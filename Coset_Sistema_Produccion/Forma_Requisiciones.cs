@@ -1387,16 +1387,23 @@ namespace Coset_Sistema_Produccion
             if (Inicia_variables_word())
             {
                 Desactiva_boton_requisiciones_previo();
+                Desactiva_boton_guardar();
                 Desactiva_combo_provedores_previo();
                 Asigna_nombre_archivo_para_analizar();
                 Elimina_archivo();
                 Copiar_template_requisicion();
                 Abrir_documento_word();
                 Rellenar_campos_requisicion();
+                Guardar_archivo_word();
                 Visible_instancia_word();
 
             }
             
+        }
+
+        private void Desactiva_boton_guardar()
+        {
+            buttonSaveFile.Enabled = false;
         }
 
         private void Desactiva_combo_provedores_previo()
@@ -1473,7 +1480,6 @@ namespace Coset_Sistema_Produccion
             Rellena_informacion_requisicion();
             Rellena_partidas_Requisicion();
             Limpia_partidas_sin_informacion();
-            Guardar_archivo_word();
         }
 
         private void Rellena_informacion_requisicion()
@@ -1698,6 +1704,35 @@ namespace Coset_Sistema_Produccion
         private void comboBoxProveedoresPrevio_SelectedIndexChanged(object sender, EventArgs e)
         {
             buttonWordPrevio.Enabled = true;
+            buttonSaveFile.Enabled = true;
+        }
+
+        private void buttonSaveFile_Click(object sender, EventArgs e)
+        {
+            if (Inicia_variables_word())
+            {
+                Desactiva_boton_requisiciones_previo();
+                Desactiva_boton_guardar();
+                Desactiva_combo_provedores_previo();
+                Asigna_nombre_archivo_para_analizar();
+                Elimina_archivo();
+                Copiar_template_requisicion();
+                Abrir_documento_word();
+                Rellenar_campos_requisicion();
+                Guardar_archivo_word_en_ruta_en_datos_generales();
+            }
+        }
+
+        private void Guardar_archivo_word_en_ruta_en_datos_generales()
+        {
+            string nombre_archivo = "";
+            datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
+            nombre_archivo = "@" + datos_generales.folder_requisiciones + @"\" + comboBoxCodigoRequisiciones.Text + "_" +
+                comboBoxProveedoresPrevio.Text + ".docx";
+            if (!Directory.Exists(datos_generales.folder_requisiciones))
+            {
+                Directory.CreateDirectory(datos_generales.folder_requisiciones);
+            }
         }
     }
 }

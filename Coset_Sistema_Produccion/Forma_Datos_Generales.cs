@@ -58,6 +58,8 @@ namespace Coset_Sistema_Produccion
                 textBoxRfc.Text = datos_temporales.Rfc;
                 textBoxIva.Text = datos_temporales.Iva;
                 textBoxTc.Text = datos_temporales.Tc;
+                textBoxFolderRequisiciones.Text = @datos_temporales.folder_requisiciones;
+                textBoxFolderOrdenCompra.Text = @datos_temporales.folder_ordenes_compra;
             }
             else
                 MessageBox.Show(datos_temporales.error);
@@ -141,6 +143,8 @@ namespace Coset_Sistema_Produccion
             textBoxRfc.Enabled = true;
             textBoxIva.Enabled = true;
             textBoxTc.Enabled = true;
+            textBoxFolderOrdenCompra.Enabled = true;
+            textBoxFolderRequisiciones.Enabled = true;
         }
 
         private void Asigna_valores_cajas_variable_temporal_datos_generales()
@@ -184,7 +188,9 @@ namespace Coset_Sistema_Produccion
             datos_temporales.Telefono != textBoxTelefono.Text ||
             datos_temporales.Rfc != textBoxRfc.Text ||
             datos_temporales.Iva != textBoxIva.Text ||
-            datos_temporales.Tc != textBoxTc.Text)
+            datos_temporales.Tc != textBoxTc.Text  ||
+            datos_temporales.folder_ordenes_compra != textBoxFolderOrdenCompra.Text ||
+            datos_temporales.folder_ordenes_compra != textBoxFolderRequisiciones.Text)
             {
                 timerModificarDatosGenerales.Enabled = false;
                 Aparece_botom_guardar_base_datos();
@@ -304,6 +310,8 @@ namespace Coset_Sistema_Produccion
             textBoxRfc.Enabled = false;
             textBoxIva.Enabled = false;
             textBoxTc.Enabled = false;
+            textBoxFolderOrdenCompra.Enabled = false;
+            textBoxFolderRequisiciones.Enabled = false;
         }
 
         private void Desaparece_boton_cancelar()
@@ -341,12 +349,16 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_modificar_en_base_de_datos()
         {
+            string folder_requisiciones = @textBoxFolderRequisiciones.Text;
+            string folder_ordenes_compra = @textBoxFolderOrdenCompra.Text;
             return "UPDATE datos_generales set  nombre='" + textBoxEmpresa.Text +
                 "',domicilio='" + textBoxDomicilio.Text +
                 "',telefono='" + textBoxTelefono.Text +
                 "',rfc='" + textBoxRfc.Text +
                 "',iva='" + textBoxIva.Text +
                 "',tc='" + textBoxTc.Text +
+                "',folder_requisiciones='" + @textBoxFolderRequisiciones.Text +
+                "',folder_ordenes_compra='" + @textBoxFolderOrdenCompra.Text +
                 "' where clave_empresa='" + datos_temporales.Clave_empresa + "';";
         }
 
@@ -380,25 +392,6 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
     
    

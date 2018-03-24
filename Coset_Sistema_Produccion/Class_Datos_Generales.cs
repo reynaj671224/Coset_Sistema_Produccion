@@ -27,6 +27,8 @@ namespace Coset_Sistema_Produccion
                 datos_generales.Iva= mySqlDataReader["iva"].ToString();
                 datos_generales.Tc = mySqlDataReader["tc"].ToString();
                 datos_generales.Clave_empresa = mySqlDataReader["clave_empresa"].ToString();
+                datos_generales.folder_requisiciones = mySqlDataReader["folder_requisiciones"].ToString();
+                datos_generales.folder_ordenes_compra= mySqlDataReader["folder_ordenes_compra"].ToString();
             }
             catch (Exception ex)
             {
@@ -57,5 +59,7 @@ namespace Coset_Sistema_Produccion
         public string Tc = "";
         public string Clave_empresa = "";
         public string error = "";
+        public string folder_requisiciones = "";
+        public string folder_ordenes_compra = "";
     }
 }

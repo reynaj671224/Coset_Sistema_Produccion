@@ -33,6 +33,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControlDatosGenerales = new System.Windows.Forms.TabControl();
             this.tabPageDatosgenerales = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBoxFolderOrdenCompra = new System.Windows.Forms.TextBox();
+            this.textBoxFolderRequisiciones = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.textBoxRfc = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxTc = new System.Windows.Forms.TextBox();
@@ -46,6 +50,8 @@
             this.textBoxEmpresa = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPageControlfolios = new System.Windows.Forms.TabPage();
+            this.textBoxRequisiciones = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.textBoxFolioProcesos = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxFolioMateriales = new System.Windows.Forms.TextBox();
@@ -68,8 +74,6 @@
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.timerModificarDatosGenerales = new System.Windows.Forms.Timer(this.components);
             this.timerModificarControlFolios = new System.Windows.Forms.Timer(this.components);
-            this.textBoxRequisiciones = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControlDatosGenerales.SuspendLayout();
             this.tabPageDatosgenerales.SuspendLayout();
@@ -83,7 +87,7 @@
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(795, 360);
+            this.pictureBox1.Size = new System.Drawing.Size(795, 379);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -92,16 +96,20 @@
             // 
             this.tabControlDatosGenerales.Controls.Add(this.tabPageDatosgenerales);
             this.tabControlDatosGenerales.Controls.Add(this.tabPageControlfolios);
-            this.tabControlDatosGenerales.Location = new System.Drawing.Point(84, 102);
+            this.tabControlDatosGenerales.Location = new System.Drawing.Point(84, 92);
             this.tabControlDatosGenerales.Name = "tabControlDatosGenerales";
             this.tabControlDatosGenerales.SelectedIndex = 0;
-            this.tabControlDatosGenerales.Size = new System.Drawing.Size(612, 232);
+            this.tabControlDatosGenerales.Size = new System.Drawing.Size(612, 275);
             this.tabControlDatosGenerales.TabIndex = 1;
             // 
             // tabPageDatosgenerales
             // 
             this.tabPageDatosgenerales.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPageDatosgenerales.BackgroundImage")));
             this.tabPageDatosgenerales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPageDatosgenerales.Controls.Add(this.label17);
+            this.tabPageDatosgenerales.Controls.Add(this.textBoxFolderOrdenCompra);
+            this.tabPageDatosgenerales.Controls.Add(this.textBoxFolderRequisiciones);
+            this.tabPageDatosgenerales.Controls.Add(this.label15);
             this.tabPageDatosgenerales.Controls.Add(this.textBoxRfc);
             this.tabPageDatosgenerales.Controls.Add(this.label12);
             this.tabPageDatosgenerales.Controls.Add(this.textBoxTc);
@@ -118,15 +126,53 @@
             this.tabPageDatosgenerales.Location = new System.Drawing.Point(4, 22);
             this.tabPageDatosgenerales.Name = "tabPageDatosgenerales";
             this.tabPageDatosgenerales.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDatosgenerales.Size = new System.Drawing.Size(604, 206);
+            this.tabPageDatosgenerales.Size = new System.Drawing.Size(604, 249);
             this.tabPageDatosgenerales.TabIndex = 0;
             this.tabPageDatosgenerales.Text = "Datos Generales";
             this.tabPageDatosgenerales.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Image = ((System.Drawing.Image)(resources.GetObject("label17.Image")));
+            this.label17.Location = new System.Drawing.Point(215, 106);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(151, 16);
+            this.label17.TabIndex = 29;
+            this.label17.Text = "Folder Ordenes de Compra";
+            // 
+            // textBoxFolderOrdenCompra
+            // 
+            this.textBoxFolderOrdenCompra.Enabled = false;
+            this.textBoxFolderOrdenCompra.Location = new System.Drawing.Point(372, 102);
+            this.textBoxFolderOrdenCompra.Name = "textBoxFolderOrdenCompra";
+            this.textBoxFolderOrdenCompra.Size = new System.Drawing.Size(213, 20);
+            this.textBoxFolderOrdenCompra.TabIndex = 28;
+            // 
+            // textBoxFolderRequisiciones
+            // 
+            this.textBoxFolderRequisiciones.Enabled = false;
+            this.textBoxFolderRequisiciones.Location = new System.Drawing.Point(372, 76);
+            this.textBoxFolderRequisiciones.Name = "textBoxFolderRequisiciones";
+            this.textBoxFolderRequisiciones.Size = new System.Drawing.Size(213, 20);
+            this.textBoxFolderRequisiciones.TabIndex = 27;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Image = ((System.Drawing.Image)(resources.GetObject("label15.Image")));
+            this.label15.Location = new System.Drawing.Point(215, 83);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 16);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "Folder Requisiciones";
+            // 
             // textBoxRfc
             // 
             this.textBoxRfc.Enabled = false;
-            this.textBoxRfc.Location = new System.Drawing.Point(85, 102);
+            this.textBoxRfc.Location = new System.Drawing.Point(85, 105);
             this.textBoxRfc.Name = "textBoxRfc";
             this.textBoxRfc.Size = new System.Drawing.Size(113, 20);
             this.textBoxRfc.TabIndex = 25;
@@ -166,7 +212,7 @@
             // textBoxIva
             // 
             this.textBoxIva.Enabled = false;
-            this.textBoxIva.Location = new System.Drawing.Point(85, 133);
+            this.textBoxIva.Location = new System.Drawing.Point(85, 132);
             this.textBoxIva.Name = "textBoxIva";
             this.textBoxIva.Size = new System.Drawing.Size(113, 20);
             this.textBoxIva.TabIndex = 21;
@@ -185,7 +231,7 @@
             // textBoxTelefono
             // 
             this.textBoxTelefono.Enabled = false;
-            this.textBoxTelefono.Location = new System.Drawing.Point(85, 76);
+            this.textBoxTelefono.Location = new System.Drawing.Point(85, 78);
             this.textBoxTelefono.Name = "textBoxTelefono";
             this.textBoxTelefono.Size = new System.Drawing.Size(113, 20);
             this.textBoxTelefono.TabIndex = 19;
@@ -206,7 +252,7 @@
             this.textBoxDomicilio.Enabled = false;
             this.textBoxDomicilio.Location = new System.Drawing.Point(85, 50);
             this.textBoxDomicilio.Name = "textBoxDomicilio";
-            this.textBoxDomicilio.Size = new System.Drawing.Size(438, 20);
+            this.textBoxDomicilio.Size = new System.Drawing.Size(500, 20);
             this.textBoxDomicilio.TabIndex = 17;
             // 
             // label1
@@ -225,7 +271,7 @@
             this.textBoxEmpresa.Enabled = false;
             this.textBoxEmpresa.Location = new System.Drawing.Point(85, 24);
             this.textBoxEmpresa.Name = "textBoxEmpresa";
-            this.textBoxEmpresa.Size = new System.Drawing.Size(438, 20);
+            this.textBoxEmpresa.Size = new System.Drawing.Size(500, 20);
             this.textBoxEmpresa.TabIndex = 15;
             // 
             // label4
@@ -264,10 +310,29 @@
             this.tabPageControlfolios.Location = new System.Drawing.Point(4, 22);
             this.tabPageControlfolios.Name = "tabPageControlfolios";
             this.tabPageControlfolios.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageControlfolios.Size = new System.Drawing.Size(604, 206);
+            this.tabPageControlfolios.Size = new System.Drawing.Size(604, 249);
             this.tabPageControlfolios.TabIndex = 1;
             this.tabPageControlfolios.Text = "Control De Folios";
             this.tabPageControlfolios.UseVisualStyleBackColor = true;
+            // 
+            // textBoxRequisiciones
+            // 
+            this.textBoxRequisiciones.Enabled = false;
+            this.textBoxRequisiciones.Location = new System.Drawing.Point(161, 152);
+            this.textBoxRequisiciones.Name = "textBoxRequisiciones";
+            this.textBoxRequisiciones.Size = new System.Drawing.Size(113, 20);
+            this.textBoxRequisiciones.TabIndex = 39;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Image = ((System.Drawing.Image)(resources.GetObject("label16.Image")));
+            this.label16.Location = new System.Drawing.Point(51, 154);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(110, 16);
+            this.label16.TabIndex = 38;
+            this.label16.Text = "Folio Requisiciones";
             // 
             // textBoxFolioProcesos
             // 
@@ -489,32 +554,11 @@
             this.timerModificarControlFolios.Interval = 1000;
             this.timerModificarControlFolios.Tick += new System.EventHandler(this.timerModificarControlFolios_Tick);
             // 
-            // textBoxRequisiciones
-            // 
-            this.textBoxRequisiciones.Enabled = false;
-            this.textBoxRequisiciones.Location = new System.Drawing.Point(161, 152);
-            this.textBoxRequisiciones.Name = "textBoxRequisiciones";
-            this.textBoxRequisiciones.Size = new System.Drawing.Size(113, 20);
-            this.textBoxRequisiciones.TabIndex = 39;
-            this.textBoxRequisiciones.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Image = ((System.Drawing.Image)(resources.GetObject("label16.Image")));
-            this.label16.Location = new System.Drawing.Point(51, 154);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(110, 16);
-            this.label16.TabIndex = 38;
-            this.label16.Text = "Folio Requisiciones";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
-            // 
             // Forma_Datos_Generales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 360);
+            this.ClientSize = new System.Drawing.Size(795, 379);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
@@ -578,5 +622,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxRequisiciones;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBoxFolderOrdenCompra;
+        private System.Windows.Forms.TextBox textBoxFolderRequisiciones;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -42,6 +42,15 @@
             this.textBoxCodigoRequisiciones = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewPartidasRequisiciones = new System.Windows.Forms.DataGridView();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parte_requisicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto_partida = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Proveedor_requisicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Busqueda_requisicion = new System.Windows.Forms.DataGridViewButtonColumn();
             this.comboBoxCodigoRequisiciones = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.textBoxDirigido = new System.Windows.Forms.TextBox();
@@ -55,15 +64,7 @@
             this.comboBoxProveedoresPrevio = new System.Windows.Forms.ComboBox();
             this.buttonModificarRequisicion = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parte_requisicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto_partida = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Proveedor_requisicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Busqueda_requisicion = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.buttonSaveFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasRequisiciones)).BeginInit();
             this.groupBoxPrevio.SuspendLayout();
@@ -218,6 +219,68 @@
             this.dataGridViewPartidasRequisiciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewContactosClientes_CellClick);
             this.dataGridViewPartidasRequisiciones.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
             // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 50;
+            // 
+            // Numero_partida
+            // 
+            this.Numero_partida.HeaderText = "Partida";
+            this.Numero_partida.Name = "Numero_partida";
+            this.Numero_partida.ReadOnly = true;
+            this.Numero_partida.Width = 50;
+            // 
+            // Cantidad_partida
+            // 
+            this.Cantidad_partida.HeaderText = "Cantidad";
+            this.Cantidad_partida.Name = "Cantidad_partida";
+            this.Cantidad_partida.Width = 50;
+            // 
+            // Parte_requisicion
+            // 
+            this.Parte_requisicion.HeaderText = "No. Parte";
+            this.Parte_requisicion.Name = "Parte_requisicion";
+            // 
+            // Descrpcion_partida
+            // 
+            this.Descrpcion_partida.HeaderText = "Descripcion";
+            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            this.Descrpcion_partida.Width = 400;
+            // 
+            // Unidad_medida_partida
+            // 
+            this.Unidad_medida_partida.HeaderText = "Unidad Medida";
+            this.Unidad_medida_partida.Name = "Unidad_medida_partida";
+            this.Unidad_medida_partida.Width = 50;
+            // 
+            // Proyecto_partida
+            // 
+            this.Proyecto_partida.HeaderText = "Proyecto";
+            this.Proyecto_partida.Name = "Proyecto_partida";
+            this.Proyecto_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proyecto_partida.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Proveedor_requisicion
+            // 
+            this.Proveedor_requisicion.HeaderText = "Proveedor";
+            this.Proveedor_requisicion.Name = "Proveedor_requisicion";
+            this.Proveedor_requisicion.ReadOnly = true;
+            this.Proveedor_requisicion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proveedor_requisicion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Proveedor_requisicion.Width = 200;
+            // 
+            // Busqueda_requisicion
+            // 
+            this.Busqueda_requisicion.HeaderText = "Busqueda";
+            this.Busqueda_requisicion.Name = "Busqueda_requisicion";
+            this.Busqueda_requisicion.ReadOnly = true;
+            this.Busqueda_requisicion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Busqueda_requisicion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Busqueda_requisicion.Text = "Busqeuda";
+            this.Busqueda_requisicion.Width = 60;
+            // 
             // comboBoxCodigoRequisiciones
             // 
             this.comboBoxCodigoRequisiciones.FormattingEnabled = true;
@@ -296,7 +359,7 @@
             this.buttonWordPrevio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonWordPrevio.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonWordPrevio.Image = ((System.Drawing.Image)(resources.GetObject("buttonWordPrevio.Image")));
-            this.buttonWordPrevio.Location = new System.Drawing.Point(178, 15);
+            this.buttonWordPrevio.Location = new System.Drawing.Point(245, 15);
             this.buttonWordPrevio.Name = "buttonWordPrevio";
             this.buttonWordPrevio.Size = new System.Drawing.Size(79, 74);
             this.buttonWordPrevio.TabIndex = 64;
@@ -309,6 +372,7 @@
             // 
             this.groupBoxPrevio.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBoxPrevio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBoxPrevio.BackgroundImage")));
+            this.groupBoxPrevio.Controls.Add(this.buttonSaveFile);
             this.groupBoxPrevio.Controls.Add(this.comboBoxProveedoresPrevio);
             this.groupBoxPrevio.Controls.Add(this.buttonWordPrevio);
             this.groupBoxPrevio.Controls.Add(this.label2);
@@ -356,67 +420,20 @@
             this.label1.TabIndex = 67;
             this.label1.Text = "Requisitor";
             // 
-            // Codigo_partida
+            // buttonSaveFile
             // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 50;
-            // 
-            // Numero_partida
-            // 
-            this.Numero_partida.HeaderText = "Partida";
-            this.Numero_partida.Name = "Numero_partida";
-            this.Numero_partida.ReadOnly = true;
-            this.Numero_partida.Width = 50;
-            // 
-            // Cantidad_partida
-            // 
-            this.Cantidad_partida.HeaderText = "Cantidad";
-            this.Cantidad_partida.Name = "Cantidad_partida";
-            this.Cantidad_partida.Width = 50;
-            // 
-            // Parte_requisicion
-            // 
-            this.Parte_requisicion.HeaderText = "No. Parte";
-            this.Parte_requisicion.Name = "Parte_requisicion";
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Descripcion";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
-            this.Descrpcion_partida.Width = 400;
-            // 
-            // Unidad_medida_partida
-            // 
-            this.Unidad_medida_partida.HeaderText = "Unidad Medida";
-            this.Unidad_medida_partida.Name = "Unidad_medida_partida";
-            this.Unidad_medida_partida.Width = 50;
-            // 
-            // Proyecto_partida
-            // 
-            this.Proyecto_partida.HeaderText = "Proyecto";
-            this.Proyecto_partida.Name = "Proyecto_partida";
-            this.Proyecto_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proyecto_partida.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Proveedor_requisicion
-            // 
-            this.Proveedor_requisicion.HeaderText = "Proveedor";
-            this.Proveedor_requisicion.Name = "Proveedor_requisicion";
-            this.Proveedor_requisicion.ReadOnly = true;
-            this.Proveedor_requisicion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proveedor_requisicion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Proveedor_requisicion.Width = 200;
-            // 
-            // Busqueda_requisicion
-            // 
-            this.Busqueda_requisicion.HeaderText = "Busqueda";
-            this.Busqueda_requisicion.Name = "Busqueda_requisicion";
-            this.Busqueda_requisicion.ReadOnly = true;
-            this.Busqueda_requisicion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Busqueda_requisicion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Busqueda_requisicion.Text = "Busqeuda";
-            this.Busqueda_requisicion.Width = 60;
+            this.buttonSaveFile.Enabled = false;
+            this.buttonSaveFile.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSaveFile.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonSaveFile.Image = ((System.Drawing.Image)(resources.GetObject("buttonSaveFile.Image")));
+            this.buttonSaveFile.Location = new System.Drawing.Point(151, 15);
+            this.buttonSaveFile.Name = "buttonSaveFile";
+            this.buttonSaveFile.Size = new System.Drawing.Size(79, 74);
+            this.buttonSaveFile.TabIndex = 68;
+            this.buttonSaveFile.Text = "Guardar";
+            this.buttonSaveFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSaveFile.UseVisualStyleBackColor = true;
+            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
             // Forma_Requisiciones
             // 
@@ -492,5 +509,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Proyecto_partida;
         private System.Windows.Forms.DataGridViewComboBoxColumn Proveedor_requisicion;
         private System.Windows.Forms.DataGridViewButtonColumn Busqueda_requisicion;
+        private System.Windows.Forms.Button buttonSaveFile;
     }
 }
