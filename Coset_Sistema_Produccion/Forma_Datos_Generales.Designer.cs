@@ -149,6 +149,7 @@
             this.textBoxFolderOrdenCompra.Name = "textBoxFolderOrdenCompra";
             this.textBoxFolderOrdenCompra.Size = new System.Drawing.Size(213, 20);
             this.textBoxFolderOrdenCompra.TabIndex = 28;
+            this.textBoxFolderOrdenCompra.Click += new System.EventHandler(this.textBoxFolderOrdenCompra_Click);
             // 
             // textBoxFolderRequisiciones
             // 
@@ -157,6 +158,7 @@
             this.textBoxFolderRequisiciones.Name = "textBoxFolderRequisiciones";
             this.textBoxFolderRequisiciones.Size = new System.Drawing.Size(213, 20);
             this.textBoxFolderRequisiciones.TabIndex = 27;
+            this.textBoxFolderRequisiciones.Click += new System.EventHandler(this.textBoxFolderRequisiciones_Click);
             // 
             // label15
             // 

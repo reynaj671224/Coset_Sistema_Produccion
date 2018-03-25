@@ -1719,19 +1719,70 @@ namespace Coset_Sistema_Produccion
                 Copiar_template_requisicion();
                 Abrir_documento_word();
                 Rellenar_campos_requisicion();
+                Guardar_archivo_word();
                 Guardar_archivo_word_en_ruta_en_datos_generales();
+                Cierra_documento_word();
+                Termina_secuencia_save_file();
             }
+        }
+
+        private void Termina_secuencia_save_file()
+        {
+            Limpia_combo_codigo_requisicion();
+            Limpia_combo_requisitor();
+            Limpia_combo_dirigido();
+            Limpia_cajas_captura_despues_de_agregar_cotizacion();
+            Limpia_combo_codigo_requisicion();
+            Desactiva_cajas_captura_despues_de_agregar_cotizacion();
+            Desaparece_boton_guardar_base_de_datos();
+            Desaparece_boton_cancelar();
+            Desaparece_combo_codigo_requisicion();
+            Desaparece_combo_requisitor();
+            Desaparece_combo_dirigido();
+            Desaparece_combo_codigo_requisicion();
+            Activa_botones_operacion();
+            limpia_partidas_requisicion();
+            Desactiva_datagridview_partidas();
+            Aparece_caja_codigo_empleado();
+            Aparece_textbox_requisitor();
+            Aparece_textbox_dirigido();
+            Acepta_datagridview_agregar_renglones();
+            Desaparce_previo_word();
+            Cierra_documento_word();
+            Activa_boton_cotizacion_previo();
+            Desabilita_boton_word_previo();
+            Elimina_archivo();
+            Elimina_informacion_requisiciones_disponibles();
         }
 
         private void Guardar_archivo_word_en_ruta_en_datos_generales()
         {
             string nombre_archivo = "";
+            string nombre_folder = "";
             datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
-            nombre_archivo = "@" + datos_generales.folder_requisiciones + @"\" + comboBoxCodigoRequisiciones.Text + "_" +
+            nombre_archivo = datos_generales.folder_requisiciones.Replace("/", @"\") + @"\" + comboBoxCodigoRequisiciones.Text + "_" +
                 comboBoxProveedoresPrevio.Text + ".docx";
-            if (!Directory.Exists(datos_generales.folder_requisiciones))
+            nombre_folder = datos_generales.folder_requisiciones.Replace("/", @"\");
+            if (Directory.Exists(nombre_folder))
             {
-                Directory.CreateDirectory(datos_generales.folder_requisiciones);
+                if (!File.Exists(nombre_archivo))
+                {
+                    File.Copy(nombre_archivo_word, nombre_archivo, false);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Archivo ya existe, Quieres Reemplazarlo?,", "Copiar Requisicion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        File.Copy(nombre_archivo_word, nombre_archivo, true);
+                    }
+                }
+
+            }
+            else
+            {
+               MessageBox.Show("Folder No existe", "Copiar Requisicion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+               
             }
         }
     }

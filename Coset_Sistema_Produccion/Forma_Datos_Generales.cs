@@ -58,8 +58,8 @@ namespace Coset_Sistema_Produccion
                 textBoxRfc.Text = datos_temporales.Rfc;
                 textBoxIva.Text = datos_temporales.Iva;
                 textBoxTc.Text = datos_temporales.Tc;
-                textBoxFolderRequisiciones.Text = @datos_temporales.folder_requisiciones;
-                textBoxFolderOrdenCompra.Text = @datos_temporales.folder_ordenes_compra;
+                textBoxFolderRequisiciones.Text = datos_temporales.folder_requisiciones.Replace("/",@"\");
+                textBoxFolderOrdenCompra.Text = datos_temporales.folder_ordenes_compra.Replace("/", @"\");
             }
             else
                 MessageBox.Show(datos_temporales.error);
@@ -349,16 +349,16 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_modificar_en_base_de_datos()
         {
-            string folder_requisiciones = @textBoxFolderRequisiciones.Text;
-            string folder_ordenes_compra = @textBoxFolderOrdenCompra.Text;
+            string folder_requisiciones_corrected_path = textBoxFolderRequisiciones.Text.Replace(@"\","/");
+            string folder_ordenes_compra_corrected_path = textBoxFolderOrdenCompra.Text.Replace(@"\", "/");
             return "UPDATE datos_generales set  nombre='" + textBoxEmpresa.Text +
                 "',domicilio='" + textBoxDomicilio.Text +
                 "',telefono='" + textBoxTelefono.Text +
                 "',rfc='" + textBoxRfc.Text +
                 "',iva='" + textBoxIva.Text +
                 "',tc='" + textBoxTc.Text +
-                "',folder_requisiciones='" + @textBoxFolderRequisiciones.Text +
-                "',folder_ordenes_compra='" + @textBoxFolderOrdenCompra.Text +
+                "',folder_requisiciones='" + folder_requisiciones_corrected_path +
+                "',folder_ordenes_compra='" + folder_ordenes_compra_corrected_path +
                 "' where clave_empresa='" + datos_temporales.Clave_empresa + "';";
         }
 
@@ -392,6 +392,24 @@ namespace Coset_Sistema_Produccion
             }
         }
 
+
+        private void textBoxFolderRequisiciones_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxFolderRequisiciones.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void textBoxFolderOrdenCompra_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxFolderOrdenCompra.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
     
    
