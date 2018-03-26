@@ -504,5 +504,6 @@ namespace Coset_Sistema_Produccion
             Forma_Ordenes_Compra forma_Ordenes_Compra = new Forma_Ordenes_Compra();
             forma_Ordenes_Compra.ShowDialog();
         }
+
     }
 }
