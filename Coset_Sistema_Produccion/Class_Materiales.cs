@@ -62,7 +62,7 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_material(Material material)
         {
-            return "INSERT INTO ordenes_compra(codigo_material, codigo_proveedor,material_descripcion," +
+            return "INSERT INTO materiales(codigo_material, codigo_proveedor,material_descripcion," +
                     "material_unidad_medida,material_marca,material_ubicacion,material_cantidad,material_maximo,material_minimo," +
                     "material_foto) " +
                     "VALUES('" + material.Codigo + "','" + material.Codigo_proveedor + "','" +

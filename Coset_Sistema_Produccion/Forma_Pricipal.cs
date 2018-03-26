@@ -27,6 +27,8 @@ namespace Coset_Sistema_Produccion
 
         private void materialesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Forma_Materiales forma_Materiales = new Forma_Materiales();
+            forma_Materiales.ShowDialog();
 
         }
 

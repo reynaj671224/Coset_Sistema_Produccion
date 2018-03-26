@@ -410,6 +410,11 @@ namespace Coset_Sistema_Produccion
                 textBoxFolderOrdenCompra.Text = folderBrowserDialog1.SelectedPath;
             }
         }
+
+        private void textBoxFolderOrdenCompra_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     
    

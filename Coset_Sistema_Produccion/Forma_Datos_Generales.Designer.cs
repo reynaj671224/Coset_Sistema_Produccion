@@ -150,6 +150,7 @@
             this.textBoxFolderOrdenCompra.Size = new System.Drawing.Size(213, 20);
             this.textBoxFolderOrdenCompra.TabIndex = 28;
             this.textBoxFolderOrdenCompra.Click += new System.EventHandler(this.textBoxFolderOrdenCompra_Click);
+            this.textBoxFolderOrdenCompra.TextChanged += new System.EventHandler(this.textBoxFolderOrdenCompra_TextChanged);
             // 
             // textBoxFolderRequisiciones
             // 
