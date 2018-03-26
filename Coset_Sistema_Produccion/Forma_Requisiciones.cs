@@ -231,31 +231,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Limpia_combo_codigo_requisicion();
-            Limpia_combo_requisitor();
-            Limpia_combo_dirigido();
-            Limpia_cajas_captura_despues_de_agregar_cotizacion();
-            Limpia_combo_codigo_requisicion();
-            Desactiva_cajas_captura_despues_de_agregar_cotizacion();
-            Desaparece_boton_guardar_base_de_datos();
-            Desaparece_boton_cancelar();
-            Desaparece_combo_codigo_requisicion();
-            Desaparece_combo_requisitor();
-            Desaparece_combo_dirigido();
-            Desaparece_combo_codigo_requisicion();
-            Activa_botones_operacion();
-            limpia_partidas_requisicion();
-            Desactiva_datagridview_partidas();
-            Aparece_caja_codigo_empleado();
-            Aparece_textbox_requisitor();
-            Aparece_textbox_dirigido();
-            Acepta_datagridview_agregar_renglones();
-            Desaparce_previo_word();
-            Cierra_documento_word();
-            Activa_boton_cotizacion_previo();
-            Desabilita_boton_word_previo();
-            Elimina_archivo();
-            Elimina_informacion_requisiciones_disponibles();
+            Termina_secuencia_operaciones_requisiciones();
         }
 
         private void Limpia_combo_dirigido()
@@ -1726,7 +1702,7 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void Termina_secuencia_save_file()
+        private void Termina_secuencia_operaciones_requisiciones()
         {
             Limpia_combo_codigo_requisicion();
             Limpia_combo_requisitor();
@@ -1753,6 +1729,12 @@ namespace Coset_Sistema_Produccion
             Desabilita_boton_word_previo();
             Elimina_archivo();
             Elimina_informacion_requisiciones_disponibles();
+
+        }
+
+        private void Termina_secuencia_save_file()
+        {
+            Termina_secuencia_operaciones_requisiciones();
         }
 
         private void Guardar_archivo_word_en_ruta_en_datos_generales()

@@ -271,34 +271,22 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Limpia_combo_nombre_cliente();
-            Limpia_combo_atencion();
-            Limpia_combo_atencio_copia();
-            Limpia_cajas_captura_despues_de_agregar_orden_compra();
-            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-            Desaparece_boton_guardar_base_de_datos();
-            Desaparece_boton_cancelar();
-            Desaparece_combo_codigo_cotizacion();
-            Desaparece_combo_atencion();
-            Desaparece_combo_copia_atencion();
-            Desaparece_combo_codigo_cotizacion();
-            Desaparece_combo_cliente_nombre();
-            Desaparece_combo_condicion_pago();
-            Activa_botones_operacion();
-            limpia_partidas_ordenes_compra();
-            Desactiva_datagridview_partidas();
-            Aparece_caja_codigo_empleado();
-            Aparece_textbox_atencion();
-            Aparece_textbox_atencion_copia();
-            Aparece_textbox_nombre_cliente();
-            Acepta_datagridview_agregar_renglones();
-            Desaparece_botones_operacion_contactos();
-            Cierra_documento_word();
-            Activa_boton_cotizacion_previo();
-            Desabilita_boton_word_previo();
-            Selecciona_pesos_tipo_modeda();
-            Elimina_archivo();
-            Elimina_informacion_orden_compra_disponibles();
+            Termina_secuencia_operaciones_ordenes_compra();
+        }
+
+        private void Desaparece_boton_guardar_archivo_path()
+        {
+            buttonSaveFile.Visible = false;
+        }
+
+        private void Deabilita_boton_guardar_archivo_path()
+        {
+            buttonSaveFile.Enabled = false;
+        }
+
+        private void Deasaparece_boton_word_previo()
+        {
+            buttonWordPrevio.Visible = false;
         }
 
         private void Selecciona_pesos_tipo_modeda()
@@ -419,9 +407,21 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
             Rellena_cajas_informacion_de_partidas_orden_compra();
             Aparece_boton_visulizar_word_orden_compra();
+            Aparece_boton_guardar_archivo_path();
             Activa_boton_visulizar_word_orden_compra();
+            Activa_boton_guardar_archivo_localidad_path();
 
 
+        }
+
+        private void Aparece_boton_guardar_archivo_path()
+        {
+            buttonSaveFile.Visible = true;
+        }
+
+        private void Activa_boton_guardar_archivo_localidad_path()
+        {
+            buttonSaveFile.Enabled = true;
         }
 
         private void Activa_boton_visulizar_word_orden_compra()
@@ -1928,6 +1928,7 @@ namespace Coset_Sistema_Produccion
             if (Inicia_variables_word())
             {
                 Desactiva_boton_ordenes_compra_previo();
+                Desactiva_boton_guardar_archivo_path();
                 Asigna_nombre_archivo_para_analizar();
                 Elimina_archivo();
                 Copiar_template_a_orden_compra();
@@ -1936,6 +1937,11 @@ namespace Coset_Sistema_Produccion
                 Visible_instancia_word();
             }
 
+        }
+
+        private void Desactiva_boton_guardar_archivo_path()
+        {
+            buttonSaveFile.Enabled = false;
         }
 
         private bool Inicia_variables_word()
@@ -2480,5 +2486,91 @@ namespace Coset_Sistema_Produccion
             Modifica_orden_compra();
         }
 
+        private void buttonSaveFile_Click(object sender, EventArgs e)
+        {
+            if (Inicia_variables_word())
+            {
+                Desactiva_boton_ordenes_compra_previo();
+                Desactiva_boton_guardar_archivo_path();
+                Asigna_nombre_archivo_para_analizar();
+                Elimina_archivo();
+                Copiar_template_a_orden_compra();
+                Abrir_documento_word();
+                Rellenar_campos_orden_compra();
+                Guardar_archivo_word_en_ruta_en_datos_generales();
+                Cierra_documento_word();
+                Termina_secuencia_save_file();
+            }
+        }
+
+        private void Termina_secuencia_operaciones_ordenes_compra()
+        {
+            Limpia_combo_nombre_cliente();
+            Limpia_combo_atencion();
+            Limpia_combo_atencio_copia();
+            Limpia_cajas_captura_despues_de_agregar_orden_compra();
+            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+            Desaparece_boton_guardar_base_de_datos();
+            Desaparece_boton_cancelar();
+            Desaparece_combo_codigo_cotizacion();
+            Desaparece_combo_atencion();
+            Desaparece_combo_copia_atencion();
+            Desaparece_combo_codigo_cotizacion();
+            Desaparece_combo_cliente_nombre();
+            Desaparece_combo_condicion_pago();
+            Activa_botones_operacion();
+            limpia_partidas_ordenes_compra();
+            Desactiva_datagridview_partidas();
+            Aparece_caja_codigo_empleado();
+            Aparece_textbox_atencion();
+            Aparece_textbox_atencion_copia();
+            Aparece_textbox_nombre_cliente();
+            Acepta_datagridview_agregar_renglones();
+            Desaparece_botones_operacion_contactos();
+            Cierra_documento_word();
+            Activa_boton_cotizacion_previo();
+            Desabilita_boton_word_previo();
+            Deasaparece_boton_word_previo();
+            Deabilita_boton_guardar_archivo_path();
+            Desaparece_boton_guardar_archivo_path();
+            Selecciona_pesos_tipo_modeda();
+            Elimina_archivo();
+            Elimina_informacion_orden_compra_disponibles();
+
+        }
+        private void Termina_secuencia_save_file()
+        {
+            Termina_secuencia_operaciones_ordenes_compra();
+        }
+
+        private void Guardar_archivo_word_en_ruta_en_datos_generales()
+        {
+            string nombre_archivo = "";
+            string nombre_folder = "";
+            datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
+            nombre_archivo = datos_generales.folder_ordenes_compra.Replace("/", @"\") + @"\" + comboBoxCodigoOrdenCompra.Text + ".docx";
+            nombre_folder = datos_generales.folder_ordenes_compra.Replace("/", @"\");
+            if (Directory.Exists(nombre_folder))
+            {
+                if (!File.Exists(nombre_archivo))
+                {
+                    File.Copy(nombre_archivo_word, nombre_archivo, false);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Archivo ya existe, Quieres Reemplazarlo?,", "Copiar Orden de Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        File.Copy(nombre_archivo_word, nombre_archivo, true);
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Folder No existe", "Copiar Orden de Compra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+        }
     }
 }
