@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Materiales));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonModificarProceso = new System.Windows.Forms.Button();
-            this.buttonAgregarProceso = new System.Windows.Forms.Button();
-            this.buttonEliminarProceso = new System.Windows.Forms.Button();
+            this.buttonModificarMaterial = new System.Windows.Forms.Button();
+            this.buttonAgregarMaterial = new System.Windows.Forms.Button();
+            this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.timerActualizrempleado = new System.Windows.Forms.Timer(this.components);
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.timerEliminaempleado = new System.Windows.Forms.Timer(this.components);
-            this.buttonBuscarProceso = new System.Windows.Forms.Button();
+            this.buttonBuscarMaterial = new System.Windows.Forms.Button();
             this.textBoxDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxUnidadMedida = new System.Windows.Forms.TextBox();
@@ -79,50 +79,50 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // buttonModificarProceso
+            // buttonModificarMaterial
             // 
-            this.buttonModificarProceso.AutoSize = true;
-            this.buttonModificarProceso.BackColor = System.Drawing.Color.White;
-            this.buttonModificarProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonModificarProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonModificarProceso.Image")));
-            this.buttonModificarProceso.Location = new System.Drawing.Point(314, 12);
-            this.buttonModificarProceso.Name = "buttonModificarProceso";
-            this.buttonModificarProceso.Size = new System.Drawing.Size(79, 74);
-            this.buttonModificarProceso.TabIndex = 1;
-            this.buttonModificarProceso.Text = "Modificar";
-            this.buttonModificarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonModificarProceso.UseVisualStyleBackColor = false;
-            this.buttonModificarProceso.Click += new System.EventHandler(this.buttonModificarUsuario_Click);
+            this.buttonModificarMaterial.AutoSize = true;
+            this.buttonModificarMaterial.BackColor = System.Drawing.Color.White;
+            this.buttonModificarMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonModificarMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonModificarMaterial.Image")));
+            this.buttonModificarMaterial.Location = new System.Drawing.Point(314, 12);
+            this.buttonModificarMaterial.Name = "buttonModificarMaterial";
+            this.buttonModificarMaterial.Size = new System.Drawing.Size(79, 74);
+            this.buttonModificarMaterial.TabIndex = 1;
+            this.buttonModificarMaterial.Text = "Modificar";
+            this.buttonModificarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonModificarMaterial.UseVisualStyleBackColor = false;
+            this.buttonModificarMaterial.Click += new System.EventHandler(this.buttonModificarUsuario_Click);
             // 
-            // buttonAgregarProceso
+            // buttonAgregarMaterial
             // 
-            this.buttonAgregarProceso.AutoSize = true;
-            this.buttonAgregarProceso.BackColor = System.Drawing.Color.White;
-            this.buttonAgregarProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAgregarProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarProceso.Image")));
-            this.buttonAgregarProceso.Location = new System.Drawing.Point(399, 12);
-            this.buttonAgregarProceso.Name = "buttonAgregarProceso";
-            this.buttonAgregarProceso.Size = new System.Drawing.Size(79, 74);
-            this.buttonAgregarProceso.TabIndex = 2;
-            this.buttonAgregarProceso.Text = "Agregar";
-            this.buttonAgregarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonAgregarProceso.UseVisualStyleBackColor = false;
-            this.buttonAgregarProceso.Click += new System.EventHandler(this.buttonAgregarUsuario_Click);
+            this.buttonAgregarMaterial.AutoSize = true;
+            this.buttonAgregarMaterial.BackColor = System.Drawing.Color.White;
+            this.buttonAgregarMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAgregarMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarMaterial.Image")));
+            this.buttonAgregarMaterial.Location = new System.Drawing.Point(399, 12);
+            this.buttonAgregarMaterial.Name = "buttonAgregarMaterial";
+            this.buttonAgregarMaterial.Size = new System.Drawing.Size(79, 74);
+            this.buttonAgregarMaterial.TabIndex = 2;
+            this.buttonAgregarMaterial.Text = "Agregar";
+            this.buttonAgregarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAgregarMaterial.UseVisualStyleBackColor = false;
+            this.buttonAgregarMaterial.Click += new System.EventHandler(this.buttonAgregarUsuario_Click);
             // 
-            // buttonEliminarProceso
+            // buttonBusquedaBaseDatos
             // 
-            this.buttonEliminarProceso.BackColor = System.Drawing.Color.White;
-            this.buttonEliminarProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEliminarProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonEliminarProceso.Image")));
-            this.buttonEliminarProceso.Location = new System.Drawing.Point(484, 12);
-            this.buttonEliminarProceso.Name = "buttonEliminarProceso";
-            this.buttonEliminarProceso.Size = new System.Drawing.Size(79, 74);
-            this.buttonEliminarProceso.TabIndex = 3;
-            this.buttonEliminarProceso.Text = "Eliminar";
-            this.buttonEliminarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonEliminarProceso.UseVisualStyleBackColor = false;
-            this.buttonEliminarProceso.Visible = false;
-            this.buttonEliminarProceso.Click += new System.EventHandler(this.buttonEliminarUsuario_Click);
+            this.buttonBusquedaBaseDatos.BackColor = System.Drawing.Color.White;
+            this.buttonBusquedaBaseDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBusquedaBaseDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBusquedaBaseDatos.Image")));
+            this.buttonBusquedaBaseDatos.Location = new System.Drawing.Point(484, 12);
+            this.buttonBusquedaBaseDatos.Name = "buttonBusquedaBaseDatos";
+            this.buttonBusquedaBaseDatos.Size = new System.Drawing.Size(79, 74);
+            this.buttonBusquedaBaseDatos.TabIndex = 3;
+            this.buttonBusquedaBaseDatos.Text = "Buscar";
+            this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
+            this.buttonBusquedaBaseDatos.Visible = false;
+            this.buttonBusquedaBaseDatos.Click += new System.EventHandler(this.buttonEliminarUsuario_Click);
             // 
             // buttonHome
             // 
@@ -246,19 +246,19 @@
             this.timerEliminaempleado.Interval = 1000;
             this.timerEliminaempleado.Tick += new System.EventHandler(this.timerEliminaempleado_Tick);
             // 
-            // buttonBuscarProceso
+            // buttonBuscarMaterial
             // 
-            this.buttonBuscarProceso.BackColor = System.Drawing.Color.White;
-            this.buttonBuscarProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBuscarProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarProceso.Image")));
-            this.buttonBuscarProceso.Location = new System.Drawing.Point(229, 12);
-            this.buttonBuscarProceso.Name = "buttonBuscarProceso";
-            this.buttonBuscarProceso.Size = new System.Drawing.Size(79, 74);
-            this.buttonBuscarProceso.TabIndex = 27;
-            this.buttonBuscarProceso.Text = "Visualizar";
-            this.buttonBuscarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonBuscarProceso.UseVisualStyleBackColor = false;
-            this.buttonBuscarProceso.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
+            this.buttonBuscarMaterial.BackColor = System.Drawing.Color.White;
+            this.buttonBuscarMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuscarMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarMaterial.Image")));
+            this.buttonBuscarMaterial.Location = new System.Drawing.Point(229, 12);
+            this.buttonBuscarMaterial.Name = "buttonBuscarMaterial";
+            this.buttonBuscarMaterial.Size = new System.Drawing.Size(79, 74);
+            this.buttonBuscarMaterial.TabIndex = 27;
+            this.buttonBuscarMaterial.Text = "Visualizar";
+            this.buttonBuscarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBuscarMaterial.UseVisualStyleBackColor = false;
+            this.buttonBuscarMaterial.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
             // 
             // textBoxDescripcion
             // 
@@ -363,7 +363,6 @@
             this.textBoxNombreFoto.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombreFoto.TabIndex = 39;
             this.textBoxNombreFoto.Click += new System.EventHandler(this.textBoxNombreFoto_Click);
-            this.textBoxNombreFoto.TextChanged += new System.EventHandler(this.textBoxNombreFoto_TextChanged);
             // 
             // label8
             // 
@@ -448,7 +447,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxDescripcion);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.buttonBuscarProceso);
+            this.Controls.Add(this.buttonBuscarMaterial);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.comboBoxCodigoMaterial);
             this.Controls.Add(this.buttonBorrarBasedeDatos);
@@ -458,9 +457,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
-            this.Controls.Add(this.buttonEliminarProceso);
-            this.Controls.Add(this.buttonAgregarProceso);
-            this.Controls.Add(this.buttonModificarProceso);
+            this.Controls.Add(this.buttonBusquedaBaseDatos);
+            this.Controls.Add(this.buttonAgregarMaterial);
+            this.Controls.Add(this.buttonModificarMaterial);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Forma_Materiales";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -476,9 +475,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonModificarProceso;
-        private System.Windows.Forms.Button buttonAgregarProceso;
-        private System.Windows.Forms.Button buttonEliminarProceso;
+        private System.Windows.Forms.Button buttonModificarMaterial;
+        private System.Windows.Forms.Button buttonAgregarMaterial;
+        private System.Windows.Forms.Button buttonBusquedaBaseDatos;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
         private System.Windows.Forms.Label label1;
@@ -491,7 +490,7 @@
         private System.Windows.Forms.Timer timerActualizrempleado;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Timer timerEliminaempleado;
-        private System.Windows.Forms.Button buttonBuscarProceso;
+        private System.Windows.Forms.Button buttonBuscarMaterial;
         private System.Windows.Forms.TextBox textBoxDescripcion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxUnidadMedida;

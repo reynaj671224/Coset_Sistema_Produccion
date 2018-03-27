@@ -23,6 +23,8 @@ namespace Coset_Sistema_Produccion
         string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         public Class_Materiales class_materiales = new Class_Materiales();
         public Material Agregar_material = new Material();
+        public Material Visualizar_material = new Material();
+        public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Forma_Materiales()
         {
             InitializeComponent();
@@ -94,15 +96,14 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_botones_operacion()
         {
-            Desactiva_boton_agregar_proceso();
-            Desactiva_boton_modificar_proceso();
-            Desactiva_boton_eliminar_proceso();
-            Desactiva_boton_visualizar_proceso();
+            Desactiva_boton_agregar_Material();
+            Desactiva_boton_modificar_material();
+            Desactiva_boton_visualizar_material();
         }
 
-        private void Desactiva_boton_visualizar_proceso()
+        private void Desactiva_boton_visualizar_material()
         {
-            buttonBuscarProceso.Enabled = false;
+            buttonBuscarMaterial.Enabled = false;
         }
 
         private void Activa_cajas_informacion()
@@ -118,19 +119,19 @@ namespace Coset_Sistema_Produccion
             textBoxUbicacion.Enabled = true;
         }
 
-        private void Desactiva_boton_eliminar_proceso()
+        private void Desactiva_boton_buscar_base_datos()
         {
-            buttonEliminarProceso.Enabled = false;
+            buttonBusquedaBaseDatos.Enabled = false;
         }
 
-        private void Desactiva_boton_modificar_proceso()
+        private void Desactiva_boton_modificar_material()
         {
-            buttonModificarProceso.Enabled = false;
+            buttonModificarMaterial.Enabled = false;
         }
 
-        private void Desactiva_boton_agregar_proceso()
+        private void Desactiva_boton_agregar_Material()
         {
-            buttonAgregarProceso.Enabled = false;
+            buttonAgregarMaterial.Enabled = false;
         }
 
 
@@ -235,22 +236,22 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_boton_visualizar_usuarios()
         {
-            buttonBuscarProceso.Enabled = true;
+            buttonBuscarMaterial.Enabled = true;
         }
 
         private void Activa_boton_eliminar_usuarios()
         {
-            buttonEliminarProceso.Enabled = true;
+            buttonBusquedaBaseDatos.Enabled = true;
         }
 
         private void Activa_boton_modificar_usuarios()
         {
-            buttonModificarProceso.Enabled = true;
+            buttonModificarMaterial.Enabled = true;
         }
 
         private void Activa_boton_agregar_usuarios()
         {
-            buttonAgregarProceso.Enabled = true;
+            buttonAgregarMaterial.Enabled = true;
         }
 
         private void Desactiva_boton_guardar_base_de_datos()
@@ -405,10 +406,7 @@ namespace Coset_Sistema_Produccion
         {
             Desactiva_botones_operacion();
             Desaparce_caja_nombre_proceso();
-            Aparece_combo_nombre_proceso();
-            Activa_combo_nombre_proceso();
             Obtener_datos_procesos_disponibles_base_datos();
-            Rellenar_combo_nombre_proceso();
             Activa_boton_cancelar_operacio();
             Operacio_procesos = "Modificar";
         }
@@ -543,8 +541,24 @@ namespace Coset_Sistema_Produccion
 
         private void buttonEliminarUsuario_Click(object sender, EventArgs e)
         {
-            Eliminar_usuarios();
-            
+            Desactiva_boton_buscar_base_datos();
+            Obtener_datos_materiales_busqueda();
+            if (Materiales_disponibles_busqueda.Count == 1)
+            {
+
+            }
+            else if (Materiales_disponibles_busqueda.Count > 1)
+            {
+                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda);
+                forma_Materiales_Seleccion.ShowDialog();
+                textBoxCodigoMaterial.Text = forma_Materiales_Seleccion.Codigo_material_seleccionado;
+            }
+            else if(Materiales_disponibles_busqueda.Count ==  0)
+            {
+
+
+            }
+
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
@@ -578,19 +592,6 @@ namespace Coset_Sistema_Produccion
             return Elimina_datos_usuario();
         }
 
-        private void Eliminar_usuarios()
-        {
-            Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
-            Aparece_combo_nombre_proceso();
-            Activa_combo_nombre_proceso();
-            Obtener_datos_procesos_disponibles_base_datos();
-            Rellenar_combo_nombre_proceso();
-            Activa_boton_cancelar_operacio();
-            Inicia_timer_eliminar_usuario();
-            Operacio_procesos = "Eliminar";
-        }
-
         private void Inicia_timer_eliminar_usuario()
         {
             timerEliminaempleado.Enabled = true;
@@ -618,37 +619,36 @@ namespace Coset_Sistema_Produccion
         private void Visualiza_proceso()
         {
             Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
-            Activa_combo_nombre_proceso();
-            Aparece_combo_nombre_proceso();
-            Obtener_datos_procesos_disponibles_base_datos();
-            Rellenar_combo_nombre_proceso();
+            Aparece_boton_busqueda_base_datos();
+            Activa_cajas_de_informacion_visualizar();
             Activa_boton_cancelar_operacio();
             Operacio_procesos = "Visualizar";
         }
 
-        private void Activa_combo_nombre_proceso()
+        private void Aparece_boton_busqueda_base_datos()
         {
-            //comboBoxNombreProceso.Enabled = true;
+            buttonBusquedaBaseDatos.Visible = true;
         }
 
-        private void Rellenar_combo_nombre_proceso()
+        private void Obtener_datos_materiales_busqueda()
         {
-            //foreach (Proceso proceso in procesos_disponibles)
-            //{
-            //    if (proceso.error == "")
-            //        comboBoxNombreProceso.Items.Add(proceso.Nombre);
-            //    else
-            //    {
-            //        MessageBox.Show(proceso.error);
-            //        break;
-            //    }
-            //}
+            Asigna_datos_visualizar_material();
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_busqueda_en_base_datos(Visualizar_material);
         }
 
-        private void Aparece_combo_nombre_proceso()
+        private void Asigna_datos_visualizar_material()
         {
-            //comboBoxNombreProceso.Visible = true;
+            Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
+            Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            Visualizar_material.Descripcion = textBoxDescripcion.Text;
+
+        }
+
+        private void Activa_cajas_de_informacion_visualizar()
+        {
+            textBoxCodigoMaterial.Enabled = true;
+            textBoxCodigoProveedor.Enabled = true;
+            textBoxDescripcion.Enabled = true;
         }
 
         private void Desaparce_caja_nombre_proceso()
@@ -708,10 +708,7 @@ namespace Coset_Sistema_Produccion
             pictureBoxMaterial.Visible = true;
         }
 
-        private void textBoxNombreFoto_TextChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }
  

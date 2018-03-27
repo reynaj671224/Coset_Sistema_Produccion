@@ -9,13 +9,13 @@ namespace Coset_Sistema_Produccion
 {
     public class Class_Materiales
     {
-        public List<Material> Adquiere_materiales_busqueda_requisiciones_en_base_datos(Material material)
+        public List<Material> Adquiere_materiales_busqueda_en_base_datos(Material material)
         {
             List<Material> Material_existente_disponibles_requisiciones = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql(material.Codigo_proveedor, material.Descripcion), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_material(material), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
@@ -28,6 +28,10 @@ namespace Coset_Sistema_Produccion
                         Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
                         Marca = mySqlDataReader["material_marca"].ToString(),
                         Ubicacion= mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
 
                     });
                 }
@@ -71,9 +75,11 @@ namespace Coset_Sistema_Produccion
                     material.Minimo + "','" + material.foto + "');";
         }
 
-        private string Commando_leer_Mysql(string codigo_proveedor, string descripcion)
+        private string Commando_leer_Mysql_busqueda_material(Material material)
         {
-            throw new NotImplementedException();
+            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+                 material.Descripcion + "%';";
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()
