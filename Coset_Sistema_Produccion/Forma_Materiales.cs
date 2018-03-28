@@ -153,7 +153,7 @@ namespace Coset_Sistema_Produccion
 
             if (Guarda_datos_agregar_Material())
             {
-                Limpia_cajas_captura_despues_de_agregar_proceso();
+                Limpia_cajas_captura_despues_de_agregar_material();
                 Desactiva_cajas_captura_despues_de_agregar_material();
                 Desactiva_boton_guardar_base_de_datos();
                 Desactiva_boton_cancelar();
@@ -187,8 +187,7 @@ namespace Coset_Sistema_Produccion
 
             if (Guarda_datos_modificar_usuario())
             {
-                Limpia_cajas_captura_despues_de_agregar_proceso();
-                Limpia_combo_nombre_proceso();
+                Limpia_cajas_captura_despues_de_agregar_material();
                 Desactiva_cajas_captura_despues_de_agregar_material();
                 Desactiva_boton_guardar_base_de_datos();
                 Desactiva_boton_cancelar();
@@ -205,7 +204,7 @@ namespace Coset_Sistema_Produccion
             procesos_disponibles = null;
         }
 
-        private void Limpia_combo_codigo_empleadlo()
+        private void Limpia_combo_codigo_material()
         {
             comboBoxCodigoMaterial.Items.Clear();
             comboBoxCodigoMaterial.Text = "";
@@ -228,28 +227,27 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_botones_operacion()
         {
-            Activa_boton_agregar_usuarios();
-            Activa_boton_modificar_usuarios();
-            Activa_boton_eliminar_usuarios();
-            Activa_boton_visualizar_usuarios();
+            Activa_boton_agregar_material();
+            Activa_boton_modificar_material();
+            Activa_boton_visualizar_material();
         }
 
-        private void Activa_boton_visualizar_usuarios()
+        private void Activa_boton_visualizar_material()
         {
             buttonBuscarMaterial.Enabled = true;
         }
 
-        private void Activa_boton_eliminar_usuarios()
+        private void Activa_boton_busqueda_base_datos()
         {
             buttonBusquedaBaseDatos.Enabled = true;
         }
 
-        private void Activa_boton_modificar_usuarios()
+        private void Activa_boton_modificar_material()
         {
             buttonModificarMaterial.Enabled = true;
         }
 
-        private void Activa_boton_agregar_usuarios()
+        private void Activa_boton_agregar_material()
         {
             buttonAgregarMaterial.Enabled = true;
         }
@@ -282,7 +280,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoMaterial.Enabled = false;
         }
 
-        private void Limpia_cajas_captura_despues_de_agregar_proceso()
+        private void Limpia_cajas_captura_despues_de_agregar_material()
         {
             textBoxCodigoProveedor.Text = "";
             textBoxDescripcion.Text = "";
@@ -508,25 +506,19 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Limpia_cajas_captura_despues_de_agregar_proceso();
-            Limpia_combo_codigo_empleadlo();
-            Limpia_combo_nombre_proceso();
+            Limpia_cajas_captura_despues_de_agregar_material();
             Desactiva_cajas_captura_despues_de_agregar_material();
             Desactiva_boton_guardar_base_de_datos();
-            Desaparece_combo_codigo_material();
-            Desaparece_combo_codigo_empleado();
             Desactiva_boton_cancelar();
             Desactiva_boton_eliminar_base_de_datos();
             Activa_botones_operacion();
-            Activa_Combo_codigo_empleado();
-            Aparece_caja_codigo_material();
-            Aparece_caja_codigo_proveedor();
+            Desaparece_boton_busqueda_base_datos();
+
         }
 
-        private void Limpia_combo_nombre_proceso()
+        private void Desaparece_boton_busqueda_base_datos()
         {
-            //comboBoxNombreProceso.Items.Clear();
-            //comboBoxNombreProceso.Text = "";
+            buttonBusquedaBaseDatos.Visible = false;
         }
 
         private void Aparece_caja_codigo_material()
@@ -543,22 +535,72 @@ namespace Coset_Sistema_Produccion
         {
             Desactiva_boton_buscar_base_datos();
             Obtener_datos_materiales_busqueda();
+            Desaparece_foto_material();
             if (Materiales_disponibles_busqueda.Count == 1)
             {
+                Desactiva_cajas_captura_busqueda_material();
 
+                Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
+                Muestra_foto_material();
             }
             else if (Materiales_disponibles_busqueda.Count > 1)
             {
                 Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda);
                 forma_Materiales_Seleccion.ShowDialog();
-                textBoxCodigoMaterial.Text = forma_Materiales_Seleccion.Codigo_material_seleccionado;
+                Desactiva_cajas_captura_busqueda_material();
+                Limpia_cajas_captura_despues_de_agregar_material();
+                if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                {
+                    Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                    Muestra_foto_material();
+                }
             }
             else if(Materiales_disponibles_busqueda.Count ==  0)
             {
 
-
+                Desactiva_cajas_captura_busqueda_material();
+                Limpia_cajas_captura_despues_de_agregar_material();
+                MessageBox.Show("NO se encontraron Material Con esta busqueda", "Busqueda Material", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
+        }
+
+        private void Muestra_foto_material()
+        {
+            if (textBoxNombreFoto.Text != "")
+            {
+                Aparece_foto_material();
+                try
+                {
+                    pictureBoxMaterial.Image = Image.FromFile(@appPath + "\\Fotos\\" +
+                           textBoxNombreFoto.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void Desactiva_cajas_captura_busqueda_material()
+        {
+            textBoxCodigoMaterial.Enabled = false;
+            textBoxCodigoProveedor.Enabled = false;
+            textBoxDescripcion.Enabled = false;
+        }
+
+        private void Rellena_cajas_informacion_despues_busqueda(Material material_busqueda)
+        {
+            textBoxCodigoMaterial.Text = material_busqueda.Codigo;
+            textBoxCodigoProveedor.Text = material_busqueda.Codigo_proveedor;
+            textBoxDescripcion.Text = material_busqueda.Descripcion;
+            textBoxNombreFoto.Text = material_busqueda.foto;
+            textBoxUnidadMedida.Text = material_busqueda.Unidad_medida;
+            textBoxCantidad.Text = material_busqueda.Cantidad;
+            textBoxMaximo.Text = material_busqueda.Maximo;
+            textBoxMinimo.Text = material_busqueda.Minimo;
+            textBoxMarca.Text = material_busqueda.Marca;
+            textBoxUbicacion.Text = material_busqueda.Ubicacion;
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
@@ -568,8 +610,7 @@ namespace Coset_Sistema_Produccion
             {
                 if (Elimina_informacion_en_base_de_datos())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_proceso();
-                    Limpia_combo_nombre_proceso();
+                    Limpia_cajas_captura_despues_de_agregar_material();
                     Desactiva_cajas_captura_despues_de_agregar_material();
                     Desactiva_boton_eliminar_base_de_datos();
                     Desactiva_boton_cancelar();
@@ -613,15 +654,17 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBuscarempleado_Click(object sender, EventArgs e)
         {
-            Visualiza_proceso();
+            Visualiza_material();
         }
 
-        private void Visualiza_proceso()
+        private void Visualiza_material()
         {
             Desactiva_botones_operacion();
             Aparece_boton_busqueda_base_datos();
+            Activa_boton_busqueda_base_datos();
             Activa_cajas_de_informacion_visualizar();
             Activa_boton_cancelar_operacio();
+            
             Operacio_procesos = "Visualizar";
         }
 

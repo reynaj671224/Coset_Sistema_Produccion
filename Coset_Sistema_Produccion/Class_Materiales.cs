@@ -77,9 +77,12 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_material(Material material)
         {
-            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
-                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+            return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" +
                  material.Descripcion + "%';";
+
+            //return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+            //     "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+            //     material.Descripcion + "%';";
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()

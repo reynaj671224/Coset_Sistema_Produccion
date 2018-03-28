@@ -25,7 +25,7 @@ namespace Coset_Sistema_Produccion
         public Material Agregar_material = new Material();
         public Material Visualizar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
-        public string Material_seleccionado = "";
+        public Material Material_seleccionado_data_view = null;
         public Forma_Materiales_Seleccion(List<Material> materiales_busqueda_disponibles)
         {
             InitializeComponent();
@@ -34,7 +34,8 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_partidas_materiales_disponibles(List<Material> materiales_busqueda_disponibles) 
         {
-            foreach(Material material in materiales_busqueda_disponibles)
+            Materiales_disponibles_busqueda = materiales_busqueda_disponibles;
+            foreach (Material material in materiales_busqueda_disponibles)
             {
                 dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
                     material.Descripcion, material.Cantidad, material.Marca, material.Unidad_medida, material.foto);
@@ -60,7 +61,11 @@ namespace Coset_Sistema_Produccion
                 Aparece_foto_material();
                 try
                 {
-                    Material_seleccionado = dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                    
+                    Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material => 
+                    material.Codigo.Contains(dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"]
+                    .Value.ToString()));
+                        dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
                     pictureBoxMaterial.Image = Image.FromFile(@appPath + "\\Fotos\\" +
                         dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString());
 
@@ -85,17 +90,19 @@ namespace Coset_Sistema_Produccion
         {
             pictureBoxMaterial.Visible = true;
         }
-        public string  Codigo_material_seleccionado
+        public Material  Material_seleccionado
         {
             
             get
-                { return Material_seleccionado; }
+                { return Material_seleccionado_data_view; }
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            Materiales_disponibles_busqueda = null;
             this.Close();
+            GC.Collect();
         }
     }
 }
