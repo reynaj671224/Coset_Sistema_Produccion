@@ -44,6 +44,7 @@ namespace Coset_Sistema_Produccion
             connection.Close();
             return Material_existente_disponibles_requisiciones;
         }
+
         public string Inserta_nuevo_material_base_datos(Material material)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
@@ -77,17 +78,48 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_material(Material material)
         {
-            return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" +
-                 material.Descripcion + "%';";
 
-            //return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
-            //     "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
-            //     material.Descripcion + "%';";
+            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+                 material.Descripcion + "%' OR material_marca LIKE '%" + material.Marca + "%';";
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=almacen;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
+        }
+        public string Actualiza_base_datos_materiales(Material Actualiza_material)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_materiales(Actualiza_material), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+              
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+
+        private string Configura_cadena_comando_modificar_en_base_de_datos_materiales(Material Actualiza_material)
+        {
+            return "UPDATE materiales set  codigo_proveedor='" + Actualiza_material.Codigo_proveedor +
+              "',material_descripcion='" + Actualiza_material.Descripcion +
+              "',material_unidad_medida='" + Actualiza_material.Unidad_medida +
+              "',material_marca='" + Actualiza_material.Marca +
+              "',material_ubicacion='" + Actualiza_material.Descripcion +
+              "',material_cantidad='" + Actualiza_material.Cantidad +
+              "',material_maximo='" + Actualiza_material.Maximo +
+              "',material_minimo='" + Actualiza_material.Minimo +
+              "',material_foto='" + Actualiza_material.foto +
+              "' where codigo_material='" + Actualiza_material.Codigo + "';";
         }
     }
     public class Material

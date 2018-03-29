@@ -58,7 +58,7 @@
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
-            this.buttonHome.Text = "Regresar";
+            this.buttonHome.Text = "Seleccionar";
             this.buttonHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonHome.UseVisualStyleBackColor = true;
             this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);

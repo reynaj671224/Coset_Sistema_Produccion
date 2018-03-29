@@ -92,7 +92,7 @@
             this.buttonModificarMaterial.Text = "Modificar";
             this.buttonModificarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonModificarMaterial.UseVisualStyleBackColor = false;
-            this.buttonModificarMaterial.Click += new System.EventHandler(this.buttonModificarUsuario_Click);
+            this.buttonModificarMaterial.Click += new System.EventHandler(this.buttonModificarMaterial_Click);
             // 
             // buttonAgregarMaterial
             // 
@@ -122,7 +122,7 @@
             this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
             this.buttonBusquedaBaseDatos.Visible = false;
-            this.buttonBusquedaBaseDatos.Click += new System.EventHandler(this.buttonEliminarUsuario_Click);
+            this.buttonBusquedaBaseDatos.Click += new System.EventHandler(this.buttonBusquedaBaseDatos_Click);
             // 
             // buttonHome
             // 
@@ -219,7 +219,6 @@
             this.comboBoxCodigoMaterial.Size = new System.Drawing.Size(136, 21);
             this.comboBoxCodigoMaterial.TabIndex = 25;
             this.comboBoxCodigoMaterial.Visible = false;
-            this.comboBoxCodigoMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoempleado_SelectedIndexChanged);
             // 
             // timerActualizrempleado
             // 
