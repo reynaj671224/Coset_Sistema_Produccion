@@ -44,6 +44,7 @@
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Foto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonAgregarMaterial = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasMaterialSeleccion)).BeginInit();
@@ -54,7 +55,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(921, 429);
+            this.buttonHome.Location = new System.Drawing.Point(977, 429);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
@@ -147,11 +148,26 @@
             this.Foto.Name = "Foto";
             this.Foto.Visible = false;
             // 
+            // buttonAgregarMaterial
+            // 
+            this.buttonAgregarMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAgregarMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarMaterial.Image")));
+            this.buttonAgregarMaterial.Location = new System.Drawing.Point(977, 349);
+            this.buttonAgregarMaterial.Name = "buttonAgregarMaterial";
+            this.buttonAgregarMaterial.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonAgregarMaterial.Size = new System.Drawing.Size(79, 74);
+            this.buttonAgregarMaterial.TabIndex = 54;
+            this.buttonAgregarMaterial.Text = "Agregar";
+            this.buttonAgregarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAgregarMaterial.UseVisualStyleBackColor = true;
+            this.buttonAgregarMaterial.Visible = false;
+            // 
             // Forma_Materiales_Seleccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 530);
+            this.Controls.Add(this.buttonAgregarMaterial);
             this.Controls.Add(this.dataGridViewPartidasMaterialSeleccion);
             this.Controls.Add(this.pictureBoxMaterial);
             this.Controls.Add(this.buttonHome);
@@ -183,5 +199,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad_medida_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Foto;
+        private System.Windows.Forms.Button buttonAgregarMaterial;
     }
 }

@@ -45,21 +45,39 @@ namespace Coset_Sistema_Produccion
             this.Close();
         }
 
-        private void buttonAgregarUsuario_Click(object sender, EventArgs e)
+        private void buttonAgregarMaterial_Click(object sender, EventArgs e)
         {
-            Agrega_proceso();
+            Agrega_material();
         }
 
-        private void Agrega_proceso()
+        private void Agrega_material()
         {
             Asigna_codigo_proceso_foilio_disponible();
             Desactiva_botones_operacion();
             Aparece_caja_codigo_proveedor();
             Desaparece_combo_codigo_material();
-            Activa_cajas_informacion();
-            Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
+            Activa_cajas_informacion_agregar_busqueda_inicial();
+            Rellena_cajas_busqueda_interrogacion_agregar();
+            Inicia_timer_para_asegurar_informacion_busqueda_agregar();
             Activa_boton_cancelar_operacio();
             Operacio_materiales = "Agregar";
+        }
+
+        private void Inicia_timer_para_asegurar_informacion_busqueda_agregar()
+        {
+            timerBusquedaAgregar.Enabled = true;
+        }
+
+        private void Activa_cajas_informacion_agregar_busqueda_inicial()
+        {
+            textBoxCodigoProveedor.Enabled = true;
+            textBoxDescripcion.Enabled = true;
+        }
+
+        private void Rellena_cajas_busqueda_interrogacion_agregar()
+        {
+            textBoxDescripcion.Text = "?";
+            textBoxCodigoProveedor.Text = "?";
         }
 
         private void Asigna_codigo_proceso_foilio_disponible()
@@ -519,7 +537,7 @@ namespace Coset_Sistema_Produccion
 
         private void Inicia_timer_modificar_empleado()
         {
-            timerActualizrempleado.Enabled = true;
+            timerBusquedaAgregar.Enabled = true;
         }
 
         private void Desactiva_Combo_codigo_empleado()
@@ -534,11 +552,11 @@ namespace Coset_Sistema_Produccion
             //textBoxCodigoMaterial.Text = Proceso_Modificaciones.Codigo;
         }
 
-        private void timerActualizrempleado_Tick(object sender, EventArgs e)
+        private void timerBusquedaAgregar_Tick(object sender, EventArgs e)
         {
-            if(textBoxCodigoProveedor.Text!= Proceso_Modificaciones.Nombre)
+            if(textBoxCodigoProveedor.Text!= "?" || textBoxDescripcion.Text !="?")
             {
-                timerActualizrempleado.Enabled = false;
+                timerBusquedaAgregar.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
             }
         }
@@ -810,17 +828,6 @@ namespace Coset_Sistema_Produccion
                 configura_forma_visualizar();
         }
 
-        private void TimerAgregarMaterial_Tick(object sender, EventArgs e)
-        {
-            if(textBoxCodigoMaterial.Text !="" && textBoxCodigoProveedor.Text!="" &&
-               textBoxDescripcion.Text !="")
-            {
-                timerAgregarMaterial.Enabled = false;
-                Activa_boton_guardar_base_de_datos();
-            }
-            
-        }
-
         private void textBoxNombreFoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -851,7 +858,14 @@ namespace Coset_Sistema_Produccion
             pictureBoxMaterial.Visible = true;
         }
 
-
+        private void timerBusquedaAgregar_Tick_1(object sender, EventArgs e)
+        {
+            if (textBoxCodigoProveedor.Text != "?" || textBoxDescripcion.Text != "?")
+            {
+                timerBusquedaAgregar.Enabled = false;
+                buttonBusquedaBaseDatos.Visible = true;
+            }
+        }
     }
 }
  

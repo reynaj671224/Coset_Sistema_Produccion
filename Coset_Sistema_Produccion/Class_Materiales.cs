@@ -27,7 +27,7 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["material_descripcion"].ToString(),
                         Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
                         Marca = mySqlDataReader["material_marca"].ToString(),
-                        Ubicacion= mySqlDataReader["material_ubicacion"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
                         Cantidad = mySqlDataReader["material_cantidad"].ToString(),
                         Minimo = mySqlDataReader["material_minimo"].ToString(),
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
@@ -99,7 +99,7 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-              
+
                 connection.Close();
                 return ex.Message;
             }
@@ -137,4 +137,10 @@ namespace Coset_Sistema_Produccion
         public string error = "";
 
     }
+    public class Materiales_agregar_seleccion:Material
+    {
+        public string Opreacion_materiales = "";
+        public string Seleccion_materiales = "";
+    }
+     
 }

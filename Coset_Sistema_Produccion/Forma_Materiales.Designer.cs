@@ -43,7 +43,7 @@
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.timerAgregarMaterial = new System.Windows.Forms.Timer(this.components);
             this.comboBoxCodigoMaterial = new System.Windows.Forms.ComboBox();
-            this.timerActualizrempleado = new System.Windows.Forms.Timer(this.components);
+            this.timerBusquedaAgregar = new System.Windows.Forms.Timer(this.components);
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.timerEliminaempleado = new System.Windows.Forms.Timer(this.components);
             this.buttonBuscarMaterial = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@
             this.buttonAgregarMaterial.Text = "Agregar";
             this.buttonAgregarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonAgregarMaterial.UseVisualStyleBackColor = false;
-            this.buttonAgregarMaterial.Click += new System.EventHandler(this.buttonAgregarUsuario_Click);
+            this.buttonAgregarMaterial.Click += new System.EventHandler(this.buttonAgregarMaterial_Click);
             // 
             // buttonBusquedaBaseDatos
             // 
@@ -209,7 +209,6 @@
             // timerAgregarMaterial
             // 
             this.timerAgregarMaterial.Interval = 1000;
-            this.timerAgregarMaterial.Tick += new System.EventHandler(this.TimerAgregarMaterial_Tick);
             // 
             // comboBoxCodigoMaterial
             // 
@@ -220,10 +219,10 @@
             this.comboBoxCodigoMaterial.TabIndex = 25;
             this.comboBoxCodigoMaterial.Visible = false;
             // 
-            // timerActualizrempleado
+            // timerBusquedaAgregar
             // 
-            this.timerActualizrempleado.Interval = 1000;
-            this.timerActualizrempleado.Tick += new System.EventHandler(this.timerActualizrempleado_Tick);
+            this.timerBusquedaAgregar.Interval = 1000;
+            this.timerBusquedaAgregar.Tick += new System.EventHandler(this.timerBusquedaAgregar_Tick_1);
             // 
             // buttonCancelar
             // 
@@ -486,7 +485,7 @@
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Timer timerAgregarMaterial;
         private System.Windows.Forms.ComboBox comboBoxCodigoMaterial;
-        private System.Windows.Forms.Timer timerActualizrempleado;
+        private System.Windows.Forms.Timer timerBusquedaAgregar;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Timer timerEliminaempleado;
         private System.Windows.Forms.Button buttonBuscarMaterial;
