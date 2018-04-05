@@ -26,10 +26,38 @@ namespace Coset_Sistema_Produccion
         public Material Visualizar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Material Material_seleccionado_data_view = null;
-        public Forma_Materiales_Seleccion(List<Material> materiales_busqueda_disponibles)
+        public string agregar_seleccion = "";
+        public Forma_Materiales_Seleccion(List<Material> materiales_busqueda_disponibles,string Operacion_materiales)
         {
             InitializeComponent();
+
+            if (Operacion_materiales == "Agregar")
+            {
+                Aparece_boton_agregar_material();
+                Aparece_boton_no_agregar_material();
+            }
+            else if(Operacion_materiales == "Requisiciones")
+            {
+                Aparece_boton_agregar_material();
+          
+            }
+
             Rellena_partidas_materiales_disponibles(materiales_busqueda_disponibles);
+        }
+
+        private void Aparece_boton_seleccionar_material()
+        {
+            buttonSeleccionMaterial.Visible = true;
+        }
+
+        private void Aparece_boton_no_agregar_material()
+        {
+            buttonRegresarNoAgregar.Visible = true;
+        }
+
+        private void Aparece_boton_agregar_material()
+        {
+            buttonAgregarMaterial.Visible = true;
         }
 
         private void Rellena_partidas_materiales_disponibles(List<Material> materiales_busqueda_disponibles) 
@@ -56,6 +84,8 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasMaterialSeleccion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            buttonSeleccionMaterial.Visible = true;
+            buttonAgregarMaterial.Visible = false;
             if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString() != "")
             {
                 Aparece_foto_material();
@@ -96,10 +126,31 @@ namespace Coset_Sistema_Produccion
             get
                 { return Material_seleccionado_data_view; }
         }
+        public string Material_operacion_seleccion
+        {
 
-        private void buttonHome_Click(object sender, EventArgs e)
+            get
+            { return agregar_seleccion; }
+        }
+
+        private void buttonSeleccionMaterial_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            Materiales_disponibles_busqueda = null;
+            this.Close();
+            GC.Collect();
+        }
+
+        private void buttonAgregarMaterial_Click(object sender, EventArgs e)
+        {
+            agregar_seleccion = "Agregar";
+            Materiales_disponibles_busqueda = null;
+            this.Close();
+            GC.Collect();
+        }
+
+        private void buttonRegresarNoAgregar_Click(object sender, EventArgs e)
+        {
             Materiales_disponibles_busqueda = null;
             this.Close();
             GC.Collect();

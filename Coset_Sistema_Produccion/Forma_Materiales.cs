@@ -557,7 +557,7 @@ namespace Coset_Sistema_Produccion
             if(textBoxCodigoProveedor.Text!= "?" || textBoxDescripcion.Text !="?")
             {
                 timerBusquedaAgregar.Enabled = false;
-                buttonGuardarBasedeDatos.Visible = true;
+                buttonBusquedaBaseDatos.Visible = true;
             }
         }
 
@@ -591,7 +591,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
-            Desactiva_boton_buscar_base_datos();
+            Desaparece_boton_buscar_base_datos();
             Obtener_datos_materiales_busqueda();
             Desaparece_foto_material();
             if (Materiales_disponibles_busqueda.Count == 1)
@@ -599,42 +599,109 @@ namespace Coset_Sistema_Produccion
                 if (Operacio_materiales == "Visualizar")
                 {
                     Desactiva_cajas_captura_busqueda_material();
-                }else if(Operacio_materiales == "Modificar")
+                    Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
+                    Muestra_foto_material();
+                }
+                else if(Operacio_materiales == "Modificar")
                 {
                     Activa_cajas_informacion_material_modificaciones();
                     Aparece_boton_guardar_material_base_datos();
+                    Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
+                    Muestra_foto_material();
+                }else if(Operacio_materiales == "Agregar")
+                {
+                    Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, Operacio_materiales);
+                    forma_Materiales_Seleccion.ShowDialog();
+                    if (forma_Materiales_Seleccion.agregar_seleccion == "Agregar")
+                    {
+                        Activa_cajas_informacion();
+                        Activa_timer_agregar_material();
+                    }
+                    else
+                    {
+                        Cancela_operacion_agregar();
+                    }
                 }
-                Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
-                Muestra_foto_material();
+                
                 
             }
             else if (Materiales_disponibles_busqueda.Count > 1)
             {
-                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda);
+                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda,Operacio_materiales);
                 forma_Materiales_Seleccion.ShowDialog();
                 if (Operacio_materiales == "Visualizar")
                 {
                     Desactiva_cajas_captura_busqueda_material();
+                    Limpia_cajas_captura_despues_de_agregar_material();
+                    if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                    {
+                        Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                        Muestra_foto_material();
+                    }
                 }
                 else if (Operacio_materiales == "Modificar")
                 {
                     Activa_cajas_informacion_material_modificaciones();
                     Aparece_boton_guardar_material_base_datos();
-                }
-                Limpia_cajas_captura_despues_de_agregar_material();
-                if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                    Limpia_cajas_captura_despues_de_agregar_material();
+                    if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                    {
+                        Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                        Muestra_foto_material();
+                    }
+                }else if(Operacio_materiales == "Agregar")
                 {
-                    Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
-                    Muestra_foto_material();
+                    if (forma_Materiales_Seleccion.agregar_seleccion == "Agregar")
+                    {
+                        Activa_cajas_informacion();
+                        Activa_timer_agregar_material();
+                    }
+                    else
+                    {
+                        Cancela_operacion_agregar();
+                    }
+
                 }
+               
             }
             else if(Materiales_disponibles_busqueda.Count ==  0)
             {
-                Desactiva_cajas_captura_busqueda_material();
-                Limpia_cajas_captura_despues_de_agregar_material();
-                MessageBox.Show("NO se encontraron Material Con esta busqueda", "Busqueda Material", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (Operacio_materiales == "Agregar")
+                {
+                    Activa_cajas_informacion();
+                    Activa_timer_agregar_material();
+
+                }
+                else
+                {
+                    Desactiva_cajas_captura_busqueda_material();
+                    Limpia_cajas_captura_despues_de_agregar_material();
+                    MessageBox.Show("NO se encontraron Material Con esta busqueda", "Busqueda Material", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
 
+        }
+
+        private void Activa_timer_agregar_material()
+        {
+            timerAgregarMaterial.Enabled = true;
+        }
+
+        private void Cancela_operacion_agregar()
+        {
+            Limpia_cajas_captura_despues_de_agregar_material();
+            Desactiva_cajas_captura_despues_de_agregar_material();
+            Desactiva_boton_guardar_base_de_datos();
+            Desactiva_boton_cancelar();
+            Desactiva_boton_eliminar_base_de_datos();
+            Activa_botones_operacion();
+            Desaparece_foto_material();
+            Desaparece_boton_busqueda_base_datos();
+        }
+
+        private void Desaparece_boton_buscar_base_datos()
+        {
+            buttonBusquedaBaseDatos.Visible = false;
         }
 
         private void Aparece_boton_guardar_material_base_datos()
@@ -743,14 +810,6 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = true;
         }
 
-        private void timerEliminaempleado_Tick(object sender, EventArgs e)
-        {
-            //if (comboBoxNombreProceso.Text != "")
-            //{
-            //    timerEliminaempleado.Enabled = false;
-            //    Activa_boton_borrar_ususraio_base_datos();
-            //}
-        }
 
         private void buttonBuscarempleado_Click(object sender, EventArgs e)
         {
@@ -792,16 +851,22 @@ namespace Coset_Sistema_Produccion
         private void Obtener_datos_materiales_busqueda()
         {
             Asigna_datos_visualizar_material();
-            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_busqueda_en_base_datos(Visualizar_material);
+            if (Operacio_materiales == "Agregar")
+            {
+                Materiales_disponibles_busqueda = class_materiales.Adquiere_agregar_materiales_busqueda_en_base_datos(Visualizar_material);
+            }
+            else
+            {
+                Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_busqueda_en_base_datos(Visualizar_material);
+            }
         }
 
         private void Asigna_datos_visualizar_material()
-        {
-            Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
-            Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Visualizar_material.Descripcion = textBoxDescripcion.Text;
-            Visualizar_material.Marca = textBoxMarca.Text;
-
+        {           
+                Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
+                Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+                Visualizar_material.Descripcion = textBoxDescripcion.Text;
+                Visualizar_material.Marca = textBoxMarca.Text;
         }
 
         private void Activa_cajas_de_informacion_visualizar()
@@ -858,12 +923,13 @@ namespace Coset_Sistema_Produccion
             pictureBoxMaterial.Visible = true;
         }
 
-        private void timerBusquedaAgregar_Tick_1(object sender, EventArgs e)
+        private void timerAgregarMaterial_Tick(object sender, EventArgs e)
         {
-            if (textBoxCodigoProveedor.Text != "?" || textBoxDescripcion.Text != "?")
+            if (textBoxCodigoProveedor.Text != "" && textBoxDescripcion.Text != "" &&
+                textBoxMarca.Text !="")
             {
                 timerBusquedaAgregar.Enabled = false;
-                buttonBusquedaBaseDatos.Visible = true;
+                buttonGuardarBasedeDatos.Visible = true;
             }
         }
     }

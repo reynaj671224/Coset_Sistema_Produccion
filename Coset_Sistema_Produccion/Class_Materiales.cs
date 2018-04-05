@@ -45,6 +45,48 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_requisiciones;
         }
 
+        public List<Material> Adquiere_agregar_materiales_busqueda_en_base_datos(Material material)
+        {
+            List<Material> Material_existente_disponibles_requisiciones = new List<Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_material_agregar(material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_requisiciones.Add(new Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
+                        Descripcion = mySqlDataReader["material_descripcion"].ToString(),
+                        Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
+                        Marca = mySqlDataReader["material_marca"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_requisiciones.Add(new Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_requisiciones;
+        }
+
+        private string Commando_leer_Mysql_busqueda_material_agregar(Material material)
+        {
+            return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + 
+                "%' OR material_descripcion LIKE '%" + material.Descripcion + "%';";
+        }
+
         public string Inserta_nuevo_material_base_datos(Material material)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());

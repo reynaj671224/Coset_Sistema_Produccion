@@ -209,6 +209,7 @@
             // timerAgregarMaterial
             // 
             this.timerAgregarMaterial.Interval = 1000;
+            this.timerAgregarMaterial.Tick += new System.EventHandler(this.timerAgregarMaterial_Tick);
             // 
             // comboBoxCodigoMaterial
             // 
@@ -222,7 +223,7 @@
             // timerBusquedaAgregar
             // 
             this.timerBusquedaAgregar.Interval = 1000;
-            this.timerBusquedaAgregar.Tick += new System.EventHandler(this.timerBusquedaAgregar_Tick_1);
+            this.timerBusquedaAgregar.Tick += new System.EventHandler(this.timerBusquedaAgregar_Tick);
             // 
             // buttonCancelar
             // 
@@ -242,7 +243,6 @@
             // timerEliminaempleado
             // 
             this.timerEliminaempleado.Interval = 1000;
-            this.timerEliminaempleado.Tick += new System.EventHandler(this.timerEliminaempleado_Tick);
             // 
             // buttonBuscarMaterial
             // 
