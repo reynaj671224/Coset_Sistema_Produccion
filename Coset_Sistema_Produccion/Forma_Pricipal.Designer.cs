@@ -55,6 +55,7 @@
             this.entradaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +77,6 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
-            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -281,6 +281,12 @@
             this.devolucionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.devolucionToolStripMenuItem.Text = "Devolución Material";
             // 
+            // autosToolStripMenuItem
+            // 
+            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
+            this.autosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autosToolStripMenuItem.Text = "Autos";
+            // 
             // produccionToolStripMenuItem
             // 
             this.produccionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -445,12 +451,6 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
-            // autosToolStripMenuItem
-            // 
-            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
-            this.autosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.autosToolStripMenuItem.Text = "Autos";
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,7 +467,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 2.3";
+            this.Text = "Coset Sistema Produccion Rev 2.4";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
