@@ -39,6 +39,7 @@ namespace Coset_Sistema_Produccion
         public List<Proyecto> proyectos_disponibles = new List<Proyecto>();
         public Class_Proyectos Class_proyectos = new Class_Proyectos();
         public Material Visualizar_material = new Material();
+        public Material Agregar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Class_Materiales class_materiales = new Class_Materiales();
         string RenglonParaEliminar = "";
@@ -783,29 +784,130 @@ namespace Coset_Sistema_Produccion
         {
             if (Guarda_datos_partidas_requisiciones())
             {
-                if (Guarda_datos_requisicion())
+                if (Agrega_materiales_requisicion_base_datos())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_cotizacion();
-                    Limpia_combo_codigo_requisicion();
-                    Limpia_combo_requisitor();
-                    Limpia_combo_dirigido();
-                    Desactiva_cajas_captura_despues_de_agregar_cotizacion();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_requisicion();
-                    Activa_botones_operacion();
-                    limpia_partidas_requisicion();
-                    Desactiva_datagridview_partidas();
-                    Desaparece_combo_requisitor();
-                    Desactiva_combo_requisitor();
-                    Desaparece_combo_dirigido();
-                    Desactiva_combo_dirigido();
-                    Aparece_textbox_requisitor();
-                    Aparece_textbox_dirigido();
-                    Asigna_nuevo_folio_requisiciones();
-                    Elimina_informacion_requisiciones_disponibles();
+                    if (Guarda_datos_requisicion())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_cotizacion();
+                        Limpia_combo_codigo_requisicion();
+                        Limpia_combo_requisitor();
+                        Limpia_combo_dirigido();
+                        Desactiva_cajas_captura_despues_de_agregar_cotizacion();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_requisicion();
+                        Activa_botones_operacion();
+                        limpia_partidas_requisicion();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_requisitor();
+                        Desactiva_combo_requisitor();
+                        Desaparece_combo_dirigido();
+                        Desactiva_combo_dirigido();
+                        Aparece_textbox_requisitor();
+                        Aparece_textbox_dirigido();
+                        Asigna_nuevo_folio_requisiciones();
+                        Elimina_informacion_requisiciones_disponibles();
+                    }
                 }
             }
+        }
+
+        private bool Agrega_materiales_requisicion_base_datos()
+        {
+            string respuesta_agregar_material = "";
+            for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.Rows.Count - 1; partidas++)
+            {
+
+                if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells["Busqueda_requisicion"].Value.ToString() == "A")
+                {
+                    if (Asigna_valores_material_requisicion_agregar(partidas))
+                    {
+                        respuesta_agregar_material = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
+                        if (respuesta_agregar_material == "NO errores")
+                        {
+                            Asigna_nuevo_folio_material();
+                        }
+                        else
+                        {
+                            MessageBox.Show(respuesta_agregar_material);
+                            return false;
+                        }
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Campos sin asignar", "Agregar Material Requisicion",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+
+                }
+               
+            }
+
+            return true;
+
+        }
+
+        private void Asigna_nuevo_folio_material()
+        {
+            int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(1, folio_disponible.Folio_materiales.Length - 1));
+            numero_folio++;
+            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 1) + numero_folio.ToString();
+            string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
+            if (respuesta != "")
+                MessageBox.Show(folio_disponible.error);
+        }
+
+        private bool Asigna_valores_material_requisicion_agregar(int partidas)
+        {
+            Agregar_material.Codigo = Asigna_codigo_proceso_foilio_disponible();
+
+            if(dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Parte_requisicion"].Value.ToString() !="?" && dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Parte_requisicion"].Value != null)
+            {
+                Agregar_material.Codigo_proveedor = dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Parte_requisicion"].Value.ToString();
+            }
+            else
+            {
+                return false;
+            }
+
+            if (dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Descrpcion_partida"].Value.ToString() != "?" && dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Descrpcion_partida"].Value != null)
+            {
+                Agregar_material.Descripcion = dataGridViewPartidasRequisiciones.Rows[partidas].
+                 Cells["Descrpcion_partida"].Value.ToString();
+            }
+            else
+            {
+                return false;
+            }
+
+            if (dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Unidad_medida_partida"].Value.ToString() != "?" && dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Unidad_medida_partida"].Value != null)
+            {
+                Agregar_material.Unidad_medida = dataGridViewPartidasRequisiciones.Rows[partidas].
+                Cells["Unidad_medida_partida"].Value.ToString();
+            }
+            else
+            {
+                return false;
+            }
+            Agregar_material.Cantidad = "0";
+            Agregar_material.Maximo = "0";
+            Agregar_material.Minimo = "0";
+            return true;
+        }
+
+        private string Asigna_codigo_proceso_foilio_disponible()
+        {
+            folio_disponible = class_folio_disponible.Obtener_informacion_control_folio_base_datos();
+            return folio_disponible.Folio_materiales;
         }
 
         private bool Guarda_datos_requisicion()

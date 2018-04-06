@@ -181,7 +181,7 @@ namespace Coset_Sistema_Produccion
                     Activa_botones_operacion();
                     Aparece_caja_codigo_material();
                     Desaparece_foto_material();
-                    Asigna_nuevo_folio_proceso();
+                    Asigna_nuevo_folio_material();
                     Desaparece_foto_material();
                     Elimina_informacion_materiales_disponibles();
                 }
@@ -194,7 +194,7 @@ namespace Coset_Sistema_Produccion
             pictureBoxMaterial.Visible = false;
         }
 
-        private void Asigna_nuevo_folio_proceso()
+        private void Asigna_nuevo_folio_material()
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(1, folio_disponible.Folio_materiales.Length - 1));
             numero_folio++;
