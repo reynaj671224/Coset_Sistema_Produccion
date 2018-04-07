@@ -633,24 +633,45 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_cliente()
         {
-            if (Guarda_datos_contactos_clientes())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_clientes())
+                if (Guarda_datos_contactos_clientes())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_cliente();
-                    Limpia_combo_codigo_cliente();
-                    Desactiva_cajas_captura_despues_de_agregar_cliente();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_cliente();
-                    Activa_botones_operacion();
-                    limpia_contactos_clientes();
-                    Desactiva_datagridview_contactos();
-                    Asigna_nuevo_folio_clientes();
-                    Elimina_informacion_cliente_disponibles();
+                    if (Guarda_datos_clientes())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_cliente();
+                        Limpia_combo_codigo_cliente();
+                        Desactiva_cajas_captura_despues_de_agregar_cliente();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cliente();
+                        Activa_botones_operacion();
+                        limpia_contactos_clientes();
+                        Desactiva_datagridview_contactos();
+                        Asigna_nuevo_folio_clientes();
+                        Elimina_informacion_cliente_disponibles();
+                    }
                 }
             }
 
+        }
+
+        private bool verifica_datos_partidas()
+        {
+            for (int contactos = 0; contactos < dataGridViewContactosClientes.Rows.Count - 1; contactos++)
+            {
+                for (int campo = 1; campo < dataGridViewContactosClientes.Rows[contactos].Cells.Count; campo++)
+                {
+                    if (dataGridViewContactosClientes.Rows[contactos].Cells[campo].Value == null)
+                    {
+                        MessageBox.Show("campo en blanco");
+                        return false;
+                    }
+
+                }
+
+            }
+            return true;
         }
 
         private void Asigna_nuevo_folio_clientes()

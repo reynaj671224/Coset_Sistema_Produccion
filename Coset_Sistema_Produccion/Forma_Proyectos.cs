@@ -834,46 +834,49 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_subproyecto()
         {
-            if (Guarda_datos_dibujos_proyecto())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_proyecto())
+                if (Guarda_datos_dibujos_proyecto())
                 {
-                    if (Actulaiza_cotizacion_asigna_Orden_compra_y_subproyecto())
+                    if (Guarda_datos_proyecto())
                     {
-                        Limpia_cajas_captura_despues_de_agregar_proyecto();
-                        Limpia_combo_codigo_cotizacion();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_ingenieros_coset();
-                        Limpia_combo_ingeniero_cliente();
-                        Desactiva_cajas_captura_despues_de_agregar_proyecto();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Desaparece_combo_cliente_nombre();
-                        Desaparece_combo_ingenieros_coset();
-                        Desaparece_combo_ingenieros_cliente();
-                        Activa_botones_operacion();
-                        limpia_dibujos_proyecto();
-                        Desactiva_datagridview_dibujos();
+                        if (Actulaiza_cotizacion_asigna_Orden_compra_y_subproyecto())
+                        {
+                            Limpia_cajas_captura_despues_de_agregar_proyecto();
+                            Limpia_combo_codigo_cotizacion();
+                            Limpia_combo_nombre_cliente();
+                            Limpia_combo_ingenieros_coset();
+                            Limpia_combo_ingeniero_cliente();
+                            Desactiva_cajas_captura_despues_de_agregar_proyecto();
+                            Desaparece_boton_guardar_base_de_datos();
+                            Desaparece_boton_cancelar();
+                            Desaparece_combo_codigo_cotizacion();
+                            Desaparece_combo_cliente_nombre();
+                            Desaparece_combo_ingenieros_coset();
+                            Desaparece_combo_ingenieros_cliente();
+                            Activa_botones_operacion();
+                            limpia_dibujos_proyecto();
+                            Desactiva_datagridview_dibujos();
 
-                        Desactiva_combo_cliente_nombre();
-                        Desactiva_combo_codigo_cotizacion();
-                        Desactiva_combo_ingeniero_coset();
-                        Desactiva_combo_ingenieros_cliente();
+                            Desactiva_combo_cliente_nombre();
+                            Desactiva_combo_codigo_cotizacion();
+                            Desactiva_combo_ingeniero_coset();
+                            Desactiva_combo_ingenieros_cliente();
 
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_codigo_cotizacion();
-                        Aparece_textbox_ingeniero_coset();
-                        Aparece_textbox_ingeniero_cliente();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_codigo_cotizacion();
+                            Aparece_textbox_ingeniero_coset();
+                            Aparece_textbox_ingeniero_cliente();
 
-                        Desaparece_textbox_subproyecto();
-                        Desactiva_textbox_subproyecto();
+                            Desaparece_textbox_subproyecto();
+                            Desactiva_textbox_subproyecto();
 
-                        Limpia_combo_proyecto();
-                        Desaparece_combo_codigo_proyecto();
-                        Desactiva_combobox_codigo_proyecto();
+                            Limpia_combo_proyecto();
+                            Desaparece_combo_codigo_proyecto();
+                            Desactiva_combobox_codigo_proyecto();
 
-                        Elimina_informacion_proyectos_disponibles();
+                            Elimina_informacion_proyectos_disponibles();
+                        }
                     }
                 }
             }
@@ -1031,14 +1034,17 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_dibujos()
         {
-            if (Guarda_datos_dibujos_proyecto())
+            if (verifica_datos_partidas())
             {
-                Desaparece_boton_guardar_base_de_datos();
-                Activa_botones_operacion_contactos();
-                limpia_dibujos_proyecto();
-                Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-                Rellena_cajas_informacion_de_dibujos_proyecto();
-                Elimina_informacion_proyectos_disponibles();
+                if (Guarda_datos_dibujos_proyecto())
+                {
+                    Desaparece_boton_guardar_base_de_datos();
+                    Activa_botones_operacion_contactos();
+                    limpia_dibujos_proyecto();
+                    Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
+                    Rellena_cajas_informacion_de_dibujos_proyecto();
+                    Elimina_informacion_proyectos_disponibles();
+                }
             }
         }
 
@@ -1060,45 +1066,48 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_modificar_proyecto()
         {
-            if (Modificar_datos_dibujos_proyecto())
+            if (verifica_datos_partidas())
             {
-                if (Modifica_datos_proyecto())
+                if (Modificar_datos_dibujos_proyecto())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_proyecto();
+                    if (Modifica_datos_proyecto())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_proyecto();
 
-                    Limpia_combo_codigo_cotizacion();
-                    Limpia_combo_nombre_cliente();
-                    Limpia_combo_ingenieros_coset();
-                    Limpia_combo_ingeniero_cliente();
-                    Limpia_combo_proyecto();
+                        Limpia_combo_codigo_cotizacion();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_ingenieros_coset();
+                        Limpia_combo_ingeniero_cliente();
+                        Limpia_combo_proyecto();
 
-                    Desactiva_cajas_captura_despues_de_agregar_proyecto();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
+                        Desactiva_cajas_captura_despues_de_agregar_proyecto();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
 
-                    Desaparece_combo_codigo_cotizacion();
-                    Desaparece_combo_cliente_nombre();
-                    Desaparece_combo_ingenieros_coset();
-                    Desaparece_combo_ingenieros_cliente();
-                    Desaparece_combo_codigo_proyecto();
+                        Desaparece_combo_codigo_cotizacion();
+                        Desaparece_combo_cliente_nombre();
+                        Desaparece_combo_ingenieros_coset();
+                        Desaparece_combo_ingenieros_cliente();
+                        Desaparece_combo_codigo_proyecto();
 
-                    Activa_botones_operacion();
-                    limpia_dibujos_proyecto();
-                    Desactiva_datagridview_dibujos();
+                        Activa_botones_operacion();
+                        limpia_dibujos_proyecto();
+                        Desactiva_datagridview_dibujos();
 
-                    Desactiva_combo_cliente_nombre();
-                    Desactiva_combo_codigo_cotizacion();
-                    Desactiva_combo_ingeniero_coset();
-                    Desactiva_combo_ingenieros_cliente();
-                    Desactiva_combobox_codigo_proyecto();
+                        Desactiva_combo_cliente_nombre();
+                        Desactiva_combo_codigo_cotizacion();
+                        Desactiva_combo_ingeniero_coset();
+                        Desactiva_combo_ingenieros_cliente();
+                        Desactiva_combobox_codigo_proyecto();
 
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_codigo_cotizacion();
-                    Aparece_textbox_ingeniero_coset();
-                    Aparece_textbox_ingeniero_cliente();
-                    Aparece_textbox_codigo_proyecto();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_codigo_cotizacion();
+                        Aparece_textbox_ingeniero_coset();
+                        Aparece_textbox_ingeniero_cliente();
+                        Aparece_textbox_codigo_proyecto();
 
-                    Elimina_informacion_proyectos_disponibles();
+                        Elimina_informacion_proyectos_disponibles();
+                    }
                 }
             }
         }
@@ -1208,46 +1217,67 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_proyecto()
         {
-            if (Guarda_datos_dibujos_proyecto())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_proyecto())
+                if (Guarda_datos_dibujos_proyecto())
                 {
-                    if (Actulaiza_cotizacion_asigna_Orden_compra_y_proyecto())
+                    if (Guarda_datos_proyecto())
                     {
-                        Limpia_cajas_captura_despues_de_agregar_proyecto();
-                        Limpia_combo_codigo_cotizacion();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_ingenieros_coset();
-                        Limpia_combo_ingeniero_cliente();
-                        Desactiva_cajas_captura_despues_de_agregar_proyecto();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Desaparece_combo_cliente_nombre();
-                        Desaparece_combo_ingenieros_coset();
-                        Desaparece_combo_ingenieros_cliente();
-                        Activa_botones_operacion();
-                        limpia_dibujos_proyecto();
-                        Desactiva_datagridview_dibujos();
+                        if (Actulaiza_cotizacion_asigna_Orden_compra_y_proyecto())
+                        {
+                            Limpia_cajas_captura_despues_de_agregar_proyecto();
+                            Limpia_combo_codigo_cotizacion();
+                            Limpia_combo_nombre_cliente();
+                            Limpia_combo_ingenieros_coset();
+                            Limpia_combo_ingeniero_cliente();
+                            Desactiva_cajas_captura_despues_de_agregar_proyecto();
+                            Desaparece_boton_guardar_base_de_datos();
+                            Desaparece_boton_cancelar();
+                            Desaparece_combo_codigo_cotizacion();
+                            Desaparece_combo_cliente_nombre();
+                            Desaparece_combo_ingenieros_coset();
+                            Desaparece_combo_ingenieros_cliente();
+                            Activa_botones_operacion();
+                            limpia_dibujos_proyecto();
+                            Desactiva_datagridview_dibujos();
 
-                        Desactiva_combo_cliente_nombre();
-                        Desactiva_combo_codigo_cotizacion();
-                        Desactiva_combo_ingeniero_coset();
-                        Desactiva_combo_ingenieros_cliente();
+                            Desactiva_combo_cliente_nombre();
+                            Desactiva_combo_codigo_cotizacion();
+                            Desactiva_combo_ingeniero_coset();
+                            Desactiva_combo_ingenieros_cliente();
 
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_codigo_cotizacion();
-                        Aparece_textbox_ingeniero_coset();
-                        Aparece_textbox_ingeniero_cliente();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_codigo_cotizacion();
+                            Aparece_textbox_ingeniero_coset();
+                            Aparece_textbox_ingeniero_cliente();
 
-                        Asigna_nuevo_folio_proyecto();
-                        Asigna_njuevo_folio_OC();
+                            Asigna_nuevo_folio_proyecto();
+                            Asigna_njuevo_folio_OC();
 
-                        Elimina_informacion_proyectos_disponibles();
+                            Elimina_informacion_proyectos_disponibles();
+                        }
                     }
                 }
             }
 
+        }
+
+        private bool verifica_datos_partidas()
+        {
+            for (int partidas = 0; partidas < dataGridViewDibujosProyecto.Rows.Count - 1; partidas++)
+            {
+                for (int campo = 1; campo < dataGridViewDibujosProyecto.Rows[partidas].Cells.Count; campo++)
+                {
+                    if (dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value == null)
+                    {
+                        MessageBox.Show("campo en blanco");
+                        return false;
+                    }
+
+                }
+
+            }
+            return true;
         }
 
         private bool Actulaiza_cotizacion_asigna_Orden_compra_y_proyecto()

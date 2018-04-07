@@ -667,33 +667,36 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_copiar_cotizacion()
         {
-            if (Copia_datos_partidas_cotizacion())
+            if (verifica_datos_partidas())
             {
-                if (Copia_datos_cotizaciones())
+                if (Copia_datos_partidas_cotizacion())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_cotizacion();
-                    Limpia_combo_codigo_cotizacion();
-                    Limpia_combo_nombre_cliente();
-                    Limpia_combo_atencion();
-                    Limpia_combo_atencio_copia();
-                    Desactiva_cajas_captura_despues_de_agregar_cotizacion();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_cotizacion();
-                    Activa_botones_operacion();
-                    limpia_partidas_cotizacion();
-                    Desactiva_datagridview_partidas();
-                    Desaparece_combo_cliente_nombre();
-                    Desactiva_combo_cliente_nombre();
-                    Desaparece_combo_atencion();
-                    Desactiva_combo_atencion();
-                    Desaparece_combo_copia_atencion();
-                    Desactiva_combo_copia_atencion();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_atencion();
-                    Aparece_textbox_atencion_copia();
-                    Elimina_informacion_cotizaciones_disponibles();
+                    if (Copia_datos_cotizaciones())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_cotizacion();
+                        Limpia_combo_codigo_cotizacion();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_atencion();
+                        Limpia_combo_atencio_copia();
+                        Desactiva_cajas_captura_despues_de_agregar_cotizacion();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cotizacion();
+                        Activa_botones_operacion();
+                        limpia_partidas_cotizacion();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_cliente_nombre();
+                        Desactiva_combo_cliente_nombre();
+                        Desaparece_combo_atencion();
+                        Desactiva_combo_atencion();
+                        Desaparece_combo_copia_atencion();
+                        Desactiva_combo_copia_atencion();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_atencion();
+                        Aparece_textbox_atencion_copia();
+                        Elimina_informacion_cotizaciones_disponibles();
+                    }
                 }
             }
         }
@@ -778,14 +781,17 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_partidas()
         {
-            if (Guarda_datos_partidas_cotizacion())
+            if (verifica_datos_partidas())
             {
-                Desaparece_boton_guardar_base_de_datos();
-                Activa_botones_operacion_contactos();
-                limpia_partidas_cotizacion();
-                Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoCotizaciones.Text);
-                Rellena_cajas_informacion_de_partidas_cotizacion();
-                Elimina_informacion_cotizaciones_disponibles();
+                if (Guarda_datos_partidas_cotizacion())
+                {
+                    Desaparece_boton_guardar_base_de_datos();
+                    Activa_botones_operacion_contactos();
+                    limpia_partidas_cotizacion();
+                    Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoCotizaciones.Text);
+                    Rellena_cajas_informacion_de_partidas_cotizacion();
+                    Elimina_informacion_cotizaciones_disponibles();
+                }
             }
         }
 
@@ -807,34 +813,37 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_modificar_cotizacion()
         {
-            if (Modificar_datos_partidas_cotizacion())
+            if (verifica_datos_partidas())
             {
-                if (Modifica_datos_cotizacion())
+                if (Modificar_datos_partidas_cotizacion())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_cotizacion();
-                    Limpia_combo_codigo_cotizacion();
-                    Limpia_combo_nombre_cliente();
-                    Limpia_combo_atencion();
-                    Limpia_combo_atencio_copia();
-                    Desactiva_cajas_captura_despues_de_agregar_cotizacion();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_cotizacion();
-                    Aparce_caja_codigo_cliente();
-                    Activa_botones_operacion();
-                    limpia_partidas_cotizacion();
-                    Desactiva_datagridview_partidas();
-                    Desaparece_combo_cliente_nombre();
-                    Desactiva_combo_cliente_nombre();
-                    Desaparece_combo_atencion();
-                    Desactiva_combo_atencion();
-                    Desaparece_combo_copia_atencion();
-                    Desactiva_combo_copia_atencion();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_atencion();
-                    Aparece_textbox_atencion_copia();
-                    Elimina_informacion_cotizaciones_disponibles();
+                    if (Modifica_datos_cotizacion())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_cotizacion();
+                        Limpia_combo_codigo_cotizacion();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_atencion();
+                        Limpia_combo_atencio_copia();
+                        Desactiva_cajas_captura_despues_de_agregar_cotizacion();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cotizacion();
+                        Aparce_caja_codigo_cliente();
+                        Activa_botones_operacion();
+                        limpia_partidas_cotizacion();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_cliente_nombre();
+                        Desactiva_combo_cliente_nombre();
+                        Desaparece_combo_atencion();
+                        Desactiva_combo_atencion();
+                        Desaparece_combo_copia_atencion();
+                        Desactiva_combo_copia_atencion();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_atencion();
+                        Aparece_textbox_atencion_copia();
+                        Elimina_informacion_cotizaciones_disponibles();
+                    }
                 }
             }
         }
@@ -938,36 +947,58 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_cotizacion()
         {
-            if (Guarda_datos_partidas_cotizacion())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_cotizaciones())
+                if (Guarda_datos_partidas_cotizacion())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_cotizacion();
-                    Limpia_combo_codigo_cotizacion();
-                    Limpia_combo_nombre_cliente();
-                    Limpia_combo_atencion();
-                    Limpia_combo_atencio_copia();
-                    Desactiva_cajas_captura_despues_de_agregar_cotizacion();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_cotizacion();
-                    Activa_botones_operacion();
-                    limpia_partidas_cotizacion();
-                    Desactiva_datagridview_partidas();
-                    Desaparece_combo_cliente_nombre();
-                    Desactiva_combo_cliente_nombre();
-                    Desaparece_combo_atencion();
-                    Desactiva_combo_atencion();
-                    Desaparece_combo_copia_atencion();
-                    Desactiva_combo_copia_atencion();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_atencion();
-                    Aparece_textbox_atencion_copia();
-                    Asigna_nuevo_folio_cotizaciones();
-                    Elimina_informacion_cotizaciones_disponibles();
+                    if (Guarda_datos_cotizaciones())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_cotizacion();
+                        Limpia_combo_codigo_cotizacion();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_atencion();
+                        Limpia_combo_atencio_copia();
+                        Desactiva_cajas_captura_despues_de_agregar_cotizacion();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cotizacion();
+                        Activa_botones_operacion();
+                        limpia_partidas_cotizacion();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_cliente_nombre();
+                        Desactiva_combo_cliente_nombre();
+                        Desaparece_combo_atencion();
+                        Desactiva_combo_atencion();
+                        Desaparece_combo_copia_atencion();
+                        Desactiva_combo_copia_atencion();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_atencion();
+                        Aparece_textbox_atencion_copia();
+                        Asigna_nuevo_folio_cotizaciones();
+                        Elimina_informacion_cotizaciones_disponibles();
+                    }
                 }
             }
+
+        }
+
+        private bool verifica_datos_partidas()
+        {
+            for (int partidas = 0; partidas < dataGridViewPartidasCotizacion.Rows.Count - 1; partidas++)
+            {
+                for (int campo = 1; campo < dataGridViewPartidasCotizacion.Rows[partidas].Cells.Count; campo++)
+                {
+                    if (dataGridViewPartidasCotizacion.Rows[partidas].Cells[campo].Value == null)
+                    {
+                        MessageBox.Show("campo en blanco");
+                        return false;
+                    }
+
+                }
+
+            }
+            return true;
 
         }
 

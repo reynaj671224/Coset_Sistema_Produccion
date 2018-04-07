@@ -869,34 +869,37 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_copiar_cotizacion()
         {
-            if (Verifica_divisa_numero())
+            if (verifica_datos_partidas())
             {
-                if (Copia_datos_partidas_cotizacion())
+                if (Verifica_divisa_numero())
                 {
-                    if (Copia_datos_cotizaciones())
+                    if (Copia_datos_partidas_cotizacion())
                     {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_atencion();
-                        Limpia_combo_atencio_copia();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Desaparece_combo_cliente_nombre();
-                        Desactiva_combo_cliente_nombre();
-                        Desaparece_combo_atencion();
-                        Desactiva_combo_atencion();
-                        Desaparece_combo_copia_atencion();
-                        Desactiva_combo_copia_atencion();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_atencion();
-                        Aparece_textbox_atencion_copia();
-                        Elimina_informacion_orden_compra_disponibles();
+                        if (Copia_datos_cotizaciones())
+                        {
+                            Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                            Limpia_combo_nombre_cliente();
+                            Limpia_combo_atencion();
+                            Limpia_combo_atencio_copia();
+                            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                            Desaparece_boton_guardar_base_de_datos();
+                            Desaparece_boton_cancelar();
+                            Desaparece_combo_codigo_cotizacion();
+                            Activa_botones_operacion();
+                            limpia_partidas_ordenes_compra();
+                            Desactiva_datagridview_partidas();
+                            Desaparece_combo_cliente_nombre();
+                            Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_atencion();
+                            Desactiva_combo_atencion();
+                            Desaparece_combo_copia_atencion();
+                            Desactiva_combo_copia_atencion();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_atencion();
+                            Aparece_textbox_atencion_copia();
+                            Elimina_informacion_orden_compra_disponibles();
+                        }
                     }
                 }
             }
@@ -1009,14 +1012,17 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_partidas()
         {
-            if (Guarda_datos_partidas_orden_compra())
+            if (verifica_datos_partidas())
             {
-                Desaparece_boton_guardar_base_de_datos();
-                Activa_botones_operacion_partidas();
-                limpia_partidas_ordenes_compra();
-                Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-                Rellena_cajas_informacion_de_partidas_orden_compra();
-                Elimina_informacion_orden_compra_disponibles();
+                if (Guarda_datos_partidas_orden_compra())
+                {
+                    Desaparece_boton_guardar_base_de_datos();
+                    Activa_botones_operacion_partidas();
+                    limpia_partidas_ordenes_compra();
+                    Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
+                    Rellena_cajas_informacion_de_partidas_orden_compra();
+                    Elimina_informacion_orden_compra_disponibles();
+                }
             }
         }
 
@@ -1038,35 +1044,38 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_modificar_orden_compra()
         {
-            if (Modificar_datos_partidas_orden_compra())
+            if (verifica_datos_partidas())
             {
-                if (Modifica_datos_orden_compra())
+                if (Modificar_datos_partidas_orden_compra())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                    Limpia_combo_nombre_cliente();
-                    Limpia_combo_atencion();
-                    Limpia_combo_atencio_copia();
-                    Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_cotizacion();
-                    Aparce_caja_codigo_cliente();
-                    Activa_botones_operacion();
-                    limpia_partidas_ordenes_compra();
-                    Desactiva_datagridview_partidas();
-                    Desaparece_combo_cliente_nombre();
-                    Desactiva_combo_cliente_nombre();
-                    Desaparece_combo_atencion();
-                    Desactiva_combo_atencion();
-                    Desaparece_combo_copia_atencion();
-                    Desaparece_combo_condicion_pago();
-                    Desactiva_combo_copia_atencion();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_nombre_cliente();
-                    Aparece_textbox_atencion();
-                    Aparece_textbox_atencion_copia();
-                    Aparece_textbox_condicio_pago();
-                    Elimina_informacion_orden_compra_disponibles();
+                    if (Modifica_datos_orden_compra())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_atencion();
+                        Limpia_combo_atencio_copia();
+                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cotizacion();
+                        Aparce_caja_codigo_cliente();
+                        Activa_botones_operacion();
+                        limpia_partidas_ordenes_compra();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_cliente_nombre();
+                        Desactiva_combo_cliente_nombre();
+                        Desaparece_combo_atencion();
+                        Desactiva_combo_atencion();
+                        Desaparece_combo_copia_atencion();
+                        Desaparece_combo_condicion_pago();
+                        Desactiva_combo_copia_atencion();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_atencion();
+                        Aparece_textbox_atencion_copia();
+                        Aparece_textbox_condicio_pago();
+                        Elimina_informacion_orden_compra_disponibles();
+                    }
                 }
             }
         }
@@ -1202,42 +1211,62 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_orden_compra()
         {
-            if (Verifica_divisa_numero())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_partidas_orden_compra())
+                if (Verifica_divisa_numero())
                 {
-                    if (Guarda_datos_orden_compra())
+                    if (Guarda_datos_partidas_orden_compra())
                     {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_atencion();
-                        Limpia_combo_atencio_copia();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Desaparece_combo_cliente_nombre();
-                        Desactiva_combo_cliente_nombre();
-                        Desaparece_combo_atencion();
-                        Desactiva_combo_atencion();
-                        Desaparece_combo_copia_atencion();
-                        Desactiva_combo_copia_atencion();
-                        Desactiva_combo_condicion_pago();
-                        Desaparece_combo_condicion_pago();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_atencion();
-                        Aparece_textbox_atencion_copia();
-                        Asigna_nuevo_folio_orden_compra();
-                        Selecciona_pesos_tipo_modeda();
-                        Elimina_informacion_orden_compra_disponibles();
+                        if (Guarda_datos_orden_compra())
+                        {
+                            Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                            Limpia_combo_nombre_cliente();
+                            Limpia_combo_atencion();
+                            Limpia_combo_atencio_copia();
+                            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                            Desaparece_boton_guardar_base_de_datos();
+                            Desaparece_boton_cancelar();
+                            Desaparece_combo_codigo_cotizacion();
+                            Activa_botones_operacion();
+                            limpia_partidas_ordenes_compra();
+                            Desactiva_datagridview_partidas();
+                            Desaparece_combo_cliente_nombre();
+                            Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_atencion();
+                            Desactiva_combo_atencion();
+                            Desaparece_combo_copia_atencion();
+                            Desactiva_combo_copia_atencion();
+                            Desactiva_combo_condicion_pago();
+                            Desaparece_combo_condicion_pago();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_atencion();
+                            Aparece_textbox_atencion_copia();
+                            Asigna_nuevo_folio_orden_compra();
+                            Selecciona_pesos_tipo_modeda();
+                            Elimina_informacion_orden_compra_disponibles();
+                        }
                     }
                 }
             }
 
+        }
+
+        private bool verifica_datos_partidas()
+        {
+            for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
+            {
+                for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
+                {
+                    if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value == null)
+                    {
+                        MessageBox.Show("campo en blanco");
+                        return false;
+                    }
+
+                }
+            }
+            return true;
         }
 
         private void Desaparece_combo_condicion_pago()

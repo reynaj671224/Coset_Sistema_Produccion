@@ -479,14 +479,17 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_contactos()
         {
-            if (Guarda_datos_contactos_proveedor())
+            if (verifica_datos_partidas())
             {
-                Desaparece_boton_guardar_base_de_datos();
-                Activa_botones_operacion_contactos();
-                limpia_contactos_proveedor();
-                Obtener_datos_contactos_proveedores_disponibles_base_datos(textBoxCodigoProveedor.Text);
-                Rellena_cajas_informacion_de_contactos_proveedores();
-                Elimina_informacion_proveedores_disponibles();
+                if (Guarda_datos_contactos_proveedor())
+                {
+                    Desaparece_boton_guardar_base_de_datos();
+                    Activa_botones_operacion_contactos();
+                    limpia_contactos_proveedor();
+                    Obtener_datos_contactos_proveedores_disponibles_base_datos(textBoxCodigoProveedor.Text);
+                    Rellena_cajas_informacion_de_contactos_proveedores();
+                    Elimina_informacion_proveedores_disponibles();
+                }
             }
         }
 
@@ -508,23 +511,26 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_modificar_proveedor()
         {
-            if (Modificar_datos_contactos_cliente())
+            if (verifica_datos_partidas())
             {
-                if (Modifica_datos_clientes())
+                if (Modificar_datos_contactos_cliente())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_proveedor();
-                    Limpia_combo_nombre_proveedores();
-                    Desactiva_cajas_captura_despues_de_agregar_proveedor();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_proveedor();
-                    Aparce_caja_codigo_cliente();
-                    Activa_botones_operacion();
-                    limpia_contactos_proveedor();
-                    Desactiva_datagridview_contactos();
-                    Desaparece_combo_nombre_proveedor();
-                    Aparece_caja_nombre_proveedor();
-                    Elimina_informacion_proveedores_disponibles();
+                    if (Modifica_datos_clientes())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_proveedor();
+                        Limpia_combo_nombre_proveedores();
+                        Desactiva_cajas_captura_despues_de_agregar_proveedor();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_proveedor();
+                        Aparce_caja_codigo_cliente();
+                        Activa_botones_operacion();
+                        limpia_contactos_proveedor();
+                        Desactiva_datagridview_contactos();
+                        Desaparece_combo_nombre_proveedor();
+                        Aparece_caja_nombre_proveedor();
+                        Elimina_informacion_proveedores_disponibles();
+                    }
                 }
             }
         }
@@ -631,24 +637,44 @@ namespace Coset_Sistema_Produccion
 
         private void Secuencia_agregar_proveedor()
         {
-            if (Guarda_datos_contactos_proveedor())
+            if (verifica_datos_partidas())
             {
-                if (Guarda_datos_proveedores())
+                if (Guarda_datos_contactos_proveedor())
                 {
-                    Limpia_cajas_captura_despues_de_agregar_proveedor();
-                    Limpia_combo_codigo_proveedor();
-                    Desactiva_cajas_captura_despues_de_agregar_proveedor();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_codigo_proveedor();
-                    Activa_botones_operacion();
-                    limpia_contactos_proveedor();
-                    Desactiva_datagridview_contactos();
-                    Asigna_nuevo_folio();
-                    Elimina_informacion_proveedores_disponibles();
+                    if (Guarda_datos_proveedores())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_proveedor();
+                        Limpia_combo_codigo_proveedor();
+                        Desactiva_cajas_captura_despues_de_agregar_proveedor();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_proveedor();
+                        Activa_botones_operacion();
+                        limpia_contactos_proveedor();
+                        Desactiva_datagridview_contactos();
+                        Asigna_nuevo_folio();
+                        Elimina_informacion_proveedores_disponibles();
+                    }
                 }
             }
 
+        }
+
+        private bool verifica_datos_partidas()
+        {
+            for (int contactos = 0; contactos < dataGridViewContactosProveedor.Rows.Count - 1; contactos++)
+            {
+                for (int campo = 1; campo < dataGridViewContactosProveedor.Rows[contactos].Cells.Count; campo++)
+                {
+                    if (dataGridViewContactosProveedor.Rows[contactos].Cells[campo].Value == null)
+                    {
+                        MessageBox.Show("campo en blanco");
+                        return false;
+                    }
+
+                }
+            }
+            return true;
         }
 
         private void Asigna_nuevo_folio()
