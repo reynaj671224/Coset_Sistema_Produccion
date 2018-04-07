@@ -437,6 +437,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_EF16B98EDB8F41C8A21422A049E677A6"
+                    {
+                    "Name" = "8:Fotos"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_C63DD42187A544B694211E39BDD91E37"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_91AE316FD08E45DE8581D2902BE81002"
@@ -1016,7 +1027,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DDA8D2DB19004807814AFA4BECC7265A"
             {
-            "SourcePath" = "8:..\\Coset_Sistema_Produccion\\obj\\Debug\\Coset_Sistema_Produccion.exe"
+            "SourcePath" = "8:..\\Coset_Sistema_Produccion\\obj\\Release\\Coset_Sistema_Produccion.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_71F85687256F4113B15D4FE40881C4B6"
