@@ -170,7 +170,7 @@
             this.buttonRegresarNoAgregar.AutoSize = true;
             this.buttonRegresarNoAgregar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRegresarNoAgregar.Image = ((System.Drawing.Image)(resources.GetObject("buttonRegresarNoAgregar.Image")));
-            this.buttonRegresarNoAgregar.Location = new System.Drawing.Point(945, 429);
+            this.buttonRegresarNoAgregar.Location = new System.Drawing.Point(977, 429);
             this.buttonRegresarNoAgregar.Name = "buttonRegresarNoAgregar";
             this.buttonRegresarNoAgregar.Size = new System.Drawing.Size(79, 74);
             this.buttonRegresarNoAgregar.TabIndex = 55;

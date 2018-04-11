@@ -77,6 +77,7 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
+            this.verificarRequisicionesPendientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -174,7 +175,8 @@
             this.comprastoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ordenesDeCompraToolStripMenuItem,
             this.proveedoresToolStripMenuItem,
-            this.requisicionToolStripMenuItem});
+            this.requisicionToolStripMenuItem,
+            this.verificarRequisicionesPendientesToolStripMenuItem});
             this.comprastoolStripMenuItem.Name = "comprastoolStripMenuItem";
             this.comprastoolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.comprastoolStripMenuItem.Text = "Compras";
@@ -182,21 +184,21 @@
             // ordenesDeCompraToolStripMenuItem
             // 
             this.ordenesDeCompraToolStripMenuItem.Name = "ordenesDeCompraToolStripMenuItem";
-            this.ordenesDeCompraToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.ordenesDeCompraToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.ordenesDeCompraToolStripMenuItem.Text = "Ordenes De Compra";
             this.ordenesDeCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesDeCompraToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
             this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // requisicionToolStripMenuItem
             // 
             this.requisicionToolStripMenuItem.Name = "requisicionToolStripMenuItem";
-            this.requisicionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.requisicionToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.requisicionToolStripMenuItem.Text = "Requisicion De Materiales";
             this.requisicionToolStripMenuItem.Click += new System.EventHandler(this.requisicionToolStripMenuItem_Click);
             // 
@@ -451,6 +453,13 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
+            // verificarRequisicionesPendientesToolStripMenuItem
+            // 
+            this.verificarRequisicionesPendientesToolStripMenuItem.Name = "verificarRequisicionesPendientesToolStripMenuItem";
+            this.verificarRequisicionesPendientesToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.verificarRequisicionesPendientesToolStripMenuItem.Text = "Verificar Requisiciones Pendientes";
+            this.verificarRequisicionesPendientesToolStripMenuItem.Click += new System.EventHandler(this.verificarRequisicionesPendientesToolStripMenuItem_Click);
+            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,7 +476,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 2.6";
+            this.Text = "Coset Sistema Produccion Rev 2.7";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -530,6 +539,7 @@
         private System.Windows.Forms.Label labelREquisicionesAbiertas;
         private System.Windows.Forms.ToolStripMenuItem devolucionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verificarRequisicionesPendientesToolStripMenuItem;
     }
 }
 

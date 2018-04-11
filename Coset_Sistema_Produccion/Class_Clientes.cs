@@ -43,7 +43,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql()
         {
-            return "SELECT * FROM sistema.clientes";
+            return "SELECT * FROM clientes ORDER BY ABS(codigo_cliente);";
         }
 
         private string Configura_Cadena_Conexion_MySQL_sistema_clientes()

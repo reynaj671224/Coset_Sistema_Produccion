@@ -164,12 +164,26 @@ namespace Coset_Sistema_Produccion
         {
             Muestra_Menu_compras_Proveedores();
             Muestra_Menu_Compras_Orden_De_Compra();
+            Muestra_menu_comras_requisiciones_pendientes();
+            
         }
+
+        private void Muestra_menu_comras_requisiciones_pendientes()
+        {
+            verificarRequisicionesPendientesToolStripMenuItem.Enabled = true;
+        }
+
         private void Oculta_Menus_de_Compras_Prohibidas_Para_Ingenieria()
         {
             Oculta_Menu_Compras_Orden_De_Compra();
             Oculta_Menu_Compras_Proveedores();
+            Oculta_menu_compras_requisiciones_pendientes();
 
+        }
+
+        private void Oculta_menu_compras_requisiciones_pendientes()
+        {
+            verificarRequisicionesPendientesToolStripMenuItem.Enabled = false;
         }
 
         private void Oculta_Menu_Compras_Proveedores()
@@ -507,5 +521,9 @@ namespace Coset_Sistema_Produccion
             forma_Ordenes_Compra.ShowDialog();
         }
 
+        private void verificarRequisicionesPendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Revisa_por_reqisiciones_abiertas();
+        }
     }
 }

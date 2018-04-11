@@ -112,5 +112,13 @@ namespace Coset_Sistema_Produccion
         {
             
         }
+
+        private void textBoxpassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                Verifica_password_para_usuario_seleccionado();
+            }
+        }
     }
 }

@@ -80,6 +80,7 @@
             this.textBoxpassword.PasswordChar = '*';
             this.textBoxpassword.Size = new System.Drawing.Size(158, 20);
             this.textBoxpassword.TabIndex = 5;
+            this.textBoxpassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxpassword_KeyPress);
             // 
             // CheckPassword
             // 

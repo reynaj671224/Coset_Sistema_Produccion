@@ -50,7 +50,7 @@ namespace Coset_Sistema_Produccion
         }
         private string Commando_leer_Mysql()
         {
-            return "SELECT * FROM proyectos";
+            return "SELECT * FROM proyectos ORDER BY ABS(codigo_proyecto)";
         }
 
         private string Configura_Cadena_Conexion_MySQL_ingenieria_cotizaciones()

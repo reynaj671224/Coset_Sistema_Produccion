@@ -925,10 +925,11 @@ namespace Coset_Sistema_Produccion
 
         private void timerAgregarMaterial_Tick(object sender, EventArgs e)
         {
-            if (textBoxCodigoProveedor.Text != "" && textBoxDescripcion.Text != "" &&
+            if (textBoxCodigoProveedor.Text != "" && 
+                textBoxDescripcion.Text != "" &&
                 textBoxMarca.Text !="")
             {
-                timerBusquedaAgregar.Enabled = false;
+                timerAgregarMaterial.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
             }
         }

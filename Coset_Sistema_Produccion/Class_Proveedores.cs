@@ -78,7 +78,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql()
         {
-            return "SELECT * FROM proveedores";
+            return "SELECT * FROM proveedores ORDER BY ABS(codigo_proveedor)";
         }
 
         private string Configura_Cadena_Conexion_MySQL_sistema_clientes()
