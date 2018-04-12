@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Requisiciones));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonBuscarRequisicion = new System.Windows.Forms.Button();
-            this.buttonAgregarCotizacion = new System.Windows.Forms.Button();
+            this.buttonAgregarRequisicion = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
@@ -65,6 +65,10 @@
             this.comboBoxProveedoresPrevio = new System.Windows.Forms.ComboBox();
             this.buttonModificarRequisicion = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonAgregarPartida = new System.Windows.Forms.Button();
+            this.buttonEliminarPartida = new System.Windows.Forms.Button();
+            this.buttonPartidas = new System.Windows.Forms.Button();
+            this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasRequisiciones)).BeginInit();
             this.groupBoxPrevio.SuspendLayout();
@@ -77,7 +81,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1182, 461);
+            this.pictureBox1.Size = new System.Drawing.Size(1259, 461);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -94,28 +98,28 @@
             this.buttonBuscarRequisicion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarRequisicion.UseVisualStyleBackColor = true;
             this.buttonBuscarRequisicion.Visible = false;
-            this.buttonBuscarRequisicion.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
+            this.buttonBuscarRequisicion.Click += new System.EventHandler(this.buttonBuscarRequisicion_Click);
             // 
-            // buttonAgregarCotizacion
+            // buttonAgregarRequisicion
             // 
-            this.buttonAgregarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAgregarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarCotizacion.Image")));
-            this.buttonAgregarCotizacion.Location = new System.Drawing.Point(594, 33);
-            this.buttonAgregarCotizacion.Name = "buttonAgregarCotizacion";
-            this.buttonAgregarCotizacion.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonAgregarCotizacion.Size = new System.Drawing.Size(79, 74);
-            this.buttonAgregarCotizacion.TabIndex = 29;
-            this.buttonAgregarCotizacion.Text = "Agregar";
-            this.buttonAgregarCotizacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonAgregarCotizacion.UseVisualStyleBackColor = true;
-            this.buttonAgregarCotizacion.Click += new System.EventHandler(this.buttonAgregarCotizacion_Click);
+            this.buttonAgregarRequisicion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAgregarRequisicion.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarRequisicion.Image")));
+            this.buttonAgregarRequisicion.Location = new System.Drawing.Point(594, 33);
+            this.buttonAgregarRequisicion.Name = "buttonAgregarRequisicion";
+            this.buttonAgregarRequisicion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonAgregarRequisicion.Size = new System.Drawing.Size(79, 74);
+            this.buttonAgregarRequisicion.TabIndex = 29;
+            this.buttonAgregarRequisicion.Text = "Agregar";
+            this.buttonAgregarRequisicion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAgregarRequisicion.UseVisualStyleBackColor = true;
+            this.buttonAgregarRequisicion.Click += new System.EventHandler(this.buttonAgregarRequisicion_Click);
             // 
             // buttonCancelar
             // 
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(1091, 293);
+            this.buttonCancelar.Location = new System.Drawing.Point(1168, 295);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 35;
@@ -130,7 +134,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(1091, 373);
+            this.buttonHome.Location = new System.Drawing.Point(1168, 375);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 33;
@@ -144,7 +148,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1091, 213);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1168, 216);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 32;
@@ -212,7 +216,7 @@
             this.Proveedor_requisicion,
             this.Busqueda_requisicion});
             this.dataGridViewPartidasRequisiciones.Enabled = false;
-            this.dataGridViewPartidasRequisiciones.Location = new System.Drawing.Point(12, 293);
+            this.dataGridViewPartidasRequisiciones.Location = new System.Drawing.Point(108, 295);
             this.dataGridViewPartidasRequisiciones.Name = "dataGridViewPartidasRequisiciones";
             this.dataGridViewPartidasRequisiciones.Size = new System.Drawing.Size(1054, 156);
             this.dataGridViewPartidasRequisiciones.TabIndex = 48;
@@ -230,7 +234,6 @@
             // 
             this.Numero_partida.HeaderText = "Partida";
             this.Numero_partida.Name = "Numero_partida";
-            this.Numero_partida.ReadOnly = true;
             this.Numero_partida.Width = 50;
             // 
             // Cantidad_partida
@@ -435,11 +438,74 @@
             this.label1.TabIndex = 67;
             this.label1.Text = "Requisitor";
             // 
+            // buttonAgregarPartida
+            // 
+            this.buttonAgregarPartida.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAgregarPartida.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarPartida.Image")));
+            this.buttonAgregarPartida.Location = new System.Drawing.Point(23, 295);
+            this.buttonAgregarPartida.Name = "buttonAgregarPartida";
+            this.buttonAgregarPartida.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonAgregarPartida.Size = new System.Drawing.Size(79, 74);
+            this.buttonAgregarPartida.TabIndex = 69;
+            this.buttonAgregarPartida.Text = "Agregar";
+            this.buttonAgregarPartida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAgregarPartida.UseVisualStyleBackColor = true;
+            this.buttonAgregarPartida.Visible = false;
+            this.buttonAgregarPartida.Click += new System.EventHandler(this.buttonAgregarPartida_Click);
+            // 
+            // buttonEliminarPartida
+            // 
+            this.buttonEliminarPartida.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEliminarPartida.Image = ((System.Drawing.Image)(resources.GetObject("buttonEliminarPartida.Image")));
+            this.buttonEliminarPartida.Location = new System.Drawing.Point(23, 375);
+            this.buttonEliminarPartida.Name = "buttonEliminarPartida";
+            this.buttonEliminarPartida.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonEliminarPartida.Size = new System.Drawing.Size(79, 74);
+            this.buttonEliminarPartida.TabIndex = 68;
+            this.buttonEliminarPartida.Text = "Eliminar";
+            this.buttonEliminarPartida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonEliminarPartida.UseVisualStyleBackColor = true;
+            this.buttonEliminarPartida.Visible = false;
+            this.buttonEliminarPartida.Click += new System.EventHandler(this.buttonEliminarPartida_Click);
+            // 
+            // buttonPartidas
+            // 
+            this.buttonPartidas.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPartidas.Image = ((System.Drawing.Image)(resources.GetObject("buttonPartidas.Image")));
+            this.buttonPartidas.Location = new System.Drawing.Point(764, 33);
+            this.buttonPartidas.Name = "buttonPartidas";
+            this.buttonPartidas.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonPartidas.Size = new System.Drawing.Size(79, 74);
+            this.buttonPartidas.TabIndex = 70;
+            this.buttonPartidas.Text = "Partidas";
+            this.buttonPartidas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonPartidas.UseVisualStyleBackColor = true;
+            this.buttonPartidas.Click += new System.EventHandler(this.buttonPartidas_Click);
+            // 
+            // buttonBorrarBasedeDatos
+            // 
+            this.buttonBorrarBasedeDatos.AutoSize = true;
+            this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1168, 201);
+            this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
+            this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
+            this.buttonBorrarBasedeDatos.TabIndex = 71;
+            this.buttonBorrarBasedeDatos.Text = "Eliminar";
+            this.buttonBorrarBasedeDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBorrarBasedeDatos.UseVisualStyleBackColor = true;
+            this.buttonBorrarBasedeDatos.Visible = false;
+            this.buttonBorrarBasedeDatos.Click += new System.EventHandler(this.buttonBorrarBasedeDatos_Click);
+            // 
             // Forma_Requisiciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 461);
+            this.ClientSize = new System.Drawing.Size(1259, 461);
+            this.Controls.Add(this.buttonBorrarBasedeDatos);
+            this.Controls.Add(this.buttonPartidas);
+            this.Controls.Add(this.buttonAgregarPartida);
+            this.Controls.Add(this.buttonEliminarPartida);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonModificarRequisicion);
             this.Controls.Add(this.groupBoxPrevio);
@@ -458,7 +524,7 @@
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
             this.Controls.Add(this.buttonBuscarRequisicion);
-            this.Controls.Add(this.buttonAgregarCotizacion);
+            this.Controls.Add(this.buttonAgregarRequisicion);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Forma_Requisiciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -477,7 +543,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonBuscarRequisicion;
-        private System.Windows.Forms.Button buttonAgregarCotizacion;
+        private System.Windows.Forms.Button buttonAgregarRequisicion;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
@@ -501,6 +567,9 @@
         private System.Windows.Forms.ComboBox comboBoxProveedoresPrevio;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSaveFile;
+        private System.Windows.Forms.Button buttonAgregarPartida;
+        private System.Windows.Forms.Button buttonEliminarPartida;
+        private System.Windows.Forms.Button buttonPartidas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_partida;
@@ -510,5 +579,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Proyecto_partida;
         private System.Windows.Forms.DataGridViewComboBoxColumn Proveedor_requisicion;
         private System.Windows.Forms.DataGridViewButtonColumn Busqueda_requisicion;
+        private System.Windows.Forms.Button buttonBorrarBasedeDatos;
     }
 }

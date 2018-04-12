@@ -1646,7 +1646,7 @@ namespace Coset_Sistema_Produccion
 
 
         
-        private void Agrega_partida_orden_comra()
+        private void Agrega_partida_orden_compra()
         {
             Operacio_orden_compra = "Agregar Partidas";
             Desactiva_botones_operacion_partidas();
@@ -1657,8 +1657,6 @@ namespace Coset_Sistema_Produccion
             Rellena_combo_requisicion_partidas_orden_compra();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
-            
-
         }
 
         private void Desactiva_botones_operacion_partidas()
@@ -1864,10 +1862,10 @@ namespace Coset_Sistema_Produccion
 
         private void buttonContactos_Click(object sender, EventArgs e)
         {
-            Prtidas_operaciones();
+            Partidas_operaciones();
         }
 
-        private void Prtidas_operaciones()
+        private void Partidas_operaciones()
         {
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
@@ -2481,7 +2479,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonAgregarPartida_Click(object sender, EventArgs e)
         {
-            Agrega_partida_orden_comra();
+            Agrega_partida_orden_compra();
         }
 
         private void dataGridViewPartidasOrdenCompra_CellClick(object sender, DataGridViewCellEventArgs e)

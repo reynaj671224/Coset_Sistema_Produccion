@@ -143,12 +143,8 @@ namespace Coset_Sistema_Produccion
            
         }
 
-        private void buttonBuscarempleado_Click(object sender, EventArgs e)
-        {
-            Visualiza_cliente();
-        }
 
-        private void Visualiza_cliente()
+        private void Visualiza_requisicion()
         {
             Desactiva_botones_operacion();
             Limpia_combo_requisiciones();
@@ -160,7 +156,7 @@ namespace Coset_Sistema_Produccion
             Rellena_combo_codigo_requisiciones();
             Aparece_boton_cancelar_operacio();
             Activa_cajas_informacion_requisiciones();
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Activa_dataview_partidas_requisiciones();
             Obtener_proveedores_disponibles();
             Rellena_combo_proveedores_partida_requisicion();
@@ -189,7 +185,7 @@ namespace Coset_Sistema_Produccion
             dataGridViewPartidasRequisiciones.Rows.Clear();
         }
 
-        private void No_aceptar_agregar_contactos_requisiciones()
+        private void No_aceptar_agregar_partidas_requisiciones()
         {
             dataGridViewPartidasRequisiciones.AllowUserToAddRows = false;
         }
@@ -215,7 +211,13 @@ namespace Coset_Sistema_Produccion
             Desactiva_boton_agregar_cotizacion();
             Desactiva_boton_visualizar_cotizacion();
             Desactiva_boton_Agregar_proveedor();
+            Desactiva_boton_partidas();
 
+        }
+
+        private void Desactiva_boton_partidas()
+        {
+            buttonPartidas.Enabled = false;
         }
 
         private void Desactiva_boton_Agregar_proveedor()
@@ -230,7 +232,7 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_boton_agregar_cotizacion()
         {
-            buttonAgregarCotizacion.Enabled = false;
+            buttonAgregarRequisicion.Enabled = false;
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
@@ -277,7 +279,23 @@ namespace Coset_Sistema_Produccion
                 configura_forma_modificar();
             else if (Operacio_requisiciones == "Visualizar")
                 configura_forma_visualizar();
+            else if (Operacio_requisiciones == "Operacion Partidas")
+                configura_forma_operacion_partidas();
 
+        }
+
+        private void configura_forma_operacion_partidas()
+        {
+            limpia_partidas_requisicion();
+            Desactiva_combobox_codigo_requisiciones();
+            rellena_combos_informacio_requisicion();
+            rellena_cajas_informacio_requisicion();
+            Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+            Rellena_campos_partidas_requisiciones();
+            Limpia_combo_clientes_partidas();
+            Obtener_proveedores_disponibles();
+            Rellena_combo_proveedores_partida_requisicion();
+            Aparecer_botones_operaciones_partidas();
         }
 
         private void configura_forma_copiar()
@@ -367,7 +385,6 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_modificar()
         {
             limpia_partidas_requisicion();
-            //Activa_cajas_informacion_requisiciones();
             Desactiva_combobox_codigo_requisiciones();
             rellena_combos_informacio_requisicion();
             Obtener_datos_partidas_requisiciones_disponibles_base_datos();
@@ -452,17 +469,12 @@ namespace Coset_Sistema_Produccion
             comboBoxCodigoRequisiciones.Enabled = false;
         }
 
-        private void buttonAgregarCotizacion_Click(object sender, EventArgs e)
-        {
-            Agrega_cotizacion();
-        }
-
         private void Agrega_contactos_cliente()
         {
             throw new NotImplementedException();
         }
 
-        private void Agrega_cotizacion()
+        private void Agrega_requisicion()
         {
             Operacio_requisiciones = "Agregar";
             limpia_partidas_requisicion();
@@ -643,7 +655,30 @@ namespace Coset_Sistema_Produccion
                 Secuencia_agregar_partidas_requisiciones();
             else if (Operacio_requisiciones == "Modificar")
                 Secuencia_modificar_requisiciones();
+            else if (Operacio_requisiciones == "Agregar Partida")
+                secuencia_agregar_solo_materiales_partidas();
 
+        }
+
+        private void secuencia_agregar_solo_materiales_partidas()
+        {
+            if (Confirma_datos_partidas())
+            {
+                if (Agrega_materiales_requisicion_base_datos())
+                {
+                    if (Guarda_datos_partidas_requisiciones())
+                    {
+                        Desaparece_boton_guardar_base_de_datos();
+                        Activa_botones_operacion_partidas();
+                        limpia_partidas_requisicion();
+                        Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+                        Operacio_requisiciones = "Mostar Partida";
+                        Rellena_campos_partidas_requisiciones();
+                        Elimina_informacion_requisiciones_disponibles();
+
+                    }
+                }
+            }
         }
 
         private void Secuencia_modificar_requisiciones()
@@ -831,7 +866,7 @@ namespace Coset_Sistema_Produccion
         {
             for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.Rows.Count - 1; partidas++)
             {
-                for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count; campo++)
+                for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count-1; campo++)
                 {
                     if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly ||
                         (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
@@ -986,7 +1021,7 @@ namespace Coset_Sistema_Produccion
                     connection.Open();
                     for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.Rows.Count - 1; partidas++)
                     {
-                    for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count; campo++)
+                    for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count-1; campo++)
                     {
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly || 
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
@@ -1017,7 +1052,8 @@ namespace Coset_Sistema_Produccion
                             }
                         }
                     }
-                    partida_requisicion_agregar.Codigo_requisicion = textBoxCodigoRequisiciones.Text;
+                    
+                    Selecciona_codigo_material();
                     MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_partidas_requisiciones(partida_requisicion_agregar), connection);
                         command.ExecuteNonQuery();
                     }
@@ -1032,6 +1068,18 @@ namespace Coset_Sistema_Produccion
                 connection.Close();
                 return true;
             
+        }
+
+        private void Selecciona_codigo_material()
+        {
+            if (Operacio_requisiciones == "Agregar")
+            {
+                partida_requisicion_agregar.Codigo_requisicion = textBoxCodigoRequisiciones.Text;
+            }
+            else if (Operacio_requisiciones == "Agregar Partida")
+            {
+                partida_requisicion_agregar.Codigo_requisicion = comboBoxCodigoRequisiciones.Text;
+            }
         }
 
         private void Asigna_codigo_empleado_para_tipo_de_operacio()
@@ -1122,6 +1170,12 @@ namespace Coset_Sistema_Produccion
             Activa_boton_agregar_ccotizacion();
             Activa_boton_visualizar_cotizacion();
             Activa_boton_modoficar_proveedor();
+            Activa_boton_partidas();
+        }
+
+        private void Activa_boton_partidas()
+        {
+            buttonPartidas.Enabled = true;
         }
 
         private void Activa_boton_modoficar_proveedor()
@@ -1136,7 +1190,7 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_boton_agregar_ccotizacion()
         {
-            buttonAgregarCotizacion.Enabled = true;
+            buttonAgregarRequisicion.Enabled = true;
         }
 
         private void Desaparece_combo_codigo_requisicion()
@@ -1205,7 +1259,7 @@ namespace Coset_Sistema_Produccion
             Desaparece_caja_captura_codigo_requisciciones();
             Aparece_combo_codigo_cotizacion();
             Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Activa_dataview_partidas_requisiciones();
 
             Operacio_requisiciones = "Modificar";
@@ -1292,18 +1346,10 @@ namespace Coset_Sistema_Produccion
             limpia_partidas_requisicion();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
-            Operacio_requisiciones = "Agregar Partidas";
+            Operacio_requisiciones = "Agregar Partida";
 
         }
 
-        private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
-        {
-
-            if (Operacio_requisiciones == "Eliminar partida")
-                Elimina_partida_cotizacion();
-            else if (Operacio_requisiciones == "Eliminar")
-                Elimina_cotizacion();
-        }
 
         private void Elimina_partida_cotizacion()
         {
@@ -1386,7 +1432,7 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_Contacto_cliente()
         {
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Operacio_requisiciones = "Eliminar partida";
         }
 
@@ -1406,18 +1452,19 @@ namespace Coset_Sistema_Produccion
             Desaparece_caja_captura_codigo_requisciciones();
             Aparece_combo_codigo_cotizacion();
             Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Activa_dataview_partidas_requisiciones();
             Operacio_requisiciones = "Operaciones Patidas";
         }
 
         private void dataGridViewContactosClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Operacio_requisiciones == "Eliminar partida")
+            if (Operacio_requisiciones == "Eliminar Partida")
             {
-                RenglonParaEliminar=dataGridViewPartidasRequisiciones.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                Aparce_boton_borrar_base_datos();
+                RenglonParaEliminar =dataGridViewPartidasRequisiciones.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
             }
-            else if(Operacio_requisiciones == "Agregar")
+            else if(Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
                
                 if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.busqueda)
@@ -1431,22 +1478,27 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        private void Aparce_boton_borrar_base_datos()
+        {
+            buttonBorrarBasedeDatos.Visible = true;
+        }
+
         private void dataGridViewPartidasCotizacion_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (Operacio_requisiciones == "Agregar")/*verifica si esta agregando Partidas*/
+            if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
-                if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.partida) /*verifica si esta modificando el precio*/
+                if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.partida) 
                 {
                     try
                     {
-                        /*Valida Numeros en la caja de horas estimadas*/
+                        /*Valida Numeros en la caja partida*/
                         Convert.ToSingle(dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString());
 
 
                     }
                     catch
                     {
-                        /* en caso de error limpia la caja de precio*/
+                        
                         dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, e.RowIndex].Value = "";
                     }
 
@@ -1457,7 +1509,7 @@ namespace Coset_Sistema_Produccion
                     {
                         /*Valida Numeros en la caja cantidad*/
                         Convert.ToSingle(dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString());
-                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, e.RowIndex].Value = e.RowIndex + 1;
+                        //dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, e.RowIndex].Value = e.RowIndex + 1;
 
                     }
                     catch
@@ -1586,7 +1638,7 @@ namespace Coset_Sistema_Produccion
             Desaparece_caja_captura_codigo_requisciciones();
             Aparece_combo_codigo_cotizacion();
             Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Activa_dataview_partidas_requisiciones();
             Operacio_requisiciones = "Copiar";
         }
@@ -1853,7 +1905,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_requisiciones_disponibles_base_datos();
             Rellena_combo_codigo_requisiciones();
             Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_contactos_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
             Desactiva_Campos_partida_requisicion();
             Activa_dataview_partidas_requisiciones();
             Activa_columna_proveedores_ser_mododificada();
@@ -1970,8 +2022,25 @@ namespace Coset_Sistema_Produccion
             Desabilita_boton_word_previo();
             Elimina_archivo();
             Activa_Campos_partida_requisicion();
+            Desaparece_botones_operacion_partidas();
             Elimina_informacion_requisiciones_disponibles();
 
+        }
+
+        private void Desaparece_botones_operacion_partidas()
+        {
+            Desaparece_boton_eliminar_partidas();
+            Desaparece_boton_agregar_partidas();
+        }
+
+        private void Desaparece_boton_agregar_partidas()
+        {
+            buttonAgregarPartida.Visible = false;
+        }
+
+        private void Desaparece_boton_eliminar_partidas()
+        {
+            buttonEliminarPartida.Visible = false;
         }
 
         private void Termina_secuencia_save_file()
@@ -2012,7 +2081,7 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasRequisiciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            if (Operacio_requisiciones == "Agregar")
+            if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Parte_requisicion"].Value = "?";
@@ -2026,6 +2095,156 @@ namespace Coset_Sistema_Produccion
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Descrpcion_partida"].Value = "";
             }
+        }
+
+
+        private void buttonBuscarRequisicion_Click(object sender, EventArgs e)
+        {
+            Visualiza_requisicion();
+        }
+
+        private void buttonAgregarRequisicion_Click(object sender, EventArgs e)
+        {
+            Agrega_requisicion();
+        }
+
+        private void buttonPartidas_Click(object sender, EventArgs e)
+        {
+            Desactiva_botones_operacion();
+            Limpia_combo_requisiciones();
+            Limpia_combo_proyectos_partidas();
+            Desaparece_caja_captura_codigo_requisciciones();
+            Aparece_combo_codigo_cotizacion();
+            Activa_combo_codigo_requisiciones();
+            Obtener_datos_requisiciones_disponibles_base_datos();
+            Rellena_combo_codigo_requisiciones();
+            Aparece_boton_cancelar_operacio();
+            //Activa_cajas_informacion_requisiciones();
+            No_aceptar_agregar_partidas_requisiciones();
+            Activa_dataview_partidas_requisiciones();
+            Obtener_proveedores_disponibles();
+            Rellena_combo_proveedores_partida_requisicion();
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
+            Activa_botones_operacion_partidas();
+            Operacio_requisiciones = "Operacion Partidas";
+        }
+
+        private void Activa_botones_operacion_partidas()
+        {
+            Activa_boton_agregar_prtida();
+            Activa_boton_eliminar_partida();
+        }
+
+        private void Activa_boton_eliminar_partida()
+        {
+            buttonEliminarPartida.Enabled = true;
+        }
+
+        private void Activa_boton_agregar_prtida()
+        {
+            buttonAgregarPartida.Enabled = true;
+        }
+        private void Aparecer_botones_operaciones_partidas()
+        {
+            Aparece_boton_agregar_partidas();
+            Aparece_boton_eliminar_partidas();
+        }
+        private void Aparece_boton_eliminar_partidas()
+        {
+            buttonEliminarPartida.Visible = true;
+        }
+
+        private void Aparece_boton_agregar_partidas()
+        {
+            buttonAgregarPartida.Visible = true;
+        }
+
+        private void buttonAgregarPartida_Click(object sender, EventArgs e)
+        {
+            Operacio_requisiciones = "Agregar Partida";
+            Desactiva_botones_operacion_partidas();
+            limpia_partidas_requisicion();
+            Aceptar_agregar_partidas_requisiciones();
+            Aparce_boton_guardar_base_datos();
+        }
+
+        private void Aceptar_agregar_partidas_requisiciones()
+        {
+            dataGridViewPartidasRequisiciones.AllowUserToAddRows = true;
+        }
+
+        private void Desactiva_botones_operacion_partidas()
+        {
+            Desactiva_boton_agregar_contactos();
+            Desactiva_boton_eliminar_contactos();
+        }
+
+        private void Desactiva_boton_eliminar_contactos()
+        {
+            buttonEliminarPartida.Enabled = false;
+        }
+
+        private void Desactiva_boton_agregar_contactos()
+        {
+            buttonAgregarPartida.Enabled = false;
+        }
+
+        private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Esta Seguro de Eiliminar la partida requisicion seleccionada?",
+                   "Eliminar partida requisicion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (Elimina_partida_orden_compra_seleccionada())
+                {
+                    Desaparece_boton_borrar_base_de_datos();
+                    Activa_botones_operacion_partidas();
+                    limpia_partidas_requisicion();
+                    Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+                    Operacio_requisiciones = "Mostar Partida";
+                    Rellena_campos_partidas_requisiciones();
+                    Elimina_informacion_requisiciones_disponibles();
+                }
+            }
+        }
+
+        private void Desaparece_boton_borrar_base_de_datos()
+        {
+            buttonBorrarBasedeDatos.Visible = false;
+        }
+
+        private bool Elimina_partida_orden_compra_seleccionada()
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_compras());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos_partida_requisiciones(), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_eliminar_en_base_de_datos_partida_requisiciones()
+        {
+            return "DELETE from partidas_requisiciones where codigo_partida='" +
+                RenglonParaEliminar + "';";
+        }
+
+        private void buttonEliminarPartida_Click(object sender, EventArgs e)
+        {
+            Operacio_requisiciones = "Eliminar Partida";
+            Desactiva_botones_operacion_partidas();
+            No_aceptar_agregar_partidas_requisiciones();
+
         }
     }
 }
