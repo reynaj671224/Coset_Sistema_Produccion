@@ -77,7 +77,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql()
         {
-            return "SELECT * FROM requisiciones";
+            return "SELECT * FROM requisiciones ORDER BY ABS(codigo_requisicion)";
         }
 
         private string Configura_Cadena_Conexion_MySQL_compras_requisiciones()
