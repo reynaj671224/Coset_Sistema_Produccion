@@ -638,7 +638,7 @@ namespace Coset_Sistema_Produccion
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
     }
