@@ -458,6 +458,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProveedor.Enabled = false;
             textBoxDescripcion.Enabled = false;
             textBoxMarca.Enabled = false;
+            textBoxUbicacion.Enabled = false;
         }
 
         private void Rellena_partidas_materiales_disponibles_busqueda(List<Material> materiales_busqueda_disponibles)
