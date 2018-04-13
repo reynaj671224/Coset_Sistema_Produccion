@@ -525,5 +525,11 @@ namespace Coset_Sistema_Produccion
         {
             Revisa_por_reqisiciones_abiertas();
         }
+
+        private void consultaMaterialesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Forma_Consulta_Materiales forma_Consulta_Materiales = new Forma_Consulta_Materiales();
+            forma_Consulta_Materiales.ShowDialog();
+        }
     }
 }

@@ -40,3 +40,4 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Ordenes_Compra.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Materiales.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Materiales_Seleccion.resources
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Consulta_Materiales.resources

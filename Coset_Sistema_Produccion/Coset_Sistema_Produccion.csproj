@@ -71,6 +71,12 @@
     <Compile Include="Forma_Clientes.Designer.cs">
       <DependentUpon>Forma_Clientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Consulta_Materiales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Consulta_Materiales.Designer.cs">
+      <DependentUpon>Forma_Consulta_Materiales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Cotizaciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forma_Clientes.resx">
       <DependentUpon>Forma_Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Consulta_Materiales.resx">
+      <DependentUpon>Forma_Consulta_Materiales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Cotizaciones.resx">
       <DependentUpon>Forma_Cotizaciones.cs</DependentUpon>

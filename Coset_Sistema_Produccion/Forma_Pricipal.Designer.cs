@@ -271,6 +271,7 @@
             this.consultaMaterialesToolStripMenuItem1.Name = "consultaMaterialesToolStripMenuItem1";
             this.consultaMaterialesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.consultaMaterialesToolStripMenuItem1.Text = "Consulta Materiales";
+            this.consultaMaterialesToolStripMenuItem1.Click += new System.EventHandler(this.consultaMaterialesToolStripMenuItem1_Click);
             // 
             // entradaMaterialesToolStripMenuItem
             // 
@@ -476,7 +477,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 2.8";
+            this.Text = "Coset Sistema Produccion Rev 2.9";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
