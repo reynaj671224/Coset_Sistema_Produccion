@@ -55,6 +55,7 @@
     <Compile Include="Class_Cotizaciones.cs" />
     <Compile Include="Class_Datos_Generales.cs" />
     <Compile Include="Class_Dibujos_Proyecto.cs" />
+    <Compile Include="Class_Entrada_Material.cs" />
     <Compile Include="Class_Materiales.cs" />
     <Compile Include="Class_Ordenes_Compra.cs" />
     <Compile Include="Class_Partidas_Cotizaciones.cs" />

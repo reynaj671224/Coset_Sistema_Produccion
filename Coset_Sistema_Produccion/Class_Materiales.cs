@@ -223,10 +223,5 @@ namespace Coset_Sistema_Produccion
         public string error = "";
 
     }
-    public class Materiales_agregar_seleccion:Material
-    {
-        public string Opreacion_materiales = "";
-        public string Seleccion_materiales = "";
-    }
      
 }
