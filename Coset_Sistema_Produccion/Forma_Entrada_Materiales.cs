@@ -47,9 +47,13 @@ namespace Coset_Sistema_Produccion
         public List<Partida_orden_compra> partidas_ordenes_compra_disponibles = 
             new List<Partida_orden_compra>();
         public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
+        public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
         public Proveedor Proveedor_modificaciones = new Proveedor();
         public List<Partida_requisicion> Partidas_requisiciones_disponibles_numero_parte
             = new List<Partida_requisicion>();
+        public Class_Materiales Class_Materiales = new Class_Materiales();
+        public List<Material> Materiales_disponible_entrada_materiales = new List<Material>();
+        public Material Material_disponible_entrada_materiales = new Material();
         string RenglonParaEliminar = "";
         string Requisicion_eliminar = "";
         string Descripcion_eleiminar = "";
@@ -1536,194 +1540,28 @@ namespace Coset_Sistema_Produccion
             Operacio_orden_compra = "Copiar";
         }
 
-        private void buttonWordPrevio_Click(object sender, EventArgs e)
+
+        private void comboBoxDescripcionMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Inicia_variables_word())
-            {
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_a_orden_compra();
-                Abrir_documento_word();
-                Rellenar_campos_orden_compra();
-                Visible_instancia_word();
-            }
+            Partida_orden_compra_seleccionada = partidas_ordenes_compra_disponibles.Find(partidas_ordenes_compra => partidas_ordenes_compra.Descripcion.Contains(comboBoxDescripcionMaterial.SelectedItem.ToString()));
+            Rellenar_campos_entrada_materiales();
+        }
+
+        private void Rellenar_campos_entrada_materiales()
+        {
+            textBoxTotalUnidades.Text = Partida_orden_compra_seleccionada.Cantidad;
+            textBoxCodigoProveedor.Text = Partida_orden_compra_seleccionada.Parte;
+            Obtener_materiales_con_descripcion_codigo_proveedor();
+            textCodigoMaterial.Text = Material_disponible_entrada_materiales.Codigo;
+            textBoxPrecioMaterial.Text = Partida_orden_compra_seleccionada.precio_unitario;
 
         }
 
-
-        private bool Inicia_variables_word()
+        private void Obtener_materiales_con_descripcion_codigo_proveedor()
         {
-            try
-            {
-                application = new word.Application();
-                Documento = new word.Document();
-                return true;
-
-            }
-            catch
-            {
-                MessageBox.Show("NO Word Instalado", "Inicio EWord", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            Materiales_disponible_entrada_materiales = Class_Materiales.Adquiere_materiales_Consulta_Entrada_materiales_en_base_datos(Partida_orden_compra_seleccionada);
+            Material_disponible_entrada_materiales = Materiales_disponible_entrada_materiales.Find(material_disponible => material_disponible.Codigo_proveedor.Contains(textBoxCodigoProveedor.Text));
         }
-
-        private void Abrir_documento_word()
-        {
-            Documento = application.Documents.Open(nombre_archivo_word);
-            Documento.Activate();
-        }
-
-        private void Asigna_nombre_archivo_para_analizar()
-        {
-            nombre_archivo_word = @appPath + "\\" + comboBoxCodigoOrdenCompra.Text + ".docx";
-        }
-
-
-
-        private void Visible_instancia_word()
-        {
-            application.Visible = true;
-           
-        }
-
-        private void Copiar_template_a_orden_compra()
-        {
-            try
-            {
-                File.Copy(@appPath + "\\Orden_compra_Coset_template.docx", @appPath + "\\" + comboBoxCodigoOrdenCompra.Text + ".docx", false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Elimina_archivo()
-        {
-            try
-            {
-                File.Delete(nombre_archivo_word);
-            }
-            catch
-            {
-               
-            }
-        }
-
-        private void Rellenar_campos_orden_compra()
-        {
-           Rellena_informacion_partidas_orden_compra_previo_word();
-           Limpia_partidas_sin_informacion();
-           Guardar_archivo_word();
-        }
-
-
-        private void Guardar_archivo_word()
-        {
-            Documento.Save();
-        }
-
-        private void Limpia_partidas_sin_informacion()
-        {
-            for (int partida = dataGridViewPartidasOrdenCompra.Rows.Count + 1; partida <= 16; partida++)
-            {
-                Remplaza_texto_en_Documento("<n" + partida + ">",
-                        "");
-                Remplaza_texto_en_Documento("<c" + partida + ">",
-                    "");
-                Remplaza_texto_en_Documento("<np" + partida + ">",
-                   "");
-                Remplaza_texto_en_Documento("<d" + partida + ">",
-                    "");
-                Remplaza_texto_en_Documento("<p" + partida + ">",
-                 "");
-                Remplaza_texto_en_Documento("<t" + partida + ">",
-                 "");
-                Remplaza_texto_en_Documento("<m" + partida + ">",
-                "");
-
-            }
-        }
-
-        private void Rellena_informacion_partidas_orden_compra_previo_word()
-        {
-            double importe = 0;
-            double total = 0;
-            double Total_partidas = 0;
-            double iva_total = 0;
-            if (dataGridViewPartidasOrdenCompra.Rows.Count <= 16)
-            {
-                for (int partida = 1; partida <= dataGridViewPartidasOrdenCompra.Rows.Count; partida++)
-                {
-                    Remplaza_texto_en_Documento("<n" + partida + ">",
-                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.partida, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<c" + partida + ">",
-                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.cantidad, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<np" + partida + ">",
-                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<d" + partida + ">",
-                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descrpcion, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<m" + partida + ">",
-                       dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.unidad_medida, partida - 1].Value.ToString());
-                    importe = Convert.ToDouble(dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.precio, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<p" + partida + ">",
-                     importe.ToString("C"));
-                    total = Convert.ToDouble(dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.total, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<t" + partida + ">",
-                     total.ToString("C"));
-                    Total_partidas += total;
-                }
-                datos_generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
-                Remplaza_texto_en_Documento("<importe>",
-                    Total_partidas.ToString("C"));
-                Remplaza_texto_en_Documento("<iva>",
-                    datos_generales.Iva);
-                iva_total = (Convert.ToSingle(datos_generales.Iva)/100.0) * Total_partidas;
-                Remplaza_texto_en_Documento("<iva_total>",
-                    iva_total.ToString("C"));
-                total = Total_partidas + iva_total;
-                Remplaza_texto_en_Documento("<total>",
-                   total.ToString("C"));
-
-            }
-            else
-            {
-                MessageBox.Show("Esta Applicacion solo Puede desplegar Hasta 16 Partidas", "Previo Ordenes Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Remplaza_texto_en_Documento(string original, string cambio)
-        {
-            word.Selection seleccion = application.Selection;
-            seleccion.Find.Text = original;
-            seleccion.Find.Replacement.Text = cambio;
-            seleccion.Find.Wrap = WdFindWrap.wdFindContinue;
-            seleccion.Find.Forward = true;
-            seleccion.Find.Format = false;
-            seleccion.Find.MatchCase = false;
-            seleccion.Find.MatchWholeWord = false;
-            seleccion.Find.Execute(Replace: WdReplace.wdReplaceAll);
-        }
-
-        private void Copiar_template_a_cotizacion_ingles()
-        {
-            try
-            {
-                File.Copy(@appPath + "\\Quote_Coset_Template_Ingles.docx", @appPath + "\\" + comboBoxCodigoOrdenCompra.Text + ".docx", false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private void comboBoxNombreProveedor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         private void Obtener_contactos_disponibles_proveedor()
         {
@@ -1970,20 +1808,6 @@ namespace Coset_Sistema_Produccion
             Modifica_orden_compra();
         }
 
-        private void buttonSaveFile_Click(object sender, EventArgs e)
-        {
-            if (Inicia_variables_word())
-            {
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_a_orden_compra();
-                Abrir_documento_word();
-                Rellenar_campos_orden_compra();
-                Guardar_archivo_word_en_ruta_en_datos_generales();
-                Cierra_documento_word();
-                Termina_secuencia_save_file();
-            }
-        }
 
         private void Termina_secuencia_operaciones_ordenes_compra()
         {
@@ -2005,7 +1829,6 @@ namespace Coset_Sistema_Produccion
             Aparece_textbox_nombre_cliente();
             Acepta_datagridview_agregar_renglones();
             Cierra_documento_word();
-            Elimina_archivo();
             Elimina_informacion_orden_compra_disponibles();
 
         }
@@ -2014,34 +1837,5 @@ namespace Coset_Sistema_Produccion
             Termina_secuencia_operaciones_ordenes_compra();
         }
 
-        private void Guardar_archivo_word_en_ruta_en_datos_generales()
-        {
-            string nombre_archivo = "";
-            string nombre_folder = "";
-            datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
-            nombre_archivo = datos_generales.folder_ordenes_compra.Replace("/", @"\") + @"\" + comboBoxCodigoOrdenCompra.Text + ".docx";
-            nombre_folder = datos_generales.folder_ordenes_compra.Replace("/", @"\");
-            if (Directory.Exists(nombre_folder))
-            {
-                if (!File.Exists(nombre_archivo))
-                {
-                    File.Copy(nombre_archivo_word, nombre_archivo, false);
-                }
-                else
-                {
-                    DialogResult result = MessageBox.Show("Archivo ya existe, Quieres Reemplazarlo?,", "Copiar Orden de Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        File.Copy(nombre_archivo_word, nombre_archivo, true);
-                    }
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Folder No existe", "Copiar Orden de Compra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            }
-        }
     }
 }

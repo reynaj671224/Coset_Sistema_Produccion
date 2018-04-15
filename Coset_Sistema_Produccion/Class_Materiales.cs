@@ -117,6 +117,48 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_requisiciones;
         }
 
+        public List<Material> Adquiere_materiales_Consulta_Entrada_materiales_en_base_datos(Partida_orden_compra material)
+        {
+            List<Material> Material_existente_disponibles_entrada_materiales = new List<Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_consulta_entrada_material(material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_entrada_materiales.Add(new Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
+                        Descripcion = mySqlDataReader["material_descripcion"].ToString(),
+                        Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
+                        Marca = mySqlDataReader["material_marca"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_entrada_materiales.Add(new Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_entrada_materiales;
+        }
+
+        private string Commando_leer_Mysql_consulta_entrada_material(Partida_orden_compra material)
+        {
+            return "SELECT * FROM materiales WHERE codigo_proveedor = '" + material.Parte +
+                 "' AND  material_descripcion ='" + material.Descripcion+ "';";
+        }
+
         private string Commando_leer_Mysql_consulta_material(Material material)
         {
              return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
@@ -174,6 +216,7 @@ namespace Coset_Sistema_Produccion
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=almacen;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
         }
+
         public string Actualiza_base_datos_materiales(Material Actualiza_material)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
