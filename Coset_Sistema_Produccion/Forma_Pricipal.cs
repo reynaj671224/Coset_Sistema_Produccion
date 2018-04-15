@@ -531,5 +531,11 @@ namespace Coset_Sistema_Produccion
             Forma_Consulta_Materiales forma_Consulta_Materiales = new Forma_Consulta_Materiales();
             forma_Consulta_Materiales.ShowDialog();
         }
+
+        private void entradaMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Entrada_Materiales forma_Entrada_Materiales = new Forma_Entrada_Materiales();
+            forma_Entrada_Materiales.ShowDialog();
+        }
     }
 }

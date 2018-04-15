@@ -90,6 +90,12 @@
     <Compile Include="Forma_Datos_Generales.Designer.cs">
       <DependentUpon>Forma_Datos_Generales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Entrada_Materiales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Entrada_Materiales.Designer.cs">
+      <DependentUpon>Forma_Entrada_Materiales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Materiales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Datos_Generales.resx">
       <DependentUpon>Forma_Datos_Generales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Entrada_Materiales.resx">
+      <DependentUpon>Forma_Entrada_Materiales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Materiales.resx">
       <DependentUpon>Forma_Materiales.cs</DependentUpon>

@@ -38,6 +38,7 @@ namespace Coset_Sistema_Produccion
         private void Regresar_forma_principal()
         {
             Materiales_disponibles_busqueda = null;
+            timerConsultaMaterial.Enabled = false;
             clase_procesos = null;
             Proceso_Modificaciones = null;
             this.Dispose();

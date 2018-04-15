@@ -278,6 +278,7 @@
             this.entradaMaterialesToolStripMenuItem.Name = "entradaMaterialesToolStripMenuItem";
             this.entradaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.entradaMaterialesToolStripMenuItem.Text = "Entrada Materiales";
+            this.entradaMaterialesToolStripMenuItem.Click += new System.EventHandler(this.entradaMaterialesToolStripMenuItem_Click);
             // 
             // salidaMaterialesToolStripMenuItem
             // 

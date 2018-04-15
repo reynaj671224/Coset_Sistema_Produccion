@@ -1,4 +1,4 @@
 [ip_address server]
-192.168.0.46
+10.20.34.124
 [password BD]
 Jaqueline5!
