@@ -45,7 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCodigoOrdenCompra = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridViewPartidasOrdenCompra = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPartidasEntradaMateriales = new System.Windows.Forms.DataGridView();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Orden_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,7 +73,7 @@
             this.textBoxUnidadesEntrada = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasEntradaMateriales)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -143,7 +143,6 @@
             this.buttonBorrarBasedeDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBorrarBasedeDatos.UseVisualStyleBackColor = true;
             this.buttonBorrarBasedeDatos.Visible = false;
-            this.buttonBorrarBasedeDatos.Click += new System.EventHandler(this.buttonBorrarBasedeDatos_Click);
             // 
             // buttonHome
             // 
@@ -247,11 +246,11 @@
             this.label4.TabIndex = 37;
             this.label4.Text = "Codigo Orden Compra";
             // 
-            // dataGridViewPartidasOrdenCompra
+            // dataGridViewPartidasEntradaMateriales
             // 
-            this.dataGridViewPartidasOrdenCompra.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridViewPartidasOrdenCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPartidasOrdenCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewPartidasEntradaMateriales.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewPartidasEntradaMateriales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPartidasEntradaMateriales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
             this.Orden_compra,
             this.Fecha,
@@ -261,13 +260,11 @@
             this.Descripcion,
             this.Cantidad,
             this.Precio_partida});
-            this.dataGridViewPartidasOrdenCompra.Enabled = false;
-            this.dataGridViewPartidasOrdenCompra.Location = new System.Drawing.Point(23, 347);
-            this.dataGridViewPartidasOrdenCompra.Name = "dataGridViewPartidasOrdenCompra";
-            this.dataGridViewPartidasOrdenCompra.Size = new System.Drawing.Size(1044, 202);
-            this.dataGridViewPartidasOrdenCompra.TabIndex = 48;
-            this.dataGridViewPartidasOrdenCompra.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasOrdenCompra_CellClick);
-            this.dataGridViewPartidasOrdenCompra.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasOrdenCompra_CellEndEdit);
+            this.dataGridViewPartidasEntradaMateriales.Enabled = false;
+            this.dataGridViewPartidasEntradaMateriales.Location = new System.Drawing.Point(23, 347);
+            this.dataGridViewPartidasEntradaMateriales.Name = "dataGridViewPartidasEntradaMateriales";
+            this.dataGridViewPartidasEntradaMateriales.Size = new System.Drawing.Size(1044, 202);
+            this.dataGridViewPartidasEntradaMateriales.TabIndex = 48;
             // 
             // Codigo_partida
             // 
@@ -503,7 +500,7 @@
             this.Controls.Add(this.dateTimePickerFechaActual);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBoxCodigoOrdenCompra);
-            this.Controls.Add(this.dataGridViewPartidasOrdenCompra);
+            this.Controls.Add(this.dataGridViewPartidasEntradaMateriales);
             this.Controls.Add(this.textBoxDescripcionMaterial);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxEmpleado);
@@ -522,7 +519,7 @@
             this.Text = "Entrada Materiales";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasEntradaMateriales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,7 +542,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCodigoOrdenCompra;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridViewPartidasOrdenCompra;
+        private System.Windows.Forms.DataGridView dataGridViewPartidasEntradaMateriales;
         private System.Windows.Forms.ComboBox comboBoxCodigoOrdenCompra;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaActual;

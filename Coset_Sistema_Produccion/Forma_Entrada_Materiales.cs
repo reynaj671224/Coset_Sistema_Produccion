@@ -24,20 +24,9 @@ namespace Coset_Sistema_Produccion
         public Control_folio folio_disponible = new Control_folio();
         public Datos_generales datos_generales = new Datos_generales();
         public Class_Datos_Generales Class_Datos_Generales = new Class_Datos_Generales();
-        public List<Partida_requisicion> Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas 
-            = new List<Partida_requisicion>();
-        public Class_Partidas_Requisiciones Class_partidas_requisiciones = new Class_Partidas_Requisiciones();
-        public List<Proveedor> Proveedores_disponibles = new List<Proveedor>();
-        public Class_Proveedores Class_proveedores = new Class_Proveedores();
-        public Proveedor Proveedor_seleccionado = new Proveedor();
-        public List<Contacto_proveedor> Contactos_proveedor_disponibles = new List<Contacto_proveedor>();
-        public Class_Contactos_Proveedor Class_contactos_Proveedor = new Class_Contactos_Proveedor();
-        public Contacto_proveedor Contacto_proveedor_seleccionado = new Contacto_proveedor();
         public Class_Usuarios class_Usuarios = new Class_Usuarios();
         public Usuario Usuario_requisitores = new Usuario();
         public List<Usuario> Usuarios_administrativos = new List<Usuario>();
-        public Partida_orden_compra Partida_orden_compra_agregar = new Partida_orden_compra();
-        public Partida_orden_compra Partida_orden_compra_modificar = new Partida_orden_compra();
         public Class_Datos_Generales Class_datos_generales = new Class_Datos_Generales();
         public Datos_generales datos_Generales = new Datos_generales();
         public List<Orden_compra> ordenes_compra_disponibles = new List<Orden_compra>();
@@ -46,18 +35,15 @@ namespace Coset_Sistema_Produccion
         public Orden_compra orden_compra_modificar = new Orden_compra();
         public List<Partida_orden_compra> partidas_ordenes_compra_disponibles = 
             new List<Partida_orden_compra>();
-        public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
-        public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
-        public Proveedor Proveedor_modificaciones = new Proveedor();
-        public List<Partida_requisicion> Partidas_requisiciones_disponibles_numero_parte
-            = new List<Partida_requisicion>();
         public Class_Materiales Class_Materiales = new Class_Materiales();
         public List<Material> Materiales_disponible_entrada_materiales = new List<Material>();
         public Material Material_disponible_entrada_materiales = new Material();
         public Entrada_Material Insertar_entrada_materiales = new Entrada_Material();
         public Entrada_Material Entrada_materiales_seleccion = new Entrada_Material();
         public Class_Entrada_Material Class_entrada_material = new Class_Entrada_Material();
-        public List<Entrada_Material> Entrada_materiles_disponibles = new List<Entrada_Material>();
+        public List<Entrada_Material> Entrada_materiales_disponibles = new List<Entrada_Material>();
+        public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
+        public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
         string RenglonParaEliminar = "";
         string Requisicion_eliminar = "";
         string Descripcion_eleiminar = "";
@@ -96,14 +82,14 @@ namespace Coset_Sistema_Produccion
         
         private void buttonHome_Click(object sender, EventArgs e)
         {
- 
+            partidas_ordenes_compra_disponibles = null;
+            Materiales_disponible_entrada_materiales = null;
+            partidas_ordenes_compra_disponibles = null;
+            Entrada_materiales_disponibles = null;
+            ordenes_compra_disponibles = null;
             class_folio_disponible = null;
             folio_disponible = null;
             Usuarios_administrativos = null;
-            Contactos_proveedor_disponibles = null;
-            Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas = null;
-            Proveedores_disponibles = null;
-            Contactos_proveedor_disponibles = null;
             this.Dispose();
             GC.Collect();
             this.Close();
@@ -167,17 +153,17 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_dataview_partidas_ordenes_compra()
         {
-            dataGridViewPartidasOrdenCompra.Enabled = true;
+            dataGridViewPartidasEntradaMateriales.Enabled = true;
         }
 
         private void limpia_partidas_ordenes_compra()
         {
-            dataGridViewPartidasOrdenCompra.Rows.Clear();
+            dataGridViewPartidasEntradaMateriales.Rows.Clear();
         }
 
         private void No_aceptar_agregar_partidas_ordenes_compra()
         {
-            dataGridViewPartidasOrdenCompra.AllowUserToAddRows = false;
+            dataGridViewPartidasEntradaMateriales.AllowUserToAddRows = false;
         }
 
         private void Aparece_boton_cancelar_operacio()
@@ -185,10 +171,7 @@ namespace Coset_Sistema_Produccion
             buttonCancelar.Visible = true;
         }
 
-        private void Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(string codigo_orden_compra)
-        {
-            partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_disponibles_en_base_datos(codigo_orden_compra);
-        }
+
 
         private void Desaparece_caja_captura_codigo_orden_compra()
         {
@@ -250,13 +233,6 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoOrdenCompra.Visible = true;
         }
 
-        private void configura_forma_copiar()
-        {
-            limpia_partidas_ordenes_compra();
-            Rellena_cajas_informacion_de_orden_compra();
-            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-            Aparece_boton_guardar_base_datos();
-        }
 
         private void configura_forma_agregar()
         {
@@ -304,13 +280,6 @@ namespace Coset_Sistema_Produccion
             textBoxEmpleado.Visible = false;
         }
 
-        private void configura_forma_operaciones_partidas()
-        {
-            Desactiva_combobox_codigo_orden_compra();
-            limpia_partidas_ordenes_compra();
-            Rellena_cajas_informacion_de_orden_compra();
-            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-         }
 
         private void configura_forma_visualizar()
         {
@@ -323,88 +292,9 @@ namespace Coset_Sistema_Produccion
 
         }
 
-
-        private void Rellena_cajas_informacion_de_orden_compra()
-        {
-            orden_compra_visualizar = ordenes_compra_disponibles.Find(orden_compra => orden_compra.Codigo.Contains(comboBoxCodigoOrdenCompra.SelectedItem.ToString()));
-
-            textBoxCodigoProveedor.Text = orden_compra_visualizar.Cotizacion;
-            dateTimePickerFechaActual.Text = orden_compra_visualizar.Fecha;
-            textBoxDescripcionMaterial.Text = orden_compra_visualizar.Proveedor;
-            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxDescripcionMaterial.Text);
-            textBoxEmpleado.Text = orden_compra_visualizar.Realizado;
-           
-            if (orden_compra_visualizar.Tipo_moneda == "Dolares")
-            {
-                textBoxTotalUnidades.Text = orden_compra_visualizar.Divisa;
-                Desactiva_textbox_divisa();
-            }
-            else
-            {
-                textBoxTotalUnidades.Text = "";
-            }
-
-        }
-
-        private void configura_forma_eliminar()
-        {
-            limpia_partidas_ordenes_compra();
-            Rellena_cajas_informacion_de_orden_compra();
-            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-            Aparece_boton_eliminar_datos_en_base_de_datos();
-        }
-
         private void Aparece_boton_eliminar_datos_en_base_de_datos()
         {
             buttonBorrarBasedeDatos.Visible = true;
-        }
-
-        private void configura_forma_modificar()
-        {
-
-            limpia_partidas_ordenes_compra();
-            Desaparece_textbox_realizado();
-            Limpia_combo_empleado();
-            Rellena_cajas_informacion_de_orden_compra_modificaciones();
-            Obtener_contactos_proveedor_modificaciones();
-            Desaparece_textbox_realizado();
-            Aparece_combo_empleado();
-            Activa_combo_empleado();
-            obtener_usuarios_administrativos_compras_disponibles();
-            Rellena_combo_empleado();
-            Activa_seleccion_fecha_actual();
-            Activa_textbox_codigo_proveedor();
-            Activa_textbox_divisa();
-            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-            Aparece_boton_guardar_base_datos();
-        }
-
-
-
-        private void Rellena_cajas_informacion_de_orden_compra_modificaciones()
-        {
-            orden_compra_modificar = ordenes_compra_disponibles.Find(orden_compra => orden_compra.Codigo.Contains(comboBoxCodigoOrdenCompra.SelectedItem.ToString()));
-
-            textBoxCodigoProveedor.Text = orden_compra_modificar.Cotizacion;
-            dateTimePickerFechaActual.Text = orden_compra_modificar.Fecha;
-            textBoxDescripcionMaterial.Text = orden_compra_modificar.Proveedor;
-            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxDescripcionMaterial.Text);
-            comboBoxEmpleado.Text = orden_compra_modificar.Realizado;
-            if (orden_compra_modificar.Tipo_moneda == "Dolares")
-            {
-                textBoxTotalUnidades.Text = orden_compra_modificar.Divisa;
-                Desactiva_textbox_divisa();
-            }
-            else
-            {
-                textBoxTotalUnidades.Text = "";
-            }
-        }
-
-        private void Obtener_contactos_proveedor_modificaciones()
-        {
-            Proveedor_modificaciones = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxDescripcionMaterial.Text);
-            Contactos_proveedor_disponibles = Class_contactos_Proveedor.Adquiere_contactos_proveedores_disponibles_en_base_datos(Proveedor_modificaciones.Codigo);
         }
 
 
@@ -511,12 +401,6 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProveedor.Enabled = true;
         }
 
-        private void Obtener_proveedores_disponibles()
-        {
-            Proveedores_disponibles = Class_proveedores.Adquiere_proveedores_disponibles_en_base_datos();
-        }
-
-
         private void Aparecer_combo_descripcion_materiales()
         {
             comboBoxDescripcionMaterial.Visible = true;
@@ -540,17 +424,17 @@ namespace Coset_Sistema_Produccion
 
         private void Acepta_datagridview_agregar_renglones()
         {
-            dataGridViewPartidasOrdenCompra.AllowUserToAddRows = true;
+            dataGridViewPartidasEntradaMateriales.AllowUserToAddRows = true;
         }
 
         private void Activa_datagridview_partidas_orden_compra()
         {
-            dataGridViewPartidasOrdenCompra.Enabled = true;
+            dataGridViewPartidasEntradaMateriales.Enabled = true;
         }
 
         private void Desactiva_columna_codigo_partidas_cotizaciones()
         {
-            dataGridViewPartidasOrdenCompra.Columns[0].Visible = false;
+            dataGridViewPartidasEntradaMateriales.Columns[0].Visible = false;
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_orden_compra()
@@ -578,21 +462,6 @@ namespace Coset_Sistema_Produccion
             else if (Operacio_entrada_materiales == "Visualizar")
                 Secuencia_agregar_entrada_materiales();
         }
-
-        private void Secuencia_agregar_partidas()
-        {
-            if (verifica_datos_partidas())
-            {
-
-                Desaparece_boton_guardar_base_de_datos();
-                limpia_partidas_ordenes_compra();
-                Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-                Elimina_informacion_orden_compra_disponibles();
-
-            }
-        }
-
-
 
         private void Secuencia_modificar_orden_compra()
         {
@@ -671,33 +540,61 @@ namespace Coset_Sistema_Produccion
             {
                 if (verfica_datos_entrada_materiales())
                 {
-                    if (Insertar_datos_entrada_materiales_class())
+                    if (verica_cantidad_entrada())
                     {
-                        if (Agrega_entrada_material_base_datos())
+                        if (Insertar_datos_entrada_materiales_class())
                         {
-                            Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                            Limpia_combo_nombre_cliente();
-                            Limpia_combo_descripcion_materiales();
-                            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                            Desaparece_boton_guardar_base_de_datos();
-                            Desaparece_boton_cancelar();
-                            Desaparece_combo_codigo_cotizacion();
-                            Activa_botones_operacion();
-                            limpia_partidas_ordenes_compra();
-                            Desactiva_datagridview_partidas();
-                            Desaparece_combo_cliente_nombre();
-                            Desactiva_combo_cliente_nombre();
-                            Desaparece_combo_atencion();
-                            Desactiva_combo_atencion();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_atencion();
-                            Elimina_informacion_orden_compra_disponibles();
+                            if (Agrega_entrada_material_base_datos())
+                            {
+                                Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                                Limpia_combo_nombre_cliente();
+                                Limpia_combo_descripcion_materiales();
+                                Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                                Desaparece_boton_guardar_base_de_datos();
+                                Desaparece_boton_cancelar();
+                                Desaparece_combo_codigo_cotizacion();
+                                Activa_botones_operacion();
+                                limpia_partidas_ordenes_compra();
+                                Desactiva_datagridview_partidas();
+                                Desaparece_combo_cliente_nombre();
+                                Desactiva_combo_cliente_nombre();
+                                Desaparece_combo_atencion();
+                                Desactiva_combo_atencion();
+                                Aparece_textbox_nombre_cliente();
+                                Aparece_textbox_nombre_cliente();
+                                Aparece_textbox_atencion();
+                                Elimina_informacion_orden_compra_disponibles();
+                            }
                         }
                     }
                 }
             }
 
+        }
+
+        private bool verica_cantidad_entrada()
+        {
+            try
+            {
+                if (Convert.ToInt32(textBoxUnidadesEntrada.Text) + Convert.ToInt32(textBoxUnidadesEntradas.Text) <=
+                    Convert.ToInt32(textBoxTotalUnidades.Text))
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Cantidad Entrada Mayor a Cantidad OC", "Entrada Material", MessageBoxButtons.OK,
+                      MessageBoxIcon.Exclamation);
+                    textBoxUnidadesEntrada.Text = "";
+                    return false;
+                }
+               
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         private bool Agrega_entrada_material_base_datos()
@@ -779,11 +676,11 @@ namespace Coset_Sistema_Produccion
 
         private bool verifica_datos_partidas()
         {
-            for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
+            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMateriales.Rows.Count - 1; partidas++)
             {
-                for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
+                for (int campo = 1; campo < dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells.Count; campo++)
                 {
-                    if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value == null)
+                    if (dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells[campo].Value == null)
                     {
                         MessageBox.Show("campo en blanco");
                         return false;
@@ -836,19 +733,19 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_datagridview_partidas()
         {
-            dataGridViewPartidasOrdenCompra.Enabled = false;
+            dataGridViewPartidasEntradaMateriales.Enabled = false;
         }
 
         private void Elimina_informacion_orden_compra_disponibles()
         {
-            Usuarios_administrativos = null;
-            Contactos_proveedor_disponibles = null;
-            Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas = null;
-            Proveedores_disponibles = null;
-            Contactos_proveedor_disponibles = null;
-            ordenes_compra_disponibles = null;
             partidas_ordenes_compra_disponibles = null;
-            Partidas_requisiciones_disponibles_numero_parte = null;
+            Materiales_disponible_entrada_materiales = null;
+            partidas_ordenes_compra_disponibles = null;
+            Entrada_materiales_disponibles = null;
+            ordenes_compra_disponibles = null;
+            class_folio_disponible = null;
+            folio_disponible = null;
+            Usuarios_administrativos = null;
             GC.Collect();
         }
 
@@ -918,13 +815,6 @@ namespace Coset_Sistema_Produccion
                 partida_orden_compra_agregar.Parte+"' ;";
         }
 
-        private void Asigna_codigo_orden_compra_para_tipo_de_operacio()
-        {
-            if (Operacio_entrada_materiales == "Agregar")
-                Partida_orden_compra_agregar.Codigo_orden = textBoxCodigoOrdenCompra.Text;
-            else if (Operacio_entrada_materiales == "Agregar Partidas" || Operacio_entrada_materiales == "Copiar")
-                Partida_orden_compra_agregar.Codigo_orden = comboBoxCodigoOrdenCompra.Text;
-        }
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra partida_orden_compra)
         {
@@ -1054,52 +944,7 @@ namespace Coset_Sistema_Produccion
             
         }
 
-
-        
-        private void Agrega_partida_orden_compra()
-        {
-            Operacio_entrada_materiales = "Agregar Partidas";
-            limpia_partidas_ordenes_compra();
-            Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor();
-            Limpia_datagridview_ordenes_compra();
-            Acepta_datagridview_agregar_renglones();
-            Aparece_boton_guardar_base_datos();
-        }
-
-
-        private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
-        {
-
-            if (Operacio_entrada_materiales == "Eliminar partida")
-                Elimina_partida_orden_compra();
-            else if (Operacio_entrada_materiales == "Eliminar")
-                Elimina_orden_compra();
-        }
-
-        private void Elimina_partida_orden_compra()
-        {
-            if (MessageBox.Show("Esta Seguro de Eiliminar la partida orden de compra seleccionada?",
-                "Eliminar partida orden de compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (Actualiza_requisicion_orden_compra_asignada())
-                {
-                    if (Elimina_informacion_partida_orden_compra_en_base_de_datos())
-                    {
-                        if (Actualiza_requisicion_orden_compra_asignada())
-                        {
-                            Desaparece_boton_eliminar_base_de_datos();
-                            limpia_partidas_ordenes_compra();
-                            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
-                            limpia_texto_eliminar_pertida_orden_compra();
-                            Desaparece_boton_eliminar_base_de_datos();
-                        }
-                    }
-                }
-            }
-            
-        }
-
-        private bool Actualiza_requisicion_orden_compra_asignada()
+    private bool Actualiza_requisicion_orden_compra_asignada()
         {
             MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
             try
@@ -1199,13 +1044,13 @@ namespace Coset_Sistema_Produccion
             try
             {
                 connection.Open();
-                for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count; partidas++)
+                for (int partidas = 0; partidas < dataGridViewPartidasEntradaMateriales.Rows.Count; partidas++)
                 {
-                        if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells["Requisicion_compra"].Value != null &&
-                            dataGridViewPartidasOrdenCompra.Rows[partidas].Cells["Descrpcion_partida"].Value != null)
+                        if (dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Requisicion_compra"].Value != null &&
+                            dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Descrpcion_partida"].Value != null)
                         {
-                            Requisicion_eliminar = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells["Requisicion_compra"].Value.ToString();
-                            Descripcion_eleiminar = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells["Descrpcion_partida"].Value.ToString();
+                            Requisicion_eliminar = dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Requisicion_compra"].Value.ToString();
+                            Descripcion_eleiminar = dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Descrpcion_partida"].Value.ToString();
                             
                         }
 
@@ -1276,26 +1121,9 @@ namespace Coset_Sistema_Produccion
             if (Operacio_entrada_materiales == "Eliminar partida")
             {
                 Aparece_boton_eliminar_datos_en_base_de_datos();
-                RenglonParaEliminar=dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                RenglonParaEliminar=dataGridViewPartidasEntradaMateriales.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
             }
            
-        }
-
-        private void Rellena_combo_nombre_proveedor()
-        {
-            foreach (Proveedor proveedor in Proveedores_disponibles)
-            {
-                if (proveedor.error == "")
-                {
-                    comboBoxDescripcionMaterial.Items.Add(proveedor.Nombre);
-                }
-                else
-                {
-                    MessageBox.Show(proveedor.error);
-                    break;
-                }
-
-            }
         }
 
         private void buttonCopiarCotizacion_Click(object sender, EventArgs e)
@@ -1331,12 +1159,12 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_datagrid_entrada_materiles()
         {
-            foreach (Entrada_Material material in Entrada_materiles_disponibles)
+            foreach (Entrada_Material material in Entrada_materiales_disponibles)
             {
 
                 try
                 {
-                    dataGridViewPartidasOrdenCompra.Rows.Add(material.Codigo.ToString(), material.Orden_compra,
+                    dataGridViewPartidasEntradaMateriales.Rows.Add(material.Codigo.ToString(), material.Orden_compra,
                         material.Fecha, material.Codigo_material, material.Codigo_proveedor,
                         material.Nombre_empleado, material.Descripcion_material, material.Cantidad, material.Precio);
                 }
@@ -1351,7 +1179,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_partidas_entrada_materiles()
         {
             Asigna_valores_entrada_materiales_visualizar();
-            Entrada_materiles_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
+            Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
         }
 
         private void Asigna_valores_entrada_materiales_visualizar()
@@ -1400,14 +1228,14 @@ namespace Coset_Sistema_Produccion
         private void Rellena_caja_cantidad_entradas_anteriormente()
         {
             int Total_cantidad = 0;
-           for(int renglones=0;renglones< dataGridViewPartidasOrdenCompra.Rows.Count; renglones++)
+           for(int renglones=0;renglones< dataGridViewPartidasEntradaMateriales.Rows.Count; renglones++)
             { 
 
-                if (dataGridViewPartidasOrdenCompra[(int)Campos_entrada_materiales.cantidad, renglones].Value != null)
+                if (dataGridViewPartidasEntradaMateriales[(int)Campos_entrada_materiales.cantidad, renglones].Value != null)
                 {
                     try
                     {
-                        Total_cantidad = Total_cantidad + Convert.ToInt32(dataGridViewPartidasOrdenCompra[
+                        Total_cantidad = Total_cantidad + Convert.ToInt32(dataGridViewPartidasEntradaMateriales[
                             (int)Campos_entrada_materiales.cantidad, renglones].Value.ToString());
                     }
                     catch
@@ -1441,200 +1269,12 @@ namespace Coset_Sistema_Produccion
            
         }
 
-        private void Obtener_contactos_disponibles_proveedor()
-        {
-            Proveedor_seleccionado = Proveedores_disponibles.Find(proveedores => proveedores.Nombre.Contains(comboBoxDescripcionMaterial.SelectedItem.ToString()));
-
-            Contactos_proveedor_disponibles = Class_contactos_Proveedor.Adquiere_contactos_proveedores_disponibles_en_base_datos(Proveedor_seleccionado.Codigo);
-        }
-
-
         private void Limpia_datagridview_ordenes_compra()
         {
-            dataGridViewPartidasOrdenCompra.Rows.Clear();
+            dataGridViewPartidasEntradaMateriales.Rows.Clear();
         }
 
 
-        private void Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor()
-        {
-            if (Operacio_entrada_materiales == "Agregar" )
-            {
-                Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas = Class_partidas_requisiciones.
-                    Adquiere_partidas_requisiciones_disponibles_en_base_datos_orden_compra_no_asignadas(comboBoxDescripcionMaterial.Text);
-            }
-            else if (Operacio_entrada_materiales == "Operaciones Patidas" || Operacio_entrada_materiales == "Agregar Partidas")
-            {
-                Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas = Class_partidas_requisiciones.
-                    Adquiere_partidas_requisiciones_disponibles_en_base_datos_orden_compra_no_asignadas(textBoxDescripcionMaterial.Text);
-            }
-        }
-
-
-        private void dataGridViewPartidasOrdenCompra_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //try
-            //{
-            //    if (e.ColumnIndex == (int)Campos_entrada_materiales.requisicion && e.RowIndex >= 0) //check if combobox column
-            //    {
-            //        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //        {
-            //            string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            //            /*rellena combo numero de parte disponible para requisicio*/
-
-            //            DataGridViewComboBoxCell combo_descripcion = (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_entrada_materiales.descrpcion];
-            //            combo_descripcion.Items.Clear();
-            //            combo_descripcion.Value = "";
-            //            foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
-            //            {
-            //                if (partida_requisicion.Codigo_requisicion == selectedValue)
-            //                {
-            //                    combo_descripcion.Items.Add(partida_requisicion.Descripcion);
-            //                }
-
-            //            }
-            //        }
-            //    }
-            //    else if (e.ColumnIndex == (int)Campos_entrada_materiales.descrpcion && e.RowIndex >= 0) //check if combobox column
-            //    {
-            //        if (Operacio_orden_compra == "Agregar" || Operacio_orden_compra == "Agregar Partidas")
-            //        {
-            //            if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //            {
-            //                string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
-            //                foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
-            //                {
-            //                    if (partida_requisicion.Descripcion == selectedValue)
-            //                    {
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
-
-            //                    }
-
-            //                }
-            //            }
-            //        }else if(Operacio_orden_compra == "Modificar")
-            //        {
-            //            if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //            {
-            //                string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
-            //                foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_numero_parte)
-            //                {
-            //                    if (partida_requisicion.Descripcion == selectedValue)
-            //                    {
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
-            //                        dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
-
-            //                    }
-
-            //                }
-            //            }
-            //        }
-            //    }
-            //    else if (e.ColumnIndex == (int)Campos_entrada_materiales.cantidad && e.RowIndex >= 0)
-            //    {
-            //        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //        {
-            //            try
-            //            {
-            //                Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            //            }
-            //            catch
-            //            {
-            //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-            //            }
-            //        }
-            //    }
-            //    else if (e.ColumnIndex == (int)Campos_entrada_materiales.partida && e.RowIndex >= 0)
-            //    {
-            //        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //        {
-            //            try
-            //            {
-            //                Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            //            }
-            //            catch
-            //            {
-            //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-            //            }
-            //        }
-
-            //    }
-            //    else if (e.ColumnIndex == (int)Campos_entrada_materiales.precio && e.RowIndex >= 0)
-            //    {
-            //        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            //        {
-            //            try
-            //            {
-            //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_entrada_materiales.total].Value =
-            //                    (Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value) *
-            //                    Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_entrada_materiales.cantidad].Value)).ToString("####.##");
-
-            //            }
-            //            catch
-            //            {
-            //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-            //            }
-            //        }
-            //    }
-            //}
-            //catch(Exception er)
-            //{
-            //    MessageBox.Show(er.Message);
-            //}
-
-        }
-
-
-        private void radioButtonDolares_CheckedChanged(object sender, EventArgs e)
-        {
-            Aparece_etiqueta_divisa();
-            Aparece_textbox_divisa();
-            Activa_textbox_divisa();
-        }
-
-        private void Activa_textbox_divisa()
-        {
-            textBoxTotalUnidades.Enabled = true;
-        }
-
-        private void Aparece_textbox_divisa()
-        {
-            textBoxTotalUnidades.Visible = true;
-        }
-
-        private void Aparece_etiqueta_divisa()
-        {
-            labeldivisa.Visible = true;
-        }
-
-        private void radioButtonPesos_CheckedChanged(object sender, EventArgs e)
-        {
-            Desaparece_etiqueta_divisa();
-            Desaparece_textbox_divisa();
-            Desactiva_textbox_divisa();
-
-        }
-
-        private void Desactiva_textbox_divisa()
-        {
-            textBoxTotalUnidades.Enabled = false;
-        }
-
-        private void Desaparece_textbox_divisa()
-        {
-            textBoxTotalUnidades.Visible = false;
-        }
-
-        private void Desaparece_etiqueta_divisa()
-        {
-            labeldivisa.Visible = false;
-        }
 
         private void buttonBuscarOrdenCompra_Click(object sender, EventArgs e)
         {
@@ -1648,37 +1288,6 @@ namespace Coset_Sistema_Produccion
             else if (Operacio_entrada_materiales == "Visualizar")
                 configura_forma_visualizar();
 
-        }
-
-        private void buttonAgregarPartida_Click(object sender, EventArgs e)
-        {
-            Agrega_partida_orden_compra();
-        }
-
-        private void dataGridViewPartidasOrdenCompra_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Operacio_entrada_materiales == "Eliminar partida")
-            {
-                Aparece_boton_eliminar_datos_en_base_de_datos();
-                RenglonParaEliminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
-                Requisicion_eliminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Requisicion_compra"].Value.ToString();
-                Descripcion_eleiminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Descrpcion_partida"].Value.ToString();
-            }
-        }
-
-        private void buttonEliminarCotizacion_Click(object sender, EventArgs e)
-        {
-            Desactiva_botones_operacion();
-            Desaparece_caja_captura_codigo_orden_compra();
-            Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_partidas_ordenes_compra();
-            Activa_dataview_partidas_ordenes_compra();
-            limpia_combo_ordenes_compra();
-            Aparece_combo_orden_compra();
-            Activa_combo_orden_compra();
-            obtener_ordenes_compra_disponibles();
-            Rellenar_combo_ordenes_compra();
-            Operacio_entrada_materiales = "Eliminar";
         }
 
         private void buttonModificarCotizacion_Click(object sender, EventArgs e)
