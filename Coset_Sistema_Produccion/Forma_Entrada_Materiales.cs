@@ -118,7 +118,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
             Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_partidas_ordenes_compra();
+            Acepta_datagridview_agregar_renglones();
             Activa_dataview_partidas_ordenes_compra();
             limpia_combo_ordenes_compra();
             Aparece_combo_orden_compra();
@@ -233,7 +233,7 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Limpia_combo_atencion()
+        private void Limpia_combo_descripcion_materiales()
         {
             comboBoxDescripcionMaterial.Items.Clear();
             comboBoxDescripcionMaterial.Text = "";
@@ -260,15 +260,13 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_agregar()
         {
+            Limpia_combo_descripcion_materiales();
             Aparecer_combo_descripcion_materiales();
             Activa_combo_descripcion_materiales();
             Desaparece_textbox_descripcion_materiales();
             Obtener_materiales_ordenes_compra();
             Rellena_combo_descripcion_materiales();
-            //Desactiva_combobox_codigo_orden_compra();
-            //Desaparece_textbox_requisitor();
-            //Aparece_combo_empleado();
-            //Activa_combo_empleado();
+
         }
 
         private void Obtener_materiales_ordenes_compra()
@@ -316,9 +314,12 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
-            limpia_partidas_ordenes_compra();
-            Rellena_cajas_informacion_de_orden_compra();
-            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
+            Limpia_combo_descripcion_materiales();
+            Aparecer_combo_descripcion_materiales();
+            Activa_combo_descripcion_materiales();
+            Desaparece_textbox_descripcion_materiales();
+            Obtener_materiales_ordenes_compra();
+            Rellena_combo_descripcion_materiales();
 
         }
 
@@ -601,7 +602,7 @@ namespace Coset_Sistema_Produccion
                     {
                         Limpia_cajas_captura_despues_de_agregar_orden_compra();
                         Limpia_combo_nombre_cliente();
-                        Limpia_combo_atencion();
+                        Limpia_combo_descripcion_materiales();
                         Desactiva_cajas_captura_despues_de_agregar_orden_compra();
                         Desaparece_boton_guardar_base_de_datos();
                         Desaparece_boton_cancelar();
@@ -672,28 +673,46 @@ namespace Coset_Sistema_Produccion
                 {
                     if (Insertar_datos_entrada_materiales_class())
                     {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_atencion();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Desaparece_combo_cliente_nombre();
-                        Desactiva_combo_cliente_nombre();
-                        Desaparece_combo_atencion();
-                        Desactiva_combo_atencion();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_atencion();
-                        Elimina_informacion_orden_compra_disponibles();
+                        if (Agrega_entrada_material_base_datos())
+                        {
+                            Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                            Limpia_combo_nombre_cliente();
+                            Limpia_combo_descripcion_materiales();
+                            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                            Desaparece_boton_guardar_base_de_datos();
+                            Desaparece_boton_cancelar();
+                            Desaparece_combo_codigo_cotizacion();
+                            Activa_botones_operacion();
+                            limpia_partidas_ordenes_compra();
+                            Desactiva_datagridview_partidas();
+                            Desaparece_combo_cliente_nombre();
+                            Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_atencion();
+                            Desactiva_combo_atencion();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_atencion();
+                            Elimina_informacion_orden_compra_disponibles();
+                        }
                     }
                 }
             }
 
+        }
+
+        private bool Agrega_entrada_material_base_datos()
+        {
+            Material_disponible_entrada_materiales.Cantidad = (Convert.ToInt32(Material_disponible_entrada_materiales.Cantidad.ToString()) +
+                            Convert.ToUInt32(textBoxUnidadesEntrada.Text)).ToString();
+            if (Class_Materiales.Actualiza_base_datos_materiales(
+                Material_disponible_entrada_materiales) == "NO errores")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool Insertar_datos_entrada_materiales_class()
@@ -1361,17 +1380,20 @@ namespace Coset_Sistema_Produccion
 
         private void Verfica_total_unidades_entradas()
         {
-            try
+            if (Operacio_entrada_materiales == "Agregar")
             {
-                if (Convert.ToInt32(textBoxUnidadesEntradas.Text) < Convert.ToInt32(textBoxTotalUnidades.Text))
+                try
                 {
-                    textBoxUnidadesEntrada.Enabled = true;
+                    if (Convert.ToInt32(textBoxUnidadesEntradas.Text) < Convert.ToInt32(textBoxTotalUnidades.Text))
+                    {
+                        textBoxUnidadesEntrada.Enabled = true;
+                    }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("No valores numericos en cantidad", "Entrada Materriales",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch
+                {
+                    MessageBox.Show("No valores numericos en cantidad", "Entrada Materriales",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1668,7 +1690,7 @@ namespace Coset_Sistema_Produccion
         private void Termina_secuencia_operaciones_ordenes_compra()
         {
             Limpia_combo_nombre_cliente();
-            Limpia_combo_atencion();
+            Limpia_combo_descripcion_materiales();
             Limpia_cajas_captura_despues_de_agregar_orden_compra();
             Desactiva_cajas_captura_despues_de_agregar_orden_compra();
             Desaparece_boton_guardar_base_de_datos();
