@@ -924,9 +924,9 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_nuevo_folio_material()
         {
-            int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(1, folio_disponible.Folio_materiales.Length - 1));
+            int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(2, folio_disponible.Folio_materiales.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 1) + numero_folio.ToString();
+            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 2) + numero_folio.ToString();
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);
@@ -1462,7 +1462,7 @@ namespace Coset_Sistema_Produccion
             if (Operacio_requisiciones == "Eliminar Partida")
             {
                 Aparce_boton_borrar_base_datos();
-                RenglonParaEliminar =dataGridViewPartidasRequisiciones.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                RenglonParaEliminar = dataGridViewPartidasRequisiciones.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
             }
             else if(Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
@@ -2119,7 +2119,6 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_requisiciones_disponibles_base_datos();
             Rellena_combo_codigo_requisiciones();
             Aparece_boton_cancelar_operacio();
-            //Activa_cajas_informacion_requisiciones();
             No_aceptar_agregar_partidas_requisiciones();
             Activa_dataview_partidas_requisiciones();
             Obtener_proveedores_disponibles();

@@ -86,16 +86,15 @@ namespace Coset_Sistema_Produccion
         {
             buttonSeleccionMaterial.Visible = true;
             buttonAgregarMaterial.Visible = false;
+            Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material =>
+                    material.Codigo.Contains(dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"]
+                    .Value.ToString()));
             if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString() != "")
             {
                 Aparece_foto_material();
                 try
                 {
-                    
-                    Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material => 
-                    material.Codigo.Contains(dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"]
-                    .Value.ToString()));
-                        dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                    dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
                     pictureBoxMaterial.Image = Image.FromFile(@appPath + "\\Fotos\\" +
                         dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString());
 
