@@ -537,5 +537,10 @@ namespace Coset_Sistema_Produccion
             Forma_Entrada_Materiales forma_Entrada_Materiales = new Forma_Entrada_Materiales();
             forma_Entrada_Materiales.ShowDialog();
         }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

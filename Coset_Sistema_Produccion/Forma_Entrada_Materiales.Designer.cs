@@ -334,7 +334,6 @@
             // timerModificarClientes
             // 
             this.timerModificarClientes.Interval = 1000;
-            this.timerModificarClientes.Tick += new System.EventHandler(this.timerModificarClientes_Tick);
             // 
             // dateTimePickerFechaActual
             // 

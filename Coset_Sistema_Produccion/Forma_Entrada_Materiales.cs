@@ -99,7 +99,7 @@ namespace Coset_Sistema_Produccion
 
 
         
-        private void Visualiza_orden_compra()
+        private void Visualiza_entrada_materiales()
         {
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
@@ -204,7 +204,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Termina_secuencia_operaciones_ordenes_compra();
+            Termina_secuencia_operaciones_entrada_materiales();
         }
 
 
@@ -325,7 +325,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonAgregarCotizacion_Click(object sender, EventArgs e)
         {
-            Agrega_orden_compra();
+            Agrega_entrada_materiales();
         }
 
         private void Agrega_contactos_cliente()
@@ -333,7 +333,7 @@ namespace Coset_Sistema_Produccion
             throw new NotImplementedException();
         }
 
-        private void Agrega_orden_compra()
+        private void Agrega_entrada_materiales()
         {
             
             Desactiva_botones_operacion();
@@ -463,76 +463,12 @@ namespace Coset_Sistema_Produccion
                 Secuencia_agregar_entrada_materiales();
         }
 
-        private void Secuencia_modificar_orden_compra()
-        {
-            if (verifica_datos_partidas())
-            {
-                    if (Modifica_datos_orden_compra())
-                    {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Limpia_combo_nombre_cliente();
-                        Limpia_combo_descripcion_materiales();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_guardar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Aparce_caja_codigo_cliente();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Desaparece_combo_cliente_nombre();
-                        Desactiva_combo_cliente_nombre();
-                        Desaparece_combo_atencion();
-                        Desactiva_combo_atencion();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_nombre_cliente();
-                        Aparece_textbox_atencion();
-                        Elimina_informacion_orden_compra_disponibles();
-                    }
-            }
-        }
-
 
         private void Aparce_caja_codigo_cliente()
         {
             textBoxCodigoOrdenCompra.Visible = true;
         }
 
-        private bool Modifica_datos_orden_compra()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-               // MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_orden_compra(), connection);
-                //command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-
-        private string Configura_cadena_comando_en_base_de_datos_modificar_partidas_orden_compra(Partida_orden_compra partidas_orden_compra)
-        {
-            return "UPDATE partidas_oredenes_compra set  codigo_orden_compra='" + comboBoxCodigoOrdenCompra.Text +
-                "',partida_compra='" + partidas_orden_compra.Partida +
-                "',requisicion_compra='" + partidas_orden_compra.Requisicion +
-                "',cantidad_compra='" + partidas_orden_compra.Cantidad +
-                "',parte_compra='" + partidas_orden_compra.Parte +
-                "',descripcion_compra='" + partidas_orden_compra.Descripcion +
-                "',unidad_medida='" + partidas_orden_compra.Unidad_medida +
-                "',proyecto_compra='" + partidas_orden_compra.Proyecto +
-                "',precio_unitario='" + partidas_orden_compra.precio_unitario +
-                "',total_compra='" + partidas_orden_compra.Total +
-                "' where codigo_partida='" + partidas_orden_compra.Codigo + "';";
-        }
 
         private void Secuencia_agregar_entrada_materiales()
         {
@@ -721,16 +657,6 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Visible = false;
         }
 
-        private void Asigna_nuevo_folio_orden_compra()
-        {
-            int numero_folio = Convert.ToInt32(folio_disponible.Folio_oc.Substring(2, folio_disponible.Folio_oc.Length - 2));
-            numero_folio++;
-            folio_disponible.Folio_oc = folio_disponible.Folio_oc.Substring(0, 2) +numero_folio.ToString();
-            string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
-            if (respuesta != "")
-                MessageBox.Show(folio_disponible.error);
-        }
-
         private void Desactiva_datagridview_partidas()
         {
             dataGridViewPartidasEntradaMateriales.Enabled = false;
@@ -826,44 +752,6 @@ namespace Coset_Sistema_Produccion
                 partida_orden_compra.precio_unitario + "','"+ partida_orden_compra.Total + "');";
         }
 
-        private bool Insertar_datos_entrada_materiales()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_entrada_materiales(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_insertar_en_base_de_datos_entrada_materiales()
-        {
-            return "INSERT INTO entrada_material(orden_compra,fecha, codigo_material," +
-                "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,precio) " +
-                "VALUES('" + comboBoxCodigoOrdenCompra.Text + "','" + dateTimePickerFechaActual.Text + "','" +
-                textCodigoMaterial.Text + "','" + textBoxUnidadesEntrada.Text + "','" + textBoxCodigoProveedor.Text + 
-                "','" + comboBoxEmpleado.Text + "','" +comboBoxDescripcionMaterial.Text + "','" + 
-                textBoxPrecioMaterial.Text + "');";
-        }
-
-        private string Configura_cadena_conexion_MySQL_almacen()
-        {
-            return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=almacen;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
-        }
-
-
-
-
 
         private void Modifica_orden_compra()
         {
@@ -880,200 +768,6 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_ordenes_compra();
             Activa_dataview_partidas_ordenes_compra();
             Operacio_entrada_materiales = "Modificar";
-        }
-
-        private bool Elimina_informacion_orden_compra_en_base_de_datos()
-        {
-            return (Elimina_datos_orden_compra() && Elinina_partidas_orden_compra());
-        }
-
-        private bool Elinina_partidas_orden_compra()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos_contactos_cliente(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_eliminar_en_base_de_datos_contactos_cliente()
-        {
-            return "DELETE from partidas_oredenes_compra where codigo_orden_compra='" +
-               comboBoxCodigoOrdenCompra.Text + "';";
-        }
-
-
-        private bool Elimina_datos_orden_compra()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos_orden_compra(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-        private string Configura_cadena_comando_eliminar_en_base_de_datos_orden_compra()
-        {
-            return "DELETE from ordenes_compra where codigo_orden_compra='" +
-               comboBoxCodigoOrdenCompra.Text + "';";
-        }
-
-        private void timerModificarClientes_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-    private bool Actualiza_requisicion_orden_compra_asignada()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_partida_cotizacion(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_modificar_en_base_de_datos_partida_cotizacion()
-        {
-            return "UPDATE partidas_requisiciones set  orden_compra_asignada='No_Asignada'" +
-               "where codigo_requisicion='" + Requisicion_eliminar + "' and "+
-               "descripcion_requisicion= '" + Descripcion_eleiminar + "';";
-        }
-
-        private void limpia_texto_eliminar_pertida_orden_compra()
-        {
-            RenglonParaEliminar = "";
-        }
-
-        private bool Elimina_informacion_partida_orden_compra_en_base_de_datos()
-        {
-            return Elimina_partida_orden_compra_seleccionada();
-        }
-
-        private bool Elimina_partida_orden_compra_seleccionada()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos_partida_orden_compra(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_eliminar_en_base_de_datos_partida_orden_compra()
-        {
-            return "DELETE from partidas_oredenes_compra where codigo_partida='" +
-                RenglonParaEliminar + "';";
-        }
-
-        private string Configura_cadena_comando_eliminar_en_base_de_datos_partida_cotizacion()
-        {
-            return "DELETE from partidas_cotizaciones where codigo_partida='" +
-                RenglonParaEliminar + "';";
-        }
-
-        private void Elimina_orden_compra()
-        {
-            if (MessageBox.Show("Esta Seguro de Eiliminar Esta Orden de Compra Incluyendo Todos sus partidas?",
-                "Eliminar Orden de Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (Modifica_requisiciones_orden_compra_asignada())
-                {
-                    if (Elimina_informacion_orden_compra_en_base_de_datos())
-                    {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_eliminar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Elimina_informacion_orden_compra_disponibles();
-                        Aparce_caja_codigo_cliente();
-                    }
-                }
-            }
-        }
-
-        private bool Modifica_requisiciones_orden_compra_asignada()
-        {
-
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_almacen());
-            try
-            {
-                connection.Open();
-                for (int partidas = 0; partidas < dataGridViewPartidasEntradaMateriales.Rows.Count; partidas++)
-                {
-                        if (dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Requisicion_compra"].Value != null &&
-                            dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Descrpcion_partida"].Value != null)
-                        {
-                            Requisicion_eliminar = dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Requisicion_compra"].Value.ToString();
-                            Descripcion_eleiminar = dataGridViewPartidasEntradaMateriales.Rows[partidas].Cells["Descrpcion_partida"].Value.ToString();
-                            
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("campo en blanco");
-                            connection.Close();
-                            return false;
-                        }
-
-                        MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_partida_cotizacion(), connection);
-                        command.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
         }
 
         private void Desaparece_boton_eliminar_base_de_datos()
@@ -1126,20 +820,6 @@ namespace Coset_Sistema_Produccion
            
         }
 
-        private void buttonCopiarCotizacion_Click(object sender, EventArgs e)
-        {
-            Copiar_cotizacion();
-        }
-
-        private void Copiar_cotizacion()
-        {
-            Desactiva_botones_operacion();
-            Desaparece_caja_captura_codigo_orden_compra();
-            Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_partidas_ordenes_compra();
-            Activa_dataview_partidas_ordenes_compra();
-            Operacio_entrada_materiales = "Copiar";
-        }
 
 
         private void comboBoxDescripcionMaterial_SelectedIndexChanged(object sender, EventArgs e)
@@ -1278,7 +958,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBuscarOrdenCompra_Click(object sender, EventArgs e)
         {
-            Visualiza_orden_compra();
+            Visualiza_entrada_materiales();
         }
 
         private void comboBoxCodigoOrdenCompra_SelectedIndexChanged(object sender, EventArgs e)
@@ -1296,7 +976,7 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Termina_secuencia_operaciones_ordenes_compra()
+        private void Termina_secuencia_operaciones_entrada_materiales()
         {
             Limpia_combo_nombre_cliente();
             Limpia_combo_descripcion_materiales();
@@ -1320,7 +1000,7 @@ namespace Coset_Sistema_Produccion
         }
         private void Termina_secuencia_save_file()
         {
-            Termina_secuencia_operaciones_ordenes_compra();
+            Termina_secuencia_operaciones_entrada_materiales();
         }
 
         private void timerAgregarEntradaMateriales_Tick(object sender, EventArgs e)

@@ -65,6 +65,7 @@
     <Compile Include="Class_Proveedores.cs" />
     <Compile Include="Class_Proyectos.cs" />
     <Compile Include="Class_Requisiciones.cs" />
+    <Compile Include="Class_Salida_Material.cs" />
     <Compile Include="Class_Usuarios.cs" />
     <Compile Include="Forma_Clientes.cs">
       <SubType>Form</SubType>
