@@ -11,7 +11,7 @@ namespace Coset_Sistema_Produccion
     {
         public List<Material> Adquiere_materiales_busqueda_en_base_datos(Material material)
         {
-            List<Material> Material_existente_disponibles_requisiciones = new List<Material>();
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
@@ -20,7 +20,7 @@ namespace Coset_Sistema_Produccion
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
-                    Material_existente_disponibles_requisiciones.Add(new Material()
+                    Material_existente_disponibles_materiales.Add(new Material()
                     {
                         Codigo = mySqlDataReader["codigo_material"].ToString(),
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
@@ -38,16 +38,59 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-                Material_existente_disponibles_requisiciones.Add(new Material()
+                Material_existente_disponibles_materiales.Add(new Material()
                 { error = ex.Message.ToString() });
             }
             connection.Close();
-            return Material_existente_disponibles_requisiciones;
+            return Material_existente_disponibles_materiales;
+        }
+
+        public List<Material> Adquiere_materiales_busqueda_entrada_materiales_en_base_datos(Material material)
+        {
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_entrada_material(material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_materiales.Add(new Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
+                        Descripcion = mySqlDataReader["material_descripcion"].ToString(),
+                        Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
+                        Marca = mySqlDataReader["material_marca"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_materiales.Add(new Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_materiales;
+        }
+
+        private string Commando_leer_Mysql_busqueda_entrada_material(Material material)
+        {
+            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+                 material.Descripcion + "%';";
         }
 
         public List<Material> Adquiere_agregar_materiales_busqueda_en_base_datos(Material material)
         {
-            List<Material> Material_existente_disponibles_requisiciones = new List<Material>();
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
@@ -56,7 +99,7 @@ namespace Coset_Sistema_Produccion
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
-                    Material_existente_disponibles_requisiciones.Add(new Material()
+                    Material_existente_disponibles_materiales.Add(new Material()
                     {
                         Codigo = mySqlDataReader["codigo_material"].ToString(),
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
@@ -74,16 +117,16 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-                Material_existente_disponibles_requisiciones.Add(new Material()
+                Material_existente_disponibles_materiales.Add(new Material()
                 { error = ex.Message.ToString() });
             }
             connection.Close();
-            return Material_existente_disponibles_requisiciones;
+            return Material_existente_disponibles_materiales;
         }
 
         public List<Material> Adquiere_materiales_Consulta_en_base_datos(Material material)
         {
-            List<Material> Material_existente_disponibles_requisiciones = new List<Material>();
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
@@ -92,7 +135,7 @@ namespace Coset_Sistema_Produccion
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
-                    Material_existente_disponibles_requisiciones.Add(new Material()
+                    Material_existente_disponibles_materiales.Add(new Material()
                     {
                         Codigo = mySqlDataReader["codigo_material"].ToString(),
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
@@ -110,11 +153,11 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-                Material_existente_disponibles_requisiciones.Add(new Material()
+                Material_existente_disponibles_materiales.Add(new Material()
                 { error = ex.Message.ToString() });
             }
             connection.Close();
-            return Material_existente_disponibles_requisiciones;
+            return Material_existente_disponibles_materiales;
         }
 
         public List<Material> Adquiere_materiales_Consulta_Entrada_materiales_en_base_datos(Partida_orden_compra material)

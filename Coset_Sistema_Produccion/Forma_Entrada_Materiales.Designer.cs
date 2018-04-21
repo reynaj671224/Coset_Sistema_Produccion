@@ -56,7 +56,7 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoOrdenCompra = new System.Windows.Forms.ComboBox();
-            this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
+            this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
             this.dateTimePickerFechaActual = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxDescripcionMaterial = new System.Windows.Forms.ComboBox();
@@ -72,6 +72,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxUnidadesEntrada = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasEntradaMateriales)).BeginInit();
             this.SuspendLayout();
@@ -331,9 +332,10 @@
             this.comboBoxCodigoOrdenCompra.Visible = false;
             this.comboBoxCodigoOrdenCompra.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoOrdenCompra_SelectedIndexChanged);
             // 
-            // timerModificarClientes
+            // timerBusquedaMaterial
             // 
-            this.timerModificarClientes.Interval = 1000;
+            this.timerBusquedaMaterial.Interval = 1000;
+            this.timerBusquedaMaterial.Tick += new System.EventHandler(this.timerBusquedaMaterial_Tick);
             // 
             // dateTimePickerFechaActual
             // 
@@ -358,7 +360,7 @@
             // comboBoxDescripcionMaterial
             // 
             this.comboBoxDescripcionMaterial.FormattingEnabled = true;
-            this.comboBoxDescripcionMaterial.Location = new System.Drawing.Point(262, 163);
+            this.comboBoxDescripcionMaterial.Location = new System.Drawing.Point(262, 162);
             this.comboBoxDescripcionMaterial.Name = "comboBoxDescripcionMaterial";
             this.comboBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 21);
             this.comboBoxDescripcionMaterial.TabIndex = 60;
@@ -477,11 +479,27 @@
             this.label3.TabIndex = 82;
             this.label3.Text = "Unidades Entrada";
             // 
+            // buttonBusquedaBaseDatos
+            // 
+            this.buttonBusquedaBaseDatos.BackColor = System.Drawing.Color.White;
+            this.buttonBusquedaBaseDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBusquedaBaseDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBusquedaBaseDatos.Image")));
+            this.buttonBusquedaBaseDatos.Location = new System.Drawing.Point(586, 24);
+            this.buttonBusquedaBaseDatos.Name = "buttonBusquedaBaseDatos";
+            this.buttonBusquedaBaseDatos.Size = new System.Drawing.Size(79, 74);
+            this.buttonBusquedaBaseDatos.TabIndex = 84;
+            this.buttonBusquedaBaseDatos.Text = "Buscar";
+            this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
+            this.buttonBusquedaBaseDatos.Visible = false;
+            this.buttonBusquedaBaseDatos.Click += new System.EventHandler(this.buttonBusquedaBaseDatos_Click);
+            // 
             // Forma_Entrada_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 582);
+            this.Controls.Add(this.buttonBusquedaBaseDatos);
             this.Controls.Add(this.textBoxUnidadesEntrada);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxPrecioMaterial);
@@ -543,7 +561,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridViewPartidasEntradaMateriales;
         private System.Windows.Forms.ComboBox comboBoxCodigoOrdenCompra;
-        private System.Windows.Forms.Timer timerModificarClientes;
+        private System.Windows.Forms.Timer timerBusquedaMaterial;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaActual;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxDescripcionMaterial;
@@ -568,5 +586,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
+        private System.Windows.Forms.Button buttonBusquedaBaseDatos;
     }
 }

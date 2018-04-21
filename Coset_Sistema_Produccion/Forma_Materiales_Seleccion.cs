@@ -36,10 +36,14 @@ namespace Coset_Sistema_Produccion
                 Aparece_boton_agregar_material();
                 Aparece_boton_no_agregar_material();
             }
-            else if(Operacion_materiales == "Requisiciones")
+            else if (Operacion_materiales == "Requisiciones")
             {
                 Aparece_boton_agregar_material();
-          
+
+            }
+            else if (Operacion_materiales == "Entrada Materiales")
+            {
+
             }
 
             Rellena_partidas_materiales_disponibles(materiales_busqueda_disponibles);
