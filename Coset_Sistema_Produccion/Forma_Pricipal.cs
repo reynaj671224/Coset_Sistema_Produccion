@@ -542,5 +542,11 @@ namespace Coset_Sistema_Produccion
         {
 
         }
+
+        private void salidaMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Salida_Materiales forma_Salida_Materiales = new Forma_Salida_Materiales();
+            forma_Salida_Materiales.ShowDialog();
+        }
     }
 }

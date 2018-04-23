@@ -25,6 +25,7 @@ namespace Coset_Sistema_Produccion
         public Material Visualizar_material = new Material();
         public Material Modificar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
+        public string criterio_busqueda = "";
         public Forma_Consulta_Materiales()
         {
             InitializeComponent();
@@ -358,7 +359,7 @@ namespace Coset_Sistema_Produccion
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             Limpia_cajas_captura_despues_de_agregar_material();
-            Activa_cajas_de_informacion_visualizar();
+            Desactiva_cajas_captura_busqueda_material();
             Desactiva_boton_cancelar();
             Desaparece_foto_material();
             Desaparece_boton_busqueda_base_datos();
@@ -541,7 +542,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_datos_materiales_busqueda()
         {
             Asigna_datos_visualizar_material();
-            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_Consulta_en_base_datos(Visualizar_material);
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_Consulta_en_base_datos(Visualizar_material,criterio_busqueda);
         }
 
         private void Asigna_datos_visualizar_material()
@@ -641,6 +642,82 @@ namespace Coset_Sistema_Produccion
             catch(Exception ex)
             {
                 //MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void labelCodigoMaterial_Click(object sender, EventArgs e)
+        {
+            if(!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            {
+                textBoxCodigoMaterial.Enabled = true;
+                criterio_busqueda = "CodigoMaterial";
+            }
+            else
+            {
+                textBoxCodigoMaterial.Enabled = false;
+                criterio_busqueda = "";
+            }
+        }
+
+        private void labelCodigoProveedor_Click(object sender, EventArgs e)
+        {
+            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            {
+                textBoxCodigoProveedor.Enabled = true;
+                criterio_busqueda = "CodigoProveedor";
+            }
+            else
+            {
+                textBoxCodigoProveedor.Enabled = false;
+                criterio_busqueda = "";
+            }
+        }
+
+        private void labelDescripcion_Click(object sender, EventArgs e)
+        {
+            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            {
+                textBoxDescripcion.Enabled = true;
+                criterio_busqueda = "Descripcion";
+            }
+            else
+            {
+                textBoxDescripcion.Enabled = false;
+                criterio_busqueda = "";
+            }
+        }
+
+        private void labelUbicacion_Click(object sender, EventArgs e)
+        {
+            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            {
+                textBoxUbicacion.Enabled = true;
+                criterio_busqueda = "Ubicacion";
+            }
+            else
+            {
+                textBoxUbicacion.Enabled = false;
+                criterio_busqueda = "";
+            }
+        }
+
+        private void labelMarca_Click(object sender, EventArgs e)
+        {
+            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            {
+                textBoxMarca.Enabled = true;
+                criterio_busqueda = "Marca";
+
+            }
+            else
+            {
+                textBoxMarca.Enabled = false;
+                criterio_busqueda = "";
             }
         }
     }

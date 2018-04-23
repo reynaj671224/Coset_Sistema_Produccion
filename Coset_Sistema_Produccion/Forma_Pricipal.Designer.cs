@@ -285,6 +285,7 @@
             this.salidaMaterialesToolStripMenuItem.Name = "salidaMaterialesToolStripMenuItem";
             this.salidaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salidaMaterialesToolStripMenuItem.Text = "Salida Materiales";
+            this.salidaMaterialesToolStripMenuItem.Click += new System.EventHandler(this.salidaMaterialesToolStripMenuItem_Click);
             // 
             // devolucionToolStripMenuItem
             // 

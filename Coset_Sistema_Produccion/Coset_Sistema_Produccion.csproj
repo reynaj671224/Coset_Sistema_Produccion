@@ -151,6 +151,12 @@
     <Compile Include="Forma_Requisiciones.Designer.cs">
       <DependentUpon>Forma_Requisiciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Salida_Materiales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Salida_Materiales.Designer.cs">
+      <DependentUpon>Forma_Salida_Materiales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Requisiciones.resx">
       <DependentUpon>Forma_Requisiciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Salida_Materiales.resx">
+      <DependentUpon>Forma_Salida_Materiales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Usuarios.resx">
       <DependentUpon>Forma_Usuarios.cs</DependentUpon>

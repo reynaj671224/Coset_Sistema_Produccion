@@ -1021,7 +1021,7 @@ namespace Coset_Sistema_Produccion
                     connection.Open();
                     for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.Rows.Count - 1; partidas++)
                     {
-                    for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count-1; campo++)
+                    for (int campo = 1; campo < dataGridViewPartidasRequisiciones.Rows[partidas].Cells.Count; campo++)
                     {
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly || 
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
@@ -1541,6 +1541,7 @@ namespace Coset_Sistema_Produccion
                     if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
                     {
                         Rellena_campos_partidas_requisiciones_materiales(RowIndex, forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.busqueda, RowIndex].Value = "S";
                     }
                 }
             }
@@ -1561,6 +1562,7 @@ namespace Coset_Sistema_Produccion
                     if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
                     {
                         Rellena_campos_partidas_requisiciones_materiales(RowIndex, forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.busqueda, RowIndex].Value = "S";
                     }
                 }
 

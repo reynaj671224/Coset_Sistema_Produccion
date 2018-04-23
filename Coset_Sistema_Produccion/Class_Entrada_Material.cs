@@ -43,6 +43,45 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_entrada_materiales;
         }
 
+        public List<Entrada_Material> Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_Material material)
+        {
+            List<Entrada_Material> Material_existente_disponibles_entrada_materiales = new List<Entrada_Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_entrada_material_no_orden_compra(material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_entrada_materiales.Add(new Entrada_Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_entrada"].ToString(),
+                        Orden_compra = mySqlDataReader["orden_compra"].ToString(),
+                        Fecha = mySqlDataReader["fecha"].ToString(),
+                        Codigo_material = mySqlDataReader["codigo_material"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
+                        Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
+                        Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                        Precio = mySqlDataReader["precio"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_entrada_materiales.Add(new Entrada_Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_entrada_materiales;
+        }
+
+        private string Commando_leer_Mysql_busqueda_entrada_material_no_orden_compra(Entrada_Material material)
+        {
+            return "SELECT * FROM entrada_material where codigo_material ='" + material.Codigo_material  + "';";
+        }
+
         private string Commando_leer_Mysql_busqueda_entrada_material(Entrada_Material material)
         {
             return "SELECT * FROM entrada_material where codigo_material ='" + material.Codigo_material +

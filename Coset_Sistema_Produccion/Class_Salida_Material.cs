@@ -50,11 +50,10 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_salida_material(Salida_Material material)
         {
-            return "SELECT * FROM salida_material where codigo_material ='" + material.Codigo_material +
-                "' and proyecto ='" + material.Proyecto + "';";
+            return "SELECT * FROM salida_material where codigo_material ='" + material.Codigo_material + "';";
         }
 
-        public string Inserta_nuevo_entrada_material_base_datos(Salida_Material material)
+        public string Inserta_nuevo_salida_material_base_datos(Salida_Material material)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
@@ -76,7 +75,7 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_salida_material(Salida_Material salida_Material)
         {
-            return "INSERT INTO entrada_material(proyecto, fecha,codigo_material," +
+            return "INSERT INTO salida_material(proyecto, fecha,codigo_material," +
                    "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material) " +
                    "VALUES('" + salida_Material.Proyecto + "','" + salida_Material.Fecha + "','" +
                    salida_Material.Codigo_material + "','" + salida_Material.Cantidad + "','" + salida_Material.Codigo_proveedor + "','" +

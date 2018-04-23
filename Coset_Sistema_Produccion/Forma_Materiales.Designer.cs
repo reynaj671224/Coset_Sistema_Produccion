@@ -64,6 +64,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxUbicacion = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxPrecio = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             this.SuspendLayout();
@@ -356,7 +358,7 @@
             // textBoxNombreFoto
             // 
             this.textBoxNombreFoto.Enabled = false;
-            this.textBoxNombreFoto.Location = new System.Drawing.Point(445, 233);
+            this.textBoxNombreFoto.Location = new System.Drawing.Point(445, 257);
             this.textBoxNombreFoto.Name = "textBoxNombreFoto";
             this.textBoxNombreFoto.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombreFoto.TabIndex = 39;
@@ -367,7 +369,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Image = ((System.Drawing.Image)(resources.GetObject("label8.Image")));
-            this.label8.Location = new System.Drawing.Point(328, 233);
+            this.label8.Location = new System.Drawing.Point(328, 259);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 16);
             this.label8.TabIndex = 38;
@@ -423,11 +425,32 @@
             this.label10.TabIndex = 43;
             this.label10.Text = "Ubicacion";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
+            this.label11.Location = new System.Drawing.Point(328, 233);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 16);
+            this.label11.TabIndex = 45;
+            this.label11.Text = "Precio";
+            // 
+            // textBoxPrecio
+            // 
+            this.textBoxPrecio.Enabled = false;
+            this.textBoxPrecio.Location = new System.Drawing.Point(445, 229);
+            this.textBoxPrecio.Name = "textBoxPrecio";
+            this.textBoxPrecio.Size = new System.Drawing.Size(160, 20);
+            this.textBoxPrecio.TabIndex = 46;
+            // 
             // Forma_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 530);
+            this.Controls.Add(this.textBoxPrecio);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.textBoxUbicacion);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBoxMarca);
@@ -506,5 +529,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxUbicacion;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxPrecio;
     }
 }
