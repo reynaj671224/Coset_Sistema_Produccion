@@ -647,77 +647,97 @@ namespace Coset_Sistema_Produccion
 
         private void labelCodigoMaterial_Click(object sender, EventArgs e)
         {
-            if(!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
-                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            if ((!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled) ||
+                textBoxCodigoMaterial.Enabled)
             {
-                textBoxCodigoMaterial.Enabled = true;
-                criterio_busqueda = "CodigoMaterial";
-            }
-            else
-            {
-                textBoxCodigoMaterial.Enabled = false;
-                criterio_busqueda = "";
+                if (textBoxCodigoMaterial.Enabled == false)
+                {
+                    textBoxCodigoMaterial.Enabled = true;
+                    criterio_busqueda = "CodigoMaterial";
+                }
+                else
+                {
+                    textBoxCodigoMaterial.Enabled = false;
+                    criterio_busqueda = "";
+                }
             }
         }
 
         private void labelCodigoProveedor_Click(object sender, EventArgs e)
         {
-            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
-                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            if ((!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+                !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled) ||
+                 textBoxCodigoProveedor.Enabled)
             {
-                textBoxCodigoProveedor.Enabled = true;
-                criterio_busqueda = "CodigoProveedor";
-            }
-            else
-            {
-                textBoxCodigoProveedor.Enabled = false;
-                criterio_busqueda = "";
+                if (textBoxCodigoProveedor.Enabled == false)
+                {
+                    textBoxCodigoProveedor.Enabled = true;
+                    criterio_busqueda = "CodigoProveedor";
+                }
+                else
+                {
+                    textBoxCodigoProveedor.Enabled = false;
+                    criterio_busqueda = "";
+                }
             }
         }
 
         private void labelDescripcion_Click(object sender, EventArgs e)
         {
-            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
-               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            if ((!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled) ||
+               textBoxDescripcion.Enabled)
             {
-                textBoxDescripcion.Enabled = true;
-                criterio_busqueda = "Descripcion";
-            }
-            else
-            {
-                textBoxDescripcion.Enabled = false;
-                criterio_busqueda = "";
+                if (textBoxDescripcion.Enabled == false)
+                {
+                    textBoxDescripcion.Enabled = true;
+                    criterio_busqueda = "Descripcion";
+                }
+                else
+                {
+                    textBoxDescripcion.Enabled = false;
+                    criterio_busqueda = "";
+                }
             }
         }
 
         private void labelUbicacion_Click(object sender, EventArgs e)
         {
-            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
-               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            if ((!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled) ||
+               textBoxUbicacion.Enabled)
             {
-                textBoxUbicacion.Enabled = true;
-                criterio_busqueda = "Ubicacion";
-            }
-            else
-            {
-                textBoxUbicacion.Enabled = false;
-                criterio_busqueda = "";
+                if (textBoxUbicacion.Enabled == false)
+                {
+                    textBoxUbicacion.Enabled = true;
+                    criterio_busqueda = "Ubicacion";
+                }
+                else
+                {
+                    textBoxUbicacion.Enabled = false;
+                    criterio_busqueda = "";
+                }
             }
         }
 
         private void labelMarca_Click(object sender, EventArgs e)
         {
-            if (!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
-               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled)
+            if ((!textBoxCodigoMaterial.Enabled && !textBoxCodigoProveedor.Enabled &&
+               !textBoxDescripcion.Enabled && !textBoxMarca.Enabled && !textBoxUbicacion.Enabled) ||
+               textBoxMarca.Enabled)
             {
-                textBoxMarca.Enabled = true;
-                criterio_busqueda = "Marca";
+                if (textBoxMarca.Enabled == false)
+                {
+                    textBoxMarca.Enabled = true;
+                    criterio_busqueda = "Marca";
 
-            }
-            else
-            {
-                textBoxMarca.Enabled = false;
-                criterio_busqueda = "";
+                }
+                else
+                {
+                    textBoxMarca.Enabled = false;
+                    criterio_busqueda = "";
+                }
             }
         }
     }
