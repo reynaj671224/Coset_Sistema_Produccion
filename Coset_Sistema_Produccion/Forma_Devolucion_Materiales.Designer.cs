@@ -1,6 +1,6 @@
 ﻿namespace Coset_Sistema_Produccion
 {
-    partial class Forma_Salida_Materiales
+    partial class Forma_Devolucion_Materiales
     {
         /// <summary>
         /// Required designer variable.
@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Salida_Materiales));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Devolucion_Materiales));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonBuscarOrdenCompra = new System.Windows.Forms.Button();
-            this.buttonSalidaMaterial = new System.Windows.Forms.Button();
+            this.buttonBuscarDevolucion = new System.Windows.Forms.Button();
+            this.buttonDevolucionMaterial = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.timerAgregarSalidaMateriales = new System.Windows.Forms.Timer(this.components);
             this.label12 = new System.Windows.Forms.Label();
-            this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
+            this.textBoxDescripcionMotivo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxEmpleado = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridViewSalidassEntradaMateriales = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDevolucionEntradaMateriales = new System.Windows.Forms.DataGridView();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +70,7 @@
             this.textBoxTotalUnidades = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidassEntradaMateriales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucionEntradaMateriales)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -85,32 +85,32 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // buttonBuscarOrdenCompra
+            // buttonBuscarDevolucion
             // 
-            this.buttonBuscarOrdenCompra.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBuscarOrdenCompra.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarOrdenCompra.Image")));
-            this.buttonBuscarOrdenCompra.Location = new System.Drawing.Point(416, 24);
-            this.buttonBuscarOrdenCompra.Name = "buttonBuscarOrdenCompra";
-            this.buttonBuscarOrdenCompra.Size = new System.Drawing.Size(79, 74);
-            this.buttonBuscarOrdenCompra.TabIndex = 31;
-            this.buttonBuscarOrdenCompra.Text = "Visualizar";
-            this.buttonBuscarOrdenCompra.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonBuscarOrdenCompra.UseVisualStyleBackColor = true;
-            this.buttonBuscarOrdenCompra.Click += new System.EventHandler(this.buttonBuscarOrdenCompra_Click);
+            this.buttonBuscarDevolucion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuscarDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarDevolucion.Image")));
+            this.buttonBuscarDevolucion.Location = new System.Drawing.Point(416, 24);
+            this.buttonBuscarDevolucion.Name = "buttonBuscarDevolucion";
+            this.buttonBuscarDevolucion.Size = new System.Drawing.Size(79, 74);
+            this.buttonBuscarDevolucion.TabIndex = 31;
+            this.buttonBuscarDevolucion.Text = "Visualizar";
+            this.buttonBuscarDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBuscarDevolucion.UseVisualStyleBackColor = true;
+            this.buttonBuscarDevolucion.Click += new System.EventHandler(this.buttonBuscarOrdenCompra_Click);
             // 
-            // buttonSalidaMaterial
+            // buttonDevolucionMaterial
             // 
-            this.buttonSalidaMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSalidaMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonSalidaMaterial.Image")));
-            this.buttonSalidaMaterial.Location = new System.Drawing.Point(501, 24);
-            this.buttonSalidaMaterial.Name = "buttonSalidaMaterial";
-            this.buttonSalidaMaterial.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonSalidaMaterial.Size = new System.Drawing.Size(79, 74);
-            this.buttonSalidaMaterial.TabIndex = 29;
-            this.buttonSalidaMaterial.Text = "Salida";
-            this.buttonSalidaMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSalidaMaterial.UseVisualStyleBackColor = true;
-            this.buttonSalidaMaterial.Click += new System.EventHandler(this.buttonSalidaMaterial_Click);
+            this.buttonDevolucionMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDevolucionMaterial.Image = ((System.Drawing.Image)(resources.GetObject("buttonDevolucionMaterial.Image")));
+            this.buttonDevolucionMaterial.Location = new System.Drawing.Point(501, 24);
+            this.buttonDevolucionMaterial.Name = "buttonDevolucionMaterial";
+            this.buttonDevolucionMaterial.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonDevolucionMaterial.Size = new System.Drawing.Size(79, 74);
+            this.buttonDevolucionMaterial.TabIndex = 29;
+            this.buttonDevolucionMaterial.Text = "Devolución";
+            this.buttonDevolucionMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonDevolucionMaterial.UseVisualStyleBackColor = true;
+            this.buttonDevolucionMaterial.Click += new System.EventHandler(this.buttonSalidaMaterial_Click);
             // 
             // buttonCancelar
             // 
@@ -180,19 +180,20 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Image = ((System.Drawing.Image)(resources.GetObject("label12.Image")));
-            this.label12.Location = new System.Drawing.Point(106, 190);
+            this.label12.Location = new System.Drawing.Point(106, 207);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(150, 16);
             this.label12.TabIndex = 45;
             this.label12.Text = "Codigo Proveedor Material";
             // 
-            // textBoxDescripcionMaterial
+            // textBoxDescripcionMotivo
             // 
-            this.textBoxDescripcionMaterial.Enabled = false;
-            this.textBoxDescripcionMaterial.Location = new System.Drawing.Point(262, 162);
-            this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
-            this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
-            this.textBoxDescripcionMaterial.TabIndex = 42;
+            this.textBoxDescripcionMotivo.Enabled = false;
+            this.textBoxDescripcionMotivo.Location = new System.Drawing.Point(262, 162);
+            this.textBoxDescripcionMotivo.Multiline = true;
+            this.textBoxDescripcionMotivo.Name = "textBoxDescripcionMotivo";
+            this.textBoxDescripcionMotivo.Size = new System.Drawing.Size(246, 37);
+            this.textBoxDescripcionMotivo.TabIndex = 42;
             // 
             // label2
             // 
@@ -201,14 +202,14 @@
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
             this.label2.Location = new System.Drawing.Point(106, 164);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 16);
+            this.label2.Size = new System.Drawing.Size(106, 16);
             this.label2.TabIndex = 41;
-            this.label2.Text = "Material Descripcion";
+            this.label2.Text = "Motivo Devolución";
             // 
             // textBoxEmpleado
             // 
             this.textBoxEmpleado.Enabled = false;
-            this.textBoxEmpleado.Location = new System.Drawing.Point(262, 214);
+            this.textBoxEmpleado.Location = new System.Drawing.Point(262, 233);
             this.textBoxEmpleado.Name = "textBoxEmpleado";
             this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
             this.textBoxEmpleado.TabIndex = 40;
@@ -218,7 +219,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(106, 215);
+            this.label1.Location = new System.Drawing.Point(106, 235);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 16);
             this.label1.TabIndex = 39;
@@ -243,11 +244,11 @@
             this.label4.TabIndex = 37;
             this.label4.Text = "CodigoProyecto";
             // 
-            // dataGridViewSalidassEntradaMateriales
+            // dataGridViewDevolucionEntradaMateriales
             // 
-            this.dataGridViewSalidassEntradaMateriales.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridViewSalidassEntradaMateriales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSalidassEntradaMateriales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewDevolucionEntradaMateriales.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewDevolucionEntradaMateriales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDevolucionEntradaMateriales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
             this.Proyecto,
             this.Fecha,
@@ -256,11 +257,11 @@
             this.Nombre_empleado,
             this.Descripcion,
             this.Cantidad});
-            this.dataGridViewSalidassEntradaMateriales.Enabled = false;
-            this.dataGridViewSalidassEntradaMateriales.Location = new System.Drawing.Point(23, 347);
-            this.dataGridViewSalidassEntradaMateriales.Name = "dataGridViewSalidassEntradaMateriales";
-            this.dataGridViewSalidassEntradaMateriales.Size = new System.Drawing.Size(993, 202);
-            this.dataGridViewSalidassEntradaMateriales.TabIndex = 48;
+            this.dataGridViewDevolucionEntradaMateriales.Enabled = false;
+            this.dataGridViewDevolucionEntradaMateriales.Location = new System.Drawing.Point(23, 347);
+            this.dataGridViewDevolucionEntradaMateriales.Name = "dataGridViewDevolucionEntradaMateriales";
+            this.dataGridViewDevolucionEntradaMateriales.Size = new System.Drawing.Size(993, 202);
+            this.dataGridViewDevolucionEntradaMateriales.TabIndex = 48;
             // 
             // Codigo_partida
             // 
@@ -319,7 +320,7 @@
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCodigoProyecto.TabIndex = 49;
             this.comboBoxCodigoProyecto.Visible = false;
-            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoOrdenCompra_SelectedIndexChanged);
+            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.buttonDevolucionMaterial_SelectedIndexChanged);
             // 
             // timerBusquedaMaterial
             // 
@@ -349,7 +350,7 @@
             // comboBoxEmpleado
             // 
             this.comboBoxEmpleado.FormattingEnabled = true;
-            this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 213);
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 233);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
             this.comboBoxEmpleado.TabIndex = 62;
@@ -358,7 +359,7 @@
             // textBoxCodigoProveedor
             // 
             this.textBoxCodigoProveedor.Enabled = false;
-            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 188);
+            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 205);
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
@@ -454,7 +455,7 @@
             this.label5.TabIndex = 85;
             this.label5.Text = "Total Unidades";
             // 
-            // Forma_Salida_Materiales
+            // Forma_Devolucion_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -474,8 +475,8 @@
             this.Controls.Add(this.dateTimePickerFechaActual);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBoxCodigoProyecto);
-            this.Controls.Add(this.dataGridViewSalidassEntradaMateriales);
-            this.Controls.Add(this.textBoxDescripcionMaterial);
+            this.Controls.Add(this.dataGridViewDevolucionEntradaMateriales);
+            this.Controls.Add(this.textBoxDescripcionMotivo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxEmpleado);
             this.Controls.Add(this.label1);
@@ -485,15 +486,15 @@
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
-            this.Controls.Add(this.buttonBuscarOrdenCompra);
-            this.Controls.Add(this.buttonSalidaMaterial);
+            this.Controls.Add(this.buttonBuscarDevolucion);
+            this.Controls.Add(this.buttonDevolucionMaterial);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Forma_Salida_Materiales";
+            this.Name = "Forma_Devolucion_Materiales";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Salida Materiales";
+            this.Text = "Devolución Materiales";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidassEntradaMateriales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucionEntradaMateriales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,21 +503,21 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonBuscarOrdenCompra;
-        private System.Windows.Forms.Button buttonSalidaMaterial;
+        private System.Windows.Forms.Button buttonBuscarDevolucion;
+        private System.Windows.Forms.Button buttonDevolucionMaterial;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
         private System.Windows.Forms.Timer timerAgregarSalidaMateriales;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBoxDescripcionMaterial;
+        private System.Windows.Forms.TextBox textBoxDescripcionMotivo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxEmpleado;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCodigoProyecto;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridViewSalidassEntradaMateriales;
+        private System.Windows.Forms.DataGridView dataGridViewDevolucionEntradaMateriales;
         private System.Windows.Forms.ComboBox comboBoxCodigoProyecto;
         private System.Windows.Forms.Timer timerBusquedaMaterial;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaActual;

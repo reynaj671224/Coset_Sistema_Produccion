@@ -54,6 +54,7 @@
     <Compile Include="Class_Control_Folios.cs" />
     <Compile Include="Class_Cotizaciones.cs" />
     <Compile Include="Class_Datos_Generales.cs" />
+    <Compile Include="Class_Devolucion_Material.cs" />
     <Compile Include="Class_Dibujos_Proyecto.cs" />
     <Compile Include="Class_Entrada_Material.cs" />
     <Compile Include="Class_Materiales.cs" />
@@ -90,6 +91,12 @@
     </Compile>
     <Compile Include="Forma_Datos_Generales.Designer.cs">
       <DependentUpon>Forma_Datos_Generales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forma_Devolucion_Materiales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Devolucion_Materiales.Designer.cs">
+      <DependentUpon>Forma_Devolucion_Materiales.cs</DependentUpon>
     </Compile>
     <Compile Include="Forma_Entrada_Materiales.cs">
       <SubType>Form</SubType>
@@ -176,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Datos_Generales.resx">
       <DependentUpon>Forma_Datos_Generales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Devolucion_Materiales.resx">
+      <DependentUpon>Forma_Devolucion_Materiales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Entrada_Materiales.resx">
       <DependentUpon>Forma_Entrada_Materiales.cs</DependentUpon>

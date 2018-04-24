@@ -17,7 +17,7 @@ using System.Globalization;
 
 namespace Coset_Sistema_Produccion
 {
-    public partial class Forma_Salida_Materiales : Form
+    public partial class Forma_Devolucion_Materiales : Form
     {
         public Datos_generales datos_generales = new Datos_generales();
         public Class_Datos_Generales Class_Datos_Generales = new Class_Datos_Generales();
@@ -28,10 +28,10 @@ namespace Coset_Sistema_Produccion
         public Datos_generales datos_Generales = new Datos_generales();
         public Class_Materiales Class_Materiales = new Class_Materiales();
         public Material Material_disponible_salida_materiales = new Material();
-        public Salida_Material Insertar_salida_materiales = new Salida_Material();
-        public Salida_Material Salida_materiales_seleccion = new Salida_Material();
-        public Class_Salida_Material Class_salida_material = new Class_Salida_Material();
-        public List<Salida_Material> Salida_materiales_disponibles = new List<Salida_Material>();
+        public Devolucion_Material Insertar_devolucion_materiales = new Devolucion_Material();
+        public Devolucion_Material Devolucion_materiales_seleccion = new Devolucion_Material();
+        public Class_Devolucion_Material Class_devolucion_material = new Class_Devolucion_Material();
+        public List<Devolucion_Material> Devolucion_materiales_disponibles = new List<Devolucion_Material>();
         public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
         public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
         public Material Visualizar_material = new Material();
@@ -51,9 +51,9 @@ namespace Coset_Sistema_Produccion
             cantidad, precio,
         };
 
-        public string Operacio_entrada_materiales = "";
+        public string Operacio_devolucion_materiales = "";
 
-        public Forma_Salida_Materiales()
+        public Forma_Devolucion_Materiales()
         {
             InitializeComponent();
         }
@@ -66,7 +66,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            Salida_materiales_disponibles = null;
+            Devolucion_materiales_disponibles = null;
             Usuarios_administrativos = null;
             Proyectos_disponibles = null;
             Materiales_disponibles_busqueda = null;
@@ -114,17 +114,17 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_dataview_partidas_salida_materiales()
         {
-            dataGridViewSalidassEntradaMateriales.Enabled = true;
+            dataGridViewDevolucionEntradaMateriales.Enabled = true;
         }
 
         private void limpia_partidas_salida_materiales()
         {
-            dataGridViewSalidassEntradaMateriales.Rows.Clear();
+            dataGridViewDevolucionEntradaMateriales.Rows.Clear();
         }
 
         private void No_aceptar_agregar_partidas_salida_materiales()
         {
-            dataGridViewSalidassEntradaMateriales.AllowUserToAddRows = false;
+            dataGridViewDevolucionEntradaMateriales.AllowUserToAddRows = false;
         }
 
         private void Aparece_boton_cancelar_operacio()
@@ -146,13 +146,13 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_boton_visualizar_cotizacion()
         {
-            buttonBuscarOrdenCompra.Enabled = false;
+            buttonBuscarDevolucion.Enabled = false;
         }
 
 
         private void Desactiva_boton_agregar_salida_materiales()
         {
-            buttonSalidaMaterial.Enabled = false;
+            buttonDevolucionMaterial.Enabled = false;
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
@@ -172,14 +172,9 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void configura_forma_salida()
+        private void configura_forma_devolucion()
         {
-            Desactiva_combobox_codigo_orden_compra();
-            Activa_textbox_codigo_proveedor();
-            Activa_textbox_descripcion_material();
-            Activa_textbox_codigo_material();
-            Asigna_caracter_busqueda_material();
-            Inicia_timer_busqueda_materiales();
+            Desactiva_combobox_codigo_proyecto();
 
         }
 
@@ -203,7 +198,7 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
-            Desactiva_combobox_codigo_orden_compra();
+            Desactiva_combobox_codigo_proyecto();
             Desaparece_textbox_descripcion_materiales();
 
         }
@@ -234,7 +229,7 @@ namespace Coset_Sistema_Produccion
             timerBusquedaMaterial.Enabled = true;
         }
 
-        private void Desactiva_combobox_codigo_orden_compra()
+        private void Desactiva_combobox_codigo_proyecto()
         {
             comboBoxCodigoProyecto.Enabled = false;
         }
@@ -245,7 +240,7 @@ namespace Coset_Sistema_Produccion
                 "Entrada Material", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                Agrega_salida_materiales_proyecto();
+                Agrega_devolucion_materiales();
             }
             else
             {
@@ -264,12 +259,12 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_codigo_material();
             Asigna_caracter_busqueda_material();
             Inicia_timer_busqueda_materiales();
-            Operacio_entrada_materiales = "Agregar";
+            Operacio_devolucion_materiales = "Agregar";
         }
 
         public void secuencia_despues_de_busqueda_material()
         {
-            if (Operacio_entrada_materiales == "Visualizar" || Operacio_entrada_materiales == "Visualizar OC")
+            if (Operacio_devolucion_materiales == "Visualizar" || Operacio_devolucion_materiales == "Visualizar OC")
             {
 
             }
@@ -305,7 +300,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxCodigoProveedor.Text = "?";
             textCodigoMaterial.Text = "?";
-            textBoxDescripcionMaterial.Text = "?";
+            textBoxDescripcionMotivo.Text = "?";
 
         }
 
@@ -316,10 +311,10 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_textbox_descripcion_material()
         {
-            textBoxDescripcionMaterial.Enabled = true;
+            textBoxDescripcionMotivo.Enabled = true;
         }
 
-        private void Agrega_salida_materiales_proyecto()
+        private void Agrega_devolucion_materiales()
         {
 
             Desactiva_botones_operacion();
@@ -338,7 +333,12 @@ namespace Coset_Sistema_Produccion
             obtener_usuarios_administrativos_compras_disponibles();
             Rellena_combo_empleado();
             Activa_seleccion_fecha_actual();
-            Operacio_entrada_materiales = "Salida";
+            Activa_textbox_codigo_proveedor();
+            Activa_textbox_descripcion_material();
+            Activa_textbox_codigo_material();
+            Asigna_caracter_busqueda_material();
+            Inicia_timer_busqueda_materiales();
+            Operacio_devolucion_materiales = "Devolucion";
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material()
@@ -388,22 +388,22 @@ namespace Coset_Sistema_Produccion
 
         private void Desaparece_textbox_descripcion_materiales()
         {
-            textBoxDescripcionMaterial.Visible = false;
+            textBoxDescripcionMotivo.Visible = false;
         }
 
         private void Acepta_datagridview_agregar_renglones()
         {
-            dataGridViewSalidassEntradaMateriales.AllowUserToAddRows = true;
+            dataGridViewDevolucionEntradaMateriales.AllowUserToAddRows = true;
         }
 
         private void Activa_datagridview_partidas_entrada_materiales()
         {
-            dataGridViewSalidassEntradaMateriales.Enabled = true;
+            dataGridViewDevolucionEntradaMateriales.Enabled = true;
         }
 
         private void Desactiva_columna_codigo_partidas_cotizaciones()
         {
-            dataGridViewSalidassEntradaMateriales.Columns[0].Visible = false;
+            dataGridViewDevolucionEntradaMateriales.Columns[0].Visible = false;
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_orden_compra()
@@ -415,7 +415,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxEmpleado.Enabled = true;
             dateTimePickerFechaActual.Enabled = true;
-            textBoxDescripcionMaterial.Enabled = true;
+            textBoxDescripcionMotivo.Enabled = true;
         }
 
         private void Modifica_contactos_cliente()
@@ -426,9 +426,9 @@ namespace Coset_Sistema_Produccion
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (Operacio_entrada_materiales == "Salida")
+            if (Operacio_devolucion_materiales == "Devolucion")
             {
-                Secuencia_salida_materiales();
+                Secuencia_devolucion_materiales();
             }
 
         }
@@ -440,17 +440,17 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Secuencia_salida_materiales()
+        private void Secuencia_devolucion_materiales()
         {
             if (verifica_campos_numericos())
             {
                 if (verfica_datos_entrada_materiales())
                 {
-                    if (Insertar_datos_salida_materiales_class())
+                    if (Insertar_datos_devolucion_materiales_class())
                     {
-                        if (Salida_material_base_datos())
+                        if (Devolucion_material_base_datos())
                         {
-                            Limpia_cajas_captura_despues_de_agregar_salida_material();
+                            Limpia_cajas_captura_despues_de_agregar_devolucion_material();
                             Limpia_combo_nombre_cliente();
                             Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
                             Desaparece_boton_guardar_base_de_datos();
@@ -473,21 +473,14 @@ namespace Coset_Sistema_Produccion
 
         }
 
-
-        private bool Salida_material_base_datos()
+        private bool Devolucion_material_base_datos()
         {
             string respuesta = "";
             try
             {
                 Material_disponible_salida_materiales.Cantidad = (Convert.ToInt32(
-                    Material_disponible_salida_materiales.Cantidad.ToString()) -
+                    Material_disponible_salida_materiales.Cantidad.ToString()) +
                                 Convert.ToUInt32(textBoxUnidadesEntrada.Text)).ToString();
-
-                if (
-                    Convert.ToSingle(textBoxPrecioMaterial.Text) < 0)
-                {
-                    Material_disponible_salida_materiales.precio = "0";
-                }
 
                 respuesta = Class_Materiales.Actualiza_base_datos_materiales(
                     Material_disponible_salida_materiales);
@@ -497,7 +490,7 @@ namespace Coset_Sistema_Produccion
                 }
                 else
                 {
-                    MessageBox.Show(respuesta, "Salida Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(respuesta, "Devolucion Materiales", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -509,19 +502,19 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private bool Insertar_datos_salida_materiales_class()
+        private bool Insertar_datos_devolucion_materiales_class()
         {
             string respuesta = "";
             Asigna_valores_salida_materiales();
-            respuesta = Class_salida_material.Inserta_nuevo_salida_material_base_datos(
-                Insertar_salida_materiales);
+            respuesta = Class_devolucion_material.Inserta_nuevo_devolucion_material_base_datos(
+                Insertar_devolucion_materiales);
             if (respuesta == "NO errores")
             {
                 return true;
             }
             else
             {
-                MessageBox.Show(respuesta, "Salida Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(respuesta, "Devolucion Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -530,13 +523,13 @@ namespace Coset_Sistema_Produccion
         private void Asigna_valores_salida_materiales()
         {
 
-            Insertar_salida_materiales.Proyecto = comboBoxCodigoProyecto.Text;
-            Insertar_salida_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
-            Insertar_salida_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Insertar_salida_materiales.Nombre_empleado = comboBoxEmpleado.Text;
-            Insertar_salida_materiales.Fecha = dateTimePickerFechaActual.Text;
-            Insertar_salida_materiales.Codigo_material = textCodigoMaterial.Text;
-            Insertar_salida_materiales.Cantidad = textBoxUnidadesEntrada.Text;
+            Insertar_devolucion_materiales.Proyecto = comboBoxCodigoProyecto.Text;
+            Insertar_devolucion_materiales.Motivo_devolucion = textBoxDescripcionMotivo.Text;
+            Insertar_devolucion_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            Insertar_devolucion_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+            Insertar_devolucion_materiales.Fecha = dateTimePickerFechaActual.Text;
+            Insertar_devolucion_materiales.Codigo_material = textCodigoMaterial.Text;
+            Insertar_devolucion_materiales.Cantidad = textBoxUnidadesEntrada.Text;
 
         }
 
@@ -544,7 +537,7 @@ namespace Coset_Sistema_Produccion
         {
 
             if (
-            textBoxDescripcionMaterial.Text != "" &&
+            textBoxDescripcionMotivo.Text != "" &&
             textBoxCodigoProveedor.Text != "" &&
             comboBoxEmpleado.Text != "" &&
             textCodigoMaterial.Text != "" &&
@@ -555,7 +548,7 @@ namespace Coset_Sistema_Produccion
             }
             else
             {
-                MessageBox.Show("Campos en blanco", "Salida Materiales", MessageBoxButtons.OK,
+                MessageBox.Show("Campos en blanco", "Devolucion Materiales", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
                 return false;
             }
@@ -601,11 +594,11 @@ namespace Coset_Sistema_Produccion
 
         private bool verifica_datos_partidas()
         {
-            for (int partidas = 0; partidas < dataGridViewSalidassEntradaMateriales.Rows.Count - 1; partidas++)
+            for (int partidas = 0; partidas < dataGridViewDevolucionEntradaMateriales.Rows.Count - 1; partidas++)
             {
-                for (int campo = 1; campo < dataGridViewSalidassEntradaMateriales.Rows[partidas].Cells.Count; campo++)
+                for (int campo = 1; campo < dataGridViewDevolucionEntradaMateriales.Rows[partidas].Cells.Count; campo++)
                 {
-                    if (dataGridViewSalidassEntradaMateriales.Rows[partidas].Cells[campo].Value == null)
+                    if (dataGridViewDevolucionEntradaMateriales.Rows[partidas].Cells[campo].Value == null)
                     {
                         MessageBox.Show("campo en blanco");
                         return false;
@@ -618,7 +611,7 @@ namespace Coset_Sistema_Produccion
 
         private void Aparece_textbox_descripcion()
         {
-            textBoxDescripcionMaterial.Visible = true;
+            textBoxDescripcionMotivo.Visible = true;
         }
 
         private void Aparece_textbox_nombre_cliente()
@@ -638,16 +631,16 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_datagridview_partidas()
         {
-            dataGridViewSalidassEntradaMateriales.Enabled = false;
+            dataGridViewDevolucionEntradaMateriales.Enabled = false;
         }
 
         private void Elimina_informacion_salida_materiales_disponibles()
         {
-            Salida_materiales_disponibles = null;
+            Devolucion_materiales_disponibles = null;
             Usuarios_administrativos = null;
             Proyectos_disponibles = null;
             Materiales_disponibles_busqueda = null;
-            Salida_materiales_disponibles = null;
+            Devolucion_materiales_disponibles = null;
             Usuarios_administrativos = null;
             GC.Collect();
         }
@@ -661,12 +654,12 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_boton_visualizar_cotizacion()
         {
-            buttonBuscarOrdenCompra.Enabled = true;
+            buttonBuscarDevolucion.Enabled = true;
         }
 
         private void Activa_boton_agregar_ccotizacion()
         {
-            buttonSalidaMaterial.Enabled = true;
+            buttonDevolucionMaterial.Enabled = true;
         }
 
         private void Desaparece_combo_codigo_proyecto()
@@ -688,7 +681,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxEmpleado.Enabled = false;
             dateTimePickerFechaActual.Enabled = false;
-            textBoxDescripcionMaterial.Enabled = false;
+            textBoxDescripcionMotivo.Enabled = false;
             textBoxCodigoProveedor.Enabled = false;
             textBoxUnidadesEntrada.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
@@ -696,12 +689,12 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Limpia_cajas_captura_despues_de_agregar_salida_material()
+        private void Limpia_cajas_captura_despues_de_agregar_devolucion_material()
         {
             textBoxEmpleado.Text = "";
             textBoxCodigoProyecto.Text = "";
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();
-            textBoxDescripcionMaterial.Text = "";
+            textBoxDescripcionMotivo.Text = "";
             textBoxCodigoProveedor.Text = "";
             textBoxUnidadesEntrada.Text = "";
             textCodigoMaterial.Text = "";
@@ -709,109 +702,28 @@ namespace Coset_Sistema_Produccion
             textBoxTotalUnidades.Text = "";
         }
 
-       
-
-        private string Configura_cadena_comando_actualizar_en_base_de_datos_partidas_requisiciones(Partida_orden_compra partida_orden_compra_agregar)
-        {
-            return "UPDATE partidas_requisiciones set  orden_compra_asignada='" + partida_orden_compra_agregar.Codigo_orden+
-                "' where codigo_requisicion='" + partida_orden_compra_agregar.Requisicion + "' and numero_parte='" +
-                partida_orden_compra_agregar.Parte+"' ;";
-        }
-
-
-        private string Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra partida_orden_compra)
-        {
-            return "INSERT INTO partidas_oredenes_compra(codigo_orden_compra,partida_compra, requisicion_compra," +
-                "cantidad_compra,parte_compra,descripcion_compra,unidad_medida,proyecto_compra,precio_unitario,total_compra) " +
-                "VALUES('" + partida_orden_compra.Codigo_orden + "','" + partida_orden_compra.Partida + "','" +
-                partida_orden_compra.Requisicion + "','" + partida_orden_compra.Cantidad + "','" + partida_orden_compra.Parte + "','" +
-                partida_orden_compra.Descripcion + "','" + partida_orden_compra.Unidad_medida + "','" + partida_orden_compra.Proyecto + "','" +
-                partida_orden_compra.precio_unitario + "','"+ partida_orden_compra.Total + "');";
-        }
-
-
-        private void Modifica_orden_compra()
-        {
-            Desactiva_botones_operacion();
-            limpia_combo_proyectos();
-            Desaparece_caja_captura_codigo_proyecto();
-            obtener_proyectos_base_datos_disponibles();
-            Aparece_boton_cancelar_operacio();
-            Activa_dataview_partidas_salida_materiales();
-            No_aceptar_agregar_partidas_salida_materiales();
-            Aparece_combo_proyectos();
-            Activa_combo_proyectos();
-            obtener_proyectos_base_datos_disponibles();
-            Activa_dataview_partidas_salida_materiales();
-            Operacio_entrada_materiales = "Modificar";
-        }
-
         private void Desaparece_boton_eliminar_base_de_datos()
         {
             buttonBorrarBasedeDatos.Visible = false;
         }
 
-        private void buttonEliminarContacto_Click(object sender, EventArgs e)
-        {
-            Elimina_Contacto_cliente();
-        }
-
-        private void Elimina_Contacto_cliente()
-        {
-            Operacio_entrada_materiales = "Eliminar partida";
-            No_aceptar_agregar_partidas_salida_materiales();
-            
-        }
-
-
-        private void buttonContactos_Click(object sender, EventArgs e)
-        {
-            Partidas_operaciones();
-        }
-
-        private void Partidas_operaciones()
-        {
-            Desactiva_botones_operacion();
-            Desaparece_caja_captura_codigo_proyecto();
-            Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_partidas_salida_materiales();
-            Activa_dataview_partidas_salida_materiales();
-            limpia_combo_proyectos();
-            Aparece_combo_proyectos();
-            Activa_combo_proyectos();
-            obtener_proyectos_base_datos_disponibles();
-            Operacio_entrada_materiales = "Operaciones Patidas";
-        }
-
-
-
-        private void dataGridViewContactosClientes_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Operacio_entrada_materiales == "Eliminar partida")
-            {
-                Aparece_boton_eliminar_datos_en_base_de_datos();
-                RenglonParaEliminar=dataGridViewSalidassEntradaMateriales.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
-            }
-           
-        }
-
         private void Rellenar_partidas_salida_materiales()
         {
-            Obtener_partidas_entrada_materiales();
-            Rellena_datagrid_entrada_materiales();
+            Obtener_partidas_devolucion_materiales();
+            Rellena_datagrid_devolucion_materiales();
 
         }
-
-        private void Rellena_datagrid_entrada_materiales()
+        
+        private void Rellena_datagrid_devolucion_materiales()
         {
-            foreach (Salida_Material material in Salida_materiales_disponibles)
+            foreach (Devolucion_Material material in Devolucion_materiales_disponibles)
             {
 
                 try
                 {
-                    dataGridViewSalidassEntradaMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
+                    dataGridViewDevolucionEntradaMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
                         material.Fecha, material.Codigo_material, material.Codigo_proveedor,
-                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad);
+                        material.Nombre_empleado, material.Motivo_devolucion, material.Cantidad);
                 }
                 catch (Exception ex)
                 {
@@ -821,29 +733,29 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void Obtener_partidas_entrada_materiales()
+        private void Obtener_partidas_devolucion_materiales()
         {
-            Asigna_valores_entrada_materiales_visualizar();
-            Salida_materiales_disponibles = Class_salida_material.Adquiere_salida_materiales_busqueda_en_base_datos(Salida_materiales_seleccion);
+            Asigna_valores_devolucion_materiales_visualizar();
+            Devolucion_materiales_disponibles = Class_devolucion_material.Adquiere_devolucion_materiales_busqueda_en_base_datos(Devolucion_materiales_seleccion);
 
         }
 
-        private void Asigna_valores_entrada_materiales_visualizar()
+        private void Asigna_valores_devolucion_materiales_visualizar()
         {
 
-            Salida_materiales_seleccion.Proyecto = "N";
-            Salida_materiales_seleccion.Descripcion_material = textBoxDescripcionMaterial.Text;
-            Salida_materiales_seleccion.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Salida_materiales_seleccion.Nombre_empleado = comboBoxEmpleado.Text;
-            Salida_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
-            Salida_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
-            Salida_materiales_seleccion.Cantidad = textBoxUnidadesEntrada.Text;
+            Devolucion_materiales_seleccion.Proyecto = "N";
+            Devolucion_materiales_seleccion.Motivo_devolucion = textBoxDescripcionMotivo.Text;
+            Devolucion_materiales_seleccion.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            Devolucion_materiales_seleccion.Nombre_empleado = comboBoxEmpleado.Text;
+            Devolucion_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
+            Devolucion_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
+            Devolucion_materiales_seleccion.Cantidad = textBoxUnidadesEntrada.Text;
 
         }
 
         private void Limpia_datagridview_entrada_material()
         {
-            dataGridViewSalidassEntradaMateriales.Rows.Clear();
+            dataGridViewDevolucionEntradaMateriales.Rows.Clear();
         }
 
         private void buttonBuscarOrdenCompra_Click(object sender, EventArgs e)
@@ -862,29 +774,23 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_codigo_material();
             Asigna_caracter_busqueda_material();
             Inicia_timer_busqueda_materiales();
-            Operacio_entrada_materiales = "Visualizar";
+            Operacio_devolucion_materiales = "Visualizar";
 
         }
 
-        private void comboBoxCodigoOrdenCompra_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonDevolucionMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacio_entrada_materiales == "Salida")
-                configura_forma_salida();
-            else if (Operacio_entrada_materiales == "Visualizar")
+            if (Operacio_devolucion_materiales == "Devolucion")
+                configura_forma_devolucion();
+            else if (Operacio_devolucion_materiales == "Visualizar")
                 configura_forma_visualizar();
 
         }
 
-        private void buttonModificarCotizacion_Click(object sender, EventArgs e)
-        {
-            Modifica_orden_compra();
-        }
-
-
         private void Termina_secuencia_operaciones_salida_materiales()
         {
             Limpia_combo_nombre_cliente();
-            Limpia_cajas_captura_despues_de_agregar_salida_material();
+            Limpia_cajas_captura_despues_de_agregar_devolucion_material();
             Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
             Desaparece_boton_guardar_base_de_datos();
             Desaparece_boton_cancelar();
@@ -920,7 +826,7 @@ namespace Coset_Sistema_Produccion
             if (
                 textBoxCodigoProveedor.Text != "?" ||
                 textCodigoMaterial.Text != "?" ||
-                textBoxDescripcionMaterial.Text != "?")
+                textBoxDescripcionMotivo.Text != "?")
             {
                 timerBusquedaMaterial.Enabled = false;
                 buttonBusquedaBaseDatos.Visible = true;
@@ -937,7 +843,7 @@ namespace Coset_Sistema_Produccion
                 Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
                 Material_disponible_salida_materiales = Materiales_disponibles_busqueda[0];
                 secuencia_despues_de_busqueda_material();
-                if(Operacio_entrada_materiales=="Visualizar")
+                if(Operacio_devolucion_materiales=="Visualizar")
                 {
                     Rellenar_partidas_salida_materiales();
                 }
@@ -956,7 +862,7 @@ namespace Coset_Sistema_Produccion
                     secuencia_despues_de_busqueda_material();
                 }
 
-                if (Operacio_entrada_materiales == "Visualizar")
+                if (Operacio_devolucion_materiales == "Visualizar")
                 {
                     Rellenar_partidas_salida_materiales();
                 }
@@ -974,11 +880,11 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_informacion_despues_busqueda(Material material)
         {
-            if (Operacio_entrada_materiales == "Visualizar")
+            if (Operacio_devolucion_materiales == "Visualizar")
             {
                 textBoxCodigoProveedor.Text = material.Codigo_proveedor;
                 textCodigoMaterial.Text = material.Codigo;
-                textBoxDescripcionMaterial.Text = material.Descripcion;
+                textBoxDescripcionMotivo.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
             }
@@ -986,7 +892,7 @@ namespace Coset_Sistema_Produccion
             {
                 textBoxCodigoProveedor.Text = material.Codigo_proveedor;
                 textCodigoMaterial.Text = material.Codigo;
-                textBoxDescripcionMaterial.Text = material.Descripcion;
+                textBoxDescripcionMotivo.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
             }
@@ -996,14 +902,14 @@ namespace Coset_Sistema_Produccion
         {
             textBoxCodigoProveedor.Text = "";
             textCodigoMaterial.Text = "";
-            textBoxDescripcionMaterial.Text = "";
+            textBoxDescripcionMotivo.Text = "";
         }
 
         private void Desactiva_cajas_captura_busqueda_material()
         {
             textBoxCodigoProveedor.Enabled = false;
             textCodigoMaterial.Enabled = false;
-            textBoxDescripcionMaterial.Enabled = false;
+            textBoxDescripcionMotivo.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
             textBoxTotalUnidades.Enabled = false;
         }
@@ -1018,7 +924,7 @@ namespace Coset_Sistema_Produccion
         {
             Visualizar_material.Codigo = textCodigoMaterial.Text;
             Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Visualizar_material.Descripcion = textBoxDescripcionMaterial.Text;
+            Visualizar_material.Descripcion = textBoxDescripcionMotivo.Text;
         }
 
         private void Desaparece_boton_buscar_base_datos()
@@ -1028,7 +934,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonSalidaMaterial_Click(object sender, EventArgs e)
         {
-            Agrega_salida_materiales_proyecto();
+            Agrega_devolucion_materiales();
         }
     }
 }

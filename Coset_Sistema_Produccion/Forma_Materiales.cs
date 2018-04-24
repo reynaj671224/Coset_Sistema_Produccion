@@ -135,6 +135,7 @@ namespace Coset_Sistema_Produccion
             textBoxUnidadMedida.Enabled = true;
             textBoxMarca.Enabled = true;
             textBoxUbicacion.Enabled = true;
+            textBoxPrecio.Enabled = true;
         }
 
         private void Desactiva_boton_buscar_base_datos()
@@ -339,6 +340,7 @@ namespace Coset_Sistema_Produccion
             textBoxUnidadMedida.Enabled = false;
             textBoxMarca.Enabled = false;
             textBoxUbicacion.Enabled = false;
+            textBoxPrecio.Enabled = false;
         }
 
         private void Desactiva_caja_nombre_proceso()
@@ -363,6 +365,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoMaterial.Text = "";
             textBoxMarca.Text = "";
             textBoxUbicacion.Text = "";
+            textBoxPrecio.Text = "";
         }
 
        
@@ -419,6 +422,7 @@ namespace Coset_Sistema_Produccion
             Agregar_material.Minimo = textBoxMinimo.Text;
             Agregar_material.Marca = textBoxMarca.Text;
             Agregar_material.Ubicacion = textBoxUbicacion.Text;
+            Agregar_material.precio = textBoxPrecio.Text;
             
             respuesta = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
             if (respuesta == "NO errores")
@@ -721,6 +725,7 @@ namespace Coset_Sistema_Produccion
             textBoxUnidadMedida.Enabled = true;
             textBoxMarca.Enabled = true;
             textBoxUbicacion.Enabled = true;
+            textBoxPrecio.Enabled = true;
         }
 
         private void Cambia_Color_window_fondo_cajas_busqueda()
@@ -768,6 +773,7 @@ namespace Coset_Sistema_Produccion
             textBoxMinimo.Text = material_busqueda.Minimo;
             textBoxMarca.Text = material_busqueda.Marca;
             textBoxUbicacion.Text = material_busqueda.Ubicacion;
+            textBoxPrecio.Text = material_busqueda.precio;
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)

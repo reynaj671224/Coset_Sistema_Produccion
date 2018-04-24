@@ -548,5 +548,11 @@ namespace Coset_Sistema_Produccion
             Forma_Salida_Materiales forma_Salida_Materiales = new Forma_Salida_Materiales();
             forma_Salida_Materiales.ShowDialog();
         }
+
+        private void devolucionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Forma_Devolucion_Materiales forma_Devolucion_Materiales = new Forma_Devolucion_Materiales();
+            //forma_Devolucion_Materiales.ShowDialog();
+        }
     }
 }
