@@ -39,7 +39,6 @@ namespace Coset_Sistema_Produccion
         public Class_Proyectos Class_Proyectos = new Class_Proyectos();
         public List<Proyecto> Proyectos_disponibles = new List<Proyecto>();
         public Proyecto Proyecto_seleccionado = new Proyecto();
-        string RenglonParaEliminar = "";
         string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         public CultureInfo cultureInfo = new CultureInfo("en-US");
         public string nombre_archivo_word = "";
@@ -175,6 +174,11 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_devolucion()
         {
             Desactiva_combobox_codigo_proyecto();
+            Activa_textbox_codigo_proveedor();
+            Activa_textbox_descripcion_material();
+            Activa_textbox_codigo_material();
+            Asigna_caracter_busqueda_material();
+            Inicia_timer_busqueda_materiales();
 
         }
 
@@ -234,39 +238,11 @@ namespace Coset_Sistema_Produccion
             comboBoxCodigoProyecto.Enabled = false;
         }
 
-        private void buttonAgregarCotizacion_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("La entrada de Material cuenta con orden de compra?",
-                "Entrada Material", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-            {
-                Agrega_devolucion_materiales();
-            }
-            else
-            {
-                Agrega_entrada_materiales();
-            }
-        }
-
-        private void Agrega_entrada_materiales()
-        {
-            Desactiva_botones_operacion();
-            Acepta_datagridview_agregar_renglones();
-            Aparece_boton_cancelar_operacio();
-            Activa_datagridview_partidas_entrada_materiales();
-            Activa_textbox_codigo_proveedor();
-            Activa_textbox_descripcion_material();
-            Activa_textbox_codigo_material();
-            Asigna_caracter_busqueda_material();
-            Inicia_timer_busqueda_materiales();
-            Operacio_devolucion_materiales = "Agregar";
-        }
-
         public void secuencia_despues_de_busqueda_material()
         {
-            if (Operacio_devolucion_materiales == "Visualizar" || Operacio_devolucion_materiales == "Visualizar OC")
+            if (Operacio_devolucion_materiales == "Visualizar")
             {
-
+                Desactiva_textboxdescripcion_materiales();
             }
             else
             {
@@ -277,8 +253,20 @@ namespace Coset_Sistema_Produccion
                 Rellena_combo_empleado();
                 Activa_seleccion_fecha_actual();
                 Activa_textbox_cantidad_material();
+                Activa_textbox_motivo_devolucion();
+                Desactiva_textboxdescripcion_materiales();
                 Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
             }
+        }
+
+        private void Desactiva_textboxdescripcion_materiales()
+        {
+            textBoxDescripcionMaterial.Enabled = false;
+        }
+
+        private void Activa_textbox_motivo_devolucion()
+        {
+            textBoxDescripcionMotivo.Enabled = true;
         }
 
         private void Activa_textbox_precio()
@@ -300,7 +288,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxCodigoProveedor.Text = "?";
             textCodigoMaterial.Text = "?";
-            textBoxDescripcionMotivo.Text = "?";
+            textBoxDescripcionMaterial.Text = "?";
 
         }
 
@@ -311,7 +299,7 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_textbox_descripcion_material()
         {
-            textBoxDescripcionMotivo.Enabled = true;
+            textBoxDescripcionMaterial.Enabled = true;
         }
 
         private void Agrega_devolucion_materiales()
@@ -333,17 +321,12 @@ namespace Coset_Sistema_Produccion
             obtener_usuarios_administrativos_compras_disponibles();
             Rellena_combo_empleado();
             Activa_seleccion_fecha_actual();
-            Activa_textbox_codigo_proveedor();
-            Activa_textbox_descripcion_material();
-            Activa_textbox_codigo_material();
-            Asigna_caracter_busqueda_material();
-            Inicia_timer_busqueda_materiales();
             Operacio_devolucion_materiales = "Devolucion";
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material()
         {
-            timerAgregarSalidaMateriales.Enabled = true;
+            timerAgregarDevolucionMateriales.Enabled = true;
         }
 
         private void Obtener_datos_generales()
@@ -408,7 +391,7 @@ namespace Coset_Sistema_Produccion
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_orden_compra()
         {
-            timerAgregarSalidaMateriales.Enabled = true;
+            timerAgregarDevolucionMateriales.Enabled = true;
         }
 
         private void Activa_cajas_informacion_cotizaciones()
@@ -530,6 +513,7 @@ namespace Coset_Sistema_Produccion
             Insertar_devolucion_materiales.Fecha = dateTimePickerFechaActual.Text;
             Insertar_devolucion_materiales.Codigo_material = textCodigoMaterial.Text;
             Insertar_devolucion_materiales.Cantidad = textBoxUnidadesEntrada.Text;
+            Insertar_devolucion_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
 
         }
 
@@ -685,6 +669,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProveedor.Enabled = false;
             textBoxUnidadesEntrada.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
+            textBoxDescripcionMaterial.Enabled = false;
 
         }
 
@@ -700,6 +685,7 @@ namespace Coset_Sistema_Produccion
             textCodigoMaterial.Text = "";
             textBoxPrecioMaterial.Text = "";
             textBoxTotalUnidades.Text = "";
+            textBoxDescripcionMaterial.Text = "";
         }
 
         private void Desaparece_boton_eliminar_base_de_datos()
@@ -750,6 +736,7 @@ namespace Coset_Sistema_Produccion
             Devolucion_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
             Devolucion_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
             Devolucion_materiales_seleccion.Cantidad = textBoxUnidadesEntrada.Text;
+            Devolucion_materiales_seleccion.Descripcion_material = textBoxDescripcionMaterial.Text;
 
         }
 
@@ -809,13 +796,14 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void timerAgregarSalidaMateriales_Tick(object sender, EventArgs e)
+        private void timerAgregarDevolucionMateriales_Tick(object sender, EventArgs e)
         {
 
                 if (comboBoxEmpleado.Text != "" &&
-                    textBoxUnidadesEntrada.Text != "")
+                    textBoxUnidadesEntrada.Text != "" &&
+                    textBoxDescripcionMotivo.Text != "")
                 {
-                    timerAgregarSalidaMateriales.Enabled = false;
+                    timerAgregarDevolucionMateriales.Enabled = false;
                     Aparece_boton_guardar_base_datos();
                 }
  
@@ -826,7 +814,7 @@ namespace Coset_Sistema_Produccion
             if (
                 textBoxCodigoProveedor.Text != "?" ||
                 textCodigoMaterial.Text != "?" ||
-                textBoxDescripcionMotivo.Text != "?")
+                textBoxDescripcionMaterial.Text != "?")
             {
                 timerBusquedaMaterial.Enabled = false;
                 buttonBusquedaBaseDatos.Visible = true;
@@ -884,7 +872,7 @@ namespace Coset_Sistema_Produccion
             {
                 textBoxCodigoProveedor.Text = material.Codigo_proveedor;
                 textCodigoMaterial.Text = material.Codigo;
-                textBoxDescripcionMotivo.Text = material.Descripcion;
+                textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
             }
@@ -892,7 +880,7 @@ namespace Coset_Sistema_Produccion
             {
                 textBoxCodigoProveedor.Text = material.Codigo_proveedor;
                 textCodigoMaterial.Text = material.Codigo;
-                textBoxDescripcionMotivo.Text = material.Descripcion;
+                textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
             }
@@ -924,7 +912,7 @@ namespace Coset_Sistema_Produccion
         {
             Visualizar_material.Codigo = textCodigoMaterial.Text;
             Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Visualizar_material.Descripcion = textBoxDescripcionMotivo.Text;
+            Visualizar_material.Descripcion = textBoxDescripcionMaterial.Text;
         }
 
         private void Desaparece_boton_buscar_base_datos()

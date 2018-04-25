@@ -560,7 +560,7 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_datos_usuarios_disponibles_base_datos()
         {
-            usuarios_disponibles_empleados = clase_usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+            usuarios_disponibles_empleados = clase_usuarios.Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void Configura_cadena_comando_actualizar_en_base_de_datos()

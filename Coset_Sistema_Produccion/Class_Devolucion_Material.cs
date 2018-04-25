@@ -22,14 +22,15 @@ namespace Coset_Sistema_Produccion
                 {
                     Material_existente_disponibles_devolucion_materiales.Add(new Devolucion_Material()
                     {
-                        Codigo = mySqlDataReader["codigo_salida"].ToString(),
+                        Codigo = mySqlDataReader["codigo_devolucion"].ToString(),
                         Proyecto = mySqlDataReader["proyecto"].ToString(),
                         Fecha = mySqlDataReader["fecha"].ToString(),
                         Codigo_material = mySqlDataReader["codigo_material"].ToString(),
                         Cantidad = mySqlDataReader["cantidad_material"].ToString(),
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
-                        Motivo_devolucion = mySqlDataReader["descripcion_material"].ToString(),
+                        Motivo_devolucion = mySqlDataReader["motivo_devolucion"].ToString(),
+                        Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
                     });
                 }
             }
@@ -50,7 +51,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_devolucion_material(Devolucion_Material material)
         {
-            return "SELECT * FROM salida_material where codigo_material ='" + material.Codigo_material + "';";
+            return "SELECT * FROM devolucion_material where codigo_material ='" + material.Codigo_material + "';";
         }
 
         public string Inserta_nuevo_devolucion_material_base_datos(Devolucion_Material material)
@@ -73,13 +74,13 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private string Configura_cadena_comando_insertar_en_base_de_datos_devolucion_material(Devolucion_Material salida_Material)
+        private string Configura_cadena_comando_insertar_en_base_de_datos_devolucion_material(Devolucion_Material devolucion_Material)
         {
-            return "INSERT INTO salida_material(proyecto, fecha,codigo_material," +
-                   "cantidad_material,codigo_proveedor_material,nombre_empleado,motivo_devolucion) " +
-                   "VALUES('" + salida_Material.Proyecto + "','" + salida_Material.Fecha + "','" +
-                   salida_Material.Codigo_material + "','" + salida_Material.Cantidad + "','" + salida_Material.Codigo_proveedor + "','" +
-                   salida_Material.Nombre_empleado + "','" + salida_Material.Motivo_devolucion + "');";
+            return "INSERT INTO devolucion_material(proyecto, fecha,codigo_material," +
+                   "cantidad_material,codigo_proveedor_material,nombre_empleado,motivo_devolucion,descripcion_material) " +
+                   "VALUES('" + devolucion_Material.Proyecto + "','" + devolucion_Material.Fecha + "','" +
+                   devolucion_Material.Codigo_material + "','" + devolucion_Material.Cantidad + "','" + devolucion_Material.Codigo_proveedor + "','" +
+                   devolucion_Material.Nombre_empleado + "','" + devolucion_Material.Motivo_devolucion + "','" + devolucion_Material.Descripcion_material + "');";
         }
     }
     public class Devolucion_Material
@@ -92,6 +93,7 @@ namespace Coset_Sistema_Produccion
         public string Codigo_proveedor = "";
         public string Nombre_empleado = "";
         public string Motivo_devolucion = "";
+        public string Descripcion_material = "";
         public string error = "";
     }
 }

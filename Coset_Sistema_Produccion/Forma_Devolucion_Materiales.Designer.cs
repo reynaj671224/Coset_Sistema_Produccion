@@ -37,7 +37,7 @@
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
-            this.timerAgregarSalidaMateriales = new System.Windows.Forms.Timer(this.components);
+            this.timerAgregarDevolucionMateriales = new System.Windows.Forms.Timer(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxDescripcionMotivo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,14 +46,6 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewDevolucionEntradaMateriales = new System.Windows.Forms.DataGridView();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parte_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre_empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
             this.dateTimePickerFechaActual = new System.Windows.Forms.DateTimePicker();
@@ -69,6 +61,16 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxTotalUnidades = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parte_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre_empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Motivo_Devolucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucionEntradaMateriales)).BeginInit();
             this.SuspendLayout();
@@ -170,17 +172,17 @@
             this.buttonGuardarBasedeDatos.Visible = false;
             this.buttonGuardarBasedeDatos.Click += new System.EventHandler(this.buttonGuardarBasedeDatos_Click);
             // 
-            // timerAgregarSalidaMateriales
+            // timerAgregarDevolucionMateriales
             // 
-            this.timerAgregarSalidaMateriales.Interval = 1000;
-            this.timerAgregarSalidaMateriales.Tick += new System.EventHandler(this.timerAgregarSalidaMateriales_Tick);
+            this.timerAgregarDevolucionMateriales.Interval = 1000;
+            this.timerAgregarDevolucionMateriales.Tick += new System.EventHandler(this.timerAgregarDevolucionMateriales_Tick);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Image = ((System.Drawing.Image)(resources.GetObject("label12.Image")));
-            this.label12.Location = new System.Drawing.Point(106, 207);
+            this.label12.Location = new System.Drawing.Point(106, 233);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(150, 16);
             this.label12.TabIndex = 45;
@@ -189,7 +191,7 @@
             // textBoxDescripcionMotivo
             // 
             this.textBoxDescripcionMotivo.Enabled = false;
-            this.textBoxDescripcionMotivo.Location = new System.Drawing.Point(262, 162);
+            this.textBoxDescripcionMotivo.Location = new System.Drawing.Point(263, 188);
             this.textBoxDescripcionMotivo.Multiline = true;
             this.textBoxDescripcionMotivo.Name = "textBoxDescripcionMotivo";
             this.textBoxDescripcionMotivo.Size = new System.Drawing.Size(246, 37);
@@ -200,7 +202,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(106, 164);
+            this.label2.Location = new System.Drawing.Point(106, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 16);
             this.label2.TabIndex = 41;
@@ -209,7 +211,7 @@
             // textBoxEmpleado
             // 
             this.textBoxEmpleado.Enabled = false;
-            this.textBoxEmpleado.Location = new System.Drawing.Point(262, 233);
+            this.textBoxEmpleado.Location = new System.Drawing.Point(262, 261);
             this.textBoxEmpleado.Name = "textBoxEmpleado";
             this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
             this.textBoxEmpleado.TabIndex = 40;
@@ -219,7 +221,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(106, 235);
+            this.label1.Location = new System.Drawing.Point(106, 260);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 16);
             this.label1.TabIndex = 39;
@@ -255,62 +257,13 @@
             this.Codigo_material,
             this.Parte_proveedor,
             this.Nombre_empleado,
-            this.Descripcion,
+            this.Motivo_Devolucion,
             this.Cantidad});
             this.dataGridViewDevolucionEntradaMateriales.Enabled = false;
             this.dataGridViewDevolucionEntradaMateriales.Location = new System.Drawing.Point(23, 347);
             this.dataGridViewDevolucionEntradaMateriales.Name = "dataGridViewDevolucionEntradaMateriales";
             this.dataGridViewDevolucionEntradaMateriales.Size = new System.Drawing.Size(993, 202);
             this.dataGridViewDevolucionEntradaMateriales.TabIndex = 48;
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 50;
-            // 
-            // Proyecto
-            // 
-            this.Proyecto.HeaderText = "Proyecto";
-            this.Proyecto.Name = "Proyecto";
-            this.Proyecto.Width = 50;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Codigo_material
-            // 
-            this.Codigo_material.HeaderText = "Codigo Material";
-            this.Codigo_material.Name = "Codigo_material";
-            this.Codigo_material.Width = 50;
-            // 
-            // Parte_proveedor
-            // 
-            this.Parte_proveedor.HeaderText = "Codigo Parte Proveedor";
-            this.Parte_proveedor.Name = "Parte_proveedor";
-            this.Parte_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nombre_empleado
-            // 
-            this.Nombre_empleado.HeaderText = "Nombre Empleado";
-            this.Nombre_empleado.Name = "Nombre_empleado";
-            this.Nombre_empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Nombre_empleado.Width = 200;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 400;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 50;
             // 
             // comboBoxCodigoProyecto
             // 
@@ -350,7 +303,7 @@
             // comboBoxEmpleado
             // 
             this.comboBoxEmpleado.FormattingEnabled = true;
-            this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 233);
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 260);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
             this.comboBoxEmpleado.TabIndex = 62;
@@ -359,7 +312,7 @@
             // textBoxCodigoProveedor
             // 
             this.textBoxCodigoProveedor.Enabled = false;
-            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 205);
+            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 231);
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
@@ -455,11 +408,81 @@
             this.label5.TabIndex = 85;
             this.label5.Text = "Total Unidades";
             // 
+            // textBoxDescripcionMaterial
+            // 
+            this.textBoxDescripcionMaterial.Enabled = false;
+            this.textBoxDescripcionMaterial.Location = new System.Drawing.Point(263, 162);
+            this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
+            this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
+            this.textBoxDescripcionMaterial.TabIndex = 88;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Image = ((System.Drawing.Image)(resources.GetObject("label7.Image")));
+            this.label7.Location = new System.Drawing.Point(106, 164);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(120, 16);
+            this.label7.TabIndex = 87;
+            this.label7.Text = "Descripcion Material";
+            // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 50;
+            // 
+            // Proyecto
+            // 
+            this.Proyecto.HeaderText = "Proyecto";
+            this.Proyecto.Name = "Proyecto";
+            this.Proyecto.Width = 50;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Codigo_material
+            // 
+            this.Codigo_material.HeaderText = "Codigo Material";
+            this.Codigo_material.Name = "Codigo_material";
+            this.Codigo_material.Width = 50;
+            // 
+            // Parte_proveedor
+            // 
+            this.Parte_proveedor.HeaderText = "Codigo Parte Proveedor";
+            this.Parte_proveedor.Name = "Parte_proveedor";
+            this.Parte_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nombre_empleado
+            // 
+            this.Nombre_empleado.HeaderText = "Nombre Empleado";
+            this.Nombre_empleado.Name = "Nombre_empleado";
+            this.Nombre_empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Nombre_empleado.Width = 200;
+            // 
+            // Motivo_Devolucion
+            // 
+            this.Motivo_Devolucion.HeaderText = "Motivo Devolución";
+            this.Motivo_Devolucion.Name = "Motivo_Devolucion";
+            this.Motivo_Devolucion.Width = 400;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Width = 50;
+            // 
             // Forma_Devolucion_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 582);
+            this.Controls.Add(this.textBoxDescripcionMaterial);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBoxTotalUnidades);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonBusquedaBaseDatos);
@@ -509,7 +532,7 @@
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
-        private System.Windows.Forms.Timer timerAgregarSalidaMateriales;
+        private System.Windows.Forms.Timer timerAgregarDevolucionMateriales;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxDescripcionMotivo;
         private System.Windows.Forms.Label label2;
@@ -530,16 +553,18 @@
         private System.Windows.Forms.TextBox textBoxUnidadesEntrada;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonBusquedaBaseDatos;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxTotalUnidades;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxDescripcionMaterial;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_material;
         private System.Windows.Forms.DataGridViewTextBoxColumn Parte_proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Motivo_Devolucion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBoxTotalUnidades;
-        private System.Windows.Forms.Label label5;
     }
 }
