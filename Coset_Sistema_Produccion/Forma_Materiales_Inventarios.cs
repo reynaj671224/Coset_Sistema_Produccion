@@ -12,65 +12,34 @@ using System.IO;
 
 namespace Coset_Sistema_Produccion
 {
-    public partial class Forma_Materiales_Seleccion : Form
+    public partial class Forma_Materiales_Inventarios : Form
     {
-        public List<Proceso> procesos_disponibles = new List<Proceso>();
-        public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso Proceso_Modificaciones = new Proceso();
-        public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
-        public Control_folio folio_disponible = new Control_folio();
         public string Operacio_procesos = "";
         string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         public Class_Materiales class_materiales = new Class_Materiales();
         public Material Agregar_material = new Material();
         public Material Visualizar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
-        public Material Material_seleccionado_data_view = null;
+        public Material Material_seleccionado_data_view = new Material();
         public string agregar_seleccion = "";
-        public Forma_Materiales_Seleccion(List<Material> materiales_busqueda_disponibles,string Operacion_materiales)
+        public Forma_Materiales_Inventarios()
         {
             InitializeComponent();
-
-            if (Operacion_materiales == "Agregar")
-            {
-                Aparece_boton_agregar_material();
-                Aparece_boton_no_agregar_material();
-            }
-            else if (Operacion_materiales == "Requisiciones")
-            {
-                Aparece_boton_agregar_material();
-
-            }
-            else if (Operacion_materiales == "Entrada Materiales")
-            {
-
-            }
-
-            Rellena_partidas_materiales_disponibles(materiales_busqueda_disponibles);
         }
 
-        private void Aparece_boton_seleccionar_material()
-        {
-            buttonSeleccionMaterial.Visible = true;
-        }
 
         private void Aparece_boton_no_agregar_material()
         {
             buttonRegresarNoAgregar.Visible = true;
         }
 
-        private void Aparece_boton_agregar_material()
-        {
-            buttonAgregarMaterial.Visible = true;
-        }
 
-        private void Rellena_partidas_materiales_disponibles(List<Material> materiales_busqueda_disponibles) 
+        private void Rellena_partidas_materiales_disponibles() 
         {
-            Materiales_disponibles_busqueda = materiales_busqueda_disponibles;
-            foreach (Material material in materiales_busqueda_disponibles)
+            foreach (Material material in Materiales_disponibles_busqueda)
             {
                 dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
-                    material.Descripcion, material.Cantidad, material.Marca, material.Unidad_medida, material.foto);
+                    material.Descripcion, material.Minimo, material.Cantidad, material.Maximo,material.Marca, material.Unidad_medida, material.foto);
             }
             Activa_datagrid_materiales();
             
@@ -83,13 +52,12 @@ namespace Coset_Sistema_Produccion
 
         private void Forma_Materiales_Seleccion_Load(object sender, EventArgs e)
         {
-
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_inventarios_en_base_datos();
+            Rellena_partidas_materiales_disponibles();
         }
 
         private void dataGridViewPartidasMaterialSeleccion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            buttonSeleccionMaterial.Visible = true;
-            buttonAgregarMaterial.Visible = false;
             if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value != null)
             {
                 Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material =>
@@ -125,34 +93,6 @@ namespace Coset_Sistema_Produccion
         private void Aparece_foto_material()
         {
             pictureBoxMaterial.Visible = true;
-        }
-        public Material  Material_seleccionado
-        {
-            
-            get
-                { return Material_seleccionado_data_view; }
-        }
-        public string Material_operacion_seleccion
-        {
-
-            get
-            { return agregar_seleccion; }
-        }
-
-        private void buttonSeleccionMaterial_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            Materiales_disponibles_busqueda = null;
-            this.Close();
-            GC.Collect();
-        }
-
-        private void buttonAgregarMaterial_Click(object sender, EventArgs e)
-        {
-            agregar_seleccion = "Agregar";
-            Materiales_disponibles_busqueda = null;
-            this.Close();
-            GC.Collect();
         }
 
         private void buttonRegresarNoAgregar_Click(object sender, EventArgs e)

@@ -9,6 +9,48 @@ namespace Coset_Sistema_Produccion
 {
     public class Class_Materiales
     {
+        public List<Material> Adquiere_materiales_inventarios_en_base_datos()
+        {
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_inventarios_material(), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_materiales.Add(new Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
+                        Descripcion = mySqlDataReader["material_descripcion"].ToString(),
+                        Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
+                        Marca = mySqlDataReader["material_marca"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
+                        precio = mySqlDataReader["material_precio"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_materiales.Add(new Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_materiales;
+        }
+
+        private string Commando_leer_Mysql_inventarios_material()
+        {
+            return "SELECT * FROM materiales WHERE material_cantidad < material_minimo or material_cantidad > material_maximo";
+        }
+
         public List<Material> Adquiere_materiales_busqueda_en_base_datos(Material material)
         {
             List<Material> Material_existente_disponibles_materiales = new List<Material>();

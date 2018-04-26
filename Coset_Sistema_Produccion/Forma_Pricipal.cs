@@ -178,7 +178,6 @@ namespace Coset_Sistema_Produccion
             Oculta_Menu_Compras_Orden_De_Compra();
             Oculta_Menu_Compras_Proveedores();
             Oculta_menu_compras_requisiciones_pendientes();
-
         }
 
         private void Oculta_menu_compras_requisiciones_pendientes()
@@ -201,6 +200,18 @@ namespace Coset_Sistema_Produccion
             Oculta_Menu_Almacen_Entradas();
             Oculta_Menu_Almacen_Salidas();
             Oculta_Menu_Almacen_Materiales();
+            Oculta_Menu_Almacen_Inventarios();
+            Oculta_Menu_Almacen_Devoluciones();
+        }
+
+        private void Oculta_Menu_Almacen_Devoluciones()
+        {
+            devolucionToolStripMenuItem.Enabled = false;
+        }
+
+        private void Oculta_Menu_Almacen_Inventarios()
+        {
+            toolStripMenuItemInventarios.Enabled = false;
         }
 
         private void Oculta_Menu_Almacen_Materiales()
@@ -229,8 +240,21 @@ namespace Coset_Sistema_Produccion
             Muestra_Menus_de_Almacen_Proibidas_Para_Ingenieria();
             Muestra_Menus_de_Almacen_Proibidas_Para_Compras();
             Muestra__menu_inicio_de_usuario();
+            Limpia_datagrid_requisiciones_abiertas();
+            Oculta_datagrid_requisiciones();
+            Oculta_etiqueta_requisciones_disponibles();
             toolStripStatusUsuario.Text = "No Usuario";
             
+        }
+
+        private void Oculta_etiqueta_requisciones_disponibles()
+        {
+            labelREquisicionesAbiertas.Visible = false;
+        }
+
+        private void Oculta_datagrid_requisiciones()
+        {
+            dataGridViewRequisicionesAbiertas.Visible = false;
         }
 
         private void Muestra__menu_inicio_de_usuario()
@@ -287,6 +311,7 @@ namespace Coset_Sistema_Produccion
         private void Oculta_Menus_de_Compras_Prohibidas_Para_Almacen()
         {
             Oculta_Menu_Compras_Orden_De_Compra();
+            Oculta_menu_compras_requisiciones_pendientes();
         }
 
         private void usuarioProduccionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -553,6 +578,12 @@ namespace Coset_Sistema_Produccion
         {
             Forma_Devolucion_Materiales forma_Devolucion_Materiales = new Forma_Devolucion_Materiales();
             forma_Devolucion_Materiales.ShowDialog();
+        }
+
+        private void toolStripMenuItemInventarios_Click(object sender, EventArgs e)
+        {
+            Forma_Materiales_Inventarios forma_Materiales_Inventarios = new Forma_Materiales_Inventarios();
+            forma_Materiales_Inventarios.ShowDialog();
         }
     }
 }

@@ -1527,7 +1527,7 @@ namespace Coset_Sistema_Produccion
         {
             if (Materiales_disponibles_busqueda.Count == 1)
             {
-                
+
                 Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, "Requisiciones");
                 forma_Materiales_Seleccion.ShowDialog();
                 if (forma_Materiales_Seleccion.agregar_seleccion == "Agregar")

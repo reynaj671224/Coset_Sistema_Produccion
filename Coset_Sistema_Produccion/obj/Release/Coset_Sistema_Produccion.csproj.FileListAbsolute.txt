@@ -36,3 +36,4 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Entrada_Materiales.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Salida_Materiales.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Devolucion_Materiales.resources
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Materiales_Inventarios.resources

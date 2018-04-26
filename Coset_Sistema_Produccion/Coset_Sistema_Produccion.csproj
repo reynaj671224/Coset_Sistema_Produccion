@@ -110,6 +110,12 @@
     <Compile Include="Forma_Materiales.Designer.cs">
       <DependentUpon>Forma_Materiales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Materiales_Inventarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Materiales_Inventarios.Designer.cs">
+      <DependentUpon>Forma_Materiales_Inventarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Materiales_Seleccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Materiales.resx">
       <DependentUpon>Forma_Materiales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Materiales_Inventarios.resx">
+      <DependentUpon>Forma_Materiales_Inventarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Materiales_Seleccion.resx">
       <DependentUpon>Forma_Materiales_Seleccion.cs</DependentUpon>
