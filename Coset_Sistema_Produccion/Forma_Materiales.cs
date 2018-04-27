@@ -407,6 +407,7 @@ namespace Coset_Sistema_Produccion
             Modificar_material.Marca = textBoxMarca.Text;
             Modificar_material.Ubicacion = textBoxUbicacion.Text;
             Modificar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            Modificar_material.precio = textBoxPrecio.Text;
         }
 
         private bool Guarda_datos_agregar_Material()

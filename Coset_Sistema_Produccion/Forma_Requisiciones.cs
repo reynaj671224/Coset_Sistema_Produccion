@@ -974,6 +974,7 @@ namespace Coset_Sistema_Produccion
             Agregar_material.Cantidad = "0";
             Agregar_material.Maximo = "0";
             Agregar_material.Minimo = "0";
+            Agregar_material.precio = "0.0";
             return true;
         }
 

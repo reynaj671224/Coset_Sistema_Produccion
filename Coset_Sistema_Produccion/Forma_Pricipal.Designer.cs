@@ -56,6 +56,7 @@
             this.entradaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemInventarios = new System.Windows.Forms.ToolStripMenuItem();
             this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +79,6 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
-            this.toolStripMenuItemInventarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -264,28 +264,28 @@
             // materialesToolStripMenuItem
             // 
             this.materialesToolStripMenuItem.Name = "materialesToolStripMenuItem";
-            this.materialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.materialesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.materialesToolStripMenuItem.Text = "Materiales ";
             this.materialesToolStripMenuItem.Click += new System.EventHandler(this.materialesToolStripMenuItem_Click);
             // 
             // consultaMaterialesToolStripMenuItem1
             // 
             this.consultaMaterialesToolStripMenuItem1.Name = "consultaMaterialesToolStripMenuItem1";
-            this.consultaMaterialesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.consultaMaterialesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.consultaMaterialesToolStripMenuItem1.Text = "Consulta Materiales";
             this.consultaMaterialesToolStripMenuItem1.Click += new System.EventHandler(this.consultaMaterialesToolStripMenuItem1_Click);
             // 
             // entradaMaterialesToolStripMenuItem
             // 
             this.entradaMaterialesToolStripMenuItem.Name = "entradaMaterialesToolStripMenuItem";
-            this.entradaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.entradaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.entradaMaterialesToolStripMenuItem.Text = "Entrada Materiales";
             this.entradaMaterialesToolStripMenuItem.Click += new System.EventHandler(this.entradaMaterialesToolStripMenuItem_Click);
             // 
             // salidaMaterialesToolStripMenuItem
             // 
             this.salidaMaterialesToolStripMenuItem.Name = "salidaMaterialesToolStripMenuItem";
-            this.salidaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salidaMaterialesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.salidaMaterialesToolStripMenuItem.Text = "Salida Materiales";
             this.salidaMaterialesToolStripMenuItem.Click += new System.EventHandler(this.salidaMaterialesToolStripMenuItem_Click);
             // 
@@ -296,10 +296,17 @@
             this.devolucionToolStripMenuItem.Text = "Devolución Materiales";
             this.devolucionToolStripMenuItem.Click += new System.EventHandler(this.devolucionToolStripMenuItem_Click);
             // 
+            // toolStripMenuItemInventarios
+            // 
+            this.toolStripMenuItemInventarios.Name = "toolStripMenuItemInventarios";
+            this.toolStripMenuItemInventarios.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMenuItemInventarios.Text = "Inventarios Materiales";
+            this.toolStripMenuItemInventarios.Click += new System.EventHandler(this.toolStripMenuItemInventarios_Click);
+            // 
             // autosToolStripMenuItem
             // 
             this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
-            this.autosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.autosToolStripMenuItem.Text = "Autos";
             // 
             // produccionToolStripMenuItem
@@ -467,13 +474,6 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
-            // toolStripMenuItemInventarios
-            // 
-            this.toolStripMenuItemInventarios.Name = "toolStripMenuItemInventarios";
-            this.toolStripMenuItemInventarios.Size = new System.Drawing.Size(191, 22);
-            this.toolStripMenuItemInventarios.Text = "Inventarios Materiales";
-            this.toolStripMenuItemInventarios.Click += new System.EventHandler(this.toolStripMenuItemInventarios_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,7 +490,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 3.7";
+            this.Text = "Coset Sistema Produccion Rev 3.8";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
