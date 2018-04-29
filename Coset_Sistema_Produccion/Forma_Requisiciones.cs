@@ -1757,7 +1757,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_partidas_Requisicion()
         {
-            if (dataGridViewPartidasRequisiciones.Rows.Count <= 16)
+            if (dataGridViewPartidasRequisiciones.Rows.Count <= 50)
             {
                 for (int partida = 1; partida <= dataGridViewPartidasRequisiciones.Rows.Count; partida++)
                 {
@@ -1783,7 +1783,7 @@ namespace Coset_Sistema_Produccion
             }
             else
             {
-                MessageBox.Show("Esta Applicacion solo Puede desplegar Hasta 16 Partidas", "Previo Requisiciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Esta Applicacion solo Puede desplegar Hasta 50 Partidas", "Previo Requisiciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1817,7 +1817,7 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_espacios_en_renglones_sin_informacion()
         {
-            for(int renglon =1; renglon<=16; renglon++)
+            for(int renglon =1; renglon<=50; renglon++)
             {
                 Remplaza_texto_en_Documento("<n" + renglon + ">", "");
             }
