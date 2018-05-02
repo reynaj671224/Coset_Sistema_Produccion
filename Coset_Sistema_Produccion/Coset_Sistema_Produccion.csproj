@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class_Autos.cs" />
     <Compile Include="Class_Contactos_Clientes.cs" />
     <Compile Include="Class_Clientes.cs" />
     <Compile Include="Class_Contactos_Proveedor.cs" />
