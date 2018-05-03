@@ -585,5 +585,11 @@ namespace Coset_Sistema_Produccion
             Forma_Materiales_Inventarios forma_Materiales_Inventarios = new Forma_Materiales_Inventarios();
             forma_Materiales_Inventarios.ShowDialog();
         }
+
+        private void autosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Autos forma_Autos = new Forma_Autos();
+            forma_Autos.ShowDialog();
+        }
     }
 }

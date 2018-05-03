@@ -57,7 +57,7 @@
             this.salidaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemInventarios = new System.Windows.Forms.ToolStripMenuItem();
-            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +79,7 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
+            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -138,7 +139,8 @@
             this.datosGeneralesToolStripMenuItem,
             this.empleadosToolStripMenuItem,
             this.clientesToolStripMenuItem,
-            this.cotizacionesToolStripMenuItem});
+            this.cotizacionesToolStripMenuItem,
+            this.autosToolStripMenuItem});
             this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
             this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
             this.administrativoToolStripMenuItem.Text = "Administrativo";
@@ -256,7 +258,7 @@
             this.salidaMaterialesToolStripMenuItem,
             this.devolucionToolStripMenuItem,
             this.toolStripMenuItemInventarios,
-            this.autosToolStripMenuItem});
+            this.movimientosautosToolStripMenuItem});
             this.almacenToolStripMenuItem.Name = "almacenToolStripMenuItem";
             this.almacenToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.almacenToolStripMenuItem.Text = "Almacen";
@@ -303,11 +305,11 @@
             this.toolStripMenuItemInventarios.Text = "Inventarios Materiales";
             this.toolStripMenuItemInventarios.Click += new System.EventHandler(this.toolStripMenuItemInventarios_Click);
             // 
-            // autosToolStripMenuItem
+            // movimientosautosToolStripMenuItem
             // 
-            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
-            this.autosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.autosToolStripMenuItem.Text = "Autos";
+            this.movimientosautosToolStripMenuItem.Name = "movimientosautosToolStripMenuItem";
+            this.movimientosautosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.movimientosautosToolStripMenuItem.Text = " Movimientos Autos";
             // 
             // produccionToolStripMenuItem
             // 
@@ -474,6 +476,13 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
+            // autosToolStripMenuItem
+            // 
+            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
+            this.autosToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.autosToolStripMenuItem.Text = "Autos";
+            this.autosToolStripMenuItem.Click += new System.EventHandler(this.autosToolStripMenuItem_Click);
+            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,9 +561,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.Label labelREquisicionesAbiertas;
         private System.Windows.Forms.ToolStripMenuItem devolucionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem movimientosautosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verificarRequisicionesPendientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInventarios;
+        private System.Windows.Forms.ToolStripMenuItem autosToolStripMenuItem;
     }
 }
 

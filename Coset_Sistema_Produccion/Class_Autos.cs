@@ -41,7 +41,7 @@ namespace Coset_Sistema_Produccion
             return clientes_disponibles;
         }
 
-        private string Guarda_datos_auto(Auto auto)
+        public string Inserta_datos_auto(Auto auto)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
             try
@@ -60,7 +60,7 @@ namespace Coset_Sistema_Produccion
             return "NO errores";
         }
 
-        private string Modifica_datos_auto(Auto auto)
+        public string Modifica_datos_auto(Auto auto)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
             try
@@ -77,6 +77,31 @@ namespace Coset_Sistema_Produccion
 
             connection.Close();
             return "NO errores";
+        }
+
+        public string Elimina_datos_auto(Auto auto)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos_autos(auto), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+        private string Configura_cadena_comando_eliminar_en_base_de_datos_autos(Auto auto)
+        {
+            return "DELETE from autos where placas='" +
+               auto.Placas + "';";
         }
 
         private string Configura_cadena_comando_modificar_auto_en_base_de_datos(Auto auto)
