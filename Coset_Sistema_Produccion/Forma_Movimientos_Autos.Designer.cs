@@ -1,6 +1,6 @@
 ﻿namespace Coset_Sistema_Produccion
 {
-    partial class Forma_Autos
+    partial class Forma_Movimientos_Autos
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Autos));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Movimientos_Autos));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonBuscarAuto = new System.Windows.Forms.Button();
-            this.buttonEliminarAuto = new System.Windows.Forms.Button();
-            this.buttonAgregarAuto = new System.Windows.Forms.Button();
-            this.buttonModificarAuto = new System.Windows.Forms.Button();
+            this.buttonBuscarMovimientos = new System.Windows.Forms.Button();
+            this.buttonEntradaAuto = new System.Windows.Forms.Button();
+            this.buttonSalidaAuto = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
@@ -67,59 +66,46 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // buttonBuscarAuto
+            // buttonBuscarMovimientos
             // 
-            this.buttonBuscarAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBuscarAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarAuto.Image")));
-            this.buttonBuscarAuto.Location = new System.Drawing.Point(317, 22);
-            this.buttonBuscarAuto.Name = "buttonBuscarAuto";
-            this.buttonBuscarAuto.Size = new System.Drawing.Size(79, 74);
-            this.buttonBuscarAuto.TabIndex = 31;
-            this.buttonBuscarAuto.Text = "Visualizar";
-            this.buttonBuscarAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonBuscarAuto.UseVisualStyleBackColor = true;
-            this.buttonBuscarAuto.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
+            this.buttonBuscarMovimientos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuscarMovimientos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarMovimientos.Image")));
+            this.buttonBuscarMovimientos.Location = new System.Drawing.Point(374, 21);
+            this.buttonBuscarMovimientos.Name = "buttonBuscarMovimientos";
+            this.buttonBuscarMovimientos.Size = new System.Drawing.Size(79, 74);
+            this.buttonBuscarMovimientos.TabIndex = 31;
+            this.buttonBuscarMovimientos.Text = "Visualizar";
+            this.buttonBuscarMovimientos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBuscarMovimientos.UseVisualStyleBackColor = true;
+            this.buttonBuscarMovimientos.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
             // 
-            // buttonEliminarAuto
+            // buttonEntradaAuto
             // 
-            this.buttonEliminarAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEliminarAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonEliminarAuto.Image")));
-            this.buttonEliminarAuto.Location = new System.Drawing.Point(572, 22);
-            this.buttonEliminarAuto.Name = "buttonEliminarAuto";
-            this.buttonEliminarAuto.Size = new System.Drawing.Size(79, 74);
-            this.buttonEliminarAuto.TabIndex = 30;
-            this.buttonEliminarAuto.Text = "Eliminar";
-            this.buttonEliminarAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonEliminarAuto.UseVisualStyleBackColor = true;
-            this.buttonEliminarAuto.Click += new System.EventHandler(this.buttonEliminarCliente_Click);
+            this.buttonEntradaAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEntradaAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonEntradaAuto.Image")));
+            this.buttonEntradaAuto.Location = new System.Drawing.Point(544, 21);
+            this.buttonEntradaAuto.Name = "buttonEntradaAuto";
+            this.buttonEntradaAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonEntradaAuto.Size = new System.Drawing.Size(79, 74);
+            this.buttonEntradaAuto.TabIndex = 29;
+            this.buttonEntradaAuto.Text = "Entrada";
+            this.buttonEntradaAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonEntradaAuto.UseVisualStyleBackColor = true;
+            this.buttonEntradaAuto.Click += new System.EventHandler(this.buttonAgregarAuto_Click);
             // 
-            // buttonAgregarAuto
+            // buttonSalidaAuto
             // 
-            this.buttonAgregarAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAgregarAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarAuto.Image")));
-            this.buttonAgregarAuto.Location = new System.Drawing.Point(487, 22);
-            this.buttonAgregarAuto.Name = "buttonAgregarAuto";
-            this.buttonAgregarAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonAgregarAuto.Size = new System.Drawing.Size(79, 74);
-            this.buttonAgregarAuto.TabIndex = 29;
-            this.buttonAgregarAuto.Text = "Agregar";
-            this.buttonAgregarAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonAgregarAuto.UseVisualStyleBackColor = true;
-            this.buttonAgregarAuto.Click += new System.EventHandler(this.buttonAgregarAuto_Click);
-            // 
-            // buttonModificarAuto
-            // 
-            this.buttonModificarAuto.AutoSize = true;
-            this.buttonModificarAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonModificarAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonModificarAuto.Image")));
-            this.buttonModificarAuto.Location = new System.Drawing.Point(402, 22);
-            this.buttonModificarAuto.Name = "buttonModificarAuto";
-            this.buttonModificarAuto.Size = new System.Drawing.Size(79, 74);
-            this.buttonModificarAuto.TabIndex = 28;
-            this.buttonModificarAuto.Text = "Modificar";
-            this.buttonModificarAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonModificarAuto.UseVisualStyleBackColor = true;
-            this.buttonModificarAuto.Click += new System.EventHandler(this.buttonModificarCliente_Click);
+            this.buttonSalidaAuto.AutoSize = true;
+            this.buttonSalidaAuto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSalidaAuto.Image = ((System.Drawing.Image)(resources.GetObject("buttonSalidaAuto.Image")));
+            this.buttonSalidaAuto.Location = new System.Drawing.Point(459, 21);
+            this.buttonSalidaAuto.Name = "buttonSalidaAuto";
+            this.buttonSalidaAuto.Size = new System.Drawing.Size(81, 74);
+            this.buttonSalidaAuto.TabIndex = 28;
+            this.buttonSalidaAuto.Text = "Salida";
+            this.buttonSalidaAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSalidaAuto.UseVisualStyleBackColor = true;
+            this.buttonSalidaAuto.Click += new System.EventHandler(this.buttonModificarCliente_Click);
             // 
             // buttonCancelar
             // 
@@ -257,9 +243,9 @@
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
             this.label4.Location = new System.Drawing.Point(85, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 16);
+            this.label4.Size = new System.Drawing.Size(47, 16);
             this.label4.TabIndex = 37;
-            this.label4.Text = "Auto Placas";
+            this.label4.Text = "Cliente";
             // 
             // comboBoxCodigoAutoPlacas
             // 
@@ -304,7 +290,7 @@
             this.label5.TabIndex = 55;
             this.label5.Text = "Auto Marca";
             // 
-            // Forma_Autos
+            // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -325,14 +311,13 @@
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
-            this.Controls.Add(this.buttonBuscarAuto);
-            this.Controls.Add(this.buttonEliminarAuto);
-            this.Controls.Add(this.buttonAgregarAuto);
-            this.Controls.Add(this.buttonModificarAuto);
+            this.Controls.Add(this.buttonBuscarMovimientos);
+            this.Controls.Add(this.buttonEntradaAuto);
+            this.Controls.Add(this.buttonSalidaAuto);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Forma_Autos";
+            this.Name = "Forma_Movimientos_Autos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Autos";
+            this.Text = "Movimientos Autos";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -343,10 +328,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonBuscarAuto;
-        private System.Windows.Forms.Button buttonEliminarAuto;
-        private System.Windows.Forms.Button buttonAgregarAuto;
-        private System.Windows.Forms.Button buttonModificarAuto;
+        private System.Windows.Forms.Button buttonBuscarMovimientos;
+        private System.Windows.Forms.Button buttonEntradaAuto;
+        private System.Windows.Forms.Button buttonSalidaAuto;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Button buttonHome;

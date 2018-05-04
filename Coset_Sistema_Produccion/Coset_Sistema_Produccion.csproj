@@ -59,6 +59,7 @@
     <Compile Include="Class_Dibujos_Proyecto.cs" />
     <Compile Include="Class_Entrada_Material.cs" />
     <Compile Include="Class_Materiales.cs" />
+    <Compile Include="Class_Movimientos_Autos.cs" />
     <Compile Include="Class_Ordenes_Compra.cs" />
     <Compile Include="Class_Partidas_Cotizaciones.cs" />
     <Compile Include="Class_Partidas_Orden_compra.cs" />
@@ -128,6 +129,12 @@
     </Compile>
     <Compile Include="Forma_Materiales_Seleccion.Designer.cs">
       <DependentUpon>Forma_Materiales_Seleccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forma_Movimientos_Autos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Movimientos_Autos.Designer.cs">
+      <DependentUpon>Forma_Movimientos_Autos.cs</DependentUpon>
     </Compile>
     <Compile Include="Forma_Ordenes_Compra.cs">
       <SubType>Form</SubType>
@@ -214,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Materiales_Seleccion.resx">
       <DependentUpon>Forma_Materiales_Seleccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Movimientos_Autos.resx">
+      <DependentUpon>Forma_Movimientos_Autos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Ordenes_Compra.resx">
       <DependentUpon>Forma_Ordenes_Compra.cs</DependentUpon>
