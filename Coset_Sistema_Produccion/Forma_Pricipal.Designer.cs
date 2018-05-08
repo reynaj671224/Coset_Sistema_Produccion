@@ -40,6 +40,7 @@
             this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cotizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprastoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenesDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,6 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
-            this.autosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -172,6 +172,13 @@
             this.cotizacionesToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cotizacionesToolStripMenuItem.Text = "Cotizaciones";
             this.cotizacionesToolStripMenuItem.Click += new System.EventHandler(this.cotizacionesToolStripMenuItem_Click);
+            // 
+            // autosToolStripMenuItem
+            // 
+            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
+            this.autosToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.autosToolStripMenuItem.Text = "Autos";
+            this.autosToolStripMenuItem.Click += new System.EventHandler(this.autosToolStripMenuItem_Click);
             // 
             // comprastoolStripMenuItem
             // 
@@ -310,6 +317,7 @@
             this.movimientosautosToolStripMenuItem.Name = "movimientosautosToolStripMenuItem";
             this.movimientosautosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.movimientosautosToolStripMenuItem.Text = " Movimientos Autos";
+            this.movimientosautosToolStripMenuItem.Click += new System.EventHandler(this.movimientosautosToolStripMenuItem_Click);
             // 
             // produccionToolStripMenuItem
             // 
@@ -475,13 +483,6 @@
             this.labelREquisicionesAbiertas.Text = "Requisiciones Abiertas";
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
-            // 
-            // autosToolStripMenuItem
-            // 
-            this.autosToolStripMenuItem.Name = "autosToolStripMenuItem";
-            this.autosToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.autosToolStripMenuItem.Text = "Autos";
-            this.autosToolStripMenuItem.Click += new System.EventHandler(this.autosToolStripMenuItem_Click);
             // 
             // Coset_Sistema_Produccion
             // 

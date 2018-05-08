@@ -46,7 +46,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_movimiento_autos(Movimiento_auto autos_movimiento)
         {
-            throw new NotImplementedException();
+            return "SELECT * FROM movimientos_autos ORDER BY ABS(auto_descripcion);";
         }
 
         public string Inserta_nuevo_entrada_material_base_datos(Movimiento_auto autos_movimiento)

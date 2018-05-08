@@ -52,7 +52,13 @@
             this.comboBoxAutoDescripcion = new System.Windows.Forms.ComboBox();
             this.textBoxAutoMarca = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.TimePickerHora = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
+            this.dataGridViewEmpleadosAuto = new System.Windows.Forms.DataGridView();
+            this.Empleado_nombre = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -61,7 +67,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(952, 486);
+            this.pictureBox1.Size = new System.Drawing.Size(1039, 486);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -112,7 +118,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(830, 288);
+            this.buttonCancelar.Location = new System.Drawing.Point(948, 292);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 35;
@@ -127,7 +133,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(830, 192);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(948, 192);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -142,7 +148,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(830, 370);
+            this.buttonHome.Location = new System.Drawing.Point(948, 372);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 33;
@@ -156,7 +162,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(830, 208);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(948, 212);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 32;
@@ -233,7 +239,7 @@
             this.textBoxCodigoAutoPlacas.Enabled = false;
             this.textBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 163);
             this.textBoxCodigoAutoPlacas.Name = "textBoxCodigoAutoPlacas";
-            this.textBoxCodigoAutoPlacas.Size = new System.Drawing.Size(147, 20);
+            this.textBoxCodigoAutoPlacas.Size = new System.Drawing.Size(311, 20);
             this.textBoxCodigoAutoPlacas.TabIndex = 38;
             // 
             // label4
@@ -243,16 +249,16 @@
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
             this.label4.Location = new System.Drawing.Point(85, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 16);
+            this.label4.Size = new System.Drawing.Size(103, 16);
             this.label4.TabIndex = 37;
-            this.label4.Text = "Cliente";
+            this.label4.Text = "Cliente/Proveedor";
             // 
             // comboBoxCodigoAutoPlacas
             // 
             this.comboBoxCodigoAutoPlacas.FormattingEnabled = true;
-            this.comboBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 161);
+            this.comboBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 163);
             this.comboBoxCodigoAutoPlacas.Name = "comboBoxCodigoAutoPlacas";
-            this.comboBoxCodigoAutoPlacas.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxCodigoAutoPlacas.Size = new System.Drawing.Size(311, 21);
             this.comboBoxCodigoAutoPlacas.TabIndex = 49;
             this.comboBoxCodigoAutoPlacas.Visible = false;
             this.comboBoxCodigoAutoPlacas.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
@@ -286,15 +292,66 @@
             this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
             this.label5.Location = new System.Drawing.Point(85, 219);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 16);
+            this.label5.Size = new System.Drawing.Size(89, 16);
             this.label5.TabIndex = 55;
-            this.label5.Text = "Auto Marca";
+            this.label5.Text = "Contacto Visita";
+            // 
+            // TimePickerHora
+            // 
+            this.TimePickerHora.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.TimePickerHora.Location = new System.Drawing.Point(207, 312);
+            this.TimePickerHora.Name = "TimePickerHora";
+            this.TimePickerHora.Size = new System.Drawing.Size(147, 20);
+            this.TimePickerHora.TabIndex = 58;
+            // 
+            // dateTimePickerFecha
+            // 
+            this.dateTimePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(207, 342);
+            this.dateTimePickerFecha.Name = "dateTimePickerFecha";
+            this.dateTimePickerFecha.Size = new System.Drawing.Size(147, 20);
+            this.dateTimePickerFecha.TabIndex = 59;
+            // 
+            // dataGridViewEmpleadosAuto
+            // 
+            this.dataGridViewEmpleadosAuto.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewEmpleadosAuto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmpleadosAuto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Empleado_nombre,
+            this.Responsable});
+            this.dataGridViewEmpleadosAuto.Location = new System.Drawing.Point(544, 163);
+            this.dataGridViewEmpleadosAuto.Name = "dataGridViewEmpleadosAuto";
+            this.dataGridViewEmpleadosAuto.Size = new System.Drawing.Size(343, 184);
+            this.dataGridViewEmpleadosAuto.TabIndex = 60;
+            this.dataGridViewEmpleadosAuto.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmpleadosAuto_CellEnter);
+            this.dataGridViewEmpleadosAuto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewEmpleadosAuto_RowsAdded);
+            // 
+            // Empleado_nombre
+            // 
+            this.Empleado_nombre.HeaderText = "Empleado";
+            this.Empleado_nombre.Name = "Empleado_nombre";
+            this.Empleado_nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado_nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Empleado_nombre.Width = 200;
+            // 
+            // Responsable
+            // 
+            this.Responsable.HeaderText = "Responsable LLaves";
+            this.Responsable.Items.AddRange(new object[] {
+            "Responsable",
+            "Acompañante"});
+            this.Responsable.Name = "Responsable";
+            this.Responsable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 486);
+            this.ClientSize = new System.Drawing.Size(1039, 486);
+            this.Controls.Add(this.dataGridViewEmpleadosAuto);
+            this.Controls.Add(this.dateTimePickerFecha);
+            this.Controls.Add(this.TimePickerHora);
             this.Controls.Add(this.textBoxAutoMarca);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxAutoDescripcion);
@@ -320,6 +377,7 @@
             this.Text = "Movimientos Autos";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,5 +407,10 @@
         private System.Windows.Forms.ComboBox comboBoxAutoDescripcion;
         private System.Windows.Forms.TextBox textBoxAutoMarca;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker TimePickerHora;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
+        private System.Windows.Forms.DataGridView dataGridViewEmpleadosAuto;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Empleado_nombre;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Responsable;
     }
 }

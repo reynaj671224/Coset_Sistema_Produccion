@@ -29,6 +29,25 @@ namespace Coset_Sistema_Produccion
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+            TimePickerHora.Format = DateTimePickerFormat.Time;
+            TimePickerHora.ShowUpDown = true;
+            Genera_lineas_empleados_datagridview();
+            deshabilita_datagridview_empleados();
+            
+
+        }
+
+        private void deshabilita_datagridview_empleados()
+        {
+            dataGridViewEmpleadosAuto.AllowUserToAddRows = false;
+        }
+
+        private void Genera_lineas_empleados_datagridview()
+        {
+           for(int renglon=0; renglon<5;renglon++)
+            {
+                dataGridViewEmpleadosAuto.Rows.Add();
+            }
         }
 
         private void Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana()
@@ -603,6 +622,28 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        private void dataGridViewEmpleadosAuto_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            try
+            {
+                if (dataGridViewEmpleadosAuto.Rows.Count >= 5)
+                {
+                    //dataGridViewEmpleadosAuto.AllowUserToAddRows = false;
+                    //dataGridViewEmpleadosAuto.Rows.RemoveAt(dataGridViewEmpleadosAuto.Rows.Count-1);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void dataGridViewEmpleadosAuto_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >5)
+            {
+                SendKeys.Send("{UP}");
+            }
+        }
     }
 }

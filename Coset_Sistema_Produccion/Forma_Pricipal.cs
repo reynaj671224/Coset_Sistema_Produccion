@@ -591,5 +591,11 @@ namespace Coset_Sistema_Produccion
             Forma_Autos forma_Autos = new Forma_Autos();
             forma_Autos.ShowDialog();
         }
+
+        private void movimientosautosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Movimientos_Autos forma_Movimientos_Autos = new Forma_Movimientos_Autos();
+            forma_Movimientos_Autos.ShowDialog();
+        }
     }
 }
