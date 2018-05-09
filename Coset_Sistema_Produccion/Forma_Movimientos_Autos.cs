@@ -15,10 +15,20 @@ namespace Coset_Sistema_Produccion
     {
         public Class_Autos Class_Autos = new Class_Autos();
         public List<Auto> autos_disponibles = new List<Auto>();
-        public Auto auto_modificacion = new Auto();
         public Auto auto_agregar = new Auto();
-        public Auto auto_busqueda = new Auto();
-        public Auto auto_eliminar = new Auto();
+        public Class_Proveedores Class_Proveedores = new Class_Proveedores();
+        public List<Proveedor> Proeveedores_disponibles = new List<Proveedor>();
+        public Proveedor Proveedor_seleccion = new Proveedor();
+        public Class_Contactos_Proveedor Class_Contactos_Proveedor = new Class_Contactos_Proveedor();
+        public List<Contacto_proveedor> Contactos_proveedor_disponibles = new List<Contacto_proveedor>();
+        public Class_Clientes Class_Clientes = new Class_Clientes();
+        public List<Cliente> Clientes_disponibles = new List<Cliente>();
+        public Cliente Cliente_seleccionado = new Cliente();
+        public Class_Contactos_Clientes Class_Contactos_Clientes = new Class_Contactos_Clientes();
+        public List<Contacto_cliente> Contactos_clientes_disponibles = new List<Contacto_cliente>();
+        public Class_Usuarios Class_Usuarios = new Class_Usuarios();
+        public List<Usuario> Usuarios_disponibles = new List<Usuario>();
+
         public string Operacion_autos = "";
 
         public Forma_Movimientos_Autos()
@@ -112,9 +122,9 @@ namespace Coset_Sistema_Produccion
             textBoxAutoDescripcion.Visible=false;
         }
 
-        private void Activa_combo_codigo_cliente()
+        private void Activa_combo_cliente_proveedor()
         {
-            comboBoxCodigoAutoPlacas.Enabled = true;
+            comboBoxClienteProveedor.Enabled = true;
         }
 
         private void Aparece_boton_cancelar_operacio()
@@ -132,12 +142,12 @@ namespace Coset_Sistema_Produccion
 
         private void Aparece_combo_placas_autos()
         {
-            comboBoxCodigoAutoPlacas.Visible = true;
+            comboBoxClienteProveedor.Visible = true;
         }
 
         private void Desaparece_caja_captura_placas_auto()
         {
-            textBoxCodigoAutoPlacas.Visible = false;
+            textBoxClienteProveedor.Visible = false;
         }
 
         private void Desactiva_botones_operacion()
@@ -165,10 +175,10 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Limpia_combo_codigo_cliente();
+            Limpia_combo_cliente_proveedor();
             Limpia_combo_nombre_cliente();
             Limpia_cajas_captura_despues_de_agregar_cliente();
-            Limpia_combo_codigo_cliente();
+            Limpia_combo_cliente_proveedor();
             Desactiva_cajas_captura_despues_de_agregar_cliente();
             Desaparece_boton_guardar_base_de_datos();
             Desaparece_boton_cancelar();
@@ -198,18 +208,15 @@ namespace Coset_Sistema_Produccion
 
         private void Aparece_caja_codigo_empleado()
         {
-            textBoxCodigoAutoPlacas.Visible = true;
+            textBoxClienteProveedor.Visible = true;
         }
 
         private void comboBoxCodigoCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacion_autos == "Modificar")
-                configura_forma_modificar();
-            else if (Operacion_autos == "Eliminar")
-                configura_forma_eliminar();
-            else if (Operacion_autos == "Visualizar")
-                configura_forma_visualizar();
-
+            if (Operacion_autos == "Salida")
+                configura_forma_salida();
+            else if (Operacion_autos == "Entrada")
+                configura_forma_entrada();
         }
 
 
@@ -228,18 +235,58 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_informacion_de_clientes()
         {
-            auto_busqueda = autos_disponibles.Find(autos => autos.Descripcion.Contains(comboBoxAutoDescripcion.SelectedItem.ToString()));
+            //auto_busqueda = autos_disponibles.Find(autos => autos.Descripcion.Contains(comboBoxAutoDescripcion.SelectedItem.ToString()));
 
-            textBoxCodigoAutoPlacas.Text = auto_busqueda.Placas;
-            textBoxAutoColor.Text = auto_busqueda.Color;
-            textBoxAutoModelo.Text = auto_busqueda.Modelo;
-            textBoxAutoMarca.Text = auto_busqueda.Marca;
+            //textBoxCodigoAutoPlacas.Text = auto_busqueda.Placas;
+            //textBoxAutoColor.Text = auto_busqueda.Color;
+            //textBoxAutoModelo.Text = auto_busqueda.Modelo;
+            //textBoxAutoMarca.Text = auto_busqueda.Marca;
         }
 
-        private void configura_forma_eliminar()
+        private void configura_forma_salida()
         {
-            Rellena_cajas_informacion_de_clientes();
-            Aparece_boton_eliminar_datos_en_base_de_datos();
+            Limpia_combo_contactos_cleinte_proveedor();
+            Aparece_combo_contacto_cliente_proveedor();
+            Activa_combo_contacto_cliente_proveedor();
+            Obtener_contactos_clientes_disponibles();
+            Rellena_combo_contactos_clientes();
+        }
+
+        private void Activa_combo_contacto_cliente_proveedor()
+        {
+            comboBoxContactoClienteProveedor.Enabled = true;
+        }
+
+        private void Aparece_combo_contacto_cliente_proveedor()
+        {
+            comboBoxContactoClienteProveedor.Visible = true;
+        }
+
+        private void Limpia_combo_contactos_cleinte_proveedor()
+        {
+            comboBoxContactoClienteProveedor.Items.Clear();
+            comboBoxContactoClienteProveedor.Text = "";
+        }
+
+        private void Rellena_combo_contactos_clientes()
+        {
+            foreach (Contacto_cliente contacto in Contactos_clientes_disponibles)
+            {
+                if (contacto.error == "")
+                    comboBoxContactoClienteProveedor.Items.Add(contacto.Nombre);
+                else
+                {
+                    MessageBox.Show(contacto.error);
+                    break;
+                }
+            }
+
+        }
+
+        private void Obtener_contactos_clientes_disponibles()
+        {
+            Cliente_seleccionado = Clientes_disponibles.Find(cliente => cliente.Nombre.Contains(comboBoxClienteProveedor.SelectedItem.ToString()));
+            Contactos_clientes_disponibles = Class_Contactos_Clientes.Adquiere_contactos_cliente_disponibles_en_base_datos(Cliente_seleccionado.Codigo);
         }
 
         private void Aparece_boton_eliminar_datos_en_base_de_datos()
@@ -247,11 +294,11 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = true;
         }
 
-        private void configura_forma_modificar()
+        private void configura_forma_entrada()
         {
             Rellena_cajas_informacion_de_clientes();
             Activa_cajas_informacion_auto();
-            Asigna_datos_en_cajas_a_variable();
+            //Asigna_datos_en_cajas_a_variable();
             Aparce_boton_guardar_base_datos();
         }
 
@@ -260,14 +307,7 @@ namespace Coset_Sistema_Produccion
             buttonGuardarBasedeDatos.Visible = true;
         }
 
-        private void Asigna_datos_en_cajas_a_variable()
-        {
-            auto_modificacion.Descripcion = textBoxAutoDescripcion.Text;
-            auto_modificacion.Color = textBoxAutoColor.Text;
-            auto_modificacion.Modelo = textBoxAutoModelo.Text;
-            auto_modificacion.Marca = textBoxAutoMarca.Text;
 
-        }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_modificar_clientes()
         {
@@ -276,7 +316,7 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_combobox_codigo_clientes()
         {
-            comboBoxCodigoAutoPlacas.Enabled = false;
+            comboBoxClienteProveedor.Enabled = false;
         }
 
         private void buttonAgregarAuto_Click(object sender, EventArgs e)
@@ -306,10 +346,10 @@ namespace Coset_Sistema_Produccion
             textBoxAutoDescripcion.Enabled = true;
             textBoxAutoColor.Enabled = true;
             textBoxAutoModelo.Enabled = true;
-            textBoxAutoMarca.Enabled = true;
+            textBoxContactoClienteProveedor.Enabled = true;
             if (Operacion_autos == "Agregar")
             {
-                textBoxCodigoAutoPlacas.Enabled = true;
+                textBoxClienteProveedor.Enabled = true;
             }
         }
 
@@ -319,7 +359,7 @@ namespace Coset_Sistema_Produccion
             if (textBoxAutoDescripcion.Text != "" &&
             textBoxAutoColor.Text != "" &&
             textBoxAutoModelo.Text != "" &&
-            textBoxAutoMarca.Text != "")
+            textBoxContactoClienteProveedor.Text != "")
             {
                 timerAgregarAuto.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
@@ -328,57 +368,14 @@ namespace Coset_Sistema_Produccion
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (Operacion_autos == "Agregar")
-                Secuencia_agregar_auto();
-            else if (Operacion_autos == "Modificar")
-                Secuencia_modificar_auto();
+ 
+
 
         }
 
 
-        private void Secuencia_modificar_auto()
-        {
 
-            if (Modifica_datos_autos())
-            {
-                Limpia_cajas_captura_despues_de_agregar_cliente();
-                Limpia_combo_nombre_cliente();
-                Desactiva_cajas_captura_despues_de_agregar_cliente();
-                Desaparece_boton_guardar_base_de_datos();
-                Desaparece_boton_cancelar();
-                Desaparece_combo_nombre_cliente();
-                Aparce_caja_descripcion_auto();
-                Activa_botones_operacion();
-                Elimina_informacion_auto_disponibles();
-            }
 
-        }
-
-        private bool Modifica_datos_autos()
-        {
-            string respuesta = "";
-            Asigna_datos_modificar_auto();
-            respuesta = Class_Autos.Modifica_datos_auto(auto_modificacion);
-            if (respuesta == "NO errores")
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show(respuesta);
-                return false;
-            }
-        }
-
-        private void Asigna_datos_modificar_auto()
-        {
-            auto_modificacion.Marca = textBoxAutoMarca.Text;
-            auto_modificacion.Descripcion = comboBoxAutoDescripcion.Text;
-            auto_modificacion.Color = textBoxAutoColor.Text;
-            auto_modificacion.Modelo = textBoxAutoModelo.Text;
-            auto_modificacion.Placas = textBoxCodigoAutoPlacas.Text;
-
-        }
 
         private void Aparce_caja_descripcion_auto()
         {
@@ -387,49 +384,9 @@ namespace Coset_Sistema_Produccion
 
         private void Aparce_caja_codigo_cliente()
         {
-            textBoxCodigoAutoPlacas.Visible = true;
+            textBoxClienteProveedor.Visible = true;
         }
 
-        private void Secuencia_agregar_auto()
-        {
-            if (Guarda_datos_auto())
-            {
-                Limpia_cajas_captura_despues_de_agregar_cliente();
-                Limpia_combo_codigo_cliente();
-                Desactiva_cajas_captura_despues_de_agregar_cliente();
-                Desaparece_boton_guardar_base_de_datos();
-                Desaparece_boton_cancelar();
-                Desaparece_combo_codigo_cliente();
-                Activa_botones_operacion();
-                Elimina_informacion_auto_disponibles();
-            }
-
-        }
-
-        private bool Guarda_datos_auto()
-        {
-            string respuesta = "";
-            Asigna_datos_agregar_auto();
-            respuesta = Class_Autos.Inserta_datos_auto(auto_modificacion);
-            if(respuesta == "NO errores")
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show(respuesta);
-                return false;
-            }
-        }
-
-        private void Asigna_datos_agregar_auto()
-        {
-            auto_modificacion.Marca = textBoxAutoMarca.Text;
-            auto_modificacion.Descripcion = textBoxAutoDescripcion.Text;
-            auto_modificacion.Color = textBoxAutoColor.Text;
-            auto_modificacion.Modelo = textBoxAutoModelo.Text;
-            auto_modificacion.Placas = textBoxCodigoAutoPlacas.Text;
-        }
 
         private void Elimina_informacion_auto_disponibles()
         {
@@ -462,7 +419,7 @@ namespace Coset_Sistema_Produccion
 
         private void Desaparece_combo_codigo_cliente()
         {
-            comboBoxCodigoAutoPlacas.Visible = false;
+            comboBoxClienteProveedor.Visible = false;
         }
 
         private void Desaparece_boton_cancelar()
@@ -477,36 +434,55 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_cajas_captura_despues_de_agregar_cliente()
         {
-            textBoxCodigoAutoPlacas.Enabled = false;
+            textBoxClienteProveedor.Enabled = false;
             textBoxAutoDescripcion.Enabled = false;
             textBoxAutoColor.Enabled = false;
             textBoxAutoModelo.Enabled = false;
-            textBoxAutoMarca.Enabled = false;
+            textBoxContactoClienteProveedor.Enabled = false;
         }
 
-        private void Limpia_combo_codigo_cliente()
+        private void Limpia_combo_cliente_proveedor()
         {
-            comboBoxCodigoAutoPlacas.Items.Clear();
-            comboBoxCodigoAutoPlacas.Text = "";
+            comboBoxClienteProveedor.Items.Clear();
+            comboBoxClienteProveedor.Text = "";
         }
 
         private void Limpia_cajas_captura_despues_de_agregar_cliente()
         {
-            textBoxCodigoAutoPlacas.Text = "";
+            textBoxClienteProveedor.Text = "";
             textBoxAutoDescripcion.Text = "";
             textBoxAutoColor.Text = "";
             textBoxAutoModelo.Text = "";
-            textBoxAutoMarca.Text = "";
+            textBoxContactoClienteProveedor.Text = "";
         }
 
-        private void buttonModificarCliente_Click(object sender, EventArgs e)
+        private void buttonSalidaAuto_Click(object sender, EventArgs e)
         {
-            Modifica_clientes();
+            Salida_auto();
         }
 
-        private void Modifica_clientes()
+        private void Salida_auto()
         {
-            Operacion_autos = "Modificar";
+            Operacion_autos = "Salida";
+            Aparece_combo_cliente_proveedor();
+            Activa_combo_cliente_proveedor();
+
+            DialogResult dialogResult = MessageBox.Show("La visita en el Auto es a un cliente?", "Salida Auto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                labelClienteProveedor.Text = "Nombre Cliente";
+                Limpia_combo_cliente_proveedor();
+                Obtener_clientes_disponibles_base_datos();
+                Rellenar_combo_clientes();
+
+            }
+            else
+            {
+                labelClienteProveedor.Text = "Nombre Proveedor";
+                Limpia_combo_cliente_proveedor();
+                Obtener_proveedores_disponibles_base_datos();
+            }
+
             Desactiva_botones_operacion();
             Desaparece_caja_descripcion_auto();
             Aparece_combo_descrpcion_auto();
@@ -514,8 +490,36 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_autos_disponibles_base_datos();
             Rellena_combo_auto_descripcion();
             Aparece_boton_cancelar_operacio();
-            Activa_combo_codigo_cliente();
-            
+ 
+        }
+
+        private void Aparece_combo_cliente_proveedor()
+        {
+            comboBoxClienteProveedor.Visible = true;
+        }
+
+        private void Rellenar_combo_clientes()
+        {
+            foreach(Cliente cliente in Clientes_disponibles)
+            {
+                if (cliente.error == "")
+                    comboBoxClienteProveedor.Items.Add(cliente.Nombre);
+                else
+                {
+                    MessageBox.Show(cliente.error);
+                    break;
+                }
+            }
+        }
+
+        private void Obtener_proveedores_disponibles_base_datos()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Obtener_clientes_disponibles_base_datos()
+        {
+            Clientes_disponibles = Class_Clientes.Adquiere_clientes_disponibles_en_base_datos();
         }
 
         private void buttonEliminarCliente_Click(object sender, EventArgs e)
@@ -549,56 +553,9 @@ namespace Coset_Sistema_Produccion
         {
 
 
-            if (Operacion_autos == "Eliminar")
-                Elimina_auto();
         }
 
      
-        private void Elimina_auto()
-        {
-            if (MessageBox.Show("Esta Seguro de Eiliminar Este Auto?",
-                "Eliminar Auto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (Elimina_informacion_auto_en_base_de_datos())
-                {
-                    Limpia_cajas_captura_despues_de_agregar_cliente();
-                    Limpia_combo_nombre_cliente();
-                    Desactiva_cajas_captura_despues_de_agregar_cliente();
-                    Desaparece_boton_eliminar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_nombre_cliente();
-                    Activa_botones_operacion();
-                    Elimina_informacion_auto_disponibles();
-                    Aparce_caja_descripcion_auto();
-                }
-            }
-        }
-
-        private bool Elimina_informacion_auto_en_base_de_datos()
-        {
-            string respuesta = "";
-            Asigna_datos_elimira_auto();
-            respuesta = Class_Autos.Elimina_datos_auto(auto_eliminar);
-            if (respuesta == "NO errores")
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show(respuesta);
-                return false;
-            }
-
-        }
-
-        private void Asigna_datos_elimira_auto()
-        {
-            auto_eliminar.Marca = textBoxAutoMarca.Text;
-            auto_eliminar.Descripcion = comboBoxAutoDescripcion.Text;
-            auto_eliminar.Color = textBoxAutoColor.Text;
-            auto_eliminar.Modelo = textBoxAutoModelo.Text;
-            auto_eliminar.Placas = textBoxCodigoAutoPlacas.Text;
-        }
 
         private void Desaparece_boton_eliminar_base_de_datos()
         {
@@ -614,36 +571,14 @@ namespace Coset_Sistema_Produccion
         private void comboBoxNombreCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Operacion_autos == "Modificar")
-                configura_forma_modificar();
+                configura_forma_salida();
             else if (Operacion_autos == "Eliminar")
-                configura_forma_eliminar();
+                configura_forma_salida();
             else if (Operacion_autos == "Visualizar")
                 configura_forma_visualizar();
 
         }
 
-        private void dataGridViewEmpleadosAuto_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            try
-            {
-                if (dataGridViewEmpleadosAuto.Rows.Count >= 5)
-                {
-                    //dataGridViewEmpleadosAuto.AllowUserToAddRows = false;
-                    //dataGridViewEmpleadosAuto.Rows.RemoveAt(dataGridViewEmpleadosAuto.Rows.Count-1);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void dataGridViewEmpleadosAuto_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex >5)
-            {
-                SendKeys.Send("{UP}");
-            }
-        }
     }
 }

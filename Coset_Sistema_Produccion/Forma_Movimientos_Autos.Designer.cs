@@ -45,18 +45,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxCodigoAutoPlacas = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxCodigoAutoPlacas = new System.Windows.Forms.ComboBox();
+            this.textBoxClienteProveedor = new System.Windows.Forms.TextBox();
+            this.labelClienteProveedor = new System.Windows.Forms.Label();
+            this.comboBoxClienteProveedor = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.comboBoxAutoDescripcion = new System.Windows.Forms.ComboBox();
-            this.textBoxAutoMarca = new System.Windows.Forms.TextBox();
+            this.textBoxContactoClienteProveedor = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.TimePickerHora = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewEmpleadosAuto = new System.Windows.Forms.DataGridView();
             this.Empleado_nombre = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.comboBoxContactoClienteProveedor = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).BeginInit();
             this.SuspendLayout();
@@ -111,7 +112,7 @@
             this.buttonSalidaAuto.Text = "Salida";
             this.buttonSalidaAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonSalidaAuto.UseVisualStyleBackColor = true;
-            this.buttonSalidaAuto.Click += new System.EventHandler(this.buttonModificarCliente_Click);
+            this.buttonSalidaAuto.Click += new System.EventHandler(this.buttonSalidaAuto_Click);
             // 
             // buttonCancelar
             // 
@@ -180,7 +181,7 @@
             // textBoxAutoModelo
             // 
             this.textBoxAutoModelo.Enabled = false;
-            this.textBoxAutoModelo.Location = new System.Drawing.Point(207, 270);
+            this.textBoxAutoModelo.Location = new System.Drawing.Point(588, 110);
             this.textBoxAutoModelo.Name = "textBoxAutoModelo";
             this.textBoxAutoModelo.Size = new System.Drawing.Size(147, 20);
             this.textBoxAutoModelo.TabIndex = 44;
@@ -190,16 +191,16 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Image = ((System.Drawing.Image)(resources.GetObject("label12.Image")));
-            this.label12.Location = new System.Drawing.Point(85, 270);
+            this.label12.Location = new System.Drawing.Point(86, 252);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 16);
+            this.label12.Size = new System.Drawing.Size(34, 16);
             this.label12.TabIndex = 45;
-            this.label12.Text = "Auto Modelo";
+            this.label12.Text = "Hora";
             // 
             // textBoxAutoColor
             // 
             this.textBoxAutoColor.Enabled = false;
-            this.textBoxAutoColor.Location = new System.Drawing.Point(207, 244);
+            this.textBoxAutoColor.Location = new System.Drawing.Point(412, 110);
             this.textBoxAutoColor.Name = "textBoxAutoColor";
             this.textBoxAutoColor.Size = new System.Drawing.Size(147, 20);
             this.textBoxAutoColor.TabIndex = 42;
@@ -209,16 +210,16 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(85, 244);
+            this.label2.Location = new System.Drawing.Point(86, 226);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 16);
+            this.label2.Size = new System.Drawing.Size(38, 16);
             this.label2.TabIndex = 41;
-            this.label2.Text = "Auto Color";
+            this.label2.Text = "Fecha";
             // 
             // textBoxAutoDescripcion
             // 
             this.textBoxAutoDescripcion.Enabled = false;
-            this.textBoxAutoDescripcion.Location = new System.Drawing.Point(207, 190);
+            this.textBoxAutoDescripcion.Location = new System.Drawing.Point(208, 165);
             this.textBoxAutoDescripcion.Name = "textBoxAutoDescripcion";
             this.textBoxAutoDescripcion.Size = new System.Drawing.Size(311, 20);
             this.textBoxAutoDescripcion.TabIndex = 40;
@@ -228,40 +229,40 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(85, 192);
+            this.label1.Location = new System.Drawing.Point(86, 167);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 16);
             this.label1.TabIndex = 39;
             this.label1.Text = "Auto Descripcion";
             // 
-            // textBoxCodigoAutoPlacas
+            // textBoxClienteProveedor
             // 
-            this.textBoxCodigoAutoPlacas.Enabled = false;
-            this.textBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 163);
-            this.textBoxCodigoAutoPlacas.Name = "textBoxCodigoAutoPlacas";
-            this.textBoxCodigoAutoPlacas.Size = new System.Drawing.Size(311, 20);
-            this.textBoxCodigoAutoPlacas.TabIndex = 38;
+            this.textBoxClienteProveedor.Enabled = false;
+            this.textBoxClienteProveedor.Location = new System.Drawing.Point(208, 138);
+            this.textBoxClienteProveedor.Name = "textBoxClienteProveedor";
+            this.textBoxClienteProveedor.Size = new System.Drawing.Size(178, 20);
+            this.textBoxClienteProveedor.TabIndex = 38;
             // 
-            // label4
+            // labelClienteProveedor
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(85, 163);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 16);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "Cliente/Proveedor";
+            this.labelClienteProveedor.AutoSize = true;
+            this.labelClienteProveedor.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelClienteProveedor.Image = ((System.Drawing.Image)(resources.GetObject("labelClienteProveedor.Image")));
+            this.labelClienteProveedor.Location = new System.Drawing.Point(86, 140);
+            this.labelClienteProveedor.Name = "labelClienteProveedor";
+            this.labelClienteProveedor.Size = new System.Drawing.Size(103, 16);
+            this.labelClienteProveedor.TabIndex = 37;
+            this.labelClienteProveedor.Text = "Cliente/Proveedor";
             // 
-            // comboBoxCodigoAutoPlacas
+            // comboBoxClienteProveedor
             // 
-            this.comboBoxCodigoAutoPlacas.FormattingEnabled = true;
-            this.comboBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 163);
-            this.comboBoxCodigoAutoPlacas.Name = "comboBoxCodigoAutoPlacas";
-            this.comboBoxCodigoAutoPlacas.Size = new System.Drawing.Size(311, 21);
-            this.comboBoxCodigoAutoPlacas.TabIndex = 49;
-            this.comboBoxCodigoAutoPlacas.Visible = false;
-            this.comboBoxCodigoAutoPlacas.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
+            this.comboBoxClienteProveedor.FormattingEnabled = true;
+            this.comboBoxClienteProveedor.Location = new System.Drawing.Point(208, 138);
+            this.comboBoxClienteProveedor.Name = "comboBoxClienteProveedor";
+            this.comboBoxClienteProveedor.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxClienteProveedor.TabIndex = 49;
+            this.comboBoxClienteProveedor.Visible = false;
+            this.comboBoxClienteProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
             // 
             // timerModificarClientes
             // 
@@ -270,27 +271,27 @@
             // comboBoxAutoDescripcion
             // 
             this.comboBoxAutoDescripcion.FormattingEnabled = true;
-            this.comboBoxAutoDescripcion.Location = new System.Drawing.Point(207, 190);
+            this.comboBoxAutoDescripcion.Location = new System.Drawing.Point(208, 165);
             this.comboBoxAutoDescripcion.Name = "comboBoxAutoDescripcion";
             this.comboBoxAutoDescripcion.Size = new System.Drawing.Size(311, 21);
             this.comboBoxAutoDescripcion.TabIndex = 54;
             this.comboBoxAutoDescripcion.Visible = false;
             this.comboBoxAutoDescripcion.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreCliente_SelectedIndexChanged);
             // 
-            // textBoxAutoMarca
+            // textBoxContactoClienteProveedor
             // 
-            this.textBoxAutoMarca.Enabled = false;
-            this.textBoxAutoMarca.Location = new System.Drawing.Point(207, 217);
-            this.textBoxAutoMarca.Name = "textBoxAutoMarca";
-            this.textBoxAutoMarca.Size = new System.Drawing.Size(147, 20);
-            this.textBoxAutoMarca.TabIndex = 56;
+            this.textBoxContactoClienteProveedor.Enabled = false;
+            this.textBoxContactoClienteProveedor.Location = new System.Drawing.Point(208, 194);
+            this.textBoxContactoClienteProveedor.Name = "textBoxContactoClienteProveedor";
+            this.textBoxContactoClienteProveedor.Size = new System.Drawing.Size(178, 20);
+            this.textBoxContactoClienteProveedor.TabIndex = 56;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
-            this.label5.Location = new System.Drawing.Point(85, 219);
+            this.label5.Location = new System.Drawing.Point(86, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 16);
             this.label5.TabIndex = 55;
@@ -299,7 +300,7 @@
             // TimePickerHora
             // 
             this.TimePickerHora.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TimePickerHora.Location = new System.Drawing.Point(207, 312);
+            this.TimePickerHora.Location = new System.Drawing.Point(208, 252);
             this.TimePickerHora.Name = "TimePickerHora";
             this.TimePickerHora.Size = new System.Drawing.Size(147, 20);
             this.TimePickerHora.TabIndex = 58;
@@ -307,7 +308,7 @@
             // dateTimePickerFecha
             // 
             this.dateTimePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerFecha.Location = new System.Drawing.Point(207, 342);
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(208, 226);
             this.dateTimePickerFecha.Name = "dateTimePickerFecha";
             this.dateTimePickerFecha.Size = new System.Drawing.Size(147, 20);
             this.dateTimePickerFecha.TabIndex = 59;
@@ -319,12 +320,10 @@
             this.dataGridViewEmpleadosAuto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Empleado_nombre,
             this.Responsable});
-            this.dataGridViewEmpleadosAuto.Location = new System.Drawing.Point(544, 163);
+            this.dataGridViewEmpleadosAuto.Location = new System.Drawing.Point(599, 140);
             this.dataGridViewEmpleadosAuto.Name = "dataGridViewEmpleadosAuto";
-            this.dataGridViewEmpleadosAuto.Size = new System.Drawing.Size(343, 184);
+            this.dataGridViewEmpleadosAuto.Size = new System.Drawing.Size(343, 146);
             this.dataGridViewEmpleadosAuto.TabIndex = 60;
-            this.dataGridViewEmpleadosAuto.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmpleadosAuto_CellEnter);
-            this.dataGridViewEmpleadosAuto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewEmpleadosAuto_RowsAdded);
             // 
             // Empleado_nombre
             // 
@@ -344,26 +343,36 @@
             this.Responsable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // comboBoxContactoClienteProveedor
+            // 
+            this.comboBoxContactoClienteProveedor.FormattingEnabled = true;
+            this.comboBoxContactoClienteProveedor.Location = new System.Drawing.Point(208, 193);
+            this.comboBoxContactoClienteProveedor.Name = "comboBoxContactoClienteProveedor";
+            this.comboBoxContactoClienteProveedor.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxContactoClienteProveedor.TabIndex = 61;
+            this.comboBoxContactoClienteProveedor.Visible = false;
+            // 
             // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1039, 486);
+            this.Controls.Add(this.comboBoxContactoClienteProveedor);
             this.Controls.Add(this.dataGridViewEmpleadosAuto);
             this.Controls.Add(this.dateTimePickerFecha);
             this.Controls.Add(this.TimePickerHora);
-            this.Controls.Add(this.textBoxAutoMarca);
+            this.Controls.Add(this.textBoxContactoClienteProveedor);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxAutoDescripcion);
-            this.Controls.Add(this.comboBoxCodigoAutoPlacas);
+            this.Controls.Add(this.comboBoxClienteProveedor);
             this.Controls.Add(this.textBoxAutoModelo);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBoxAutoColor);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxAutoDescripcion);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxCodigoAutoPlacas);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxClienteProveedor);
+            this.Controls.Add(this.labelClienteProveedor);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.buttonHome);
@@ -400,17 +409,18 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxAutoDescripcion;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxCodigoAutoPlacas;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxCodigoAutoPlacas;
+        private System.Windows.Forms.TextBox textBoxClienteProveedor;
+        private System.Windows.Forms.Label labelClienteProveedor;
+        private System.Windows.Forms.ComboBox comboBoxClienteProveedor;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.ComboBox comboBoxAutoDescripcion;
-        private System.Windows.Forms.TextBox textBoxAutoMarca;
+        private System.Windows.Forms.TextBox textBoxContactoClienteProveedor;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker TimePickerHora;
         private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
         private System.Windows.Forms.DataGridView dataGridViewEmpleadosAuto;
         private System.Windows.Forms.DataGridViewComboBoxColumn Empleado_nombre;
         private System.Windows.Forms.DataGridViewComboBoxColumn Responsable;
+        private System.Windows.Forms.ComboBox comboBoxContactoClienteProveedor;
     }
 }
