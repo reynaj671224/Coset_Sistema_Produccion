@@ -579,6 +579,52 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        private void comboBoxContactoClienteProveedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Activa_datagridview_empleados();
+            //Limpia_datagridview_empleados();
+            Obtener_usuarios_disponibles_base_datos();
+            Limpia_combo_nombre_empleado_en_datagridview();
+            Rellenar_combo_usuarios_datagridview();
 
+           
+        }
+
+        private void Limpia_combo_nombre_empleado_en_datagridview()
+        {
+            Empleado_nombre.Items.Clear();
+        }
+
+        private void Rellenar_combo_usuarios_datagridview()
+        {
+            foreach (Usuario usario in Usuarios_disponibles)
+            {
+                if (usario.error == "")
+                {
+                    Empleado_nombre.Items.Add(usario.nombre_empleado);
+                }
+                else
+                {
+                    MessageBox.Show(usario.error);
+                }
+
+            }
+
+        }
+
+        private void Obtener_usuarios_disponibles_base_datos()
+        {
+            Usuarios_disponibles = Class_Usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+        }
+
+        private void Limpia_datagridview_empleados()
+        {
+            dataGridViewEmpleadosAuto.Rows.Clear();
+        }
+
+        private void Activa_datagridview_empleados()
+        {
+            dataGridViewEmpleadosAuto.Enabled = true;
+        }
     }
 }
