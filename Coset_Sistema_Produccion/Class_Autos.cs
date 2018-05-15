@@ -79,6 +79,30 @@ namespace Coset_Sistema_Produccion
             return "NO errores";
         }
 
+        public string Modifica_datos_status_auto(string status)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_status_auto_en_base_de_datos(status), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+
+        private string Configura_cadena_comando_modificar_status_auto_en_base_de_datos(string status)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Elimina_datos_auto(Auto auto)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());

@@ -38,7 +38,7 @@
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
-            this.timerAgregarAuto = new System.Windows.Forms.Timer(this.components);
+            this.timerMovimientosAuto = new System.Windows.Forms.Timer(this.components);
             this.textBoxAutoModelo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxAutoColor = new System.Windows.Forms.TextBox();
@@ -182,10 +182,10 @@
             this.buttonGuardarBasedeDatos.Visible = false;
             this.buttonGuardarBasedeDatos.Click += new System.EventHandler(this.buttonGuardarBasedeDatos_Click);
             // 
-            // timerAgregarAuto
+            // timerMovimientosAuto
             // 
-            this.timerAgregarAuto.Interval = 1000;
-            this.timerAgregarAuto.Tick += new System.EventHandler(this.timerAgregarAuto_Tick);
+            this.timerMovimientosAuto.Interval = 1000;
+            this.timerMovimientosAuto.Tick += new System.EventHandler(this.timerMovimientosAuto_Tick);
             // 
             // textBoxAutoModelo
             // 
@@ -472,7 +472,7 @@
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
-        private System.Windows.Forms.Timer timerAgregarAuto;
+        private System.Windows.Forms.Timer timerMovimientosAuto;
         private System.Windows.Forms.TextBox textBoxAutoModelo;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxAutoColor;

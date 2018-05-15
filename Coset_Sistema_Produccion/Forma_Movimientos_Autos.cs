@@ -15,7 +15,7 @@ namespace Coset_Sistema_Produccion
     {
         public Class_Autos Class_Autos = new Class_Autos();
         public List<Auto> autos_disponibles = new List<Auto>();
-        public Auto auto_agregar = new Auto();
+        public Auto auto_seleccion = new Auto();
         public Class_Proveedores Class_Proveedores = new Class_Proveedores();
         public List<Proveedor> Proeveedores_disponibles = new List<Proveedor>();
         public Proveedor Proveedor_seleccion = new Proveedor();
@@ -28,6 +28,11 @@ namespace Coset_Sistema_Produccion
         public List<Contacto_cliente> Contactos_clientes_disponibles = new List<Contacto_cliente>();
         public Class_Usuarios Class_Usuarios = new Class_Usuarios();
         public List<Usuario> Usuarios_disponibles = new List<Usuario>();
+        public Class_Movimientos_Autos Class_Movimientos_Autos = new Class_Movimientos_Autos();
+        public List<Movimiento_auto> Movimientos_auto_disponibles = new List<Movimiento_auto>();
+        public Movimiento_auto Movimiento_salida = new Movimiento_auto();
+        public Movimiento_auto Movimiento_entrada = new Movimiento_auto();
+        public Movimiento_auto Movimiento_visualizar = new Movimiento_auto();
 
         public string Operacion_autos = "";
 
@@ -98,7 +103,12 @@ namespace Coset_Sistema_Produccion
             foreach (Auto auto in autos_disponibles)
             {
                 if (auto.error == "")
-                    comboBoxAutoDescripcion.Items.Add(auto.Descripcion);
+                {
+                    if (auto.Status != "Usando")
+                    {
+                        comboBoxAutoDescripcion.Items.Add(auto.Descripcion);
+                    }
+                }
                 else
                 {
                     MessageBox.Show(auto.error);
@@ -338,7 +348,7 @@ namespace Coset_Sistema_Produccion
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_auto()
         {
-            timerAgregarAuto.Enabled = true;
+            timerMovimientosAuto.Enabled = true;
         }
 
         private void Activa_cajas_informacion_auto()
@@ -354,14 +364,15 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void timerAgregarAuto_Tick(object sender, EventArgs e)
+        private void timerMovimientosAuto_Tick(object sender, EventArgs e)
         {
-            if (textBoxAutoDescripcion.Text != "" &&
-            textBoxAutoColor.Text != "" &&
-            textBoxAutoModelo.Text != "" &&
-            textBoxContactoClienteProveedor.Text != "")
+
+            if (comboBoxContactoClienteProveedor.Text != "" &&
+                comboBoxAutoDescripcion.Text != "" &&
+                comboBoxContactoClienteProveedor.Text != "" &&
+                dataGridViewEmpleadosAuto[0, 0].Value != null)
             {
-                timerAgregarAuto.Enabled = false;
+                timerMovimientosAuto.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
             }
         }
@@ -369,13 +380,92 @@ namespace Coset_Sistema_Produccion
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
  
-
-
+            if(Operacion_autos == "Salida")
+            {
+                secuencia_guarda_salida();
+            }
         }
 
+        private void secuencia_guarda_salida()
+        {
+            Asigna_valores_de_cajas_variable_movimientos_autos();
+            if(Guarda_datos_salida())
+            {
+                if (Asigna_usando_status_auto())
+                {
+                    Limpia_combo_cliente_proveedor();
+                    Limpia_combo_nombre_cliente();
+                    Limpia_cajas_captura_despues_de_agregar_cliente();
+                    Limpia_combo_cliente_proveedor();
+                    Desactiva_cajas_captura_despues_de_agregar_cliente();
+                    Desaparece_boton_guardar_base_de_datos();
+                    Desaparece_boton_cancelar();
+                    Desaparece_combo_codigo_cliente();
+                    Desaparece_combo_nombre_cliente();
+                    Activa_botones_operacion();
+                    Aparece_caja_codigo_empleado();
+                    Aparece_caja_nombre_cliente();
+                    Elimina_informacion_auto_disponibles();
+                }
+            }
+        }
 
+        private bool Asigna_usando_status_auto()
+        {
 
+            //autos_disponibles = Class_Autos.Adquiere_autos_disponibles_en_base_datos();
 
+            auto_seleccion = autos_disponibles.Find(autos => autos.Descripcion.Contains(comboBoxAutoDescripcion.SelectedItem.ToString()));
+            string respuesta = "";
+            auto_seleccion.Status = "Usando";
+            respuesta = Class_Autos.Modifica_datos_auto(auto_seleccion);
+            if(respuesta == "NO errores")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool Guarda_datos_salida()
+        {
+            string respuesta = "";
+            respuesta = Class_Movimientos_Autos.Inserta_nuevo_movimiento_auto_base_datos(Movimiento_salida);
+            if(respuesta == "NO errores")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void Asigna_valores_de_cajas_variable_movimientos_autos()
+        {
+            Movimiento_salida.Auto_descripcion = comboBoxAutoDescripcion.Text;
+            Movimiento_salida.Fecha_salida = dateTimePickerFecha.Text;
+            Movimiento_salida.Hora_salida = TimePickerHora.Text;
+            Movimiento_salida.Nombre_visita = comboBoxClienteProveedor.Text;
+            Movimiento_salida.Nombre_contacto = comboBoxContactoClienteProveedor.Text;
+            Movimiento_salida.Status = "Usando";
+            Movimiento_salida.Empleados = Contruye_cadena_empleados_en_auto();
+        }
+
+        private string Contruye_cadena_empleados_en_auto()
+        {
+            string Empleados = "";
+            foreach(DataGridViewRow renglon in dataGridViewEmpleadosAuto.Rows)
+            {
+                if (renglon.Cells[0].Value != null)
+                {
+                    Empleados = Empleados + renglon.Cells[0].Value.ToString() + ":" + renglon.Cells[1].Value.ToString().Substring(0, 1) + ",";
+                }
+            }
+            return Empleados;
+        }
 
         private void Aparce_caja_descripcion_auto()
         {
@@ -490,7 +580,13 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_autos_disponibles_base_datos();
             Rellena_combo_auto_descripcion();
             Aparece_boton_cancelar_operacio();
- 
+            Inicia_timer_movimiento_autos();
+            Operacion_autos = "Salida";
+        }
+
+        private void Inicia_timer_movimiento_autos()
+        {
+            timerMovimientosAuto.Enabled = true;
         }
 
         private void Aparece_combo_cliente_proveedor()
@@ -570,7 +666,7 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacion_autos == "Modificar")
+            if (Operacion_autos == "Salida")
                 configura_forma_salida();
             else if (Operacion_autos == "Eliminar")
                 configura_forma_salida();

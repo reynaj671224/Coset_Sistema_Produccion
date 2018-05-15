@@ -49,13 +49,13 @@ namespace Coset_Sistema_Produccion
             return "SELECT * FROM movimientos_autos ORDER BY ABS(auto_descripcion);";
         }
 
-        public string Inserta_nuevo_entrada_material_base_datos(Movimiento_auto autos_movimiento)
+        public string Inserta_nuevo_movimiento_auto_base_datos(Movimiento_auto autos_movimiento)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_entrada_material(autos_movimiento), connection);
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_movimiento_auto(autos_movimiento), connection);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private string Configura_cadena_comando_insertar_en_base_de_datos_entrada_material(Movimiento_auto autos_movimiento)
+        private string Configura_cadena_comando_insertar_en_base_de_datos_movimiento_auto(Movimiento_auto autos_movimiento)
         {
             return "INSERT INTO movimientos_autos(salida_hora, salida_fecha,entrada_hora," +
                    "entrada_fecha,auto_descripcion,nombre_visita,nombre_contacto,empleados,status) " +
@@ -84,7 +84,7 @@ namespace Coset_Sistema_Produccion
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_materiales(autos_movimiento), connection);
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos_movimiento_auto(autos_movimiento), connection);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace Coset_Sistema_Produccion
             return "NO errores";
         }
 
-        private string Configura_cadena_comando_modificar_en_base_de_datos_materiales(Movimiento_auto autos_movimiento)
+        private string Configura_cadena_comando_modificar_en_base_de_datos_movimiento_auto(Movimiento_auto autos_movimiento)
         {
             return "UPDATE movimientos_autos set" +
               "',salida_hora='" + autos_movimiento.Hora_salida +
