@@ -316,7 +316,7 @@
             // 
             this.movimientosautosToolStripMenuItem.Name = "movimientosautosToolStripMenuItem";
             this.movimientosautosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.movimientosautosToolStripMenuItem.Text = " Movimientos Autos";
+            this.movimientosautosToolStripMenuItem.Text = "Movimientos Autos";
             this.movimientosautosToolStripMenuItem.Click += new System.EventHandler(this.movimientosautosToolStripMenuItem_Click);
             // 
             // produccionToolStripMenuItem

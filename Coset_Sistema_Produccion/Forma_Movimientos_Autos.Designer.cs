@@ -58,7 +58,8 @@
             this.Empleado_nombre = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.comboBoxContactoClienteProveedor = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMovimientosAutos = new System.Windows.Forms.DataGridView();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_entrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,9 +67,10 @@
             this.Compania = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Contacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empleados = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovimientosAutos)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -107,7 +109,7 @@
             this.buttonEntradaAuto.Text = "Entrada";
             this.buttonEntradaAuto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEntradaAuto.UseVisualStyleBackColor = true;
-            this.buttonEntradaAuto.Click += new System.EventHandler(this.buttonAgregarAuto_Click);
+            this.buttonEntradaAuto.Click += new System.EventHandler(this.buttonEntradaAuto_Click);
             // 
             // buttonSalidaAuto
             // 
@@ -308,6 +310,7 @@
             // 
             // TimePickerHora
             // 
+            this.TimePickerHora.Enabled = false;
             this.TimePickerHora.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.TimePickerHora.Location = new System.Drawing.Point(208, 252);
             this.TimePickerHora.Name = "TimePickerHora";
@@ -316,6 +319,7 @@
             // 
             // dateTimePickerFecha
             // 
+            this.dateTimePickerFecha.Enabled = false;
             this.dateTimePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerFecha.Location = new System.Drawing.Point(208, 226);
             this.dateTimePickerFecha.Name = "dateTimePickerFecha";
@@ -363,23 +367,31 @@
             this.comboBoxContactoClienteProveedor.Visible = false;
             this.comboBoxContactoClienteProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxContactoClienteProveedor_SelectedIndexChanged);
             // 
-            // dataGridView1
+            // dataGridViewMovimientosAutos
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewMovimientosAutos.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewMovimientosAutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMovimientosAutos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codigo,
             this.Hora_salida,
             this.Fecha_salida,
             this.Hora_entrada,
             this.Fecha_entrada,
             this.Compania,
             this.Contacto,
-            this.Estado});
-            this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(80, 328);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(845, 146);
-            this.dataGridView1.TabIndex = 62;
+            this.Estado,
+            this.empleados});
+            this.dataGridViewMovimientosAutos.Enabled = false;
+            this.dataGridViewMovimientosAutos.Location = new System.Drawing.Point(80, 328);
+            this.dataGridViewMovimientosAutos.Name = "dataGridViewMovimientosAutos";
+            this.dataGridViewMovimientosAutos.Size = new System.Drawing.Size(845, 146);
+            this.dataGridViewMovimientosAutos.TabIndex = 62;
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Codigo";
+            this.codigo.Name = "codigo";
+            this.codigo.Visible = false;
             // 
             // Hora_salida
             // 
@@ -420,12 +432,18 @@
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             // 
+            // empleados
+            // 
+            this.empleados.HeaderText = "Empleados";
+            this.empleados.Name = "empleados";
+            this.empleados.Visible = false;
+            // 
             // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1039, 486);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewMovimientosAutos);
             this.Controls.Add(this.comboBoxContactoClienteProveedor);
             this.Controls.Add(this.dataGridViewEmpleadosAuto);
             this.Controls.Add(this.dateTimePickerFecha);
@@ -456,7 +474,7 @@
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovimientosAutos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,7 +510,8 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Empleado_nombre;
         private System.Windows.Forms.DataGridViewComboBoxColumn Responsable;
         private System.Windows.Forms.ComboBox comboBoxContactoClienteProveedor;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewMovimientosAutos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_entrada;
@@ -500,5 +519,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Compania;
         private System.Windows.Forms.DataGridViewTextBoxColumn Contacto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn empleados;
     }
 }
