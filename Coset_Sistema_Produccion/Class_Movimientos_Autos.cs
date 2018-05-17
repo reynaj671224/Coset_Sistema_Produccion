@@ -9,13 +9,13 @@ namespace Coset_Sistema_Produccion
 {
     public class Class_Movimientos_Autos
     {
-        public List<Movimiento_auto> Adquiere_movimientos_autos_busqueda_en_base_datos()
+        public List<Movimiento_auto> Adquiere_movimientos_autos_busqueda_en_base_datos(string descripcion_auto)
         {
             List<Movimiento_auto> Movimientos_autos_disponibles = new List<Movimiento_auto>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_movimiento_autos(), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_movimiento_autos(descripcion_auto), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
@@ -85,9 +85,9 @@ namespace Coset_Sistema_Produccion
                 " and status='Usando';";
         }
 
-        private string Commando_leer_Mysql_busqueda_movimiento_autos()
+        private string Commando_leer_Mysql_busqueda_movimiento_autos(string descripcion_auto)
         {
-            return "SELECT * FROM movimientos_autos ORDER BY ABS(auto_descripcion);";
+            return "SELECT * FROM movimientos_autos where auto_descripcion ='" + descripcion_auto +"'";
         }
 
         public string Inserta_nuevo_movimiento_auto_base_datos(Movimiento_auto autos_movimiento)
@@ -141,8 +141,8 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_modificar_en_base_de_datos_movimiento_auto(Movimiento_auto autos_movimiento)
         {
-            return "UPDATE movimientos_autos set" +
-              "',salida_hora='" + autos_movimiento.Hora_salida +
+            return "UPDATE movimientos_autos set " +
+              "salida_hora='" + autos_movimiento.Hora_salida +
               "',salida_fecha='" + autos_movimiento.Fecha_salida +
               "',entrada_hora='" + autos_movimiento.Hora_entrada +
               "',entrada_fecha='" + autos_movimiento.Fecha_entrada +

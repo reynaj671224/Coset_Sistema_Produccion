@@ -39,9 +39,7 @@
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.timerMovimientosAuto = new System.Windows.Forms.Timer(this.components);
-            this.textBoxAutoModelo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBoxAutoColor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -95,7 +93,7 @@
             this.buttonBuscarMovimientos.Text = "Visualizar";
             this.buttonBuscarMovimientos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarMovimientos.UseVisualStyleBackColor = true;
-            this.buttonBuscarMovimientos.Click += new System.EventHandler(this.buttonBuscarempleado_Click);
+            this.buttonBuscarMovimientos.Click += new System.EventHandler(this.buttonBuscarMovimientos_Click);
             // 
             // buttonEntradaAuto
             // 
@@ -189,14 +187,6 @@
             this.timerMovimientosAuto.Interval = 1000;
             this.timerMovimientosAuto.Tick += new System.EventHandler(this.timerMovimientosAuto_Tick);
             // 
-            // textBoxAutoModelo
-            // 
-            this.textBoxAutoModelo.Enabled = false;
-            this.textBoxAutoModelo.Location = new System.Drawing.Point(588, 110);
-            this.textBoxAutoModelo.Name = "textBoxAutoModelo";
-            this.textBoxAutoModelo.Size = new System.Drawing.Size(147, 20);
-            this.textBoxAutoModelo.TabIndex = 44;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -207,14 +197,6 @@
             this.label12.Size = new System.Drawing.Size(34, 16);
             this.label12.TabIndex = 45;
             this.label12.Text = "Hora";
-            // 
-            // textBoxAutoColor
-            // 
-            this.textBoxAutoColor.Enabled = false;
-            this.textBoxAutoColor.Location = new System.Drawing.Point(412, 110);
-            this.textBoxAutoColor.Name = "textBoxAutoColor";
-            this.textBoxAutoColor.Size = new System.Drawing.Size(147, 20);
-            this.textBoxAutoColor.TabIndex = 42;
             // 
             // label2
             // 
@@ -334,7 +316,7 @@
             this.Empleado_nombre,
             this.Responsable});
             this.dataGridViewEmpleadosAuto.Enabled = false;
-            this.dataGridViewEmpleadosAuto.Location = new System.Drawing.Point(534, 140);
+            this.dataGridViewEmpleadosAuto.Location = new System.Drawing.Point(582, 140);
             this.dataGridViewEmpleadosAuto.Name = "dataGridViewEmpleadosAuto";
             this.dataGridViewEmpleadosAuto.Size = new System.Drawing.Size(343, 146);
             this.dataGridViewEmpleadosAuto.TabIndex = 60;
@@ -386,6 +368,7 @@
             this.dataGridViewMovimientosAutos.Name = "dataGridViewMovimientosAutos";
             this.dataGridViewMovimientosAutos.Size = new System.Drawing.Size(845, 146);
             this.dataGridViewMovimientosAutos.TabIndex = 62;
+            this.dataGridViewMovimientosAutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovimientosAutos_CellClick);
             // 
             // codigo
             // 
@@ -452,9 +435,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxAutoDescripcion);
             this.Controls.Add(this.comboBoxClienteProveedor);
-            this.Controls.Add(this.textBoxAutoModelo);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBoxAutoColor);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxAutoDescripcion);
             this.Controls.Add(this.label1);
@@ -491,9 +472,7 @@
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
         private System.Windows.Forms.Timer timerMovimientosAuto;
-        private System.Windows.Forms.TextBox textBoxAutoModelo;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBoxAutoColor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxAutoDescripcion;
         private System.Windows.Forms.Label label1;
