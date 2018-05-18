@@ -202,6 +202,12 @@ namespace Coset_Sistema_Produccion
             Oculta_Menu_Almacen_Materiales();
             Oculta_Menu_Almacen_Inventarios();
             Oculta_Menu_Almacen_Devoluciones();
+            Oculta_Menu_Almacen_Movimiento_autos();
+        }
+
+        private void Oculta_Menu_Almacen_Movimiento_autos()
+        {
+            movimientosautosToolStripMenuItem.Enabled = false;
         }
 
         private void Oculta_Menu_Almacen_Devoluciones()
@@ -277,6 +283,26 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Almacen_Entradas();
             Muestra_Menu_Almacen_Salidas();
             Muestra_Menu_Almacen_Materiales();
+            Muestra_Menu_Almacen_Movimientos_autos();
+            Muestra_menu_almacen_devolucion_materiales();
+            Muestra_menu_almacen_inventarios_materiales();
+
+
+        }
+
+        private void Muestra_menu_almacen_devolucion_materiales()
+        {
+            devolucionToolStripMenuItem.Enabled = true;
+        }
+
+        private void Muestra_menu_almacen_inventarios_materiales()
+        {
+            toolStripMenuItemInventarios.Enabled = true;
+        }
+
+        private void Muestra_Menu_Almacen_Movimientos_autos()
+        {
+            movimientosautosToolStripMenuItem.Enabled = true;
         }
 
         private void Muestra_Menu_Almacen_Materiales()

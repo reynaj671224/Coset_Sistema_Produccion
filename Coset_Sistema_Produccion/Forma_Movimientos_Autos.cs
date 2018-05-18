@@ -636,31 +636,51 @@ namespace Coset_Sistema_Produccion
 
         private void secuencia_guarda_salida()
         {
-            Asigna_valores_de_cajas_variable_movimientos_autos();
-            if(Guarda_datos_salida())
+            if (verifica_campos_usuarios())
             {
-                if (Asigna_usando_status_auto())
+                Asigna_valores_de_cajas_variable_movimientos_autos();
+                if (Guarda_datos_salida())
                 {
-                    Limpia_combo_cliente_proveedor();
-                    Limpia_combo_descripcion_auto();
-                    Limpia_combo_contactos_cliente_proveedor();
-                    Limpia_cajas_captura_despues_de_agregar_cliente();
-                    Limpia_datagridview_texto_empleados();
-                    Desactiva_datagridview_movimiento_autos();
-                    Desactiva_cajas_captura_despues_de_agregar_cliente();
-                    Desaparece_boton_guardar_base_de_datos();
-                    Desaparece_boton_cancelar();
-                    Desaparece_combo_cliente_proveedor();
-                    Desaparece_combo_descripcion_auto();
-                    Desaparece_combo_contacto_cliente_proveedor();
-                    Activa_botones_operacion();
-                    Aparece_caja_codigo_empleado();
-                    Aparece_caja_nombre_cliente();
-                    Desactiva_seleccion_fecha();
-                    Desactiva_seleccion_hora();
-                    Elimina_informacion_auto_disponibles();
+                    if (Asigna_usando_status_auto())
+                    {
+                        Limpia_combo_cliente_proveedor();
+                        Limpia_combo_descripcion_auto();
+                        Limpia_combo_contactos_cliente_proveedor();
+                        Limpia_cajas_captura_despues_de_agregar_cliente();
+                        Limpia_datagridview_texto_empleados();
+                        Desactiva_datagridview_movimiento_autos();
+                        Desactiva_cajas_captura_despues_de_agregar_cliente();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_cliente_proveedor();
+                        Desaparece_combo_descripcion_auto();
+                        Desaparece_combo_contacto_cliente_proveedor();
+                        Activa_botones_operacion();
+                        Aparece_caja_codigo_empleado();
+                        Aparece_caja_nombre_cliente();
+                        Desactiva_seleccion_fecha();
+                        Desactiva_seleccion_hora();
+                        Elimina_informacion_auto_disponibles();
+                    }
                 }
             }
+        }
+
+        private bool verifica_campos_usuarios()
+        {
+            foreach(DataGridViewRow renglon in dataGridViewEmpleadosAuto.Rows)
+            {
+                if(renglon.Cells[(int)Empleados.nombre].Value!=null)
+                {
+                    if(renglon.Cells[(int)Empleados.acceso_auto].Value == null)
+                    {
+                        MessageBox.Show("Campo de Acceso al auto vacio", "Salida Auto", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private void Desactiva_seleccion_hora()
@@ -716,20 +736,20 @@ namespace Coset_Sistema_Produccion
             Movimiento_salida.Nombre_visita = comboBoxClienteProveedor.Text;
             Movimiento_salida.Nombre_contacto = comboBoxContactoClienteProveedor.Text;
             Movimiento_salida.Status = "Usando";
-            Movimiento_salida.Empleados = Contruye_cadena_empleados_en_auto();
+            Movimiento_salida.Empleados = Construye_cadena_empleados_en_auto();
         }
 
-        private string Contruye_cadena_empleados_en_auto()
+        private string Construye_cadena_empleados_en_auto()
         {
-            string Empleados = "";
+            string Empleados_datagridview = "";
             foreach(DataGridViewRow renglon in dataGridViewEmpleadosAuto.Rows)
             {
-                if (renglon.Cells[0].Value != null)
+                if (renglon.Cells[(int)Empleados.nombre].Value != null)
                 {
-                    Empleados = Empleados + renglon.Cells[0].Value.ToString() + ":" + renglon.Cells[1].Value.ToString().Substring(0, 1) + ",";
+                    Empleados_datagridview = Empleados_datagridview + renglon.Cells[(int)Empleados.nombre].Value.ToString() + ":" + renglon.Cells[(int)Empleados.acceso_auto].Value.ToString().Substring(0, 1) + ",";
                 }
             }
-            return Empleados;
+            return Empleados_datagridview;
         }
 
         private void Aparce_caja_descripcion_auto()
@@ -748,6 +768,11 @@ namespace Coset_Sistema_Produccion
             autos_disponibles = null;
             Proveedores_disponibles = null;
             Clientes_disponibles = null;
+            Contactos_clientes_disponibles = null;
+            Contactos_proveedor_disponibles = null;
+            Usuarios_disponibles = null;
+            Movimientos_auto_en_uso_disponibles = null;
+            Movimientos_auto_visualizar_disponibles = null;
             GC.Collect();
         }
 
