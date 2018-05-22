@@ -332,6 +332,7 @@
             this.capturaDeProduccionToolStripMenuItem.Name = "capturaDeProduccionToolStripMenuItem";
             this.capturaDeProduccionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.capturaDeProduccionToolStripMenuItem.Text = "Captura de Produccion";
+            this.capturaDeProduccionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeProduccionToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 

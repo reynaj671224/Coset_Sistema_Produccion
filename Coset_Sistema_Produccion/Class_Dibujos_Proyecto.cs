@@ -42,6 +42,44 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        public List<Dibujos_proyecto> Adquiere_dibujos_disponibles_en_base_datos(string numero_dibujo)
+        {
+            List<Dibujos_proyecto> clientes_disponibles = new List<Dibujos_proyecto>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_dibujos_proyecto());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_numero_dibujo(numero_dibujo), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    clientes_disponibles.Add(new Dibujos_proyecto()
+                    {
+                        Codigo = (int)mySqlDataReader["codigo_dibujo"],
+                        Numero = mySqlDataReader["numero_dibujo"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_dibujos"].ToString(),
+                        Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
+                        proceso = mySqlDataReader["proceso"].ToString(),
+                        tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                clientes_disponibles.Add(new Dibujos_proyecto()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return clientes_disponibles;
+
+        }
+
+        private string Commando_leer_Mysql_numero_dibujo(object numero_dibujo)
+        {
+            return "SELECT * FROM dibujos_proyecto WHERE numero_dibujo='" + numero_dibujo + "';";
+        }
+
         private string Commando_leer_Mysql(string Codigo_proyecto)
         {
             return "SELECT * FROM dibujos_proyecto WHERE codigo_proyecto='" + Codigo_proyecto + "';";
