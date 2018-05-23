@@ -27,6 +27,10 @@ namespace Coset_Sistema_Produccion
                         Estado = mySqlDataReader["estado"].ToString(),
                         Calidad = mySqlDataReader["calidad"].ToString(),
                         Secuencia = mySqlDataReader["secuencia"].ToString(),
+                        horas_produccion = mySqlDataReader["horas_produccion"].ToString(),
+                        horas_retrabajo = mySqlDataReader["horas_retrabajo"].ToString(),
+                        proyecto = mySqlDataReader["proyecto"].ToString(),
+
                     });
                 }
             }
@@ -62,10 +66,10 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_dibujo_produccion(Dibujo_produccion numero_dibujo)
         {
 
-            return "INSERT INTO produccion_dibujos(numero_dibujo, proceso,estado," +
-                   "calidad,secuencia) " +
+            return "INSERT INTO produccion_dibujos(numero_dibujo, proceso," +
+                   "proyecto,calidad) " +
                    "VALUES('" + numero_dibujo.Numero_dibujo + "','" + numero_dibujo.Proceso + "','" +
-                   numero_dibujo.Estado + "','" + numero_dibujo.Calidad + "','" + numero_dibujo.Secuencia + "');";
+                   numero_dibujo.proyecto + "','" + numero_dibujo.Calidad +"'); ";
 
         }
 
@@ -89,6 +93,9 @@ namespace Coset_Sistema_Produccion
         public string Estado = "";
         public string Calidad = "";
         public string Secuencia = "";
+        public string horas_produccion = "";
+        public string horas_retrabajo = "";
+        public string proyecto = "";
         public string error = "";
     }
 }

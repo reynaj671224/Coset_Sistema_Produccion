@@ -36,13 +36,13 @@
             this.buttonBuscarDibujo = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxCodigoProceso = new System.Windows.Forms.TextBox();
+            this.labelEmpleado = new System.Windows.Forms.Label();
+            this.textBoxEmpleado = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxNombreProceso = new System.Windows.Forms.TextBox();
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
-            this.timerInciarProcesoBUsqueda = new System.Windows.Forms.Timer(this.components);
-            this.comboBoxCodigoProceso = new System.Windows.Forms.ComboBox();
+            this.timerInciarProcesoBusqueda = new System.Windows.Forms.Timer(this.components);
+            this.comboBoxEmpleado = new System.Windows.Forms.ComboBox();
             this.timerActualizrempleado = new System.Windows.Forms.Timer(this.components);
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.timerEliminaempleado = new System.Windows.Forms.Timer(this.components);
@@ -50,6 +50,8 @@
             this.comboBoxNombreProceso = new System.Windows.Forms.ComboBox();
             this.textBoxNumeroDibujo = new System.Windows.Forms.TextBox();
             this.labelNumeroDibujo = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxEstado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,24 +142,24 @@
             this.buttonGuardarBasedeDatos.Visible = false;
             this.buttonGuardarBasedeDatos.Click += new System.EventHandler(this.buttonGuardarBasedeDatos_Click);
             // 
-            // label1
+            // labelEmpleado
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(43, 148);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Codigo Proceso";
+            this.labelEmpleado.AutoSize = true;
+            this.labelEmpleado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("labelEmpleado.Image")));
+            this.labelEmpleado.Location = new System.Drawing.Point(43, 122);
+            this.labelEmpleado.Name = "labelEmpleado";
+            this.labelEmpleado.Size = new System.Drawing.Size(61, 16);
+            this.labelEmpleado.TabIndex = 6;
+            this.labelEmpleado.Text = "Empleado";
             // 
-            // textBoxCodigoProceso
+            // textBoxEmpleado
             // 
-            this.textBoxCodigoProceso.Enabled = false;
-            this.textBoxCodigoProceso.Location = new System.Drawing.Point(171, 148);
-            this.textBoxCodigoProceso.Name = "textBoxCodigoProceso";
-            this.textBoxCodigoProceso.Size = new System.Drawing.Size(120, 20);
-            this.textBoxCodigoProceso.TabIndex = 7;
+            this.textBoxEmpleado.Enabled = false;
+            this.textBoxEmpleado.Location = new System.Drawing.Point(171, 121);
+            this.textBoxEmpleado.Name = "textBoxEmpleado";
+            this.textBoxEmpleado.Size = new System.Drawing.Size(196, 20);
+            this.textBoxEmpleado.TabIndex = 7;
             // 
             // label2
             // 
@@ -194,21 +196,20 @@
             this.buttonBorrarBasedeDatos.Visible = false;
             this.buttonBorrarBasedeDatos.Click += new System.EventHandler(this.buttonBorrarBasedeDatos_Click);
             // 
-            // timerInciarProcesoBUsqueda
+            // timerInciarProcesoBusqueda
             // 
-            this.timerInciarProcesoBUsqueda.Enabled = true;
-            this.timerInciarProcesoBUsqueda.Interval = 1000;
-            this.timerInciarProcesoBUsqueda.Tick += new System.EventHandler(this.timerInciarProcesoBUsqueda_Tick);
+            this.timerInciarProcesoBusqueda.Interval = 1000;
+            this.timerInciarProcesoBusqueda.Tick += new System.EventHandler(this.timerInciarProcesoBusqueda_Tick);
             // 
-            // comboBoxCodigoProceso
+            // comboBoxEmpleado
             // 
-            this.comboBoxCodigoProceso.FormattingEnabled = true;
-            this.comboBoxCodigoProceso.Location = new System.Drawing.Point(171, 148);
-            this.comboBoxCodigoProceso.Name = "comboBoxCodigoProceso";
-            this.comboBoxCodigoProceso.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCodigoProceso.TabIndex = 25;
-            this.comboBoxCodigoProceso.Visible = false;
-            this.comboBoxCodigoProceso.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoempleado_SelectedIndexChanged);
+            this.comboBoxEmpleado.FormattingEnabled = true;
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(171, 121);
+            this.comboBoxEmpleado.Name = "comboBoxEmpleado";
+            this.comboBoxEmpleado.Size = new System.Drawing.Size(196, 21);
+            this.comboBoxEmpleado.TabIndex = 25;
+            this.comboBoxEmpleado.Visible = false;
+            this.comboBoxEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleado_SelectedIndexChanged);
             // 
             // timerActualizrempleado
             // 
@@ -253,7 +254,7 @@
             // comboBoxNombreProceso
             // 
             this.comboBoxNombreProceso.FormattingEnabled = true;
-            this.comboBoxNombreProceso.Location = new System.Drawing.Point(171, 174);
+            this.comboBoxNombreProceso.Location = new System.Drawing.Point(171, 173);
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(196, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
@@ -262,7 +263,8 @@
             // 
             // textBoxNumeroDibujo
             // 
-            this.textBoxNumeroDibujo.Location = new System.Drawing.Point(171, 122);
+            this.textBoxNumeroDibujo.Enabled = false;
+            this.textBoxNumeroDibujo.Location = new System.Drawing.Point(171, 147);
             this.textBoxNumeroDibujo.Name = "textBoxNumeroDibujo";
             this.textBoxNumeroDibujo.Size = new System.Drawing.Size(196, 20);
             this.textBoxNumeroDibujo.TabIndex = 29;
@@ -272,28 +274,49 @@
             this.labelNumeroDibujo.AutoSize = true;
             this.labelNumeroDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNumeroDibujo.Image = ((System.Drawing.Image)(resources.GetObject("labelNumeroDibujo.Image")));
-            this.labelNumeroDibujo.Location = new System.Drawing.Point(43, 122);
+            this.labelNumeroDibujo.Location = new System.Drawing.Point(43, 149);
             this.labelNumeroDibujo.Name = "labelNumeroDibujo";
             this.labelNumeroDibujo.Size = new System.Drawing.Size(90, 16);
             this.labelNumeroDibujo.TabIndex = 30;
             this.labelNumeroDibujo.Text = "Numero Dibujo";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
+            this.label3.Location = new System.Drawing.Point(43, 202);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Estado";
+            // 
+            // textBoxEstado
+            // 
+            this.textBoxEstado.Enabled = false;
+            this.textBoxEstado.Location = new System.Drawing.Point(171, 200);
+            this.textBoxEstado.Name = "textBoxEstado";
+            this.textBoxEstado.Size = new System.Drawing.Size(196, 20);
+            this.textBoxEstado.TabIndex = 32;
             // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 346);
+            this.Controls.Add(this.textBoxEstado);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNumeroDibujo);
             this.Controls.Add(this.textBoxNumeroDibujo);
             this.Controls.Add(this.comboBoxNombreProceso);
             this.Controls.Add(this.buttonIncioProceso);
             this.Controls.Add(this.buttonCancelar);
-            this.Controls.Add(this.comboBoxCodigoProceso);
+            this.Controls.Add(this.comboBoxEmpleado);
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.textBoxNombreProceso);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxCodigoProceso);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxEmpleado);
+            this.Controls.Add(this.labelEmpleado);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonGuardarBasedeDatos);
             this.Controls.Add(this.buttonBuscarDibujo);
@@ -318,13 +341,13 @@
         private System.Windows.Forms.Button buttonBuscarDibujo;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxCodigoProceso;
+        private System.Windows.Forms.Label labelEmpleado;
+        private System.Windows.Forms.TextBox textBoxEmpleado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxNombreProceso;
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
-        private System.Windows.Forms.Timer timerInciarProcesoBUsqueda;
-        private System.Windows.Forms.ComboBox comboBoxCodigoProceso;
+        private System.Windows.Forms.Timer timerInciarProcesoBusqueda;
+        private System.Windows.Forms.ComboBox comboBoxEmpleado;
         private System.Windows.Forms.Timer timerActualizrempleado;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Timer timerEliminaempleado;
@@ -332,5 +355,7 @@
         private System.Windows.Forms.ComboBox comboBoxNombreProceso;
         private System.Windows.Forms.TextBox textBoxNumeroDibujo;
         private System.Windows.Forms.Label labelNumeroDibujo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxEstado;
     }
 }
