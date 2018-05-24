@@ -29,6 +29,8 @@ namespace Coset_Sistema_Produccion
         public Class_Dibujos_Produccion Class_Dibujos_Produccion = new Class_Dibujos_Produccion();
         public Dibujo_produccion Dibujos_produccion_seleccion = new Dibujo_produccion();
         public Dibujo_produccion Dibujos_produccion_insertar = new Dibujo_produccion();
+        public Dibujo_produccion Dibujos_produccion_busqueda = new Dibujo_produccion();
+
         public Forma_Captura_Produccion()
         {
             InitializeComponent();
@@ -569,12 +571,41 @@ namespace Coset_Sistema_Produccion
         {
             if (obtener_dibujos_disponibles_base_datos())
             {
-                Busca_dibujo_produccion_base_datos();
-                //Secuencia_operacion_produccion();
+                if (Verifica_numero_unidades_construidas())
+                {
+                    Busca_dibujo_produccion_base_datos();
+                }
+
             }
             else
+            {
                 Cancela_operacio_produccion();
+            }
 
+            Configura_botones_operacion();
+        }
+
+        private bool Verifica_numero_unidades_construidas()
+        {
+            try
+            {
+                if (Convert.ToInt32(Dibujos_proyectos_disponibles[0].Numero_unidad) <= Convert.ToInt32(Dibujos_proyectos_disponibles[0].Cantidad))
+                {
+                    return true;
+                }
+                else
+                {
+                    //MessageBox.Show("Se fabricaron Todas las piezas del Proyecto", "Verifica Unidades Construidas",
+                    //MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Valores No numericos", "Verifica Unidades Construidas",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         private void Busca_dibujo_produccion_base_datos()
@@ -582,9 +613,35 @@ namespace Coset_Sistema_Produccion
             if (Dibujo_existe_base_datos_produccion() == false)
             {
                 Inserta_nuevo_registro_dibujos_produccion_base_datos();
+                Incrementa_numero_unidad_dibujos_proyecto();
+                Actualiza_dibujo_proyecto();
+                
+            }
+            else
+            {
+                //se quedo aqui
             }
             Configura_botones_operacion();
 
+        }
+
+        private void Actualiza_dibujo_proyecto()
+        {
+            Class_Dibujos_Proyecto.Actualiza_base_datos_dibujo_proyecto(Dibujos_proyectos_disponibles[0]);
+        }
+
+        private void Incrementa_numero_unidad_dibujos_proyecto()
+        {
+            try
+            {
+                Dibujos_proyectos_disponibles[0].Numero_unidad =
+                    (Convert.ToInt32(Dibujos_proyectos_disponibles[0].Numero_unidad) + 1).ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Valores No numericos", "Verifica Unidades Construidas",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private bool Dibujo_existe_base_datos_produccion()
@@ -604,17 +661,27 @@ namespace Coset_Sistema_Produccion
 
         private void obtener_dibujos_produccio_disponibles()
         {
-            Dibujos_produccion_disponible = Class_Dibujos_Produccion.Adquiere_agregar_materiales_busqueda_en_base_datos(textBoxNumeroDibujo.Text);
+            Asigna_valores_dibujo_produccion_busqueda();
+            Dibujos_produccion_disponible = Class_Dibujos_Produccion.
+                Adquiere_dibujos_produccion_busqueda_en_base_datos(Dibujos_produccion_busqueda);
             
+        }
+
+        private void Asigna_valores_dibujo_produccion_busqueda()
+        {
+            Dibujos_produccion_busqueda.Numero_dibujo = textBoxNumeroDibujo.Text;
+            Dibujos_produccion_busqueda.Numero_dibujo = Dibujos_proyectos_disponibles[0].Numero_unidad;
         }
 
         private void Configura_botones_operacion()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void Inserta_nuevo_registro_dibujos_produccion_base_datos()
         {
+            MessageBox.Show("El numero de Dibujo se agregara a produccion", "Dibujos Produccion", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
             Asigna_valores_dibujo_produccion();
             Class_Dibujos_Produccion.Inserta_nuevo_dibujo_produccion_base_datos(Dibujos_produccion_insertar);
         }
@@ -622,9 +689,10 @@ namespace Coset_Sistema_Produccion
         private void Asigna_valores_dibujo_produccion()
         {
             Dibujos_produccion_insertar.Numero_dibujo = textBoxNumeroDibujo.Text;
-            Dibujos_produccion_insertar.proyecto=Dibujos_proyectos_disponibles[0].Codigo_proyecto;
+            Dibujos_produccion_insertar.proyecto = Dibujos_proyectos_disponibles[0].Codigo_proyecto;
             Dibujos_produccion_insertar.Proceso = Dibujos_proyectos_disponibles[0].proceso;
             Dibujos_produccion_insertar.Calidad = "";
+            Dibujos_produccion_insertar.Numero_unidad = Dibujos_proyectos_disponibles[0].Numero_unidad;
         }
 
         private void Secuencia_operacion_produccion()

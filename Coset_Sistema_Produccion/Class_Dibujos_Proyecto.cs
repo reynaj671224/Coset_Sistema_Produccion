@@ -61,7 +61,9 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
-                        Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
+                        Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString(),
+                        Numero_unidad = mySqlDataReader["numero_unidad"].ToString(),
+                        
                     });
                 }
             }
@@ -73,6 +75,26 @@ namespace Coset_Sistema_Produccion
             connection.Close();
             return clientes_disponibles;
 
+        }
+
+        public string Actualiza_base_datos_dibujo_proyecto(Dibujos_proyecto numero_dibujo)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_dibujos_proyecto());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_en_base_de_datos_modificar_dibujos_proyecto(numero_dibujo), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
         }
 
         private string Commando_leer_Mysql_numero_dibujo(object numero_dibujo)
@@ -90,6 +112,18 @@ namespace Coset_Sistema_Produccion
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=ingenieria;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
         }
 
+        private string Configura_cadena_comando_en_base_de_datos_modificar_dibujos_proyecto(Dibujos_proyecto partidas_proyecto)
+        {
+            return "UPDATE dibujos_proyecto set  cantidad_dibujos='" + partidas_proyecto.Cantidad +
+                "',numero_dibujo='" + partidas_proyecto.Numero +
+                "',descripcion_dibujo='" + partidas_proyecto.Descripcion +
+                "',proceso='" + partidas_proyecto.proceso +
+                "',tiempo_estimado_horas='" + partidas_proyecto.tiempo_estimado_horas +
+                "',numero_unidad='" + partidas_proyecto.Numero_unidad +
+                "' where codigo_dibujo='" + partidas_proyecto.Codigo + "';";
+        }
+
+
     }
     public class Dibujos_proyecto
     {
@@ -100,6 +134,7 @@ namespace Coset_Sistema_Produccion
         public string proceso = "";
         public string tiempo_estimado_horas = "";
         public string Codigo_proyecto = "";
+        public string Numero_unidad = "";
         public string error = "";
 
     }
