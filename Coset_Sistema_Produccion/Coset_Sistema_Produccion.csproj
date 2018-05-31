@@ -70,6 +70,7 @@
     <Compile Include="Class_Proyectos.cs" />
     <Compile Include="Class_Requisiciones.cs" />
     <Compile Include="Class_Salida_Material.cs" />
+    <Compile Include="Class_Secuencia_Produccion.cs" />
     <Compile Include="Class_Usuarios.cs" />
     <Compile Include="Forma_Autos.cs">
       <SubType>Form</SubType>

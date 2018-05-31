@@ -30,6 +30,7 @@ namespace Coset_Sistema_Produccion
         public Dibujo_produccion Dibujos_produccion_seleccion = new Dibujo_produccion();
         public Dibujo_produccion Dibujos_produccion_insertar = new Dibujo_produccion();
         public Dibujo_produccion Dibujos_produccion_busqueda = new Dibujo_produccion();
+        public Dibujo_produccion Dibujos_produccion_actualizar = new Dibujo_produccion();
 
         public Forma_Captura_Produccion()
         {
@@ -53,20 +54,21 @@ namespace Coset_Sistema_Produccion
 
         private void buttonTerminarProceso_Click(object sender, EventArgs e)
         {
-            Agrega_proceso();
+            Dibujos_produccion_disponible[0].Estado = "Terminado";
+            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
         }
 
-        private void Agrega_proceso()
-        {
-            Asigna_codigo_proceso_foilio_disponible();
-            Desactiva_botones_operacion();
-            Aparece_caja_codigo_proceso();
-            Desaparece_combo_nombre_proceso();
-            Activa_cajas_informacion();
-            Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
-            Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Agregar";
-        }
+        //private void Agrega_proceso()
+        //{
+        //    Asigna_codigo_proceso_foilio_disponible();
+        //    Desactiva_botones_operacion();
+        //    Aparece_caja_codigo_proceso();
+        //    Desaparece_combo_nombre_proceso();
+        //    Activa_cajas_informacion();
+        //    Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
+        //    Activa_boton_cancelar_operacio();
+        //    Operacio_procesos = "Agregar";
+        //}
 
         private void Asigna_codigo_proceso_foilio_disponible()
         {
@@ -387,20 +389,21 @@ namespace Coset_Sistema_Produccion
 
         private void buttonPausaProceso_Click(object sender, EventArgs e)
         {
-            Modifica_proceso();
+            Dibujos_produccion_disponible[0].Estado = "Pausado";
+            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
         }
 
-        private void Modifica_proceso()
-        {
-            Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
-            Aparece_combo_nombre_proceso();
-            Activa_combo_nombre_proceso();
-            Obtener_datos_procesos_disponibles_base_datos();
-            Rellenar_combo_nombre_proceso();
-            Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Modificar";
-        }
+        //private void Modifica_proceso()
+        //{
+        //    Desactiva_botones_operacion();
+        //    Desaparce_caja_nombre_proceso();
+        //    Aparece_combo_nombre_proceso();
+        //    Activa_combo_nombre_proceso();
+        //    Obtener_datos_procesos_disponibles_base_datos();
+        //    Rellenar_combo_nombre_proceso();
+        //    Activa_boton_cancelar_operacio();
+        //    Operacio_procesos = "Modificar";
+        //}
 
         private void Obtener_datos_procesos_disponibles_base_datos()
         {
@@ -564,16 +567,33 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBuscarDibujo_Click(object sender, EventArgs e)
         {
-            buscar_dubujo_base_datos();
+            buscar_dibujo_proyectos_base_datos();
+            Desaparece_boton_busqueda_dibujo();
         }
 
-        private void buscar_dubujo_base_datos()
+        private void Desaparece_boton_busqueda_dibujo()
         {
-            if (obtener_dibujos_disponibles_base_datos())
+            buttonBuscarDibujo.Enabled=false;
+        }
+
+        private void buscar_dibujo_proyectos_base_datos()
+        {
+            if (obtener_dibujos_Proyectos_disponibles_base_datos())
             {
-                if (Verifica_numero_unidades_construidas())
+                if (Busca_dibujo_produccion_base_datos())
                 {
-                    Busca_dibujo_produccion_base_datos();
+                    if (verifica_dibujo_asignado_empleado_solicitante())
+                    {
+                        Configura_botones_operacion();
+                    }
+                    else
+                    {
+                        Cancela_operacio_produccion();
+                    }
+                }
+                else
+                {
+                    Configura_botones_operacion();
                 }
 
             }
@@ -582,74 +602,16 @@ namespace Coset_Sistema_Produccion
                 Cancela_operacio_produccion();
             }
 
-            Configura_botones_operacion();
+            
         }
 
-        private bool Verifica_numero_unidades_construidas()
-        {
-            try
-            {
-                if (Convert.ToInt32(Dibujos_proyectos_disponibles[0].Numero_unidad) <= Convert.ToInt32(Dibujos_proyectos_disponibles[0].Cantidad))
-                {
-                    return true;
-                }
-                else
-                {
-                    //MessageBox.Show("Se fabricaron Todas las piezas del Proyecto", "Verifica Unidades Construidas",
-                    //MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Valores No numericos", "Verifica Unidades Construidas",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
+       
 
-        private void Busca_dibujo_produccion_base_datos()
+        private bool Busca_dibujo_produccion_base_datos()
         {
             if (Dibujo_existe_base_datos_produccion() == false)
             {
                 Inserta_nuevo_registro_dibujos_produccion_base_datos();
-                Incrementa_numero_unidad_dibujos_proyecto();
-                Actualiza_dibujo_proyecto();
-                
-            }
-            else
-            {
-                //se quedo aqui
-            }
-            Configura_botones_operacion();
-
-        }
-
-        private void Actualiza_dibujo_proyecto()
-        {
-            Class_Dibujos_Proyecto.Actualiza_base_datos_dibujo_proyecto(Dibujos_proyectos_disponibles[0]);
-        }
-
-        private void Incrementa_numero_unidad_dibujos_proyecto()
-        {
-            try
-            {
-                Dibujos_proyectos_disponibles[0].Numero_unidad =
-                    (Convert.ToInt32(Dibujos_proyectos_disponibles[0].Numero_unidad) + 1).ToString();
-            }
-            catch
-            {
-                MessageBox.Show("Valores No numericos", "Verifica Unidades Construidas",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private bool Dibujo_existe_base_datos_produccion()
-        {
-
-            obtener_dibujos_produccio_disponibles();
-            if (Dibujos_produccion_disponible.Count == 0)
-            {
                 return false;
             }
             else
@@ -659,29 +621,115 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private void obtener_dibujos_produccio_disponibles()
+        private bool Dibujo_existe_base_datos_produccion()
+        {
+
+            return obtener_dibujos_produccio_disponibles();
+            
+        }
+
+        private bool verifica_dibujo_asignado_empleado_solicitante()
+        {
+            if((Dibujos_produccion_disponible[0].Empleado == comboBoxEmpleado.Text))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Numeo de dibujo asignado, " + Dibujos_produccion_disponible[0].Empleado, "Busqueda Numero Dibujo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            
+
+        }
+
+        private bool obtener_dibujos_produccio_disponibles()
         {
             Asigna_valores_dibujo_produccion_busqueda();
             Dibujos_produccion_disponible = Class_Dibujos_Produccion.
                 Adquiere_dibujos_produccion_busqueda_en_base_datos(Dibujos_produccion_busqueda);
-            
+            if (Dibujos_produccion_disponible.Count > 1)
+            {
+                MessageBox.Show("Numeo de dibujo Duplicado", "Busqueda Numero Dibujo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else if (Dibujos_produccion_disponible.Count < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void Asigna_valores_dibujo_produccion_busqueda()
         {
             Dibujos_produccion_busqueda.Numero_dibujo = textBoxNumeroDibujo.Text;
-            Dibujos_produccion_busqueda.Numero_dibujo = Dibujos_proyectos_disponibles[0].Numero_unidad;
+            Dibujos_produccion_busqueda.Empleado = comboBoxEmpleado.Text;
         }
 
         private void Configura_botones_operacion()
         {
-            
+            if(textBoxEstado.Text == "") /*La unidad ya esiste en la base de datos de produccion*/
+            {
+                textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
+                textBoxEstado.Text = Dibujos_produccion_disponible[0].Estado;
+            }
+            textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
+            switch (textBoxEstado.Text)
+            {
+                case "Nuevo":
+                    {
+                        Secuencia_inicia_proceso();
+                        break;
+                    }
+                case "Iniciado":
+                    {
+                        Secuencia_pausa_treminar_proceso();
+                        break;
+                    }
+                case "Pausado":
+                    {
+                        Secuencia_inicia_proceso();
+                        break;
+                    }
+                case "Terminado":
+                    {
+                        Secuencia_proceso_terminado();
+                        break;
+                    }
+
+            }
+
+
+        }
+
+        private void Secuencia_proceso_terminado()
+        {
+            MessageBox.Show("Dibujo Terminado en Produccion", "Dibujos Produccion",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Secuencia_pausa_treminar_proceso()
+        {
+            buttonPausaProceso.Enabled = true;
+            buttonTerminarProceso.Enabled = true;
+        }
+
+        private void Secuencia_inicia_proceso()
+        {
+            buttonIncioProceso.Enabled = true;
         }
 
         private void Inserta_nuevo_registro_dibujos_produccion_base_datos()
         {
             MessageBox.Show("El numero de Dibujo se agregara a produccion", "Dibujos Produccion", 
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBoxEstado.Text = "Nuevo";
+            textBoxCalidad.Text = "Proceso";
             Asigna_valores_dibujo_produccion();
             Class_Dibujos_Produccion.Inserta_nuevo_dibujo_produccion_base_datos(Dibujos_produccion_insertar);
         }
@@ -690,22 +738,19 @@ namespace Coset_Sistema_Produccion
         {
             Dibujos_produccion_insertar.Numero_dibujo = textBoxNumeroDibujo.Text;
             Dibujos_produccion_insertar.proyecto = Dibujos_proyectos_disponibles[0].Codigo_proyecto;
+            Dibujos_produccion_insertar.Calidad = "Proceso";
+            Dibujos_produccion_insertar.Empleado = comboBoxEmpleado.Text;
             Dibujos_produccion_insertar.Proceso = Dibujos_proyectos_disponibles[0].proceso;
-            Dibujos_produccion_insertar.Calidad = "";
-            Dibujos_produccion_insertar.Numero_unidad = Dibujos_proyectos_disponibles[0].Numero_unidad;
+
         }
 
-        private void Secuencia_operacion_produccion()
-        {
-            Visualiza_proceso();
-        }
 
         private void Cancela_operacio_produccion()
         {
             throw new NotImplementedException();
         }
 
-        private bool obtener_dibujos_disponibles_base_datos()
+        private bool obtener_dibujos_Proyectos_disponibles_base_datos()
         {
             Dibujos_proyectos_disponibles = Class_Dibujos_Proyecto.Adquiere_dibujos_disponibles_en_base_datos(textBoxNumeroDibujo.Text);
             if(Dibujos_proyectos_disponibles.Count > 1 )
@@ -720,7 +765,11 @@ namespace Coset_Sistema_Produccion
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
+            
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
@@ -788,20 +837,24 @@ namespace Coset_Sistema_Produccion
 
         private void buttonIncioProceso_Click(object sender, EventArgs e)
         {
-            Visualiza_proceso();
+
+            Dibujos_produccion_disponible[0].Estado = "Iniciado";
+            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+
         }
 
-        private void Visualiza_proceso()
-        {
-            Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
-            Activa_combo_nombre_proceso();
-            Aparece_combo_nombre_proceso();
-            Obtener_datos_procesos_disponibles_base_datos();
-            Rellenar_combo_nombre_proceso();
-            Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Visualizar";
-        }
+
+        //private void Visualiza_proceso()
+        //{
+        //    Desactiva_botones_operacion();
+        //    Desaparce_caja_nombre_proceso();
+        //    Activa_combo_nombre_proceso();
+        //    Aparece_combo_nombre_proceso();
+        //    Obtener_datos_procesos_disponibles_base_datos();
+        //    Rellenar_combo_nombre_proceso();
+        //    Activa_boton_cancelar_operacio();
+        //    Operacio_procesos = "Visualizar";
+        //}
 
         private void Activa_combo_nombre_proceso()
         {

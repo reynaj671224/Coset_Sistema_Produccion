@@ -52,6 +52,8 @@
             this.labelNumeroDibujo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxEstado = new System.Windows.Forms.TextBox();
+            this.textBoxCalidad = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,9 +170,9 @@
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
             this.label2.Location = new System.Drawing.Point(43, 176);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 16);
+            this.label2.Size = new System.Drawing.Size(48, 16);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Nombre Proceso";
+            this.label2.Text = "Proceso";
             // 
             // textBoxNombreProceso
             // 
@@ -299,11 +301,32 @@
             this.textBoxEstado.Size = new System.Drawing.Size(196, 20);
             this.textBoxEstado.TabIndex = 32;
             // 
+            // textBoxCalidad
+            // 
+            this.textBoxCalidad.Enabled = false;
+            this.textBoxCalidad.Location = new System.Drawing.Point(171, 227);
+            this.textBoxCalidad.Name = "textBoxCalidad";
+            this.textBoxCalidad.Size = new System.Drawing.Size(196, 20);
+            this.textBoxCalidad.TabIndex = 34;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.Location = new System.Drawing.Point(43, 229);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 16);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Calidad";
+            // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 346);
+            this.Controls.Add(this.textBoxCalidad);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxEstado);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNumeroDibujo);
@@ -357,5 +380,7 @@
         private System.Windows.Forms.Label labelNumeroDibujo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxEstado;
+        private System.Windows.Forms.TextBox textBoxCalidad;
+        private System.Windows.Forms.Label label1;
     }
 }

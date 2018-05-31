@@ -62,7 +62,6 @@ namespace Coset_Sistema_Produccion
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
                         Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString(),
-                        Numero_unidad = mySqlDataReader["numero_unidad"].ToString(),
                         
                     });
                 }
@@ -119,7 +118,6 @@ namespace Coset_Sistema_Produccion
                 "',descripcion_dibujo='" + partidas_proyecto.Descripcion +
                 "',proceso='" + partidas_proyecto.proceso +
                 "',tiempo_estimado_horas='" + partidas_proyecto.tiempo_estimado_horas +
-                "',numero_unidad='" + partidas_proyecto.Numero_unidad +
                 "' where codigo_dibujo='" + partidas_proyecto.Codigo + "';";
         }
 
@@ -134,7 +132,6 @@ namespace Coset_Sistema_Produccion
         public string proceso = "";
         public string tiempo_estimado_horas = "";
         public string Codigo_proyecto = "";
-        public string Numero_unidad = "";
         public string error = "";
 
     }

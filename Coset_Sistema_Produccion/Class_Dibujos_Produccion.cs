@@ -30,8 +30,8 @@ namespace Coset_Sistema_Produccion
                         Horas_produccion = mySqlDataReader["horas_produccion"].ToString(),
                         Horas_retrabajo = mySqlDataReader["horas_retrabajo"].ToString(),
                         proyecto = mySqlDataReader["proyecto"].ToString(),
-                        Numero_unidad = mySqlDataReader["numero_unidad"].ToString(),
-                        
+                        Empleado = mySqlDataReader["empleado"].ToString(),
+
                     });
                 }
             }
@@ -64,28 +64,60 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        
+        public string Actualiza_base_datos_dibujo_produccion(Dibujo_produccion numero_dibujo)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_dibujos_produccion());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_en_base_de_datos_modificar_dibujos_produccion(numero_dibujo), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+
+
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_dibujo_produccion(Dibujo_produccion numero_dibujo)
         {
 
             return "INSERT INTO produccion_dibujos(numero_dibujo, proceso," +
-                   "proyecto,calidad,numero_unidad) " +
+                   "proyecto,calidad,empleado) " +
                    "VALUES('" + numero_dibujo.Numero_dibujo + "','" + numero_dibujo.Proceso + "','" +
-                   numero_dibujo.proyecto + "','" + numero_dibujo.Calidad + "','" + numero_dibujo.Numero_unidad+"'); ";
+                   numero_dibujo.proyecto + "','" + numero_dibujo.Calidad + "','" + numero_dibujo.Empleado + "'); ";
 
         }
 
         private string Commando_leer_Mysql_busqueda_dibujos_produccion(Dibujo_produccion numero_dibujo)
         {
-            return "SELECT * FROM produccion_dibujos WHERE numero_dibujo='" + numero_dibujo.Numero_dibujo +
-                "' and numero_unidad = '"+ numero_dibujo.Numero_unidad+ "';";
+            return "SELECT * FROM produccion_dibujos WHERE numero_dibujo='" + numero_dibujo.Numero_dibujo + "';";
         }
 
         private string Configura_Cadena_Conexion_MySQL_dibujos_produccion()
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + 
                 ";Database=produccion;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
+        }
+
+        private string Configura_cadena_comando_en_base_de_datos_modificar_dibujos_produccion(Dibujo_produccion numero_dibujo)
+        {
+            return "UPDATE produccion_dibujos set  proceso='" + numero_dibujo.Proceso +
+                "',estado='" + numero_dibujo.Estado +
+                "',calidad='" + numero_dibujo.Calidad +
+                "',secuencia='" + numero_dibujo.Secuencia +
+                "',horas_produccion='" + numero_dibujo.Horas_produccion +
+                "',horas_retrabajo='" + numero_dibujo.Horas_retrabajo +
+                "',proyecto='" + numero_dibujo.proyecto +
+                "',empleado='" + numero_dibujo.Empleado +
+                "' where numero_dibujo='" + numero_dibujo.Numero_dibujo + "';";
         }
 
 
@@ -100,7 +132,7 @@ namespace Coset_Sistema_Produccion
         public string Horas_produccion = "";
         public string Horas_retrabajo = "";
         public string proyecto = "";
-        public string Numero_unidad = "";
+        public string Empleado = "";
         public string error = "";
     }
 }
