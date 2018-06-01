@@ -31,6 +31,13 @@ namespace Coset_Sistema_Produccion
         public Dibujo_produccion Dibujos_produccion_insertar = new Dibujo_produccion();
         public Dibujo_produccion Dibujos_produccion_busqueda = new Dibujo_produccion();
         public Dibujo_produccion Dibujos_produccion_actualizar = new Dibujo_produccion();
+        public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
+        public List<Secuencia_produccion> Secuencias_produccion_disponibles = new List<Secuencia_produccion>();
+        public Secuencia_produccion Secuencia_produccion_seleccion = new Secuencia_produccion();
+        public Secuencia_produccion Secuencia_produccion_modificacion = new Secuencia_produccion();
+        public Secuencia_produccion Secuencia_produccion_insertar = new Secuencia_produccion();
+        public Secuencia_produccion Secuencia_produccion_busqueda = new Secuencia_produccion();
+
 
         public Forma_Captura_Produccion()
         {
@@ -158,30 +165,10 @@ namespace Coset_Sistema_Produccion
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (Operacio_procesos == "Modificar")
-                Secuencia_modificar_usuario();
-            else if (Operacio_procesos == "Agregar")
-                Secuencia_agregar_proceso();
+           
         }
 
-        private void Secuencia_agregar_proceso()
-        {
-
-            if (Guarda_datos_agregar_proceso())
-            {
-                Limpia_cajas_captura_despues_de_agregar_proceso();
-                Limpia_combo_nombre_proceso();
-                Desactiva_cajas_captura_despues_de_agregar_empleado();
-                Desactiva_boton_guardar_base_de_datos();
-                Desactiva_boton_cancelar();
-                Desaparece_combo_nombre_proceso();
-                Activa_botones_operacion();
-                Aparece_caja_nombre_empleado();
-                Asigna_nuevo_folio_proceso();
-                Elimina_informacion_usuarios_disponibles();
-            }
-     
-        }
+       
 
         private void Asigna_nuevo_folio_proceso()
         {
@@ -193,23 +180,7 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show(folio_disponible.error);
         }
 
-        private void Secuencia_modificar_usuario()
-        {
-
-            if (Guarda_datos_modificar_usuario())
-            {
-                Limpia_cajas_captura_despues_de_agregar_proceso();
-                Limpia_combo_nombre_proceso();
-                Desactiva_cajas_captura_despues_de_agregar_empleado();
-                Desactiva_boton_guardar_base_de_datos();
-                Desactiva_boton_cancelar();
-                Desaparece_combo_nombre_proceso();
-                Activa_botones_operacion();
-                Aparece_caja_nombre_empleado();
-                Elimina_informacion_usuarios_disponibles();
-            }    
-            
-        }
+        
 
         private void Elimina_informacion_usuarios_disponibles()
         {
@@ -304,116 +275,40 @@ namespace Coset_Sistema_Produccion
             textBoxEmpleado.Text = "";
         }
 
-        private bool Guarda_datos_modificar_usuario()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_modificar_en_base_de_datos()
-        {
-            return "UPDATE procesos set  nombre_proceso='" + comboBoxNombreProceso.Text +
-                "' where codigo_proceso='" + textBoxEmpleado.Text + "';";
-        }
-
-        private bool Guarda_datos_agregar_proceso()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-
-        private string Configura_cadena_comando_insertar_en_base_de_datos()
-        {
-            return "INSERT INTO procesos(codigo_proceso, nombre_proceso) " +
-                "VALUES('" + textBoxEmpleado.Text + "','" + textBoxNombreProceso.Text  + "');";
-        }
-
-        private bool Elimina_datos_usuario()
-        {
-            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
-            try
-            {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_en_base_de_datos(), connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
-
-            connection.Close();
-            return true;
-        }
-        private string Configura_cadena_comando_eliminar_en_base_de_datos()
-        {
-            return "DELETE from procesos where nombre_proceso='" +
-               comboBoxNombreProceso.Text + "';";
-        }
-
-        
-        private string Configura_cadena_conexion_MySQL_ingenieria_procesos()
-        {
-            return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=ingenieria;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
-        }
-
         private void buttonPausaProceso_Click(object sender, EventArgs e)
         {
             Dibujos_produccion_disponible[0].Estado = "Pausado";
             Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+            Genera_secuencia_produccion_pausar_transaccion();
         }
 
-        //private void Modifica_proceso()
-        //{
-        //    Desactiva_botones_operacion();
-        //    Desaparce_caja_nombre_proceso();
-        //    Aparece_combo_nombre_proceso();
-        //    Activa_combo_nombre_proceso();
-        //    Obtener_datos_procesos_disponibles_base_datos();
-        //    Rellenar_combo_nombre_proceso();
-        //    Activa_boton_cancelar_operacio();
-        //    Operacio_procesos = "Modificar";
-        //}
+        private void Genera_secuencia_produccion_pausar_transaccion()
+        {
+            Obtener_secuencias_produccion_disponibles();
+            Asigna_valores_secuencia_produccion_modificaciones();
+            Class_Secuencia_Produccion.Actualiza_base_datos_secuencia_produccion(Secuencia_produccion_seleccion);
+        }
+
+        private void Asigna_valores_secuencia_produccion_modificaciones()
+        {
+            Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString();
+            Secuencia_produccion_seleccion.estado = "pausado";
+        }
+
+        private void Obtener_secuencias_produccion_disponibles()
+        {
+            Secuencia_produccion_busqueda.Numero_Dibujo = textBoxNumeroDibujo.Text;
+            Secuencias_produccion_disponibles = Class_Secuencia_Produccion.
+                Adquiere_secuencia_produccion_busqueda_en_base_datos(Secuencia_produccion_busqueda);
+            Secuencia_produccion_seleccion = Secuencias_produccion_disponibles.Find
+                (secuencia_produccion => secuencia_produccion.estado.Contains(textBoxEstado.Text));
+        }
 
         private void Obtener_datos_procesos_disponibles_base_datos()
         {
             procesos_disponibles = clase_procesos.Adquiere_procesos_disponibles_en_base_datos();
         }
 
-        private void Configura_cadena_comando_actualizar_en_base_de_datos()
-        {
-            //throw new NotImplementedException();
-        }
 
         private void Aparece_combo_codigo_empleado()
         {
@@ -584,7 +479,14 @@ namespace Coset_Sistema_Produccion
                 {
                     if (verifica_dibujo_asignado_empleado_solicitante())
                     {
-                        Configura_botones_operacion();
+                        if (verifica_dibujo_en_produccion())
+                        {
+                            Configura_botones_operacion();
+                        }
+                        else
+                        {
+                            Cancela_operacio_produccion();
+                        }
                     }
                     else
                     {
@@ -605,7 +507,19 @@ namespace Coset_Sistema_Produccion
             
         }
 
-       
+        private bool verifica_dibujo_en_produccion()
+        {
+            if (Dibujos_produccion_disponible[0].Secuencia == "Produccion")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Numeo de dibujo en, " + Dibujos_produccion_disponible[0].Secuencia, "Busqueda Numero Dibujo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+        }
 
         private bool Busca_dibujo_produccion_base_datos()
         {
@@ -703,8 +617,59 @@ namespace Coset_Sistema_Produccion
                     }
 
             }
+            Rellena_datagridview_secuencias_produccion();
+        }
 
+        private void Rellena_datagridview_secuencias_produccion()
+        {
+            Limpia_datagridview_secuencia_produccion();
+            Obtener_secuencias_produccion_disponibles();
+            Asigna_valores_datagridview_secuencias_produccion();
+        }
 
+        private void Limpia_datagridview_secuencia_produccion()
+        {
+            dataGridViewSecuenciasProduccion.Rows.Clear();
+        }
+
+        private void Asigna_valores_datagridview_secuencias_produccion()
+        {
+            
+            foreach (Secuencia_produccion secuencia in Secuencias_produccion_disponibles)
+            {
+                DateTime Inicial, Final;
+                if (secuencia.final_proceso != "")
+                {
+                    Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
+                    Final = Convert.ToDateTime(secuencia.final_proceso);
+                    TimeSpan timeSpan = Final - Inicial;
+                    dataGridViewSecuenciasProduccion.Rows.Add(
+                   secuencia.Codigo,
+                   secuencia.Numero_Dibujo,
+                   secuencia.Empleado,
+                   secuencia.inicio_proceso,
+                   secuencia.final_proceso,
+                   secuencia.proceso,
+                   secuencia.estado,
+                   secuencia.calidad,
+                   timeSpan.ToString());
+                }
+                else
+                {
+                    dataGridViewSecuenciasProduccion.Rows.Add(
+                   secuencia.Codigo,
+                   secuencia.Numero_Dibujo,
+                   secuencia.Empleado,
+                   secuencia.inicio_proceso,
+                   secuencia.final_proceso,
+                   secuencia.proceso,
+                   secuencia.estado,
+                   secuencia.calidad);
+
+                }
+               
+
+            }
         }
 
         private void Secuencia_proceso_terminado()
@@ -774,23 +739,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Esta Seguro de Eiliminar Este Proceso?", "Eliminar Proceso",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (Elimina_informacion_en_base_de_datos())
-                {
-                    Limpia_cajas_captura_despues_de_agregar_proceso();
-                    Limpia_combo_nombre_proceso();
-                    Desactiva_cajas_captura_despues_de_agregar_empleado();
-                    Desactiva_boton_eliminar_base_de_datos();
-                    Desactiva_boton_cancelar();
-                    Desaparece_combo_nombre_proceso();
-                    Activa_botones_operacion();
-                    Activa_Combo_codigo_empleado();
-                    Aparece_caja_nombre_empleado();
-                    Elimina_informacion_usuarios_disponibles();
-                }
-            }
+           
         }
 
         private void Desactiva_boton_eliminar_base_de_datos()
@@ -798,10 +747,7 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = false;
         }
 
-        private bool Elimina_informacion_en_base_de_datos()
-        {
-            return Elimina_datos_usuario();
-        }
+        
 
         private void Eliminar_usuarios()
         {
@@ -840,21 +786,27 @@ namespace Coset_Sistema_Produccion
 
             Dibujos_produccion_disponible[0].Estado = "Iniciado";
             Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+            Genera_secuencia_produccion_iniciar_transaccion();
 
         }
 
+        private void Genera_secuencia_produccion_iniciar_transaccion()
+        {
+            Asigna_valores_variable_secuencia_produccion_iniciar();
+            Class_Secuencia_Produccion.Inserta_nuevo_secuencia_produccion_base_datos(Secuencia_produccion_insertar);
+        }
 
-        //private void Visualiza_proceso()
-        //{
-        //    Desactiva_botones_operacion();
-        //    Desaparce_caja_nombre_proceso();
-        //    Activa_combo_nombre_proceso();
-        //    Aparece_combo_nombre_proceso();
-        //    Obtener_datos_procesos_disponibles_base_datos();
-        //    Rellenar_combo_nombre_proceso();
-        //    Activa_boton_cancelar_operacio();
-        //    Operacio_procesos = "Visualizar";
-        //}
+        private void Asigna_valores_variable_secuencia_produccion_iniciar()
+        {
+            Secuencia_produccion_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
+            Secuencia_produccion_insertar.Empleado = comboBoxEmpleado.Text;
+            Secuencia_produccion_insertar.inicio_proceso = DateTime.Now.ToString();
+            Secuencia_produccion_insertar.final_proceso = "";
+            Secuencia_produccion_insertar.proceso = textBoxNombreProceso.Text;
+            Secuencia_produccion_insertar.estado = "Iniciado";
+            Secuencia_produccion_insertar.calidad = textBoxCalidad.Text;
+
+        }
 
         private void Activa_combo_nombre_proceso()
         {

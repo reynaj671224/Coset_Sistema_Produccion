@@ -54,7 +54,18 @@
             this.textBoxEstado = new System.Windows.Forms.TextBox();
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridViewSecuenciasProduccion = new System.Windows.Forms.DataGridView();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Inicio_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Final_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -63,7 +74,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(795, 346);
+            this.pictureBox1.Size = new System.Drawing.Size(1134, 522);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -120,7 +131,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(691, 251);
+            this.buttonHome.Location = new System.Drawing.Point(1038, 426);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
@@ -134,7 +145,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(691, 93);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1038, 266);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 4;
@@ -188,7 +199,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(691, 81);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1038, 252);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 20;
@@ -223,7 +234,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(691, 173);
+            this.buttonCancelar.Location = new System.Drawing.Point(1038, 346);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 26;
@@ -320,11 +331,85 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Calidad";
             // 
+            // dataGridViewSecuenciasProduccion
+            // 
+            this.dataGridViewSecuenciasProduccion.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewSecuenciasProduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSecuenciasProduccion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo_partida,
+            this.Numero_Dibujo,
+            this.Empleado,
+            this.Inicio_Proceso,
+            this.Final_Proceso,
+            this.Proceso,
+            this.Estado,
+            this.Calidad,
+            this.Horas});
+            this.dataGridViewSecuenciasProduccion.Enabled = false;
+            this.dataGridViewSecuenciasProduccion.Location = new System.Drawing.Point(22, 298);
+            this.dataGridViewSecuenciasProduccion.Name = "dataGridViewSecuenciasProduccion";
+            this.dataGridViewSecuenciasProduccion.Size = new System.Drawing.Size(994, 202);
+            this.dataGridViewSecuenciasProduccion.TabIndex = 49;
+            // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Visible = false;
+            this.Codigo_partida.Width = 50;
+            // 
+            // Numero_Dibujo
+            // 
+            this.Numero_Dibujo.HeaderText = "Numero Dibujo";
+            this.Numero_Dibujo.Name = "Numero_Dibujo";
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado.Width = 150;
+            // 
+            // Inicio_Proceso
+            // 
+            this.Inicio_Proceso.HeaderText = "Inicio Proceso";
+            this.Inicio_Proceso.Name = "Inicio_Proceso";
+            this.Inicio_Proceso.Width = 150;
+            // 
+            // Final_Proceso
+            // 
+            this.Final_Proceso.HeaderText = "Final Proceso";
+            this.Final_Proceso.Name = "Final_Proceso";
+            this.Final_Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Final_Proceso.Width = 150;
+            // 
+            // Proceso
+            // 
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            // 
+            // Calidad
+            // 
+            this.Calidad.HeaderText = "Calidad";
+            this.Calidad.Name = "Calidad";
+            // 
+            // Horas
+            // 
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 346);
+            this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.dataGridViewSecuenciasProduccion);
             this.Controls.Add(this.textBoxCalidad);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxEstado);
@@ -351,6 +436,7 @@
             this.Text = "Procesos";
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,5 +468,15 @@
         private System.Windows.Forms.TextBox textBoxEstado;
         private System.Windows.Forms.TextBox textBoxCalidad;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridViewSecuenciasProduccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Inicio_Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Final_Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
     }
 }
