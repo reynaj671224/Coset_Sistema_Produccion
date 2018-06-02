@@ -287,12 +287,37 @@ namespace Coset_Sistema_Produccion
             Obtener_secuencias_produccion_disponibles();
             Asigna_valores_secuencia_produccion_modificaciones();
             Class_Secuencia_Produccion.Actualiza_base_datos_secuencia_produccion(Secuencia_produccion_seleccion);
+            Asigna_valores_dibujo_produccion_actualizar();
+            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+        }
+
+        private void Asigna_valores_dibujo_produccion_actualizar()
+        {
+            DateTime Final = Convert.ToDateTime(Secuencia_produccion_seleccion.final_proceso);
+            DateTime Inicio = Convert.ToDateTime(Secuencia_produccion_seleccion.inicio_proceso);
+            TimeSpan timeSpan = Final - Inicio;
+            if(Dibujos_produccion_disponible[0].Calidad == "Proceso")
+            {
+                Dibujos_produccion_disponible[0].Horas_produccion =
+                    (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_produccion) +
+                    Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
+            }
+            else if(Dibujos_produccion_disponible[0].Calidad == "Re-trabajo" || 
+                Dibujos_produccion_disponible[0].Calidad == "Desecho")
+            {
+                Dibujos_produccion_disponible[0].Horas_retrabajo =
+                    (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_retrabajo) +
+                    Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
+            }
+            
         }
 
         private void Asigna_valores_secuencia_produccion_modificaciones()
         {
+
             Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString();
             Secuencia_produccion_seleccion.estado = "pausado";
+            
         }
 
         private void Obtener_secuencias_produccion_disponibles()
@@ -593,6 +618,8 @@ namespace Coset_Sistema_Produccion
                 textBoxEstado.Text = Dibujos_produccion_disponible[0].Estado;
             }
             textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
+            textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
+            textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
             switch (textBoxEstado.Text)
             {
                 case "Nuevo":
@@ -668,7 +695,7 @@ namespace Coset_Sistema_Produccion
 
                 }
                
-
+                
             }
         }
 
@@ -848,10 +875,7 @@ namespace Coset_Sistema_Produccion
                 configura_forma_visualizar();
         }
 
-        private void textBoxNombreProceso_TextChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }
  

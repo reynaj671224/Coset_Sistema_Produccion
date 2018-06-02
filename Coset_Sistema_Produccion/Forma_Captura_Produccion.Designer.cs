@@ -64,6 +64,10 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxHorasProceso = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxHorasRetrabajo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
             this.SuspendLayout();
@@ -192,7 +196,6 @@
             this.textBoxNombreProceso.Name = "textBoxNombreProceso";
             this.textBoxNombreProceso.Size = new System.Drawing.Size(196, 20);
             this.textBoxNombreProceso.TabIndex = 9;
-            this.textBoxNombreProceso.TextChanged += new System.EventHandler(this.textBoxNombreProceso_TextChanged);
             // 
             // buttonBorrarBasedeDatos
             // 
@@ -404,11 +407,53 @@
             this.Horas.HeaderText = "Horas";
             this.Horas.Name = "Horas";
             // 
+            // textBoxHorasProceso
+            // 
+            this.textBoxHorasProceso.Enabled = false;
+            this.textBoxHorasProceso.Location = new System.Drawing.Point(540, 118);
+            this.textBoxHorasProceso.Name = "textBoxHorasProceso";
+            this.textBoxHorasProceso.Size = new System.Drawing.Size(94, 20);
+            this.textBoxHorasProceso.TabIndex = 51;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
+            this.label4.Location = new System.Drawing.Point(412, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 16);
+            this.label4.TabIndex = 50;
+            this.label4.Text = "Horas Proceso";
+            // 
+            // textBoxHorasRetrabajo
+            // 
+            this.textBoxHorasRetrabajo.Enabled = false;
+            this.textBoxHorasRetrabajo.Location = new System.Drawing.Point(540, 144);
+            this.textBoxHorasRetrabajo.Name = "textBoxHorasRetrabajo";
+            this.textBoxHorasRetrabajo.Size = new System.Drawing.Size(94, 20);
+            this.textBoxHorasRetrabajo.TabIndex = 53;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
+            this.label5.Location = new System.Drawing.Point(412, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 16);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "Horas Re-trabajo";
+            // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.textBoxHorasRetrabajo);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBoxHorasProceso);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.dataGridViewSecuenciasProduccion);
             this.Controls.Add(this.textBoxCalidad);
             this.Controls.Add(this.label1);
@@ -478,5 +523,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Calidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
+        private System.Windows.Forms.TextBox textBoxHorasProceso;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxHorasRetrabajo;
+        private System.Windows.Forms.Label label5;
     }
 }
