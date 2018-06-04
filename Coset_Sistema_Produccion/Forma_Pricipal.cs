@@ -629,5 +629,11 @@ namespace Coset_Sistema_Produccion
             Forma_Captura_Produccion forma_Captura_Produccion = new Forma_Captura_Produccion();
             forma_Captura_Produccion.ShowDialog();
         }
+
+        private void calidadOperacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Calidad_Operaciones forma_Calidad_Operaciones = new Forma_Calidad_Operaciones();
+            forma_Calidad_Operaciones.ShowDialog();
+        }
     }
 }

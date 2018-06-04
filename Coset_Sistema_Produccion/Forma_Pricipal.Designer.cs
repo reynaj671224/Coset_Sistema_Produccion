@@ -242,9 +242,11 @@
             this.calidadOperacionesToolStripMenuItem.Name = "calidadOperacionesToolStripMenuItem";
             this.calidadOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.calidadOperacionesToolStripMenuItem.Text = "Calidad Operaciones";
+            this.calidadOperacionesToolStripMenuItem.Click += new System.EventHandler(this.calidadOperacionesToolStripMenuItem_Click);
             // 
             // dibujosOperacionesToolStripMenuItem
             // 
+            this.dibujosOperacionesToolStripMenuItem.Enabled = false;
             this.dibujosOperacionesToolStripMenuItem.Name = "dibujosOperacionesToolStripMenuItem";
             this.dibujosOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.dibujosOperacionesToolStripMenuItem.Text = "Dibujos Operaciones";
@@ -501,7 +503,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 4.1";
+            this.Text = "Coset Sistema Produccion Rev 4.2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

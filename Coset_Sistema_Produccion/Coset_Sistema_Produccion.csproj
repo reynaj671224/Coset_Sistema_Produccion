@@ -70,6 +70,7 @@
     <Compile Include="Class_Proyectos.cs" />
     <Compile Include="Class_Requisiciones.cs" />
     <Compile Include="Class_Salida_Material.cs" />
+    <Compile Include="Class_Secuencia_Calidad.cs" />
     <Compile Include="Class_Secuencia_Produccion.cs" />
     <Compile Include="Class_Usuarios.cs" />
     <Compile Include="Forma_Autos.cs">
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="Forma_Autos.Designer.cs">
       <DependentUpon>Forma_Autos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forma_Calidad_Operaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Calidad_Operaciones.Designer.cs">
+      <DependentUpon>Forma_Calidad_Operaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Forma_Captura_Produccion.cs">
       <SubType>Form</SubType>
@@ -202,6 +209,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forma_Autos.resx">
       <DependentUpon>Forma_Autos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Calidad_Operaciones.resx">
+      <DependentUpon>Forma_Calidad_Operaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Captura_Produccion.resx">
       <DependentUpon>Forma_Captura_Produccion.cs</DependentUpon>
