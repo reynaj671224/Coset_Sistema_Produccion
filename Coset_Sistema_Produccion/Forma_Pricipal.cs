@@ -635,5 +635,11 @@ namespace Coset_Sistema_Produccion
             Forma_Calidad_Operaciones forma_Calidad_Operaciones = new Forma_Calidad_Operaciones();
             forma_Calidad_Operaciones.ShowDialog();
         }
+
+        private void dibujosOperacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Dibujos_Operacion forma_Dibujos_Operacion = new Forma_Dibujos_Operacion();
+            forma_Dibujos_Operacion.ShowDialog();
+        }
     }
 }

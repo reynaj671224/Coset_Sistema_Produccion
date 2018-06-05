@@ -459,6 +459,7 @@
             this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
             this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
+            this.buttonBuscarSecuenciaDibujo.Visible = false;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
             // 
             // textBoxUnidades

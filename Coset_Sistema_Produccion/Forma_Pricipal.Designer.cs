@@ -246,10 +246,10 @@
             // 
             // dibujosOperacionesToolStripMenuItem
             // 
-            this.dibujosOperacionesToolStripMenuItem.Enabled = false;
             this.dibujosOperacionesToolStripMenuItem.Name = "dibujosOperacionesToolStripMenuItem";
             this.dibujosOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.dibujosOperacionesToolStripMenuItem.Text = "Dibujos Operaciones";
+            this.dibujosOperacionesToolStripMenuItem.Click += new System.EventHandler(this.dibujosOperacionesToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem1
             // 

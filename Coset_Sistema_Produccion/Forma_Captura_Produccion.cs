@@ -86,12 +86,6 @@ namespace Coset_Sistema_Produccion
             Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
         }
 
-        private void Asigna_codigo_proceso_foilio_disponible()
-        {
-            folio_disponible = class_folio_disponible.Obtener_informacion_control_folio_base_datos();
-            textBoxEmpleado.Text = folio_disponible.Folio_procesos;
-        }
-
         private void Aparece_caja_codigo_proceso()
         {
             textBoxEmpleado.Visible = true;
@@ -177,20 +171,6 @@ namespace Coset_Sistema_Produccion
         {
            
         }
-
-       
-
-        private void Asigna_nuevo_folio_proceso()
-        {
-            int numero_folio = Convert.ToInt32(folio_disponible.Folio_procesos.Substring(2, folio_disponible.Folio_procesos.Length - 2));
-            numero_folio++;
-            folio_disponible.Folio_procesos = folio_disponible.Folio_procesos.Substring(0, 2) + numero_folio.ToString();
-            string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
-            if (respuesta != "")
-                MessageBox.Show(folio_disponible.error);
-        }
-
-        
 
         private void Elimina_informacion_usuarios_disponibles()
         {
@@ -311,16 +291,31 @@ namespace Coset_Sistema_Produccion
             TimeSpan timeSpan = Final - Inicio;
             if(Dibujos_produccion_disponible[0].Calidad == "Proceso")
             {
-                Dibujos_produccion_disponible[0].Horas_produccion =
-                    (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_produccion) +
-                    Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
+                try
+                {
+                    Dibujos_produccion_disponible[0].Horas_produccion =
+                        (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_produccion) +
+                        Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else if(Dibujos_produccion_disponible[0].Calidad == "Re-trabajo" || 
                 Dibujos_produccion_disponible[0].Calidad == "Desecho")
             {
-                Dibujos_produccion_disponible[0].Horas_retrabajo =
+                try
+                {
+                    Dibujos_produccion_disponible[0].Horas_retrabajo =
                     (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_retrabajo) +
                     Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             
             if(secuencia_operacion == "Terminar")
