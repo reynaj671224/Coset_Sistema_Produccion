@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coset_Sistema_Produccion", "Coset_Sistema_Produccion\Coset_Sistema_Produccion.csproj", "{013E7C38-2938-4392-9F40-76CB85C5A996}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Coset Sistema Produccion Instalacion", "Coset Sistema Produccion Instalacion\Coset Sistema Produccion Instalacion.vdproj", "{6091557B-2B2B-4AE7-BC7B-B5A30E4BE88F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Coset Sistema Produccion Instalacion", "Coset Sistema Produccion Instalacion\Coset Sistema Produccion Instalacion.vdproj", "{AE2F79BC-327F-417F-B1C2-6BA866189A46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,10 @@ Global
 		{013E7C38-2938-4392-9F40-76CB85C5A996}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{013E7C38-2938-4392-9F40-76CB85C5A996}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{013E7C38-2938-4392-9F40-76CB85C5A996}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6091557B-2B2B-4AE7-BC7B-B5A30E4BE88F}.Debug|Any CPU.ActiveCfg = Debug
-		{6091557B-2B2B-4AE7-BC7B-B5A30E4BE88F}.Release|Any CPU.ActiveCfg = Release
+		{AE2F79BC-327F-417F-B1C2-6BA866189A46}.Debug|Any CPU.ActiveCfg = Debug
+		{AE2F79BC-327F-417F-B1C2-6BA866189A46}.Debug|Any CPU.Build.0 = Debug
+		{AE2F79BC-327F-417F-B1C2-6BA866189A46}.Release|Any CPU.ActiveCfg = Release
+		{AE2F79BC-327F-417F-B1C2-6BA866189A46}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
