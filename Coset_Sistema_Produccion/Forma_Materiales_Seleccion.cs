@@ -38,7 +38,7 @@ namespace Coset_Sistema_Produccion
             }
             else if (Operacion_materiales == "Requisiciones")
             {
-                Aparece_boton_agregar_material();
+                /* Aparece_boton_agregar_material(); no se permitira agregar materiales en requisiciones*/
 
             }
             else if (Operacion_materiales == "Entrada Materiales")

@@ -87,6 +87,20 @@ namespace Coset_Sistema_Produccion
             comboBoxProveedoresPrevio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxProveedoresPrevio.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxProveedoresPrevio.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxCodigoRequisiciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoRequisiciones.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoRequisiciones.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxRequsitor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxRequsitor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxRequsitor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxDirigido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxDirigido.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxDirigido.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
@@ -835,8 +849,8 @@ namespace Coset_Sistema_Produccion
             {
                 if (Guarda_datos_partidas_requisiciones())
                 {
-                    if (Agrega_materiales_requisicion_base_datos())
-                    {
+                   /* if (Agrega_materiales_requisicion_base_datos())
+                    { funcion para detectar boton de busqueda si esta asignado */
                         if (Guarda_datos_requisicion())
                         {
                             Limpia_cajas_captura_despues_de_agregar_cotizacion();
@@ -848,6 +862,7 @@ namespace Coset_Sistema_Produccion
                             Desaparece_boton_cancelar();
                             Desaparece_combo_codigo_requisicion();
                             Activa_botones_operacion();
+                            Limpia_operaciones_requisiciones();
                             limpia_partidas_requisicion();
                             Desactiva_datagridview_partidas();
                             Desaparece_combo_requisitor();
@@ -859,9 +874,14 @@ namespace Coset_Sistema_Produccion
                             Asigna_nuevo_folio_requisiciones();
                             Elimina_informacion_requisiciones_disponibles();
                         }
-                    }
+                   /* } */
                 }
             }
+        }
+
+        private void Limpia_operaciones_requisiciones()
+        {
+            Operacio_requisiciones = "";
         }
 
         private bool Confirma_datos_partidas()
@@ -873,12 +893,15 @@ namespace Coset_Sistema_Produccion
                     if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly ||
                         (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                     {
-                        if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null ||
-                            dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString() == "?")
+                        if (campo != (int)Campos_partidas.proyecto)
                         {
-                            MessageBox.Show("campo en blanco o informacion faltante (?)", "Agregar Requisicion",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return false;
+                            if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null ||
+                                dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString() == "?")
+                            {
+                                MessageBox.Show("campo en blanco o informacion faltante (?)", "Agregar Requisicion",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return false;
+                            }
                         }
 
                     }
@@ -893,30 +916,30 @@ namespace Coset_Sistema_Produccion
             for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.Rows.Count - 1; partidas++)
             {
 
-                if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells["Busqueda_requisicion"].Value.ToString() == "A")
+                /*if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells["Busqueda_requisicion"].Value.ToString() == "A")
+                { no se va a permitir agregar materiales en requicisiones*/
+                if (Asigna_valores_material_requisicion_agregar(partidas))
                 {
-                    if (Asigna_valores_material_requisicion_agregar(partidas))
+                    respuesta_agregar_material = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
+                    if (respuesta_agregar_material == "NO errores")
                     {
-                        respuesta_agregar_material = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
-                        if (respuesta_agregar_material == "NO errores")
-                        {
-                            Asigna_nuevo_folio_material();
-                        }
-                        else
-                        {
-                            MessageBox.Show(respuesta_agregar_material);
-                            return false;
-                        }
+                        Asigna_nuevo_folio_material();
                     }
                     else
                     {
-
-                        MessageBox.Show("Campos sin asignar", "Agregar Material Requisicion",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(respuesta_agregar_material);
                         return false;
                     }
-
                 }
+                else
+                {
+
+                    MessageBox.Show("Campos sin asignar", "Agregar Material Requisicion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+
+                /*}*/
                
             }
 
@@ -1029,6 +1052,13 @@ namespace Coset_Sistema_Produccion
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly || 
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                         {
+                            if (campo == (int)Campos_partidas.proyecto)
+                            {
+                                if(dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value== null)
+                                {
+                                    dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value = "";
+                                }
+                            }
                             if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value != null)
                             {
                                 if (campo == (int)Campos_partidas.partida)
@@ -1580,12 +1610,20 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_campos_partidas_requisiciones_materiales(int rowIndex, Material material_seleccionado_data_view)
         {
+            /*mueve el control a la columna de Proveedores*/
+            dataGridViewPartidasRequisiciones.CurrentCell = dataGridViewPartidasRequisiciones["Proveedor_requisicion", rowIndex];
+
+            /*pinta de blanco celdas con informacion nueva*/
+            dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, rowIndex].Style.BackColor = Color.White;
+            dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, rowIndex].Style.BackColor = Color.White;
+
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, rowIndex].Value =
                 material_seleccionado_data_view.Codigo_proveedor;
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, rowIndex].Value =
                 material_seleccionado_data_view.Descripcion;
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.uidad_medida, rowIndex].Value =
                 material_seleccionado_data_view.Unidad_medida;
+            dataGridViewPartidasRequisiciones.Update();
         }
 
 
@@ -2283,7 +2321,37 @@ namespace Coset_Sistema_Produccion
         private void Secuencia_buscar_mostrar_materiales()
         {
             Asigna_valores_busqueda_materiales();
-            Materiales_disponibles_busqueda = class_materiales.Adquiere_agregar_materiales_busqueda_en_base_datos(Visualizar_material);
+            Materiales_disponibles_busqueda = class_materiales.Busqueda_codigo_descripcion_materiales_busqueda_en_base_datos(Visualizar_material);
+            Muestra_Materiales_disponibles_busqueda_codigo_descripcion();
+        }
+
+        private void Muestra_Materiales_disponibles_busqueda_codigo_descripcion()
+        {
+            if (Materiales_disponibles_busqueda.Count == 1)
+            {
+                
+                Rellena_campos_partidas_requisiciones_materiales(dataGridViewPartidasRequisiciones.CurrentCell.RowIndex,
+                    Materiales_disponibles_busqueda[0]);
+
+            }
+            else if (Materiales_disponibles_busqueda.Count > 1)
+            {
+                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, "Requisiciones");
+                forma_Materiales_Seleccion.ShowDialog();
+
+                if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                {
+                    Rellena_campos_partidas_requisiciones_materiales(dataGridViewPartidasRequisiciones.CurrentCell.RowIndex, 
+                        forma_Materiales_Seleccion.Material_seleccionado_data_view);   
+                }
+
+
+            }
+            else if (Materiales_disponibles_busqueda.Count == 0)
+            {
+                MessageBox.Show("No existe material con el criterio de busqueda", "Requisiciones",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void Asigna_valores_busqueda_materiales()
@@ -2315,7 +2383,7 @@ namespace Coset_Sistema_Produccion
             else if(dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
             {
                 if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex,
-                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue != null)
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
                 {
                     Visualizar_material.Descripcion = dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString();
                 }
@@ -2325,7 +2393,7 @@ namespace Coset_Sistema_Produccion
                 }
 
                 if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex - 1,
-                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue != null)
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
                 {
 
                     Visualizar_material.Codigo_proveedor = dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex - 1,
