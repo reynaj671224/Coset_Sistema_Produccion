@@ -49,6 +49,8 @@ namespace Coset_Sistema_Produccion
         public word.Application application = null;
         public word.Document Documento = null;
         public int Numero_renglones_rellenos_requisicion=0;
+        private bool eventHookedUp;
+        public int Longitud_cadena_busqueda = 3;
         public enum Campos_partidas
         {
             codigo,partida,cantidad,numero, descripcion,
@@ -2087,9 +2089,9 @@ namespace Coset_Sistema_Produccion
             if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Parte_requisicion"].Value = "?";
+                            Cells["Parte_requisicion"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Descrpcion_partida"].Value = "?";
+                            Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
             }
             else if (Operacio_requisiciones == "Cancelar")
             {
@@ -2246,6 +2248,94 @@ namespace Coset_Sistema_Produccion
             Operacio_requisiciones = "Eliminar Partida";
             Desactiva_botones_operacion_partidas();
             No_aceptar_agregar_partidas_requisiciones();
+
+        }
+
+        private void dataGridViewPartidasRequisiciones_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.CellStyle.BackColor = Color.White;
+            if (this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.numero ||
+                this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
+            {
+                if (!this.eventHookedUp)
+                {
+                    e.Control.TextChanged += this.TextChange;
+                    this.eventHookedUp = true;
+                }
+            }
+            else
+            {
+                e.Control.TextChanged -= this.TextChange;
+                this.eventHookedUp = false;
+                
+            }
+        }
+
+        private void TextChange(object sender, EventArgs e)
+        {
+            dataGridViewPartidasRequisiciones.CurrentCell.Style.BackColor = Color.White;
+            if (dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString().Length == Longitud_cadena_busqueda)
+            {
+                Secuencia_buscar_mostrar_materiales();
+            }
+        }
+
+        private void Secuencia_buscar_mostrar_materiales()
+        {
+            Asigna_valores_busqueda_materiales();
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_agregar_materiales_busqueda_en_base_datos(Visualizar_material);
+        }
+
+        private void Asigna_valores_busqueda_materiales()
+        {
+            if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.numero)
+            {
+                if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+                    Visualizar_material.Codigo_proveedor = dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+
+                if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Descripcion = dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+            }
+            else if(dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
+            {
+                if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue != null)
+                {
+                    Visualizar_material.Descripcion = dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+
+                if (dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex - 1,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue != null)
+                {
+
+                    Visualizar_material.Codigo_proveedor = dataGridViewPartidasRequisiciones[dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex - 1,
+                        dataGridViewPartidasRequisiciones.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+            }
 
         }
     }

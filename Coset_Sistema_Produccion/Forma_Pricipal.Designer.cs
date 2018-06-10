@@ -80,6 +80,7 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
+            this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -487,6 +488,12 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
+            // timerStart
+            // 
+            this.timerStart.Enabled = true;
+            this.timerStart.Interval = 1000;
+            this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
+            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,6 +576,7 @@
         private System.Windows.Forms.ToolStripMenuItem verificarRequisicionesPendientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInventarios;
         private System.Windows.Forms.ToolStripMenuItem autosToolStripMenuItem;
+        private System.Windows.Forms.Timer timerStart;
     }
 }
 

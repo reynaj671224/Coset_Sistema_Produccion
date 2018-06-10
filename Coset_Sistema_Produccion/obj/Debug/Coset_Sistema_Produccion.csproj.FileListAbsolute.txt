@@ -20,7 +20,6 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Debug\Coset_Sistema_Produccion.pdb
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Debug\MySql.Data.dll
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Debug\MySql.Data.xml
-C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.csprojResolveAssemblyReference.cache
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Datos_Generales.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Coset_Sistema_Produccion.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Inicio_Usuario.resources
@@ -50,3 +49,9 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Captura_Produccion.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Calidad_Operaciones.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Dibujos_Operacion.resources
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Debug\Coset_Sistema_Produccion.exe.manifest
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Debug\Coset_Sistema_Produccion.application
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.exe.manifest
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.application
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.csproj.CopyComplete
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.csprojAssemblyReference.cache

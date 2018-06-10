@@ -325,8 +325,7 @@
             this.dataGridViewPartidasCotizacion.Size = new System.Drawing.Size(894, 156);
             this.dataGridViewPartidasCotizacion.TabIndex = 48;
             this.dataGridViewPartidasCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewContactosClientes_CellClick);
-            this.dataGridViewPartidasCotizacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
-            // 
+            this.dataGridViewPartidasCotizacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);            // 
             // Codigo_partida
             // 
             this.Codigo_partida.HeaderText = "Codigo";
@@ -373,6 +372,7 @@
             this.comboBoxCodigoCotizaciones.Location = new System.Drawing.Point(220, 129);
             this.comboBoxCodigoCotizaciones.Name = "comboBoxCodigoCotizaciones";
             this.comboBoxCodigoCotizaciones.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoCotizaciones.Sorted = true;
             this.comboBoxCodigoCotizaciones.TabIndex = 49;
             this.comboBoxCodigoCotizaciones.Visible = false;
             this.comboBoxCodigoCotizaciones.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
@@ -491,6 +491,7 @@
             this.comboBoxAtencion.Location = new System.Drawing.Point(220, 159);
             this.comboBoxAtencion.Name = "comboBoxAtencion";
             this.comboBoxAtencion.Size = new System.Drawing.Size(229, 21);
+            this.comboBoxAtencion.Sorted = true;
             this.comboBoxAtencion.TabIndex = 60;
             this.comboBoxAtencion.Visible = false;
             // 
@@ -500,6 +501,7 @@
             this.comboBoxAtencionCopia.Location = new System.Drawing.Point(220, 186);
             this.comboBoxAtencionCopia.Name = "comboBoxAtencionCopia";
             this.comboBoxAtencionCopia.Size = new System.Drawing.Size(229, 21);
+            this.comboBoxAtencionCopia.Sorted = true;
             this.comboBoxAtencionCopia.TabIndex = 61;
             this.comboBoxAtencionCopia.Visible = false;
             // 
@@ -509,6 +511,7 @@
             this.comboBoxNombreCliente.Location = new System.Drawing.Point(452, 132);
             this.comboBoxNombreCliente.Name = "comboBoxNombreCliente";
             this.comboBoxNombreCliente.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxNombreCliente.Sorted = true;
             this.comboBoxNombreCliente.TabIndex = 62;
             this.comboBoxNombreCliente.Visible = false;
             this.comboBoxNombreCliente.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreCliente_SelectedIndexChanged);

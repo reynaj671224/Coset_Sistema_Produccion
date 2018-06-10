@@ -1896,5 +1896,6 @@ namespace Coset_Sistema_Produccion
         {
             buttonWordPrevio.Enabled = true;
         }
+
     }
 }

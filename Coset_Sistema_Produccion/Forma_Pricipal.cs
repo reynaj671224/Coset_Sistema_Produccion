@@ -641,5 +641,14 @@ namespace Coset_Sistema_Produccion
             Forma_Dibujos_Operacion forma_Dibujos_Operacion = new Forma_Dibujos_Operacion();
             forma_Dibujos_Operacion.ShowDialog();
         }
+
+        private void timerStart_Tick(object sender, EventArgs e)
+        {
+            timerStart.Enabled = false;
+            Inicia_timer_busca_tipo_de_usuario();
+            Limpia_tipo_de_usuario();
+            Mustra_forma_seleccio_de_usuarios();
+            Oculta_menu_inicio_de_usuario();
+        }
     }
 }
