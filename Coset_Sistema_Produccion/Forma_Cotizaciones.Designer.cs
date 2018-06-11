@@ -325,7 +325,8 @@
             this.dataGridViewPartidasCotizacion.Size = new System.Drawing.Size(894, 156);
             this.dataGridViewPartidasCotizacion.TabIndex = 48;
             this.dataGridViewPartidasCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewContactosClientes_CellClick);
-            this.dataGridViewPartidasCotizacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);            // 
+            this.dataGridViewPartidasCotizacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
+            // 
             // Codigo_partida
             // 
             this.Codigo_partida.HeaderText = "Codigo";
@@ -665,7 +666,6 @@
         private System.Windows.Forms.TextBox textBoxCodigoCotizaciones;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridViewPartidasCotizacion;
-        private System.Windows.Forms.ComboBox comboBoxCodigoCotizaciones;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.Button buttonPartidas;
         private System.Windows.Forms.Button buttonEliminarPartida;
@@ -691,5 +691,6 @@
         private System.Windows.Forms.GroupBox groupBoxPrevio;
         private System.Windows.Forms.RadioButton radioButtonPrevioIngles;
         private System.Windows.Forms.RadioButton radioButtonPrevioEspanol;
+        private System.Windows.Forms.ComboBox comboBoxCodigoCotizaciones;
     }
 }

@@ -491,7 +491,6 @@
             // timerStart
             // 
             this.timerStart.Enabled = true;
-            this.timerStart.Interval = 1000;
             this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
             // 
             // Coset_Sistema_Produccion

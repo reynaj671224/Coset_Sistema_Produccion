@@ -328,6 +328,7 @@
             this.comboBoxCodigoOrdenCompra.Location = new System.Drawing.Point(262, 136);
             this.comboBoxCodigoOrdenCompra.Name = "comboBoxCodigoOrdenCompra";
             this.comboBoxCodigoOrdenCompra.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoOrdenCompra.Sorted = true;
             this.comboBoxCodigoOrdenCompra.TabIndex = 49;
             this.comboBoxCodigoOrdenCompra.Visible = false;
             this.comboBoxCodigoOrdenCompra.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoOrdenCompra_SelectedIndexChanged);

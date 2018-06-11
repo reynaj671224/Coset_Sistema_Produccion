@@ -404,6 +404,10 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxNombreProceso.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxNombreProceso.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)

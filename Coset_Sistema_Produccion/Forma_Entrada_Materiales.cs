@@ -77,6 +77,15 @@ namespace Coset_Sistema_Produccion
             comboBoxDescripcionMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxDescripcionMaterial.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxDescripcionMaterial.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxCodigoOrdenCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoOrdenCompra.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoOrdenCompra.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
 
         

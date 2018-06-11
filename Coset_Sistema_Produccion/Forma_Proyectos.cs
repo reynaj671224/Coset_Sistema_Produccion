@@ -70,6 +70,33 @@ namespace Coset_Sistema_Produccion
         {
             Desactiva_columna_codigo_partidas_cotizaciones();
             Rellena_combo_procesos_datagridview_dibujos();
+            Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+
+        }
+
+        private void Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana()
+        {
+            comboBoxCodigoProyecto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoProyecto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoProyecto.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxCodigoCotizacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoCotizacion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoCotizacion.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxNombreCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxNombreCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxNombreCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxIngenieroCoset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxIngenieroCoset.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxIngenieroCoset.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxIngenieroCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxIngenieroCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxIngenieroCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+
 
         }
 

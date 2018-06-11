@@ -58,6 +58,29 @@ namespace Coset_Sistema_Produccion
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
             Desactiva_columna_codigo_partidas_cotizaciones();
+            Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+        }
+
+        private void Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana()
+        {
+            comboBoxCodigoCotizaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoCotizaciones.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoCotizaciones.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxAtencion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxAtencion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxAtencion.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxAtencionCopia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxAtencionCopia.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxAtencionCopia.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxNombreCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxNombreCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxNombreCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
 
         private void buttonHome_Click(object sender, EventArgs e)

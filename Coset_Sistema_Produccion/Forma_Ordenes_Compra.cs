@@ -50,6 +50,9 @@ namespace Coset_Sistema_Produccion
         public Proveedor Proveedor_modificaciones = new Proveedor();
         public List<Partida_requisicion> Partidas_requisiciones_disponibles_numero_parte
             = new List<Partida_requisicion>();
+        public Class_Proyectos Class_proyectos = new Class_Proyectos();
+        public List<Proyecto> proyectos_disponibles = new List<Proyecto>();
+        private bool eventHookedUp;
         string RenglonParaEliminar = "";
         string Requisicion_eliminar = "";
         string Descripcion_eleiminar = "";
@@ -58,9 +61,14 @@ namespace Coset_Sistema_Produccion
         public string nombre_archivo_word = "";
         public word.Application application = null;
         public word.Document Documento = null;
+        public int Longitud_cadena_busqueda = 3;
+        public Material Visualizar_material = new Material();
+        public Material Agregar_material = new Material();
+        public List<Material> Materiales_disponibles_busqueda = new List<Material>();
+        public Class_Materiales class_materiales = new Class_Materiales();
         public enum Campos_orden_compra
         {
-            codigo, partida, requisicion, cantidad, parte,descrpcion,unidad_medida,
+            codigo, partida, requisicion, cantidad, parte,descripcion,unidad_medida,
             proyecto,precio, total
         };
 
@@ -83,6 +91,20 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxNombreProveedor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxNombreProveedor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxCodigoOrdenCompra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoOrdenCompra.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoOrdenCompra.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxCotizado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCotizado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCotizado.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxRealizado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxRealizado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxRealizado.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         
@@ -159,6 +181,8 @@ namespace Coset_Sistema_Produccion
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
             Operacio_orden_compra = "Visualizar";
         }
 
@@ -441,25 +465,27 @@ namespace Coset_Sistema_Produccion
                     {
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(), 
-                            partidas_ordenes_compra_disponibles[partidas].Partida,"", 
+                            partidas_ordenes_compra_disponibles[partidas].Partida,
+                            partidas_ordenes_compra_disponibles[partidas].Requisicion, 
                             partidas_ordenes_compra_disponibles[partidas].Cantidad,  
-                            partidas_ordenes_compra_disponibles[partidas].Parte, "",
+                            partidas_ordenes_compra_disponibles[partidas].Parte,
+                            partidas_ordenes_compra_disponibles[partidas].Descripcion,
                             partidas_ordenes_compra_disponibles[partidas].Unidad_medida, 
                             partidas_ordenes_compra_disponibles[partidas].Proyecto, 
                             partidas_ordenes_compra_disponibles[partidas].precio_unitario, 
                             partidas_ordenes_compra_disponibles[partidas].Total);
-                        /*Rellena combo requisiciones partidas ordenes compra*/
-                        DataGridViewComboBoxCell combo_codigo_requisicion = 
-                            (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.requisicion];
-                        combo_codigo_requisicion.Items.Clear();
-                        combo_codigo_requisicion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Requisicion);
-                        combo_codigo_requisicion.Value = partidas_ordenes_compra_disponibles[partidas].Requisicion;
-                        /* rellena combo numero de parte partidas ordenes compra*/
-                        DataGridViewComboBoxCell combo_descrpcion =
-                           (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.descrpcion];
-                        combo_descrpcion.Items.Clear();
-                        combo_descrpcion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Descripcion);
-                        combo_descrpcion.Value = partidas_ordenes_compra_disponibles[partidas].Descripcion;
+                        ///*Rellena combo requisiciones partidas ordenes compra*/
+                        //DataGridViewComboBoxCell combo_codigo_requisicion = 
+                        //    (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.requisicion];
+                        //combo_codigo_requisicion.Items.Clear();
+                        //combo_codigo_requisicion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Requisicion);
+                        //combo_codigo_requisicion.Value = partidas_ordenes_compra_disponibles[partidas].Requisicion;
+                        ///* rellena combo numero de parte partidas ordenes compra*/
+                        //DataGridViewComboBoxCell combo_descrpcion =
+                        //   (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.descripcion];
+                        //combo_descrpcion.Items.Clear();
+                        //combo_descrpcion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Descripcion);
+                        //combo_descrpcion.Value = partidas_ordenes_compra_disponibles[partidas].Descripcion;
                     }
                     catch
                     {
@@ -486,37 +512,40 @@ namespace Coset_Sistema_Produccion
                 {
                     try
                     {
+                        /*se activaron los valores de requisicoin y descripcion*/
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(),
-                            partidas_ordenes_compra_disponibles[partidas].Partida, "",
+                            partidas_ordenes_compra_disponibles[partidas].Partida,
+                            partidas_ordenes_compra_disponibles[partidas].Requisicion,
                             partidas_ordenes_compra_disponibles[partidas].Cantidad,
-                            partidas_ordenes_compra_disponibles[partidas].Parte, "",
+                            partidas_ordenes_compra_disponibles[partidas].Parte,
+                            partidas_ordenes_compra_disponibles[partidas].Descripcion,
                             partidas_ordenes_compra_disponibles[partidas].Unidad_medida,
                             partidas_ordenes_compra_disponibles[partidas].Proyecto,
                             partidas_ordenes_compra_disponibles[partidas].precio_unitario,
                             partidas_ordenes_compra_disponibles[partidas].Total);
-                        /*Rellena combo requisiciones partidas ordenes compra*/
-                        DataGridViewComboBoxCell combo_codigo_requisicion =
-                            (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.requisicion];
-                        combo_codigo_requisicion.Items.Clear();
-                        combo_codigo_requisicion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Requisicion);
-                        combo_codigo_requisicion.Value = partidas_ordenes_compra_disponibles[partidas].Requisicion;
-                        /* rellena combo descripcion partidas ordenes compra*/
-                        Partidas_requisiciones_disponibles_numero_parte = Class_partidas_requisiciones.
-                            Adquiere_partidas_requisiciones_disponibles_numero_parte_en_base_datos(textBoxNombreProveedor.Text);
+                        ///*Rellena combo requisiciones partidas ordenes compra*/
+                        //DataGridViewComboBoxCell combo_codigo_requisicion =
+                        //    (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.requisicion];
+                        //combo_codigo_requisicion.Items.Clear();
+                        //combo_codigo_requisicion.Items.Add(partidas_ordenes_compra_disponibles[partidas].Requisicion);
+                        //combo_codigo_requisicion.Value = partidas_ordenes_compra_disponibles[partidas].Requisicion;
+                        ///* rellena combo descripcion partidas ordenes compra*/
+                        //Partidas_requisiciones_disponibles_numero_parte = Class_partidas_requisiciones.
+                        //    Adquiere_partidas_requisiciones_disponibles_numero_parte_en_base_datos(textBoxNombreProveedor.Text);
 
-                        DataGridViewComboBoxCell combo_descripcion =
-                           (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.descrpcion];
-                        combo_descripcion.Items.Clear();
-                        foreach(Partida_requisicion partida in Partidas_requisiciones_disponibles_numero_parte)
-                        {
-                            if (partidas_ordenes_compra_disponibles[partidas].Requisicion == partida.Codigo_requisicion)
-                            {
-                                combo_descripcion.Items.Add(partida.Descripcion);
-                            }
-                        }
+                        //DataGridViewComboBoxCell combo_descripcion =
+                        //   (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.descripcion];
+                        //combo_descripcion.Items.Clear();
+                        //foreach(Partida_requisicion partida in Partidas_requisiciones_disponibles_numero_parte)
+                        //{
+                        //    if (partidas_ordenes_compra_disponibles[partidas].Requisicion == partida.Codigo_requisicion)
+                        //    {
+                        //        combo_descripcion.Items.Add(partida.Descripcion);
+                        //    }
+                        //}
 
-                        combo_descripcion.Value = partidas_ordenes_compra_disponibles[partidas].Descripcion;
+                        //combo_descripcion.Value = partidas_ordenes_compra_disponibles[partidas].Descripcion;
                     }
                     catch
                     {
@@ -603,6 +632,11 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
             Rellena_cajas_informacion_de_partidas_orden_compra_modificaciones();
             Aparce_boton_guardar_base_datos();
+        }
+
+        private void Limpia_combo_proyectos_partidas()
+        {
+            Proyecto_compra.Items.Clear();
         }
 
         private void Desaparece_textbox_condicion_pago()
@@ -706,6 +740,8 @@ namespace Coset_Sistema_Produccion
             //Obtener_datos_generales();
             Aparece_combo_condicion_pago();
             Activa_combo_condicion_pago();
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
             Operacio_orden_compra = "Agregar";
         }
 
@@ -881,6 +917,8 @@ namespace Coset_Sistema_Produccion
                             Limpia_combo_nombre_cliente();
                             Limpia_combo_atencion();
                             Limpia_combo_atencio_copia();
+                            Limpia_operaciones_ordenes_compra();
+                            Limpia_combo_proyectos_partidas();
                             Desactiva_cajas_captura_despues_de_agregar_orden_compra();
                             Desaparece_boton_guardar_base_de_datos();
                             Desaparece_boton_cancelar();
@@ -975,7 +1013,7 @@ namespace Coset_Sistema_Produccion
                                 Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.parte)
                                 Partida_orden_compra_agregar.Parte = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_orden_compra.descrpcion)
+                            else if (campo == (int)Campos_orden_compra.descripcion)
                                 Partida_orden_compra_agregar.Descripcion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.unidad_medida)
                                 Partida_orden_compra_agregar.Unidad_medida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
@@ -1017,6 +1055,7 @@ namespace Coset_Sistema_Produccion
                 if (Guarda_datos_partidas_orden_compra())
                 {
                     Desaparece_boton_guardar_base_de_datos();
+                    Limpia_operaciones_ordenes_compra();
                     Activa_botones_operacion_partidas();
                     limpia_partidas_ordenes_compra();
                     Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
@@ -1024,6 +1063,11 @@ namespace Coset_Sistema_Produccion
                     Elimina_informacion_orden_compra_disponibles();
                 }
             }
+        }
+
+        private void Limpia_operaciones_ordenes_compra()
+        {
+            Operacio_orden_compra = "";
         }
 
         private void Activa_botones_operacion_partidas()
@@ -1054,6 +1098,7 @@ namespace Coset_Sistema_Produccion
                         Limpia_combo_nombre_cliente();
                         Limpia_combo_atencion();
                         Limpia_combo_atencio_copia();
+                        Limpia_operaciones_ordenes_compra();
                         Desactiva_cajas_captura_despues_de_agregar_orden_compra();
                         Desaparece_boton_guardar_base_de_datos();
                         Desaparece_boton_cancelar();
@@ -1074,6 +1119,7 @@ namespace Coset_Sistema_Produccion
                         Aparece_textbox_atencion();
                         Aparece_textbox_atencion_copia();
                         Aparece_textbox_condicio_pago();
+                        Limpia_combo_proyectos_partidas();
                         Elimina_informacion_orden_compra_disponibles();
                     }
                 }
@@ -1159,7 +1205,7 @@ namespace Coset_Sistema_Produccion
                                 Partida_orden_compra_modificar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.parte)
                                 Partida_orden_compra_modificar.Parte = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_orden_compra.descrpcion)
+                            else if (campo == (int)Campos_orden_compra.descripcion)
                                 Partida_orden_compra_modificar.Descripcion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.unidad_medida)
                                 Partida_orden_compra_modificar.Unidad_medida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
@@ -1223,6 +1269,8 @@ namespace Coset_Sistema_Produccion
                             Limpia_combo_nombre_cliente();
                             Limpia_combo_atencion();
                             Limpia_combo_atencio_copia();
+                            Limpia_operaciones_ordenes_compra();
+                            Limpia_combo_proyectos_partidas();
                             Desactiva_cajas_captura_despues_de_agregar_orden_compra();
                             Desaparece_boton_guardar_base_de_datos();
                             Desaparece_boton_cancelar();
@@ -1448,7 +1496,7 @@ namespace Coset_Sistema_Produccion
                                 Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.parte)
                                 Partida_orden_compra_agregar.Parte = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_orden_compra.descrpcion)
+                            else if (campo == (int)Campos_orden_compra.descripcion)
                                 Partida_orden_compra_agregar.Descripcion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.unidad_medida)
                                 Partida_orden_compra_agregar.Unidad_medida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
@@ -1567,6 +1615,8 @@ namespace Coset_Sistema_Produccion
 
         private void Modifica_orden_compra()
         {
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
             Desactiva_botones_operacion();
             limpia_combo_ordenes_compra();
             Desaparece_caja_captura_codigo_orden_compra();
@@ -1653,8 +1703,8 @@ namespace Coset_Sistema_Produccion
             limpia_partidas_ordenes_compra();
             Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor();
             Limpia_datagridview_ordenes_compra();
-            Limpia_combo_requisiciones_partidas_orden_compra();
-            Rellena_combo_requisicion_partidas_orden_compra();
+            //Limpia_combo_requisiciones_partidas_orden_compra();
+            //Rellena_combo_requisicion_partidas_orden_compra();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
         }
@@ -1867,6 +1917,8 @@ namespace Coset_Sistema_Produccion
 
         private void Partidas_operaciones()
         {
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
             Aparece_boton_cancelar_operacio();
@@ -2102,7 +2154,7 @@ namespace Coset_Sistema_Produccion
                     Remplaza_texto_en_Documento("<np" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<d" + partida + ">",
-                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descrpcion, partida - 1].Value.ToString());
+                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<m" + partida + ">",
                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.unidad_medida, partida - 1].Value.ToString());
                     importe = Convert.ToDouble(dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.precio, partida - 1].Value.ToString());
@@ -2184,17 +2236,16 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreProveedor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor();
+            //Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor();
             Limpia_datagridview_ordenes_compra();
-            Limpia_combo_requisiciones_partidas_orden_compra();
-            Rellena_combo_requisicion_partidas_orden_compra();
+            //Limpia_combo_requisiciones_partidas_orden_compra();
+            //Rellena_combo_requisicion_partidas_orden_compra();
             Rellena_razon_social_proveedor();
             Limpia_combo_cotizado();
             Aparece_combo_cotizado();
             Activa_combo_cotizado();
             Obtener_contactos_disponibles_proveedor();
             Rellena_combo_contactos_proveedor();
-            
 
         }
 
@@ -2245,10 +2296,10 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Limpia_combo_requisiciones_partidas_orden_compra()
-        {
-            Requisicion_compra.Items.Clear();
-        }
+        //private void Limpia_combo_requisiciones_partidas_orden_compra()
+        //{
+        //    Requisicion_compra.Items.Clear();
+        //}
 
         private void Limpia_datagridview_ordenes_compra()
         {
@@ -2261,16 +2312,16 @@ namespace Coset_Sistema_Produccion
             textBoxRazonSocialProveedor.Text = Proveedor_seleccionado.RazonSocial;
         }
 
-        private void Rellena_combo_requisicion_partidas_orden_compra()
-        {
-            foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
-            {
-                if (!Requisicion_compra.Items.Contains(partida_requisicion.Codigo_requisicion))
-                {
-                    Requisicion_compra.Items.Add(partida_requisicion.Codigo_requisicion);
-                }
-            }
-        }
+        //private void Rellena_combo_requisicion_partidas_orden_compra()
+        //{
+        //    foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
+        //    {
+        //        if (!Requisicion_compra.Items.Contains(partida_requisicion.Codigo_requisicion))
+        //        {
+        //            Requisicion_compra.Items.Add(partida_requisicion.Codigo_requisicion);
+        //        }
+        //    }
+        //}
 
         private void Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor()
         {
@@ -2293,65 +2344,65 @@ namespace Coset_Sistema_Produccion
             {
                 if (e.ColumnIndex == (int)Campos_orden_compra.requisicion && e.RowIndex >= 0) //check if combobox column
                 {
-                    if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-                    {
-                        string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                        /*rellena combo numero de parte disponible para requisicio*/
+                    //if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                    //{
+                    //    string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    //    /*rellena combo numero de parte disponible para requisicio*/
 
-                        DataGridViewComboBoxCell combo_descripcion = (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.descrpcion];
-                        combo_descripcion.Items.Clear();
-                        combo_descripcion.Value = "";
-                        foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
-                        {
-                            if (partida_requisicion.Codigo_requisicion == selectedValue)
-                            {
-                                combo_descripcion.Items.Add(partida_requisicion.Descripcion);
-                            }
+                    //    DataGridViewComboBoxCell combo_descripcion = (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.descrpcion];
+                    //    combo_descripcion.Items.Clear();
+                    //    combo_descripcion.Value = "";
+                    //    foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
+                    //    {
+                    //        if (partida_requisicion.Codigo_requisicion == selectedValue)
+                    //        {
+                    //            combo_descripcion.Items.Add(partida_requisicion.Descripcion);
+                    //        }
 
-                        }
-                    }
+                    //    }
+                    //}
                 }
-                else if (e.ColumnIndex == (int)Campos_orden_compra.descrpcion && e.RowIndex >= 0) //check if combobox column
+                else if (e.ColumnIndex == (int)Campos_orden_compra.descripcion && e.RowIndex >= 0) //check if combobox column
                 {
-                    if (Operacio_orden_compra == "Agregar" || Operacio_orden_compra == "Agregar Partidas")
-                    {
-                        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-                        {
-                            string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    //if (Operacio_orden_compra == "Agregar" || Operacio_orden_compra == "Agregar Partidas")
+                    //{
+                    //    if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                    //    {
+                    //        string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-                            foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
-                            {
-                                if (partida_requisicion.Descripcion == selectedValue)
-                                {
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
+                    //        foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas)
+                    //        {
+                    //            if (partida_requisicion.Descripcion == selectedValue)
+                    //            {
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
 
-                                }
+                    //            }
 
-                            }
-                        }
-                    }else if(Operacio_orden_compra == "Modificar")
-                    {
-                        if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-                        {
-                            string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    //        }
+                    //    }
+                    //}else if(Operacio_orden_compra == "Modificar")
+                    //{
+                    //    if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                    //    {
+                    //        string selectedValue = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-                            foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_numero_parte)
-                            {
-                                if (partida_requisicion.Descripcion == selectedValue)
-                                {
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
-                                    dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
+                    //        foreach (Partida_requisicion partida_requisicion in Partidas_requisiciones_disponibles_numero_parte)
+                    //        {
+                    //            if (partida_requisicion.Descripcion == selectedValue)
+                    //            {
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Cantidad_partida"].Value = partida_requisicion.Cantidad;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Parte_partida"].Value = partida_requisicion.Numero;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["UnidadMedida_compra"].Value = partida_requisicion.Unidad_medida;
+                    //                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Proyecto_compra"].Value = partida_requisicion.Proyecto;
 
-                                }
+                    //            }
 
-                            }
-                        }
-                    }
+                    //        }
+                    //    }
+                    //}
                 }
                 else if (e.ColumnIndex == (int)Campos_orden_compra.cantidad && e.RowIndex >= 0)
                 {
@@ -2535,6 +2586,7 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_nombre_cliente();
             Limpia_combo_atencion();
             Limpia_combo_atencio_copia();
+            Limpia_combo_proyectos_partidas();
             Limpia_cajas_captura_despues_de_agregar_orden_compra();
             Desactiva_cajas_captura_despues_de_agregar_orden_compra();
             Desaparece_boton_guardar_base_de_datos();
@@ -2597,6 +2649,172 @@ namespace Coset_Sistema_Produccion
             {
                 MessageBox.Show("Folder No existe", "Copiar Orden de Compra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+            }
+        }
+        private void obtener_proyectos_disponibles()
+        {
+            proyectos_disponibles = Class_proyectos.Adquiere_proyectos_disponibles_en_base_datos();
+        }
+        private void Rellenar_combo_proyectos_partidas_requisiciones()
+        {
+            foreach (Proyecto proyecto in proyectos_disponibles)
+            {
+                if (proyecto.error == "")
+                {
+                    Proyecto_compra.Items.Add(proyecto.Codigo);
+                }
+                else
+                {
+                    MessageBox.Show(proyecto.error);
+                }
+
+            }
+        }
+
+        private void dataGridViewPartidasOrdenCompra_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.CellStyle.BackColor = Color.White;
+            if (this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.parte ||
+                this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.descripcion)
+            {
+                if (!this.eventHookedUp)
+                {
+                    e.Control.TextChanged += this.TextChange;
+                    this.eventHookedUp = true;
+                }
+            }
+            else
+            {
+                e.Control.TextChanged -= this.TextChange;
+                this.eventHookedUp = false;
+
+            }
+        }
+
+        private void TextChange(object sender, EventArgs e)
+        {
+            dataGridViewPartidasOrdenCompra.CurrentCell.Style.BackColor = Color.White;
+            if (dataGridViewPartidasOrdenCompra.CurrentCell.EditedFormattedValue.ToString().Length == Longitud_cadena_busqueda)
+            {
+                Secuencia_buscar_mostrar_materiales();
+            }
+        }
+
+        private void Secuencia_buscar_mostrar_materiales()
+        {
+            Asigna_valores_busqueda_materiales();
+            Materiales_disponibles_busqueda = class_materiales.Busqueda_codigo_descripcion_materiales_busqueda_en_base_datos(Visualizar_material);
+            Muestra_Materiales_disponibles_busqueda_codigo_descripcion();
+        }
+
+        private void Muestra_Materiales_disponibles_busqueda_codigo_descripcion()
+        {
+            if (Materiales_disponibles_busqueda.Count == 1)
+            {
+
+                Rellena_campos_partidas_requisiciones_materiales(dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex,
+                    Materiales_disponibles_busqueda[0]);
+
+            }
+            else if (Materiales_disponibles_busqueda.Count > 1)
+            {
+                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, "Requisiciones");
+                forma_Materiales_Seleccion.ShowDialog();
+
+                if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
+                {
+                    Rellena_campos_partidas_requisiciones_materiales(dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex,
+                        forma_Materiales_Seleccion.Material_seleccionado_data_view);
+                }
+
+
+            }
+            else if (Materiales_disponibles_busqueda.Count == 0)
+            {
+                MessageBox.Show("No existe material con el criterio de busqueda", "Requisiciones",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Rellena_campos_partidas_requisiciones_materiales(int rowIndex, Material material_seleccionado_data_view)
+        {
+            /*mueve el control a la columna de Proveedores*/
+            dataGridViewPartidasOrdenCompra.CurrentCell = dataGridViewPartidasOrdenCompra["Proyecto_compra", rowIndex];
+
+            /*pinta de blanco celdas con informacion nueva*/
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Style.BackColor = Color.White;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Style.BackColor = Color.White;
+
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Value =
+                material_seleccionado_data_view.Codigo_proveedor;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Value =
+                material_seleccionado_data_view.Descripcion;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.unidad_medida, rowIndex].Value =
+                material_seleccionado_data_view.Unidad_medida;
+            dataGridViewPartidasOrdenCompra.Update();
+            
+        }
+
+        private void Asigna_valores_busqueda_materiales()
+        {
+            if (dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.parte)
+            {
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+                    Visualizar_material.Codigo_proveedor = dataGridViewPartidasOrdenCompra.CurrentCell.EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Descripcion = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+            }
+            else if (dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.descripcion)
+            {
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+                    Visualizar_material.Descripcion = dataGridViewPartidasOrdenCompra.CurrentCell.EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Codigo_proveedor = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+            }
+        }
+
+        private void dataGridViewPartidasOrdenCompra_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (Operacio_orden_compra == "Agregar" || Operacio_orden_compra == "Agregar Partidas")
+            {
+                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
+                            Cells["Parte_partida"].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
+                            Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
             }
         }
     }

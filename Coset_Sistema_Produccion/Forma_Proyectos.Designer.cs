@@ -355,6 +355,7 @@
             this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 129);
             this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProyecto.Sorted = true;
             this.comboBoxCodigoProyecto.TabIndex = 49;
             this.comboBoxCodigoProyecto.Visible = false;
             this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
@@ -473,6 +474,7 @@
             this.comboBoxCodigoCotizacion.Location = new System.Drawing.Point(220, 186);
             this.comboBoxCodigoCotizacion.Name = "comboBoxCodigoCotizacion";
             this.comboBoxCodigoCotizacion.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoCotizacion.Sorted = true;
             this.comboBoxCodigoCotizacion.TabIndex = 60;
             this.comboBoxCodigoCotizacion.Visible = false;
             // 
@@ -482,6 +484,7 @@
             this.comboBoxIngenieroCoset.Location = new System.Drawing.Point(220, 270);
             this.comboBoxIngenieroCoset.Name = "comboBoxIngenieroCoset";
             this.comboBoxIngenieroCoset.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxIngenieroCoset.Sorted = true;
             this.comboBoxIngenieroCoset.TabIndex = 61;
             this.comboBoxIngenieroCoset.Visible = false;
             // 
@@ -491,6 +494,7 @@
             this.comboBoxNombreCliente.Location = new System.Drawing.Point(220, 242);
             this.comboBoxNombreCliente.Name = "comboBoxNombreCliente";
             this.comboBoxNombreCliente.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxNombreCliente.Sorted = true;
             this.comboBoxNombreCliente.TabIndex = 62;
             this.comboBoxNombreCliente.Visible = false;
             this.comboBoxNombreCliente.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreCliente_SelectedIndexChanged);
@@ -590,6 +594,7 @@
             this.comboBoxIngenieroCliente.Location = new System.Drawing.Point(220, 298);
             this.comboBoxIngenieroCliente.Name = "comboBoxIngenieroCliente";
             this.comboBoxIngenieroCliente.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxIngenieroCliente.Sorted = true;
             this.comboBoxIngenieroCliente.TabIndex = 77;
             this.comboBoxIngenieroCliente.Visible = false;
             // 
