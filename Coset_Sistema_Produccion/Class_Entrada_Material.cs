@@ -65,6 +65,7 @@ namespace Coset_Sistema_Produccion
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
                         Precio = mySqlDataReader["precio"].ToString(),
+                        Unidades_entradas = mySqlDataReader["unidades_entradas"].ToString(),
                     });
                 }
             }
@@ -133,6 +134,7 @@ namespace Coset_Sistema_Produccion
         public string Nombre_empleado = "";
         public string Descripcion_material = "";
         public string Precio = "";
+        public string Unidades_entradas = "";
         public string error = "";
 
     }
