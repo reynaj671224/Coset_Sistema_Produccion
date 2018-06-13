@@ -207,6 +207,7 @@
             this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
             this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
             this.textBoxDescripcionMaterial.TabIndex = 42;
+            this.textBoxDescripcionMaterial.TextChanged += new System.EventHandler(this.textBoxDescripcionMaterial_TextChanged);
             // 
             // label2
             // 
@@ -372,7 +373,7 @@
             // comboBoxDescripcionMaterial
             // 
             this.comboBoxDescripcionMaterial.FormattingEnabled = true;
-            this.comboBoxDescripcionMaterial.Location = new System.Drawing.Point(262, 162);
+            this.comboBoxDescripcionMaterial.Location = new System.Drawing.Point(263, 161);
             this.comboBoxDescripcionMaterial.Name = "comboBoxDescripcionMaterial";
             this.comboBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 21);
             this.comboBoxDescripcionMaterial.TabIndex = 60;
@@ -395,6 +396,7 @@
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
+            this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
             // labeldivisa
             // 
@@ -441,6 +443,7 @@
             this.textCodigoMaterial.Name = "textCodigoMaterial";
             this.textCodigoMaterial.Size = new System.Drawing.Size(124, 20);
             this.textCodigoMaterial.TabIndex = 79;
+            this.textCodigoMaterial.TextChanged += new System.EventHandler(this.textCodigoMaterial_TextChanged);
             // 
             // label9
             // 
