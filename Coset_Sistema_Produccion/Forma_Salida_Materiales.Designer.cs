@@ -193,6 +193,7 @@
             this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
             this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
             this.textBoxDescripcionMaterial.TabIndex = 42;
+            this.textBoxDescripcionMaterial.TextChanged += new System.EventHandler(this.textBoxDescripcionMaterial_TextChanged);
             // 
             // label2
             // 
@@ -362,6 +363,7 @@
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
+            this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
             // textCodigoMaterial
             // 
@@ -370,6 +372,7 @@
             this.textCodigoMaterial.Name = "textCodigoMaterial";
             this.textCodigoMaterial.Size = new System.Drawing.Size(124, 20);
             this.textCodigoMaterial.TabIndex = 79;
+            this.textCodigoMaterial.TextChanged += new System.EventHandler(this.textCodigoMaterial_TextChanged);
             // 
             // label9
             // 

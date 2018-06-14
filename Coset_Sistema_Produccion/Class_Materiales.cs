@@ -413,8 +413,9 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_material_agregar(Material material)
         {
-            return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + 
-                "%' OR material_descripcion LIKE '%" + material.Descripcion + "%';";
+            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
+                 material.Descripcion + "%' OR material_marca LIKE '%" + material.Marca + "%';";
         }
 
         public string Inserta_nuevo_material_base_datos(Material material)
@@ -451,9 +452,81 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_Mysql_busqueda_material(Material material)
         {
 
-            return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
-                 "%' OR codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' OR material_descripcion LIKE '%" +
-                 material.Descripcion + "%' OR material_marca LIKE '%" + material.Marca + "%';";
+            if (material.Codigo != "~" && material.Codigo_proveedor == "~" && material.Descripcion == "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%' ;";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor != "~" && material.Descripcion == "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' ;";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor != "~" && material.Descripcion == "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+                    "%' AND codigo_material LIKE '%" + material.Codigo + "%' ;";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor == "~" && material.Descripcion != "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%';";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor == "~" && material.Descripcion != "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%' AND codigo_material LIKE '%" +
+               material.Codigo + "%' ;";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor != "~" && material.Descripcion != "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+               "%' AND material_descripcion LIKE '%" + material.Descripcion + "%';";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor != "~" && material.Descripcion != "~" && material.Marca == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+               "%' AND material_descripcion LIKE '%" + material.Descripcion + "%' AND codigo_material LIKE '%" +
+               material.Codigo + "%' ;";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor == "~" && material.Descripcion == "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor == "~" && material.Descripcion == "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                    "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor != "~" && material.Descripcion == "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+                    "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor != "~" && material.Descripcion == "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' AND codigo_material LIKE '%" +
+                material.Codigo + "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor == "~" && material.Descripcion != "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion +
+                    "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo != "~" && material.Codigo_proveedor == "~" && material.Descripcion != "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%' AND codigo_material LIKE '%" +
+                material.Codigo + "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+            else if (material.Codigo == "~" && material.Codigo_proveedor != "~" && material.Descripcion != "~" && material.Marca != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+               "%' AND material_descripcion LIKE '%" + material.Descripcion + "%' AND material_marca LIKE '%" +
+               material.Marca + "%';";
+            }
+            else
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
+                "%' AND material_descripcion LIKE '%" + material.Descripcion + "%' AND codigo_material LIKE '%" +
+                material.Codigo + "%' AND material_marca LIKE '%" + material.Marca + "%';";
+            }
+
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()

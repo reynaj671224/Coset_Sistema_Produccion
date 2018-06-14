@@ -1079,6 +1079,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProveedor.Enabled = false;
             textBoxUnidadesEntrada.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
+            textCodigoMaterial.Enabled = false;
 
         }
 
@@ -1413,9 +1414,25 @@ namespace Coset_Sistema_Produccion
             Acepta_datagridview_agregar_renglones();
             Desaparece_datagridview_entrada_visualizar();
             Desaparece_datagridview_entrada_materiales();
+            Pinta_color_blanco_cajas_busqueda_material();
+            Termina_timer_busqueda();
+            Desaparece_boton_buscar_base_datos();
             Elimina_informacion_orden_compra_disponibles();
 
         }
+
+        private void Termina_timer_busqueda()
+        {
+            timerBusquedaMaterial.Enabled = false;
+        }
+
+        private void Pinta_color_blanco_cajas_busqueda_material()
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+            textBoxDescripcionMaterial.BackColor = Color.White;
+            textCodigoMaterial.BackColor = Color.White;
+        }
+
         private void Termina_secuencia_save_file()
         {
             Termina_secuencia_operaciones_entrada_materiales();

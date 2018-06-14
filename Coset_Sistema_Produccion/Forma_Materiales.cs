@@ -63,6 +63,11 @@ namespace Coset_Sistema_Produccion
             Operacio_materiales = "Agregar";
         }
 
+        private void Inicia_timer_para_asegurar_informacion_agregar()
+        {
+            timerAgregarMaterial.Enabled = true;
+        }
+
         private void Inicia_timer_para_asegurar_informacion_busqueda_agregar()
         {
             timerBusquedaAgregar.Enabled = true;
@@ -76,8 +81,8 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_busqueda_interrogacion_agregar()
         {
-            textBoxDescripcion.Text = "?";
-            textBoxCodigoProveedor.Text = "?";
+            textBoxDescripcion.BackColor = Color.Yellow;
+            textBoxCodigoProveedor.BackColor= Color.Yellow;
         }
 
         private void Asigna_codigo_proceso_foilio_disponible()
@@ -341,6 +346,7 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Enabled = false;
             textBoxUbicacion.Enabled = false;
             textBoxPrecio.Enabled = false;
+            textBoxCodigoProveedor.Enabled = false;
         }
 
         private void Desactiva_caja_nombre_proceso()
@@ -482,11 +488,12 @@ namespace Coset_Sistema_Produccion
         private void Modifica_material()
         {
             Desactiva_botones_operacion();
-            Aparece_boton_busqueda_base_datos();
+            //Aparece_boton_busqueda_base_datos();
             Activa_boton_busqueda_base_datos();
             Activa_cajas_de_informacion_visualizar();
             Rellena_cajas_busqueda_interrogacion();
             Activa_boton_cancelar_operacio();
+            Inicia_timer_para_asegurar_informacion_busqueda_agregar();
             Operacio_materiales = "Modificar";
         }
 
@@ -532,17 +539,12 @@ namespace Coset_Sistema_Produccion
             Activa_cajas_informacion();
             Rellena_cajas_informacion_de_proceso();
             Desactiva_caja_codigo_proceso();
-            Inicia_timer_modificar_empleado();
+            //Inicia_timer_modificar_empleado();
         }
 
         private void Desactiva_combo_nombre_empleado()
         {
             //comboBoxNombreProceso.Enabled = false;
-        }
-
-        private void Inicia_timer_modificar_empleado()
-        {
-            timerBusquedaAgregar.Enabled = true;
         }
 
         private void Desactiva_Combo_codigo_empleado()
@@ -559,10 +561,25 @@ namespace Coset_Sistema_Produccion
 
         private void timerBusquedaAgregar_Tick(object sender, EventArgs e)
         {
-            if(textBoxCodigoProveedor.Text!= "?" || textBoxDescripcion.Text !="?")
+            if (Operacio_materiales == "Agregar")
             {
-                timerBusquedaAgregar.Enabled = false;
-                buttonBusquedaBaseDatos.Visible = true;
+                if (textBoxCodigoProveedor.Text != "" ||
+                textBoxDescripcion.Text != "")
+                {
+                    timerBusquedaAgregar.Enabled = false;
+                    buttonBusquedaBaseDatos.Visible = true;
+                }
+            }
+            else
+            {
+                if (textBoxCodigoProveedor.Text != "" ||
+                textBoxDescripcion.Text != "" ||
+                textBoxCodigoMaterial.Text != "" ||
+                textBoxMarca.Text != "")
+                {
+                    timerBusquedaAgregar.Enabled = false;
+                    buttonBusquedaBaseDatos.Visible = true;
+                }
             }
         }
 
@@ -575,8 +592,17 @@ namespace Coset_Sistema_Produccion
             Desactiva_boton_eliminar_base_de_datos();
             Activa_botones_operacion();
             Desaparece_foto_material();
+            pinta_blanco_cajas_busqueda();
             Desaparece_boton_busqueda_base_datos();
 
+        }
+
+        private void pinta_blanco_cajas_busqueda()
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+            textBoxDescripcion.BackColor = Color.White;
+            textBoxMarca.BackColor = Color.White;
+            textBoxCodigoMaterial.BackColor = Color.White;
         }
 
         private void Desaparece_boton_busqueda_base_datos()
@@ -621,6 +647,7 @@ namespace Coset_Sistema_Produccion
                     {
                         Activa_cajas_informacion();
                         Activa_timer_agregar_material();
+                        pinta_blanco_cajas_busqueda();
                     }
                     else
                     {
@@ -826,11 +853,12 @@ namespace Coset_Sistema_Produccion
         private void Visualiza_material()
         {
             Desactiva_botones_operacion();
-            Aparece_boton_busqueda_base_datos();
+            //Aparece_boton_busqueda_base_datos();
             Activa_boton_busqueda_base_datos();
             Activa_cajas_de_informacion_visualizar();
             Rellena_cajas_busqueda_interrogacion();
             Activa_boton_cancelar_operacio();
+            Inicia_timer_para_asegurar_informacion_busqueda_agregar();
             Operacio_materiales = "Visualizar";
         }
 
@@ -844,10 +872,10 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_busqueda_interrogacion()
         {
-            textBoxCodigoMaterial.Text = "?";
-            textBoxCodigoProveedor.Text = "?";
-            textBoxDescripcion.Text = "?";
-            textBoxMarca.Text = "?";
+            textBoxCodigoMaterial.BackColor = Color.Yellow;
+            textBoxCodigoProveedor.BackColor = Color.Yellow;
+            textBoxDescripcion.BackColor = Color.Yellow;
+            textBoxMarca.BackColor = Color.Yellow;
         }
 
         private void Aparece_boton_busqueda_base_datos()
@@ -860,7 +888,7 @@ namespace Coset_Sistema_Produccion
             Asigna_datos_visualizar_material();
             if (Operacio_materiales == "Agregar")
             {
-                Materiales_disponibles_busqueda = class_materiales.Adquiere_agregar_materiales_busqueda_en_base_datos(Visualizar_material);
+                Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_busqueda_en_base_datos(Visualizar_material);
             }
             else
             {
@@ -869,11 +897,70 @@ namespace Coset_Sistema_Produccion
         }
 
         private void Asigna_datos_visualizar_material()
-        {           
-                Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
-                Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-                Visualizar_material.Descripcion = textBoxDescripcion.Text;
-                Visualizar_material.Marca = textBoxMarca.Text;
+        {
+            if (Operacio_materiales == "Agregar")
+            {
+                if (textBoxCodigoProveedor.Text == "")
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+                }
+
+                if (textBoxDescripcion.Text == "")
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = textBoxDescripcion.Text;
+                }
+
+                Visualizar_material.Codigo = "~";
+                Visualizar_material.Marca = "~";
+            }
+            else
+            {
+                if (textBoxCodigoMaterial.Text == "")
+                {
+                    Visualizar_material.Codigo = "~";
+
+                }
+                else
+                {
+                    Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
+
+                }
+
+                if (textBoxCodigoProveedor.Text == "")
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+                }
+
+                if (textBoxDescripcion.Text == "")
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = textBoxDescripcion.Text;
+                }
+
+                if (textBoxMarca.Text == "")
+                {
+                    Visualizar_material.Marca = "~";
+                }
+                else
+                {
+                    Visualizar_material.Marca = textBoxMarca.Text;
+                }
+            }
         }
 
         private void Activa_cajas_de_informacion_visualizar()
@@ -933,14 +1020,37 @@ namespace Coset_Sistema_Produccion
         private void timerAgregarMaterial_Tick(object sender, EventArgs e)
         {
             if (textBoxCodigoProveedor.Text != "" && 
-                textBoxDescripcion.Text != "" &&
-                textBoxMarca.Text !="")
+                textBoxDescripcion.Text != "")
             {
                 timerAgregarMaterial.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
             }
         }
 
+        private void textBoxCodigoMaterial_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCodigoMaterial.BackColor = Color.White;
+        }
+
+        private void textBoxCodigoProveedor_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+        }
+
+        private void textBoxDescripcion_TextChanged(object sender, EventArgs e)
+        {
+            textBoxDescripcion.BackColor = Color.White;
+        }
+
+        private void textBoxMarca_TextChanged(object sender, EventArgs e)
+        {
+            textBoxMarca.BackColor = Color.White;
+        }
+
+        private void timerEliminaempleado_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
  

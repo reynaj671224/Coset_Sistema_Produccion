@@ -173,6 +173,7 @@
             this.textBoxCodigoMaterial.Name = "textBoxCodigoMaterial";
             this.textBoxCodigoMaterial.Size = new System.Drawing.Size(135, 20);
             this.textBoxCodigoMaterial.TabIndex = 7;
+            this.textBoxCodigoMaterial.TextChanged += new System.EventHandler(this.textBoxCodigoMaterial_TextChanged);
             // 
             // label2
             // 
@@ -192,6 +193,7 @@
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(135, 20);
             this.textBoxCodigoProveedor.TabIndex = 9;
+            this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
             // buttonBorrarBasedeDatos
             // 
@@ -216,7 +218,7 @@
             // comboBoxCodigoMaterial
             // 
             this.comboBoxCodigoMaterial.FormattingEnabled = true;
-            this.comboBoxCodigoMaterial.Location = new System.Drawing.Point(172, 111);
+            this.comboBoxCodigoMaterial.Location = new System.Drawing.Point(172, 108);
             this.comboBoxCodigoMaterial.Name = "comboBoxCodigoMaterial";
             this.comboBoxCodigoMaterial.Size = new System.Drawing.Size(136, 21);
             this.comboBoxCodigoMaterial.TabIndex = 25;
@@ -245,6 +247,7 @@
             // timerEliminaempleado
             // 
             this.timerEliminaempleado.Interval = 1000;
+            this.timerEliminaempleado.Tick += new System.EventHandler(this.timerEliminaempleado_Tick);
             // 
             // buttonBuscarMaterial
             // 
@@ -267,6 +270,7 @@
             this.textBoxDescripcion.Name = "textBoxDescripcion";
             this.textBoxDescripcion.Size = new System.Drawing.Size(430, 20);
             this.textBoxDescripcion.TabIndex = 29;
+            this.textBoxDescripcion.TextChanged += new System.EventHandler(this.textBoxDescripcion_TextChanged);
             // 
             // label3
             // 
@@ -394,6 +398,7 @@
             this.textBoxMarca.Name = "textBoxMarca";
             this.textBoxMarca.Size = new System.Drawing.Size(160, 20);
             this.textBoxMarca.TabIndex = 42;
+            this.textBoxMarca.TextChanged += new System.EventHandler(this.textBoxMarca_TextChanged);
             // 
             // label9
             // 

@@ -46,6 +46,14 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewDevolucionEntradaMateriales = new System.Windows.Forms.DataGridView();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parte_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre_empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Motivo_Devolucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
             this.dateTimePickerFechaActual = new System.Windows.Forms.DateTimePicker();
@@ -63,14 +71,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parte_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre_empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Motivo_Devolucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevolucionEntradaMateriales)).BeginInit();
             this.SuspendLayout();
@@ -265,6 +265,55 @@
             this.dataGridViewDevolucionEntradaMateriales.Size = new System.Drawing.Size(993, 202);
             this.dataGridViewDevolucionEntradaMateriales.TabIndex = 48;
             // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 50;
+            // 
+            // Proyecto
+            // 
+            this.Proyecto.HeaderText = "Proyecto";
+            this.Proyecto.Name = "Proyecto";
+            this.Proyecto.Width = 50;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Codigo_material
+            // 
+            this.Codigo_material.HeaderText = "Codigo Material";
+            this.Codigo_material.Name = "Codigo_material";
+            this.Codigo_material.Width = 50;
+            // 
+            // Parte_proveedor
+            // 
+            this.Parte_proveedor.HeaderText = "Codigo Parte Proveedor";
+            this.Parte_proveedor.Name = "Parte_proveedor";
+            this.Parte_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nombre_empleado
+            // 
+            this.Nombre_empleado.HeaderText = "Nombre Empleado";
+            this.Nombre_empleado.Name = "Nombre_empleado";
+            this.Nombre_empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Nombre_empleado.Width = 200;
+            // 
+            // Motivo_Devolucion
+            // 
+            this.Motivo_Devolucion.HeaderText = "Motivo Devolución";
+            this.Motivo_Devolucion.Name = "Motivo_Devolucion";
+            this.Motivo_Devolucion.Width = 400;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Width = 50;
+            // 
             // comboBoxCodigoProyecto
             // 
             this.comboBoxCodigoProyecto.FormattingEnabled = true;
@@ -316,6 +365,7 @@
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
+            this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
             // textCodigoMaterial
             // 
@@ -324,6 +374,7 @@
             this.textCodigoMaterial.Name = "textCodigoMaterial";
             this.textCodigoMaterial.Size = new System.Drawing.Size(124, 20);
             this.textCodigoMaterial.TabIndex = 79;
+            this.textCodigoMaterial.TextChanged += new System.EventHandler(this.textCodigoMaterial_TextChanged);
             // 
             // label9
             // 
@@ -415,6 +466,7 @@
             this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
             this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
             this.textBoxDescripcionMaterial.TabIndex = 88;
+            this.textBoxDescripcionMaterial.TextChanged += new System.EventHandler(this.textBoxDescripcionMaterial_TextChanged);
             // 
             // label7
             // 
@@ -426,55 +478,6 @@
             this.label7.Size = new System.Drawing.Size(120, 16);
             this.label7.TabIndex = 87;
             this.label7.Text = "Descripcion Material";
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 50;
-            // 
-            // Proyecto
-            // 
-            this.Proyecto.HeaderText = "Proyecto";
-            this.Proyecto.Name = "Proyecto";
-            this.Proyecto.Width = 50;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Codigo_material
-            // 
-            this.Codigo_material.HeaderText = "Codigo Material";
-            this.Codigo_material.Name = "Codigo_material";
-            this.Codigo_material.Width = 50;
-            // 
-            // Parte_proveedor
-            // 
-            this.Parte_proveedor.HeaderText = "Codigo Parte Proveedor";
-            this.Parte_proveedor.Name = "Parte_proveedor";
-            this.Parte_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nombre_empleado
-            // 
-            this.Nombre_empleado.HeaderText = "Nombre Empleado";
-            this.Nombre_empleado.Name = "Nombre_empleado";
-            this.Nombre_empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Nombre_empleado.Width = 200;
-            // 
-            // Motivo_Devolucion
-            // 
-            this.Motivo_Devolucion.HeaderText = "Motivo Devolución";
-            this.Motivo_Devolucion.Name = "Motivo_Devolucion";
-            this.Motivo_Devolucion.Width = 400;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 50;
             // 
             // Forma_Devolucion_Materiales
             // 

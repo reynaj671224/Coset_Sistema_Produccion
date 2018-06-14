@@ -286,9 +286,9 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_caracter_busqueda_material()
         {
-            textBoxCodigoProveedor.Text = "?";
-            textCodigoMaterial.Text = "?";
-            textBoxDescripcionMaterial.Text = "?";
+            textBoxCodigoProveedor.BackColor = Color.Yellow;
+            textCodigoMaterial.BackColor = Color.Yellow;
+            textBoxDescripcionMaterial.BackColor = Color.Yellow;
 
         }
 
@@ -670,6 +670,7 @@ namespace Coset_Sistema_Produccion
             textBoxUnidadesEntrada.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
             textBoxDescripcionMaterial.Enabled = false;
+            textCodigoMaterial.Enabled = false;
 
         }
 
@@ -791,10 +792,24 @@ namespace Coset_Sistema_Produccion
             Aparece_textbox_descripcion();
             Aparece_textbox_nombre_cliente();
             Acepta_datagridview_agregar_renglones();
+            Pinta_color_blanco_cajas_busqueda_material();
+            Termina_timer_busqueda();
+            Desaparece_boton_buscar_base_datos();
             Elimina_informacion_salida_materiales_disponibles();
 
         }
 
+        private void Pinta_color_blanco_cajas_busqueda_material()
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+            textBoxDescripcionMaterial.BackColor = Color.White;
+            textCodigoMaterial.BackColor = Color.White;
+        }
+
+        private void Termina_timer_busqueda()
+        {
+            timerBusquedaMaterial.Enabled = false;
+        }
 
         private void timerAgregarDevolucionMateriales_Tick(object sender, EventArgs e)
         {
@@ -812,9 +827,9 @@ namespace Coset_Sistema_Produccion
         private void timerBusquedaMaterial_Tick(object sender, EventArgs e)
         {
             if (
-                textBoxCodigoProveedor.Text != "?" ||
-                textCodigoMaterial.Text != "?" ||
-                textBoxDescripcionMaterial.Text != "?")
+                textBoxCodigoProveedor.Text != "" ||
+                textCodigoMaterial.Text != "" ||
+                textBoxDescripcionMaterial.Text != "")
             {
                 timerBusquedaMaterial.Enabled = false;
                 buttonBusquedaBaseDatos.Visible = true;
@@ -910,9 +925,33 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_datos_visualizar_material()
         {
-            Visualizar_material.Codigo = textCodigoMaterial.Text;
-            Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Visualizar_material.Descripcion = textBoxDescripcionMaterial.Text;
+            if(textCodigoMaterial.Text=="")
+            {
+                Visualizar_material.Codigo = "~";
+            }
+            else
+            {
+                Visualizar_material.Codigo = textCodigoMaterial.Text;
+            }
+
+            if (textBoxCodigoProveedor.Text == "")
+            {
+                Visualizar_material.Codigo_proveedor = "~";
+            }
+            else
+            {
+                Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            }
+            
+            if(textBoxDescripcionMaterial.Text=="")
+            {
+                Visualizar_material.Descripcion = "~";
+            }
+            else
+            {
+                Visualizar_material.Descripcion = textBoxDescripcionMaterial.Text;
+            }
+           
         }
 
         private void Desaparece_boton_buscar_base_datos()
@@ -923,6 +962,21 @@ namespace Coset_Sistema_Produccion
         private void buttonSalidaMaterial_Click(object sender, EventArgs e)
         {
             Agrega_devolucion_materiales();
+        }
+
+        private void textBoxDescripcionMaterial_TextChanged(object sender, EventArgs e)
+        {
+            textBoxDescripcionMaterial.BackColor = Color.White;
+        }
+
+        private void textBoxCodigoProveedor_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+        }
+
+        private void textCodigoMaterial_TextChanged(object sender, EventArgs e)
+        {
+            textCodigoMaterial.BackColor = Color.White;
         }
     }
 }
