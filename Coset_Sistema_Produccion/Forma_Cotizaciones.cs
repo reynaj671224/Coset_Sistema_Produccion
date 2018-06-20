@@ -583,6 +583,7 @@ namespace Coset_Sistema_Produccion
         private void Agrega_cotizacion()
         {
             Asigna_codigo_cliente_foilio_disponible();
+            Asigna_nuevo_folio_cotizaciones();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_cotizaciones();
             Acepta_datagridview_agregar_renglones();
@@ -998,7 +999,6 @@ namespace Coset_Sistema_Produccion
                         Aparece_textbox_nombre_cliente();
                         Aparece_textbox_atencion();
                         Aparece_textbox_atencion_copia();
-                        Asigna_nuevo_folio_cotizaciones();
                         Elimina_informacion_cotizaciones_disponibles();
                     }
                 }
@@ -1074,7 +1074,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_cotizaciones.Substring(2, folio_disponible.Folio_cotizaciones.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_cotizaciones = folio_disponible.Folio_cotizaciones.Substring(0, 2) +numero_folio.ToString();
+            folio_disponible.Folio_cotizaciones = folio_disponible.Folio_cotizaciones.Substring(0, 2) +numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);
@@ -1920,5 +1920,24 @@ namespace Coset_Sistema_Produccion
             buttonWordPrevio.Enabled = true;
         }
 
+        private void dataGridViewPartidasCotizacion_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int numero_partida = 1;
+            for(int renglones = 0; renglones<dataGridViewPartidasCotizacion.RowCount-1; renglones++)
+            {
+                dataGridViewPartidasCotizacion["Numero_partida", renglones].Value = numero_partida.ToString();
+                numero_partida++;
+            }
+        }
+
+        private void dataGridViewPartidasCotizacion_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int numero_partida = 1;
+            for (int renglones = 0; renglones < dataGridViewPartidasCotizacion.RowCount - 1; renglones++)
+            {
+                dataGridViewPartidasCotizacion["Numero_partida", renglones].Value = numero_partida.ToString();
+                numero_partida++;
+            }
+        }
     }
 }

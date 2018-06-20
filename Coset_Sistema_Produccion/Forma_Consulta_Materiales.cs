@@ -181,11 +181,11 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_material()
         {
-            textBoxCodigoProveedor.Text = "?";
-            textBoxDescripcion.Text = "?";
-            textBoxCodigoMaterial.Text = "?";
-            textBoxMarca.Text = "?";
-            textBoxUbicacion.Text = "?";
+            textBoxCodigoProveedor.Text = "";
+            textBoxDescripcion.Text = "";
+            textBoxCodigoMaterial.Text = "";
+            textBoxMarca.Text = "";
+            textBoxUbicacion.Text = "";
         }
 
        
@@ -358,14 +358,34 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            
             Limpia_cajas_captura_despues_de_agregar_material();
-            Desactiva_cajas_captura_busqueda_material();
+            Pinta_amarillo_cajas_captura();
+            Activa_cajas_decaptura_busqueda_material();
             Desactiva_boton_cancelar();
             Desaparece_foto_material();
             Desaparece_boton_busqueda_base_datos();
             Limpiar_partidas_materiales();
             Inicia_timer_buscar_materiales();
             
+        }
+
+        private void Pinta_amarillo_cajas_captura()
+        {
+            textBoxCodigoMaterial.BackColor= Color.Yellow;
+            textBoxCodigoProveedor.BackColor = Color.Yellow;
+            textBoxDescripcion.BackColor = Color.Yellow;
+            textBoxMarca.BackColor = Color.Yellow;
+            textBoxUbicacion.BackColor = Color.Yellow;
+        }
+
+        private void Activa_cajas_decaptura_busqueda_material()
+        {
+            textBoxCodigoMaterial.Enabled = true;
+            textBoxCodigoProveedor.Enabled = true;
+            textBoxDescripcion.Enabled = true;
+            textBoxMarca.Enabled = true;
+            textBoxUbicacion.Enabled = true;
         }
 
         private void Inicia_timer_buscar_materiales()
@@ -396,7 +416,17 @@ namespace Coset_Sistema_Produccion
             Desaparece_foto_material();
             Desactiva_cajas_captura_busqueda_material();
             Rellena_partidas_materiales_disponibles_busqueda(Materiales_disponibles_busqueda);
+            Pinta_blanco_cajas_captura();
+            Desactiva_cajas_captura_busqueda_material();
             //Muestra_foto_material();
+        }
+
+        private void Pinta_blanco_cajas_captura()
+        {
+            textBoxCodigoMaterial.BackColor=Color.White;
+            textBoxCodigoProveedor.BackColor = Color.White;
+            textBoxDescripcion.BackColor = Color.White;
+            textBoxMarca.BackColor = Color.White;
         }
 
         private void Activa_timer_agregar_material()
@@ -541,17 +571,50 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_datos_materiales_busqueda()
         {
-            Asigna_datos_visualizar_material();
-            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_Consulta_en_base_datos(Visualizar_material,criterio_busqueda);
+            Asigna_datos_visualizar_material(); 
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_busqueda_en_base_datos(Visualizar_material);
         }
 
         private void Asigna_datos_visualizar_material()
-        {           
-            Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
-            Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Visualizar_material.Descripcion = textBoxDescripcion.Text;
-            Visualizar_material.Marca = textBoxMarca.Text;
-            Visualizar_material.Ubicacion = textBoxUbicacion.Text;
+        {
+            if (textBoxCodigoMaterial.Text == "")
+            {
+                Visualizar_material.Codigo = "~";
+
+            }
+            else
+            {
+                Visualizar_material.Codigo = textBoxCodigoMaterial.Text;
+
+            }
+
+            if (textBoxCodigoProveedor.Text == "")
+            {
+                Visualizar_material.Codigo_proveedor = "~";
+            }
+            else
+            {
+                Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
+            }
+
+            if (textBoxDescripcion.Text == "")
+            {
+                Visualizar_material.Descripcion = "~";
+            }
+            else
+            {
+                Visualizar_material.Descripcion = textBoxDescripcion.Text;
+            }
+
+            if (textBoxMarca.Text == "")
+            {
+                Visualizar_material.Marca = "~";
+            }
+            else
+            {
+                Visualizar_material.Marca = textBoxMarca.Text;
+            }
+
         }
 
         private void Activa_cajas_de_informacion_visualizar()
@@ -611,11 +674,10 @@ namespace Coset_Sistema_Produccion
 
         private void timerConsultaMaterial_Tick(object sender, EventArgs e)
         {
-            if (textBoxCodigoProveedor.Text != "?" || 
-                textBoxDescripcion.Text != "?" ||
-                textBoxMarca.Text !="?" ||
-                textBoxCodigoMaterial.Text != "?" ||
-                textBoxUbicacion.Text !="?")
+            if (textBoxCodigoProveedor.Text != "" || 
+                textBoxDescripcion.Text != "" ||
+                textBoxMarca.Text !="" ||
+                textBoxCodigoMaterial.Text != "")
             {
                 timerConsultaMaterial.Enabled = false;
                 buttonBusquedaBaseDatos.Visible = true;
@@ -739,6 +801,26 @@ namespace Coset_Sistema_Produccion
                     criterio_busqueda = "";
                 }
             }
+        }
+
+        private void textBoxDescripcion_TextChanged(object sender, EventArgs e)
+        {
+            textBoxDescripcion.BackColor = Color.White;
+        }
+
+        private void textBoxCodigoProveedor_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCodigoProveedor.BackColor = Color.White;
+        }
+
+        private void textBoxCodigoMaterial_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCodigoMaterial.BackColor = Color.White;
+        }
+
+        private void textBoxMarca_TextChanged(object sender, EventArgs e)
+        {
+            textBoxMarca.BackColor = Color.White;
         }
     }
 }

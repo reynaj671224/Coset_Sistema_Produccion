@@ -1542,7 +1542,7 @@ namespace Coset_Sistema_Produccion
                     {
                         /*Valida Numeros en la caja cantidad*/
                         Convert.ToSingle(dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString());
-                        //dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, e.RowIndex].Value = e.RowIndex + 1;
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.cantidad, e.RowIndex].Style.BackColor = Color.White;
 
                     }
                     catch
@@ -1616,7 +1616,7 @@ namespace Coset_Sistema_Produccion
             /*pinta de blanco celdas con informacion nueva*/
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, rowIndex].Style.BackColor = Color.White;
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, rowIndex].Style.BackColor = Color.White;
-
+           
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, rowIndex].Value =
                 material_seleccionado_data_view.Codigo_proveedor;
             dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, rowIndex].Value =
@@ -2124,12 +2124,21 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasRequisiciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            int numero_partida = 1;
             if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Parte_requisicion"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
+                            Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
+
+                for (int renglones = 0; renglones < dataGridViewPartidasRequisiciones.RowCount - 1; renglones++)
+                {
+                    dataGridViewPartidasRequisiciones["Numero_partida", renglones].Value = numero_partida.ToString();
+                    numero_partida++;
+                }
             }
             else if (Operacio_requisiciones == "Cancelar")
             {
@@ -2405,6 +2414,16 @@ namespace Coset_Sistema_Produccion
                 }
             }
 
+        }
+
+        private void dataGridViewPartidasRequisiciones_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int numero_partida = 1;
+            for (int renglones = 0; renglones < dataGridViewPartidasRequisiciones.RowCount - 1; renglones++)
+            {
+                dataGridViewPartidasRequisiciones["Numero_partida", renglones].Value = numero_partida.ToString();
+                numero_partida++;
+            }
         }
     }
 }

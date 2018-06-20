@@ -53,6 +53,7 @@ namespace Coset_Sistema_Produccion
         private void Agrega_material()
         {
             Asigna_codigo_proceso_foilio_disponible();
+            Asigna_nuevo_folio_material();
             Desactiva_botones_operacion();
             Aparece_caja_codigo_proveedor();
             Desaparece_combo_codigo_material();
@@ -187,7 +188,6 @@ namespace Coset_Sistema_Produccion
                     Activa_botones_operacion();
                     Aparece_caja_codigo_material();
                     Desaparece_foto_material();
-                    Asigna_nuevo_folio_material();
                     Desaparece_foto_material();
                     Elimina_informacion_materiales_disponibles();
                 }
@@ -204,7 +204,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(2, folio_disponible.Folio_materiales.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 2) + numero_folio.ToString();
+            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 2) + numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);
@@ -687,10 +687,12 @@ namespace Coset_Sistema_Produccion
                     {
                         Activa_cajas_informacion();
                         Activa_timer_agregar_material();
+                        pinta_blanco_cajas_busqueda();
                     }
                     else
                     {
                         Cancela_operacion_agregar();
+                        pinta_blanco_cajas_busqueda();
                     }
 
                 }
@@ -702,6 +704,7 @@ namespace Coset_Sistema_Produccion
                 {
                     Activa_cajas_informacion();
                     Activa_timer_agregar_material();
+                    pinta_blanco_cajas_busqueda();
 
                 }
                 else

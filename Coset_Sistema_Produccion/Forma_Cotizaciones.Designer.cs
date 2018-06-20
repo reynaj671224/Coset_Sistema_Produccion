@@ -51,13 +51,6 @@
             this.textBoxCodigoCotizaciones = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewPartidasCotizacion = new System.Windows.Forms.DataGridView();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parte_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Importe_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoCotizaciones = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.buttonPartidas = new System.Windows.Forms.Button();
@@ -77,6 +70,13 @@
             this.groupBoxPrevio = new System.Windows.Forms.GroupBox();
             this.radioButtonPrevioIngles = new System.Windows.Forms.RadioButton();
             this.radioButtonPrevioEspanol = new System.Windows.Forms.RadioButton();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parte_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasCotizacion)).BeginInit();
             this.groupBoxPrevio.SuspendLayout();
@@ -326,46 +326,8 @@
             this.dataGridViewPartidasCotizacion.TabIndex = 48;
             this.dataGridViewPartidasCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewContactosClientes_CellClick);
             this.dataGridViewPartidasCotizacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 50;
-            // 
-            // Numero_partida
-            // 
-            this.Numero_partida.HeaderText = "Partida";
-            this.Numero_partida.Name = "Numero_partida";
-            this.Numero_partida.Width = 50;
-            // 
-            // Cantidad_partida
-            // 
-            this.Cantidad_partida.HeaderText = "Cantidad";
-            this.Cantidad_partida.Name = "Cantidad_partida";
-            this.Cantidad_partida.Width = 50;
-            // 
-            // Parte_partida
-            // 
-            this.Parte_partida.HeaderText = "Parte";
-            this.Parte_partida.Name = "Parte_partida";
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Descripcion";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
-            this.Descrpcion_partida.Width = 450;
-            // 
-            // Precio_partida
-            // 
-            this.Precio_partida.HeaderText = "Precio";
-            this.Precio_partida.Name = "Precio_partida";
-            // 
-            // Importe_partida
-            // 
-            this.Importe_partida.HeaderText = "Importe";
-            this.Importe_partida.Name = "Importe_partida";
-            this.Importe_partida.ReadOnly = true;
+            this.dataGridViewPartidasCotizacion.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewPartidasCotizacion_RowsAdded);
+            this.dataGridViewPartidasCotizacion.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewPartidasCotizacion_RowsRemoved);
             // 
             // comboBoxCodigoCotizaciones
             // 
@@ -590,6 +552,47 @@
             this.radioButtonPrevioEspanol.UseVisualStyleBackColor = false;
             this.radioButtonPrevioEspanol.CheckedChanged += new System.EventHandler(this.radioButtonPrevioEspanol_CheckedChanged);
             // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 50;
+            // 
+            // Numero_partida
+            // 
+            this.Numero_partida.HeaderText = "Partida";
+            this.Numero_partida.Name = "Numero_partida";
+            this.Numero_partida.ReadOnly = true;
+            this.Numero_partida.Width = 50;
+            // 
+            // Cantidad_partida
+            // 
+            this.Cantidad_partida.HeaderText = "Cantidad";
+            this.Cantidad_partida.Name = "Cantidad_partida";
+            this.Cantidad_partida.Width = 50;
+            // 
+            // Parte_partida
+            // 
+            this.Parte_partida.HeaderText = "Parte";
+            this.Parte_partida.Name = "Parte_partida";
+            // 
+            // Descrpcion_partida
+            // 
+            this.Descrpcion_partida.HeaderText = "Descripcion";
+            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            this.Descrpcion_partida.Width = 450;
+            // 
+            // Precio_partida
+            // 
+            this.Precio_partida.HeaderText = "Precio";
+            this.Precio_partida.Name = "Precio_partida";
+            // 
+            // Importe_partida
+            // 
+            this.Importe_partida.HeaderText = "Importe";
+            this.Importe_partida.Name = "Importe_partida";
+            this.Importe_partida.ReadOnly = true;
+            // 
             // Forma_Cotizaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -679,6 +682,12 @@
         private System.Windows.Forms.ComboBox comboBoxAtencion;
         private System.Windows.Forms.ComboBox comboBoxAtencionCopia;
         private System.Windows.Forms.ComboBox comboBoxNombreCliente;
+        private System.Windows.Forms.Button buttonCopiarCotizacion;
+        private System.Windows.Forms.Button buttonWordPrevio;
+        private System.Windows.Forms.GroupBox groupBoxPrevio;
+        private System.Windows.Forms.RadioButton radioButtonPrevioIngles;
+        private System.Windows.Forms.RadioButton radioButtonPrevioEspanol;
+        private System.Windows.Forms.ComboBox comboBoxCodigoCotizaciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_partida;
@@ -686,11 +695,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe_partida;
-        private System.Windows.Forms.Button buttonCopiarCotizacion;
-        private System.Windows.Forms.Button buttonWordPrevio;
-        private System.Windows.Forms.GroupBox groupBoxPrevio;
-        private System.Windows.Forms.RadioButton radioButtonPrevioIngles;
-        private System.Windows.Forms.RadioButton radioButtonPrevioEspanol;
-        private System.Windows.Forms.ComboBox comboBoxCodigoCotizaciones;
     }
 }

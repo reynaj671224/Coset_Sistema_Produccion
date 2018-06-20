@@ -114,12 +114,12 @@
             // 
             // textBoxCodigoMaterial
             // 
-            this.textBoxCodigoMaterial.Enabled = false;
+            this.textBoxCodigoMaterial.BackColor = System.Drawing.Color.Yellow;
             this.textBoxCodigoMaterial.Location = new System.Drawing.Point(173, 32);
             this.textBoxCodigoMaterial.Name = "textBoxCodigoMaterial";
             this.textBoxCodigoMaterial.Size = new System.Drawing.Size(135, 20);
             this.textBoxCodigoMaterial.TabIndex = 7;
-            this.textBoxCodigoMaterial.Text = "?";
+            this.textBoxCodigoMaterial.TextChanged += new System.EventHandler(this.textBoxCodigoMaterial_TextChanged);
             // 
             // labelCodigoProveedor
             // 
@@ -135,12 +135,12 @@
             // 
             // textBoxCodigoProveedor
             // 
-            this.textBoxCodigoProveedor.Enabled = false;
+            this.textBoxCodigoProveedor.BackColor = System.Drawing.Color.Yellow;
             this.textBoxCodigoProveedor.Location = new System.Drawing.Point(173, 61);
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(135, 20);
             this.textBoxCodigoProveedor.TabIndex = 9;
-            this.textBoxCodigoProveedor.Text = "?";
+            this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
             // timerConsultaMaterial
             // 
@@ -150,12 +150,12 @@
             // 
             // textBoxDescripcion
             // 
-            this.textBoxDescripcion.Enabled = false;
+            this.textBoxDescripcion.BackColor = System.Drawing.Color.Yellow;
             this.textBoxDescripcion.Location = new System.Drawing.Point(175, 90);
             this.textBoxDescripcion.Name = "textBoxDescripcion";
             this.textBoxDescripcion.Size = new System.Drawing.Size(430, 20);
             this.textBoxDescripcion.TabIndex = 29;
-            this.textBoxDescripcion.Text = "?";
+            this.textBoxDescripcion.TextChanged += new System.EventHandler(this.textBoxDescripcion_TextChanged);
             // 
             // labelDescripcion
             // 
@@ -183,12 +183,12 @@
             // 
             // textBoxMarca
             // 
-            this.textBoxMarca.Enabled = false;
+            this.textBoxMarca.BackColor = System.Drawing.Color.Yellow;
             this.textBoxMarca.Location = new System.Drawing.Point(445, 61);
             this.textBoxMarca.Name = "textBoxMarca";
             this.textBoxMarca.Size = new System.Drawing.Size(160, 20);
             this.textBoxMarca.TabIndex = 42;
-            this.textBoxMarca.Text = "?";
+            this.textBoxMarca.TextChanged += new System.EventHandler(this.textBoxMarca_TextChanged);
             // 
             // labelMarca
             // 
@@ -204,12 +204,13 @@
             // 
             // textBoxUbicacion
             // 
+            this.textBoxUbicacion.BackColor = System.Drawing.Color.Yellow;
             this.textBoxUbicacion.Enabled = false;
             this.textBoxUbicacion.Location = new System.Drawing.Point(445, 35);
             this.textBoxUbicacion.Name = "textBoxUbicacion";
             this.textBoxUbicacion.Size = new System.Drawing.Size(160, 20);
             this.textBoxUbicacion.TabIndex = 44;
-            this.textBoxUbicacion.Text = "?";
+            this.textBoxUbicacion.Visible = false;
             // 
             // labelUbicacion
             // 
@@ -221,6 +222,7 @@
             this.labelUbicacion.Size = new System.Drawing.Size(60, 16);
             this.labelUbicacion.TabIndex = 43;
             this.labelUbicacion.Text = "Ubicacion";
+            this.labelUbicacion.Visible = false;
             this.labelUbicacion.Click += new System.EventHandler(this.labelUbicacion_Click);
             // 
             // dataGridViewPartidasMaterialSeleccion
@@ -237,9 +239,9 @@
             this.Ubicacion,
             this.foto});
             this.dataGridViewPartidasMaterialSeleccion.Enabled = false;
-            this.dataGridViewPartidasMaterialSeleccion.Location = new System.Drawing.Point(44, 284);
+            this.dataGridViewPartidasMaterialSeleccion.Location = new System.Drawing.Point(30, 284);
             this.dataGridViewPartidasMaterialSeleccion.Name = "dataGridViewPartidasMaterialSeleccion";
-            this.dataGridViewPartidasMaterialSeleccion.Size = new System.Drawing.Size(862, 234);
+            this.dataGridViewPartidasMaterialSeleccion.Size = new System.Drawing.Size(866, 234);
             this.dataGridViewPartidasMaterialSeleccion.TabIndex = 50;
             this.dataGridViewPartidasMaterialSeleccion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasMaterialSeleccion_CellClick);
             // 

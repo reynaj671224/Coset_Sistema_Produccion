@@ -224,6 +224,7 @@
             this.dataGridViewPartidasRequisiciones.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
             this.dataGridViewPartidasRequisiciones.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewPartidasRequisiciones_EditingControlShowing);
             this.dataGridViewPartidasRequisiciones.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewPartidasRequisiciones_RowsAdded);
+            this.dataGridViewPartidasRequisiciones.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewPartidasRequisiciones_RowsRemoved);
             // 
             // comboBoxCodigoRequisiciones
             // 
@@ -452,6 +453,7 @@
             // 
             this.Numero_partida.HeaderText = "Partida";
             this.Numero_partida.Name = "Numero_partida";
+            this.Numero_partida.ReadOnly = true;
             this.Numero_partida.Width = 50;
             // 
             // Cantidad_partida

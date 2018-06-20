@@ -91,7 +91,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_inventarios_material()
         {
-            return "SELECT * FROM materiales WHERE material_cantidad < material_minimo or material_cantidad > material_maximo";
+            return "SELECT * FROM materiales WHERE (material_cantidad < material_minimo and material_minimo !=0) or (material_cantidad > material_maximo and material_maximo!=0)";
         }
 
         public List<Material> Adquiere_materiales_busqueda_en_base_datos(Material material)
