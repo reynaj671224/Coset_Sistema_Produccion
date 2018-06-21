@@ -28,6 +28,7 @@ namespace Coset_Sistema_Produccion
         public List<Usuario> Usuarios_administrativos = new List<Usuario>();
         public List<Usuario> Usuarios_requisitores = new List<Usuario>();
         public Partida_requisicion partida_requisicion_agregar = new Partida_requisicion();
+        public Partida_requisicion partida_requisicion_modificar = new Partida_requisicion();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public Datos_generales datos_generales = new Datos_generales();
@@ -42,7 +43,8 @@ namespace Coset_Sistema_Produccion
         public Material Agregar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Class_Materiales class_materiales = new Class_Materiales();
-        string RenglonParaEliminar = "";
+        public string RenglonParaEliminar = "";
+        public int RenglonParaEliminardatagridview = 0;
         string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
         public CultureInfo cultureInfo = new CultureInfo("en-US");
         public string nombre_archivo_word = "";
@@ -51,6 +53,7 @@ namespace Coset_Sistema_Produccion
         public int Numero_renglones_rellenos_requisicion=0;
         private bool eventHookedUp;
         public int Longitud_cadena_busqueda = 3;
+        public int Numero_partidas_disponibles = 0;
         public enum Campos_partidas
         {
             codigo,partida,cantidad,numero, descripcion,
@@ -455,6 +458,7 @@ namespace Coset_Sistema_Produccion
                 }
 
             }
+            
         }
 
         private void Obtener_datos_partidas_requisiciones_disponibles_base_datos()
@@ -495,6 +499,7 @@ namespace Coset_Sistema_Produccion
             Operacio_requisiciones = "Agregar";
             limpia_partidas_requisicion();
             Asigna_codigo_cliente_foilio_disponible();
+            Asigna_nuevo_folio_requisiciones();
             Limpia_combo_dirigido();
             Limpia_combo_requisitor();
             Limpia_combo_requisiciones();
@@ -680,20 +685,21 @@ namespace Coset_Sistema_Produccion
         {
             if (Confirma_datos_partidas())
             {
-                if (Agrega_materiales_requisicion_base_datos())
+                /*if (Agrega_materiales_requisicion_base_datos())
+                {*/
+                if (Guarda_datos_partidas_requisiciones())
                 {
-                    if (Guarda_datos_partidas_requisiciones())
-                    {
-                        Desaparece_boton_guardar_base_de_datos();
-                        Activa_botones_operacion_partidas();
-                        limpia_partidas_requisicion();
-                        Obtener_datos_partidas_requisiciones_disponibles_base_datos();
-                        Operacio_requisiciones = "Mostar Partida";
-                        Rellena_campos_partidas_requisiciones();
-                        Elimina_informacion_requisiciones_disponibles();
+                    Desaparece_boton_guardar_base_de_datos();
+                    Activa_botones_operacion_partidas();
+                    limpia_partidas_requisicion();
+                    Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+                    Operacio_requisiciones = "Mostar Partida";
+                    No_aceptar_agregar_partidas_requisiciones();
+                    Rellena_campos_partidas_requisiciones();
+                    Elimina_informacion_requisiciones_disponibles();
 
-                    }
                 }
+               /* }*/
             }
         }
 
@@ -777,42 +783,41 @@ namespace Coset_Sistema_Produccion
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly ||
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                         {
+                            if (campo == (int)Campos_partidas.proyecto)
+                            {
+                                if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null)
+                                {
+                                    dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value = "";
+                                }
+                            }
                             if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value != null)
                             {
-                                if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString() != "")
-                                {
-                                    if (campo == (int)Campos_partidas.partida)
-                                        partida_requisicion_agregar.Partida = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.cantidad)
-                                        partida_requisicion_agregar.Cantidad = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.descripcion)
-                                        partida_requisicion_agregar.Descripcion = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.uidad_medida)
-                                        partida_requisicion_agregar.Unidad_medida = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.proyecto)
-                                        partida_requisicion_agregar.Proyecto = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.proveedor)
-                                        partida_requisicion_agregar.Proveedor = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                    else if (campo == (int)Campos_partidas.codigo)
-                                        partida_requisicion_agregar.Codigo = Convert.ToInt32(dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value);
-                                    else if (campo == (int)Campos_partidas.numero)
-                                        partida_requisicion_agregar.Numero = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("campo en blanco");
-                                    connection.Close();
-                                    return false;
-                                }
-
+                                /*estaba detectando blancos*/
+                                if (campo == (int)Campos_partidas.partida)
+                                    partida_requisicion_agregar.Partida = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.cantidad)
+                                    partida_requisicion_agregar.Cantidad = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.descripcion)
+                                    partida_requisicion_agregar.Descripcion = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.uidad_medida)
+                                    partida_requisicion_agregar.Unidad_medida = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.proyecto)
+                                    partida_requisicion_agregar.Proyecto = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.proveedor)
+                                    partida_requisicion_agregar.Proveedor = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_partidas.codigo)
+                                    partida_requisicion_agregar.Codigo = Convert.ToInt32(dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value);
+                                else if (campo == (int)Campos_partidas.numero)
+                                    partida_requisicion_agregar.Numero = dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString();
                             }
-
                             else
                             {
                                 MessageBox.Show("campo en blanco");
                                 connection.Close();
                                 return false;
                             }
+
+ 
                         }
                     }
                     partida_requisicion_agregar.Codigo_requisicion = textBoxCodigoRequisiciones.Text;
@@ -871,7 +876,6 @@ namespace Coset_Sistema_Produccion
                             Desactiva_combo_dirigido();
                             Aparece_textbox_requisitor();
                             Aparece_textbox_dirigido();
-                            Asigna_nuevo_folio_requisiciones();
                             Elimina_informacion_requisiciones_disponibles();
                         }
                    /* } */
@@ -1189,6 +1193,7 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_informacion_requisiciones_disponibles()
         {
+            Numero_partidas_disponibles = 0;
             Partidas_requisicion_disponibles = null;
             Proveedores_disponibles = null;
             requisiciones_disponibles = null;
@@ -1496,6 +1501,8 @@ namespace Coset_Sistema_Produccion
             {
                 Aparce_boton_borrar_base_datos();
                 RenglonParaEliminar = dataGridViewPartidasRequisiciones.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                RenglonParaEliminardatagridview = e.RowIndex;
+                //Borra_partida_requsicion_base_datos();
             }
             else if(Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
@@ -1509,6 +1516,27 @@ namespace Coset_Sistema_Produccion
                 
             }
 
+        }
+
+        private void Borra_partida_requsicion_base_datos()
+        {
+            if (MessageBox.Show("Esta Seguro de Eiliminar la partida requisicion seleccionada?",
+                   "Eliminar partida requisicion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (Elimina_partida_orden_compra_seleccionada())
+                {
+                    if (Renumera_partidas_despues_eliminar())
+                    {
+                        Desaparece_boton_borrar_base_de_datos();
+                        Activa_botones_operacion_partidas();
+                        limpia_partidas_requisicion();
+                        Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+                        Operacio_requisiciones = "Mostar Partida";
+                        Rellena_campos_partidas_requisiciones();
+                        Elimina_informacion_requisiciones_disponibles();
+                    }
+                }
+            }
         }
 
         private void Aparce_boton_borrar_base_datos()
@@ -2124,7 +2152,6 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasRequisiciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            int numero_partida = 1;
             if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
             {
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
@@ -2133,12 +2160,18 @@ namespace Coset_Sistema_Produccion
                             Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
-
-                for (int renglones = 0; renglones < dataGridViewPartidasRequisiciones.RowCount - 1; renglones++)
+            if(Operacio_requisiciones == "Agregar")
                 {
-                    dataGridViewPartidasRequisiciones["Numero_partida", renglones].Value = numero_partida.ToString();
-                    numero_partida++;
+                    dataGridViewPartidasRequisiciones["Numero_partida", e.RowIndex].
+                        Value = dataGridViewPartidasRequisiciones.RowCount;
                 }
+                else if(Operacio_requisiciones == "Agregar Partida")
+                {
+                    Numero_partidas_disponibles++;
+                    dataGridViewPartidasRequisiciones["Numero_partida", e.RowIndex].
+                        Value = Numero_partidas_disponibles;
+                }
+              
             }
             else if (Operacio_requisiciones == "Cancelar")
             {
@@ -2214,10 +2247,12 @@ namespace Coset_Sistema_Produccion
         private void buttonAgregarPartida_Click(object sender, EventArgs e)
         {
             Operacio_requisiciones = "Agregar Partida";
+            Numero_partidas_disponibles = dataGridViewPartidasRequisiciones.RowCount;
             Desactiva_botones_operacion_partidas();
             limpia_partidas_requisicion();
             Aceptar_agregar_partidas_requisiciones();
             Aparce_boton_guardar_base_datos();
+            
         }
 
         private void Aceptar_agregar_partidas_requisiciones()
@@ -2248,18 +2283,54 @@ namespace Coset_Sistema_Produccion
             {
                 if (Elimina_partida_orden_compra_seleccionada())
                 {
-                    Desaparece_boton_borrar_base_de_datos();
-                    Activa_botones_operacion_partidas();
-                    limpia_partidas_requisicion();
-                    Obtener_datos_partidas_requisiciones_disponibles_base_datos();
-                    Operacio_requisiciones = "Mostar Partida";
-                    Rellena_campos_partidas_requisiciones();
-                    Elimina_informacion_requisiciones_disponibles();
+                    if (Renumera_partidas_despues_eliminar())
+                    {
+                        Desaparece_boton_borrar_base_de_datos();
+                        Activa_botones_operacion_partidas();
+                        limpia_partidas_requisicion();
+                        Obtener_datos_partidas_requisiciones_disponibles_base_datos();
+                        Operacio_requisiciones = "Mostar Partida";
+                        Rellena_campos_partidas_requisiciones();
+                        Elimina_informacion_requisiciones_disponibles();
+                    }
                 }
             }
         }
 
-        private void Desaparece_boton_borrar_base_de_datos()
+        private bool Renumera_partidas_despues_eliminar()
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_compras());
+            Activa_Campos_partida_requisicion();
+            try
+            {
+                connection.Open();
+                for (int partidas = 0; partidas < dataGridViewPartidasRequisiciones.RowCount; partidas++)
+                {
+
+                    partida_requisicion_modificar.Partida = (partidas + 1).ToString();
+                    partida_requisicion_modificar.Codigo = Convert.ToInt32(dataGridViewPartidasRequisiciones[(int)Campos_partidas.codigo, partidas].Value);
+                    MySqlCommand command = new MySqlCommand(Configura_cadena_comando_actualiza_numero_partida_requisiciones(partida_requisicion_modificar), connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_actualiza_numero_partida_requisiciones(Partida_requisicion partida_requisicion_modificar)
+        {
+            return "UPDATE partidas_requisiciones set  partida_requisicion='" + partida_requisicion_modificar.Partida +
+                 "' where codigo_partida='" + partida_requisicion_modificar.Codigo + "';";
+        }
+
+            private void Desaparece_boton_borrar_base_de_datos()
         {
             buttonBorrarBasedeDatos.Visible = false;
         }
@@ -2279,7 +2350,7 @@ namespace Coset_Sistema_Produccion
                 connection.Close();
                 return false;
             }
-
+            dataGridViewPartidasRequisiciones.Rows.Remove(dataGridViewPartidasRequisiciones.Rows[RenglonParaEliminardatagridview]);
             connection.Close();
             return true;
         }
@@ -2418,12 +2489,7 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasRequisiciones_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            int numero_partida = 1;
-            for (int renglones = 0; renglones < dataGridViewPartidasRequisiciones.RowCount - 1; renglones++)
-            {
-                dataGridViewPartidasRequisiciones["Numero_partida", renglones].Value = numero_partida.ToString();
-                numero_partida++;
-            }
+           
         }
     }
 }
