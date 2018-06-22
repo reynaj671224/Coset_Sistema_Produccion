@@ -635,6 +635,7 @@
             // 
             this.Numero_partida.HeaderText = "Partida";
             this.Numero_partida.Name = "Numero_partida";
+            this.Numero_partida.ReadOnly = true;
             this.Numero_partida.Width = 50;
             // 
             // Requisicion_compra
@@ -642,6 +643,7 @@
             this.Requisicion_compra.HeaderText = "Requisicion";
             this.Requisicion_compra.Name = "Requisicion_compra";
             this.Requisicion_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Requisicion_compra.Visible = false;
             // 
             // Cantidad_partida
             // 
@@ -660,7 +662,7 @@
             this.Descrpcion_partida.HeaderText = "Descripcion";
             this.Descrpcion_partida.Name = "Descrpcion_partida";
             this.Descrpcion_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Descrpcion_partida.Width = 400;
+            this.Descrpcion_partida.Width = 500;
             // 
             // UnidadMedida_compra
             // 
