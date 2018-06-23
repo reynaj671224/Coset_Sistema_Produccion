@@ -50,6 +50,16 @@
             this.textBoxCodigoOrdenCompra = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewPartidasOrdenCompra = new System.Windows.Forms.DataGridView();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Requisicion_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parte_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnidadMedida_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto_compra = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Precio_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoOrdenCompra = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.buttonPartidas = new System.Windows.Forms.Button();
@@ -75,16 +85,8 @@
             this.comboBoxCondicionPago = new System.Windows.Forms.ComboBox();
             this.textBoxCondicionPago = new System.Windows.Forms.TextBox();
             this.buttonSaveFile = new System.Windows.Forms.Button();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Requisicion_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parte_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnidadMedida_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto_compra = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Precio_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Importe_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxRequisicion = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -289,9 +291,9 @@
             // textBoxCodigoOrdenCompra
             // 
             this.textBoxCodigoOrdenCompra.Enabled = false;
-            this.textBoxCodigoOrdenCompra.Location = new System.Drawing.Point(239, 134);
+            this.textBoxCodigoOrdenCompra.Location = new System.Drawing.Point(238, 111);
             this.textBoxCodigoOrdenCompra.Name = "textBoxCodigoOrdenCompra";
-            this.textBoxCodigoOrdenCompra.Size = new System.Drawing.Size(121, 20);
+            this.textBoxCodigoOrdenCompra.Size = new System.Drawing.Size(149, 20);
             this.textBoxCodigoOrdenCompra.TabIndex = 38;
             // 
             // label4
@@ -299,7 +301,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(106, 138);
+            this.label4.Location = new System.Drawing.Point(106, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(127, 16);
             this.label4.TabIndex = 37;
@@ -330,12 +332,74 @@
             this.dataGridViewPartidasOrdenCompra.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewPartidasOrdenCompra_EditingControlShowing);
             this.dataGridViewPartidasOrdenCompra.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewPartidasOrdenCompra_RowsAdded);
             // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 50;
+            // 
+            // Numero_partida
+            // 
+            this.Numero_partida.HeaderText = "Partida";
+            this.Numero_partida.Name = "Numero_partida";
+            this.Numero_partida.ReadOnly = true;
+            this.Numero_partida.Width = 50;
+            // 
+            // Requisicion_compra
+            // 
+            this.Requisicion_compra.HeaderText = "Requisicion";
+            this.Requisicion_compra.Name = "Requisicion_compra";
+            this.Requisicion_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Requisicion_compra.Visible = false;
+            // 
+            // Cantidad_partida
+            // 
+            this.Cantidad_partida.HeaderText = "Cantidad";
+            this.Cantidad_partida.Name = "Cantidad_partida";
+            this.Cantidad_partida.Width = 50;
+            // 
+            // Parte_partida
+            // 
+            this.Parte_partida.HeaderText = "Parte";
+            this.Parte_partida.Name = "Parte_partida";
+            this.Parte_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Descrpcion_partida
+            // 
+            this.Descrpcion_partida.HeaderText = "Descripcion";
+            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            this.Descrpcion_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Descrpcion_partida.Width = 500;
+            // 
+            // UnidadMedida_compra
+            // 
+            this.UnidadMedida_compra.HeaderText = "Unidad Medida";
+            this.UnidadMedida_compra.Name = "UnidadMedida_compra";
+            // 
+            // Proyecto_compra
+            // 
+            this.Proyecto_compra.HeaderText = "Proyecto";
+            this.Proyecto_compra.Name = "Proyecto_compra";
+            this.Proyecto_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proyecto_compra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Precio_partida
+            // 
+            this.Precio_partida.HeaderText = "Precio";
+            this.Precio_partida.Name = "Precio_partida";
+            // 
+            // Importe_partida
+            // 
+            this.Importe_partida.HeaderText = "Total";
+            this.Importe_partida.Name = "Importe_partida";
+            this.Importe_partida.ReadOnly = true;
+            // 
             // comboBoxCodigoOrdenCompra
             // 
             this.comboBoxCodigoOrdenCompra.FormattingEnabled = true;
-            this.comboBoxCodigoOrdenCompra.Location = new System.Drawing.Point(239, 135);
+            this.comboBoxCodigoOrdenCompra.Location = new System.Drawing.Point(239, 110);
             this.comboBoxCodigoOrdenCompra.Name = "comboBoxCodigoOrdenCompra";
-            this.comboBoxCodigoOrdenCompra.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoOrdenCompra.Size = new System.Drawing.Size(149, 21);
             this.comboBoxCodigoOrdenCompra.Sorted = true;
             this.comboBoxCodigoOrdenCompra.TabIndex = 49;
             this.comboBoxCodigoOrdenCompra.Visible = false;
@@ -415,7 +479,7 @@
             this.dateTimePickerFechaActual.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerFechaActual.Location = new System.Drawing.Point(239, 273);
             this.dateTimePickerFechaActual.Name = "dateTimePickerFechaActual";
-            this.dateTimePickerFechaActual.Size = new System.Drawing.Size(120, 20);
+            this.dateTimePickerFechaActual.Size = new System.Drawing.Size(149, 20);
             this.dateTimePickerFechaActual.TabIndex = 57;
             // 
             // label6
@@ -481,7 +545,7 @@
             this.textBoxCotizacion.Enabled = false;
             this.textBoxCotizacion.Location = new System.Drawing.Point(239, 162);
             this.textBoxCotizacion.Name = "textBoxCotizacion";
-            this.textBoxCotizacion.Size = new System.Drawing.Size(121, 20);
+            this.textBoxCotizacion.Size = new System.Drawing.Size(246, 20);
             this.textBoxCotizacion.TabIndex = 66;
             // 
             // label3
@@ -625,73 +689,32 @@
             this.buttonSaveFile.Visible = false;
             this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
-            // Codigo_partida
+            // textBoxRequisicion
             // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 50;
+            this.textBoxRequisicion.Enabled = false;
+            this.textBoxRequisicion.Location = new System.Drawing.Point(238, 136);
+            this.textBoxRequisicion.Name = "textBoxRequisicion";
+            this.textBoxRequisicion.Size = new System.Drawing.Size(247, 20);
+            this.textBoxRequisicion.TabIndex = 78;
             // 
-            // Numero_partida
+            // label9
             // 
-            this.Numero_partida.HeaderText = "Partida";
-            this.Numero_partida.Name = "Numero_partida";
-            this.Numero_partida.ReadOnly = true;
-            this.Numero_partida.Width = 50;
-            // 
-            // Requisicion_compra
-            // 
-            this.Requisicion_compra.HeaderText = "Requisicion";
-            this.Requisicion_compra.Name = "Requisicion_compra";
-            this.Requisicion_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Requisicion_compra.Visible = false;
-            // 
-            // Cantidad_partida
-            // 
-            this.Cantidad_partida.HeaderText = "Cantidad";
-            this.Cantidad_partida.Name = "Cantidad_partida";
-            this.Cantidad_partida.Width = 50;
-            // 
-            // Parte_partida
-            // 
-            this.Parte_partida.HeaderText = "Parte";
-            this.Parte_partida.Name = "Parte_partida";
-            this.Parte_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Descripcion";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
-            this.Descrpcion_partida.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Descrpcion_partida.Width = 500;
-            // 
-            // UnidadMedida_compra
-            // 
-            this.UnidadMedida_compra.HeaderText = "Unidad Medida";
-            this.UnidadMedida_compra.Name = "UnidadMedida_compra";
-            // 
-            // Proyecto_compra
-            // 
-            this.Proyecto_compra.HeaderText = "Proyecto";
-            this.Proyecto_compra.Name = "Proyecto_compra";
-            this.Proyecto_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proyecto_compra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Precio_partida
-            // 
-            this.Precio_partida.HeaderText = "Precio";
-            this.Precio_partida.Name = "Precio_partida";
-            // 
-            // Importe_partida
-            // 
-            this.Importe_partida.HeaderText = "Total";
-            this.Importe_partida.Name = "Importe_partida";
-            this.Importe_partida.ReadOnly = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Image = ((System.Drawing.Image)(resources.GetObject("label9.Image")));
+            this.label9.Location = new System.Drawing.Point(106, 140);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 16);
+            this.label9.TabIndex = 77;
+            this.label9.Text = "Requisicion";
             // 
             // Forma_Ordenes_Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1334, 582);
+            this.Controls.Add(this.textBoxRequisicion);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.buttonSaveFile);
             this.Controls.Add(this.comboBoxCondicionPago);
             this.Controls.Add(this.textBoxCondicionPago);
@@ -803,5 +826,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Proyecto_compra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe_partida;
+        private System.Windows.Forms.TextBox textBoxRequisicion;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -577,7 +577,7 @@ namespace Coset_Sistema_Produccion
             textBoxRazonSocialProveedor.Text = Proveedor_seleccionado.RazonSocial;
             textBoxCorreoContacto.Text = orden_compra_visualizar.Correo_electronico;
             textBoxRequisitor.Text = orden_compra_visualizar.Realizado;
-            
+            textBoxRequisicion.Text = orden_compra_visualizar.Requisicion;
             textBoxCondicionPago.Text = orden_compra_visualizar.Condicion_pago;
             if (orden_compra_visualizar.Tipo_moneda == "Dolares")
             {
@@ -630,10 +630,16 @@ namespace Coset_Sistema_Produccion
             Activa_combo_condicion_pago();
             Activa_seleccion_fecha_actual();
             Activa_textbox_cotizaciones();
+            Activa_textbox_requisiciones();
             Activa_textbox_divisa();
             Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
             Rellena_cajas_informacion_de_partidas_orden_compra_modificaciones();
             Aparce_boton_guardar_base_datos();
+        }
+
+        private void Activa_textbox_requisiciones()
+        {
+            textBoxRequisicion.Enabled = true;
         }
 
         private void Limpia_combo_proyectos_partidas()
@@ -651,6 +657,7 @@ namespace Coset_Sistema_Produccion
             orden_compra_modificar = ordenes_compra_disponibles.Find(orden_compra => orden_compra.Codigo.Contains(comboBoxCodigoOrdenCompra.SelectedItem.ToString()));
 
             textBoxCotizacion.Text = orden_compra_modificar.Cotizacion;
+            textBoxRequisicion.Text = orden_compra_modificar.Requisicion;
             dateTimePickerFechaActual.Text = orden_compra_modificar.Fecha;
             textBoxNombreProveedor.Text = orden_compra_modificar.Proveedor;
             comboBoxCotizado.Text = orden_compra_modificar.Cotizado;
@@ -736,6 +743,7 @@ namespace Coset_Sistema_Produccion
             Rellena_combo_nombre_proveedor();
             Aparece_textbox_cotizaciones();
             Activa_textbox_cotizaciones();
+            Activa_textbox_reqisiciones();
             Limpia_combo_realizado();
             Aparece_combo_realizado();
             Activa_combo_realizado();
@@ -748,6 +756,11 @@ namespace Coset_Sistema_Produccion
             obtener_proyectos_disponibles();
             Rellenar_combo_proyectos_partidas_requisiciones();
             
+        }
+
+        private void Activa_textbox_reqisiciones()
+        {
+            textBoxRequisicion.Enabled = true;
         }
 
         private void Activa_combo_condicion_pago()
@@ -877,7 +890,8 @@ namespace Coset_Sistema_Produccion
             {
                 if (comboBoxRealizado.Text != "" && comboBoxNombreProveedor.Text != "" &&
                     comboBoxCotizado.Text != "" && textBoxCotizacion.Text != "" &&
-                    comboBoxCondicionPago.Text != "" && textBoxDivisa.Text!= "")
+                    comboBoxCondicionPago.Text != "" && textBoxDivisa.Text!= "" &&
+                    textBoxRequisicion.Text !="")
                 {
                     timerAgregarOrdenCompra.Enabled = false;
                     buttonGuardarBasedeDatos.Visible = true;
@@ -1185,6 +1199,7 @@ namespace Coset_Sistema_Produccion
                "',cotizado_compra='" + comboBoxCotizado.Text +
                "',correo_contacto_compra='" + textBoxCorreoContacto.Text +
                "',cotizacion_compra='" + textBoxCotizacion.Text +
+               "',requisicion='" + textBoxRequisicion.Text +
                "' where codigo_orden_compra='" + comboBoxCodigoOrdenCompra.Text + "';";
         }
 
@@ -1468,6 +1483,7 @@ namespace Coset_Sistema_Produccion
             textBoxCotizado.Enabled = false;
             textBoxCotizacion.Enabled = false;
             textBoxCondicionPago.Enabled = false;
+            textBoxRequisicion.Enabled = false;
         }
 
 
@@ -1483,6 +1499,7 @@ namespace Coset_Sistema_Produccion
             textBoxCotizacion.Text = "";
             textBoxCondicionPago.Text = "";
             textBoxDivisa.Text = "";
+            textBoxRequisicion.Text = "";
             radioButtonPesos.Select();
         }
 
@@ -1607,11 +1624,11 @@ namespace Coset_Sistema_Produccion
 
                 return "INSERT INTO ordenes_compra(codigo_orden_compra, provedor_compra,tipo_moneda_compra," +
                     "divisa_compra,fecha_orden,condicion_pago_compra,realizado_compra,cotizado_compra,correo_contacto_compra," +
-                    "cotizacion_compra) " +
+                    "cotizacion_compra,requisicion) " +
                     "VALUES('" + textBoxCodigoOrdenCompra.Text + "','" + comboBoxNombreProveedor.Text + "','" +
                     tipo_moneda + "','" + divisa + "','" + dateTimePickerFechaActual.Text + "','" + 
                     comboBoxCondicionPago.Text + "','" + comboBoxRealizado.Text + "','" + comboBoxCotizado.Text + "','"+
-                    textBoxCorreoContacto.Text + "','" + textBoxCotizacion.Text +"');";
+                    textBoxCorreoContacto.Text + "','" + textBoxCotizacion.Text + "','" +textBoxRequisicion.Text +"');";
         }
 
         private string Configura_cadena_conexion_MySQL_compras()
@@ -1625,6 +1642,7 @@ namespace Coset_Sistema_Produccion
 
         private void Modifica_orden_compra()
         {
+            Operacio_orden_compra = "Modificar";
             obtener_proyectos_disponibles();
             Rellenar_combo_proyectos_partidas_requisiciones();
             Desactiva_botones_operacion();
@@ -1639,7 +1657,7 @@ namespace Coset_Sistema_Produccion
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
             Activa_dataview_partidas_ordenes_compra();
-            Operacio_orden_compra = "Modificar";
+           
         }
 
         private bool Elimina_informacion_orden_compra_en_base_de_datos()
@@ -2488,10 +2506,13 @@ namespace Coset_Sistema_Produccion
                         try
                         {
                             dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.total].Value =
-                                (Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value) *
-                                Convert.ToSingle(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.cantidad].Value)).ToString("####.##");
+                                (Convert.ToDouble(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value) *
+                                Convert.ToDouble(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.cantidad].Value)).ToString("0.00");
+                            dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[(int)Campos_orden_compra.precio].Value =
+                                (Convert.ToDouble(dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value) * 1).ToString("0.00");
                             dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].
                                 Style.BackColor = Color.White;
+
                         }
                         catch
                         {

@@ -32,6 +32,7 @@ namespace Coset_Sistema_Produccion
                         Cotizado = mySqlDataReader["cotizado_compra"].ToString(),
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
+                        Requisicion = mySqlDataReader["requisicion"].ToString(),
 
                     });
                 }
@@ -66,6 +67,7 @@ namespace Coset_Sistema_Produccion
         public string Cotizado = "";
         public string Correo_electronico = "";
         public string Cotizacion = "";
+        public string Requisicion = "";
         public string error = "";
     }
 }
