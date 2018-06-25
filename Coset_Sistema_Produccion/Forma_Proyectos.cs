@@ -304,6 +304,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            Operacio_proyectos = "Cancelar";
             Limpia_combo_codigo_cotizacion();
             Limpia_combo_proyecto();
             Limpia_combo_ingenieros_coset();
@@ -640,8 +641,10 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_subproyecto()
         {
+            Operacio_proyectos = "Agregar SubProyecto";
             Desactiva_botones_operacion();
             Activa_cajas_informacion_proyecto();
+            No_aceptar_agregar_dibujos_proyecto();
             Acepta_datagridview_agregar_renglones();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_proyecto();
             Aparece_boton_cancelar_operacio();
@@ -668,7 +671,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_combo_codigo_proyectos_no_subproyectos();
 
-            Operacio_proyectos = "Agregar SubProyecto";
+            
         }
 
         private void Activa_textbox_subproyecto()
@@ -712,9 +715,12 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_proyecto()
         {
+            Operacio_proyectos = "Agregar Proyecto";
             Asigna_codigo_proyecto_foilio_disponible();
+            Asigna_nuevo_folio_proyecto();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_proyecto();
+            No_aceptar_agregar_dibujos_proyecto();
             Acepta_datagridview_agregar_renglones();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_proyecto();
             Aparece_boton_cancelar_operacio();
@@ -733,7 +739,7 @@ namespace Coset_Sistema_Produccion
             Rellena_combo_codigo_cotizacion();
 
             
-            Operacio_proyectos = "Agregar Proyecto";
+            
         }
 
         private void Asigna_codigo_OC_folio_disponible()
@@ -882,6 +888,7 @@ namespace Coset_Sistema_Produccion
                             Desaparece_combo_ingenieros_coset();
                             Desaparece_combo_ingenieros_cliente();
                             Activa_botones_operacion();
+                            Limpia_operaciones_proyectos();
                             limpia_dibujos_proyecto();
                             Desactiva_datagridview_dibujos();
 
@@ -1068,6 +1075,8 @@ namespace Coset_Sistema_Produccion
                     Desaparece_boton_guardar_base_de_datos();
                     Activa_botones_operacion_contactos();
                     limpia_dibujos_proyecto();
+                    Limpia_operaciones_proyectos();
+                    No_aceptar_agregar_dibujos_proyecto();
                     Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
                     Rellena_cajas_informacion_de_dibujos_proyecto();
                     Elimina_informacion_proyectos_disponibles();
@@ -1118,6 +1127,7 @@ namespace Coset_Sistema_Produccion
                         Desaparece_combo_codigo_proyecto();
 
                         Activa_botones_operacion();
+                        Limpia_operaciones_proyectos();
                         limpia_dibujos_proyecto();
                         Desactiva_datagridview_dibujos();
 
@@ -1265,6 +1275,7 @@ namespace Coset_Sistema_Produccion
                             Desaparece_combo_ingenieros_coset();
                             Desaparece_combo_ingenieros_cliente();
                             Activa_botones_operacion();
+                            Limpia_operaciones_proyectos();
                             limpia_dibujos_proyecto();
                             Desactiva_datagridview_dibujos();
 
@@ -1278,8 +1289,7 @@ namespace Coset_Sistema_Produccion
                             Aparece_textbox_ingeniero_coset();
                             Aparece_textbox_ingeniero_cliente();
 
-                            Asigna_nuevo_folio_proyecto();
-                            Asigna_njuevo_folio_OC();
+                            //Asigna_nuevo_folio_OC();
 
                             Elimina_informacion_proyectos_disponibles();
                         }
@@ -1287,6 +1297,11 @@ namespace Coset_Sistema_Produccion
                 }
             }
 
+        }
+
+        private void Limpia_operaciones_proyectos()
+        {
+            Operacio_proyectos = "";
         }
 
         private bool verifica_datos_partidas()
@@ -1339,7 +1354,7 @@ namespace Coset_Sistema_Produccion
                "' where codigo_cotizacion='" + comboBoxCodigoCotizacion.Text + "';";
         }
 
-        private void Asigna_njuevo_folio_OC()
+        private void Asigna_nuevo_folio_OC()
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_oc.Substring(2, folio_disponible.Folio_oc.Length - 2));
             numero_folio++;
@@ -1457,7 +1472,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_proyectos.Substring(2, folio_disponible.Folio_proyectos.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_proyectos = folio_disponible.Folio_proyectos.Substring(0, 2) + numero_folio.ToString();
+            folio_disponible.Folio_proyectos = folio_disponible.Folio_proyectos.Substring(0, 2) + numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
 
             if (respuesta != "")
@@ -1804,11 +1819,12 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_dibujo_proyecto()
         {
+            Operacio_proyectos = "Agregar Dibujo";
             Desactiva_botones_operacion_contactos();
             limpia_dibujos_proyecto();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
-            Operacio_proyectos = "Agregar Dibujo";
+            
 
         }
 
@@ -2018,7 +2034,7 @@ namespace Coset_Sistema_Produccion
         private void dataGridViewDibujosProyecto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (Operacio_proyectos == "Agregar Proyecto" || Operacio_proyectos == "Modificar" ||
-                Operacio_proyectos == "Agregar Dibujo" || Operacio_proyectos == "Agregar Sub-Proyecto")/*verifica si esta agregando Partidas*/
+                Operacio_proyectos == "Agregar Dibujo" || Operacio_proyectos == "Agregar SubProyecto")/*verifica si esta agregando Partidas*/
             {
                 if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tiempo_estimado) /*verifica si esta modificando el precio*/
                 {
@@ -2026,7 +2042,9 @@ namespace Coset_Sistema_Produccion
                     {
                         /*Valida Numeros en la caja de horas estimadas*/
                         Convert.ToSingle(dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value.ToString());
-                            
+                        dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
+
+
                     }
                     catch
                     {
@@ -2035,13 +2053,13 @@ namespace Coset_Sistema_Produccion
                     }
 
                 }
-                else if(dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.cantidad)
+                else if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.cantidad)
                 {
                     try
                     {
                         /*Valida Numeros en la caja cantidad*/
                         Convert.ToSingle(dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value.ToString());
-
+                        dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
                     }
                     catch
                     {
@@ -2049,6 +2067,28 @@ namespace Coset_Sistema_Produccion
                         dataGridViewDibujosProyecto[(int)Campos_dibujos.cantidad, e.RowIndex].Value = "";
                     }
 
+                }
+                else if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.numero)
+                {
+                    if (dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value != null)
+                    {
+                        if (dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                        {
+                            dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex]
+                            .Style.BackColor = Color.White;
+                        }
+                    }
+                }
+                else if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.descripcion)
+                {
+                    if (dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value != null)
+                    {
+                        if (dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                        {
+                            dataGridViewDibujosProyecto[e.ColumnIndex, e.RowIndex]
+                            .Style.BackColor = Color.White;
+                        }
+                    }
                 }
             }
         }
@@ -2324,5 +2364,21 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        private void dataGridViewDibujosProyecto_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (Operacio_proyectos == "Agregar Proyecto" || Operacio_proyectos == "Agregar Dibujo" ||
+                Operacio_proyectos == "Agregar SubProyecto")
+            {
+                dataGridViewDibujosProyecto.Rows[e.RowIndex].
+                           Cells["Cantidad_dibujos"].Style.BackColor = Color.Yellow;
+                dataGridViewDibujosProyecto.Rows[e.RowIndex].
+                          Cells["Dibujo_proyecto"].Style.BackColor = Color.Yellow;
+                dataGridViewDibujosProyecto.Rows[e.RowIndex].
+                          Cells["Descripcion_dibujo"].Style.BackColor = Color.Yellow;
+                dataGridViewDibujosProyecto.Rows[e.RowIndex].
+                          Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
+
+            }
+        }
     }
 }

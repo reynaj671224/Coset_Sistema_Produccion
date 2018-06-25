@@ -42,6 +42,8 @@ namespace Coset_Sistema_Produccion
         public string nombre_archivo_word = "";
         public word.Application application = null;
         public word.Document Documento = null;
+        public int Numero_partidas_disponibles = 0;
+        public int RenglonParaEliminardatagridview = 0;
         public enum Campos_partidas
         {
             codigo, numero, cantidad, parte, descripcion,
@@ -269,6 +271,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            Operacio_cotizaciones = "Cancelar";
             Limpia_combo_codigo_cotizacion();
             Limpia_combo_nombre_cliente();
             Limpia_combo_atencion();
@@ -582,14 +585,16 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_cotizacion()
         {
+            Operacio_cotizaciones = "Agregar";
             Asigna_codigo_cliente_foilio_disponible();
             Asigna_nuevo_folio_cotizaciones();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_cotizaciones();
+            No_aceptar_agregar_contactos_cotizacion();
             Acepta_datagridview_agregar_renglones();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_cotizacion();
             Aparece_boton_cancelar_operacio();
-            Activa_datagridview_contactos_clientes();
+            Activa_datagridview_partidas_cotizaciones();
             Desactiva_combobox_codigo_cotizaciones();
             Desaparece_textbox_nombre_cliente();
             Aparece_combo_nombre_cliente();
@@ -636,7 +641,7 @@ namespace Coset_Sistema_Produccion
             dataGridViewPartidasCotizacion.AllowUserToAddRows = true;
         }
 
-        private void Activa_datagridview_contactos_clientes()
+        private void Activa_datagridview_partidas_cotizaciones()
         {
             dataGridViewPartidasCotizacion.Enabled = true;
         }
@@ -811,7 +816,9 @@ namespace Coset_Sistema_Produccion
                 {
                     Desaparece_boton_guardar_base_de_datos();
                     Activa_botones_operacion_contactos();
+                    Limpia_operaciones_cotizaciones();
                     limpia_partidas_cotizacion();
+                    //Desactiva_datagridview_partidas();
                     Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoCotizaciones.Text);
                     Rellena_cajas_informacion_de_partidas_cotizacion();
                     Elimina_informacion_cotizaciones_disponibles();
@@ -854,6 +861,7 @@ namespace Coset_Sistema_Produccion
                         Desaparece_combo_codigo_cotizacion();
                         Aparce_caja_codigo_cliente();
                         Activa_botones_operacion();
+                        Limpia_operaciones_cotizaciones();
                         limpia_partidas_cotizacion();
                         Desactiva_datagridview_partidas();
                         Desaparece_combo_cliente_nombre();
@@ -987,6 +995,7 @@ namespace Coset_Sistema_Produccion
                         Desaparece_boton_cancelar();
                         Desaparece_combo_codigo_cotizacion();
                         Activa_botones_operacion();
+                        Limpia_operaciones_cotizaciones();
                         limpia_partidas_cotizacion();
                         Desactiva_datagridview_partidas();
                         Desaparece_combo_cliente_nombre();
@@ -1004,6 +1013,11 @@ namespace Coset_Sistema_Produccion
                 }
             }
 
+        }
+
+        private void Limpia_operaciones_cotizaciones()
+        {
+            Operacio_cotizaciones = "";
         }
 
         private bool verifica_datos_partidas()
@@ -1087,6 +1101,8 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_informacion_cotizaciones_disponibles()
         {
+            Numero_partidas_disponibles = 0;
+            RenglonParaEliminardatagridview = 0;
             cotizaciones_disponibles = null;
             partidas_cotizacion_disponibles = null;
             clientes_disponibles = null;
@@ -1308,13 +1324,14 @@ namespace Coset_Sistema_Produccion
 
         private void buttonEliminarCliente_Click(object sender, EventArgs e)
         {
+            Operacio_cotizaciones = "Eliminar";
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_cotizacion();
             Aparece_combo_codigo_cotizacion();
             Obtener_datos_cotizaciones_disponibles_base_datos();
             Rellena_combo_codigo_cotizacion();
             Aparece_boton_cancelar_operacio();
-            Operacio_cotizaciones = "Eliminar";
+            
         }
 
         private bool Elimina_informacion_clienete_en_base_de_datos()
@@ -1337,7 +1354,6 @@ namespace Coset_Sistema_Produccion
                 connection.Close();
                 return false;
             }
-
             connection.Close();
             return true;
         }
@@ -1388,16 +1404,18 @@ namespace Coset_Sistema_Produccion
 
         private void buttonAgregaContactosCliente_Click(object sender, EventArgs e)
         {
-            Agrega_contactos_clientes();
+            Agrega_partida_cotizaciones();
         }
 
-        private void Agrega_contactos_clientes()
+        private void Agrega_partida_cotizaciones()
         {
+            Operacio_cotizaciones = "Agregar Partidas";
+            Numero_partidas_disponibles = dataGridViewPartidasCotizacion.RowCount;
             Desactiva_botones_operacion_contactos();
             limpia_partidas_cotizacion();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
-            Operacio_cotizaciones = "Agregar Partidas";
+            
 
         }
 
@@ -1433,12 +1451,16 @@ namespace Coset_Sistema_Produccion
             {
                 if (Elimina_informacion_partida_cotizacion_en_base_de_datos())
                 {
-                    Desaparece_boton_eliminar_base_de_datos();
-                    Activa_botones_operacion_contactos();
-                    limpia_partidas_cotizacion();
-                    Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoCotizaciones.Text);
-                    Rellena_cajas_informacion_de_partidas_cotizacion();
-                    limpia_texto_eliminar_contacto();
+                    if (Renumera_partidas_despues_eliminar())
+                    {
+                        Desaparece_boton_eliminar_base_de_datos();
+                        Activa_botones_operacion_contactos();
+                        limpia_partidas_cotizacion();
+                        Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoCotizaciones.Text);
+                        Rellena_cajas_informacion_de_partidas_cotizacion();
+                        limpia_texto_eliminar_contacto();
+                        Activa_datagridview_partidas_cotizaciones();
+                    }
                 }
             }
             
@@ -1469,7 +1491,7 @@ namespace Coset_Sistema_Produccion
                 connection.Close();
                 return false;
             }
-
+            dataGridViewPartidasCotizacion.Rows.Remove(dataGridViewPartidasCotizacion.Rows[RenglonParaEliminardatagridview]);
             connection.Close();
             return true;
         }
@@ -1490,6 +1512,7 @@ namespace Coset_Sistema_Produccion
             {
                 if (Elimina_informacion_clienete_en_base_de_datos())
                 {
+
                     Limpia_cajas_captura_despues_de_agregar_cotizacion();
                     Limpia_combo_codigo_cotizacion();
                     Desactiva_cajas_captura_despues_de_agregar_cotizacion();
@@ -1501,8 +1524,41 @@ namespace Coset_Sistema_Produccion
                     Desactiva_datagridview_partidas();
                     Elimina_informacion_cotizaciones_disponibles();
                     Aparce_caja_codigo_cliente();
+
                 }
             }
+        }
+
+        private bool Renumera_partidas_despues_eliminar()
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria());
+            try
+            {
+                connection.Open();
+                for (int partidas = 0; partidas < dataGridViewPartidasCotizacion.RowCount; partidas++)
+                {
+
+                    Partidas_cotizacion_modificar.Numero = (partidas + 1).ToString();
+                    Partidas_cotizacion_modificar.Codigo = Convert.ToInt32(dataGridViewPartidasCotizacion[(int)Campos_partidas.codigo, partidas].Value);
+                    MySqlCommand command = new MySqlCommand(Configura_cadena_comando_actualiza_numero_partida_cotizacion(Partidas_cotizacion_modificar), connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_actualiza_numero_partida_cotizacion(Partida_cotizacion partidas_cotizacion_modificar)
+        {
+            return "UPDATE partidas_cotizaciones set  numero_partida='" + partidas_cotizacion_modificar.Numero +
+                "' where codigo_partida='" + partidas_cotizacion_modificar.Codigo + "';";
         }
 
         private void Desaparece_boton_eliminar_base_de_datos()
@@ -1510,30 +1566,33 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = false;
         }
 
-        private void buttonEliminarContacto_Click(object sender, EventArgs e)
+        private void buttonEliminarPartida_Click(object sender, EventArgs e)
         {
-            Elimina_Contacto_cliente();
+            Elimina_partidas_cotizacion();
         }
 
-        private void Elimina_Contacto_cliente()
+        private void Elimina_partidas_cotizacion()
         {
-            Desactiva_botones_operacion_contactos();
-            No_aceptar_agregar_contactos_cotizacion();
             Operacio_cotizaciones = "Eliminar partida";
+            Desactiva_botones_operacion_contactos();
+            Activa_datagridview_partidas_cotizaciones();
+            No_aceptar_agregar_contactos_cotizacion();
+            
         }
 
         private void buttonAgregarContacto_Click(object sender, EventArgs e)
         {
-            Agrega_contactos_clientes();
+            Agrega_partida_cotizaciones();
         }
 
-        private void buttonContactos_Click(object sender, EventArgs e)
+        private void buttonPartidas_Click(object sender, EventArgs e)
         {
             Prtidas_operaciones();
         }
 
         private void Prtidas_operaciones()
         {
+            Operacio_cotizaciones = "Operaciones Patidas";
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_cotizacion();
             Aparece_combo_codigo_cotizacion();
@@ -1543,7 +1602,7 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_contactos_cotizacion();
             Activa_dataview_partidas_cotizacion();
-            Operacio_cotizaciones = "Operaciones Patidas";
+            
         }
 
         private void Aparece_boton_eliminar_partidas()
@@ -1562,7 +1621,8 @@ namespace Coset_Sistema_Produccion
             if (Operacio_cotizaciones == "Eliminar partida")
             {
                 Aparece_boton_eliminar_datos_en_base_de_datos();
-                RenglonParaEliminar=dataGridViewPartidasCotizacion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+                RenglonParaEliminardatagridview = e.RowIndex;
+                RenglonParaEliminar =dataGridViewPartidasCotizacion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
             }
            
         }
@@ -1580,7 +1640,11 @@ namespace Coset_Sistema_Produccion
                         datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
                         dataGridViewPartidasCotizacion[e.ColumnIndex + 1, e.RowIndex].Value =
                             (Convert.ToSingle(dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value.ToString()) *
-                            ((Convert.ToSingle(datos_generales.Iva) / 100.0) + 1)).ToString("###.##");
+                            ((Convert.ToSingle(datos_generales.Iva) / 100.0) + 1)).ToString("0.00");
+                        dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value =
+                            (Convert.ToSingle(dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value.ToString()) *
+                            1).ToString("0.00");
+                        dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
                     }
                     catch
                     {
@@ -1590,7 +1654,48 @@ namespace Coset_Sistema_Produccion
                     }
 
                 }
-              
+                else if (dataGridViewPartidasCotizacion.CurrentCell.ColumnIndex == (int)Campos_partidas.cantidad)
+                {
+                    try
+                    {
+                        /*Valida Numeros en la caja cantidad*/
+                        Convert.ToSingle(dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex]
+                            .Value.ToString());
+                        dataGridViewPartidasCotizacion[(int)Campos_partidas.cantidad, e.RowIndex]
+                            .Style.BackColor = Color.White;
+
+                    }
+                    catch
+                    {
+                        /* en caso de error limpia la cantidad*/
+                        dataGridViewPartidasCotizacion[(int)Campos_partidas.cantidad, e.RowIndex].Value = "";
+                    }
+                }
+                else if (dataGridViewPartidasCotizacion.CurrentCell.ColumnIndex == (int)Campos_partidas.parte)
+                {
+                    if (dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value != null)
+                    {
+                        if (dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                        {
+                            dataGridViewPartidasCotizacion[(int)Campos_partidas.parte, e.RowIndex]
+                            .Style.BackColor = Color.White;
+                        }
+                    }
+
+                }
+                else if (dataGridViewPartidasCotizacion.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
+                {
+                    if (dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value != null)
+                    {
+                        if (dataGridViewPartidasCotizacion[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                        {
+                            dataGridViewPartidasCotizacion[(int)Campos_partidas.descripcion, e.RowIndex]
+                            .Style.BackColor = Color.White;
+                        }
+                    }
+
+                }
+
             }
         }
 
@@ -1922,22 +2027,35 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasCotizacion_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            int numero_partida = 1;
-            for(int renglones = 0; renglones<dataGridViewPartidasCotizacion.RowCount-1; renglones++)
+
+            if (Operacio_cotizaciones == "Agregar" || Operacio_cotizaciones == "Agregar Partidas")
             {
-                dataGridViewPartidasCotizacion["Numero_partida", renglones].Value = numero_partida.ToString();
-                numero_partida++;
+                dataGridViewPartidasCotizacion["Cantidad_partida", 
+                    e.RowIndex].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasCotizacion["Parte_partida",
+                    e.RowIndex].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasCotizacion["Descrpcion_partida",
+                    e.RowIndex].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasCotizacion["Precio_partida",
+                    e.RowIndex].Style.BackColor = Color.Yellow;
+            }
+
+            if (Operacio_cotizaciones == "Agregar")
+            {
+                dataGridViewPartidasCotizacion["Numero_partida", e.RowIndex].
+                    Value = dataGridViewPartidasCotizacion.RowCount;
+            }
+            else if (Operacio_cotizaciones == "Agregar Partidas")
+            {
+                Numero_partidas_disponibles++;
+                dataGridViewPartidasCotizacion["Numero_partida", e.RowIndex].
+                    Value = Numero_partidas_disponibles;
             }
         }
 
         private void dataGridViewPartidasCotizacion_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            int numero_partida = 1;
-            for (int renglones = 0; renglones < dataGridViewPartidasCotizacion.RowCount - 1; renglones++)
-            {
-                dataGridViewPartidasCotizacion["Numero_partida", renglones].Value = numero_partida.ToString();
-                numero_partida++;
-            }
+            
         }
     }
 }

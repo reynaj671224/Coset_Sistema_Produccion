@@ -357,7 +357,7 @@
             this.buttonPartidas.Text = "Partidas";
             this.buttonPartidas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonPartidas.UseVisualStyleBackColor = true;
-            this.buttonPartidas.Click += new System.EventHandler(this.buttonContactos_Click);
+            this.buttonPartidas.Click += new System.EventHandler(this.buttonPartidas_Click);
             // 
             // buttonEliminarPartida
             // 
@@ -372,7 +372,7 @@
             this.buttonEliminarPartida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEliminarPartida.UseVisualStyleBackColor = true;
             this.buttonEliminarPartida.Visible = false;
-            this.buttonEliminarPartida.Click += new System.EventHandler(this.buttonEliminarContacto_Click);
+            this.buttonEliminarPartida.Click += new System.EventHandler(this.buttonEliminarPartida_Click);
             // 
             // buttonAgregarPartida
             // 

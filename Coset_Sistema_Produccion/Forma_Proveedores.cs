@@ -399,6 +399,7 @@ namespace Coset_Sistema_Produccion
         private void Agrega_clientes()
         {
             Asigna_codigo_proveedor_foilio_disponible();
+            Asigna_nuevo_folio();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_proveedor();
             Acepta_datagridview_agregar_renglones();
@@ -652,7 +653,6 @@ namespace Coset_Sistema_Produccion
                         Activa_botones_operacion();
                         limpia_contactos_proveedor();
                         Desactiva_datagridview_contactos();
-                        Asigna_nuevo_folio();
                         Elimina_informacion_proveedores_disponibles();
                     }
                 }
@@ -681,7 +681,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_proveedores.Substring(1, folio_disponible.Folio_proveedores.Length - 1));
             numero_folio++;
-            folio_disponible.Folio_proveedores = folio_disponible.Folio_proveedores.Substring(0, 1) + numero_folio.ToString();
+            folio_disponible.Folio_proveedores = folio_disponible.Folio_proveedores.Substring(0, 1) + numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);

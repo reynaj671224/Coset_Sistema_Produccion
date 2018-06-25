@@ -52,7 +52,7 @@ namespace Coset_Sistema_Produccion
         public word.Document Documento = null;
         public int Numero_renglones_rellenos_requisicion=0;
         private bool eventHookedUp;
-        public int Longitud_cadena_busqueda = 3;
+        public int Longitud_cadena_busqueda = 4;
         public int Numero_partidas_disponibles = 0;
         public enum Campos_partidas
         {
@@ -1180,7 +1180,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_requisiciones.Substring(2, folio_disponible.Folio_requisiciones.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_requisiciones = folio_disponible.Folio_requisiciones.Substring(0, 2) +numero_folio.ToString();
+            folio_disponible.Folio_requisiciones = folio_disponible.Folio_requisiciones.Substring(0, 2) +numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);
@@ -1199,7 +1199,6 @@ namespace Coset_Sistema_Produccion
             requisiciones_disponibles = null;
             Usuarios_administrativos = null;
             Usuarios_requisitores = null;
-
             GC.Collect();
         }
 

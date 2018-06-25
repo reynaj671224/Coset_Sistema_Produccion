@@ -70,7 +70,7 @@ namespace Coset_Sistema_Produccion
         {
             return "UPDATE control_folio set  foilio_clientes='" + control_folio.Folio_clientes +
                "',folio_proveedores='" + control_folio.Folio_proveedores +
-               "',folio_ot='" + control_folio.Folio_oc +
+               "',folio_ot='" + control_folio.Folio_ot +
                "',folio_cotizaciones='" + control_folio.Folio_cotizaciones +
                "',foilio_oc='" + control_folio.Folio_oc +
                "',folio_proyectos='" + control_folio.Folio_proyectos +

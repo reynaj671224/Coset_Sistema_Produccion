@@ -312,6 +312,7 @@
             this.dataGridViewDibujosProyecto.TabIndex = 48;
             this.dataGridViewDibujosProyecto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellClick);
             this.dataGridViewDibujosProyecto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellEndEdit);
+            this.dataGridViewDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
             // 
             // Codigo_proyecto
             // 

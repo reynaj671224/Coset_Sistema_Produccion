@@ -47,6 +47,7 @@ namespace Coset_Sistema_Produccion
         private void Agrega_proceso()
         {
             Asigna_codigo_proceso_foilio_disponible();
+            Asigna_nuevo_folio_proceso();
             Desactiva_botones_operacion();
             Aparece_caja_codigo_proceso();
             Desaparece_combo_nombre_proceso();
@@ -158,7 +159,6 @@ namespace Coset_Sistema_Produccion
                 Desaparece_combo_nombre_proceso();
                 Activa_botones_operacion();
                 Aparece_caja_nombre_empleado();
-                Asigna_nuevo_folio_proceso();
                 Elimina_informacion_usuarios_disponibles();
             }
      
@@ -168,7 +168,7 @@ namespace Coset_Sistema_Produccion
         {
             int numero_folio = Convert.ToInt32(folio_disponible.Folio_procesos.Substring(2, folio_disponible.Folio_procesos.Length - 2));
             numero_folio++;
-            folio_disponible.Folio_procesos = folio_disponible.Folio_procesos.Substring(0, 2) + numero_folio.ToString();
+            folio_disponible.Folio_procesos = folio_disponible.Folio_procesos.Substring(0, 2) + numero_folio.ToString("00000");
             string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
             if (respuesta != "")
                 MessageBox.Show(folio_disponible.error);

@@ -61,7 +61,7 @@ namespace Coset_Sistema_Produccion
         public string nombre_archivo_word = "";
         public word.Application application = null;
         public word.Document Documento = null;
-        public int Longitud_cadena_busqueda = 3;
+        public int Longitud_cadena_busqueda = 4;
         public Material Visualizar_material = new Material();
         public Material Agregar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
