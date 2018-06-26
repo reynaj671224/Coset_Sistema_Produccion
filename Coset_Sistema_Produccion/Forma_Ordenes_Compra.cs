@@ -2893,8 +2893,6 @@ namespace Coset_Sistema_Produccion
                             Cells["Precio_partida"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
                             Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
-                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
-                            Cells["Proyecto_compra"].Style.BackColor = Color.Yellow;
 
                 if (Operacio_orden_compra == "Agregar")
                 {
