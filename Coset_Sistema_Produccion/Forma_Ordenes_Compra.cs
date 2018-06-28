@@ -70,7 +70,7 @@ namespace Coset_Sistema_Produccion
         public int RenglonParaEliminardatagridview = 0;
         public enum Campos_orden_compra
         {
-            codigo, partida, requisicion, cantidad, parte,descripcion,unidad_medida,
+            codigo, partida, material, cantidad, parte,descripcion,unidad_medida,
             proyecto,precio, total
         };
 
@@ -468,7 +468,7 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(), 
                             partidas_ordenes_compra_disponibles[partidas].Partida,
-                            partidas_ordenes_compra_disponibles[partidas].Requisicion, 
+                            partidas_ordenes_compra_disponibles[partidas].Material, 
                             partidas_ordenes_compra_disponibles[partidas].Cantidad,  
                             partidas_ordenes_compra_disponibles[partidas].Parte,
                             partidas_ordenes_compra_disponibles[partidas].Descripcion,
@@ -518,7 +518,7 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(),
                             partidas_ordenes_compra_disponibles[partidas].Partida,
-                            partidas_ordenes_compra_disponibles[partidas].Requisicion,
+                            partidas_ordenes_compra_disponibles[partidas].Material,
                             partidas_ordenes_compra_disponibles[partidas].Cantidad,
                             partidas_ordenes_compra_disponibles[partidas].Parte,
                             partidas_ordenes_compra_disponibles[partidas].Descripcion,
@@ -1026,8 +1026,8 @@ namespace Coset_Sistema_Produccion
                         {
                             if (campo == (int)Campos_orden_compra.partida)
                                 Partida_orden_compra_agregar.Partida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_orden_compra.requisicion)
-                                Partida_orden_compra_agregar.Requisicion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.material)
+                                Partida_orden_compra_agregar.Material = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.cantidad)
                                 Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.parte)
@@ -1219,8 +1219,8 @@ namespace Coset_Sistema_Produccion
                                 Partida_orden_compra_modificar.Codigo = Convert.ToInt32(dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
                             else if (campo == (int)Campos_orden_compra.partida)
                                 Partida_orden_compra_modificar.Partida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_orden_compra.requisicion)
-                                Partida_orden_compra_modificar.Requisicion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.material)
+                                Partida_orden_compra_modificar.Material = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.cantidad)
                                 Partida_orden_compra_modificar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_orden_compra.parte)
@@ -1264,7 +1264,7 @@ namespace Coset_Sistema_Produccion
         {
             return "UPDATE partidas_oredenes_compra set  codigo_orden_compra='" + comboBoxCodigoOrdenCompra.Text +
                 "',partida_compra='" + partidas_orden_compra.Partida +
-                "',requisicion_compra='" + partidas_orden_compra.Requisicion +
+                "',material_compra='" + partidas_orden_compra.Material +
                 "',cantidad_compra='" + partidas_orden_compra.Cantidad +
                 "',parte_compra='" + partidas_orden_compra.Parte +
                 "',descripcion_compra='" + partidas_orden_compra.Descripcion +
@@ -1325,7 +1325,7 @@ namespace Coset_Sistema_Produccion
             {
                 for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
                 {
-                    if (campo != (int)Campos_orden_compra.requisicion)
+                    if (campo != (int)Campos_orden_compra.material)
                     {
                         if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value == null)
                         {
@@ -1512,15 +1512,13 @@ namespace Coset_Sistema_Produccion
                 for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
                 {
                     for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
-                    {
-                        if (campo != (int)Campos_orden_compra.requisicion)
-                        {
+                    {    
                             if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value != null)
                             {
                                 if (campo == (int)Campos_orden_compra.partida)
                                     Partida_orden_compra_agregar.Partida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.requisicion)
-                                    Partida_orden_compra_agregar.Requisicion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_orden_compra.material)
+                                    Partida_orden_compra_agregar.Material = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                                 else if (campo == (int)Campos_orden_compra.cantidad)
                                     Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                                 else if (campo == (int)Campos_orden_compra.parte)
@@ -1542,7 +1540,6 @@ namespace Coset_Sistema_Produccion
                                 connection.Close();
                                 return false;
                             }
-                        }
                     }
                     Asigna_codigo_orden_compra_para_tipo_de_operacio();
                     MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra_agregar), connection);
@@ -1565,7 +1562,7 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_actualizar_en_base_de_datos_partidas_requisiciones(Partida_orden_compra partida_orden_compra_agregar)
         {
             return "UPDATE partidas_requisiciones set  orden_compra_asignada='" + partida_orden_compra_agregar.Codigo_orden+
-                "' where codigo_requisicion='" + partida_orden_compra_agregar.Requisicion + "' and numero_parte='" +
+                "' where codigo_requisicion='" + partida_orden_compra_agregar.Material + "' and numero_parte='" +
                 partida_orden_compra_agregar.Parte+"' ;";
         }
 
@@ -1580,10 +1577,10 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra partida_orden_compra)
         {
             return "INSERT INTO partidas_oredenes_compra(codigo_orden_compra,partida_compra," +
-                "cantidad_compra,parte_compra,descripcion_compra,unidad_medida,proyecto_compra,precio_unitario,total_compra) " +
+                "cantidad_compra,parte_compra,descripcion_compra,unidad_medida,proyecto_compra,precio_unitario,total_compra,material_compra) " +
                 "VALUES('" + partida_orden_compra.Codigo_orden + "','" + partida_orden_compra.Partida + "','" + partida_orden_compra.Cantidad + "','" + partida_orden_compra.Parte + "','" +
                 partida_orden_compra.Descripcion + "','" + partida_orden_compra.Unidad_medida + "','" + partida_orden_compra.Proyecto + "','" +
-                partida_orden_compra.precio_unitario + "','"+ partida_orden_compra.Total + "');";
+                partida_orden_compra.precio_unitario + "','"+ partida_orden_compra.Total + "','" + partida_orden_compra.Material + "');";
         }
         private bool Guarda_datos_orden_compra()
         {
@@ -1897,22 +1894,22 @@ namespace Coset_Sistema_Produccion
             if (MessageBox.Show("Esta Seguro de Eiliminar Esta Orden de Compra Incluyendo Todos sus partidas?",
                 "Eliminar Orden de Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (Modifica_requisiciones_orden_compra_asignada())
+                /*if (Modifica_requisiciones_orden_compra_asignada())
+                {*/
+                if (Elimina_informacion_orden_compra_en_base_de_datos())
                 {
-                    if (Elimina_informacion_orden_compra_en_base_de_datos())
-                    {
-                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                        Desaparece_boton_eliminar_base_de_datos();
-                        Desaparece_boton_cancelar();
-                        Desaparece_combo_codigo_cotizacion();
-                        Activa_botones_operacion();
-                        limpia_partidas_ordenes_compra();
-                        Desactiva_datagridview_partidas();
-                        Elimina_informacion_orden_compra_disponibles();
-                        Aparce_caja_codigo_cliente();
-                    }
+                    Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                    Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                    Desaparece_boton_eliminar_base_de_datos();
+                    Desaparece_boton_cancelar();
+                    Desaparece_combo_codigo_cotizacion();
+                    Activa_botones_operacion();
+                    limpia_partidas_ordenes_compra();
+                    Desactiva_datagridview_partidas();
+                    Elimina_informacion_orden_compra_disponibles();
+                    Aparce_caja_codigo_cliente();
                 }
+                /*}*/
             }
         }
 
@@ -2406,7 +2403,7 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                if (e.ColumnIndex == (int)Campos_orden_compra.requisicion && e.RowIndex >= 0) //check if combobox column
+                if (e.ColumnIndex == (int)Campos_orden_compra.material && e.RowIndex >= 0) //check if combobox column
                 {
                     //if (dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                     //{
@@ -2609,7 +2606,7 @@ namespace Coset_Sistema_Produccion
             {
                 Aparece_boton_eliminar_datos_en_base_de_datos();
                 RenglonParaEliminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
-                Requisicion_eliminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Requisicion_compra"].Value.ToString();
+                Requisicion_eliminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Material_compra"].Value.ToString();
                 Descripcion_eleiminar = dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].Cells["Descrpcion_partida"].Value.ToString();
                 RenglonParaEliminardatagridview = e.RowIndex;
             }
@@ -2825,6 +2822,8 @@ namespace Coset_Sistema_Produccion
                 material_seleccionado_data_view.Descripcion;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.unidad_medida, rowIndex].Value =
                 material_seleccionado_data_view.Unidad_medida;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material,rowIndex].Value =
+                material_seleccionado_data_view.Codigo;
             dataGridViewPartidasOrdenCompra.Update();
             
         }

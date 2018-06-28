@@ -783,13 +783,6 @@ namespace Coset_Sistema_Produccion
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly ||
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                         {
-                            if (campo == (int)Campos_partidas.proyecto)
-                            {
-                                if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null)
-                                {
-                                    dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value = "";
-                                }
-                            }
                             if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value != null)
                             {
                                 /*estaba detectando blancos*/
@@ -897,16 +890,15 @@ namespace Coset_Sistema_Produccion
                     if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly ||
                         (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                     {
-                        if (campo != (int)Campos_partidas.proyecto)
+
+                        if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null ||
+                            dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString() == "?")
                         {
-                            if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value == null ||
-                                dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value.ToString() == "?")
-                            {
-                                MessageBox.Show("campo en blanco o informacion faltante (?)", "Agregar Requisicion",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                return false;
-                            }
+                            MessageBox.Show("campo en blanco o informacion faltante (?)", "Agregar Requisicion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
                         }
+
 
                     }
                 }
@@ -1056,13 +1048,6 @@ namespace Coset_Sistema_Produccion
                         if (!dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly || 
                             (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].ReadOnly && campo == (int)Campos_partidas.partida))
                         {
-                            if (campo == (int)Campos_partidas.proyecto)
-                            {
-                                if(dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value== null)
-                                {
-                                    dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value = "";
-                                }
-                            }
                             if (dataGridViewPartidasRequisiciones.Rows[partidas].Cells[campo].Value != null)
                             {
                                 if (campo == (int)Campos_partidas.partida)
@@ -1579,7 +1564,71 @@ namespace Coset_Sistema_Produccion
                     }
 
                 }
-                
+                else if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.numero)
+                {
+                    try
+                    {
+                        /*Valida Numeros en la caja cantidad*/
+                        if(dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value != null)
+                        {
+                            if (dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                            {
+                                dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, e.RowIndex].Style.BackColor = Color.White;
+                            }
+                        }
+                        
+                    }
+                    catch
+                    {
+                        /* en caso de error limpia la cantidad*/
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, e.RowIndex].Value = "";
+                    }
+
+                }
+                else if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
+                {
+                    try
+                    {
+                        /*Valida Numeros en la caja cantidad*/
+                        if (dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value != null)
+                        {
+                            if (dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                            {
+                                dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, e.RowIndex].Style.BackColor = Color.White;
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        /* en caso de error limpia la cantidad*/
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, e.RowIndex].Value = "";
+                    }
+
+                }
+                else if (dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.uidad_medida)
+                {
+                    try
+                    {
+                        /*Valida Numeros en la caja cantidad*/
+                        if (dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value != null)
+                        {
+                            if (dataGridViewPartidasRequisiciones[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
+                            {
+                                dataGridViewPartidasRequisiciones[(int)Campos_partidas.uidad_medida, e.RowIndex].Style.BackColor = Color.White;
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        /* en caso de error limpia la cantidad*/
+                        dataGridViewPartidasRequisiciones[(int)Campos_partidas.uidad_medida, e.RowIndex].Value = "";
+                    }
+
+                }
+
+
             }
         }
 
@@ -1976,7 +2025,7 @@ namespace Coset_Sistema_Produccion
             Rellena_combo_codigo_requisiciones();
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_partidas_requisiciones();
-            Desactiva_Campos_partida_requisicion();
+            //Desactiva_Campos_partida_requisicion();
             Activa_dataview_partidas_requisiciones();
             Activa_columna_proveedores_ser_mododificada();
             Operacio_requisiciones = "Modificar";
@@ -2159,7 +2208,9 @@ namespace Coset_Sistema_Produccion
                             Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
                             Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
-            if(Operacio_requisiciones == "Agregar")
+                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
+                            Cells["Unidad_medida_partida"].Style.BackColor = Color.Yellow;
+                if (Operacio_requisiciones == "Agregar")
                 {
                     dataGridViewPartidasRequisiciones["Numero_partida", e.RowIndex].
                         Value = dataGridViewPartidasRequisiciones.RowCount;
@@ -2370,31 +2421,32 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasRequisiciones_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.CellStyle.BackColor = Color.White;
-            if (this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.numero ||
-                this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
-            {
-                if (!this.eventHookedUp)
-                {
-                    e.Control.TextChanged += this.TextChange;
-                    this.eventHookedUp = true;
-                }
-            }
-            else
-            {
-                e.Control.TextChanged -= this.TextChange;
-                this.eventHookedUp = false;
+            /*Este evento controla el cambio de gtexto de las celdas del DatGridView*/
+            //e.CellStyle.BackColor = Color.White;
+            //if (this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.numero ||
+            //    this.dataGridViewPartidasRequisiciones.CurrentCell.ColumnIndex == (int)Campos_partidas.descripcion)
+            //{
+            //    if (!this.eventHookedUp)
+            //    {
+            //        e.Control.TextChanged += this.TextChange;
+            //        this.eventHookedUp = true;
+            //    }
+            //}
+            //else
+            //{
+            //    e.Control.TextChanged -= this.TextChange;
+            //    this.eventHookedUp = false;
                 
-            }
+            //}
         }
 
         private void TextChange(object sender, EventArgs e)
         {
-            dataGridViewPartidasRequisiciones.CurrentCell.Style.BackColor = Color.White;
-            if (dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString().Length == Longitud_cadena_busqueda)
-            {
-                Secuencia_buscar_mostrar_materiales();
-            }
+            //dataGridViewPartidasRequisiciones.CurrentCell.Style.BackColor = Color.White;
+            //if (dataGridViewPartidasRequisiciones.CurrentCell.EditedFormattedValue.ToString().Length == Longitud_cadena_busqueda)
+            //{
+            //    Secuencia_buscar_mostrar_materiales();
+            //}
         }
 
         private void Secuencia_buscar_mostrar_materiales()

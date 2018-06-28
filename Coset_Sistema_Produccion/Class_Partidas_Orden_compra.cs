@@ -25,7 +25,7 @@ namespace Coset_Sistema_Produccion
                         Codigo = (int)mySqlDataReader["codigo_partida"],
                         Codigo_orden = mySqlDataReader["codigo_orden_compra"].ToString(),
                         Partida = mySqlDataReader["partida_compra"].ToString(),
-                        Requisicion = mySqlDataReader["requisicion_compra"].ToString(),
+                        Material = mySqlDataReader["material_compra"].ToString(),
                         Cantidad = mySqlDataReader["cantidad_compra"].ToString(),
                         Parte = mySqlDataReader["parte_compra"].ToString(),
                         Descripcion = mySqlDataReader["descripcion_compra"].ToString(),
@@ -61,7 +61,7 @@ namespace Coset_Sistema_Produccion
         public int Codigo = 0;
         public string Codigo_orden = "";
         public string Partida = "";
-        public string Requisicion = "";
+        public string Material = "";
         public string Cantidad = "";
         public string Parte = "";
         public string Descripcion = "";

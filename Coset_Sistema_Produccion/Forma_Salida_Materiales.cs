@@ -714,17 +714,17 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_actualizar_en_base_de_datos_partidas_requisiciones(Partida_orden_compra partida_orden_compra_agregar)
         {
             return "UPDATE partidas_requisiciones set  orden_compra_asignada='" + partida_orden_compra_agregar.Codigo_orden+
-                "' where codigo_requisicion='" + partida_orden_compra_agregar.Requisicion + "' and numero_parte='" +
+                "' where codigo_requisicion='" + partida_orden_compra_agregar.Material + "' and numero_parte='" +
                 partida_orden_compra_agregar.Parte+"' ;";
         }
 
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra partida_orden_compra)
         {
-            return "INSERT INTO partidas_oredenes_compra(codigo_orden_compra,partida_compra, requisicion_compra," +
+            return "INSERT INTO partidas_oredenes_compra(codigo_orden_compra,partida_compra, material_compra," +
                 "cantidad_compra,parte_compra,descripcion_compra,unidad_medida,proyecto_compra,precio_unitario,total_compra) " +
                 "VALUES('" + partida_orden_compra.Codigo_orden + "','" + partida_orden_compra.Partida + "','" +
-                partida_orden_compra.Requisicion + "','" + partida_orden_compra.Cantidad + "','" + partida_orden_compra.Parte + "','" +
+                partida_orden_compra.Material + "','" + partida_orden_compra.Cantidad + "','" + partida_orden_compra.Parte + "','" +
                 partida_orden_compra.Descripcion + "','" + partida_orden_compra.Unidad_medida + "','" + partida_orden_compra.Proyecto + "','" +
                 partida_orden_compra.precio_unitario + "','"+ partida_orden_compra.Total + "');";
         }
