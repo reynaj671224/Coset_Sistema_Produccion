@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
+using Microsoft.Office.Core;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace Coset_Sistema_Produccion
 {
@@ -22,6 +25,8 @@ namespace Coset_Sistema_Produccion
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Material Material_seleccionado_data_view = new Material();
         public string agregar_seleccion = "";
+        public Excel.Application oXL = null;
+        public Excel._Worksheet oSheet = null;
         public Forma_Materiales_Inventarios()
         {
             InitializeComponent();
@@ -39,7 +44,7 @@ namespace Coset_Sistema_Produccion
             foreach (Material material in Materiales_disponibles_busqueda)
             {
                 dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
-                    material.Descripcion, material.Minimo, material.Cantidad, material.Maximo,material.Marca, material.Unidad_medida, material.foto);
+                    material.Descripcion, material.Minimo, material.Maximo, material.Cantidad, material.Marca, material.Unidad_medida, material.foto);
             }
             Activa_datagrid_materiales();
             
@@ -98,8 +103,70 @@ namespace Coset_Sistema_Produccion
         private void buttonRegresarNoAgregar_Click(object sender, EventArgs e)
         {
             Materiales_disponibles_busqueda = null;
+            Close_Excel();
+            Termina_applicacion();
             this.Close();
             GC.Collect();
+        }
+
+        private void buttonExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Start Excel and get Application object.
+                oXL = new Excel.Application();
+                oXL.Visible = true;
+                oSheet = oXL.ActiveSheet;
+                Imprime_titiulos_excel();
+
+                for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
+                {
+                    for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
+                    {
+                        oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                    }
+                }
+
+                oSheet.Cells.EntireColumn.AutoFit();
+            }
+            catch
+            {
+                MessageBox.Show("Excel No instalado");
+            }
+
+
+        }
+
+        private void Imprime_titiulos_excel()
+        {
+            oSheet.Cells[1, 1] = "Codigo Material";
+            oSheet.Cells[1, 2] = "Codigo Proveedor";
+            oSheet.Cells[1, 3] = "Descripcion";
+            oSheet.Cells[1, 4] = "Minimo";
+            oSheet.Cells[1, 5] = "Maximo";
+            oSheet.Cells[1, 6] = "Cantidad";
+            oSheet.Cells[1, 7] = "Marca";
+            oSheet.Cells[1, 8] = "Unidad Medida";
+
+        }
+
+        private void Termina_applicacion()
+        {
+            if (oXL != null)
+            {
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(oXL);
+            }
+        }
+
+        private void Close_Excel()
+        {
+            if (oXL != null)
+            {
+                oXL.Quit();
+                oXL = null;
+                oSheet = null;
+            }
+
         }
     }
 }

@@ -33,6 +33,45 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_materiales.Add(new Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_materiales;
+        }
+
+        public List<Material> Adquiere_materiales_MaxMIn_en_base_datos()
+        {
+            List<Material> Material_existente_disponibles_materiales = new List<Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_max_min_material(), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_materiales.Add(new Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor"].ToString(),
+                        Descripcion = mySqlDataReader["material_descripcion"].ToString(),
+                        Unidad_medida = mySqlDataReader["material_unidad_medida"].ToString(),
+                        Marca = mySqlDataReader["material_marca"].ToString(),
+                        Ubicacion = mySqlDataReader["material_ubicacion"].ToString(),
+                        Cantidad = mySqlDataReader["material_cantidad"].ToString(),
+                        Minimo = mySqlDataReader["material_minimo"].ToString(),
+                        Maximo = mySqlDataReader["material_maximo"].ToString(),
+                        foto = mySqlDataReader["material_foto"].ToString(),
+                        precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -52,7 +91,7 @@ namespace Coset_Sistema_Produccion
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_material_codigo_proveedor_descripcion(material), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_material_codigo_material(material), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
@@ -70,6 +109,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -83,13 +123,17 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_materiales;
         }
 
-        private string Commando_leer_Mysql_material_codigo_proveedor_descripcion(Material material)
+        private string Commando_leer_Mysql_material_codigo_material(Material material)
         {
-            return "SELECT * FROM materiales WHERE codigo_proveedor = '" + material.Codigo_proveedor +
-                 "' AND  material_descripcion ='" + material.Descripcion + "';";
+            return "SELECT * FROM materiales WHERE codigo_material = '" + material.Codigo +"';";
         }
 
         private string Commando_leer_Mysql_inventarios_material()
+        {
+            return "SELECT * FROM materiales";
+        }
+
+        private string Commando_leer_Mysql_max_min_material()
         {
             return "SELECT * FROM materiales WHERE (material_cantidad < material_minimo and material_minimo !=0) or (material_cantidad > material_maximo and material_maximo!=0)";
         }
@@ -118,6 +162,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -155,6 +200,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -233,6 +279,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -270,7 +317,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
-
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
                     });
                 }
             }
@@ -307,7 +354,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
-
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -345,6 +392,7 @@ namespace Coset_Sistema_Produccion
                         Maximo = mySqlDataReader["material_maximo"].ToString(),
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
+                        divisa = mySqlDataReader["material_divisa"].ToString(),
 
                     });
                 }
@@ -368,16 +416,19 @@ namespace Coset_Sistema_Produccion
         {
             if(material.Codigo_proveedor == "~")
             {
-                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%';";
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%'" +
+                    "AND material_divisa ='" + material.divisa + "';";
             }
             else if(material.Descripcion == "~")
             {
-                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%';";
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%'" +
+                    "AND material_divisa ='" + material.divisa + ";";
             }
             else 
             {
                 return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
-                 "%' AND  material_descripcion LIKE '%" + material.Descripcion + "%';";
+                 "%' AND  material_descripcion LIKE '%" + material.Descripcion + "%'" +
+                 "AND material_divisa ='" + material.divisa + ";";
             }
         }
 
@@ -442,11 +493,11 @@ namespace Coset_Sistema_Produccion
         {
             return "INSERT INTO materiales(codigo_material, codigo_proveedor,material_descripcion," +
                     "material_unidad_medida,material_marca,material_ubicacion,material_cantidad,material_maximo,material_minimo," +
-                    "material_foto,material_precio) " +
+                    "material_foto,material_precio,material_divisa) " +
                     "VALUES('" + material.Codigo + "','" + material.Codigo_proveedor + "','" +
                     material.Descripcion + "','" + material.Unidad_medida + "','" + material.Marca + "','" +
                     material.Ubicacion + "','" + material.Cantidad + "','" + material.Maximo + "','" +
-                    material.Minimo + "','" + material.foto + "','" + material.precio + "');";
+                    material.Minimo + "','" + material.foto + "','" + material.precio + "','" + material.divisa + "');";
         }
 
         private string Commando_leer_Mysql_busqueda_material(Material material)
@@ -566,6 +617,7 @@ namespace Coset_Sistema_Produccion
               "',material_minimo='" + Actualiza_material.Minimo +
               "',material_foto='" + Actualiza_material.foto +
               "',material_precio='" + Actualiza_material.precio +
+              "',material_divisa='" + Actualiza_material.divisa +
               "' where codigo_material='" + Actualiza_material.Codigo + "';";
         }
     }
@@ -582,6 +634,7 @@ namespace Coset_Sistema_Produccion
         public string Minimo = "";
         public string foto = "";
         public string precio = "";
+        public string divisa = "";
         public string error = "";
         
 

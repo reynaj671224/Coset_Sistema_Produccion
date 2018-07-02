@@ -62,7 +62,7 @@ namespace Coset_Sistema_Produccion
         public enum Campos_entrada_materiales_agregar
         {
             codigo, codigo_material, codigo_proveedor, descripcion, cantidad_entrada,
-            unidades_entrada, total_unidades_oc, precio,
+            unidades_entrada, total_unidades_oc, precio, divisa,
         };
 
         public string Operacio_entrada_materiales = "";
@@ -284,7 +284,7 @@ namespace Coset_Sistema_Produccion
 
                     dataGridViewPartidasEntradaMaterialesEntrada.Rows.Add(partida_orden_compra.Codigo.ToString(), Material_disponible_entrada_materiales.Codigo,
                         Material_disponible_entrada_materiales.Codigo_proveedor, partida_orden_compra.Descripcion, "",
-                        Calculo_unidades_entrdas(), partida_orden_compra.Cantidad, Material_disponible_entrada_materiales.precio);
+                        Calculo_unidades_entrdas(), partida_orden_compra.Cantidad, partida_orden_compra.precio_unitario, Material_disponible_entrada_materiales.divisa);
                     dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_unidades",
                         Row_material].Style.BackColor = Color.Yellow;
                     Row_material++;
@@ -686,19 +686,22 @@ namespace Coset_Sistema_Produccion
             string respuesta = "";
             for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count - 1; partidas++)
             {
-                Busqueda_material.Descripcion = dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();
-                Busqueda_material.Codigo_proveedor = dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.codigo_proveedor, partidas].Value.ToString();
+                /*Busqueda_material.Descripcion = dataGridViewPartidasEntradaMaterialesEntrada[
+                    (int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();*/
+                Busqueda_material.Codigo = dataGridViewPartidasEntradaMaterialesEntrada[
+                    (int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
                 Materiales_disponibles_busqueda = Class_Materiales.
                     Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Busqueda_material);
                 Visualizar_material = Materiales_disponibles_busqueda.Find(material_disponible =>
-                material_disponible.Codigo_proveedor.Contains(Busqueda_material.Codigo_proveedor));
+                material_disponible.Codigo.Contains(Busqueda_material.Codigo));
 
-                Visualizar_material.Cantidad = (Convert.ToInt32(
+               Visualizar_material.Cantidad = (Convert.ToInt32(
                Visualizar_material.Cantidad.ToString()) +
                            Convert.ToUInt32(dataGridViewPartidasEntradaMaterialesEntrada[
                     (int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString())).ToString();
+                Visualizar_material.precio =
+                    dataGridViewPartidasEntradaMaterialesEntrada[
+                    (int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
 
                 respuesta = Class_Materiales.Actualiza_base_datos_materiales(
                 Visualizar_material);
@@ -729,7 +732,9 @@ namespace Coset_Sistema_Produccion
                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
                 Insertar_entrada_materiales.Cantidad =
                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString();
-               if(!Insertar_datos_entrada_materiales_class())
+                Insertar_entrada_materiales.Divisa =
+                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.divisa, partidas].Value.ToString();
+                if (!Insertar_datos_entrada_materiales_class())
                 {
                     return false;
                 }
@@ -1213,7 +1218,7 @@ namespace Coset_Sistema_Produccion
                 {
                     dataGridViewPartidasEntradaMaterialesVisualizar.Rows.Add(material.Codigo.ToString(), material.Orden_compra,
                         material.Fecha, material.Codigo_material, material.Codigo_proveedor,
-                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad, material.Precio);
+                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad, material.Precio, material.Divisa);
                 }
                 catch (Exception ex)
                 {

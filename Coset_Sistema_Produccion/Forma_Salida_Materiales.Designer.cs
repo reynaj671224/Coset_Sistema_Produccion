@@ -258,9 +258,9 @@
             this.Descripcion,
             this.Cantidad});
             this.dataGridViewSalidassEntradaMateriales.Enabled = false;
-            this.dataGridViewSalidassEntradaMateriales.Location = new System.Drawing.Point(23, 347);
+            this.dataGridViewSalidassEntradaMateriales.Location = new System.Drawing.Point(25, 347);
             this.dataGridViewSalidassEntradaMateriales.Name = "dataGridViewSalidassEntradaMateriales";
-            this.dataGridViewSalidassEntradaMateriales.Size = new System.Drawing.Size(993, 202);
+            this.dataGridViewSalidassEntradaMateriales.Size = new System.Drawing.Size(996, 202);
             this.dataGridViewSalidassEntradaMateriales.TabIndex = 48;
             // 
             // Codigo_partida
@@ -318,6 +318,7 @@
             this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(263, 135);
             this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProyecto.Sorted = true;
             this.comboBoxCodigoProyecto.TabIndex = 49;
             this.comboBoxCodigoProyecto.Visible = false;
             this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoOrdenCompra_SelectedIndexChanged);
@@ -353,6 +354,7 @@
             this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 213);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxEmpleado.Sorted = true;
             this.comboBoxEmpleado.TabIndex = 62;
             this.comboBoxEmpleado.Visible = false;
             // 
@@ -408,9 +410,9 @@
             this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
             this.label3.Location = new System.Drawing.Point(539, 248);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 16);
+            this.label3.Size = new System.Drawing.Size(96, 16);
             this.label3.TabIndex = 82;
-            this.label3.Text = "Unidades Entrada";
+            this.label3.Text = "Unidades Salida";
             // 
             // buttonBusquedaBaseDatos
             // 

@@ -414,6 +414,11 @@ namespace Coset_Sistema_Produccion
             Modificar_material.Ubicacion = textBoxUbicacion.Text;
             Modificar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
             Modificar_material.precio = textBoxPrecio.Text;
+            if (radioButtonDolares.Checked)
+                Modificar_material.divisa = "Dolares";
+            else if (radioButtonPesos.Checked)
+                Modificar_material.divisa = "Pesos";
+
         }
 
         private bool Guarda_datos_agregar_Material()
@@ -430,7 +435,11 @@ namespace Coset_Sistema_Produccion
             Agregar_material.Marca = textBoxMarca.Text;
             Agregar_material.Ubicacion = textBoxUbicacion.Text;
             Agregar_material.precio = textBoxPrecio.Text;
-            
+            if (radioButtonDolares.Checked)
+                Agregar_material.divisa = "Dolares";
+            else if (radioButtonPesos.Checked)
+                Agregar_material.divisa = "Pesos";
+
             respuesta = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
             if (respuesta == "NO errores")
             {
@@ -805,6 +814,10 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Text = material_busqueda.Marca;
             textBoxUbicacion.Text = material_busqueda.Ubicacion;
             textBoxPrecio.Text = material_busqueda.precio;
+            if (material_busqueda.divisa == "Dolares")
+                radioButtonDolares.Select();
+            else if (material_busqueda.divisa == "Pesos")
+                radioButtonPesos.Select();
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)

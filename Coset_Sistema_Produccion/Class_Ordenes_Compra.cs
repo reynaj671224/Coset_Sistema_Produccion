@@ -25,7 +25,6 @@ namespace Coset_Sistema_Produccion
                         Codigo = mySqlDataReader["codigo_orden_compra"].ToString(),
                         Proveedor = mySqlDataReader["provedor_compra"].ToString(),
                         Tipo_moneda = mySqlDataReader["tipo_moneda_compra"].ToString(),
-                        Divisa = mySqlDataReader["divisa_compra"].ToString(),
                         Fecha = mySqlDataReader["fecha_orden"].ToString(),
                         Condicion_pago = mySqlDataReader["condicion_pago_compra"].ToString(),
                         Realizado = mySqlDataReader["realizado_compra"].ToString(),

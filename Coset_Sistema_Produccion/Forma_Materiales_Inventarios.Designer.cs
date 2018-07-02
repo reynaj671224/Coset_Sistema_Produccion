@@ -36,16 +36,17 @@
             this.pictureBoxMaterial = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridViewPartidasMaterialSeleccion = new System.Windows.Forms.DataGridView();
-            this.buttonRegresarNoAgregar = new System.Windows.Forms.Button();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Foto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonRegresarNoAgregar = new System.Windows.Forms.Button();
+            this.buttonExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasMaterialSeleccion)).BeginInit();
@@ -83,31 +84,17 @@
             this.Codigo_Proveedor,
             this.Descripcion,
             this.Minimo,
-            this.Cantidad,
             this.Maximo,
+            this.Cantidad,
             this.Marca,
             this.Unidad_medida_partida,
             this.Foto});
             this.dataGridViewPartidasMaterialSeleccion.Enabled = false;
             this.dataGridViewPartidasMaterialSeleccion.Location = new System.Drawing.Point(56, 290);
             this.dataGridViewPartidasMaterialSeleccion.Name = "dataGridViewPartidasMaterialSeleccion";
-            this.dataGridViewPartidasMaterialSeleccion.Size = new System.Drawing.Size(883, 259);
+            this.dataGridViewPartidasMaterialSeleccion.Size = new System.Drawing.Size(900, 259);
             this.dataGridViewPartidasMaterialSeleccion.TabIndex = 49;
             this.dataGridViewPartidasMaterialSeleccion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasMaterialSeleccion_CellClick);
-            // 
-            // buttonRegresarNoAgregar
-            // 
-            this.buttonRegresarNoAgregar.AutoSize = true;
-            this.buttonRegresarNoAgregar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRegresarNoAgregar.Image = ((System.Drawing.Image)(resources.GetObject("buttonRegresarNoAgregar.Image")));
-            this.buttonRegresarNoAgregar.Location = new System.Drawing.Point(957, 475);
-            this.buttonRegresarNoAgregar.Name = "buttonRegresarNoAgregar";
-            this.buttonRegresarNoAgregar.Size = new System.Drawing.Size(79, 74);
-            this.buttonRegresarNoAgregar.TabIndex = 55;
-            this.buttonRegresarNoAgregar.Text = "Regresar";
-            this.buttonRegresarNoAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonRegresarNoAgregar.UseVisualStyleBackColor = true;
-            this.buttonRegresarNoAgregar.Click += new System.EventHandler(this.buttonRegresarNoAgregar_Click);
             // 
             // Codigo_partida
             // 
@@ -133,17 +120,17 @@
             this.Minimo.Name = "Minimo";
             this.Minimo.Width = 50;
             // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 50;
-            // 
             // Maximo
             // 
             this.Maximo.HeaderText = "Maximo";
             this.Maximo.Name = "Maximo";
             this.Maximo.Width = 50;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Width = 50;
             // 
             // Marca
             // 
@@ -163,11 +150,40 @@
             this.Foto.Name = "Foto";
             this.Foto.Visible = false;
             // 
+            // buttonRegresarNoAgregar
+            // 
+            this.buttonRegresarNoAgregar.AutoSize = true;
+            this.buttonRegresarNoAgregar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRegresarNoAgregar.Image = ((System.Drawing.Image)(resources.GetObject("buttonRegresarNoAgregar.Image")));
+            this.buttonRegresarNoAgregar.Location = new System.Drawing.Point(962, 475);
+            this.buttonRegresarNoAgregar.Name = "buttonRegresarNoAgregar";
+            this.buttonRegresarNoAgregar.Size = new System.Drawing.Size(79, 74);
+            this.buttonRegresarNoAgregar.TabIndex = 55;
+            this.buttonRegresarNoAgregar.Text = "Regresar";
+            this.buttonRegresarNoAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonRegresarNoAgregar.UseVisualStyleBackColor = true;
+            this.buttonRegresarNoAgregar.Click += new System.EventHandler(this.buttonRegresarNoAgregar_Click);
+            // 
+            // buttonExcel
+            // 
+            this.buttonExcel.AutoSize = true;
+            this.buttonExcel.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExcel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExcel.Image")));
+            this.buttonExcel.Location = new System.Drawing.Point(962, 395);
+            this.buttonExcel.Name = "buttonExcel";
+            this.buttonExcel.Size = new System.Drawing.Size(79, 74);
+            this.buttonExcel.TabIndex = 57;
+            this.buttonExcel.Text = "Excel";
+            this.buttonExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonExcel.UseVisualStyleBackColor = true;
+            this.buttonExcel.Click += new System.EventHandler(this.buttonExcel_Click);
+            // 
             // Forma_Materiales_Inventarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 561);
+            this.Controls.Add(this.buttonExcel);
             this.Controls.Add(this.buttonRegresarNoAgregar);
             this.Controls.Add(this.dataGridViewPartidasMaterialSeleccion);
             this.Controls.Add(this.pictureBoxMaterial);
@@ -196,10 +212,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Minimo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Maximo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad_medida_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Foto;
+        private System.Windows.Forms.Button buttonExcel;
     }
 }

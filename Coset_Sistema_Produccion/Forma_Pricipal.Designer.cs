@@ -57,6 +57,7 @@
             this.entradaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemMaxMin = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemInventarios = new System.Windows.Forms.ToolStripMenuItem();
             this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -267,6 +268,7 @@
             this.entradaMaterialesToolStripMenuItem,
             this.salidaMaterialesToolStripMenuItem,
             this.devolucionToolStripMenuItem,
+            this.toolStripMenuItemMaxMin,
             this.toolStripMenuItemInventarios,
             this.movimientosautosToolStripMenuItem});
             this.almacenToolStripMenuItem.Name = "almacenToolStripMenuItem";
@@ -307,6 +309,13 @@
             this.devolucionToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.devolucionToolStripMenuItem.Text = "Devolución Materiales";
             this.devolucionToolStripMenuItem.Click += new System.EventHandler(this.devolucionToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemMaxMin
+            // 
+            this.toolStripMenuItemMaxMin.Name = "toolStripMenuItemMaxMin";
+            this.toolStripMenuItemMaxMin.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMenuItemMaxMin.Text = "Maximos Minimos";
+            this.toolStripMenuItemMaxMin.Click += new System.EventHandler(this.toolStripMenuItemMaxMin_Click);
             // 
             // toolStripMenuItemInventarios
             // 
@@ -509,7 +518,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 5.6";
+            this.Text = "Coset Sistema Produccion Rev 5.7";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -576,6 +585,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInventarios;
         private System.Windows.Forms.ToolStripMenuItem autosToolStripMenuItem;
         private System.Windows.Forms.Timer timerStart;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMaxMin;
     }
 }
 

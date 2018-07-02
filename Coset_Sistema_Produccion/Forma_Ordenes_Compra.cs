@@ -1279,8 +1279,8 @@ namespace Coset_Sistema_Produccion
         {
             if (verifica_datos_partidas())
             {
-                if (Verifica_divisa_numero())
-                {
+                /*if (Verifica_divisa_numero())
+                {*/
                     if (Guarda_datos_partidas_orden_compra())
                     {
                         if (Guarda_datos_orden_compra())
@@ -1314,7 +1314,7 @@ namespace Coset_Sistema_Produccion
                             Elimina_informacion_orden_compra_disponibles();
                         }
                     }
-                }
+               /* }*/
             }
 
         }
@@ -1620,10 +1620,10 @@ namespace Coset_Sistema_Produccion
             }
 
                 return "INSERT INTO ordenes_compra(codigo_orden_compra, provedor_compra,tipo_moneda_compra," +
-                    "divisa_compra,fecha_orden,condicion_pago_compra,realizado_compra,cotizado_compra,correo_contacto_compra," +
+                    "fecha_orden,condicion_pago_compra,realizado_compra,cotizado_compra,correo_contacto_compra," +
                     "cotizacion_compra,requisicion) " +
                     "VALUES('" + textBoxCodigoOrdenCompra.Text + "','" + comboBoxNombreProveedor.Text + "','" +
-                    tipo_moneda + "','" + divisa + "','" + dateTimePickerFechaActual.Text + "','" + 
+                    tipo_moneda + "','" + dateTimePickerFechaActual.Text + "','" + 
                     comboBoxCondicionPago.Text + "','" + comboBoxRealizado.Text + "','" + comboBoxCotizado.Text + "','"+
                     textBoxCorreoContacto.Text + "','" + textBoxCotizacion.Text + "','" +textBoxRequisicion.Text +"');";
         }
@@ -2533,9 +2533,9 @@ namespace Coset_Sistema_Produccion
 
         private void radioButtonDolares_CheckedChanged(object sender, EventArgs e)
         {
-            Aparece_etiqueta_divisa();
-            Aparece_textbox_divisa();
-            Activa_textbox_divisa();
+            //Aparece_etiqueta_divisa();
+            //Aparece_textbox_divisa();
+            //Activa_textbox_divisa();
         }
 
         private void Activa_textbox_divisa()
@@ -2878,6 +2878,10 @@ namespace Coset_Sistema_Produccion
                     Visualizar_material.Codigo_proveedor = "~";
                 }
             }
+            if (radioButtonPesos.Checked)
+                Visualizar_material.divisa = "Pesos";
+            else if (radioButtonDolares.Checked)
+                Visualizar_material.divisa = "Dolares";
         }
 
         private void dataGridViewPartidasOrdenCompra_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

@@ -650,5 +650,11 @@ namespace Coset_Sistema_Produccion
             Mustra_forma_seleccio_de_usuarios();
             Oculta_menu_inicio_de_usuario();
         }
+
+        private void toolStripMenuItemMaxMin_Click(object sender, EventArgs e)
+        {
+            Forma_Materiales_MaxMin forma_Materiales_MaxMin = new Forma_Materiales_MaxMin();
+            forma_Materiales_MaxMin.ShowDialog();
+        }
     }
 }

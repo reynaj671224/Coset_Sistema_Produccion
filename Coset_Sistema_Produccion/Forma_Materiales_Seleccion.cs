@@ -27,6 +27,8 @@ namespace Coset_Sistema_Produccion
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
         public Material Material_seleccionado_data_view = null;
         public string agregar_seleccion = "";
+
+
         public Forma_Materiales_Seleccion(List<Material> materiales_busqueda_disponibles,string Operacion_materiales)
         {
             InitializeComponent();
@@ -70,7 +72,7 @@ namespace Coset_Sistema_Produccion
             foreach (Material material in materiales_busqueda_disponibles)
             {
                 dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
-                    material.Descripcion, material.Cantidad, material.Marca, material.Unidad_medida, material.foto);
+                    material.Descripcion, material.Cantidad, material.Marca, material.Unidad_medida, material.divisa,material.foto);
             }
             Activa_datagrid_materiales();
             

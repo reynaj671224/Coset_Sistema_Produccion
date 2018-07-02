@@ -31,6 +31,7 @@ namespace Coset_Sistema_Produccion
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
                         Precio = mySqlDataReader["precio"].ToString(),
+                        Divisa = mySqlDataReader["divisa"].ToString(),
                     });
                 }
             }
@@ -65,6 +66,7 @@ namespace Coset_Sistema_Produccion
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
                         Precio = mySqlDataReader["precio"].ToString(),
+                        Divisa = mySqlDataReader["divisa"].ToString(),
                     });
                 }
             }
@@ -111,10 +113,11 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_entrada_material(Entrada_Material entrada_Material)
         {
             return "INSERT INTO entrada_material(orden_compra, fecha,codigo_material," +
-                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,precio) " +
+                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,precio,divisa) " +
                    "VALUES('" + entrada_Material.Orden_compra + "','" + entrada_Material.Fecha + "','" +
                    entrada_Material.Codigo_material + "','" + entrada_Material.Cantidad + "','" + entrada_Material.Codigo_proveedor + "','" +
-                   entrada_Material.Nombre_empleado + "','" + entrada_Material.Descripcion_material + "','" + entrada_Material.Precio + "');";
+                   entrada_Material.Nombre_empleado + "','" + entrada_Material.Descripcion_material + "','" + entrada_Material.Precio +
+                   "','" + entrada_Material.Divisa + "');";
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()
@@ -133,6 +136,7 @@ namespace Coset_Sistema_Produccion
         public string Nombre_empleado = "";
         public string Descripcion_material = "";
         public string Precio = "";
+        public string Divisa = "";
         public string error = "";
 
     }

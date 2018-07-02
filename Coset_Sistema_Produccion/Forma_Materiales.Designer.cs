@@ -66,8 +66,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBoxPrecio = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonDolares = new System.Windows.Forms.RadioButton();
+            this.radioButtonPesos = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -76,7 +80,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(786, 530);
+            this.pictureBox1.Size = new System.Drawing.Size(782, 593);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -131,7 +135,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(668, 407);
+            this.buttonHome.Location = new System.Drawing.Point(668, 507);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
@@ -145,7 +149,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(668, 247);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(668, 347);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 4;
@@ -200,7 +204,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(668, 224);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(668, 335);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 20;
@@ -234,7 +238,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(668, 327);
+            this.buttonCancelar.Location = new System.Drawing.Point(668, 427);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 26;
@@ -362,7 +366,7 @@
             // textBoxNombreFoto
             // 
             this.textBoxNombreFoto.Enabled = false;
-            this.textBoxNombreFoto.Location = new System.Drawing.Point(445, 257);
+            this.textBoxNombreFoto.Location = new System.Drawing.Point(172, 287);
             this.textBoxNombreFoto.Name = "textBoxNombreFoto";
             this.textBoxNombreFoto.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombreFoto.TabIndex = 39;
@@ -373,7 +377,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Image = ((System.Drawing.Image)(resources.GetObject("label8.Image")));
-            this.label8.Location = new System.Drawing.Point(328, 259);
+            this.label8.Location = new System.Drawing.Point(39, 287);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 16);
             this.label8.TabIndex = 38;
@@ -383,7 +387,7 @@
             // 
             this.pictureBoxMaterial.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxMaterial.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMaterial.Image")));
-            this.pictureBoxMaterial.Location = new System.Drawing.Point(173, 296);
+            this.pictureBoxMaterial.Location = new System.Drawing.Point(172, 359);
             this.pictureBoxMaterial.Name = "pictureBoxMaterial";
             this.pictureBoxMaterial.Size = new System.Drawing.Size(379, 222);
             this.pictureBoxMaterial.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -405,7 +409,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Image = ((System.Drawing.Image)(resources.GetObject("label9.Image")));
-            this.label9.Location = new System.Drawing.Point(328, 204);
+            this.label9.Location = new System.Drawing.Point(328, 199);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 16);
             this.label9.TabIndex = 41;
@@ -449,11 +453,57 @@
             this.textBoxPrecio.Size = new System.Drawing.Size(160, 20);
             this.textBoxPrecio.TabIndex = 46;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox1.Controls.Add(this.radioButtonDolares);
+            this.groupBox1.Controls.Add(this.radioButtonPesos);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox1.Location = new System.Drawing.Point(445, 255);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(160, 65);
+            this.groupBox1.TabIndex = 71;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tipo Moneda";
+            // 
+            // radioButtonDolares
+            // 
+            this.radioButtonDolares.AutoSize = true;
+            this.radioButtonDolares.BackColor = System.Drawing.SystemColors.Highlight;
+            this.radioButtonDolares.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("radioButtonDolares.BackgroundImage")));
+            this.radioButtonDolares.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.radioButtonDolares.ForeColor = System.Drawing.Color.White;
+            this.radioButtonDolares.Location = new System.Drawing.Point(7, 42);
+            this.radioButtonDolares.Name = "radioButtonDolares";
+            this.radioButtonDolares.Size = new System.Drawing.Size(61, 17);
+            this.radioButtonDolares.TabIndex = 66;
+            this.radioButtonDolares.Text = "Dolares";
+            this.radioButtonDolares.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonPesos
+            // 
+            this.radioButtonPesos.AutoSize = true;
+            this.radioButtonPesos.BackColor = System.Drawing.Color.White;
+            this.radioButtonPesos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("radioButtonPesos.BackgroundImage")));
+            this.radioButtonPesos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.radioButtonPesos.Checked = true;
+            this.radioButtonPesos.ForeColor = System.Drawing.Color.White;
+            this.radioButtonPesos.Location = new System.Drawing.Point(7, 19);
+            this.radioButtonPesos.Name = "radioButtonPesos";
+            this.radioButtonPesos.Size = new System.Drawing.Size(54, 17);
+            this.radioButtonPesos.TabIndex = 65;
+            this.radioButtonPesos.TabStop = true;
+            this.radioButtonPesos.Text = "Pesos";
+            this.radioButtonPesos.UseVisualStyleBackColor = false;
+            // 
             // Forma_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 530);
+            this.ClientSize = new System.Drawing.Size(782, 593);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBoxPrecio);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBoxUbicacion);
@@ -493,6 +543,8 @@
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,5 +588,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxPrecio;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButtonDolares;
+        private System.Windows.Forms.RadioButton radioButtonPesos;
     }
 }
