@@ -523,11 +523,18 @@ namespace Coset_Sistema_Produccion
             {
                 if (Busca_dibujo_produccion_base_datos())
                 {
-                    if (verifica_dibujo_asignado_empleado_solicitante())
-                    {
-                        if (verifica_dibujo_en_produccion())
+                    if (dibujo_esta_iniciado())
+                    {  
+                        if (verifica_dibujo_asignado_empleado_solicitante())
                         {
-                            Configura_botones_operacion();
+                            if (verifica_dibujo_en_produccion())
+                            {
+                                Configura_botones_operacion();
+                            }
+                            else
+                            {
+                                Cancela_operacio_produccion();
+                            }
                         }
                         else
                         {
@@ -536,7 +543,21 @@ namespace Coset_Sistema_Produccion
                     }
                     else
                     {
-                        Cancela_operacio_produccion();
+                        if (Asigna_dibujo_empleado())
+                        {
+                            if (verifica_dibujo_en_produccion())
+                            {
+                                Configura_botones_operacion();
+                            }
+                            else
+                            {
+                               
+                            }
+                        }
+                        else
+                        {
+                            Cancela_operacio_produccion();
+                        }
                     }
                 }
                 else
@@ -551,6 +572,23 @@ namespace Coset_Sistema_Produccion
             }
 
             
+        }
+
+        private bool Asigna_dibujo_empleado()
+        {
+            string Respuesta = "";
+            Dibujos_produccion_disponible[0].Empleado = comboBoxEmpleado.Text;
+            Respuesta = Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+            if (Respuesta == "NO errores")
+                return true;
+            else
+                return false;
+        }
+
+        private bool dibujo_esta_iniciado()
+        {
+            
+            return Dibujos_produccion_disponible[0].Estado == "Iniciado";
         }
 
         private bool verifica_dibujo_en_produccion()
