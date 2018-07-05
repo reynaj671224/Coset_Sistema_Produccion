@@ -230,49 +230,71 @@ namespace Coset_Sistema_Produccion
 
         private bool verifica_datos_numericos_cantidad()
         {
-            try
+            if (textBoxCantidad.Text != "")
             {
-                Convert.ToSingle(textBoxCantidad.Text);
-                return true;
-            }
-            catch
-            {
-                textBoxCantidad.Text = "";
-                MessageBox.Show("Cantidad NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                try
+                {
+                    Convert.ToSingle(textBoxCantidad.Text);
+                    return true;
+                }
+                catch
+                {
+                    textBoxCantidad.Text = "";
+                    MessageBox.Show("Cantidad NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
 
+                }
+            }
+            else
+            {
+                return true;
             }
         }
 
         private bool verifica_datos_numericos_minimo()
         {
-            try
+            if (textBoxMinimo.Text != "")
             {
-                Convert.ToSingle(textBoxMinimo.Text);
+                try
+                {
+                    Convert.ToSingle(textBoxMinimo.Text);
+                    return true;
+                }
+                catch
+                {
+                    textBoxMinimo.Text = "";
+                    MessageBox.Show("Minimo NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+
+                }
+            }
+            else
+            {
                 return true;
             }
-            catch
-            {
-                textBoxMinimo.Text = "";
-                MessageBox.Show("Minimo NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
 
-            }
         }
 
         private bool verifica_datos_numericos_maximo()
         {
-            try
+            if (textBoxMaximo.Text != "")
             {
-                Convert.ToSingle(textBoxMaximo.Text);
-                return true;
-            }
-            catch
-            {
-                textBoxMaximo.Text = "";
-                MessageBox.Show("Maximo NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                try
+                {
+                    Convert.ToSingle(textBoxMaximo.Text);
+                    return true;
+                }
+                catch
+                {
+                    textBoxMaximo.Text = "";
+                    MessageBox.Show("Maximo NO numerico", "Guardar Material", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
 
+                }
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -429,12 +451,31 @@ namespace Coset_Sistema_Produccion
             Agregar_material.Descripcion = textBoxDescripcion.Text;
             Agregar_material.foto = textBoxNombreFoto.Text;
             Agregar_material.Unidad_medida = textBoxUnidadMedida.Text;
-            Agregar_material.Cantidad = textBoxCantidad.Text;
-            Agregar_material.Maximo = textBoxMaximo.Text;
-            Agregar_material.Minimo = textBoxMinimo.Text;
             Agregar_material.Marca = textBoxMarca.Text;
             Agregar_material.Ubicacion = textBoxUbicacion.Text;
-            Agregar_material.precio = textBoxPrecio.Text;
+
+
+            if(textBoxCantidad.Text == "")
+                Agregar_material.Cantidad = "0";
+            else
+                Agregar_material.Cantidad = textBoxCantidad.Text;
+
+            if (textBoxMaximo.Text == "")
+                Agregar_material.Maximo = "0";
+            else
+                Agregar_material.Maximo = textBoxMaximo.Text;
+
+            if (textBoxMinimo.Text == "")
+                Agregar_material.Minimo = "0";
+            else
+                Agregar_material.Minimo = textBoxMinimo.Text;
+
+            if (textBoxPrecio.Text == "")
+                Agregar_material.precio = "0.0";
+            else
+                Agregar_material.precio = textBoxPrecio.Text;
+
+
             if (radioButtonDolares.Checked)
                 Agregar_material.divisa = "Dolares";
             else if (radioButtonPesos.Checked)
@@ -612,6 +653,7 @@ namespace Coset_Sistema_Produccion
             textBoxDescripcion.BackColor = Color.White;
             textBoxMarca.BackColor = Color.White;
             textBoxCodigoMaterial.BackColor = Color.White;
+            textBoxMarca.BackColor = Color.White;
         }
 
         private void Desaparece_boton_busqueda_base_datos()
@@ -641,6 +683,7 @@ namespace Coset_Sistema_Produccion
                     Desactiva_cajas_captura_busqueda_material();
                     Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
                     Muestra_foto_material();
+                    
                 }
                 else if(Operacio_materiales == "Modificar")
                 {
@@ -678,6 +721,7 @@ namespace Coset_Sistema_Produccion
                     {
                         Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
                         Muestra_foto_material();
+                        pinta_blanco_cajas_busqueda();
                     }
                 }
                 else if (Operacio_materiales == "Modificar")
@@ -689,6 +733,7 @@ namespace Coset_Sistema_Produccion
                     {
                         Rellena_cajas_informacion_despues_busqueda(forma_Materiales_Seleccion.Material_seleccionado_data_view);
                         Muestra_foto_material();
+                        pinta_blanco_cajas_busqueda();
                     }
                 }else if(Operacio_materiales == "Agregar")
                 {
