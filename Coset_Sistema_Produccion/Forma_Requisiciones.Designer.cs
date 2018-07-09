@@ -223,7 +223,6 @@
             this.dataGridViewPartidasRequisiciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewContactosClientes_CellClick);
             this.dataGridViewPartidasRequisiciones.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasCotizacion_CellEndEdit);
             this.dataGridViewPartidasRequisiciones.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewPartidasRequisiciones_EditingControlShowing);
-            this.dataGridViewPartidasRequisiciones.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewPartidasRequisiciones_RowsAdded);
             this.dataGridViewPartidasRequisiciones.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewPartidasRequisiciones_RowsRemoved);
             // 
             // comboBoxCodigoRequisiciones
@@ -314,7 +313,7 @@
             this.buttonWordPrevio.Text = "Previo";
             this.buttonWordPrevio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonWordPrevio.UseVisualStyleBackColor = true;
-            this.buttonWordPrevio.Click += new System.EventHandler(this.buttonWordPrevio_Click);
+
             // 
             // groupBoxPrevio
             // 
@@ -346,7 +345,7 @@
             this.buttonSaveFile.Text = "Guardar";
             this.buttonSaveFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonSaveFile.UseVisualStyleBackColor = true;
-            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
+
             // 
             // comboBoxProveedoresPrevio
             // 
@@ -371,7 +370,6 @@
             this.buttonModificarRequisicion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonModificarRequisicion.UseVisualStyleBackColor = true;
             this.buttonModificarRequisicion.Visible = false;
-            this.buttonModificarRequisicion.Click += new System.EventHandler(this.buttonModificarRequisicion_Click);
             // 
             // label1
             // 
@@ -397,7 +395,6 @@
             this.buttonAgregarPartida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonAgregarPartida.UseVisualStyleBackColor = true;
             this.buttonAgregarPartida.Visible = false;
-            this.buttonAgregarPartida.Click += new System.EventHandler(this.buttonAgregarPartida_Click);
             // 
             // buttonEliminarPartida
             // 

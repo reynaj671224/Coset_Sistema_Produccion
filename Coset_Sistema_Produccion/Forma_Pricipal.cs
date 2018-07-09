@@ -656,5 +656,11 @@ namespace Coset_Sistema_Produccion
             Forma_Materiales_MaxMin forma_Materiales_MaxMin = new Forma_Materiales_MaxMin();
             forma_Materiales_MaxMin.ShowDialog();
         }
+
+        private void proyectosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Forma_Reporte_Proyectos forma_Reporte_Proyectos = new Forma_Reporte_Proyectos();
+            forma_Reporte_Proyectos.ShowDialog();
+        }
     }
 }

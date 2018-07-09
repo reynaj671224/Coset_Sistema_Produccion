@@ -50,10 +50,7 @@ namespace Coset_Sistema_Produccion
         public string nombre_archivo_word = "";
         public word.Application application = null;
         public word.Document Documento = null;
-        public int Numero_renglones_rellenos_requisicion=0;
-        private bool eventHookedUp;
-        public int Longitud_cadena_busqueda = 4;
-        public int Numero_partidas_disponibles = 0;
+
         public enum Campos_partidas
         {
             codigo,partida,cantidad,numero, descripcion,
@@ -1178,7 +1175,6 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_informacion_requisiciones_disponibles()
         {
-            Numero_partidas_disponibles = 0;
             Partidas_requisicion_disponibles = null;
             Proveedores_disponibles = null;
             requisiciones_disponibles = null;
@@ -1762,25 +1758,7 @@ namespace Coset_Sistema_Produccion
             Operacio_requisiciones = "Copiar";
         }
 
-        private void buttonWordPrevio_Click(object sender, EventArgs e)
-        {
-            if (Inicia_variables_word())
-            {
-                Desactiva_boton_requisiciones_previo();
-                Desactiva_boton_guardar();
-                Desactiva_combo_provedores_previo();
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_requisicion();
-                Abrir_documento_word();
-                Rellenar_campos_requisicion();
-                Guardar_archivo_word();
-                Visible_instancia_word();
-
-            }
-            
-        }
-
+      
         private void Desactiva_boton_guardar()
         {
             buttonSaveFile.Enabled = false;
@@ -1791,197 +1769,7 @@ namespace Coset_Sistema_Produccion
             comboBoxProveedoresPrevio.Enabled = false;
         }
 
-        private bool Inicia_variables_word()
-        {
-            try
-            {
-                application = new word.Application();
-                Documento = new word.Document();
-                return true;
-
-            }
-            catch
-            {
-                MessageBox.Show("NO Word Instalado", "Inicio EWord", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
-        private void Abrir_documento_word()
-        {
-            Documento = application.Documents.Open(nombre_archivo_word);
-            Documento.Activate();
-        }
-
-        private void Asigna_nombre_archivo_para_analizar()
-        {
-            nombre_archivo_word = @appPath + "\\" + comboBoxCodigoRequisiciones.Text +"_" +
-                comboBoxProveedoresPrevio.Text + ".docx";
-        }
-
-        private void Desactiva_boton_requisiciones_previo()
-        {
-            buttonWordPrevio.Enabled = false;
-        }
-
-        private void Visible_instancia_word()
-        {
-            application.Visible = true;
-           
-        }
-
-        private void Copiar_template_requisicion()
-        {
-            try
-            {
-                File.Copy(@appPath + "\\Requisicion_Coset_template.docx", @appPath + "\\" + comboBoxCodigoRequisiciones.Text + 
-                    "_"+ comboBoxProveedoresPrevio.Text +".docx", false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Elimina_archivo()
-        {
-            try
-            {
-                File.Delete(nombre_archivo_word);
-            }
-            catch
-            {
-               
-            }
-        }
-
-        private void Rellenar_campos_requisicion()
-        {
-            Rellena_informacion_requisicion();
-            Rellena_partidas_Requisicion();
-            Limpia_partidas_sin_informacion();
-        }
-
-        private void Rellena_informacion_requisicion()
-        {
-            Remplaza_texto_en_Documento("<REQN>", comboBoxCodigoRequisiciones.Text);
-            Remplaza_texto_en_Documento("<realizador>", textBoxDirigido.Text);
-            Remplaza_texto_en_Documento("<requisitor>", textBoxRequsitor.Text);
-            Remplaza_texto_en_Documento("<dirigido>", comboBoxProveedoresPrevio.Text);
-            Remplaza_texto_en_Documento("<fecha>", dateTimePickerFechaActual.Text);
-        }
-
-        private void Rellena_partidas_Requisicion()
-        {
-            if (dataGridViewPartidasRequisiciones.Rows.Count <= 50)
-            {
-                for (int partida = 1; partida <= dataGridViewPartidasRequisiciones.Rows.Count; partida++)
-                {
-                    if (comboBoxProveedoresPrevio.Text == dataGridViewPartidasRequisiciones.Rows[partida - 1].
-                        Cells["Proveedor_requisicion"].Value.ToString())
-                    {
-                        Remplaza_texto_en_Documento("<n" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, partida - 1].Value.ToString());
-                        Remplaza_texto_en_Documento("<c" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.cantidad, partida - 1].Value.ToString());
-                        Remplaza_texto_en_Documento("<np" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, partida - 1].Value.ToString());
-                        Remplaza_texto_en_Documento("<d" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, partida - 1].Value.ToString());
-                        Remplaza_texto_en_Documento("<m" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.uidad_medida, partida - 1].Value.ToString());
-                        Remplaza_texto_en_Documento("<p" + partida + ">",
-                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.proyecto, partida - 1].Value.ToString());
-                        Numero_renglones_rellenos_requisicion++;
-                    }
-                                     
-                }
-            }
-            else
-            {
-                MessageBox.Show("Esta Applicacion solo Puede desplegar Hasta 50 Partidas", "Previo Requisiciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Rellena_empleado_informacion()
-        {
-            Remplaza_texto_en_Documento("<empleado>",
-                    Forma_Inicio_Usuario.Usuario_global.nombre_empleado);
-            Remplaza_texto_en_Documento("<correo_electronico>",
-                    Forma_Inicio_Usuario.Usuario_global.Correo_electronico);
-        }
-
-        private void Guardar_archivo_word()
-        {
-            Documento.Save();
-        }
-
-        private void Limpia_partidas_sin_informacion()
-        {
-            Asigna_espacios_en_renglones_sin_informacion();
-            word.Table table = Documento.Tables[2];
-            for (int renglon = 1; renglon <= table.Rows.Count; renglon++)
-            {
-                if (table.Rows[renglon].Cells[1].Range.Text == "\r\a")
-                {
-                    table.Rows[renglon].Delete();
-                    renglon--;
-                }
-
-            }
-        }
-
-        private void Asigna_espacios_en_renglones_sin_informacion()
-        {
-            for(int renglon =1; renglon<=50; renglon++)
-            {
-                Remplaza_texto_en_Documento("<n" + renglon + ">", "");
-            }
-        }
-
-        private bool menor_de_una_semana(int semanas)
-        {
-            if (semanas < 1)
-                return true;
-            else
-                return false;
-        }
-
-        private void Remplaza_texto_en_Documento(string original, string cambio)
-        {
-            word.Selection seleccion = application.Selection;
-            seleccion.Find.Text = original;
-            seleccion.Find.Replacement.Text = cambio;
-            seleccion.Find.Wrap = WdFindWrap.wdFindContinue;
-            seleccion.Find.Forward = true;
-            seleccion.Find.Format = false;
-            seleccion.Find.MatchCase = false;
-            seleccion.Find.MatchWholeWord = false;
-            seleccion.Find.Execute(Replace: WdReplace.wdReplaceAll);
-        }
-
-        private void Copiar_template_a_cotizacion_ingles()
-        {
-            try
-            {
-                File.Copy(@appPath + "\\Quote_Coset_Template_Ingles.docx", @appPath + "\\" + comboBoxCodigoRequisiciones.Text + ".docx", false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void radioButtonPrevioEspanol_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonWordPrevio.Enabled = true;
-        }
-
-        private void radioButtonPrevioIngles_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonWordPrevio.Enabled = true;
-        }
-
+ 
         private void timerAgregarRequisicion_Tick(object sender, EventArgs e)
         {
             if (textBoxCodigoRequisiciones.Text != "" &&
@@ -1994,42 +1782,6 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void buttonModificarRequisicion_Click(object sender, EventArgs e)
-        {
-            Modificar_requisicion_asignar_proveedor();
-        }
-
-        private void Modificar_requisicion_asignar_proveedor()
-        {
-            Desactiva_botones_operacion();
-            Limpia_combo_dirigido();
-            Limpia_combo_requisitor();
-            Limpia_combo_requisiciones();
-            Limpia_combo_proyectos_partidas();
-            Desactiva_botones_operacion();
-            Activa_cajas_informacion_requisiciones();
-            Acepta_datagridview_agregar_renglones();
-            Aparece_combo_codigo_requisiciones();
-            Aparece_combo_requisitor();
-            Activa_combo_requisitor();
-            Activa_Combo_dirigido();
-            Activa_combo_codigo_requisiciones();
-            Aparece_combo_dirigido();
-            Obtener_datos_usuarios_administrativos_compas_disponibles_base_datos();
-            rellena_combo_dirigido();
-            Obtener_datos_usuarios_requisitores_disponibles_base_datos();
-            rellena_combo_requisitores();
-            obtener_proyectos_disponibles();
-            Rellenar_combo_proyectos_partidas_requisiciones();
-            Obtener_datos_requisiciones_disponibles_base_datos();
-            Rellena_combo_codigo_requisiciones();
-            Aparece_boton_cancelar_operacio();
-            No_aceptar_agregar_partidas_requisiciones();
-            //Desactiva_Campos_partida_requisicion();
-            Activa_dataview_partidas_requisiciones();
-            Activa_columna_proveedores_ser_mododificada();
-            Operacio_requisiciones = "Modificar";
-        }
 
         private void Desactiva_Campos_partida_requisicion()
         {
@@ -2094,25 +1846,7 @@ namespace Coset_Sistema_Produccion
             buttonSaveFile.Enabled = true;
         }
 
-        private void buttonSaveFile_Click(object sender, EventArgs e)
-        {
-            if (Inicia_variables_word())
-            {
-                Desactiva_boton_requisiciones_previo();
-                Desactiva_boton_guardar();
-                Desactiva_combo_provedores_previo();
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_requisicion();
-                Abrir_documento_word();
-                Rellenar_campos_requisicion();
-                Guardar_archivo_word();
-                Guardar_archivo_word_en_ruta_en_datos_generales();
-                Cierra_documento_word();
-                Termina_secuencia_save_file();
-            }
-        }
-
+      
         private void Termina_secuencia_operaciones_requisiciones()
         {
             Operacio_requisiciones = "Cancelar";
@@ -2139,7 +1873,6 @@ namespace Coset_Sistema_Produccion
             Cierra_documento_word();
             Activa_boton_cotizacion_previo();
             Desabilita_boton_word_previo();
-            Elimina_archivo();
             Activa_Campos_partida_requisicion();
             Desaparece_botones_operacion_partidas();
             Elimina_informacion_requisiciones_disponibles();
@@ -2197,41 +1930,6 @@ namespace Coset_Sistema_Produccion
                
             }
         }
-
-        private void dataGridViewPartidasRequisiciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            if (Operacio_requisiciones == "Agregar" || Operacio_requisiciones == "Agregar Partida")
-            {
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Parte_requisicion"].Style.BackColor = Color.Yellow;
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Unidad_medida_partida"].Style.BackColor = Color.Yellow;
-                if (Operacio_requisiciones == "Agregar")
-                {
-                    dataGridViewPartidasRequisiciones["Numero_partida", e.RowIndex].
-                        Value = dataGridViewPartidasRequisiciones.RowCount;
-                }
-                else if(Operacio_requisiciones == "Agregar Partida")
-                {
-                    Numero_partidas_disponibles++;
-                    dataGridViewPartidasRequisiciones["Numero_partida", e.RowIndex].
-                        Value = Numero_partidas_disponibles;
-                }
-              
-            }
-            else if (Operacio_requisiciones == "Cancelar")
-            {
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Parte_requisicion"].Value = "";
-                dataGridViewPartidasRequisiciones.Rows[e.RowIndex].
-                            Cells["Descrpcion_partida"].Value = "";
-            }
-        }
-
 
         private void buttonBuscarRequisicion_Click(object sender, EventArgs e)
         {
@@ -2294,17 +1992,7 @@ namespace Coset_Sistema_Produccion
             buttonAgregarPartida.Visible = true;
         }
 
-        private void buttonAgregarPartida_Click(object sender, EventArgs e)
-        {
-            Operacio_requisiciones = "Agregar Partida";
-            Numero_partidas_disponibles = dataGridViewPartidasRequisiciones.RowCount;
-            Desactiva_botones_operacion_partidas();
-            limpia_partidas_requisicion();
-            Aceptar_agregar_partidas_requisiciones();
-            Aparce_boton_guardar_base_datos();
-            
-        }
-
+  
         private void Aceptar_agregar_partidas_requisiciones()
         {
             dataGridViewPartidasRequisiciones.AllowUserToAddRows = true;

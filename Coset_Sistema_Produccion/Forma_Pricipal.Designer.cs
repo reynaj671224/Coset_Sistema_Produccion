@@ -358,14 +358,15 @@
             // produccionToolStripMenuItem1
             // 
             this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
-            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.produccionToolStripMenuItem1.Text = "Produccion";
             // 
             // proyectosToolStripMenuItem1
             // 
             this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
-            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.proyectosToolStripMenuItem1.Text = "Proyectos";
+            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
             // 
             // statusStrip1
             // 
