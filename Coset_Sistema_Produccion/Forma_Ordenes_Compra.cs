@@ -70,7 +70,7 @@ namespace Coset_Sistema_Produccion
         public int RenglonParaEliminardatagridview = 0;
         public enum Campos_orden_compra
         {
-            codigo, partida, material, cantidad, parte,descripcion,unidad_medida,
+            codigo, partida, cantidad, material, parte,descripcion,unidad_medida,
             proyecto,precio, total
         };
 
@@ -1187,12 +1187,10 @@ namespace Coset_Sistema_Produccion
             else
             {
                 tipo_moneda = "Dolares";
-                divisa = textBoxDivisa.Text;
             }
 
             return "UPDATE ordenes_compra set  provedor_compra='" + textBoxNombreProveedor.Text +
                "',tipo_moneda_compra='" + tipo_moneda +
-               "',divisa_compra='" + divisa +
                "',fecha_orden='" + dateTimePickerFechaActual.Text +
                "',condicion_pago_compra='" + comboBoxCondicionPago.Text +
                "',realizado_compra='" + comboBoxRealizado.Text +
@@ -2746,7 +2744,8 @@ namespace Coset_Sistema_Produccion
         {
             e.CellStyle.BackColor = Color.White;
             if (this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.parte ||
-                this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.descripcion)
+                this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.descripcion ||
+                this.dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.material)
             {
                 if (!this.eventHookedUp)
                 {
@@ -2815,6 +2814,7 @@ namespace Coset_Sistema_Produccion
             /*pinta de blanco celdas con informacion nueva*/
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Style.BackColor = Color.White;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Style.BackColor = Color.White;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material, rowIndex].Style.BackColor = Color.White;
 
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Value =
                 material_seleccionado_data_view.Codigo_proveedor;
@@ -2853,6 +2853,17 @@ namespace Coset_Sistema_Produccion
                 {
                     Visualizar_material.Descripcion = "~";
                 }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+                    Visualizar_material.Codigo = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 1,
+                       dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo = "~";
+                }
             }
             else if (dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.descripcion)
             {
@@ -2877,7 +2888,57 @@ namespace Coset_Sistema_Produccion
                 {
                     Visualizar_material.Codigo_proveedor = "~";
                 }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 2,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Codigo = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex - 2,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo = "~";
+                }
             }
+            else if (dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex == (int)Campos_orden_compra.material)
+            {
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+                    Visualizar_material.Codigo = dataGridViewPartidasOrdenCompra.CurrentCell.EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo = "~";
+                }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Codigo_proveedor = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 1,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Codigo_proveedor = "~";
+                }
+
+                if (dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 2,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString() != "")
+                {
+
+                    Visualizar_material.Descripcion = dataGridViewPartidasOrdenCompra[dataGridViewPartidasOrdenCompra.CurrentCell.ColumnIndex + 2,
+                        dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex].EditedFormattedValue.ToString();
+                }
+                else
+                {
+                    Visualizar_material.Descripcion = "~";
+                }
+            }
+
+
             if (radioButtonPesos.Checked)
                 Visualizar_material.divisa = "Pesos";
             else if (radioButtonDolares.Checked)
@@ -2896,6 +2957,8 @@ namespace Coset_Sistema_Produccion
                             Cells["Precio_partida"].Style.BackColor = Color.Yellow;
                 dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
                             Cells["Cantidad_partida"].Style.BackColor = Color.Yellow;
+                dataGridViewPartidasOrdenCompra.Rows[e.RowIndex].
+                            Cells["Material_compra"].Style.BackColor = Color.Yellow;
 
                 if (Operacio_orden_compra == "Agregar")
                 {

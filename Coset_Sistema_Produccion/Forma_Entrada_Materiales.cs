@@ -61,8 +61,8 @@ namespace Coset_Sistema_Produccion
 
         public enum Campos_entrada_materiales_agregar
         {
-            codigo, codigo_material, codigo_proveedor, descripcion, cantidad_entrada,
-            unidades_entrada, total_unidades_oc, precio, divisa,
+            codigo, codigo_material, codigo_proveedor, descripcion, unidades_entrada,
+            cantidad_entrada, precio, divisa
         };
 
         public string Operacio_entrada_materiales = "";
@@ -258,6 +258,7 @@ namespace Coset_Sistema_Produccion
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
             //Desaparece_textbox_descripcion_materiales();
+            Limpia_datagridview_agrega_materiales();
             Obtener_materiales_ordenes_compra();
             Rellena_datagridview_agregar_materiales();
             //Rellena_combo_descripcion_materiales();
@@ -267,6 +268,7 @@ namespace Coset_Sistema_Produccion
         private void Rellena_datagridview_agregar_materiales()
         {
             int Row_material = 0;
+            int Unidades_ordenadas = 0;
             Limpia_datagridview_agrega_materiales();
             foreach (Partida_orden_compra partida_orden_compra in partidas_ordenes_compra_disponibles)
             {
@@ -282,12 +284,17 @@ namespace Coset_Sistema_Produccion
                         material_disponible => material_disponible.Codigo_proveedor.Contains(partida_orden_compra.Parte));
                     }
 
-                    dataGridViewPartidasEntradaMaterialesEntrada.Rows.Add(partida_orden_compra.Codigo.ToString(), Material_disponible_entrada_materiales.Codigo,
-                        Material_disponible_entrada_materiales.Codigo_proveedor, partida_orden_compra.Descripcion, "",
-                        Calculo_unidades_entrdas(), partida_orden_compra.Cantidad, partida_orden_compra.precio_unitario, Material_disponible_entrada_materiales.divisa);
-                    dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_unidades",
-                        Row_material].Style.BackColor = Color.Yellow;
-                    Row_material++;
+                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas();
+                    if (Unidades_ordenadas != 0)
+                    {
+                        dataGridViewPartidasEntradaMaterialesEntrada.Rows.Add(partida_orden_compra.Codigo.ToString(), Material_disponible_entrada_materiales.Codigo,
+                            Material_disponible_entrada_materiales.Codigo_proveedor, partida_orden_compra.Descripcion, Unidades_ordenadas.ToString(),
+                            "", partida_orden_compra.precio_unitario, Material_disponible_entrada_materiales.divisa);
+
+                        dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_unidades",
+                            Row_material].Style.BackColor = Color.Yellow;
+                        Row_material++;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -297,13 +304,12 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private string Calculo_unidades_entrdas()
+        private int Calculo_unidades_entradas()
         {
             Obtener_partidas_entrada_materiales();
             int Total_cantidad = 0;
             for (int renglones = 0; renglones < Entrada_materiales_disponibles.Count; renglones++)
             {
-
 
                 try
                 {
@@ -316,7 +322,7 @@ namespace Coset_Sistema_Produccion
                 }
 
             }
-            return Total_cantidad.ToString();
+            return Total_cantidad;
 
         }
 
@@ -505,6 +511,7 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             Activa_datagridview_partidas_entrada_materiales();
             //Activa_textbox_codigo_proveedor();
+            Limpia_datagridview_agrega_materiales();
             limpia_combo_ordenes_compra();
             Aparece_combo_orden_compra();
             Activa_combo_orden_compra();
@@ -1610,9 +1617,14 @@ namespace Coset_Sistema_Produccion
                     {
                         /*Valida Numeros en la caja partida*/
                         Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString());
+                        if (Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString()) >
+                             Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex-1, e.RowIndex].Value.ToString()))
+                        {
+                            throw new System.ArgumentException("Numero de Unidades Mayor a unidades ordenadas", "Entrada Materiales");
+                        }
                         dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
                     }
-                    catch
+                    catch(Exception)
                     {
 
                         dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, e.RowIndex].Value = "";

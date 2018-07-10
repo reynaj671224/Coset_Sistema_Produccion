@@ -79,8 +79,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Material_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Material_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Parte_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnidadMedida_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -314,8 +314,8 @@
             this.dataGridViewPartidasOrdenCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
             this.Numero_partida,
-            this.Material_compra,
             this.Cantidad_partida,
+            this.Material_compra,
             this.Parte_partida,
             this.Descrpcion_partida,
             this.UnidadMedida_compra,
@@ -658,18 +658,17 @@
             this.Numero_partida.ReadOnly = true;
             this.Numero_partida.Width = 50;
             // 
-            // Material_compra
-            // 
-            this.Material_compra.HeaderText = "Codigo Material";
-            this.Material_compra.Name = "Material_compra";
-            this.Material_compra.ReadOnly = true;
-            this.Material_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // Cantidad_partida
             // 
             this.Cantidad_partida.HeaderText = "Cantidad";
             this.Cantidad_partida.Name = "Cantidad_partida";
             this.Cantidad_partida.Width = 50;
+            // 
+            // Material_compra
+            // 
+            this.Material_compra.HeaderText = "Codigo Material";
+            this.Material_compra.Name = "Material_compra";
+            this.Material_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Parte_partida
             // 
@@ -819,8 +818,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_partida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Material_compra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_partida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Material_compra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Parte_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnidadMedida_compra;

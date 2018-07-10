@@ -220,37 +220,40 @@ namespace Coset_Sistema_Produccion
 
             if (material.Codigo_proveedor != "~" && material.Codigo == "~" && material.Descripcion == "~")
             {
-                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%';";
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%'" +
+                    "AND material_divisa = '" + material.divisa + "';";
             }
             else if (material.Codigo_proveedor == "~" && material.Codigo != "~" && material.Descripcion == "~")
             {
-                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%';";
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%'" +
+                    "AND material_divisa = '" + material.divisa + "';";
             }
             else if (material.Codigo_proveedor != "~" && material.Codigo != "~" && material.Descripcion == "~")
             {
                 return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
-                 "%' AND codigo_proveedor LIKE '%" + material.Codigo_proveedor  + "%';";
+                 "%' AND codigo_proveedor LIKE '%" + material.Codigo_proveedor  + "%'" +
+                 "AND material_divisa = '" + material.divisa + "';";
             }
             else if (material.Codigo_proveedor == "~" && material.Codigo == "~" && material.Descripcion != "~")
             {
                 return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" +
-                 material.Descripcion + "%';";
+                 material.Descripcion + "%'" + "AND material_divisa = '" + material.divisa + "';";
             }
             else if (material.Codigo_proveedor != "~" && material.Codigo == "~" && material.Descripcion != "~")
             {
                 return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' AND material_descripcion LIKE '%" +
-                material.Descripcion + "%';";
+                material.Descripcion + "%'" + "AND material_divisa = '" + material.divisa + "';";
             }
             else if (material.Codigo_proveedor == "~" && material.Codigo != "~" && material.Descripcion != "~")
             {
                 return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%' AND material_descripcion LIKE '%" +
-                 material.Descripcion + "%';";
+                 material.Descripcion + "%'" + "AND material_divisa = '" + material.divisa + "';";
             }
             else
             {
                 return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
                  "%' AND codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' AND material_descripcion LIKE '%" +
-                 material.Descripcion + "%';";
+                 material.Descripcion + "%'" + "AND material_divisa = '" + material.divisa + "';";
             }
 
         }
@@ -299,7 +302,7 @@ namespace Coset_Sistema_Produccion
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_material_codigo_descripcion(material), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_entrada_material(material), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
@@ -414,6 +417,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_material_codigo_descripcion(Material material)
         {
+
             if(material.Codigo_proveedor == "~")
             {
                 return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" + material.Descripcion + "%'" +
@@ -422,13 +426,13 @@ namespace Coset_Sistema_Produccion
             else if(material.Descripcion == "~")
             {
                 return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%'" +
-                    "AND material_divisa ='" + material.divisa + ";";
+                    "AND material_divisa ='" + material.divisa + "';";
             }
             else 
             {
                 return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor +
                  "%' AND  material_descripcion LIKE '%" + material.Descripcion + "%'" +
-                 "AND material_divisa ='" + material.divisa + ";";
+                 "AND material_divisa ='" + material.divisa + "';";
             }
         }
 
