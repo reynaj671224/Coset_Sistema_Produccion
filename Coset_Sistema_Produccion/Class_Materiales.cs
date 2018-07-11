@@ -175,7 +175,7 @@ namespace Coset_Sistema_Produccion
             connection.Close();
             return Material_existente_disponibles_materiales;
         }
-
+        /*materiales*/
         public List<Material> Adquiere_materiales_busqueda_entrada_materiales_en_base_datos(Material material)
         {
             List<Material> Material_existente_disponibles_materiales = new List<Material>();
@@ -214,7 +214,50 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_materiales;
         }
 
+        /*materiales*/
         private string Commando_leer_Mysql_busqueda_entrada_material(Material material)
+        {
+
+
+            if (material.Codigo_proveedor != "~" && material.Codigo == "~" && material.Descripcion == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%';";
+            }
+            else if (material.Codigo_proveedor == "~" && material.Codigo != "~" && material.Descripcion == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%';";
+            }
+            else if (material.Codigo_proveedor != "~" && material.Codigo != "~" && material.Descripcion == "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' AND codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%';";
+            }
+            else if (material.Codigo_proveedor == "~" && material.Codigo == "~" && material.Descripcion != "~")
+            {
+                return "SELECT * FROM materiales WHERE material_descripcion LIKE '%" +
+                 material.Descripcion + "%';";
+            }
+            else if (material.Codigo_proveedor != "~" && material.Codigo == "~" && material.Descripcion != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' AND material_descripcion LIKE '%" +
+                material.Descripcion + "%';";
+            }
+            else if (material.Codigo_proveedor == "~" && material.Codigo != "~" && material.Descripcion != "~")
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo + "%' AND material_descripcion LIKE '%" +
+                 material.Descripcion + "%';";
+            }
+            else
+            {
+                return "SELECT * FROM materiales WHERE codigo_material LIKE '%" + material.Codigo +
+                 "%' AND codigo_proveedor LIKE '%" + material.Codigo_proveedor + "%' AND material_descripcion LIKE '%" +
+                 material.Descripcion + "%';";
+            }
+
+        }
+
+        /*orden de compra*/
+        private string Commando_leer_Mysql_busqueda_entrada_material_divisa(Material material)
         {
 
 
@@ -296,13 +339,14 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_materiales;
         }
 
+        /*ordenes compra*/
         public List<Material> Busqueda_codigo_descripcion_materiales_busqueda_en_base_datos(Material material)
         {
             List<Material> Material_existente_disponibles_materiales = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_entrada_material(material), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_entrada_material_divisa(material), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())

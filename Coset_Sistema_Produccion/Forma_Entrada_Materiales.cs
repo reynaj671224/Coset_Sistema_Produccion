@@ -56,7 +56,7 @@ namespace Coset_Sistema_Produccion
         public enum Campos_entrada_materiales_visualizar
         {
             codigo, orden_compra, fecha, codigo_material, cidigo_proveedor, nombre_empleado, descripcion,
-            cantidad, precio,
+            cantidad, precio, tipo_cambio, referencia
         };
 
         public enum Campos_entrada_materiales_agregar
@@ -260,12 +260,22 @@ namespace Coset_Sistema_Produccion
             //Desaparece_textbox_descripcion_materiales();
             Limpia_datagridview_agrega_materiales();
             Obtener_materiales_ordenes_compra();
-            Rellena_datagridview_agregar_materiales();
+            if(Rellena_datagridview_agregar_materiales()!=0)
+            {
+                Limpia_combo_empleado();
+                Aparece_combo_empleado();
+                Activa_combo_empleado();
+                obtener_usuarios_administrativos_compras_disponibles();
+                Rellena_combo_empleado();
+                Activa_seleccion_fecha_actual();
+                Activa_grupo_referencia();
+                Activa_textbox_referencia();
+            }
             //Rellena_combo_descripcion_materiales();
 
         }
 
-        private void Rellena_datagridview_agregar_materiales()
+        private int Rellena_datagridview_agregar_materiales()
         {
             int Row_material = 0;
             int Unidades_ordenadas = 0;
@@ -290,8 +300,8 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasEntradaMaterialesEntrada.Rows.Add(partida_orden_compra.Codigo.ToString(), Material_disponible_entrada_materiales.Codigo,
                             Material_disponible_entrada_materiales.Codigo_proveedor, partida_orden_compra.Descripcion, Unidades_ordenadas.ToString(),
                             "", partida_orden_compra.precio_unitario, Material_disponible_entrada_materiales.divisa);
-
-                        dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_unidades",
+                        
+                        dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_recibidas",
                             Row_material].Style.BackColor = Color.Yellow;
                         Row_material++;
                     }
@@ -299,9 +309,11 @@ namespace Coset_Sistema_Produccion
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    return 0;
                 }
 
             }
+            return Row_material;
         }
 
         private int Calculo_unidades_entradas()
@@ -440,6 +452,8 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_codigo_proveedor();
             Activa_textbox_descripcion_material();
             Activa_textbox_codigo_material();
+            Activa_textbox_referencia();
+            Activa_grupo_referencia();
             Asigna_caracter_busqueda_material();
             Inicia_timer_busqueda_materiales();
             Operacio_entrada_materiales = "Agregar";
@@ -517,14 +531,18 @@ namespace Coset_Sistema_Produccion
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
-            Limpia_combo_empleado();
-            Aparece_combo_empleado();
-            Activa_combo_empleado();
-            obtener_usuarios_administrativos_compras_disponibles();
-            Rellena_combo_empleado();
-            Activa_seleccion_fecha_actual();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
             Operacio_entrada_materiales = "Agregar OC";
+        }
+
+        private void Activa_textbox_referencia()
+        {
+            textBoxReferencia.Enabled = true;
+        }
+
+        private void Activa_grupo_referencia()
+        {
+            groupBoxReferencia.Enabled = true;
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material()
@@ -666,6 +684,7 @@ namespace Coset_Sistema_Produccion
                             Desactiva_combo_cliente_nombre();
                             Desaparece_combo_atencion();
                             Desactiva_combo_atencion();
+                            Desactiva_grupo_referencia();
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_atencion();
@@ -676,6 +695,11 @@ namespace Coset_Sistema_Produccion
 
                 }
             }
+        }
+
+        private void Desactiva_grupo_referencia()
+        {
+            groupBoxReferencia.Enabled = false;
         }
 
         private void limpia_partidas_ordenes_compra_entradas()
@@ -727,6 +751,10 @@ namespace Coset_Sistema_Produccion
             for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count - 1; partidas++)
             {
                 Insertar_entrada_materiales.Orden_compra = comboBoxCodigoOrdenCompra.Text;
+                if (radioButtonFactura.Checked)
+                    Insertar_entrada_materiales.Referencia = "F-" + textBoxReferencia.Text;
+                else if(radioButtonRemision.Checked)
+                    Insertar_entrada_materiales.Referencia = "R-" + textBoxReferencia.Text;
                 Insertar_entrada_materiales.Descripcion_material =
                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();
                 Insertar_entrada_materiales.Codigo_proveedor =
@@ -1108,6 +1136,7 @@ namespace Coset_Sistema_Produccion
             textBoxTotalUnidades.Text = "";
             textCodigoMaterial.Text = "";
             textBoxPrecioMaterial.Text = "";
+            textBoxReferencia.Text = "";
         }
 
 
@@ -1225,7 +1254,7 @@ namespace Coset_Sistema_Produccion
                 {
                     dataGridViewPartidasEntradaMaterialesVisualizar.Rows.Add(material.Codigo.ToString(), material.Orden_compra,
                         material.Fecha, material.Codigo_material, material.Codigo_proveedor,
-                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad, material.Precio, material.Divisa);
+                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad, material.Precio, material.Divisa, material.Referencia);
                 }
                 catch (Exception ex)
                 {
@@ -1238,7 +1267,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_partidas_entrada_materiales()
         {
             Asigna_valores_entrada_materiales_visualizar();
-            Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
+            Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_materiales_seleccion);
 
         }
 
@@ -1420,6 +1449,7 @@ namespace Coset_Sistema_Produccion
             Activa_botones_operacion();
             limpia_partidas_ordenes_compra_visualizar();
             Desactiva_datagridview_partidas();
+            Desactiva_grupo_referencia();
             Aparece_caja_codigo_empleado();
             Aparece_textbox_atencion();
             Aparece_textbox_nombre_cliente();
@@ -1455,7 +1485,8 @@ namespace Coset_Sistema_Produccion
             if (Operacio_entrada_materiales == "Agregar OC")
             {
                 if (comboBoxCodigoOrdenCompra.Text != "" &&
-                    comboBoxEmpleado.Text != "")
+                    comboBoxEmpleado.Text != "" &&
+                    textBoxReferencia.Text !="")
                 {
                     timerAgregarEntradaMateriales.Enabled = false;
                     Aparece_boton_guardar_base_datos();
@@ -1466,7 +1497,8 @@ namespace Coset_Sistema_Produccion
                 if (
                     comboBoxEmpleado.Text != "" &&
                     textBoxPrecioMaterial.Text != "" &&
-                    textBoxUnidadesEntrada.Text != "")
+                    textBoxUnidadesEntrada.Text != "" &&
+                    textBoxReferencia.Text != "")
                 {
                     timerAgregarEntradaMateriales.Enabled = false;
                     Aparece_boton_guardar_base_datos();
@@ -1616,7 +1648,7 @@ namespace Coset_Sistema_Produccion
                     try
                     {
                         /*Valida Numeros en la caja partida*/
-                        Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString());
+            Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString());
                         if (Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString()) >
                              Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex-1, e.RowIndex].Value.ToString()))
                         {
