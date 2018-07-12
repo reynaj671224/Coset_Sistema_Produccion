@@ -117,6 +117,7 @@ namespace Coset_Sistema_Produccion
 
         private void Visualiza_entrada_materiales()
         {
+            Operacio_entrada_materiales = "Visualizar OC";
             Aparece_datagridview_entrada_visualizar();
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
@@ -128,7 +129,6 @@ namespace Coset_Sistema_Produccion
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
-            Operacio_entrada_materiales = "Visualizar OC";
         }
 
         private void Rellenar_combo_ordenes_compra()
@@ -866,12 +866,8 @@ namespace Coset_Sistema_Produccion
             Material_disponible_entrada_materiales.Cantidad = (Convert.ToInt32(
                 Material_disponible_entrada_materiales.Cantidad.ToString()) +
                             Convert.ToUInt32(textBoxUnidadesEntrada.Text)).ToString();
-            if (Convert.ToSingle(Material_disponible_entrada_materiales.precio) <
-                Convert.ToSingle(textBoxPrecioMaterial.Text))
-            {
-                Material_disponible_entrada_materiales.precio = textBoxPrecioMaterial.Text;
-            }
-
+           
+            Material_disponible_entrada_materiales.precio = textBoxPrecioMaterial.Text;
             respuesta = Class_Materiales.Actualiza_base_datos_materiales(
                 Material_disponible_entrada_materiales);
             if (respuesta == "NO errores")
@@ -929,6 +925,11 @@ namespace Coset_Sistema_Produccion
                 Insertar_entrada_materiales.Codigo_material = textCodigoMaterial.Text;
                 Insertar_entrada_materiales.Precio = textBoxPrecioMaterial.Text;
                 Insertar_entrada_materiales.Cantidad = textBoxUnidadesEntrada.Text;
+                if (radioButtonFactura.Checked)
+                    Insertar_entrada_materiales.Referencia = "F-" + textBoxReferencia.Text;
+                else if (radioButtonRemision.Checked)
+                    Insertar_entrada_materiales.Referencia = "R-" + textBoxReferencia.Text;
+                Insertar_entrada_materiales.Divisa = textBoxDivisa.Text;
             }
         }
 
@@ -1267,7 +1268,14 @@ namespace Coset_Sistema_Produccion
         private void Obtener_partidas_entrada_materiales()
         {
             Asigna_valores_entrada_materiales_visualizar();
-            Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_materiales_seleccion);
+            if (Operacio_entrada_materiales == "Visualizar")
+            {
+                Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_materiales_seleccion);
+            }
+            else if(Operacio_entrada_materiales == "Visualizar OC")
+            {
+                Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
+            }
 
         }
 
@@ -1405,6 +1413,7 @@ namespace Coset_Sistema_Produccion
 
         private void Visualiza_entrada_materiales_no_orden_compra()
         {
+            Operacio_entrada_materiales = "Visualizar";
             Aparece_datagridview_entrada_visualizar();
             Desactiva_botones_operacion();
             Acepta_datagridview_agregar_renglones();
@@ -1415,8 +1424,6 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_codigo_material();
             Asigna_caracter_busqueda_material();
             Inicia_timer_busqueda_materiales();
-            Operacio_entrada_materiales = "Visualizar";
-
         }
 
         private void comboBoxCodigoOrdenCompra_SelectedIndexChanged(object sender, EventArgs e)
@@ -1528,7 +1535,7 @@ namespace Coset_Sistema_Produccion
                 Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
                 Material_disponible_entrada_materiales = Materiales_disponibles_busqueda[0];
                 secuencia_despues_de_busqueda_material();
-                if (Operacio_entrada_materiales == "Visualizar" || Operacio_entrada_materiales == "Agregar")
+                if (Operacio_entrada_materiales == "Visualizar")
                 {
                     Rellenar_partidas_entrada_materiales();
                 }
@@ -1580,6 +1587,7 @@ namespace Coset_Sistema_Produccion
                 textCodigoMaterial.Text = material.Codigo;
                 textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxUnidadesEntradas.Text = material.Cantidad;
+                textBoxDivisa.Text = material.divisa;
             }
         }
 

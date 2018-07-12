@@ -123,15 +123,17 @@ namespace Coset_Sistema_Produccion
                 {
                     for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
                     {
+
                         oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+
                     }
                 }
 
                 oSheet.Cells.EntireColumn.AutoFit();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Excel No instalado");
+                MessageBox.Show(ex.Message);
             }
 
 
@@ -142,11 +144,9 @@ namespace Coset_Sistema_Produccion
             oSheet.Cells[1, 1] = "Codigo Material";
             oSheet.Cells[1, 2] = "Codigo Proveedor";
             oSheet.Cells[1, 3] = "Descripcion";
-            oSheet.Cells[1, 4] = "Minimo";
-            oSheet.Cells[1, 5] = "Maximo";
-            oSheet.Cells[1, 6] = "Cantidad";
-            oSheet.Cells[1, 7] = "Marca";
-            oSheet.Cells[1, 8] = "Unidad Medida";
+            oSheet.Cells[1, 4] = "Cantidad";
+            oSheet.Cells[1, 5] = "Marca";
+            oSheet.Cells[1, 6] = "Unidad Medida";
 
         }
 

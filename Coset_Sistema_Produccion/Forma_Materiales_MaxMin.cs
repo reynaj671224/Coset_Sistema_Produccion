@@ -154,9 +154,9 @@ namespace Coset_Sistema_Produccion
 
                 oSheet.Cells.EntireColumn.AutoFit();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Excel No instalado");
+                MessageBox.Show(ex.Message);
             }
 
             
