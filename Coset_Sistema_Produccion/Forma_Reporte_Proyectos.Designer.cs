@@ -40,13 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridViewDibujosProyecto = new System.Windows.Forms.DataGridView();
-            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewProyectoReportes = new System.Windows.Forms.DataGridView();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
@@ -57,8 +51,16 @@
             this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
+            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio_Unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -68,7 +70,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1124, 521);
+            this.pictureBox1.Size = new System.Drawing.Size(1265, 521);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -78,7 +80,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(1033, 355);
+            this.buttonCancelar.Location = new System.Drawing.Point(1177, 355);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 35;
@@ -93,7 +95,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1033, 258);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1177, 251);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -107,7 +109,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(1033, 435);
+            this.buttonHome.Location = new System.Drawing.Point(1177, 435);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 33;
@@ -121,7 +123,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1033, 271);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1177, 275);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 32;
@@ -173,61 +175,25 @@
             this.label4.TabIndex = 37;
             this.label4.Text = "Codigo Proyecto";
             // 
-            // dataGridViewDibujosProyecto
+            // dataGridViewProyectoReportes
             // 
-            this.dataGridViewDibujosProyecto.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridViewDibujosProyecto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDibujosProyecto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewProyectoReportes.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewProyectoReportes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProyectoReportes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_proyecto,
-            this.Cantidad_dibujos,
-            this.Dibujo_proyecto,
+            this.Codigo_proveedor,
             this.Descripcion_dibujo,
-            this.Proceso_dibujo,
-            this.Descrpcion_partida});
-            this.dataGridViewDibujosProyecto.Enabled = false;
-            this.dataGridViewDibujosProyecto.Location = new System.Drawing.Point(23, 239);
-            this.dataGridViewDibujosProyecto.Name = "dataGridViewDibujosProyecto";
-            this.dataGridViewDibujosProyecto.Size = new System.Drawing.Size(990, 270);
-            this.dataGridViewDibujosProyecto.TabIndex = 48;
-            this.dataGridViewDibujosProyecto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellClick);
-            this.dataGridViewDibujosProyecto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellEndEdit);
-            this.dataGridViewDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
-            // 
-            // Codigo_proyecto
-            // 
-            this.Codigo_proyecto.HeaderText = "Codigo";
-            this.Codigo_proyecto.Name = "Codigo_proyecto";
-            this.Codigo_proyecto.Width = 50;
-            // 
-            // Cantidad_dibujos
-            // 
-            this.Cantidad_dibujos.HeaderText = "Cantidad";
-            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
-            this.Cantidad_dibujos.Width = 50;
-            // 
-            // Dibujo_proyecto
-            // 
-            this.Dibujo_proyecto.HeaderText = "Dibujo";
-            this.Dibujo_proyecto.Name = "Dibujo_proyecto";
-            // 
-            // Descripcion_dibujo
-            // 
-            this.Descripcion_dibujo.HeaderText = "Descripcion";
-            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
-            this.Descripcion_dibujo.Width = 450;
-            // 
-            // Proceso_dibujo
-            // 
-            this.Proceso_dibujo.HeaderText = "Proceso";
-            this.Proceso_dibujo.Name = "Proceso_dibujo";
-            this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Proceso_dibujo.Width = 150;
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            this.Cantidad_dibujos,
+            this.Fecha,
+            this.Precio_Unitario,
+            this.Total_Precio,
+            this.Observaciones});
+            this.dataGridViewProyectoReportes.Enabled = false;
+            this.dataGridViewProyectoReportes.Location = new System.Drawing.Point(23, 239);
+            this.dataGridViewProyectoReportes.Name = "dataGridViewProyectoReportes";
+            this.dataGridViewProyectoReportes.Size = new System.Drawing.Size(1148, 270);
+            this.dataGridViewProyectoReportes.TabIndex = 48;
+            this.dataGridViewProyectoReportes.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
             // 
             // comboBoxCodigoProyecto
             // 
@@ -315,11 +281,53 @@
             this.textBoxIngenieroCliente.Size = new System.Drawing.Size(268, 20);
             this.textBoxIngenieroCliente.TabIndex = 76;
             // 
+            // Codigo_proyecto
+            // 
+            this.Codigo_proyecto.HeaderText = "Codigo";
+            this.Codigo_proyecto.Name = "Codigo_proyecto";
+            // 
+            // Codigo_proveedor
+            // 
+            this.Codigo_proveedor.HeaderText = "Codigo Proveedor";
+            this.Codigo_proveedor.Name = "Codigo_proveedor";
+            // 
+            // Descripcion_dibujo
+            // 
+            this.Descripcion_dibujo.HeaderText = "Descripcion";
+            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
+            this.Descripcion_dibujo.Width = 350;
+            // 
+            // Cantidad_dibujos
+            // 
+            this.Cantidad_dibujos.HeaderText = "Cantidad";
+            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            // 
+            // Precio_Unitario
+            // 
+            this.Precio_Unitario.HeaderText = "Precio Unitario";
+            this.Precio_Unitario.Name = "Precio_Unitario";
+            // 
+            // Total_Precio
+            // 
+            this.Total_Precio.HeaderText = "Total Precio";
+            this.Total_Precio.Name = "Total_Precio";
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.Width = 150;
+            // 
             // Forma_Reporte_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 521);
+            this.ClientSize = new System.Drawing.Size(1265, 521);
             this.Controls.Add(this.textBoxIngenieroCliente);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.textBoxCodigoCliente);
@@ -329,7 +337,7 @@
             this.Controls.Add(this.textBoxIngenieroCoset);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxCodigoProyecto);
-            this.Controls.Add(this.dataGridViewDibujosProyecto);
+            this.Controls.Add(this.dataGridViewProyectoReportes);
             this.Controls.Add(this.textBoxNombreCliente);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxCodigoProyecto);
@@ -344,7 +352,7 @@
             this.Text = "Proyectos";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,7 +370,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCodigoProyecto;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridViewDibujosProyecto;
+        private System.Windows.Forms.DataGridView dataGridViewProyectoReportes;
         private System.Windows.Forms.ComboBox comboBoxCodigoProyecto;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.TextBox textBoxIngenieroCoset;
@@ -374,10 +382,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBoxIngenieroCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proyecto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_dibujos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dibujo_proyecto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Proceso_dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_dibujos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Unitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total_Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
     }
 }
