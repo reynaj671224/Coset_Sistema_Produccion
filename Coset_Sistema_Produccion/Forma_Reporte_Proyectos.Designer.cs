@@ -51,7 +51,7 @@
             this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
-            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -180,7 +180,7 @@
             this.dataGridViewProyectoReportes.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewProyectoReportes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProyectoReportes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Codigo_proyecto,
+            this.Codigo_material,
             this.Codigo_proveedor,
             this.Descripcion_dibujo,
             this.Cantidad_dibujos,
@@ -281,10 +281,10 @@
             this.textBoxIngenieroCliente.Size = new System.Drawing.Size(268, 20);
             this.textBoxIngenieroCliente.TabIndex = 76;
             // 
-            // Codigo_proyecto
+            // Codigo_material
             // 
-            this.Codigo_proyecto.HeaderText = "Codigo";
-            this.Codigo_proyecto.Name = "Codigo_proyecto";
+            this.Codigo_material.HeaderText = "Codigo Material";
+            this.Codigo_material.Name = "Codigo_material";
             // 
             // Codigo_proveedor
             // 
@@ -381,7 +381,7 @@
         private System.Windows.Forms.TextBox textBoxCodigoCliente;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBoxIngenieroCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proyecto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_material;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_dibujos;

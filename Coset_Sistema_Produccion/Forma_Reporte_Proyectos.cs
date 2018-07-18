@@ -41,6 +41,9 @@ namespace Coset_Sistema_Produccion
         public Class_Salida_Material Class_salida_material = new Class_Salida_Material();
         public List<Salida_Material> Salida_materiales_disponibles = new List<Salida_Material>();
         public Salida_Material Busqueda_salida_material = new Salida_Material();
+        public Class_Materiales Class_Materiales = new Class_Materiales();
+        public Material Material_busqueda = new Material();
+        public List<Material> Materiales_disponibles = new List<Material>();
         public enum Campos_dibujos
         {
             codigo, cantidad, numero, descripcion,
@@ -419,6 +422,19 @@ namespace Coset_Sistema_Produccion
         {
             Asigna_campos_salida_materiales();
             Salida_materiales_disponibles = Class_salida_material.Adquiere_salida_materiales_proyecto_busqueda_en_base_datos(Busqueda_salida_material);
+            Rellena_partida_materiales_proyecto();
+        }
+
+        private void Rellena_partida_materiales_proyecto()
+        {
+            foreach(Salida_Material material in Salida_materiales_disponibles)
+            {
+                Material_busqueda.Codigo = material.Codigo_material;
+                Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                dataGridViewProyectoReportes.Rows.Add(Materiales_disponibles[0].Codigo, Materiales_disponibles[0].Codigo_proveedor,
+                    Materiales_disponibles[0].Descripcion, material.Cantidad, material.Fecha,
+                    Materiales_disponibles[0].precio, (Convert.ToDouble(material.Cantidad) * Convert.ToDouble(Materiales_disponibles[0].precio)).ToString("0.00"),"");
+            }
         }
 
         private void Asigna_campos_salida_materiales()
