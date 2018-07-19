@@ -587,7 +587,7 @@ namespace Coset_Sistema_Produccion
         {
             Operacio_cotizaciones = "Agregar";
             Asigna_codigo_cliente_foilio_disponible();
-            Asigna_nuevo_folio_cotizaciones();
+            //Asigna_nuevo_folio_cotizaciones();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_cotizaciones();
             No_aceptar_agregar_contactos_cotizacion();
@@ -1008,6 +1008,7 @@ namespace Coset_Sistema_Produccion
                         Aparece_textbox_nombre_cliente();
                         Aparece_textbox_atencion();
                         Aparece_textbox_atencion_copia();
+                        Asigna_nuevo_folio_cotizaciones();
                         Elimina_informacion_cotizaciones_disponibles();
                     }
                 }

@@ -53,7 +53,7 @@ namespace Coset_Sistema_Produccion
         private void Agrega_material()
         {
             Asigna_codigo_proceso_foilio_disponible();
-            Asigna_nuevo_folio_material();
+            //Asigna_nuevo_folio_material();
             Desactiva_botones_operacion();
             Aparece_caja_codigo_proveedor();
             Desaparece_combo_codigo_material();
@@ -189,6 +189,7 @@ namespace Coset_Sistema_Produccion
                     Aparece_caja_codigo_material();
                     Desaparece_foto_material();
                     Desaparece_foto_material();
+                    Asigna_nuevo_folio_material();
                     Elimina_informacion_materiales_disponibles();
                 }
             }

@@ -717,7 +717,7 @@ namespace Coset_Sistema_Produccion
         {
             Operacio_proyectos = "Agregar Proyecto";
             Asigna_codigo_proyecto_foilio_disponible();
-            Asigna_nuevo_folio_proyecto();
+            //Asigna_nuevo_folio_proyecto();
             Desactiva_botones_operacion();
             Activa_cajas_informacion_proyecto();
             No_aceptar_agregar_dibujos_proyecto();
@@ -1290,6 +1290,7 @@ namespace Coset_Sistema_Produccion
                             Aparece_textbox_ingeniero_cliente();
 
                             //Asigna_nuevo_folio_OC();
+                            Asigna_nuevo_folio_proyecto();
 
                             Elimina_informacion_proyectos_disponibles();
                         }

@@ -729,7 +729,7 @@ namespace Coset_Sistema_Produccion
         {
             Operacio_orden_compra = "Agregar";
             Asigna_codigo_orden_compra_foilio_disponible();
-            Asigna_nuevo_folio_orden_compra();
+            //Asigna_nuevo_folio_orden_compra();
             Desactiva_botones_operacion();
             No_aceptar_agregar_partidas_ordenes_compra();
             Acepta_datagridview_agregar_renglones();
@@ -1281,36 +1281,37 @@ namespace Coset_Sistema_Produccion
                 {*/
                     if (Guarda_datos_partidas_orden_compra())
                     {
-                        if (Guarda_datos_orden_compra())
-                        {
-                            Limpia_cajas_captura_despues_de_agregar_orden_compra();
-                            Limpia_combo_nombre_cliente();
-                            Limpia_combo_atencion();
-                            Limpia_combo_atencio_copia();
-                            Limpia_operaciones_ordenes_compra();
-                            Limpia_combo_proyectos_partidas();
-                            Desactiva_cajas_captura_despues_de_agregar_orden_compra();
-                            Desaparece_boton_guardar_base_de_datos();
-                            Desaparece_boton_cancelar();
-                            Desaparece_combo_codigo_cotizacion();
-                            Activa_botones_operacion();
-                            limpia_partidas_ordenes_compra();
-                            Desactiva_datagridview_partidas();
-                            Desaparece_combo_cliente_nombre();
-                            Desactiva_combo_cliente_nombre();
-                            Desaparece_combo_atencion();
-                            Desactiva_combo_atencion();
-                            Desaparece_combo_copia_atencion();
-                            Desactiva_combo_copia_atencion();
-                            Desactiva_combo_condicion_pago();
-                            Desaparece_combo_condicion_pago();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_atencion();
-                            Aparece_textbox_atencion_copia();
-                            Selecciona_pesos_tipo_modeda();
-                            Elimina_informacion_orden_compra_disponibles();
-                        }
+                    if (Guarda_datos_orden_compra())
+                    {
+                        Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                        Limpia_combo_nombre_cliente();
+                        Limpia_combo_atencion();
+                        Limpia_combo_atencio_copia();
+                        Limpia_operaciones_ordenes_compra();
+                        Limpia_combo_proyectos_partidas();
+                        Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                        Desaparece_boton_guardar_base_de_datos();
+                        Desaparece_boton_cancelar();
+                        Desaparece_combo_codigo_cotizacion();
+                        Activa_botones_operacion();
+                        limpia_partidas_ordenes_compra();
+                        Desactiva_datagridview_partidas();
+                        Desaparece_combo_cliente_nombre();
+                        Desactiva_combo_cliente_nombre();
+                        Desaparece_combo_atencion();
+                        Desactiva_combo_atencion();
+                        Desaparece_combo_copia_atencion();
+                        Desactiva_combo_copia_atencion();
+                        Desactiva_combo_condicion_pago();
+                        Desaparece_combo_condicion_pago();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_nombre_cliente();
+                        Aparece_textbox_atencion();
+                        Aparece_textbox_atencion_copia();
+                        Selecciona_pesos_tipo_modeda();
+                        Asigna_nuevo_folio_orden_compra();
+                        Elimina_informacion_orden_compra_disponibles();
+                    }
                     }
                /* }*/
             }
@@ -2801,9 +2802,28 @@ namespace Coset_Sistema_Produccion
             }
             else if (Materiales_disponibles_busqueda.Count == 0)
             {
-                MessageBox.Show("No existe material con el criterio de busqueda", "Requisiciones",
-                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                /* MessageBox.Show("No existe material con el criterio de busqueda", "Requisiciones",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                Limpia_renglon_editado(dataGridViewPartidasOrdenCompra.CurrentCell.RowIndex);
+
             }
+        }
+
+        private void Limpia_renglon_editado(int rowIndex)
+        {
+            dataGridViewPartidasOrdenCompra.CurrentCell = dataGridViewPartidasOrdenCompra["Proyecto_compra", rowIndex];
+
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Style.BackColor = Color.Yellow;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Style.BackColor = Color.Yellow;
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material, rowIndex].Style.BackColor = Color.Yellow;
+
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Value = "";
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Value = "";
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.unidad_medida, rowIndex].Value = "";
+            dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material, rowIndex].Value = "";
+
+            dataGridViewPartidasOrdenCompra.CurrentCell = dataGridViewPartidasOrdenCompra["Proyecto_compra", rowIndex];
+            dataGridViewPartidasOrdenCompra.Update();
         }
 
         private void Rellena_campos_partidas_requisiciones_materiales(int rowIndex, Material material_seleccionado_data_view)
