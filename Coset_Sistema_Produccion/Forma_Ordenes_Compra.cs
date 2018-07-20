@@ -71,7 +71,7 @@ namespace Coset_Sistema_Produccion
         public enum Campos_orden_compra
         {
             codigo, partida, cantidad, material, parte,descripcion,unidad_medida,
-            proyecto,precio, total
+            proyecto,precio, total,
         };
 
         public string Operacio_orden_compra = "";
@@ -518,8 +518,8 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(),
                             partidas_ordenes_compra_disponibles[partidas].Partida,
-                            partidas_ordenes_compra_disponibles[partidas].Material,
                             partidas_ordenes_compra_disponibles[partidas].Cantidad,
+                            partidas_ordenes_compra_disponibles[partidas].Material,
                             partidas_ordenes_compra_disponibles[partidas].Parte,
                             partidas_ordenes_compra_disponibles[partidas].Descripcion,
                             partidas_ordenes_compra_disponibles[partidas].Unidad_medida,

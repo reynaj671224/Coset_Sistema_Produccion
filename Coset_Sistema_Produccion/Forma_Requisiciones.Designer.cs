@@ -203,6 +203,7 @@
             // 
             // dataGridViewPartidasRequisiciones
             // 
+            this.dataGridViewPartidasRequisiciones.AllowUserToDeleteRows = false;
             this.dataGridViewPartidasRequisiciones.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewPartidasRequisiciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPartidasRequisiciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

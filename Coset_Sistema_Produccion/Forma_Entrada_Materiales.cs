@@ -285,9 +285,9 @@ namespace Coset_Sistema_Produccion
 
                 try
                 {
-                    Partida_orden_compra_seleccionada = partidas_ordenes_compra_disponibles.
-                        Find(partidas_ordenes_compra => partidas_ordenes_compra.Descripcion.Contains(partida_orden_compra.Descripcion));
-
+                    /*Partida_orden_compra_seleccionada = partidas_ordenes_compra_disponibles.
+                        Find(partidas_ordenes_compra => partidas_ordenes_compra.Descripcion.Contains(partida_orden_compra.Descripcion));*/
+                    Partida_orden_compra_seleccionada = partida_orden_compra;
                     if (Obtener_materiales_con_descripcion_codigo_proveedor())
                     {
                         Material_disponible_entrada_materiales = Materiales_disponible_entrada_materiales.Find(
@@ -519,6 +519,7 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_entrada_materiales_orden_compra()
         {
+            Operacio_entrada_materiales = "Agregar OC";
             Aparece_datagridview_entrada_materiales();
             Desactiva_botones_operacion();
             Acepta_datagridview_agregar_renglones();
@@ -532,7 +533,7 @@ namespace Coset_Sistema_Produccion
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
-            Operacio_entrada_materiales = "Agregar OC";
+            
         }
 
         private void Activa_textbox_referencia()
@@ -1272,7 +1273,7 @@ namespace Coset_Sistema_Produccion
             {
                 Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_materiales_seleccion);
             }
-            else if(Operacio_entrada_materiales == "Visualizar OC")
+            else if(Operacio_entrada_materiales == "Visualizar OC" || Operacio_entrada_materiales == "Agregar OC")
             {
                 Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
             }

@@ -296,6 +296,7 @@
             // 
             // dataGridViewDibujosProyecto
             // 
+            this.dataGridViewDibujosProyecto.AllowUserToDeleteRows = false;
             this.dataGridViewDibujosProyecto.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewDibujosProyecto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDibujosProyecto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
