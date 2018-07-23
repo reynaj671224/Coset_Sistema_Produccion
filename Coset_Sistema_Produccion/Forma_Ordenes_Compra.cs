@@ -180,12 +180,24 @@ namespace Coset_Sistema_Produccion
             Activa_dataview_partidas_ordenes_compra();
             limpia_combo_ordenes_compra();
             Aparece_combo_orden_compra();
+            Aparece_textbox_estado();
+            Aparece_label_estado();
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
             obtener_proyectos_disponibles();
             Rellenar_combo_proyectos_partidas_requisiciones();
             Operacio_orden_compra = "Visualizar";
+        }
+
+        private void Aparece_label_estado()
+        {
+            labelEstado.Visible = true;
+        }
+
+        private void Aparece_textbox_estado()
+        {
+            textBoxEstado.Visible = true;
         }
 
         private void Aparece_boton_visulizar_word_orden_compra()
@@ -266,9 +278,14 @@ namespace Coset_Sistema_Produccion
             Desactiva_boton_modificar_cotizacion();
             Desactiva_boton_eliminar_cotizacion();
             Desactiva_boton_visualizar_cotizacion();
+            Desactiva_boton_cancelarOC();
             Desactiva_boton_partidas();
         }
 
+        private void Desactiva_boton_cancelarOC()
+        {
+            buttonCancelarOC.Enabled = false;
+        }
 
         private void Desactiva_boton_partidas()
         {
@@ -323,7 +340,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_textbox_divisa()
         {
-            textBoxDivisa.Text = "";
+            textBoxEstado.Text = "";
         }
 
         private void Limpia_combo_atencio_copia()
@@ -468,8 +485,8 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra.Rows.Add(
                             partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(), 
                             partidas_ordenes_compra_disponibles[partidas].Partida,
-                            partidas_ordenes_compra_disponibles[partidas].Material, 
-                            partidas_ordenes_compra_disponibles[partidas].Cantidad,  
+                            partidas_ordenes_compra_disponibles[partidas].Cantidad, 
+                            partidas_ordenes_compra_disponibles[partidas].Material,  
                             partidas_ordenes_compra_disponibles[partidas].Parte,
                             partidas_ordenes_compra_disponibles[partidas].Descripcion,
                             partidas_ordenes_compra_disponibles[partidas].Unidad_medida, 
@@ -579,16 +596,15 @@ namespace Coset_Sistema_Produccion
             textBoxRequisitor.Text = orden_compra_visualizar.Realizado;
             textBoxRequisicion.Text = orden_compra_visualizar.Requisicion;
             textBoxCondicionPago.Text = orden_compra_visualizar.Condicion_pago;
+            textBoxEstado.Text = orden_compra_visualizar.Estado;
             if (orden_compra_visualizar.Tipo_moneda == "Dolares")
             {
                 radioButtonDolares.Select();
-                textBoxDivisa.Text = orden_compra_visualizar.Divisa;
                 Desactiva_textbox_divisa();
             }
             else
             {
                 radioButtonPesos.Select();
-                textBoxDivisa.Text = "";
             }
 
         }
@@ -669,13 +685,13 @@ namespace Coset_Sistema_Produccion
             if (orden_compra_modificar.Tipo_moneda == "Dolares")
             {
                 radioButtonDolares.Select();
-                textBoxDivisa.Text = orden_compra_modificar.Divisa;
+                textBoxEstado.Text = orden_compra_modificar.Divisa;
                 Desactiva_textbox_divisa();
             }
             else
             {
                 radioButtonPesos.Select();
-                textBoxDivisa.Text = "";
+                textBoxEstado.Text = "";
             }
         }
 
@@ -890,7 +906,7 @@ namespace Coset_Sistema_Produccion
             {
                 if (comboBoxRealizado.Text != "" && comboBoxNombreProveedor.Text != "" &&
                     comboBoxCotizado.Text != "" && textBoxCotizacion.Text != "" &&
-                    comboBoxCondicionPago.Text != "" && textBoxDivisa.Text!= "" &&
+                    comboBoxCondicionPago.Text != "" && textBoxEstado.Text!= "" &&
                     textBoxRequisicion.Text !="")
                 {
                     timerAgregarOrdenCompra.Enabled = false;
@@ -918,8 +934,66 @@ namespace Coset_Sistema_Produccion
                 Secuencia_modificar_orden_compra();
             else if (Operacio_orden_compra == "Agregar Partidas")
                 Secuencia_agregar_partidas();
-            else if(Operacio_orden_compra == "Copiar")
+            else if (Operacio_orden_compra == "Copiar")
                 Secuencia_copiar_cotizacion();
+            else if (Operacio_orden_compra == "CancelarOC")
+                Secuencia_cancelarOC();
+
+        }
+
+        private void Secuencia_cancelarOC()
+        {
+            if (MessageBox.Show("Esta Seguro de Cancelar la orden de compra seleccionada?",
+                "Cancelar orden de compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (Modifica_estado_orden_compra())
+                {
+                    Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                    Limpia_combo_nombre_cliente();
+                    Limpia_combo_atencion();
+                    Limpia_combo_atencio_copia();
+                    Limpia_operaciones_ordenes_compra();
+                    Desactiva_cajas_captura_despues_de_agregar_orden_compra();
+                    Desaparece_boton_guardar_base_de_datos();
+                    Desaparece_boton_cancelar();
+                    Desaparece_combo_codigo_cotizacion();
+                    Aparce_caja_codigo_cliente();
+                    Activa_botones_operacion();
+                    limpia_partidas_ordenes_compra();
+                    Desactiva_datagridview_partidas();
+                    Desaparece_combo_cliente_nombre();
+                    Desactiva_combo_cliente_nombre();
+                    Desaparece_combo_atencion();
+                    Desactiva_combo_atencion();
+                    Desaparece_combo_copia_atencion();
+                    Desaparece_combo_condicion_pago();
+                    Desactiva_combo_copia_atencion();
+                    Aparece_textbox_nombre_cliente();
+                    Aparece_textbox_nombre_cliente();
+                    Aparece_textbox_atencion();
+                    Aparece_textbox_atencion_copia();
+                    Aparece_textbox_condicio_pago();
+                    Limpia_combo_proyectos_partidas();
+                    Elimina_informacion_orden_compra_disponibles();
+                }
+            }
+        }
+
+        private bool Modifica_estado_orden_compra()
+        {
+            string Respuesta = "";
+            orden_compra_modificar.Codigo = comboBoxCodigoOrdenCompra.Text;
+            Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_modificar,"Cancelar");
+            if (Respuesta == "No Errores")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(Respuesta);
+                return false;
+            }
+            
         }
 
         private void Secuencia_copiar_cotizacion()
@@ -968,13 +1042,13 @@ namespace Coset_Sistema_Produccion
             {
                 try
                 {
-                    Convert.ToSingle(textBoxDivisa.Text);
+                    Convert.ToSingle(textBoxEstado.Text);
                     return true;
                 }
                 catch
                 {
                     MessageBox.Show("Error Formato Divisa", "Divisa", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBoxDivisa.Text = "";
+                    textBoxEstado.Text = "";
                     return false;
                 }
             }
@@ -1497,7 +1571,7 @@ namespace Coset_Sistema_Produccion
             textBoxCorreoContacto.Text = "";
             textBoxCotizacion.Text = "";
             textBoxCondicionPago.Text = "";
-            textBoxDivisa.Text = "";
+            textBoxEstado.Text = "";
             textBoxRequisicion.Text = "";
             radioButtonPesos.Select();
         }
@@ -1615,7 +1689,7 @@ namespace Coset_Sistema_Produccion
             else
             {
                 tipo_moneda = "Dolares";
-                divisa = textBoxDivisa.Text;
+                divisa = textBoxEstado.Text;
             }
 
                 return "INSERT INTO ordenes_compra(codigo_orden_compra, provedor_compra,tipo_moneda_compra," +
@@ -2211,6 +2285,8 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.partida, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<c" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.cantidad, partida - 1].Value.ToString());
+                    Remplaza_texto_en_Documento("<p" + partida + ">",
+                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.proyecto, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<np" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<d" + partida + ">",
@@ -2539,17 +2615,17 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_textbox_divisa()
         {
-            textBoxDivisa.Enabled = true;
+            textBoxEstado.Enabled = true;
         }
 
         private void Aparece_textbox_divisa()
         {
-            textBoxDivisa.Visible = true;
+            textBoxEstado.Visible = true;
         }
 
         private void Aparece_etiqueta_divisa()
         {
-            labeldivisa.Visible = true;
+            labelEstado.Visible = true;
         }
 
         private void radioButtonPesos_CheckedChanged(object sender, EventArgs e)
@@ -2562,17 +2638,17 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_textbox_divisa()
         {
-            textBoxDivisa.Enabled = false;
+            textBoxEstado.Enabled = false;
         }
 
         private void Desaparece_textbox_divisa()
         {
-            textBoxDivisa.Visible = false;
+            textBoxEstado.Visible = false;
         }
 
         private void Desaparece_etiqueta_divisa()
         {
-            labeldivisa.Visible = false;
+            labelEstado.Visible = false;
         }
 
         private void buttonBuscarOrdenCompra_Click(object sender, EventArgs e)
@@ -2592,6 +2668,17 @@ namespace Coset_Sistema_Produccion
                 configura_forma_operaciones_partidas();
             else if (Operacio_orden_compra == "Copiar")
                 configura_forma_copiar();
+            else if (Operacio_orden_compra == "CancelarOC")
+                configura_forma_CancelarOC();
+        }
+
+        private void configura_forma_CancelarOC()
+        {
+            limpia_partidas_ordenes_compra();
+            Rellena_cajas_informacion_de_orden_compra();
+            Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
+            Rellena_cajas_informacion_de_partidas_orden_compra();
+            Aparce_boton_guardar_base_datos();
         }
 
         private void buttonAgregarPartida_Click(object sender, EventArgs e)
@@ -2683,10 +2770,23 @@ namespace Coset_Sistema_Produccion
             Deabilita_boton_guardar_archivo_path();
             Desaparece_boton_guardar_archivo_path();
             Selecciona_pesos_tipo_modeda();
+            Desaparece_textbox_estado();
+            Desaparece_label_estado();
             Elimina_archivo();
             Elimina_informacion_orden_compra_disponibles();
 
         }
+
+        private void Desaparece_label_estado()
+        {
+            labelEstado.Visible = false;
+        }
+
+        private void Desaparece_textbox_estado()
+        {
+            textBoxEstado.Visible = false;
+        }
+
         private void Termina_secuencia_save_file()
         {
             Termina_secuencia_operaciones_ordenes_compra();
@@ -2992,6 +3092,26 @@ namespace Coset_Sistema_Produccion
                            Cells["Numero_partida"].Value = Numero_partidas_disponibles;
                 }
             }
+        }
+
+        private void buttonCancelarOC_Click(object sender, EventArgs e)
+        {
+            Operacio_orden_compra = "CancelarOC";
+            Desactiva_botones_operacion();
+            Desaparece_caja_captura_codigo_orden_compra();
+            Aparece_boton_cancelar_operacio();
+            No_aceptar_agregar_partidas_ordenes_compra();
+            Activa_dataview_partidas_ordenes_compra();
+            limpia_combo_ordenes_compra();
+            Aparece_combo_orden_compra();
+            Aparece_textbox_estado();
+            Aparece_label_estado();
+            Activa_combo_orden_compra();
+            obtener_ordenes_compra_disponibles();
+            Rellenar_combo_ordenes_compra();
+            obtener_proyectos_disponibles();
+            Rellenar_combo_proyectos_partidas_requisiciones();
+            
         }
     }
 }

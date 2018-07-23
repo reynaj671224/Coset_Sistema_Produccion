@@ -827,11 +827,14 @@ namespace Coset_Sistema_Produccion
         {
             if (Operacio_proyectos == "Agregar Proyecto")
             {
+                //if (textBoxCodigoProyecto.Text != "" && comboBoxNombreCliente.Text != "" &&
+                //comboBoxCodigoCotizacion.Text != "" && textBoxCodigoOC.Text != "" && 
+                //comboBoxIngenieroCoset.Text != "" && comboBoxIngenieroCliente.Text != ""  &&
+                //textBoxNombreProyecto.Text != "" && textBoxModelo.Text != "" &&
+                //textBoxSerie.Text != "")
                 if (textBoxCodigoProyecto.Text != "" && comboBoxNombreCliente.Text != "" &&
-                comboBoxCodigoCotizacion.Text != "" && textBoxCodigoOC.Text != "" && 
-                comboBoxIngenieroCoset.Text != "" && comboBoxIngenieroCliente.Text != ""  &&
-                textBoxNombreProyecto.Text != "" && textBoxModelo.Text != "" &&
-                textBoxSerie.Text != "")
+                comboBoxCodigoCotizacion.Text != ""  && comboBoxIngenieroCoset.Text != "" &&
+                comboBoxIngenieroCliente.Text != "")
                 {
                     timerAgregarProyecto.Enabled = false;
                     buttonGuardarBasedeDatos.Visible = true;

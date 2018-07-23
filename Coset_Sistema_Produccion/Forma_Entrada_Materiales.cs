@@ -33,6 +33,7 @@ namespace Coset_Sistema_Produccion
         public Class_Ordenes_Compra Class_ordenes_compra = new Class_Ordenes_Compra();
         public Orden_compra orden_compra_visualizar = new Orden_compra();
         public Orden_compra orden_compra_modificar = new Orden_compra();
+        public Orden_compra orden_compra_seleccionada = new Orden_compra();
         public List<Partida_orden_compra> partidas_ordenes_compra_disponibles =
             new List<Partida_orden_compra>();
         public Class_Materiales Class_Materiales = new Class_Materiales();
@@ -254,25 +255,47 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_agregar()
         {
             Desactiva_combobox_codigo_orden_compra();
+            Obtener_orden_compra_seleccionada();
+            Muestra_informacion_orden_compra();
             //Limpia_combo_descripcion_materiales();
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
             //Desaparece_textbox_descripcion_materiales();
-            Limpia_datagridview_agrega_materiales();
-            Obtener_materiales_ordenes_compra();
-            if(Rellena_datagridview_agregar_materiales()!=0)
+            if (orden_compra_seleccionada.Estado != "Cancelada" && orden_compra_seleccionada.Estado != "Cerrada")
             {
-                Limpia_combo_empleado();
-                Aparece_combo_empleado();
-                Activa_combo_empleado();
-                obtener_usuarios_administrativos_compras_disponibles();
-                Rellena_combo_empleado();
-                Activa_seleccion_fecha_actual();
-                Activa_grupo_referencia();
-                Activa_textbox_referencia();
+                Limpia_datagridview_agrega_materiales();
+                Obtener_materiales_ordenes_compra();
+                if (Rellena_datagridview_agregar_materiales() != 0)
+                {
+                    Limpia_combo_empleado();
+                    Aparece_combo_empleado();
+                    Activa_combo_empleado();
+                    obtener_usuarios_administrativos_compras_disponibles();
+                    Rellena_combo_empleado();
+                    Activa_seleccion_fecha_actual();
+                    Activa_grupo_referencia();
+                    Activa_textbox_referencia();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Orden de Compra " + textBoxEstadoOC.Text, "Entrada Material", 
+                MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                Termina_secuencia_operaciones_entrada_materiales();
             }
             //Rellena_combo_descripcion_materiales();
 
+        }
+
+        private void Muestra_informacion_orden_compra()
+        {
+            textBoxEstadoOC.Text = orden_compra_seleccionada.Estado;
+        }
+
+        private void Obtener_orden_compra_seleccionada()
+        {
+            orden_compra_seleccionada = ordenes_compra_disponibles.Find(orden_compra_seleccion => 
+            orden_compra_seleccion.Codigo.Contains(comboBoxCodigoOrdenCompra.Text));
         }
 
         private int Rellena_datagridview_agregar_materiales()
@@ -303,6 +326,40 @@ namespace Coset_Sistema_Produccion
                         
                         dataGridViewPartidasEntradaMaterialesEntrada["Cantidad_recibidas",
                             Row_material].Style.BackColor = Color.Yellow;
+                        Row_material++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return 0;
+                }
+
+            }
+            return Row_material;
+        }
+        private int Verifica_materiales_ordenes_compra()
+        {
+            int Row_material = 0;
+            int Unidades_ordenadas = 0;
+            Limpia_datagridview_agrega_materiales();
+            foreach (Partida_orden_compra partida_orden_compra in partidas_ordenes_compra_disponibles)
+            {
+
+                try
+                {
+                    /*Partida_orden_compra_seleccionada = partidas_ordenes_compra_disponibles.
+                        Find(partidas_ordenes_compra => partidas_ordenes_compra.Descripcion.Contains(partida_orden_compra.Descripcion));*/
+                    Partida_orden_compra_seleccionada = partida_orden_compra;
+                    if (Obtener_materiales_con_descripcion_codigo_proveedor())
+                    {
+                        Material_disponible_entrada_materiales = Materiales_disponible_entrada_materiales.Find(
+                        material_disponible => material_disponible.Codigo_proveedor.Contains(partida_orden_compra.Parte));
+                    }
+
+                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas();
+                    if (Unidades_ordenadas != 0)
+                    {
                         Row_material++;
                     }
                 }
@@ -532,8 +589,20 @@ namespace Coset_Sistema_Produccion
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
+            Aparece_textboxestadoOC();
+            Aparece_label_estado_OC();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
             
+        }
+
+        private void Aparece_label_estado_OC()
+        {
+            textBoxEstadoOC.Visible = true;
+        }
+
+        private void Aparece_textboxestadoOC()
+        {
+            labelEstadoOC.Visible = true;
         }
 
         private void Activa_textbox_referencia()
@@ -670,6 +739,7 @@ namespace Coset_Sistema_Produccion
                     {
                         if(Agrega_entrada_materiales_base_datos())
                         {
+                            Verifica_estado_orden_compra();
                             Limpia_cajas_captura_despues_de_agregar_orden_compra();
                             Limpia_combo_nombre_cliente();
                             Limpia_combo_descripcion_materiales();
@@ -689,6 +759,8 @@ namespace Coset_Sistema_Produccion
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_atencion();
+                            Desaparece_textbox_estadoOC();
+                            Desaparece_label_estadoOC();
                             Desaparece_datagridview_entrada_materiales();
                             Elimina_informacion_orden_compra_disponibles();
                         }
@@ -696,6 +768,19 @@ namespace Coset_Sistema_Produccion
 
                 }
             }
+        }
+
+        private void Verifica_estado_orden_compra()
+        {
+            string Respuesta = "";
+            Obtener_materiales_ordenes_compra();
+            orden_compra_seleccionada.Codigo = comboBoxCodigoOrdenCompra.Text;
+            if (Verifica_materiales_ordenes_compra() != 0)
+
+                Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_seleccionada, "Parcial");
+            else
+                Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_seleccionada, "Cerrar");
+
         }
 
         private void Desactiva_grupo_referencia()
@@ -1139,6 +1224,7 @@ namespace Coset_Sistema_Produccion
             textCodigoMaterial.Text = "";
             textBoxPrecioMaterial.Text = "";
             textBoxReferencia.Text = "";
+            textBoxEstadoOC.Text = "";
         }
 
 
@@ -1467,8 +1553,20 @@ namespace Coset_Sistema_Produccion
             Pinta_color_blanco_cajas_busqueda_material();
             Termina_timer_busqueda();
             Desaparece_boton_buscar_base_datos();
+            Desaparece_textbox_estadoOC();
+            Desaparece_label_estadoOC();
             Elimina_informacion_orden_compra_disponibles();
 
+        }
+
+        private void Desaparece_label_estadoOC()
+        {
+            labelEstadoOC.Visible = false;
+        }
+
+        private void Desaparece_textbox_estadoOC()
+        {
+            textBoxEstadoOC.Visible = false;
         }
 
         private void Termina_timer_busqueda()

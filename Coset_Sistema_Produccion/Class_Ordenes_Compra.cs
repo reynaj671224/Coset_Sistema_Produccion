@@ -32,6 +32,7 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
                         Requisicion = mySqlDataReader["requisicion"].ToString(),
+                        Estado = mySqlDataReader["estado"].ToString(),
 
                     });
                 }
@@ -53,6 +54,47 @@ namespace Coset_Sistema_Produccion
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=compras;Uid=root;Pwd=" + Coset_Sistema_Produccion.password_server + ";";
         }
+        public string Modifica_estado_orden_compra(Orden_compra Orden_compra,string Operacion)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_compras_partidas_orden_compra());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_estado_orden_compra(Orden_compra, Operacion), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "No Errores";
+        }
+
+        private string Configura_cadena_comando_modificar_estado_orden_compra(Orden_compra orden_compra, string operacion)
+        {
+            if (operacion == "Cancelar")
+            {
+                return "UPDATE ordenes_compra set  estado='Cancelada'" +
+                   "where codigo_orden_compra='" + orden_compra.Codigo + "';";
+            }
+            else if(operacion == "Parcial")
+            {
+                return "UPDATE ordenes_compra set  estado='Parcial'" +
+                   "where codigo_orden_compra='" + orden_compra.Codigo + "';";
+            }
+            else if(operacion == "Cerrar")
+            {
+                return "UPDATE ordenes_compra set  estado='Cerrada'" +
+                   "where codigo_orden_compra='" + orden_compra.Codigo + "';";
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
     public class Orden_compra
     {
@@ -67,6 +109,7 @@ namespace Coset_Sistema_Produccion
         public string Correo_electronico = "";
         public string Cotizacion = "";
         public string Requisicion = "";
+        public string Estado = "";
         public string error = "";
     }
 }

@@ -79,14 +79,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButtonDolares = new System.Windows.Forms.RadioButton();
             this.radioButtonPesos = new System.Windows.Forms.RadioButton();
-            this.labeldivisa = new System.Windows.Forms.Label();
-            this.textBoxDivisa = new System.Windows.Forms.TextBox();
+            this.labelEstado = new System.Windows.Forms.Label();
+            this.textBoxEstado = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxCondicionPago = new System.Windows.Forms.ComboBox();
             this.textBoxCondicionPago = new System.Windows.Forms.TextBox();
             this.buttonSaveFile = new System.Windows.Forms.Button();
             this.textBoxRequisicion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.buttonCancelarOC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -108,7 +109,7 @@
             // 
             this.buttonBuscarOrdenCompra.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBuscarOrdenCompra.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarOrdenCompra.Image")));
-            this.buttonBuscarOrdenCompra.Location = new System.Drawing.Point(416, 24);
+            this.buttonBuscarOrdenCompra.Location = new System.Drawing.Point(343, 24);
             this.buttonBuscarOrdenCompra.Name = "buttonBuscarOrdenCompra";
             this.buttonBuscarOrdenCompra.Size = new System.Drawing.Size(79, 74);
             this.buttonBuscarOrdenCompra.TabIndex = 31;
@@ -121,7 +122,7 @@
             // 
             this.buttonEliminarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonEliminarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonEliminarCotizacion.Image")));
-            this.buttonEliminarCotizacion.Location = new System.Drawing.Point(671, 24);
+            this.buttonEliminarCotizacion.Location = new System.Drawing.Point(598, 24);
             this.buttonEliminarCotizacion.Name = "buttonEliminarCotizacion";
             this.buttonEliminarCotizacion.Size = new System.Drawing.Size(79, 74);
             this.buttonEliminarCotizacion.TabIndex = 30;
@@ -134,7 +135,7 @@
             // 
             this.buttonAgregarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAgregarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarCotizacion.Image")));
-            this.buttonAgregarCotizacion.Location = new System.Drawing.Point(586, 24);
+            this.buttonAgregarCotizacion.Location = new System.Drawing.Point(513, 24);
             this.buttonAgregarCotizacion.Name = "buttonAgregarCotizacion";
             this.buttonAgregarCotizacion.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonAgregarCotizacion.Size = new System.Drawing.Size(79, 74);
@@ -149,7 +150,7 @@
             this.buttonModificarCotizacion.AutoSize = true;
             this.buttonModificarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonModificarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonModificarCotizacion.Image")));
-            this.buttonModificarCotizacion.Location = new System.Drawing.Point(501, 24);
+            this.buttonModificarCotizacion.Location = new System.Drawing.Point(428, 24);
             this.buttonModificarCotizacion.Name = "buttonModificarCotizacion";
             this.buttonModificarCotizacion.Size = new System.Drawing.Size(79, 74);
             this.buttonModificarCotizacion.TabIndex = 28;
@@ -413,7 +414,7 @@
             // 
             this.buttonPartidas.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPartidas.Image = ((System.Drawing.Image)(resources.GetObject("buttonPartidas.Image")));
-            this.buttonPartidas.Location = new System.Drawing.Point(756, 24);
+            this.buttonPartidas.Location = new System.Drawing.Point(768, 24);
             this.buttonPartidas.Name = "buttonPartidas";
             this.buttonPartidas.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonPartidas.Size = new System.Drawing.Size(79, 74);
@@ -529,7 +530,7 @@
             this.buttonWordPrevio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonWordPrevio.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonWordPrevio.Image = ((System.Drawing.Image)(resources.GetObject("buttonWordPrevio.Image")));
-            this.buttonWordPrevio.Location = new System.Drawing.Point(331, 24);
+            this.buttonWordPrevio.Location = new System.Drawing.Point(258, 24);
             this.buttonWordPrevio.Name = "buttonWordPrevio";
             this.buttonWordPrevio.Size = new System.Drawing.Size(79, 74);
             this.buttonWordPrevio.TabIndex = 64;
@@ -616,26 +617,26 @@
             this.radioButtonPesos.UseVisualStyleBackColor = false;
             this.radioButtonPesos.CheckedChanged += new System.EventHandler(this.radioButtonPesos_CheckedChanged);
             // 
-            // labeldivisa
+            // labelEstado
             // 
-            this.labeldivisa.AutoSize = true;
-            this.labeldivisa.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeldivisa.Image = ((System.Drawing.Image)(resources.GetObject("labeldivisa.Image")));
-            this.labeldivisa.Location = new System.Drawing.Point(523, 223);
-            this.labeldivisa.Name = "labeldivisa";
-            this.labeldivisa.Size = new System.Drawing.Size(41, 16);
-            this.labeldivisa.TabIndex = 71;
-            this.labeldivisa.Text = "Divisa";
-            this.labeldivisa.Visible = false;
+            this.labelEstado.AutoSize = true;
+            this.labelEstado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEstado.Image = ((System.Drawing.Image)(resources.GetObject("labelEstado.Image")));
+            this.labelEstado.Location = new System.Drawing.Point(523, 223);
+            this.labelEstado.Name = "labelEstado";
+            this.labelEstado.Size = new System.Drawing.Size(43, 16);
+            this.labelEstado.TabIndex = 71;
+            this.labelEstado.Text = "Estado";
+            this.labelEstado.Visible = false;
             // 
-            // textBoxDivisa
+            // textBoxEstado
             // 
-            this.textBoxDivisa.Enabled = false;
-            this.textBoxDivisa.Location = new System.Drawing.Point(691, 223);
-            this.textBoxDivisa.Name = "textBoxDivisa";
-            this.textBoxDivisa.Size = new System.Drawing.Size(124, 20);
-            this.textBoxDivisa.TabIndex = 72;
-            this.textBoxDivisa.Visible = false;
+            this.textBoxEstado.Enabled = false;
+            this.textBoxEstado.Location = new System.Drawing.Point(691, 223);
+            this.textBoxEstado.Name = "textBoxEstado";
+            this.textBoxEstado.Size = new System.Drawing.Size(134, 20);
+            this.textBoxEstado.TabIndex = 72;
+            this.textBoxEstado.Visible = false;
             // 
             // label7
             // 
@@ -678,7 +679,7 @@
             this.buttonSaveFile.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveFile.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonSaveFile.Image = ((System.Drawing.Image)(resources.GetObject("buttonSaveFile.Image")));
-            this.buttonSaveFile.Location = new System.Drawing.Point(246, 24);
+            this.buttonSaveFile.Location = new System.Drawing.Point(173, 24);
             this.buttonSaveFile.Name = "buttonSaveFile";
             this.buttonSaveFile.Size = new System.Drawing.Size(79, 74);
             this.buttonSaveFile.TabIndex = 76;
@@ -707,19 +708,33 @@
             this.label9.TabIndex = 77;
             this.label9.Text = "Requisicion";
             // 
+            // buttonCancelarOC
+            // 
+            this.buttonCancelarOC.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCancelarOC.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelarOC.Image")));
+            this.buttonCancelarOC.Location = new System.Drawing.Point(683, 24);
+            this.buttonCancelarOC.Name = "buttonCancelarOC";
+            this.buttonCancelarOC.Size = new System.Drawing.Size(79, 74);
+            this.buttonCancelarOC.TabIndex = 79;
+            this.buttonCancelarOC.Text = "Cancelar";
+            this.buttonCancelarOC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonCancelarOC.UseVisualStyleBackColor = true;
+            this.buttonCancelarOC.Click += new System.EventHandler(this.buttonCancelarOC_Click);
+            // 
             // Forma_Ordenes_Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1334, 582);
+            this.Controls.Add(this.buttonCancelarOC);
             this.Controls.Add(this.textBoxRequisicion);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.buttonSaveFile);
             this.Controls.Add(this.comboBoxCondicionPago);
             this.Controls.Add(this.textBoxCondicionPago);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBoxDivisa);
-            this.Controls.Add(this.labeldivisa);
+            this.Controls.Add(this.textBoxEstado);
+            this.Controls.Add(this.labelEstado);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonWordPrevio);
@@ -809,8 +824,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButtonDolares;
         private System.Windows.Forms.RadioButton radioButtonPesos;
-        private System.Windows.Forms.Label labeldivisa;
-        private System.Windows.Forms.TextBox textBoxDivisa;
+        private System.Windows.Forms.Label labelEstado;
+        private System.Windows.Forms.TextBox textBoxEstado;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxCondicionPago;
         private System.Windows.Forms.TextBox textBoxCondicionPago;
@@ -827,5 +842,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Proyecto_compra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe_partida;
+        private System.Windows.Forms.Button buttonCancelarOC;
     }
 }

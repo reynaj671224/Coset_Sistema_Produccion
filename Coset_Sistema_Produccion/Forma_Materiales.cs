@@ -52,16 +52,31 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_material()
         {
-            Asigna_codigo_proceso_foilio_disponible();
-            //Asigna_nuevo_folio_material();
-            Desactiva_botones_operacion();
-            Aparece_caja_codigo_proveedor();
-            Desaparece_combo_codigo_material();
-            Activa_cajas_informacion_agregar_busqueda_inicial();
-            Rellena_cajas_busqueda_interrogacion_agregar();
-            Inicia_timer_para_asegurar_informacion_busqueda_agregar();
-            Activa_boton_cancelar_operacio();
-            Operacio_materiales = "Agregar";
+            if (Asigna_codigo_proceso_foilio_disponible())
+            {
+                //Asigna_folio_material_temporal_en_uso();
+                Desactiva_botones_operacion();
+                Aparece_caja_codigo_proveedor();
+                Desaparece_combo_codigo_material();
+                Activa_cajas_informacion_agregar_busqueda_inicial();
+                Rellena_cajas_busqueda_interrogacion_agregar();
+                Inicia_timer_para_asegurar_informacion_busqueda_agregar();
+                Activa_boton_cancelar_operacio();
+                Operacio_materiales = "Agregar";
+            }
+            else
+            {
+                secuancia_cancelar_operacion();
+            }
+        }
+
+        private void Asigna_folio_material_temporal_en_uso()
+        {
+            int numero_folio = -1;
+            folio_disponible.Folio_materiales = folio_disponible.Folio_materiales.Substring(0, 2) + numero_folio.ToString("00000");
+            string respuesta = class_folio_disponible.Actualiza_Control_folios_base_datos(folio_disponible);
+            if (respuesta != "")
+                MessageBox.Show(folio_disponible.error);
         }
 
         private void Inicia_timer_para_asegurar_informacion_agregar()
@@ -86,10 +101,22 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProveedor.BackColor= Color.Yellow;
         }
 
-        private void Asigna_codigo_proceso_foilio_disponible()
+        private bool Asigna_codigo_proceso_foilio_disponible()
         {
             folio_disponible = class_folio_disponible.Obtener_informacion_control_folio_base_datos();
-            textBoxCodigoMaterial.Text = folio_disponible.Folio_materiales;
+            int numero_folio = Convert.ToInt32(folio_disponible.Folio_materiales.Substring(2, folio_disponible.Folio_materiales.Length - 2));
+            if (numero_folio != -1)
+            {
+                textBoxCodigoMaterial.Text = folio_disponible.Folio_materiales;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Sistema Utilizando Materiales", "Agregando Materiales", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            
         }
 
         private void Aparece_caja_codigo_proveedor()
@@ -636,6 +663,11 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            secuancia_cancelar_operacion();
+        }
+
+        private void secuancia_cancelar_operacion()
+        {
             Limpia_cajas_captura_despues_de_agregar_material();
             Desactiva_cajas_captura_despues_de_agregar_material();
             Desactiva_boton_guardar_base_de_datos();
@@ -645,7 +677,6 @@ namespace Coset_Sistema_Produccion
             Desaparece_foto_material();
             pinta_blanco_cajas_busqueda();
             Desaparece_boton_busqueda_base_datos();
-
         }
 
         private void pinta_blanco_cajas_busqueda()

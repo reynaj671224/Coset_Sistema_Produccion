@@ -37,8 +37,6 @@
             this.pictureBoxMaterial = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridViewPartidasMaterialSeleccion = new System.Windows.Forms.DataGridView();
-            this.buttonAgregarMaterial = new System.Windows.Forms.Button();
-            this.buttonRegresarNoAgregar = new System.Windows.Forms.Button();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +45,8 @@
             this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_Moneda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Foto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonAgregarMaterial = new System.Windows.Forms.Button();
+            this.buttonRegresarNoAgregar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasMaterialSeleccion)).BeginInit();
@@ -92,6 +92,7 @@
             // 
             // dataGridViewPartidasMaterialSeleccion
             // 
+            this.dataGridViewPartidasMaterialSeleccion.AllowUserToDeleteRows = false;
             this.dataGridViewPartidasMaterialSeleccion.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewPartidasMaterialSeleccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPartidasMaterialSeleccion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -106,9 +107,64 @@
             this.dataGridViewPartidasMaterialSeleccion.Enabled = false;
             this.dataGridViewPartidasMaterialSeleccion.Location = new System.Drawing.Point(67, 88);
             this.dataGridViewPartidasMaterialSeleccion.Name = "dataGridViewPartidasMaterialSeleccion";
+            this.dataGridViewPartidasMaterialSeleccion.ReadOnly = true;
             this.dataGridViewPartidasMaterialSeleccion.Size = new System.Drawing.Size(959, 156);
             this.dataGridViewPartidasMaterialSeleccion.TabIndex = 49;
             this.dataGridViewPartidasMaterialSeleccion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasMaterialSeleccion_CellClick);
+            // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.ReadOnly = true;
+            this.Codigo_partida.Width = 80;
+            // 
+            // Codigo_Proveedor
+            // 
+            this.Codigo_Proveedor.HeaderText = "Codigo Proveedor";
+            this.Codigo_Proveedor.Name = "Codigo_Proveedor";
+            this.Codigo_Proveedor.ReadOnly = true;
+            this.Codigo_Proveedor.Width = 80;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 450;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 50;
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
+            this.Marca.ReadOnly = true;
+            // 
+            // Unidad_medida_partida
+            // 
+            this.Unidad_medida_partida.HeaderText = "Unidad Medida";
+            this.Unidad_medida_partida.Name = "Unidad_medida_partida";
+            this.Unidad_medida_partida.ReadOnly = true;
+            this.Unidad_medida_partida.Width = 50;
+            // 
+            // Tipo_Moneda
+            // 
+            this.Tipo_Moneda.HeaderText = "Tipo Modeda";
+            this.Tipo_Moneda.Name = "Tipo_Moneda";
+            this.Tipo_Moneda.ReadOnly = true;
+            // 
+            // Foto
+            // 
+            this.Foto.HeaderText = "Foto";
+            this.Foto.Name = "Foto";
+            this.Foto.ReadOnly = true;
+            this.Foto.Visible = false;
             // 
             // buttonAgregarMaterial
             // 
@@ -139,52 +195,6 @@
             this.buttonRegresarNoAgregar.UseVisualStyleBackColor = true;
             this.buttonRegresarNoAgregar.Visible = false;
             this.buttonRegresarNoAgregar.Click += new System.EventHandler(this.buttonRegresarNoAgregar_Click);
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 80;
-            // 
-            // Codigo_Proveedor
-            // 
-            this.Codigo_Proveedor.HeaderText = "Codigo Proveedor";
-            this.Codigo_Proveedor.Name = "Codigo_Proveedor";
-            this.Codigo_Proveedor.Width = 80;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 450;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 50;
-            // 
-            // Marca
-            // 
-            this.Marca.HeaderText = "Marca";
-            this.Marca.Name = "Marca";
-            // 
-            // Unidad_medida_partida
-            // 
-            this.Unidad_medida_partida.HeaderText = "Unidad Medida";
-            this.Unidad_medida_partida.Name = "Unidad_medida_partida";
-            this.Unidad_medida_partida.Width = 50;
-            // 
-            // Tipo_Moneda
-            // 
-            this.Tipo_Moneda.HeaderText = "Tipo Modeda";
-            this.Tipo_Moneda.Name = "Tipo_Moneda";
-            // 
-            // Foto
-            // 
-            this.Foto.HeaderText = "Foto";
-            this.Foto.Name = "Foto";
-            this.Foto.Visible = false;
             // 
             // Forma_Materiales_Seleccion
             // 
