@@ -63,7 +63,7 @@
             this.textCodigoMaterial = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxPrecioMaterial = new System.Windows.Forms.TextBox();
-            this.textBoxUnidadesEntrada = new System.Windows.Forms.TextBox();
+            this.textBoxUnidadesSalida = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -395,13 +395,13 @@
             this.textBoxPrecioMaterial.Size = new System.Drawing.Size(124, 20);
             this.textBoxPrecioMaterial.TabIndex = 81;
             // 
-            // textBoxUnidadesEntrada
+            // textBoxUnidadesSalida
             // 
-            this.textBoxUnidadesEntrada.Enabled = false;
-            this.textBoxUnidadesEntrada.Location = new System.Drawing.Point(660, 244);
-            this.textBoxUnidadesEntrada.Name = "textBoxUnidadesEntrada";
-            this.textBoxUnidadesEntrada.Size = new System.Drawing.Size(124, 20);
-            this.textBoxUnidadesEntrada.TabIndex = 83;
+            this.textBoxUnidadesSalida.Enabled = false;
+            this.textBoxUnidadesSalida.Location = new System.Drawing.Point(660, 244);
+            this.textBoxUnidadesSalida.Name = "textBoxUnidadesSalida";
+            this.textBoxUnidadesSalida.Size = new System.Drawing.Size(124, 20);
+            this.textBoxUnidadesSalida.TabIndex = 83;
             // 
             // label3
             // 
@@ -467,7 +467,7 @@
             this.Controls.Add(this.textBoxTotalUnidades);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonBusquedaBaseDatos);
-            this.Controls.Add(this.textBoxUnidadesEntrada);
+            this.Controls.Add(this.textBoxUnidadesSalida);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxPrecioMaterial);
             this.Controls.Add(this.label10);
@@ -531,7 +531,7 @@
         private System.Windows.Forms.TextBox textCodigoMaterial;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxPrecioMaterial;
-        private System.Windows.Forms.TextBox textBoxUnidadesEntrada;
+        private System.Windows.Forms.TextBox textBoxUnidadesSalida;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonBusquedaBaseDatos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;

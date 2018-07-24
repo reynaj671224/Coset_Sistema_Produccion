@@ -62,8 +62,14 @@ namespace Coset_Sistema_Produccion
           
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_combo_codigo_proyecto();
+            Datos_gerenrales();
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
 
+        }
+
+        private void Datos_gerenrales()
+        {
+            datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
         }
 
         private void Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana()
@@ -427,14 +433,32 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_partida_materiales_proyecto()
         {
+            double Total_precio_proyecto = 0.0; 
+            double Total_precio = 0.0;
+            double Precio_unitario = 0.0;
             foreach(Salida_Material material in Salida_materiales_disponibles)
             {
+                Precio_unitario = 0.0;
+                Total_precio = 0.0;
                 Material_busqueda.Codigo = material.Codigo_material;
                 Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                if (Materiales_disponibles[0].divisa == "Pesos")
+                {
+                    Precio_unitario = Convert.ToDouble(Materiales_disponibles[0].precio);
+                    Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                }
+                else if (Materiales_disponibles[0].divisa == "Dolares")
+                {
+                    Precio_unitario = Convert.ToDouble(Materiales_disponibles[0].precio) * Convert.ToDouble(datos_generales.Tc);
+                    Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                    
+                }
+                Total_precio_proyecto += Total_precio;
                 dataGridViewProyectoReportes.Rows.Add(Materiales_disponibles[0].Codigo, Materiales_disponibles[0].Codigo_proveedor,
                     Materiales_disponibles[0].Descripcion, material.Cantidad, material.Fecha,
-                    Materiales_disponibles[0].precio, (Convert.ToDouble(material.Cantidad) * Convert.ToDouble(Materiales_disponibles[0].precio)).ToString("0.00"),"");
+                    Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),"");
             }
+            textBoxTotalPrecioProyecto.Text = Total_precio_proyecto.ToString("0.00");
         }
 
         private void Asigna_campos_salida_materiales()

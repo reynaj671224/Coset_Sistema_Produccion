@@ -293,7 +293,7 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_textbox_cantidad_material()
         {
-            textBoxUnidadesEntrada.Enabled = true;
+            textBoxUnidadesSalida.Enabled = true;
         }
 
         private void Inicia_timer_busqueda_materiales()
@@ -440,38 +440,62 @@ namespace Coset_Sistema_Produccion
 
 
         private void Secuencia_salida_materiales()
-        {
-            if (verifica_campos_numericos())
+        {if (unidades_disponibles_suficientes_para_salida())
             {
-                if (verfica_datos_entrada_materiales())
+                if (verifica_campos_numericos())
                 {
-                    if (Insertar_datos_salida_materiales_class())
+                    if (verfica_datos_entrada_materiales())
                     {
-                        if (Salida_material_base_datos())
+                        if (Insertar_datos_salida_materiales_class())
                         {
-                            Limpia_cajas_captura_despues_de_agregar_salida_material();
-                            Limpia_combo_nombre_cliente();
-                            Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
-                            Desaparece_boton_guardar_base_de_datos();
-                            Desaparece_boton_cancelar();
-                            Desaparece_combo_codigo_proyecto();
-                            Activa_botones_operacion();
-                            limpia_partidas_salida_materiales();
-                            Desactiva_datagridview_partidas();
-                            Desaparece_combo_cliente_nombre();
-                            Desactiva_combo_cliente_nombre();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_descripcion();
-                            Elimina_informacion_salida_materiales_disponibles();
+                            if (Salida_material_base_datos())
+                            {
+                                Limpia_cajas_captura_despues_de_agregar_salida_material();
+                                Limpia_combo_nombre_cliente();
+                                Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
+                                Desaparece_boton_guardar_base_de_datos();
+                                Desaparece_boton_cancelar();
+                                Desaparece_combo_codigo_proyecto();
+                                Activa_botones_operacion();
+                                limpia_partidas_salida_materiales();
+                                Desactiva_datagridview_partidas();
+                                Desaparece_combo_cliente_nombre();
+                                Desactiva_combo_cliente_nombre();
+                                Aparece_textbox_nombre_cliente();
+                                Aparece_textbox_nombre_cliente();
+                                Aparece_textbox_descripcion();
+                                Elimina_informacion_salida_materiales_disponibles();
+                            }
                         }
-                    }
 
+                    }
                 }
             }
 
         }
 
+        private bool unidades_disponibles_suficientes_para_salida()
+        {
+           try
+            {
+                if(Convert.ToInt32(textBoxUnidadesSalida.Text)<= Convert.ToInt32(textBoxTotalUnidades.Text))
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Unidades Disponibles Menor a las requeridas", "Salida Materiales",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Problemas Calculando Salida Unidades", "Salida Materiales", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
 
         private bool Salida_material_base_datos()
         {
@@ -480,7 +504,7 @@ namespace Coset_Sistema_Produccion
             {
                 Material_disponible_salida_materiales.Cantidad = (Convert.ToInt32(
                     Material_disponible_salida_materiales.Cantidad.ToString()) -
-                                Convert.ToUInt32(textBoxUnidadesEntrada.Text)).ToString();
+                                Convert.ToUInt32(textBoxUnidadesSalida.Text)).ToString();
 
                 if (
                     Convert.ToSingle(textBoxPrecioMaterial.Text) < 0)
@@ -535,7 +559,7 @@ namespace Coset_Sistema_Produccion
             Insertar_salida_materiales.Nombre_empleado = comboBoxEmpleado.Text;
             Insertar_salida_materiales.Fecha = dateTimePickerFechaActual.Text;
             Insertar_salida_materiales.Codigo_material = textCodigoMaterial.Text;
-            Insertar_salida_materiales.Cantidad = textBoxUnidadesEntrada.Text;
+            Insertar_salida_materiales.Cantidad = textBoxUnidadesSalida.Text;
 
         }
 
@@ -548,7 +572,7 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Text != "" &&
             textCodigoMaterial.Text != "" &&
             textBoxPrecioMaterial.Text != "" &&
-            textBoxUnidadesEntrada.Text != "")
+            textBoxUnidadesSalida.Text != "")
             {
                 return true;
             }
@@ -571,12 +595,12 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                Convert.ToInt32(textBoxUnidadesEntrada.Text);
+                Convert.ToInt32(textBoxUnidadesSalida.Text);
                 return true;
             }
             catch
             {
-                textBoxUnidadesEntrada.Text = "";
+                textBoxUnidadesSalida.Text = "";
                 return false;
             }
 
@@ -689,7 +713,7 @@ namespace Coset_Sistema_Produccion
             dateTimePickerFechaActual.Enabled = false;
             textBoxDescripcionMaterial.Enabled = false;
             textBoxCodigoProveedor.Enabled = false;
-            textBoxUnidadesEntrada.Enabled = false;
+            textBoxUnidadesSalida.Enabled = false;
             textBoxPrecioMaterial.Enabled = false;
             textCodigoMaterial.Enabled = false;
 
@@ -703,7 +727,7 @@ namespace Coset_Sistema_Produccion
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();
             textBoxDescripcionMaterial.Text = "";
             textBoxCodigoProveedor.Text = "";
-            textBoxUnidadesEntrada.Text = "";
+            textBoxUnidadesSalida.Text = "";
             textCodigoMaterial.Text = "";
             textBoxPrecioMaterial.Text = "";
             textBoxTotalUnidades.Text = "";
@@ -837,7 +861,7 @@ namespace Coset_Sistema_Produccion
             Salida_materiales_seleccion.Nombre_empleado = comboBoxEmpleado.Text;
             Salida_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
             Salida_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
-            Salida_materiales_seleccion.Cantidad = textBoxUnidadesEntrada.Text;
+            Salida_materiales_seleccion.Cantidad = textBoxUnidadesSalida.Text;
 
         }
 
@@ -921,7 +945,7 @@ namespace Coset_Sistema_Produccion
         {
 
                 if (comboBoxEmpleado.Text != "" &&
-                    textBoxUnidadesEntrada.Text != "")
+                    textBoxUnidadesSalida.Text != "")
                 {
                     timerAgregarSalidaMateriales.Enabled = false;
                     Aparece_boton_guardar_base_datos();
