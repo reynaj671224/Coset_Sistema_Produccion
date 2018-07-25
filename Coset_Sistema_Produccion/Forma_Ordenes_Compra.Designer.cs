@@ -88,6 +88,7 @@
             this.textBoxRequisicion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.buttonCancelarOC = new System.Windows.Forms.Button();
+            this.buttonMateriales = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -721,11 +722,25 @@
             this.buttonCancelarOC.UseVisualStyleBackColor = true;
             this.buttonCancelarOC.Click += new System.EventHandler(this.buttonCancelarOC_Click);
             // 
+            // buttonMateriales
+            // 
+            this.buttonMateriales.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMateriales.Image = ((System.Drawing.Image)(resources.GetObject("buttonMateriales.Image")));
+            this.buttonMateriales.Location = new System.Drawing.Point(853, 24);
+            this.buttonMateriales.Name = "buttonMateriales";
+            this.buttonMateriales.Size = new System.Drawing.Size(79, 74);
+            this.buttonMateriales.TabIndex = 80;
+            this.buttonMateriales.Text = "Materiales";
+            this.buttonMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMateriales.UseVisualStyleBackColor = true;
+            this.buttonMateriales.Click += new System.EventHandler(this.buttonMateriales_Click);
+            // 
             // Forma_Ordenes_Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1334, 582);
+            this.Controls.Add(this.buttonMateriales);
             this.Controls.Add(this.buttonCancelarOC);
             this.Controls.Add(this.textBoxRequisicion);
             this.Controls.Add(this.label9);
@@ -843,5 +858,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe_partida;
         private System.Windows.Forms.Button buttonCancelarOC;
+        private System.Windows.Forms.Button buttonMateriales;
     }
 }

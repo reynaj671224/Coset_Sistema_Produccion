@@ -415,7 +415,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_materiales_busqueda();
             Desaparece_foto_material();
             Desactiva_cajas_captura_busqueda_material();
-            Rellena_partidas_materiales_disponibles_busqueda(Materiales_disponibles_busqueda);
+            Rellena_partidas_materiales_disponibles_busqueda();
             Pinta_blanco_cajas_captura();
             Desactiva_cajas_captura_busqueda_material();
             //Muestra_foto_material();
@@ -493,10 +493,10 @@ namespace Coset_Sistema_Produccion
             textBoxUbicacion.Enabled = false;
         }
 
-        private void Rellena_partidas_materiales_disponibles_busqueda(List<Material> materiales_busqueda_disponibles)
+        private void Rellena_partidas_materiales_disponibles_busqueda()
         {
-            Materiales_disponibles_busqueda = materiales_busqueda_disponibles;
-            foreach (Material material in materiales_busqueda_disponibles)
+            //Materiales_disponibles_busqueda = materiales_busqueda_disponibles;
+            foreach (Material material in Materiales_disponibles_busqueda)
             {
                 dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
                     material.Descripcion, material.Cantidad, material.Marca, material.Unidad_medida, 

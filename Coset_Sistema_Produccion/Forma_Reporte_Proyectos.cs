@@ -135,7 +135,7 @@ namespace Coset_Sistema_Produccion
             dataGridViewProyectoReportes.Enabled = true;
         }
 
-        private void limpia_dibujos_proyecto()
+        private void limpia_datagrid_materiales_proyecto()
         {
             dataGridViewProyectoReportes.Rows.Clear();
         }
@@ -181,7 +181,7 @@ namespace Coset_Sistema_Produccion
             Aparece_textbox_ingeniero_cliente();
             Aparece_textbox_ingeniero_coset();
             Aparece_textbox_nombre_cliente();
-            limpia_dibujos_proyecto();
+            limpia_datagrid_materiales_proyecto();
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();  
             Elimina_informacion_proyectos_disponibles();
@@ -420,6 +420,7 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            limpia_datagrid_materiales_proyecto();
             Rellena_cajas_informacion_de_proyectos();
             Obtener_materiales_asignados_proyecto(comboBoxCodigoProyecto.Text);
         }

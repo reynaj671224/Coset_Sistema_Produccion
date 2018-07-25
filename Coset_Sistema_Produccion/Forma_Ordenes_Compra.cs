@@ -3113,5 +3113,11 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_proyectos_partidas_requisiciones();
             
         }
+
+        private void buttonMateriales_Click(object sender, EventArgs e)
+        {
+            Forma_Consulta_Materiales forma_Consulta_Materiales = new Forma_Consulta_Materiales();
+            forma_Consulta_Materiales.ShowDialog();
+        }
     }
 }
