@@ -2285,7 +2285,7 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.partida, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<c" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.cantidad, partida - 1].Value.ToString());
-                    Remplaza_texto_en_Documento("<p" + partida + ">",
+                    Remplaza_texto_en_Documento("<pr" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.proyecto, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<np" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, partida - 1].Value.ToString());
