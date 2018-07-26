@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2FC08F62FD274525AB8789E92A0D2993"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7B0B1ECC875B71E0AD9A23533749110B"
         "OwnerKey" = "8:_DDA8D2DB19004807814AFA4BECC7265A"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +41,12 @@
         {
         "MsmKey" = "8:_7DB245BB8B240DB2AF2702F332BDA417"
         "OwnerKey" = "8:_DDA8D2DB19004807814AFA4BECC7265A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8449B9400B7148A0800B3D5F8DE46C5D"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -226,6 +238,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2FC08F62FD274525AB8789E92A0D2993"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\system_package_99773\\System_Package_Icon_48.png"
+            "TargetName" = "8:System_Package_Icon_48.png"
+            "Tag" = "8:"
+            "Folder" = "8:_71F85687256F4113B15D4FE40881C4B6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7B0B1ECC875B71E0AD9A23533749110B"
             {
             "AssemblyRegister" = "3:1"
@@ -286,6 +318,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8449B9400B7148A0800B3D5F8DE46C5D"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\system_package_icon_64_UzW_icon.ico"
+            "TargetName" = "8:system_package_icon_64_UzW_icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_71F85687256F4113B15D4FE40881C4B6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_85274435B4764950AA1523D24B7CA1DD"
@@ -609,7 +661,7 @@
             "Target" = "8:_1CD137196A3A426EA2C6B169FCFAD959"
             "Folder" = "8:_61FB394BD6A54B93B42B251999100B81"
             "WorkingFolder" = "8:_044703F0DF514706BC717E4E106B6150"
-            "Icon" = "8:"
+            "Icon" = "8:_8449B9400B7148A0800B3D5F8DE46C5D"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_CFDC386B944845B2B54634FA1D92B838"
