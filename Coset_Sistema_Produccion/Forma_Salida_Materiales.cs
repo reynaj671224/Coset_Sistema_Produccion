@@ -1088,7 +1088,22 @@ namespace Coset_Sistema_Produccion
 
         private void buttonSalidaMaterial_Click(object sender, EventArgs e)
         {
-            Agrega_salida_materiales_proyecto();
+            DialogResult dialogResult = MessageBox.Show("La entrada de Material cuenta con orden de compra?",
+                "Entrada Material", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Agrega_salida_materiales_proyecto_orden_compra();
+            }
+            else
+            {
+                Agrega_salida_materiales_proyecto();
+            }
+            
+        }
+
+        private void Agrega_salida_materiales_proyecto_orden_compra()
+        {
+            throw new NotImplementedException();
         }
 
         private void textBoxDescripcionMaterial_TextChanged(object sender, EventArgs e)
