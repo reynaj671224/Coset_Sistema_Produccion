@@ -2267,6 +2267,9 @@ namespace Coset_Sistema_Produccion
                  "");
                 Remplaza_texto_en_Documento("<m" + partida + ">",
                 "");
+                Remplaza_texto_en_Documento("<pr" + partida + ">",
+                "");
+
 
             }
         }
