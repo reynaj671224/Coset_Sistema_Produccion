@@ -63,6 +63,7 @@ namespace Coset_Sistema_Produccion
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                        Orden_compra = mySqlDataReader["orden_compra"].ToString(),
                     });
                 }
             }
@@ -73,6 +74,46 @@ namespace Coset_Sistema_Produccion
             }
             connection.Close();
             return Material_existente_disponibles_salida_materiales;
+        }
+
+        public List<Salida_Material> Adquiere_salida_materiales_orden_compra_base_datos(Salida_Material salida_material)
+        {
+            List<Salida_Material> Material_existente_disponibles_salida_materiales = new List<Salida_Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_busqueda_salida_material_orden_compra(salida_material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_salida_materiales.Add(new Salida_Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_salida"].ToString(),
+                        Proyecto = mySqlDataReader["proyecto"].ToString(),
+                        Fecha = mySqlDataReader["fecha"].ToString(),
+                        Codigo_material = mySqlDataReader["codigo_material"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
+                        Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
+                        Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                        Orden_compra = mySqlDataReader["orden_compra"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_salida_materiales.Add(new Salida_Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_salida_materiales;
+        }
+
+        private string Commando_busqueda_salida_material_orden_compra(Salida_Material salida_material)
+        {
+            return "SELECT * FROM salida_material where codigo_material ='" + salida_material.Codigo_material +
+               "' and orden_compra='" + salida_material.Orden_compra +"';";
         }
 
         private string Commando_leer_Mysql_busqueda_salida_material_proyecto(Salida_Material material)
@@ -114,10 +155,10 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_salida_material(Salida_Material salida_Material)
         {
             return "INSERT INTO salida_material(proyecto, fecha,codigo_material," +
-                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material) " +
+                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,orden_compra) " +
                    "VALUES('" + salida_Material.Proyecto + "','" + salida_Material.Fecha + "','" +
                    salida_Material.Codigo_material + "','" + salida_Material.Cantidad + "','" + salida_Material.Codigo_proveedor + "','" +
-                   salida_Material.Nombre_empleado + "','" + salida_Material.Descripcion_material + "');";
+                   salida_Material.Nombre_empleado + "','" + salida_Material.Descripcion_material + "','" +salida_Material.Orden_compra + "');";
         }
     }
     public class Salida_Material
@@ -130,6 +171,7 @@ namespace Coset_Sistema_Produccion
         public string Codigo_proveedor = "";
         public string Nombre_empleado = "";
         public string Descripcion_material = "";
+        public string Orden_compra = "";
         public string error = "";
     }
 }

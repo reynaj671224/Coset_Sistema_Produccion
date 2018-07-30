@@ -308,8 +308,6 @@ namespace Coset_Sistema_Produccion
 
                 try
                 {
-                    /*Partida_orden_compra_seleccionada = partidas_ordenes_compra_disponibles.
-                        Find(partidas_ordenes_compra => partidas_ordenes_compra.Descripcion.Contains(partida_orden_compra.Descripcion));*/
                     Partida_orden_compra_seleccionada = partida_orden_compra;
                     if (Obtener_materiales_con_descripcion_codigo_proveedor())
                     {
