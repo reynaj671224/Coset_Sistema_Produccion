@@ -32,7 +32,7 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
                         Requisicion = mySqlDataReader["requisicion"].ToString(),
-                        Estado = mySqlDataReader["estado"].ToString(),
+                        Estado = mySqlDataReader["estado_entrada"].ToString(),
 
                     });
                 }
@@ -77,17 +77,17 @@ namespace Coset_Sistema_Produccion
         {
             if (operacion == "Cancelar")
             {
-                return "UPDATE ordenes_compra set  estado='Cancelada'" +
+                return "UPDATE ordenes_compra set  estado_entrada='Cancelada'" +
                    "where codigo_orden_compra='" + orden_compra.Codigo + "';";
             }
             else if(operacion == "Parcial")
             {
-                return "UPDATE ordenes_compra set  estado='Parcial'" +
+                return "UPDATE ordenes_compra set  estado_entrada='Parcial'" +
                    "where codigo_orden_compra='" + orden_compra.Codigo + "';";
             }
             else if(operacion == "Cerrar")
             {
-                return "UPDATE ordenes_compra set  estado='Cerrada'" +
+                return "UPDATE ordenes_compra set  estado_entrada='Cerrada'" +
                    "where codigo_orden_compra='" + orden_compra.Codigo + "';";
             }
             else

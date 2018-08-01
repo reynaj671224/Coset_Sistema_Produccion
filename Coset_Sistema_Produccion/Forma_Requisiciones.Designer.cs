@@ -379,6 +379,7 @@
             this.buttonWordPrevio.Text = "Previo";
             this.buttonWordPrevio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonWordPrevio.UseVisualStyleBackColor = true;
+            this.buttonWordPrevio.Click += new System.EventHandler(this.buttonWordPrevio_Click);
             // 
             // groupBoxPrevio
             // 
@@ -410,6 +411,7 @@
             this.buttonSaveFile.Text = "Guardar";
             this.buttonSaveFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonSaveFile.UseVisualStyleBackColor = true;
+            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
             // comboBoxProveedoresPrevio
             // 

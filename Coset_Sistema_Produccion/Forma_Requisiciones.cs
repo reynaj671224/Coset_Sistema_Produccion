@@ -51,6 +51,7 @@ namespace Coset_Sistema_Produccion
         public string nombre_archivo_word = "";
         public word.Application application = null;
         public word.Document Documento = null;
+        public int Numero_renglones_rellenos_requisicion = 0;
 
         public enum Campos_partidas
         {
@@ -2293,6 +2294,196 @@ namespace Coset_Sistema_Produccion
         private void buttonModificarRequisicion_Click(object sender, EventArgs e)
         {
             Modifica_requisiciones();
+        }
+
+        private void buttonWordPrevio_Click(object sender, EventArgs e)
+        {
+            if (Inicia_variables_word())
+            {
+                Desactiva_boton_requisiciones_previo();
+                Desactiva_boton_guardar();
+                Desactiva_combo_provedores_previo();
+                Asigna_nombre_archivo_para_analizar();
+                Elimina_archivo();
+                Copiar_template_requisicion();
+                Abrir_documento_word();
+                Rellenar_campos_requisicion();
+                Guardar_archivo_word();
+                Visible_instancia_word();
+
+            }
+        }
+
+        private void Visible_instancia_word()
+        {
+            application.Visible = true;
+
+        }
+
+        private void Guardar_archivo_word()
+        {
+            Documento.Save();
+        }
+
+
+        private void Rellenar_campos_requisicion()
+        {
+            Rellena_informacion_requisicion();
+            Rellena_partidas_Requisicion();
+            Limpia_partidas_sin_informacion();
+        }
+
+        private void Rellena_informacion_requisicion()
+        {
+            Remplaza_texto_en_Documento("<REQN>", comboBoxCodigoRequisiciones.Text);
+            Remplaza_texto_en_Documento("<realizador>", textBoxDirigido.Text);
+            Remplaza_texto_en_Documento("<requisitor>", textBoxRequsitor.Text);
+            Remplaza_texto_en_Documento("<dirigido>", comboBoxProveedoresPrevio.Text);
+            Remplaza_texto_en_Documento("<fecha>", dateTimePickerFechaActual.Text);
+        }
+
+        private void Rellena_partidas_Requisicion()
+        {
+            if (dataGridViewPartidasRequisiciones.Rows.Count <= 50)
+            {
+                for (int partida = 1; partida <= dataGridViewPartidasRequisiciones.Rows.Count; partida++)
+                {
+                    if (comboBoxProveedoresPrevio.Text == dataGridViewPartidasRequisiciones.Rows[partida - 1].
+                        Cells["Proveedor_requisicion"].Value.ToString())
+                    {
+                        Remplaza_texto_en_Documento("<n" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.partida, partida - 1].Value.ToString());
+                        Remplaza_texto_en_Documento("<c" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.cantidad, partida - 1].Value.ToString());
+                        Remplaza_texto_en_Documento("<np" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.numero, partida - 1].Value.ToString());
+                        Remplaza_texto_en_Documento("<d" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.descripcion, partida - 1].Value.ToString());
+                        Remplaza_texto_en_Documento("<m" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.uidad_medida, partida - 1].Value.ToString());
+                        Remplaza_texto_en_Documento("<p" + partida + ">",
+                            dataGridViewPartidasRequisiciones[(int)Campos_partidas.proyecto, partida - 1].Value.ToString());
+                        Numero_renglones_rellenos_requisicion++;
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Esta Applicacion solo Puede desplegar Hasta 50 Partidas", "Previo Requisiciones", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Limpia_partidas_sin_informacion()
+        {
+            Asigna_espacios_en_renglones_sin_informacion();
+            word.Table table = Documento.Tables[2];
+            for (int renglon = 1; renglon <= table.Rows.Count; renglon++)
+            {
+                if (table.Rows[renglon].Cells[1].Range.Text == "\r\a")
+                {
+                    table.Rows[renglon].Delete();
+                    renglon--;
+                }
+
+            }
+        }
+
+        private void Asigna_espacios_en_renglones_sin_informacion()
+        {
+            for (int renglon = 1; renglon <= 50; renglon++)
+            {
+                Remplaza_texto_en_Documento("<n" + renglon + ">", "");
+            }
+        }
+        private void Remplaza_texto_en_Documento(string original, string cambio)
+        {
+            word.Selection seleccion = application.Selection;
+            seleccion.Find.Text = original;
+            seleccion.Find.Replacement.Text = cambio;
+            seleccion.Find.Wrap = WdFindWrap.wdFindContinue;
+            seleccion.Find.Forward = true;
+            seleccion.Find.Format = false;
+            seleccion.Find.MatchCase = false;
+            seleccion.Find.MatchWholeWord = false;
+            seleccion.Find.Execute(Replace: WdReplace.wdReplaceAll);
+        }
+
+        private void Abrir_documento_word()
+        {
+            Documento = application.Documents.Open(nombre_archivo_word);
+            Documento.Activate();
+        }
+
+        private void Copiar_template_requisicion()
+        {
+            try
+            {
+                File.Copy(@appPath + "\\Requisicion_Coset_template.docx", @appPath + "\\" + comboBoxCodigoRequisiciones.Text +
+                    "_" + comboBoxProveedoresPrevio.Text + ".docx", false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Elimina_archivo()
+        {
+            try
+            {
+                File.Delete(nombre_archivo_word);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Asigna_nombre_archivo_para_analizar()
+        {
+            nombre_archivo_word = @appPath + "\\" + comboBoxCodigoRequisiciones.Text + "_" +
+                comboBoxProveedoresPrevio.Text + ".docx";
+        }
+
+        private void Desactiva_boton_requisiciones_previo()
+        {
+            buttonWordPrevio.Enabled = false;
+        }
+
+        private bool Inicia_variables_word()
+        {
+            try
+            {
+                application = new word.Application();
+                Documento = new word.Document();
+                return true;
+
+            }
+            catch
+            {
+                MessageBox.Show("NO Word Instalado", "Inicio EWord", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void buttonSaveFile_Click(object sender, EventArgs e)
+        {
+            if (Inicia_variables_word())
+            {
+                Desactiva_boton_requisiciones_previo();
+                Desactiva_boton_guardar();
+                Desactiva_combo_provedores_previo();
+                Asigna_nombre_archivo_para_analizar();
+                Elimina_archivo();
+                Copiar_template_requisicion();
+                Abrir_documento_word();
+                Rellenar_campos_requisicion();
+                Guardar_archivo_word();
+                Guardar_archivo_word_en_ruta_en_datos_generales();
+                Cierra_documento_word();
+                Termina_secuencia_save_file();
+            }
         }
     }
 }
