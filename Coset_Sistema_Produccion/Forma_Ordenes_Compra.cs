@@ -983,7 +983,7 @@ namespace Coset_Sistema_Produccion
         {
             string Respuesta = "";
             orden_compra_modificar.Codigo = comboBoxCodigoOrdenCompra.Text;
-            Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_modificar,"Cancelar");
+            Respuesta = Class_ordenes_compra.Modifica_estado_entrada_orden_compra(orden_compra_modificar,"Cancelar");
             if (Respuesta == "No Errores")
             {
                 return true;

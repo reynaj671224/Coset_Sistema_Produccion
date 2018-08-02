@@ -774,10 +774,21 @@ namespace Coset_Sistema_Produccion
             Obtener_materiales_ordenes_compra();
             orden_compra_seleccionada.Codigo = comboBoxCodigoOrdenCompra.Text;
             if (Verifica_materiales_ordenes_compra() != 0)
-
-                Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_seleccionada, "Parcial");
+            {
+                Respuesta = Class_ordenes_compra.Modifica_estado_entrada_orden_compra(orden_compra_seleccionada, "Parcial");
+                if (Respuesta != "No Errores")
+                {
+                    MessageBox.Show(Respuesta);
+                }
+            }
             else
-                Respuesta = Class_ordenes_compra.Modifica_estado_orden_compra(orden_compra_seleccionada, "Cerrar");
+            {
+                Respuesta = Class_ordenes_compra.Modifica_estado_entrada_orden_compra(orden_compra_seleccionada, "Cerrar");
+                if (Respuesta != "No Errores")
+                {
+                    MessageBox.Show(Respuesta);
+                }
+            }
 
         }
 

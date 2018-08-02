@@ -353,6 +353,11 @@ namespace Coset_Sistema_Produccion
             Aparece_label_proyecto();
             Aparece_combo_proyectos();
             Activa_seleccion_fecha_actual();
+            Activa_textbox_codigo_proveedor();
+            Activa_textbox_descripcion_material();
+            Activa_textbox_codigo_material();
+            Asigna_caracter_busqueda_material();
+            Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
         }
 
         private void Aparece_label_proyecto()
@@ -473,6 +478,7 @@ namespace Coset_Sistema_Produccion
                     {
                         if (Salida_material_base_datos_orden_compra())
                         {
+                            Asigna_estado_orden_compra_salida_materiales();
                             Limpia_cajas_captura_despues_de_agregar_salida_material();
                             Limpia_combo_nombre_cliente();
                             Limpia_datagrid_salida_materiales_orden_compra();
@@ -499,6 +505,54 @@ namespace Coset_Sistema_Produccion
             }
 
         }
+
+        private void Asigna_estado_orden_compra_salida_materiales()
+        {
+            string Respuesta="";
+            Obtener_partidas_ordenes_compra_disponibles();
+            Ordene_compra_seleccion.Codigo = comboBoxOC.Text;
+            if (Verifica_unidades_pendientes_salida_ordenes_compra()!=0)
+            {
+                Respuesta = Class_Ordenes_Compra.Modifica_estado_salida_orden_compra(Ordene_compra_seleccion, "Parcial");
+                if (Respuesta != "No Errores")
+                {
+                    MessageBox.Show(Respuesta);
+                }
+            }
+            else
+            {
+                Respuesta = Class_Ordenes_Compra.Modifica_estado_salida_orden_compra(Ordene_compra_seleccion, "Cerrar");
+                if (Respuesta != "No Errores")
+                {
+                    MessageBox.Show(Respuesta);
+                }
+            }
+
+        }
+        public int Verifica_unidades_pendientes_salida_ordenes_compra()
+        {
+            int Row_material = 0;
+            int Unidades_salidas = 0;
+            try
+            {
+
+                foreach (Partida_orden_compra partida in Partidas_orden_compra_disponibles)
+                {
+                    Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_salidas(partida);
+                    if (Unidades_salidas != 0)
+                    {
+                        Row_material++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 0;
+            }
+            return Row_material;
+        }
+        
 
         private bool Verifica_exitencia_materiales_disponer()
         {
@@ -1549,7 +1603,7 @@ namespace Coset_Sistema_Produccion
 
                 foreach (Partida_orden_compra partida in Partidas_orden_compra_disponibles)
                 {
-                    Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_entradas(partida);
+                    Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_salidas(partida);
                     if (Unidades_salidas != 0)
                     {
                         dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, partida.Parte,
@@ -1570,7 +1624,7 @@ namespace Coset_Sistema_Produccion
             return Row_material;
         }
 
-        private int Calculo_unidades_entradas(Partida_orden_compra partida)
+        private int Calculo_unidades_salidas(Partida_orden_compra partida)
         {
             Obtener_partidas_salidas_materiales(partida);
             int Total_cantidad = 0;
