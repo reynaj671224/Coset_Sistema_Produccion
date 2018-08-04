@@ -741,7 +741,8 @@ namespace Coset_Sistema_Produccion
         }
 
         private void Secuencia_salida_materiales()
-        {if (unidades_disponibles_suficientes_para_salida())
+        {
+            if (unidades_disponibles_suficientes_para_salida())
             {
                 if (verifica_campos_numericos())
                 {
@@ -766,6 +767,8 @@ namespace Coset_Sistema_Produccion
                                 Aparece_textbox_nombre_cliente();
                                 Aparece_textbox_descripcion();
                                 Desaparece_label_proyecto();
+                                Desaparece_combo_OC();
+                            Desaparece_label_OC();
                                 Elimina_informacion_salida_materiales_disponibles();
                             }
                         }
@@ -855,14 +858,28 @@ namespace Coset_Sistema_Produccion
         private void Asigna_valores_salida_materiales()
         {
 
-            Insertar_salida_materiales.Proyecto = comboBoxCodigoProyecto.Text;
-            Insertar_salida_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
-            Insertar_salida_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            Insertar_salida_materiales.Nombre_empleado = comboBoxEmpleado.Text;
-            Insertar_salida_materiales.Fecha = dateTimePickerFechaActual.Text;
-            Insertar_salida_materiales.Codigo_material = textCodigoMaterial.Text;
-            Insertar_salida_materiales.Cantidad = textBoxUnidadesSalida.Text;
-            Insertar_salida_materiales.Orden_compra = "NA";
+            if (comboBoxOC.Items.Count == 0)
+            {
+                Insertar_salida_materiales.Proyecto = comboBoxCodigoProyecto.Text;
+                Insertar_salida_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
+                Insertar_salida_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
+                Insertar_salida_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                Insertar_salida_materiales.Fecha = dateTimePickerFechaActual.Text;
+                Insertar_salida_materiales.Codigo_material = textCodigoMaterial.Text;
+                Insertar_salida_materiales.Cantidad = textBoxUnidadesSalida.Text;
+                Insertar_salida_materiales.Orden_compra = "NA";
+            }
+            else
+            {
+                Insertar_salida_materiales.Proyecto = comboBoxCodigoProyecto.Text;
+                Insertar_salida_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
+                Insertar_salida_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
+                Insertar_salida_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                Insertar_salida_materiales.Fecha = dateTimePickerFechaActual.Text;
+                Insertar_salida_materiales.Codigo_material = textCodigoMaterial.Text;
+                Insertar_salida_materiales.Cantidad = textBoxUnidadesSalida.Text;
+                Insertar_salida_materiales.Orden_compra = comboBoxOC.Text;
+            }
         }
 
         private bool verfica_datos_entrada_materiales()
@@ -1310,13 +1327,26 @@ namespace Coset_Sistema_Produccion
         {
             if (Operacio_salida_materiales == "Salida")
             {
-                if (comboBoxEmpleado.Text != "" &&
-                    textBoxUnidadesSalida.Text != "" &&
-                    comboBoxOC.Text != "" &&
-                    comboBoxCodigoProyecto.Text != "")
+                if (comboBoxOC.Visible)
                 {
-                    timerAgregarSalidaMateriales.Enabled = false;
-                    Aparece_boton_guardar_base_datos();
+                    if (comboBoxEmpleado.Text != "" &&
+                        textBoxUnidadesSalida.Text != "" &&
+                        comboBoxOC.Text != "" &&
+                        comboBoxCodigoProyecto.Text != "")
+                    {
+                        timerAgregarSalidaMateriales.Enabled = false;
+                        Aparece_boton_guardar_base_datos();
+                    }
+                }
+                else
+                {
+                    if (comboBoxEmpleado.Text != "" &&
+                        textBoxUnidadesSalida.Text != "" &&
+                        comboBoxCodigoProyecto.Text != "")
+                    {
+                        timerAgregarSalidaMateriales.Enabled = false;
+                        Aparece_boton_guardar_base_datos();
+                    }
                 }
             }
             else
@@ -1634,7 +1664,42 @@ namespace Coset_Sistema_Produccion
         private void configura_salida_material_individual()
         {
             Desactiva_combo_OC();
+            Aparece_label_unidades_pendientes_OC();
+            Aparece_textbox_unidades_pendientes_OC();
+            Actualiza_unidades_orden_compra_pendientes();
             
+        }
+
+        private void Aparece_textbox_unidades_pendientes_OC()
+        {
+            textBoxOCtotalUnits.Visible = true;
+        }
+        private void Desaparece_textbox_unidades_pendientes_OC()
+        {
+            textBoxOCtotalUnits.Visible = false;
+        }
+
+        private void Aparece_label_unidades_pendientes_OC()
+        {
+            labelOCtotalUnits.Visible = true;
+        }
+
+        private void Desaparece_label_unidades_pendientes_OC()
+        {
+            labelOCtotalUnits.Visible = false;
+        }
+
+        private void Actualiza_unidades_orden_compra_pendientes()
+        {
+            int Unidades_pendientes_orden_compra = 0;
+            Obtener_partidas_ordenes_compra_disponibles();
+            Ordene_compra_seleccion.Codigo = comboBoxOC.Text;
+            Unidades_pendientes_orden_compra = Verifica_unidades_pendientes_salida_ordenes_compra();
+            if (Unidades_pendientes_orden_compra != 0)
+            {
+                textBoxOCtotalUnits.Text =  Unidades_pendientes_orden_compra.ToString();
+            }
+
         }
 
         private void Desactiva_combo_OC()
@@ -1753,17 +1818,28 @@ namespace Coset_Sistema_Produccion
         private void Obtener_partidas_salidas_materiales(Partida_orden_compra partida)
         {
             Asigna_valores_salida_materiales_partidas_material(partida);
-            if (Operacio_salida_materiales == "SalidaOC")
-            {
-                Salida_materiales_disponibles = Class_salida_material.
-                    Adquiere_salida_materiales_orden_compra_base_datos(Salida_materiales_seleccion);
-            }
+
+            Salida_materiales_disponibles = Class_salida_material.
+                Adquiere_salida_materiales_orden_compra_base_datos(Salida_materiales_seleccion);
+
         }
 
         private void Asigna_valores_salida_materiales_partidas_material(Partida_orden_compra partida)
         {
-            Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
-            Salida_materiales_seleccion.Codigo_material = partida.Material;
+            if (Operacio_salida_materiales == "SalidaOC")
+            {
+                Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
+                Salida_materiales_seleccion.Codigo_material = partida.Material;
+            }
+            else if (Operacio_salida_materiales == "Salida")
+            {
+                if(comboBoxOC.Items.Count!=0)
+                {
+                    Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
+                    Salida_materiales_seleccion.Codigo_material = partida.Material;
+                }
+              
+            }
         }
 
         private void Obtener_partidas_ordenes_compra_disponibles()
