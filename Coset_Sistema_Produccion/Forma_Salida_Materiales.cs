@@ -31,6 +31,7 @@ namespace Coset_Sistema_Produccion
         public Salida_Material Insertar_salida_materiales = new Salida_Material();
         public Salida_Material Salida_materiales_seleccion = new Salida_Material();
         public Class_Salida_Material Class_salida_material = new Class_Salida_Material();
+        public List<Partida_orden_compra> Partidas_orden_compra_disponibles = new List<Partida_orden_compra>();
         public List<Salida_Material> Salida_materiales_disponibles = new List<Salida_Material>();
         public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
         public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
@@ -47,10 +48,12 @@ namespace Coset_Sistema_Produccion
         public word.Document Documento = null;
         public Class_Ordenes_Compra Class_Ordenes_Compra = new Class_Ordenes_Compra();
         public List<Orden_compra> Ordenes_compra_disponibles = new List<Orden_compra>();
+        public List<Orden_compra> Ordenes_compra_con_material_abiertas = new List<Orden_compra>();
         public Orden_compra Ordene_compra_seleccion = new Orden_compra();
-        public Class_Partidas_Orden_compra class_Partidas_Orden_Compra = new Class_Partidas_Orden_compra();
-        public List<Partida_orden_compra> Partidas_orden_compra_disponibles = new List<Partida_orden_compra>();
-        public Partida_orden_compra Partida_orden_compra_seleccion = new Partida_orden_compra();
+        
+
+
+
 
 
         /*Revisar*/
@@ -188,12 +191,12 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_salida()
         {
-            Desactiva_combobox_codigo_orden_compra();
-            Activa_textbox_codigo_proveedor();
-            Activa_textbox_descripcion_material();
-            Activa_textbox_codigo_material();
-            Asigna_caracter_busqueda_material();
-            Inicia_timer_busqueda_materiales();
+            Desactiva_combobox_codigo_proyectos();
+            //Activa_textbox_codigo_proveedor();
+            //Activa_textbox_descripcion_material();
+            //Activa_textbox_codigo_material();
+            //Asigna_caracter_busqueda_material();
+            //Inicia_timer_busqueda_materiales();
 
         }
 
@@ -217,7 +220,7 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
-            Desactiva_combobox_codigo_orden_compra();
+            Desactiva_combobox_codigo_proyectos();
             Desaparece_textbox_descripcion_materiales();
 
         }
@@ -243,12 +246,12 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_modificar_clientes()
+        private void Inicia_timer_para_buscar_informacion_materiales_busqueda()
         {
             timerBusquedaMaterial.Enabled = true;
         }
 
-        private void Desactiva_combobox_codigo_orden_compra()
+        private void Desactiva_combobox_codigo_proyectos()
         {
             comboBoxCodigoProyecto.Enabled = false;
         }
@@ -341,6 +344,7 @@ namespace Coset_Sistema_Produccion
             Activa_datagridview_partidas_entrada_materiales();
             Activa_textbox_codigo_proveedor();
             limpia_combo_proyectos();
+            Limpia_combo_orden_compra();
             Aparece_combo_proyectos();
             Activa_combo_proyectos();
             obtener_proyectos_base_datos_disponibles();
@@ -357,7 +361,9 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_descripcion_material();
             Activa_textbox_codigo_material();
             Asigna_caracter_busqueda_material();
-            Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
+            Activa_combo_OC();
+            Inicia_timer_para_buscar_informacion_materiales_busqueda();
+            //Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
         }
 
         private void Aparece_label_proyecto()
@@ -1185,7 +1191,7 @@ namespace Coset_Sistema_Produccion
         {
             Operacio_salida_materiales = "VisualizarOC";
             Limpia_combo_orden_compra();
-            Aparece_combo_orden_cpompra();
+            Aparece_combo_orden_compra();
             Aparece_label_orden_compra();
             Desactiva_botones_operacion();
             Acepta_datagridview_agregar_renglones();
@@ -1302,10 +1308,12 @@ namespace Coset_Sistema_Produccion
 
         private void timerAgregarSalidaMateriales_Tick(object sender, EventArgs e)
         {
-            if (Operacio_salida_materiales == "salida")
+            if (Operacio_salida_materiales == "Salida")
             {
                 if (comboBoxEmpleado.Text != "" &&
-                    textBoxUnidadesSalida.Text != "")
+                    textBoxUnidadesSalida.Text != "" &&
+                    comboBoxOC.Text != "" &&
+                    comboBoxCodigoProyecto.Text != "")
                 {
                     timerAgregarSalidaMateriales.Enabled = false;
                     Aparece_boton_guardar_base_datos();
@@ -1344,6 +1352,10 @@ namespace Coset_Sistema_Produccion
                 Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
                 Material_disponible_salida_materiales = Materiales_disponibles_busqueda[0];
                 secuencia_despues_de_busqueda_material();
+                if(Operacio_salida_materiales == "Salida" && textCodigoMaterial.Text !="")
+                {
+                    Busca_material_en_partidas_orden_compra();
+                }
                 if(Operacio_salida_materiales=="Visualizar")
                 {
                     Rellenar_partidas_salida_materiales();
@@ -1377,6 +1389,61 @@ namespace Coset_Sistema_Produccion
                 Termina_secuencia_operaciones_salida_materiales();
 
             }
+        }
+
+        private void Busca_material_en_partidas_orden_compra()
+        {
+            Limpia_partidas_ordenes_compra_disponibles();
+            Obtener_partidas_ordenes_compra_disponibles_material();
+            if(Partidas_orden_compra_disponibles.Count>0)
+            {
+                Buscar_material_ordenes_compra_abiertas();
+                if(Ordenes_compra_con_material_abiertas.Count>0)
+                {
+                    Limpia_combo_orden_compra();
+                    Aparece_combo_orden_compra();
+                    Rellena_combo_ordenes_compra();
+                    Aparece_label_orden_compra();
+
+                }
+
+            }
+            
+        }
+
+        private void Buscar_material_ordenes_compra_abiertas()
+        {
+            Limpia_ordenes_compra_con_material_abiertas();
+            foreach (Partida_orden_compra partida in Partidas_orden_compra_disponibles)
+            {
+
+                Ordenes_compra_disponibles = Class_Ordenes_Compra
+                    .Adquiere_ordenes_compra_disponibles_material_abiertas(partida.Codigo_orden);
+                if(Ordenes_compra_disponibles.Count>0)
+                {
+                    foreach(Orden_compra orden in Ordenes_compra_disponibles)
+                    {
+                        Ordenes_compra_con_material_abiertas.Add(orden);
+                    }
+                    
+                }
+            }
+        }
+
+        private void Limpia_ordenes_compra_con_material_abiertas()
+        {
+            Ordenes_compra_con_material_abiertas.Clear();
+        }
+
+        private void Obtener_partidas_ordenes_compra_disponibles_material()
+        {
+            Partidas_orden_compra_disponibles = class_partidas_Orden_compra.
+                Adquiere_partidas_ordenes_compra_disponibles_en_base_datos_material(textCodigoMaterial.Text);
+        }
+
+        private void Limpia_partidas_ordenes_compra_disponibles()
+        {
+            Partidas_orden_compra_disponibles = null;
         }
 
         private void Rellena_cajas_informacion_despues_busqueda(Material material)
@@ -1474,7 +1541,7 @@ namespace Coset_Sistema_Produccion
         {
             Operacio_salida_materiales = "SalidaOC";
             Limpia_combo_orden_compra();
-            Aparece_combo_orden_cpompra();
+            Aparece_combo_orden_compra();
             Aparece_label_orden_compra();
             Aparece_boton_cancelar_operacio();
             Desactiva_botones_operacion();
@@ -1485,16 +1552,34 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_combo_ordenes_compra()
         {
-            foreach (Orden_compra orden_compra in Ordenes_compra_disponibles)
+            if (Operacio_salida_materiales == "Salida")
             {
-                if (orden_compra.error == "")
+                foreach (Orden_compra orden_compra in Ordenes_compra_con_material_abiertas)
                 {
-                    comboBoxOC.Items.Add(orden_compra.Codigo);
+                    if (orden_compra.error == "")
+                    {
+                        comboBoxOC.Items.Add(orden_compra.Codigo);
+                    }
+                    else
+                    {
+                        MessageBox.Show(orden_compra.error);
+                        break;
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach (Orden_compra orden_compra in Ordenes_compra_disponibles)
                 {
-                    MessageBox.Show(orden_compra.error);
-                    break;
+                    if (orden_compra.error == "")
+                    {
+                        comboBoxOC.Items.Add(orden_compra.Codigo);
+                    }
+                    else
+                    {
+                        MessageBox.Show(orden_compra.error);
+                        break;
+                    }
                 }
             }
         }
@@ -1509,7 +1594,7 @@ namespace Coset_Sistema_Produccion
             labelCodigoOC.Visible = true;
         }
 
-        private void Aparece_combo_orden_cpompra()
+        private void Aparece_combo_orden_compra()
         {
             comboBoxOC.Visible = true;
         }
@@ -1539,7 +1624,26 @@ namespace Coset_Sistema_Produccion
             {
                 configura_visualizar_salida_orden_compra();
             }
+            else if(Operacio_salida_materiales == "Salida")
+            {
+                configura_salida_material_individual();
+            }
             
+        }
+
+        private void configura_salida_material_individual()
+        {
+            Desactiva_combo_OC();
+            
+        }
+
+        private void Desactiva_combo_OC()
+        {
+            comboBoxOC.Enabled = false;
+        }
+        private void Activa_combo_OC()
+        {
+            comboBoxOC.Enabled = true;
         }
 
         private void configura_visualizar_salida_orden_compra()
