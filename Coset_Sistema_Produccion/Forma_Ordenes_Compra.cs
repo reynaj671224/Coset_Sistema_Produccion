@@ -3117,10 +3117,18 @@ namespace Coset_Sistema_Produccion
             
         }
 
-        private void buttonMateriales_Click(object sender, EventArgs e)
+
+
+        private void buttonMaterialesBusqueda_Click(object sender, EventArgs e)
         {
             Forma_Consulta_Materiales forma_Consulta_Materiales = new Forma_Consulta_Materiales();
             forma_Consulta_Materiales.ShowDialog();
+        }
+
+        private void buttonMateriales_Click(object sender, EventArgs e)
+        {
+            Forma_Materiales forma_Materiales = new Forma_Materiales();
+            forma_Materiales.ShowDialog();
         }
     }
 }

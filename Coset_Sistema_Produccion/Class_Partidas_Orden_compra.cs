@@ -81,6 +81,48 @@ namespace Coset_Sistema_Produccion
             return ordenes_compra_disponibles;
         }
 
+        public List<Partida_orden_compra> Adquiere_partidas_ordenes_compra_disponibles_material_orden_compra(Partida_orden_compra partida)
+        {
+            List<Partida_orden_compra> ordenes_compra_disponibles = new List<Partida_orden_compra>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_compras_partidas_orden_compra());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_material_material_orden_compra(partida), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    ordenes_compra_disponibles.Add(new Partida_orden_compra()
+                    {
+                        Codigo = (int)mySqlDataReader["codigo_partida"],
+                        Codigo_orden = mySqlDataReader["codigo_orden_compra"].ToString(),
+                        Partida = mySqlDataReader["partida_compra"].ToString(),
+                        Material = mySqlDataReader["material_compra"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_compra"].ToString(),
+                        Parte = mySqlDataReader["parte_compra"].ToString(),
+                        Descripcion = mySqlDataReader["descripcion_compra"].ToString(),
+                        Unidad_medida = mySqlDataReader["unidad_medida"].ToString(),
+                        Proyecto = mySqlDataReader["proyecto_compra"].ToString(),
+                        precio_unitario = mySqlDataReader["precio_unitario"].ToString(),
+                        Total = mySqlDataReader["total_compra"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ordenes_compra_disponibles.Add(new Partida_orden_compra()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return ordenes_compra_disponibles;
+        }
+
+        private string Commando_leer_Mysql_material_material_orden_compra(Partida_orden_compra partida)
+        {
+            return "SELECT * FROM partidas_oredenes_compra WHERE material_compra='" + partida.Material +
+                "' and codigo_orden_compra='"+ partida.Codigo_orden+"';";
+        }
+
         private string Commando_leer_Mysql_material(string codigo_material)
         {
             return "SELECT * FROM partidas_oredenes_compra WHERE material_compra='" + codigo_material + "';";

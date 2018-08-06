@@ -1,0 +1,62 @@
+CREATE DATABASE  IF NOT EXISTS `almacen` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `almacen`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: almacen
+-- ------------------------------------------------------
+-- Server version	5.6.39-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `entrada_material`
+--
+
+DROP TABLE IF EXISTS `entrada_material`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entrada_material` (
+  `codigo_entrada` int(10) NOT NULL AUTO_INCREMENT,
+  `orden_compra` varchar(45) NOT NULL,
+  `fecha` varchar(45) NOT NULL,
+  `codigo_material` varchar(45) NOT NULL,
+  `cantidad_material` int(11) NOT NULL,
+  `codigo_proveedor_material` varchar(45) NOT NULL,
+  `nombre_empleado` varchar(45) NOT NULL,
+  `descripcion_material` varchar(80) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `divisa` varchar(45) NOT NULL,
+  `referencia_entrada` varchar(45) NOT NULL,
+  PRIMARY KEY (`codigo_entrada`)
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entrada_material`
+--
+
+LOCK TABLES `entrada_material` WRITE;
+/*!40000 ALTER TABLE `entrada_material` DISABLE KEYS */;
+INSERT INTO `entrada_material` VALUES (157,'NA','7/11/2018','AG00009',9,'DDS2-330-DHGRY','cheque Rosas','DESCONECTADOR',56.89,'Pesos','F-1234'),(158,'NA','7/11/2018','AG00009',7,'DDS2-330-DHGRY','Javier Reyna','DESCONECTADOR',45.67,'Pesos','F-678'),(159,'NA','7/11/2018','AG00009',67,'DDS2-330-DHGRY','Javier Reyna','DESCONECTADOR',789.90,'Pesos','R-6789'),(160,'OC00109','7/12/2018','AG00004',4,'SVC-EFL-010','Juan Gonzales 5','CABLE ENCODER',567.00,'Pesos','F-1234'),(161,'OC00109','7/12/2018','AG00009',5,'DDS2-330-DHGRY','Juan Gonzales 5','DESCONECTADOR',567.00,'Pesos','F-1234'),(162,'NA','7/12/2018','AG00009',6,'DDS2-330-DHGRY','Javier Reyna','DESCONECTADOR',45.00,'Pesos','R-789'),(165,'OC00111','7/19/2018','AG00009',1,'DDS2-330-DHGRY','Javier Reyna','DESCONECTADOR',908.00,'Pesos','F-123'),(166,'OC00111','7/19/2018','AG00009',5,'DDS2-330-DHGRY','Saul Romero','DESCONECTADOR',908.00,'Pesos','F-890'),(167,'OC00109','7/22/2018','AG00004',5,'SVC-EFL-010','cheque Rosas','CABLE ENCODER',567.00,'Pesos','F-6789'),(168,'OC00109','7/22/2018','AG00009',20,'DDS2-330-DHGRY','cheque Rosas','DESCONECTADOR',567.00,'Pesos','F-6789'),(169,'OC00109','7/22/2018','AG00004',5,'SVC-EFL-010','cheque Rosas','CABLE ENCODER',567.00,'Pesos','F-8790'),(170,'OC00109','7/22/2018','AG00009',15,'DDS2-330-DHGRY','cheque Rosas','DESCONECTADOR',567.00,'Pesos','F-8790'),(171,'OC00111','7/22/2018','AG00009',1,'DDS2-330-DHGRY','Saul Romero','DESCONECTADOR',908.00,'Pesos','F-123'),(172,'OC00111','7/22/2018','AG00009',1,'DDS2-330-DHGRY','cheque Rosas','DESCONECTADOR',908.00,'Pesos','F-1234'),(173,'OC00111','7/22/2018','AG00009',2,'DDS2-330-DHGRY','Javier Reyna','DESCONECTADOR',908.00,'Pesos','F-1234'),(174,'OC00114','7/22/2018','AG00004',5,'SVC-EFL-010','Ulises','CABLE ENCODER',456.00,'Pesos','F-1234'),(175,'OC00114','7/22/2018','AG00009',5,'DDS2-330-DHGRY','Ulises','DESCONECTADOR',4654.00,'Pesos','F-1234'),(176,'OC00114','7/22/2018','AG00004',5,'SVC-EFL-010','Juan Gonzales 5','CABLE ENCODER',456.00,'Pesos','F-2344'),(177,'OC00114','7/22/2018','AG00009',1,'DDS2-330-DHGRY','Juan Gonzales 5','DESCONECTADOR',4654.00,'Pesos','F-2344'),(178,'OC00114','7/22/2018','AG00009',4,'DDS2-330-DHGRY','Juan Gonzales 5','DESCONECTADOR',4654.00,'Pesos','F-234'),(179,'OC00113','7/22/2018','AG00009',1,'DDS2-330-DHGRY','cheque Rosas','DESCONECTADOR',656.00,'Pesos','F-345'),(180,'OC00113','7/22/2018','AG00004',2,'SVC-EFL-010','cheque Rosas','CABLE ENCODER',678.00,'Pesos','F-345'),(181,'OC00113','7/22/2018','AG00004',2,'SVC-EFL-010','Javier Reyna','CABLE ENCODER',678.00,'Pesos','F-345');
+/*!40000 ALTER TABLE `entrada_material` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-08-05  9:04:54

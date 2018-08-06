@@ -437,13 +437,29 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_visualizar()
         {
             Desactiva_combobox_codigo_orden_compra();
-            Limpia_combo_descripcion_materiales();
-            Aparecer_combo_descripcion_materiales();
-            Activa_combo_descripcion_materiales();
+            //Limpia_combo_descripcion_materiales();
+            //Aparecer_combo_descripcion_materiales();
+            //Activa_combo_descripcion_materiales();
             Desaparece_textbox_descripcion_materiales();
-            Obtener_materiales_ordenes_compra();
-            Rellena_combo_descripcion_materiales();
+            Mostrar_materiales_entrada();
+            
+            //Rellena_combo_descripcion_materiales();
 
+        }
+
+        private void Mostrar_materiales_entrada()
+        {
+            Obtener_materiales_ordenes_compra();
+            foreach(Partida_orden_compra orden in partidas_ordenes_compra_disponibles)
+            {
+                Entrada_materiales_seleccion.Codigo_material = orden.Material;
+                Entrada_materiales_seleccion.Orden_compra = orden.Codigo_orden;
+                Entrada_materiales_disponibles = Class_entrada_material.
+                    Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
+                Rellena_datagrid_entrada_materiales();
+            }
+            
+            
         }
 
         private void Aparece_boton_eliminar_datos_en_base_de_datos()
@@ -1764,17 +1780,17 @@ namespace Coset_Sistema_Produccion
                     try
                     {
                         /*Valida Numeros en la caja partida*/
-            Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString());
+                        Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString());
                         if (Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Value.ToString()) >
-                             Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex-1, e.RowIndex].Value.ToString()))
+                             Convert.ToSingle(dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex - 1, e.RowIndex].Value.ToString()))
                         {
                             throw new System.ArgumentException("Numero de Unidades Mayor a unidades ordenadas", "Entrada Materiales");
                         }
                         dataGridViewPartidasEntradaMaterialesEntrada[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
                     }
-                    catch(Exception)
+                    catch (Exception ex)
                     {
-
+                        MessageBox.Show(ex.Message);
                         dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, e.RowIndex].Value = "";
                     }
 
