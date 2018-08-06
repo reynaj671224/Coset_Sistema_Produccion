@@ -138,7 +138,17 @@ namespace Coset_Sistema_Produccion
             {
                 if (orden.error == "")
                 {
-                    comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                    if (Operacio_entrada_materiales == "Visualizar OC")
+                    {
+                        comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                    }
+                    else
+                    {
+                        if (orden.Estado_entrada != "Cerrada")
+                        {
+                            comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                        }
+                    }
                 }
                 else
                 {
@@ -261,7 +271,7 @@ namespace Coset_Sistema_Produccion
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
             //Desaparece_textbox_descripcion_materiales();
-            if (orden_compra_seleccionada.Estado != "Cancelada" && orden_compra_seleccionada.Estado != "Cerrada")
+            if (orden_compra_seleccionada.Estado_entrada != "Cancelada" && orden_compra_seleccionada.Estado_entrada != "Cerrada")
             {
                 Limpia_datagridview_agrega_materiales();
                 Obtener_materiales_ordenes_compra();
@@ -289,7 +299,7 @@ namespace Coset_Sistema_Produccion
 
         private void Muestra_informacion_orden_compra()
         {
-            textBoxEstadoOC.Text = orden_compra_seleccionada.Estado;
+            textBoxEstadoOC.Text = orden_compra_seleccionada.Estado_entrada;
         }
 
         private void Obtener_orden_compra_seleccionada()

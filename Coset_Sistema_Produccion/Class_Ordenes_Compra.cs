@@ -32,7 +32,8 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
                         Requisicion = mySqlDataReader["requisicion"].ToString(),
-                        Estado = mySqlDataReader["estado_entrada"].ToString(),
+                        Estado_entrada = mySqlDataReader["estado_entrada"].ToString(),
+                        Estado_salida = mySqlDataReader["estado_salida"].ToString(),
 
                     });
                 }
@@ -69,7 +70,8 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
                         Requisicion = mySqlDataReader["requisicion"].ToString(),
-                        Estado = mySqlDataReader["estado_entrada"].ToString(),
+                        Estado_entrada = mySqlDataReader["estado_entrada"].ToString(),
+                        Estado_salida = mySqlDataReader["estado_salida"].ToString(),
 
                     });
                 }
@@ -106,8 +108,8 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_contacto_compra"].ToString(),
                         Cotizacion = mySqlDataReader["cotizacion_compra"].ToString(),
                         Requisicion = mySqlDataReader["requisicion"].ToString(),
-                        Estado = mySqlDataReader["estado_entrada"].ToString(),
-
+                        Estado_entrada = mySqlDataReader["estado_entrada"].ToString(),
+                        Estado_salida = mySqlDataReader["estado_salida"].ToString(),
                     });
                 }
             }
@@ -239,7 +241,8 @@ namespace Coset_Sistema_Produccion
         public string Correo_electronico = "";
         public string Cotizacion = "";
         public string Requisicion = "";
-        public string Estado = "";
+        public string Estado_entrada= "";
+        public string Estado_salida = "";
         public string error = "";
     }
 }

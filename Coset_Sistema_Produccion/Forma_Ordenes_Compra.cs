@@ -596,7 +596,7 @@ namespace Coset_Sistema_Produccion
             textBoxRequisitor.Text = orden_compra_visualizar.Realizado;
             textBoxRequisicion.Text = orden_compra_visualizar.Requisicion;
             textBoxCondicionPago.Text = orden_compra_visualizar.Condicion_pago;
-            textBoxEstado.Text = orden_compra_visualizar.Estado;
+            textBoxEstado.Text = orden_compra_visualizar.Estado_entrada;
             if (orden_compra_visualizar.Tipo_moneda == "Dolares")
             {
                 radioButtonDolares.Select();
