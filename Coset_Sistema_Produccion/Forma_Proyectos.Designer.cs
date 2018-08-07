@@ -84,6 +84,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxSerie = new System.Windows.Forms.TextBox();
+            this.comboBoxNombreProyecto = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -646,11 +647,23 @@
             this.textBoxSerie.Size = new System.Drawing.Size(123, 20);
             this.textBoxSerie.TabIndex = 80;
             // 
+            // comboBoxNombreProyecto
+            // 
+            this.comboBoxNombreProyecto.FormattingEnabled = true;
+            this.comboBoxNombreProyecto.Location = new System.Drawing.Point(220, 158);
+            this.comboBoxNombreProyecto.Name = "comboBoxNombreProyecto";
+            this.comboBoxNombreProyecto.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxNombreProyecto.Sorted = true;
+            this.comboBoxNombreProyecto.TabIndex = 82;
+            this.comboBoxNombreProyecto.Visible = false;
+            this.comboBoxNombreProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProyecto_SelectedIndexChanged);
+            // 
             // Forma_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 521);
+            this.Controls.Add(this.comboBoxNombreProyecto);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.textBoxSerie);
             this.Controls.Add(this.label3);
@@ -764,5 +777,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
         private System.Windows.Forms.DataGridViewComboBoxColumn Proceso_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
+        private System.Windows.Forms.ComboBox comboBoxNombreProyecto;
     }
 }

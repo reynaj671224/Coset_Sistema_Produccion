@@ -172,12 +172,43 @@ namespace Coset_Sistema_Produccion
             Desaparece_caja_captura_codigo_proyecto();
             Aparece_combo_codigo_proyecto();
             Activa_combo_codigo_proyecto();
+            Aparece_combo_nombre_proyecto();
+            Activa_combo_nombre_proyecto();
+            Limpia_combo_proyecto();
+            Limpia_combo_nombre_proyecto();
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_combo_codigo_proyecto();
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
             Operacio_proyectos = "Visualizar";
+        }
+
+        private void Limpia_combo_nombre_proyecto()
+        {
+            comboBoxNombreProyecto.Items.Clear();
+            comboBoxNombreProyecto.Text = "";
+        }
+
+        private void Activa_combo_nombre_proyecto()
+        {
+            comboBoxNombreProyecto.Enabled = true;
+
+        }
+
+        private void Desactiva_combo_nombre_proyecto()
+        {
+            comboBoxNombreProyecto.Enabled = false;
+
+        }
+
+        private void Aparece_combo_nombre_proyecto()
+        {
+            comboBoxNombreProyecto.Visible = true;
+        }
+        private void Desaparece_combo_nombre_proyecto()
+        {
+            comboBoxNombreProyecto.Visible = false;
         }
 
         private void Activa_combo_codigo_proyecto()
@@ -239,7 +270,10 @@ namespace Coset_Sistema_Produccion
             foreach (Proyecto proyecto in proyectos_disponibles)
             {
                 if (proyecto.error == "")
+                {
                     comboBoxCodigoProyecto.Items.Add(proyecto.Codigo);
+                    comboBoxNombreProyecto.Items.Add(proyecto.Nombre);
+                }
                 else
                 {
                     MessageBox.Show(proyecto.error);
@@ -334,7 +368,9 @@ namespace Coset_Sistema_Produccion
             limpia_dibujos_proyecto();
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();
-            Desaparece_botones_operacion_contactos();   
+            Desaparece_botones_operacion_contactos();
+            Desaparece_combo_nombre_proyecto();
+            Desactiva_combo_nombre_proyecto();
             Elimina_informacion_proyectos_disponibles();
         }
 
@@ -387,7 +423,7 @@ namespace Coset_Sistema_Produccion
             else if (Operacio_proyectos == "Eliminar")
                 configura_forma_eliminar();
             else if (Operacio_proyectos == "Visualizar")
-                configura_forma_visualizar();
+                configura_forma_visualizar_codigo_proyecto();
             else if (Operacio_proyectos == "Operaciones Dibujos")
                 configura_forma_operaciones_dibujos();
 
@@ -397,7 +433,7 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_copiar()
         {
             limpia_dibujos_proyecto();
-            Rellena_cajas_informacion_de_proyectos();
+            Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoProyecto.Text);
             Rellena_cajas_informacion_de_dibujos_proyecto();
             Aparce_boton_guardar_base_datos();
@@ -452,7 +488,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_combobox_codigo_proyecto();
             limpia_dibujos_proyecto();
             Obtener_datos_proyectos_disponibles_base_datos();
-            Rellena_cajas_informacion_de_proyectos();
+            Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
             Rellena_cajas_informacion_de_dibujos_proyecto();
             Aparecer_botones_operaciones_dibujos();
@@ -466,10 +502,10 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_eliminar_dibujo();
         }
 
-        private void configura_forma_visualizar()
+        private void configura_forma_visualizar_codigo_proyecto()
         {
             limpia_dibujos_proyecto();
-            Rellena_cajas_informacion_de_proyectos();
+            Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
             Rellena_cajas_informacion_de_dibujos_proyecto();
         }
@@ -477,6 +513,11 @@ namespace Coset_Sistema_Produccion
         private void Obtener_datos_dibujos_proyectos_disponibles_base_datos(string codigo_proyecto)
         {
             dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_proyecto_disponibles_en_base_datos(comboBoxCodigoProyecto.Text);
+        }
+
+        private void Obtener_datos_dibujos_nombre_proyectos_disponibles_base_datos(string codigo_proyecto)
+        {
+            dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
         }
 
         private void Rellena_cajas_informacion_de_dibujos_proyecto()
@@ -499,9 +540,13 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private void Rellena_cajas_informacion_de_proyectos()
+        private void Rellena_cajas_informacion_de_codigo_proyectos()
         {
             proyecto_visualizar = proyectos_disponibles.Find(proyecto => proyecto.Codigo.Contains(comboBoxCodigoProyecto.SelectedItem.ToString()));
+            Desaparece_combo_nombre_proyecto();
+            Desactiva_combo_nombre_proyecto();
+            Limpia_combo_nombre_proyecto();
+            Aparece_textbox_nombre_proyecto();
 
             textBoxNombreCliente.Text = proyecto_visualizar.Nombre_cliente;
             textBoxIngenieroCoset.Text = proyecto_visualizar.Ingeniero_coset;;
@@ -517,6 +562,11 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoCotizacion.Text = proyecto_visualizar.Codigo_cotizacion;
         }
 
+        private void Aparece_textbox_nombre_proyecto()
+        {
+            textBoxNombreProyecto.Visible = true;
+        }
+
         private void Activa_datetimepicker_fecha_actual()
         {
             dateTimePickerFechaActual.Enabled = true;
@@ -525,7 +575,7 @@ namespace Coset_Sistema_Produccion
         private void configura_forma_eliminar()
         {
             limpia_dibujos_proyecto();
-            Rellena_cajas_informacion_de_proyectos();
+            Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
             Rellena_cajas_informacion_de_dibujos_proyecto();
             Aparece_boton_eliminar_datos_en_base_de_datos();
@@ -2383,6 +2433,44 @@ namespace Coset_Sistema_Produccion
                           Cells["Descrpcion_partida"].Style.BackColor = Color.Yellow;
 
             }
+        }
+
+        private void comboBoxNombreProyecto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Operacio_proyectos == "Visualizar")
+            {
+                configura_forma_visualizar_nombre_proyecto();
+            }
+        }
+
+        private void configura_forma_visualizar_nombre_proyecto()
+        {
+            limpia_dibujos_proyecto();
+            Rellena_cajas_informacion_de_nombre_proyectos();
+            Obtener_datos_dibujos_nombre_proyectos_disponibles_base_datos(textBoxCodigoProyecto.Text);
+            Rellena_cajas_informacion_de_dibujos_proyecto();
+        }
+
+        private void Rellena_cajas_informacion_de_nombre_proyectos()
+        {
+            proyecto_visualizar = proyectos_disponibles.Find(proyecto => proyecto.Nombre.Contains(comboBoxNombreProyecto.SelectedItem.ToString()));
+            Desaparece_combo_codigo_proyecto();
+            Desactiva_combobox_codigo_proyecto();
+            Limpia_combo_proyecto();
+            Aparece_textbox_codigo_proyecto();
+            textBoxCodigoProyecto.Text = proyecto_visualizar.Codigo;
+            textBoxNombreCliente.Text = proyecto_visualizar.Nombre_cliente;
+            textBoxIngenieroCoset.Text = proyecto_visualizar.Ingeniero_coset; ;
+            textBoxIngenieroCliente.Text = proyecto_visualizar.Ingeriero_cliente;
+            dateTimePickerFechaActual.Text = proyecto_visualizar.Fecha_inicio;
+            dateTimePickerFechaEntrega.Text = proyecto_visualizar.Fecha_entrega;
+            textBoxCodigoCliente.Text = proyecto_visualizar.Codigo_cliente;
+            textBoxModelo.Text = proyecto_visualizar.Modelo;
+            textBoxSerie.Text = proyecto_visualizar.Serie;
+            textBoxCodigoOC.Text = proyecto_visualizar.Codigo_orden_compra;
+            textBoxNombreProyecto.Text = proyecto_visualizar.Nombre;
+            textBoxUbicacionDibujos.Text = proyecto_visualizar.Ubliacion_dibujos;
+            textBoxCodigoCotizacion.Text = proyecto_visualizar.Codigo_cotizacion;
         }
     }
 }
