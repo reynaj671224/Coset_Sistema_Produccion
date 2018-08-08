@@ -59,6 +59,7 @@
             this.comboBoxUsuarios.Location = new System.Drawing.Point(98, 135);
             this.comboBoxUsuarios.Name = "comboBoxUsuarios";
             this.comboBoxUsuarios.Size = new System.Drawing.Size(158, 21);
+            this.comboBoxUsuarios.Sorted = true;
             this.comboBoxUsuarios.TabIndex = 1;
             this.comboBoxUsuarios.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuarios_SelectedIndexChanged);
             this.comboBoxUsuarios.SelectedValueChanged += new System.EventHandler(this.comboBoxUsuarios_SelectedValueChanged);

@@ -88,6 +88,8 @@ namespace Coset_Sistema_Produccion
             Usuarios_administrativos = null;
             Proyectos_disponibles = null;
             Materiales_disponibles_busqueda = null;
+            Ordenes_compra_disponibles = null;
+            Ordenes_compra_con_material_abiertas = null;
             this.Dispose();
             GC.Collect();
             this.Close();

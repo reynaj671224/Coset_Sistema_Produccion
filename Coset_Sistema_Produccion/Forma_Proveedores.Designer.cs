@@ -460,6 +460,7 @@
             this.comboBoxNombreProveedor.Location = new System.Drawing.Point(221, 139);
             this.comboBoxNombreProveedor.Name = "comboBoxNombreProveedor";
             this.comboBoxNombreProveedor.Size = new System.Drawing.Size(438, 21);
+            this.comboBoxNombreProveedor.Sorted = true;
             this.comboBoxNombreProveedor.TabIndex = 58;
             this.comboBoxNombreProveedor.Visible = false;
             this.comboBoxNombreProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProveedor_SelectedIndexChanged);

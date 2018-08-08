@@ -70,12 +70,6 @@
             this.textBoxTotalUnidades = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridViewSalidasMaterialesOC = new System.Windows.Forms.DataGridView();
-            this.comboBoxOC = new System.Windows.Forms.ComboBox();
-            this.textBoxOC = new System.Windows.Forms.TextBox();
-            this.labelCodigoOC = new System.Windows.Forms.Label();
-            this.buttonMateriales = new System.Windows.Forms.Button();
-            this.textBoxOCtotalUnits = new System.Windows.Forms.TextBox();
-            this.labelOCtotalUnits = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proyectos_ordenes_compra = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,6 +77,12 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad_oc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxOC = new System.Windows.Forms.ComboBox();
+            this.textBoxOC = new System.Windows.Forms.TextBox();
+            this.labelCodigoOC = new System.Windows.Forms.Label();
+            this.buttonMateriales = new System.Windows.Forms.Button();
+            this.textBoxOCtotalUnits = new System.Windows.Forms.TextBox();
+            this.labelOCtotalUnits = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMateriales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMaterialesOC)).BeginInit();
@@ -488,13 +488,54 @@
             this.dataGridViewTextBoxColumn8,
             this.cantidad_oc});
             this.dataGridViewSalidasMaterialesOC.Enabled = false;
-            this.dataGridViewSalidasMaterialesOC.Location = new System.Drawing.Point(25, 380);
+            this.dataGridViewSalidasMaterialesOC.Location = new System.Drawing.Point(25, 347);
             this.dataGridViewSalidasMaterialesOC.Name = "dataGridViewSalidasMaterialesOC";
             this.dataGridViewSalidasMaterialesOC.Size = new System.Drawing.Size(844, 202);
             this.dataGridViewSalidasMaterialesOC.TabIndex = 87;
             this.dataGridViewSalidasMaterialesOC.Visible = false;
             this.dataGridViewSalidasMaterialesOC.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSalidasMaterialesOC_CellContentClick);
             this.dataGridViewSalidasMaterialesOC.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSalidasMaterialesOC_CellEndEdit);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // Proyectos_ordenes_compra
+            // 
+            this.Proyectos_ordenes_compra.HeaderText = "Proyecto";
+            this.Proyectos_ordenes_compra.Name = "Proyectos_ordenes_compra";
+            this.Proyectos_ordenes_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proyectos_ordenes_compra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Codigo Material";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Parte Proveedor";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 300;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Cantidad";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // cantidad_oc
+            // 
+            this.cantidad_oc.HeaderText = "Cantidad Recibidas";
+            this.cantidad_oc.Name = "cantidad_oc";
             // 
             // comboBoxOC
             // 
@@ -561,47 +602,6 @@
             this.labelOCtotalUnits.TabIndex = 92;
             this.labelOCtotalUnits.Text = "OC Unidades";
             this.labelOCtotalUnits.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // Proyectos_ordenes_compra
-            // 
-            this.Proyectos_ordenes_compra.HeaderText = "Proyecto";
-            this.Proyectos_ordenes_compra.Name = "Proyectos_ordenes_compra";
-            this.Proyectos_ordenes_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proyectos_ordenes_compra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Codigo Material";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Parte Proveedor";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 300;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Cantidad";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // cantidad_oc
-            // 
-            this.cantidad_oc.HeaderText = "Cantidad Recibidas";
-            this.cantidad_oc.Name = "cantidad_oc";
             // 
             // Forma_Salida_Materiales
             // 

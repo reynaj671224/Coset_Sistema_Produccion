@@ -267,6 +267,7 @@
             this.comboBoxCodigoAutoPlacas.Location = new System.Drawing.Point(207, 161);
             this.comboBoxCodigoAutoPlacas.Name = "comboBoxCodigoAutoPlacas";
             this.comboBoxCodigoAutoPlacas.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxCodigoAutoPlacas.Sorted = true;
             this.comboBoxCodigoAutoPlacas.TabIndex = 49;
             this.comboBoxCodigoAutoPlacas.Visible = false;
             this.comboBoxCodigoAutoPlacas.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
@@ -281,6 +282,7 @@
             this.comboBoxAutoDescripcion.Location = new System.Drawing.Point(207, 190);
             this.comboBoxAutoDescripcion.Name = "comboBoxAutoDescripcion";
             this.comboBoxAutoDescripcion.Size = new System.Drawing.Size(311, 21);
+            this.comboBoxAutoDescripcion.Sorted = true;
             this.comboBoxAutoDescripcion.TabIndex = 54;
             this.comboBoxAutoDescripcion.Visible = false;
             this.comboBoxAutoDescripcion.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreCliente_SelectedIndexChanged);
