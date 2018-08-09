@@ -494,7 +494,7 @@
             // comboBoxNombreCliente
             // 
             this.comboBoxNombreCliente.FormattingEnabled = true;
-            this.comboBoxNombreCliente.Location = new System.Drawing.Point(220, 242);
+            this.comboBoxNombreCliente.Location = new System.Drawing.Point(220, 241);
             this.comboBoxNombreCliente.Name = "comboBoxNombreCliente";
             this.comboBoxNombreCliente.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreCliente.Sorted = true;
