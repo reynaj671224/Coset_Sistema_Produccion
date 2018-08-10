@@ -744,7 +744,7 @@
             this.buttonMateriales.Name = "buttonMateriales";
             this.buttonMateriales.Size = new System.Drawing.Size(79, 74);
             this.buttonMateriales.TabIndex = 81;
-            this.buttonMateriales.Text = "Materiales";
+            this.buttonMateriales.Text = "Materiales Agregar";
             this.buttonMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonMateriales.UseVisualStyleBackColor = true;
             this.buttonMateriales.Click += new System.EventHandler(this.buttonMateriales_Click);

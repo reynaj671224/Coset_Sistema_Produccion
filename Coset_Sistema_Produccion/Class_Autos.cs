@@ -11,7 +11,7 @@ namespace Coset_Sistema_Produccion
     {
         public List<Auto> Adquiere_autos_disponibles_en_base_datos()
         {
-            List<Auto> clientes_disponibles = new List<Auto>();
+            List<Auto> autos_disponibles = new List<Auto>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
             try
             {
@@ -20,7 +20,7 @@ namespace Coset_Sistema_Produccion
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
-                    clientes_disponibles.Add(new Auto()
+                    autos_disponibles.Add(new Auto()
                     {
                         Placas = mySqlDataReader["placas"].ToString(),
                         Marca = mySqlDataReader["marca"].ToString(),
@@ -34,11 +34,48 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-                clientes_disponibles.Add(new Auto()
+                autos_disponibles.Add(new Auto()
                 { error = ex.Message.ToString() });
             }
             connection.Close();
-            return clientes_disponibles;
+            return autos_disponibles;
+        }
+
+        public List<Auto> Adquiere_autos_usando_en_base_datos()
+        {
+            List<Auto> autos_disponibles = new List<Auto>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_autos_usando(), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    autos_disponibles.Add(new Auto()
+                    {
+                        Placas = mySqlDataReader["placas"].ToString(),
+                        Marca = mySqlDataReader["marca"].ToString(),
+                        Color = mySqlDataReader["color"].ToString(),
+                        Modelo = mySqlDataReader["modelo"].ToString(),
+                        Descripcion = mySqlDataReader["descripcion"].ToString(),
+                        Status = mySqlDataReader["status"].ToString()
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                autos_disponibles.Add(new Auto()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return autos_disponibles;
+        }
+
+        private string Commando_leer_autos_usando()
+        {
+            return "SELECT * FROM autos where status='Usando';";
         }
 
         public string Inserta_datos_auto(Auto auto)

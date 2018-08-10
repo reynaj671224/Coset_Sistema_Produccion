@@ -53,8 +53,13 @@
             this.TimePickerHora = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewEmpleadosAuto = new System.Windows.Forms.DataGridView();
+            this.Empleado_nombre = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.comboBoxContactoClienteProveedor = new System.Windows.Forms.ComboBox();
             this.dataGridViewMovimientosAutos = new System.Windows.Forms.DataGridView();
+            this.comboBoxEmpleado = new System.Windows.Forms.ComboBox();
+            this.textBoxEmpleado = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,8 +69,6 @@
             this.Contacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.empleados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado_nombre = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovimientosAutos)).BeginInit();
@@ -322,6 +325,26 @@
             this.dataGridViewEmpleadosAuto.Name = "dataGridViewEmpleadosAuto";
             this.dataGridViewEmpleadosAuto.Size = new System.Drawing.Size(343, 146);
             this.dataGridViewEmpleadosAuto.TabIndex = 60;
+            this.dataGridViewEmpleadosAuto.Visible = false;
+            // 
+            // Empleado_nombre
+            // 
+            this.Empleado_nombre.HeaderText = "Empleado";
+            this.Empleado_nombre.Name = "Empleado_nombre";
+            this.Empleado_nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado_nombre.Sorted = true;
+            this.Empleado_nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Empleado_nombre.Width = 200;
+            // 
+            // Responsable
+            // 
+            this.Responsable.HeaderText = "Responsable LLaves";
+            this.Responsable.Items.AddRange(new object[] {
+            "Responsable",
+            "Acompañante"});
+            this.Responsable.Name = "Responsable";
+            this.Responsable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // comboBoxContactoClienteProveedor
             // 
@@ -354,6 +377,36 @@
             this.dataGridViewMovimientosAutos.Size = new System.Drawing.Size(845, 146);
             this.dataGridViewMovimientosAutos.TabIndex = 62;
             this.dataGridViewMovimientosAutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovimientosAutos_CellClick);
+            // 
+            // comboBoxEmpleado
+            // 
+            this.comboBoxEmpleado.FormattingEnabled = true;
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(208, 113);
+            this.comboBoxEmpleado.Name = "comboBoxEmpleado";
+            this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxEmpleado.Sorted = true;
+            this.comboBoxEmpleado.TabIndex = 65;
+            this.comboBoxEmpleado.Visible = false;
+            this.comboBoxEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleado_SelectedIndexChanged);
+            // 
+            // textBoxEmpleado
+            // 
+            this.textBoxEmpleado.Enabled = false;
+            this.textBoxEmpleado.Location = new System.Drawing.Point(208, 113);
+            this.textBoxEmpleado.Name = "textBoxEmpleado";
+            this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
+            this.textBoxEmpleado.TabIndex = 64;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
+            this.label3.Location = new System.Drawing.Point(86, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 16);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "Empleado";
             // 
             // codigo
             // 
@@ -402,34 +455,17 @@
             // 
             // empleados
             // 
-            this.empleados.HeaderText = "Empleados";
+            this.empleados.HeaderText = "Empleado";
             this.empleados.Name = "empleados";
-            this.empleados.Visible = false;
-            // 
-            // Empleado_nombre
-            // 
-            this.Empleado_nombre.HeaderText = "Empleado";
-            this.Empleado_nombre.Name = "Empleado_nombre";
-            this.Empleado_nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Empleado_nombre.Sorted = true;
-            this.Empleado_nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Empleado_nombre.Width = 200;
-            // 
-            // Responsable
-            // 
-            this.Responsable.HeaderText = "Responsable LLaves";
-            this.Responsable.Items.AddRange(new object[] {
-            "Responsable",
-            "Acompañante"});
-            this.Responsable.Name = "Responsable";
-            this.Responsable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1039, 486);
+            this.Controls.Add(this.comboBoxEmpleado);
+            this.Controls.Add(this.textBoxEmpleado);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridViewMovimientosAutos);
             this.Controls.Add(this.comboBoxContactoClienteProveedor);
             this.Controls.Add(this.dataGridViewEmpleadosAuto);
@@ -492,6 +528,11 @@
         private System.Windows.Forms.DataGridView dataGridViewEmpleadosAuto;
         private System.Windows.Forms.ComboBox comboBoxContactoClienteProveedor;
         private System.Windows.Forms.DataGridView dataGridViewMovimientosAutos;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Empleado_nombre;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Responsable;
+        private System.Windows.Forms.ComboBox comboBoxEmpleado;
+        private System.Windows.Forms.TextBox textBoxEmpleado;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_salida;
@@ -501,7 +542,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Contacto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn empleados;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Empleado_nombre;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Responsable;
     }
 }
