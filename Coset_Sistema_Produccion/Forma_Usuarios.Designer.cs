@@ -284,7 +284,8 @@
             "Ingenieria",
             "Almacen",
             "Produccion",
-            "Admin-Compras"});
+            "Admin-Compras",
+            "Almacen-Compras"});
             this.comboBoxTipoempleado.Location = new System.Drawing.Point(172, 301);
             this.comboBoxTipoempleado.Name = "comboBoxTipoempleado";
             this.comboBoxTipoempleado.Size = new System.Drawing.Size(121, 21);
@@ -354,6 +355,7 @@
             this.comboBoxCodigoempleado.Location = new System.Drawing.Point(173, 110);
             this.comboBoxCodigoempleado.Name = "comboBoxCodigoempleado";
             this.comboBoxCodigoempleado.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoempleado.Sorted = true;
             this.comboBoxCodigoempleado.TabIndex = 25;
             this.comboBoxCodigoempleado.Visible = false;
             this.comboBoxCodigoempleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoempleado_SelectedIndexChanged);
@@ -402,6 +404,7 @@
             this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(171, 141);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(392, 21);
+            this.comboBoxNombreEmpleado.Sorted = true;
             this.comboBoxNombreEmpleado.TabIndex = 28;
             this.comboBoxNombreEmpleado.Visible = false;
             this.comboBoxNombreEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreEmpleado_SelectedIndexChanged);

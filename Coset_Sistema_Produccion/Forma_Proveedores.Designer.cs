@@ -363,6 +363,7 @@
             this.comboBoxCodigoProveedor.Location = new System.Drawing.Point(221, 113);
             this.comboBoxCodigoProveedor.Name = "comboBoxCodigoProveedor";
             this.comboBoxCodigoProveedor.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProveedor.Sorted = true;
             this.comboBoxCodigoProveedor.TabIndex = 49;
             this.comboBoxCodigoProveedor.Visible = false;
             this.comboBoxCodigoProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);

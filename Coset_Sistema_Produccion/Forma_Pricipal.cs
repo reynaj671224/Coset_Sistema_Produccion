@@ -401,7 +401,7 @@ namespace Coset_Sistema_Produccion
 
         private void Configura_Menu_En_Base_Tipo_usuario()
         {
-            if (Tipo_Usuario == "Administrativo"  || Tipo_Usuario == "Admin-Compras")
+            if (Tipo_Usuario == "Administrativo" || Tipo_Usuario == "Admin-Compras")
                 Configura_menus_para_usuarios_adminstrativos();
             else if (Tipo_Usuario == "Ingenieria")
                 Configura_menus_para_usuarios_ingenieria();
@@ -409,8 +409,29 @@ namespace Coset_Sistema_Produccion
                 Configura_menus_para_usuarios_almacen();
             else if (Tipo_Usuario == "Produccion")
                 Configura_menus_para_usuarios_produccion();
+            else if (Tipo_Usuario == "Almacen-Compras")
+                Configura_menus_para_usuarios_almacen_compras();
 
-            
+
+        }
+
+        private void Configura_menus_para_usuarios_almacen_compras()
+        {
+            Muestra_Menus_Para_Usuarios_almacen_compras();
+        }
+
+        private void Muestra_Menus_Para_Usuarios_almacen_compras()
+        {
+            Muestra_Menu_Almacen();
+            Muestra_Menu_Compras();
+            Oculta_Menus_de_Compras_Prohibidas_Para_almacen_compras();
+            toolStripStatusUsuario.Text = "Almacen-Compras";
+        }
+
+        private void Oculta_Menus_de_Compras_Prohibidas_Para_almacen_compras()
+        {
+            Oculta_Menu_Compras_Proveedores();
+            Oculta_menu_compras_requisiciones_pendientes();
         }
 
         private void Revisa_por_reqisiciones_abiertas()

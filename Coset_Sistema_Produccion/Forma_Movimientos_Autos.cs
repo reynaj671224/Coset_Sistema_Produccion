@@ -57,14 +57,20 @@ namespace Coset_Sistema_Produccion
             TimePickerHora.ShowUpDown = true;
             Genera_lineas_empleados_datagridview();
             deshabilita_datagridview_empleados();
-            Operacion_autos = "Inicio";
-            Obtener_movimientos_autos_en_uso();
-            Rellenar_datagridview_movimientos_autos();
-            Activa_datagridview_movimiento_autos();
+           
+            Muestra_autos_usandode();
+            
 
 
         }
 
+        private void Muestra_autos_usandode()
+        {
+            Operacion_autos = "Inicio";
+            Obtener_movimientos_autos_en_uso();
+            Rellenar_datagridview_movimientos_autos();
+            Activa_datagridview_movimiento_autos();
+        }
 
         private void Obtener_movimientos_autos_en_uso()
         {
@@ -484,7 +490,7 @@ namespace Coset_Sistema_Produccion
             {
                 foreach (Movimiento_auto movimiento in Movimientos_auto_en_uso_disponibles)
                 {
-                    dataGridViewMovimientosAutos.Rows.Add(movimiento.Codigo, movimiento.Hora_salida, movimiento.Fecha_salida,
+                    dataGridViewMovimientosAutos.Rows.Add(movimiento.Codigo, movimiento.Auto_descripcion, movimiento.Hora_salida, movimiento.Fecha_salida,
                     movimiento.Hora_entrada, movimiento.Fecha_entrada, movimiento.Nombre_visita, movimiento.Nombre_contacto, movimiento.Status, movimiento.Empleados);
                 }
             }
@@ -492,7 +498,7 @@ namespace Coset_Sistema_Produccion
             {
                 foreach (Movimiento_auto movimiento in Movimientos_auto_visualizar_disponibles)
                 {
-                    dataGridViewMovimientosAutos.Rows.Add(movimiento.Codigo, movimiento.Hora_salida, movimiento.Fecha_salida,
+                    dataGridViewMovimientosAutos.Rows.Add( movimiento.Codigo, movimiento.Auto_descripcion, movimiento.Hora_salida, movimiento.Fecha_salida,
                     movimiento.Hora_entrada, movimiento.Fecha_entrada, movimiento.Nombre_visita, movimiento.Nombre_contacto, movimiento.Status, movimiento.Empleados);
                 }
             }
@@ -500,7 +506,7 @@ namespace Coset_Sistema_Produccion
             {
                 foreach (Movimiento_auto movimiento in Movimientos_auto_en_uso_disponibles)
                 {
-                    dataGridViewMovimientosAutos.Rows.Add(movimiento.Codigo, movimiento.Hora_salida, movimiento.Fecha_salida,
+                    dataGridViewMovimientosAutos.Rows.Add(movimiento.Codigo, movimiento.Auto_descripcion, movimiento.Hora_salida, movimiento.Fecha_salida,
                     movimiento.Hora_entrada, movimiento.Fecha_entrada, movimiento.Nombre_visita, movimiento.Nombre_contacto, movimiento.Status, movimiento.Empleados);
                 }
             }
@@ -552,7 +558,7 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             Activa_seleccion_fecha();
             Activa_seleccion_hora();
-            
+            Limpia_datagridview_movimiento_autos();
 
         }
 
@@ -619,6 +625,7 @@ namespace Coset_Sistema_Produccion
                     Aparece_caja_nombre_cliente();
                     Desactiva_seleccion_fecha();
                     Desactiva_seleccion_hora();
+                    Muestra_autos_usandode();
                     Elimina_informacion_auto_disponibles();
                 }
             }
@@ -681,6 +688,7 @@ namespace Coset_Sistema_Produccion
                         Aparece_caja_nombre_cliente();
                         Desactiva_seleccion_fecha();
                         Desactiva_seleccion_hora();
+                        Muestra_autos_usandode();
                         Elimina_informacion_auto_disponibles();
                     }
                 }
@@ -883,7 +891,7 @@ namespace Coset_Sistema_Produccion
                 Rellenar_combo_clientes();
             }
 
-            
+            Limpia_datagridview_movimiento_autos();
             Limpia_combo_nombre_empleado();
             Obtener_usuarios_disponibles_base_datos();
             Rellenar_combo_empleados();

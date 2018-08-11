@@ -61,6 +61,7 @@
             this.textBoxEmpleado = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Auto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_entrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,7 +132,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(948, 292);
+            this.buttonCancelar.Location = new System.Drawing.Point(948, 320);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 35;
@@ -146,7 +147,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(948, 192);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(948, 240);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -161,7 +162,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(948, 372);
+            this.buttonHome.Location = new System.Drawing.Point(948, 400);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 33;
@@ -175,7 +176,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(948, 212);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(948, 240);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 32;
@@ -363,6 +364,7 @@
             this.dataGridViewMovimientosAutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMovimientosAutos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigo,
+            this.Auto,
             this.Hora_salida,
             this.Fecha_salida,
             this.Hora_entrada,
@@ -372,9 +374,9 @@
             this.Estado,
             this.empleados});
             this.dataGridViewMovimientosAutos.Enabled = false;
-            this.dataGridViewMovimientosAutos.Location = new System.Drawing.Point(80, 328);
+            this.dataGridViewMovimientosAutos.Location = new System.Drawing.Point(27, 328);
             this.dataGridViewMovimientosAutos.Name = "dataGridViewMovimientosAutos";
-            this.dataGridViewMovimientosAutos.Size = new System.Drawing.Size(845, 146);
+            this.dataGridViewMovimientosAutos.Size = new System.Drawing.Size(898, 146);
             this.dataGridViewMovimientosAutos.TabIndex = 62;
             this.dataGridViewMovimientosAutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovimientosAutos_CellClick);
             // 
@@ -413,6 +415,12 @@
             this.codigo.HeaderText = "Codigo";
             this.codigo.Name = "codigo";
             this.codigo.Visible = false;
+            // 
+            // Auto
+            // 
+            this.Auto.HeaderText = "Auto";
+            this.Auto.Name = "Auto";
+            this.Auto.Width = 150;
             // 
             // Hora_salida
             // 
@@ -455,8 +463,10 @@
             // 
             // empleados
             // 
+            this.empleados.FillWeight = 200F;
             this.empleados.HeaderText = "Empleado";
             this.empleados.Name = "empleados";
+            this.empleados.Width = 200;
             // 
             // Forma_Movimientos_Autos
             // 
@@ -534,6 +544,7 @@
         private System.Windows.Forms.TextBox textBoxEmpleado;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Auto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora_entrada;

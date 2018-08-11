@@ -99,7 +99,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            partidas_ordenes_compra_disponibles = null;
+            Materiales_disponibles_busqueda = null;
             Materiales_disponible_entrada_materiales = null;
             partidas_ordenes_compra_disponibles = null;
             Entrada_materiales_disponibles = null;
