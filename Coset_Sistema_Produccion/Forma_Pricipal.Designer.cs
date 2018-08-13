@@ -360,13 +360,13 @@
             // produccionToolStripMenuItem1
             // 
             this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
-            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
             this.produccionToolStripMenuItem1.Text = "Produccion";
             // 
             // proyectosToolStripMenuItem1
             // 
             this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
-            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
             this.proyectosToolStripMenuItem1.Text = "Proyectos";
             this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
             // 
@@ -522,7 +522,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 7.1";
+            this.Text = "Coset Sistema Produccion Rev 7.2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

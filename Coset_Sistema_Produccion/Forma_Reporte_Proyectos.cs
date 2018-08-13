@@ -576,32 +576,46 @@ namespace Coset_Sistema_Produccion
                         Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
                         material_seleccion = Materiales_disponibles.
                             Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
-                    }
-                    if (material_seleccion.divisa == "Pesos")
-                    {
-                        Precio_unitario = Convert.ToDouble(material_seleccion.precio);
-                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
-                    }
-                    else if (material_seleccion.divisa == "Dolares")
-                    {
-                        Precio_unitario = Convert.ToDouble(material_seleccion.precio) * Convert.ToDouble(datos_generales.Tc);
-                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                        if (material_seleccion.divisa == "Pesos")
+                        {
+                            Precio_unitario = Convert.ToDouble(material_seleccion.precio);
+                            Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                        }
+                        else if (material_seleccion.divisa == "Dolares")
+                        {
+                            Precio_unitario = Convert.ToDouble(material_seleccion.precio) * Convert.ToDouble(datos_generales.Tc);
+                            Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
 
-                    }
-                    Total_precio_proyecto_salidas += Total_precio;
-                    if (material.Orden_compra != "NA")
-                    {
+                        }
+                        Total_precio_proyecto_salidas += Total_precio;
+
                         dataGridViewProyectoReportes.Rows.Add(material_seleccion.Codigo,
-                           material_seleccion.Codigo_proveedor,
-                            material_seleccion.Descripcion, material_seleccion.Marca,
-                            material.Cantidad, material.Nombre_empleado, material.Fecha,
-                            Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
-                            Partida_orden_compra_seleccion.Proyecto,
-                            Partida_orden_compra_seleccion.Cantidad,
-                            "Salida", "");
+                          material_seleccion.Codigo_proveedor,
+                           material_seleccion.Descripcion, material_seleccion.Marca,
+                           material.Cantidad, material.Nombre_empleado, material.Fecha,
+                           Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                           Partida_orden_compra_seleccion.Proyecto,
+                           Partida_orden_compra_seleccion.Cantidad,
+                           "Salida", "");
                     }
                     else if (material.Orden_compra == "NA")
                     {
+                       
+                        Material_busqueda.Codigo = material.Codigo_material;
+                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                        material_seleccion = Materiales_disponibles.
+                            Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
+                        if (material_seleccion.divisa == "Pesos")
+                        {
+                            Precio_unitario = Convert.ToDouble(material_seleccion.precio);
+                            Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                        }
+                        else if (material_seleccion.divisa == "Dolares")
+                        {
+                            Precio_unitario = Convert.ToDouble(material_seleccion.precio) * Convert.ToDouble(datos_generales.Tc);
+                            Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+
+                        }
                         dataGridViewProyectoReportes.Rows.Add(material_seleccion.Codigo,
                             material_seleccion.Codigo_proveedor,
                             material_seleccion.Descripcion, Materiales_disponibles[0].Marca,
