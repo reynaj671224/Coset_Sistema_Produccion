@@ -43,6 +43,45 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_devolucion_materiales;
         }
 
+        public List<Devolucion_Material> Adquiere_devolucion_materiales_proyecto_busqueda_en_base_datos(Devolucion_Material material)
+        {
+            List<Devolucion_Material> Material_existente_disponibles_devolucion_materiales = new List<Devolucion_Material>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_devolucion_material_proyecto(material), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_devolucion_materiales.Add(new Devolucion_Material()
+                    {
+                        Codigo = mySqlDataReader["codigo_devolucion"].ToString(),
+                        Proyecto = mySqlDataReader["proyecto"].ToString(),
+                        Fecha = mySqlDataReader["fecha"].ToString(),
+                        Codigo_material = mySqlDataReader["codigo_material"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_material"].ToString(),
+                        Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
+                        Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
+                        Motivo_devolucion = mySqlDataReader["motivo_devolucion"].ToString(),
+                        Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_devolucion_materiales.Add(new Devolucion_Material()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_devolucion_materiales;
+        }
+
+        private string Commando_leer_Mysql_busqueda_devolucion_material_proyecto(Devolucion_Material material)
+        {
+            return "SELECT * FROM devolucion_material where proyecto ='" + material.Proyecto + "';";
+        }
+
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server + ";Database=almacen;Uid=root;Pwd=" +

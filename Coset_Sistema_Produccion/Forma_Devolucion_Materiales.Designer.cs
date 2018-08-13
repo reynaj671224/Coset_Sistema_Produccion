@@ -320,6 +320,7 @@
             this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(263, 135);
             this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProyecto.Sorted = true;
             this.comboBoxCodigoProyecto.TabIndex = 49;
             this.comboBoxCodigoProyecto.Visible = false;
             this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.buttonDevolucionMaterial_SelectedIndexChanged);
@@ -355,6 +356,7 @@
             this.comboBoxEmpleado.Location = new System.Drawing.Point(262, 260);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxEmpleado.Sorted = true;
             this.comboBoxEmpleado.TabIndex = 62;
             this.comboBoxEmpleado.Visible = false;
             // 

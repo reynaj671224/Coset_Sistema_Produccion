@@ -1671,7 +1671,10 @@ namespace Coset_Sistema_Produccion
                 {
                     if (orden_compra.error == "")
                     {
-                        comboBoxOC.Items.Add(orden_compra.Codigo);
+                        if (orden_compra.Estado_salida != "Cerrada")
+                        {
+                            comboBoxOC.Items.Add(orden_compra.Codigo);
+                        }
                     }
                     else
                     {
@@ -1847,6 +1850,7 @@ namespace Coset_Sistema_Produccion
             Aparece_datagrid_salida_materiales_orden_compra();
             Activate_datagrid_salida_materiales_orden_compra();
             Limpia_datagrid_salida_materiales_orden_compra();
+            limpia_combo_proyectos_datagrid_salida_materiales();
             obtener_proyectos_base_datos_disponibles();
             Rellenar_combo_proyectos_datagrid_salida_materiales();
             Obtener_partidas_ordenes_compra_disponibles();
@@ -1865,6 +1869,11 @@ namespace Coset_Sistema_Produccion
                     "Salida Material", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Termina_secuencia_operaciones_salida_materiales();
             }
+        }
+
+        private void limpia_combo_proyectos_datagrid_salida_materiales()
+        {
+            Proyectos_ordenes_compra.Items.Clear();
         }
 
         private int Rellenar_partidas_datagrid_ordenes_compra()

@@ -144,7 +144,7 @@ namespace Coset_Sistema_Produccion
                     }
                     else
                     {
-                        if (orden.Estado_entrada != "Cerrada")
+                        if (orden.Estado_entrada != "Cerrada" && orden.Estado_entrada!= "Cancelada")
                         {
                             comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
                         }

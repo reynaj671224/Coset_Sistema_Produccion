@@ -43,7 +43,21 @@ namespace Coset_Sistema_Produccion
         public Salida_Material Busqueda_salida_material = new Salida_Material();
         public Class_Materiales Class_Materiales = new Class_Materiales();
         public Material Material_busqueda = new Material();
+        public Material material_seleccion = new Material();
         public List<Material> Materiales_disponibles = new List<Material>();
+        public Class_Ordenes_Compra Class_Ordenes_Compra = new Class_Ordenes_Compra();
+        public List<Orden_compra> Ordenes_compra_disponibles = new List<Orden_compra>();
+        public Orden_compra Orden_compra_seleccion = new Orden_compra();
+        public Class_Partidas_Orden_compra class_Partidas_Orden_Compra = new Class_Partidas_Orden_compra();
+        public List<Partida_orden_compra> Partidas_ordenes_compra_disponibles = new List<Partida_orden_compra>();
+        public Partida_orden_compra Partida_orden_compra_seleccion = new Partida_orden_compra();
+        public Partida_orden_compra Partida_orden_compra_busqueda = new Partida_orden_compra();
+        public Class_Devolucion_Material Class_Devolucion_Material = new Class_Devolucion_Material();
+        public List<Devolucion_Material> Material_devolucion_disponibles = new List<Devolucion_Material>();
+        public Devolucion_Material Devolucion_Material_seleccion = new Devolucion_Material();
+        public Devolucion_Material Devolucion_Material_busqueda = new Devolucion_Material();
+
+
         public enum Campos_dibujos
         {
             codigo, cantidad, numero, descripcion,
@@ -175,7 +189,8 @@ namespace Coset_Sistema_Produccion
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             Operacio_proyectos = "Cancelar";           
-            Limpia_cajas_captura_despues_de_agregar_proyecto();           
+            Limpia_cajas_captura_despues_de_agregar_proyecto();
+            //Limpia_combo_proyecto();
             Desaparece_boton_guardar_base_de_datos();
             Aparece_textbox_codigo_proyecto();
             Aparece_textbox_ingeniero_cliente();
@@ -184,7 +199,7 @@ namespace Coset_Sistema_Produccion
             limpia_datagrid_materiales_proyecto();
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();  
-            Elimina_informacion_proyectos_disponibles();
+            //Elimina_informacion_proyectos_disponibles();
         }
 
        
@@ -392,7 +407,10 @@ namespace Coset_Sistema_Produccion
             textBoxNombreCliente.Text = "";
             textBoxIngenieroCliente.Text = "";
             textBoxIngenieroCoset.Text = "";
-           
+
+            textBoxTotalPrecioProyectoSalidas.Text = "";
+
+            comboBoxCodigoProyecto.Text = "";
 
         }
 
@@ -421,45 +439,185 @@ namespace Coset_Sistema_Produccion
         private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
             limpia_datagrid_materiales_proyecto();
+            Aparce_boton_cancelar();
             Rellena_cajas_informacion_de_proyectos();
             Obtener_materiales_asignados_proyecto(comboBoxCodigoProyecto.Text);
+            Activa_datagrid_reporte_proyectos();
+        }
+
+        private void Aparce_boton_cancelar()
+        {
+            buttonCancelar.Visible = true;
+        }
+
+        private void Desaparce_boton_cancelar()
+        {
+            buttonCancelar.Visible = false;
+        }
+        private void Activa_datagrid_reporte_proyectos()
+        {
+            dataGridViewProyectoReportes.Enabled = true;
+        }
+
+        private void Desactiva_datagrid_reporte_proyectos()
+        {
+            dataGridViewProyectoReportes.Enabled = true;
         }
 
         private void Obtener_materiales_asignados_proyecto(string text)
         {
             Asigna_campos_salida_materiales();
             Salida_materiales_disponibles = Class_salida_material.Adquiere_salida_materiales_proyecto_busqueda_en_base_datos(Busqueda_salida_material);
-            Rellena_partida_materiales_proyecto();
+            Rellena_partida_materiales_salida_proyecto();
+            Devolucion_Material_busqueda.Proyecto = comboBoxCodigoProyecto.Text;
+            Material_devolucion_disponibles = Class_Devolucion_Material
+            .Adquiere_devolucion_materiales_proyecto_busqueda_en_base_datos(Devolucion_Material_busqueda);
+            Rellena_partida_materiales_devolucion_proyecto();
+            calcula_total_precio_proyecto();
         }
 
-        private void Rellena_partida_materiales_proyecto()
+        private void calcula_total_precio_proyecto()
         {
-            double Total_precio_proyecto = 0.0; 
+            try
+            {
+                if (textBoxTotalPrecioProyectoSalidas.Text != "" && textBoxTotalPrecioProyectoDevoluciones.Text != "")
+                {
+                    textBoxTotalPrecioProyecto.Text = (Convert.ToDouble(textBoxTotalPrecioProyectoSalidas.Text) -
+                        Convert.ToDouble(textBoxTotalPrecioProyectoDevoluciones.Text)).ToString("0.00");
+                }
+                else
+                {
+                    MessageBox.Show("Valores en Blanco", "Reportes Proyecto"
+                        , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Valores NO Numericos", "Reportes Proyecto"
+                        , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Rellena_partida_materiales_devolucion_proyecto()
+        {
+            double Total_precio_proyecto_devolucion = 0.0;
             double Total_precio = 0.0;
             double Precio_unitario = 0.0;
+
+            foreach (Devolucion_Material material in Material_devolucion_disponibles)
+            {
+                Precio_unitario = 0.0;
+                Total_precio = 0.0;
+                try
+                {
+                    Material_busqueda.Codigo = material.Codigo_material;
+                    Materiales_disponibles = Class_Materiales.
+                        Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                    material_seleccion = Materiales_disponibles.
+                            Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
+                    if (material_seleccion.divisa == "Pesos")
+                    {
+                        Precio_unitario = Convert.ToDouble(material_seleccion.precio);
+                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                    }
+                    else if (material_seleccion.divisa == "Dolares")
+                    {
+                        Precio_unitario = Convert.ToDouble(material_seleccion.precio) * Convert.ToDouble(datos_generales.Tc);
+                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+
+                    }
+                    Total_precio_proyecto_devolucion += Total_precio;
+                    dataGridViewProyectoReportes.Rows.Add(material_seleccion.Codigo,
+                           material_seleccion.Codigo_proveedor,
+                            material_seleccion.Descripcion, material_seleccion.Marca,
+                            material.Cantidad, material.Nombre_empleado, material.Fecha,
+                            Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                            "",
+                            "",
+                            "Devolucion", material.Motivo_devolucion);
+
+                }
+                
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                
+            }
+            textBoxTotalPrecioProyectoDevoluciones.Text = Total_precio_proyecto_devolucion.ToString("0.00");
+        }
+
+        private void Rellena_partida_materiales_salida_proyecto()
+        {
+            double Total_precio_proyecto_salidas = 0.0; 
+            double Total_precio = 0.0;
+            double Precio_unitario = 0.0;
+            Ordenes_compra_disponibles = Class_Ordenes_Compra.
+                Adquiere_ordenes_compra_disponibles_en_base_datos();
             foreach(Salida_Material material in Salida_materiales_disponibles)
             {
                 Precio_unitario = 0.0;
                 Total_precio = 0.0;
-                Material_busqueda.Codigo = material.Codigo_material;
-                Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
-                if (Materiales_disponibles[0].divisa == "Pesos")
+                try
                 {
-                    Precio_unitario = Convert.ToDouble(Materiales_disponibles[0].precio);
-                    Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                    if (material.Orden_compra != "NA")
+                    {
+                        Orden_compra_seleccion = Ordenes_compra_disponibles.
+                            Find(orden_compra => orden_compra.Codigo.Contains(material.Orden_compra));
+                        Partida_orden_compra_busqueda.Material = material.Codigo_material;
+                        Partida_orden_compra_busqueda.Codigo_orden = Orden_compra_seleccion.Codigo;
+                        Partidas_ordenes_compra_disponibles = class_Partidas_Orden_Compra.
+                            Adquiere_partidas_ordenes_compra_disponibles_material_orden_compra(Partida_orden_compra_busqueda);
+
+                        Partida_orden_compra_seleccion = Partidas_ordenes_compra_disponibles.
+                            Find(partida_orden_compra => partida_orden_compra.Codigo_orden.Contains(material.Orden_compra));
+                        Material_busqueda.Codigo = material.Codigo_material;
+                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                        material_seleccion = Materiales_disponibles.
+                            Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
+                    }
+                    if (material_seleccion.divisa == "Pesos")
+                    {
+                        Precio_unitario = Convert.ToDouble(material_seleccion.precio);
+                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+                    }
+                    else if (material_seleccion.divisa == "Dolares")
+                    {
+                        Precio_unitario = Convert.ToDouble(material_seleccion.precio) * Convert.ToDouble(datos_generales.Tc);
+                        Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
+
+                    }
+                    Total_precio_proyecto_salidas += Total_precio;
+                    if (material.Orden_compra != "NA")
+                    {
+                        dataGridViewProyectoReportes.Rows.Add(material_seleccion.Codigo,
+                           material_seleccion.Codigo_proveedor,
+                            material_seleccion.Descripcion, material_seleccion.Marca,
+                            material.Cantidad, material.Nombre_empleado, material.Fecha,
+                            Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                            Partida_orden_compra_seleccion.Proyecto,
+                            Partida_orden_compra_seleccion.Cantidad,
+                            "Salida", "");
+                    }
+                    else if (material.Orden_compra == "NA")
+                    {
+                        dataGridViewProyectoReportes.Rows.Add(material_seleccion.Codigo,
+                            material_seleccion.Codigo_proveedor,
+                            material_seleccion.Descripcion, Materiales_disponibles[0].Marca,
+                            material.Cantidad, material.Nombre_empleado, material.Fecha,
+                            Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                            "",
+                            "",
+                            "Salida", "");
+                    }
                 }
-                else if (Materiales_disponibles[0].divisa == "Dolares")
+                catch(Exception ex)
                 {
-                    Precio_unitario = Convert.ToDouble(Materiales_disponibles[0].precio) * Convert.ToDouble(datos_generales.Tc);
-                    Total_precio = Convert.ToDouble(material.Cantidad) * Precio_unitario;
-                    
+                    MessageBox.Show(ex.Message);
                 }
-                Total_precio_proyecto += Total_precio;
-                dataGridViewProyectoReportes.Rows.Add(Materiales_disponibles[0].Codigo, Materiales_disponibles[0].Codigo_proveedor,
-                    Materiales_disponibles[0].Descripcion, material.Cantidad, material.Fecha,
-                    Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),"");
             }
-            textBoxTotalPrecioProyecto.Text = Total_precio_proyecto.ToString("0.00");
+            textBoxTotalPrecioProyectoSalidas.Text = Total_precio_proyecto_salidas.ToString("0.00");
         }
 
         private void Asigna_campos_salida_materiales()
