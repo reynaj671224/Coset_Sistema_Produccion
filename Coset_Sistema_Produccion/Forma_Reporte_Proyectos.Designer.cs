@@ -37,22 +37,10 @@
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.timerAgregarProyecto = new System.Windows.Forms.Timer(this.components);
             this.textBoxNombreCliente = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelNombreCliente = new System.Windows.Forms.Label();
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelCodigoProyecto = new System.Windows.Forms.Label();
             this.dataGridViewProyectoReportes = new System.Windows.Forms.DataGridView();
-            this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
-            this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
-            this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxNombreProyecto = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
-            this.textBoxTotalPrecioProyectoSalidas = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,10 +54,26 @@
             this.CantidadOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OperacionProyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
+            this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
+            this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
+            this.labelIngenieroCoset = new System.Windows.Forms.Label();
+            this.labelNombreProyecto = new System.Windows.Forms.Label();
+            this.textBoxNombreProyecto = new System.Windows.Forms.TextBox();
+            this.labelCodigoCliente = new System.Windows.Forms.Label();
+            this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
+            this.labelIngenieroCliente = new System.Windows.Forms.Label();
+            this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
+            this.textBoxTotalPrecioProyectoSalidas = new System.Windows.Forms.TextBox();
+            this.labelTotalSalidas = new System.Windows.Forms.Label();
             this.textBoxTotalPrecioProyectoDevoluciones = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelTotalDevoluciones = new System.Windows.Forms.Label();
             this.textBoxTotalPrecioProyecto = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.buttonReporteProyectos = new System.Windows.Forms.Button();
+            this.buttonReporteUsuarios = new System.Windows.Forms.Button();
+            this.buttonReoprteMateriales = new System.Windows.Forms.Button();
+            this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).BeginInit();
             this.SuspendLayout();
@@ -151,40 +155,45 @@
             // textBoxNombreCliente
             // 
             this.textBoxNombreCliente.Enabled = false;
-            this.textBoxNombreCliente.Location = new System.Drawing.Point(220, 144);
+            this.textBoxNombreCliente.Location = new System.Drawing.Point(220, 174);
             this.textBoxNombreCliente.Name = "textBoxNombreCliente";
             this.textBoxNombreCliente.Size = new System.Drawing.Size(268, 20);
             this.textBoxNombreCliente.TabIndex = 40;
+            this.textBoxNombreCliente.Visible = false;
             // 
-            // label1
+            // labelNombreCliente
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(99, 144);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 16);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "Nombre Cliente";
+            this.labelNombreCliente.AutoSize = true;
+            this.labelNombreCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombreCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreCliente.Image")));
+            this.labelNombreCliente.Location = new System.Drawing.Point(99, 174);
+            this.labelNombreCliente.Name = "labelNombreCliente";
+            this.labelNombreCliente.Size = new System.Drawing.Size(92, 16);
+            this.labelNombreCliente.TabIndex = 39;
+            this.labelNombreCliente.Text = "Nombre Cliente";
+            this.labelNombreCliente.Visible = false;
             // 
             // textBoxCodigoProyecto
             // 
             this.textBoxCodigoProyecto.Enabled = false;
-            this.textBoxCodigoProyecto.Location = new System.Drawing.Point(220, 61);
+            this.textBoxCodigoProyecto.Location = new System.Drawing.Point(220, 91);
             this.textBoxCodigoProyecto.Name = "textBoxCodigoProyecto";
             this.textBoxCodigoProyecto.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProyecto.TabIndex = 38;
+            this.textBoxCodigoProyecto.Visible = false;
+            this.textBoxCodigoProyecto.WordWrap = false;
             // 
-            // label4
+            // labelCodigoProyecto
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(99, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 16);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "Codigo Proyecto";
+            this.labelCodigoProyecto.AutoSize = true;
+            this.labelCodigoProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoProyecto.Image")));
+            this.labelCodigoProyecto.Location = new System.Drawing.Point(99, 95);
+            this.labelCodigoProyecto.Name = "labelCodigoProyecto";
+            this.labelCodigoProyecto.Size = new System.Drawing.Size(93, 16);
+            this.labelCodigoProyecto.TabIndex = 37;
+            this.labelCodigoProyecto.Text = "Codigo Proyecto";
+            this.labelCodigoProyecto.Visible = false;
             // 
             // dataGridViewProyectoReportes
             // 
@@ -206,117 +215,12 @@
             this.OperacionProyecto,
             this.Observaciones});
             this.dataGridViewProyectoReportes.Enabled = false;
-            this.dataGridViewProyectoReportes.Location = new System.Drawing.Point(23, 239);
+            this.dataGridViewProyectoReportes.Location = new System.Drawing.Point(23, 275);
             this.dataGridViewProyectoReportes.Name = "dataGridViewProyectoReportes";
             this.dataGridViewProyectoReportes.ReadOnly = true;
-            this.dataGridViewProyectoReportes.Size = new System.Drawing.Size(1148, 270);
+            this.dataGridViewProyectoReportes.Size = new System.Drawing.Size(1148, 234);
             this.dataGridViewProyectoReportes.TabIndex = 48;
             this.dataGridViewProyectoReportes.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
-            // 
-            // comboBoxCodigoProyecto
-            // 
-            this.comboBoxCodigoProyecto.FormattingEnabled = true;
-            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 60);
-            this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
-            this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCodigoProyecto.Sorted = true;
-            this.comboBoxCodigoProyecto.TabIndex = 49;
-            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoProyecto_SelectedIndexChanged);
-            // 
-            // textBoxIngenieroCoset
-            // 
-            this.textBoxIngenieroCoset.Enabled = false;
-            this.textBoxIngenieroCoset.Location = new System.Drawing.Point(220, 173);
-            this.textBoxIngenieroCoset.Name = "textBoxIngenieroCoset";
-            this.textBoxIngenieroCoset.Size = new System.Drawing.Size(268, 20);
-            this.textBoxIngenieroCoset.TabIndex = 55;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
-            this.label5.Location = new System.Drawing.Point(99, 173);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 16);
-            this.label5.TabIndex = 54;
-            this.label5.Text = "Ingeniero COSET";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Image = ((System.Drawing.Image)(resources.GetObject("label9.Image")));
-            this.label9.Location = new System.Drawing.Point(99, 90);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(98, 16);
-            this.label9.TabIndex = 68;
-            this.label9.Text = "Nombre Proyecto";
-            // 
-            // textBoxNombreProyecto
-            // 
-            this.textBoxNombreProyecto.Enabled = false;
-            this.textBoxNombreProyecto.Location = new System.Drawing.Point(220, 87);
-            this.textBoxNombreProyecto.Name = "textBoxNombreProyecto";
-            this.textBoxNombreProyecto.Size = new System.Drawing.Size(268, 20);
-            this.textBoxNombreProyecto.TabIndex = 69;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
-            this.label11.Location = new System.Drawing.Point(99, 115);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 16);
-            this.label11.TabIndex = 72;
-            this.label11.Text = "Codigo Cliente";
-            // 
-            // textBoxCodigoCliente
-            // 
-            this.textBoxCodigoCliente.Enabled = false;
-            this.textBoxCodigoCliente.Location = new System.Drawing.Point(220, 115);
-            this.textBoxCodigoCliente.Name = "textBoxCodigoCliente";
-            this.textBoxCodigoCliente.Size = new System.Drawing.Size(121, 20);
-            this.textBoxCodigoCliente.TabIndex = 74;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Image = ((System.Drawing.Image)(resources.GetObject("label13.Image")));
-            this.label13.Location = new System.Drawing.Point(99, 200);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 16);
-            this.label13.TabIndex = 75;
-            this.label13.Text = "Ingeniero Cliente";
-            // 
-            // textBoxIngenieroCliente
-            // 
-            this.textBoxIngenieroCliente.Enabled = false;
-            this.textBoxIngenieroCliente.Location = new System.Drawing.Point(220, 200);
-            this.textBoxIngenieroCliente.Name = "textBoxIngenieroCliente";
-            this.textBoxIngenieroCliente.Size = new System.Drawing.Size(268, 20);
-            this.textBoxIngenieroCliente.TabIndex = 76;
-            // 
-            // textBoxTotalPrecioProyectoSalidas
-            // 
-            this.textBoxTotalPrecioProyectoSalidas.Enabled = false;
-            this.textBoxTotalPrecioProyectoSalidas.Location = new System.Drawing.Point(771, 69);
-            this.textBoxTotalPrecioProyectoSalidas.Name = "textBoxTotalPrecioProyectoSalidas";
-            this.textBoxTotalPrecioProyectoSalidas.Size = new System.Drawing.Size(121, 20);
-            this.textBoxTotalPrecioProyectoSalidas.TabIndex = 78;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(573, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 16);
-            this.label2.TabIndex = 77;
-            this.label2.Text = "Total Precio Salidas Proyecto";
             // 
             // Codigo_material
             // 
@@ -401,69 +305,244 @@
             this.Observaciones.ReadOnly = true;
             this.Observaciones.Width = 300;
             // 
+            // comboBoxCodigoProyecto
+            // 
+            this.comboBoxCodigoProyecto.FormattingEnabled = true;
+            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 90);
+            this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
+            this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProyecto.Sorted = true;
+            this.comboBoxCodigoProyecto.TabIndex = 49;
+            this.comboBoxCodigoProyecto.Visible = false;
+            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoProyecto_SelectedIndexChanged);
+            // 
+            // textBoxIngenieroCoset
+            // 
+            this.textBoxIngenieroCoset.Enabled = false;
+            this.textBoxIngenieroCoset.Location = new System.Drawing.Point(220, 203);
+            this.textBoxIngenieroCoset.Name = "textBoxIngenieroCoset";
+            this.textBoxIngenieroCoset.Size = new System.Drawing.Size(268, 20);
+            this.textBoxIngenieroCoset.TabIndex = 55;
+            this.textBoxIngenieroCoset.Visible = false;
+            // 
+            // labelIngenieroCoset
+            // 
+            this.labelIngenieroCoset.AutoSize = true;
+            this.labelIngenieroCoset.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIngenieroCoset.Image = ((System.Drawing.Image)(resources.GetObject("labelIngenieroCoset.Image")));
+            this.labelIngenieroCoset.Location = new System.Drawing.Point(99, 203);
+            this.labelIngenieroCoset.Name = "labelIngenieroCoset";
+            this.labelIngenieroCoset.Size = new System.Drawing.Size(100, 16);
+            this.labelIngenieroCoset.TabIndex = 54;
+            this.labelIngenieroCoset.Text = "Ingeniero COSET";
+            this.labelIngenieroCoset.Visible = false;
+            // 
+            // labelNombreProyecto
+            // 
+            this.labelNombreProyecto.AutoSize = true;
+            this.labelNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombreProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreProyecto.Image")));
+            this.labelNombreProyecto.Location = new System.Drawing.Point(99, 120);
+            this.labelNombreProyecto.Name = "labelNombreProyecto";
+            this.labelNombreProyecto.Size = new System.Drawing.Size(98, 16);
+            this.labelNombreProyecto.TabIndex = 68;
+            this.labelNombreProyecto.Text = "Nombre Proyecto";
+            this.labelNombreProyecto.Visible = false;
+            // 
+            // textBoxNombreProyecto
+            // 
+            this.textBoxNombreProyecto.Enabled = false;
+            this.textBoxNombreProyecto.Location = new System.Drawing.Point(220, 117);
+            this.textBoxNombreProyecto.Name = "textBoxNombreProyecto";
+            this.textBoxNombreProyecto.Size = new System.Drawing.Size(268, 20);
+            this.textBoxNombreProyecto.TabIndex = 69;
+            this.textBoxNombreProyecto.Visible = false;
+            // 
+            // labelCodigoCliente
+            // 
+            this.labelCodigoCliente.AutoSize = true;
+            this.labelCodigoCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoCliente.Image")));
+            this.labelCodigoCliente.Location = new System.Drawing.Point(99, 145);
+            this.labelCodigoCliente.Name = "labelCodigoCliente";
+            this.labelCodigoCliente.Size = new System.Drawing.Size(87, 16);
+            this.labelCodigoCliente.TabIndex = 72;
+            this.labelCodigoCliente.Text = "Codigo Cliente";
+            this.labelCodigoCliente.Visible = false;
+            // 
+            // textBoxCodigoCliente
+            // 
+            this.textBoxCodigoCliente.Enabled = false;
+            this.textBoxCodigoCliente.Location = new System.Drawing.Point(220, 145);
+            this.textBoxCodigoCliente.Name = "textBoxCodigoCliente";
+            this.textBoxCodigoCliente.Size = new System.Drawing.Size(121, 20);
+            this.textBoxCodigoCliente.TabIndex = 74;
+            this.textBoxCodigoCliente.Visible = false;
+            // 
+            // labelIngenieroCliente
+            // 
+            this.labelIngenieroCliente.AutoSize = true;
+            this.labelIngenieroCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIngenieroCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelIngenieroCliente.Image")));
+            this.labelIngenieroCliente.Location = new System.Drawing.Point(99, 230);
+            this.labelIngenieroCliente.Name = "labelIngenieroCliente";
+            this.labelIngenieroCliente.Size = new System.Drawing.Size(101, 16);
+            this.labelIngenieroCliente.TabIndex = 75;
+            this.labelIngenieroCliente.Text = "Ingeniero Cliente";
+            this.labelIngenieroCliente.Visible = false;
+            // 
+            // textBoxIngenieroCliente
+            // 
+            this.textBoxIngenieroCliente.Enabled = false;
+            this.textBoxIngenieroCliente.Location = new System.Drawing.Point(220, 230);
+            this.textBoxIngenieroCliente.Name = "textBoxIngenieroCliente";
+            this.textBoxIngenieroCliente.Size = new System.Drawing.Size(268, 20);
+            this.textBoxIngenieroCliente.TabIndex = 76;
+            this.textBoxIngenieroCliente.Visible = false;
+            // 
+            // textBoxTotalPrecioProyectoSalidas
+            // 
+            this.textBoxTotalPrecioProyectoSalidas.Enabled = false;
+            this.textBoxTotalPrecioProyectoSalidas.Location = new System.Drawing.Point(771, 99);
+            this.textBoxTotalPrecioProyectoSalidas.Name = "textBoxTotalPrecioProyectoSalidas";
+            this.textBoxTotalPrecioProyectoSalidas.Size = new System.Drawing.Size(121, 20);
+            this.textBoxTotalPrecioProyectoSalidas.TabIndex = 78;
+            this.textBoxTotalPrecioProyectoSalidas.Visible = false;
+            // 
+            // labelTotalSalidas
+            // 
+            this.labelTotalSalidas.AutoSize = true;
+            this.labelTotalSalidas.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalSalidas.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalSalidas.Image")));
+            this.labelTotalSalidas.Location = new System.Drawing.Point(573, 99);
+            this.labelTotalSalidas.Name = "labelTotalSalidas";
+            this.labelTotalSalidas.Size = new System.Drawing.Size(161, 16);
+            this.labelTotalSalidas.TabIndex = 77;
+            this.labelTotalSalidas.Text = "Total Precio Salidas Proyecto";
+            this.labelTotalSalidas.Visible = false;
+            // 
             // textBoxTotalPrecioProyectoDevoluciones
             // 
             this.textBoxTotalPrecioProyectoDevoluciones.Enabled = false;
-            this.textBoxTotalPrecioProyectoDevoluciones.Location = new System.Drawing.Point(771, 95);
+            this.textBoxTotalPrecioProyectoDevoluciones.Location = new System.Drawing.Point(771, 125);
             this.textBoxTotalPrecioProyectoDevoluciones.Name = "textBoxTotalPrecioProyectoDevoluciones";
             this.textBoxTotalPrecioProyectoDevoluciones.Size = new System.Drawing.Size(121, 20);
             this.textBoxTotalPrecioProyectoDevoluciones.TabIndex = 80;
+            this.textBoxTotalPrecioProyectoDevoluciones.Visible = false;
             // 
-            // label3
+            // labelTotalDevoluciones
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
-            this.label3.Location = new System.Drawing.Point(573, 95);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(192, 16);
-            this.label3.TabIndex = 79;
-            this.label3.Text = "Total Precio Devoluciones Proyecto";
+            this.labelTotalDevoluciones.AutoSize = true;
+            this.labelTotalDevoluciones.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalDevoluciones.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDevoluciones.Image")));
+            this.labelTotalDevoluciones.Location = new System.Drawing.Point(573, 125);
+            this.labelTotalDevoluciones.Name = "labelTotalDevoluciones";
+            this.labelTotalDevoluciones.Size = new System.Drawing.Size(192, 16);
+            this.labelTotalDevoluciones.TabIndex = 79;
+            this.labelTotalDevoluciones.Text = "Total Precio Devoluciones Proyecto";
+            this.labelTotalDevoluciones.Visible = false;
             // 
             // textBoxTotalPrecioProyecto
             // 
             this.textBoxTotalPrecioProyecto.Enabled = false;
-            this.textBoxTotalPrecioProyecto.Location = new System.Drawing.Point(771, 121);
+            this.textBoxTotalPrecioProyecto.Location = new System.Drawing.Point(771, 151);
             this.textBoxTotalPrecioProyecto.Name = "textBoxTotalPrecioProyecto";
             this.textBoxTotalPrecioProyecto.Size = new System.Drawing.Size(121, 20);
             this.textBoxTotalPrecioProyecto.TabIndex = 82;
+            this.textBoxTotalPrecioProyecto.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
-            this.label6.Location = new System.Drawing.Point(573, 119);
+            this.label6.Location = new System.Drawing.Point(573, 149);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 16);
             this.label6.TabIndex = 81;
             this.label6.Text = "Total Precio";
+            this.label6.Visible = false;
+            // 
+            // buttonReporteProyectos
+            // 
+            this.buttonReporteProyectos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReporteProyectos.Image = ((System.Drawing.Image)(resources.GetObject("buttonReporteProyectos.Image")));
+            this.buttonReporteProyectos.Location = new System.Drawing.Point(468, 12);
+            this.buttonReporteProyectos.Name = "buttonReporteProyectos";
+            this.buttonReporteProyectos.Size = new System.Drawing.Size(79, 74);
+            this.buttonReporteProyectos.TabIndex = 83;
+            this.buttonReporteProyectos.Text = "Proyectos";
+            this.buttonReporteProyectos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonReporteProyectos.UseVisualStyleBackColor = true;
+            // 
+            // buttonReporteUsuarios
+            // 
+            this.buttonReporteUsuarios.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReporteUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("buttonReporteUsuarios.Image")));
+            this.buttonReporteUsuarios.Location = new System.Drawing.Point(553, 12);
+            this.buttonReporteUsuarios.Name = "buttonReporteUsuarios";
+            this.buttonReporteUsuarios.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonReporteUsuarios.Size = new System.Drawing.Size(79, 74);
+            this.buttonReporteUsuarios.TabIndex = 84;
+            this.buttonReporteUsuarios.Text = "Empleados";
+            this.buttonReporteUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonReporteUsuarios.UseVisualStyleBackColor = true;
+            // 
+            // buttonReoprteMateriales
+            // 
+            this.buttonReoprteMateriales.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReoprteMateriales.Image = ((System.Drawing.Image)(resources.GetObject("buttonReoprteMateriales.Image")));
+            this.buttonReoprteMateriales.Location = new System.Drawing.Point(638, 12);
+            this.buttonReoprteMateriales.Name = "buttonReoprteMateriales";
+            this.buttonReoprteMateriales.Size = new System.Drawing.Size(79, 74);
+            this.buttonReoprteMateriales.TabIndex = 85;
+            this.buttonReoprteMateriales.Text = "Materiales";
+            this.buttonReoprteMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonReoprteMateriales.UseVisualStyleBackColor = true;
+            // 
+            // buttonBusquedaBaseDatos
+            // 
+            this.buttonBusquedaBaseDatos.BackColor = System.Drawing.Color.White;
+            this.buttonBusquedaBaseDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBusquedaBaseDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBusquedaBaseDatos.Image")));
+            this.buttonBusquedaBaseDatos.Location = new System.Drawing.Point(723, 12);
+            this.buttonBusquedaBaseDatos.Name = "buttonBusquedaBaseDatos";
+            this.buttonBusquedaBaseDatos.Size = new System.Drawing.Size(79, 74);
+            this.buttonBusquedaBaseDatos.TabIndex = 86;
+            this.buttonBusquedaBaseDatos.Text = "Buscar";
+            this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
+            this.buttonBusquedaBaseDatos.Visible = false;
             // 
             // Forma_Reporte_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.Controls.Add(this.buttonBusquedaBaseDatos);
+            this.Controls.Add(this.buttonReoprteMateriales);
+            this.Controls.Add(this.buttonReporteUsuarios);
+            this.Controls.Add(this.buttonReporteProyectos);
             this.Controls.Add(this.textBoxTotalPrecioProyecto);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxTotalPrecioProyectoDevoluciones);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelTotalDevoluciones);
             this.Controls.Add(this.textBoxTotalPrecioProyectoSalidas);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelTotalSalidas);
             this.Controls.Add(this.textBoxIngenieroCliente);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.labelIngenieroCliente);
             this.Controls.Add(this.textBoxCodigoCliente);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.labelCodigoCliente);
             this.Controls.Add(this.textBoxNombreProyecto);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.labelNombreProyecto);
             this.Controls.Add(this.textBoxIngenieroCoset);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelIngenieroCoset);
             this.Controls.Add(this.comboBoxCodigoProyecto);
             this.Controls.Add(this.dataGridViewProyectoReportes);
             this.Controls.Add(this.textBoxNombreCliente);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelNombreCliente);
             this.Controls.Add(this.textBoxCodigoProyecto);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelCodigoProyecto);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.buttonHome);
@@ -489,22 +568,22 @@
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
         private System.Windows.Forms.Timer timerAgregarProyecto;
         private System.Windows.Forms.TextBox textBoxNombreCliente;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelNombreCliente;
         private System.Windows.Forms.TextBox textBoxCodigoProyecto;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelCodigoProyecto;
         private System.Windows.Forms.DataGridView dataGridViewProyectoReportes;
         private System.Windows.Forms.ComboBox comboBoxCodigoProyecto;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.TextBox textBoxIngenieroCoset;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelIngenieroCoset;
+        private System.Windows.Forms.Label labelNombreProyecto;
         private System.Windows.Forms.TextBox textBoxNombreProyecto;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelCodigoCliente;
         private System.Windows.Forms.TextBox textBoxCodigoCliente;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label labelIngenieroCliente;
         private System.Windows.Forms.TextBox textBoxIngenieroCliente;
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoSalidas;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTotalSalidas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_material;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
@@ -519,8 +598,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OperacionProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoDevoluciones;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelTotalDevoluciones;
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyecto;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonReporteProyectos;
+        private System.Windows.Forms.Button buttonReporteUsuarios;
+        private System.Windows.Forms.Button buttonReoprteMateriales;
+        private System.Windows.Forms.Button buttonBusquedaBaseDatos;
     }
 }
