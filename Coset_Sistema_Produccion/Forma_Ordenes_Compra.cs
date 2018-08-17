@@ -287,6 +287,11 @@ namespace Coset_Sistema_Produccion
             buttonCancelarOC.Enabled = false;
         }
 
+        private void Activa_boton_cancelarOC()
+        {
+            buttonCancelarOC.Enabled = true;
+        }
+
         private void Desactiva_boton_partidas()
         {
             buttonPartidas.Enabled = false;
@@ -770,8 +775,19 @@ namespace Coset_Sistema_Produccion
             Aparece_combo_condicion_pago();
             Activa_combo_condicion_pago();
             obtener_proyectos_disponibles();
+            Activa_grupo_Tipo_moneda();
             Rellenar_combo_proyectos_partidas_requisiciones();
             
+        }
+
+        private void Activa_grupo_Tipo_moneda()
+        {
+            groupBoxTipoMoneda.Enabled=true;
+        }
+
+        private void Desactiva_grupo_Tipo_moneda()
+        {
+            groupBoxTipoMoneda.Enabled = false;
         }
 
         private void Activa_textbox_reqisiciones()
@@ -902,28 +918,18 @@ namespace Coset_Sistema_Produccion
 
         private void timerAgregarCliente_Tick(object sender, EventArgs e)
         {
-            if (radioButtonDolares.Checked)
+            if (radioButtonDolares.Checked || radioButtonPesos.Checked)
             {
                 if (comboBoxRealizado.Text != "" && comboBoxNombreProveedor.Text != "" &&
                     comboBoxCotizado.Text != "" && textBoxCotizacion.Text != "" &&
-                    comboBoxCondicionPago.Text != "" && textBoxEstado.Text!= "" &&
-                    textBoxRequisicion.Text !="")
+                    comboBoxCondicionPago.Text != "" && textBoxRequisicion.Text !="")
                 {
                     timerAgregarOrdenCompra.Enabled = false;
                     buttonGuardarBasedeDatos.Visible = true;
                 }
 
             }
-            else
-            { 
-                if (comboBoxRealizado.Text != "" && comboBoxNombreProveedor.Text != "" &&
-                    comboBoxCotizado.Text != "" && textBoxCotizacion.Text != "" &&
-                    comboBoxCondicionPago.Text != "")
-                {
-                    timerAgregarOrdenCompra.Enabled = false;
-                    buttonGuardarBasedeDatos.Visible = true;
-                }
-            }
+            
         }
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
@@ -1384,6 +1390,8 @@ namespace Coset_Sistema_Produccion
                         Aparece_textbox_atencion_copia();
                         Selecciona_pesos_tipo_modeda();
                         Asigna_nuevo_folio_orden_compra();
+                        Desactiva_grupo_Tipo_moneda();
+                        Limpia_combo_combo_condicion_pago();
                         Elimina_informacion_orden_compra_disponibles();
                     }
                     }
@@ -1505,6 +1513,7 @@ namespace Coset_Sistema_Produccion
             Activa_boton_eliminar_cotizacion();
             Activa_boton_visualizar_cotizacion();
             Activa_boton_contactos();
+            Activa_boton_cancelarOC();
         }
 
 
@@ -1525,7 +1534,7 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_boton_modificar_cotizacion()
         {
-            buttonModificarCotizacion.Enabled = true;
+       //     buttonModificarCotizacion.Enabled = true;
         }
 
         private void Activa_boton_agregar_ccotizacion()
@@ -2747,6 +2756,7 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_atencion();
             Limpia_combo_atencio_copia();
             Limpia_combo_proyectos_partidas();
+            Limpia_combo_combo_condicion_pago();
             Limpia_cajas_captura_despues_de_agregar_orden_compra();
             Desactiva_cajas_captura_despues_de_agregar_orden_compra();
             Desaparece_boton_guardar_base_de_datos();
@@ -2775,9 +2785,15 @@ namespace Coset_Sistema_Produccion
             Selecciona_pesos_tipo_modeda();
             Desaparece_textbox_estado();
             Desaparece_label_estado();
+            Desactiva_grupo_Tipo_moneda();
             Elimina_archivo();
             Elimina_informacion_orden_compra_disponibles();
 
+        }
+
+        private void Limpia_combo_combo_condicion_pago()
+        {
+            comboBoxCondicionPago.Text = "";
         }
 
         private void Desaparece_label_estado()
@@ -3130,5 +3146,7 @@ namespace Coset_Sistema_Produccion
             Forma_Materiales forma_Materiales = new Forma_Materiales();
             forma_Materiales.ShowDialog();
         }
+
+
     }
 }

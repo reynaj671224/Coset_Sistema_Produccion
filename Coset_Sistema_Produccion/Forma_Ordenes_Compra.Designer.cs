@@ -76,7 +76,7 @@
             this.textBoxCotizacion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxTipoMoneda = new System.Windows.Forms.GroupBox();
             this.radioButtonDolares = new System.Windows.Forms.RadioButton();
             this.radioButtonPesos = new System.Windows.Forms.RadioButton();
             this.labelEstado = new System.Windows.Forms.Label();
@@ -92,7 +92,7 @@
             this.buttonMateriales = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxTipoMoneda.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -137,7 +137,7 @@
             // 
             this.buttonAgregarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAgregarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonAgregarCotizacion.Image")));
-            this.buttonAgregarCotizacion.Location = new System.Drawing.Point(513, 24);
+            this.buttonAgregarCotizacion.Location = new System.Drawing.Point(428, 24);
             this.buttonAgregarCotizacion.Name = "buttonAgregarCotizacion";
             this.buttonAgregarCotizacion.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonAgregarCotizacion.Size = new System.Drawing.Size(79, 74);
@@ -152,13 +152,14 @@
             this.buttonModificarCotizacion.AutoSize = true;
             this.buttonModificarCotizacion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonModificarCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonModificarCotizacion.Image")));
-            this.buttonModificarCotizacion.Location = new System.Drawing.Point(428, 24);
+            this.buttonModificarCotizacion.Location = new System.Drawing.Point(88, 24);
             this.buttonModificarCotizacion.Name = "buttonModificarCotizacion";
             this.buttonModificarCotizacion.Size = new System.Drawing.Size(79, 74);
             this.buttonModificarCotizacion.TabIndex = 28;
             this.buttonModificarCotizacion.Text = "Modificar";
             this.buttonModificarCotizacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonModificarCotizacion.UseVisualStyleBackColor = true;
+            this.buttonModificarCotizacion.Visible = false;
             this.buttonModificarCotizacion.Click += new System.EventHandler(this.buttonModificarCotizacion_Click);
             // 
             // buttonCancelar
@@ -181,7 +182,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1249, 305);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1249, 299);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -416,12 +417,12 @@
             // 
             this.buttonPartidas.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPartidas.Image = ((System.Drawing.Image)(resources.GetObject("buttonPartidas.Image")));
-            this.buttonPartidas.Location = new System.Drawing.Point(768, 24);
+            this.buttonPartidas.Location = new System.Drawing.Point(513, 24);
             this.buttonPartidas.Name = "buttonPartidas";
             this.buttonPartidas.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonPartidas.Size = new System.Drawing.Size(79, 74);
             this.buttonPartidas.TabIndex = 51;
-            this.buttonPartidas.Text = "Partidas";
+            this.buttonPartidas.Text = "Modificar";
             this.buttonPartidas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonPartidas.UseVisualStyleBackColor = true;
             this.buttonPartidas.Click += new System.EventHandler(this.buttonContactos_Click);
@@ -572,20 +573,21 @@
             this.label8.TabIndex = 69;
             this.label8.Text = "Correo Electronico Contacto";
             // 
-            // groupBox1
+            // groupBoxTipoMoneda
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
-            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox1.Controls.Add(this.radioButtonDolares);
-            this.groupBox1.Controls.Add(this.radioButtonPesos);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox1.Location = new System.Drawing.Point(691, 134);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(134, 65);
-            this.groupBox1.TabIndex = 70;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tipo Moneda";
+            this.groupBoxTipoMoneda.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBoxTipoMoneda.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBoxTipoMoneda.BackgroundImage")));
+            this.groupBoxTipoMoneda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBoxTipoMoneda.Controls.Add(this.radioButtonDolares);
+            this.groupBoxTipoMoneda.Controls.Add(this.radioButtonPesos);
+            this.groupBoxTipoMoneda.Enabled = false;
+            this.groupBoxTipoMoneda.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxTipoMoneda.Location = new System.Drawing.Point(691, 134);
+            this.groupBoxTipoMoneda.Name = "groupBoxTipoMoneda";
+            this.groupBoxTipoMoneda.Size = new System.Drawing.Size(134, 65);
+            this.groupBoxTipoMoneda.TabIndex = 70;
+            this.groupBoxTipoMoneda.TabStop = false;
+            this.groupBoxTipoMoneda.Text = "Tipo Moneda";
             // 
             // radioButtonDolares
             // 
@@ -727,7 +729,7 @@
             // 
             this.buttonMaterialesBusqueda.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMaterialesBusqueda.Image = ((System.Drawing.Image)(resources.GetObject("buttonMaterialesBusqueda.Image")));
-            this.buttonMaterialesBusqueda.Location = new System.Drawing.Point(853, 24);
+            this.buttonMaterialesBusqueda.Location = new System.Drawing.Point(768, 24);
             this.buttonMaterialesBusqueda.Name = "buttonMaterialesBusqueda";
             this.buttonMaterialesBusqueda.Size = new System.Drawing.Size(79, 74);
             this.buttonMaterialesBusqueda.TabIndex = 80;
@@ -740,7 +742,7 @@
             // 
             this.buttonMateriales.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMateriales.Image = ((System.Drawing.Image)(resources.GetObject("buttonMateriales.Image")));
-            this.buttonMateriales.Location = new System.Drawing.Point(938, 24);
+            this.buttonMateriales.Location = new System.Drawing.Point(853, 24);
             this.buttonMateriales.Name = "buttonMateriales";
             this.buttonMateriales.Size = new System.Drawing.Size(79, 74);
             this.buttonMateriales.TabIndex = 81;
@@ -765,7 +767,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBoxEstado);
             this.Controls.Add(this.labelEstado);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxTipoMoneda);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonWordPrevio);
             this.Controls.Add(this.label3);
@@ -806,8 +808,8 @@
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxTipoMoneda.ResumeLayout(false);
+            this.groupBoxTipoMoneda.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -851,7 +853,7 @@
         private System.Windows.Forms.TextBox textBoxCotizacion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxTipoMoneda;
         private System.Windows.Forms.RadioButton radioButtonDolares;
         private System.Windows.Forms.RadioButton radioButtonPesos;
         private System.Windows.Forms.Label labelEstado;

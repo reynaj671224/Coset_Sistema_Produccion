@@ -446,7 +446,7 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
-            Desactiva_combobox_codigo_orden_compra();
+            //Desactiva_combobox_codigo_orden_compra();
             //Limpia_combo_descripcion_materiales();
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
@@ -890,9 +890,12 @@ namespace Coset_Sistema_Produccion
                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString();
                 Insertar_entrada_materiales.Divisa =
                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.divisa, partidas].Value.ToString();
-                if (!Insertar_datos_entrada_materiales_class())
+                if (Convert.ToInt32(Insertar_entrada_materiales.Cantidad) != 0)
                 {
-                    return false;
+                    if (!Insertar_datos_entrada_materiales_class())
+                    {
+                        return false;
+                    }
                 }
             }
             return true;

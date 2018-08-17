@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Coset_Sistema_Produccion.exe" size="4982752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Coset_Sistema_Produccion.exe" size="4983264">
       <assemblyIdentity name="Coset_Sistema_Produccion" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JF/LYuRdckaN6TtFyLGeKYfIr/BCoWtxdkCcUZLdc/0=</dsig:DigestValue>
+        <dsig:DigestValue>gf3P8CJg+E++aPlpkV4aW2San+Y4QuQUwuaN/mKkXZ0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
