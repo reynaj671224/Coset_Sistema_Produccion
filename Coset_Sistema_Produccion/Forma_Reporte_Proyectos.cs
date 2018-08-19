@@ -28,6 +28,7 @@ namespace Coset_Sistema_Produccion
         public List<Contacto_cliente> contactos_cliente_disponibles = new List<Contacto_cliente>();
         public Class_Contactos_Clientes clase_contactos_cliente = new Class_Contactos_Clientes();
         public List<Usuario> ingenieros_disponibles = new List<Usuario>();
+        public List<Usuario> Usuarios_disponibles = new List<Usuario>();
         public Class_Usuarios clase_usuarios = new Class_Usuarios();
         public Cliente Cliente_seleccionado = new Cliente();
         string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
@@ -73,9 +74,7 @@ namespace Coset_Sistema_Produccion
 
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
-          
-            Obtener_datos_proyectos_disponibles_base_datos();
-            Rellena_combo_codigo_proyecto();
+
             Datos_gerenrales();
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
 
@@ -192,14 +191,17 @@ namespace Coset_Sistema_Produccion
             Limpia_cajas_captura_despues_de_agregar_proyecto();
             //Limpia_combo_proyecto();
             Desaparece_boton_guardar_base_de_datos();
-            Aparece_textbox_codigo_proyecto();
-            Aparece_textbox_ingeniero_cliente();
-            Aparece_textbox_ingeniero_coset();
-            Aparece_textbox_nombre_cliente();
+            //Aparece_textbox_codigo_proyecto();
+            //Aparece_textbox_ingeniero_cliente();
+            //Aparece_textbox_ingeniero_coset();
+            //Aparece_textbox_nombre_cliente();
             limpia_datagrid_materiales_proyecto();
             Desactiva_datagridview_dibujos();
-            Acepta_datagridview_agregar_renglones();  
+            Acepta_datagridview_agregar_renglones();
+            Desaparece_cajas_etiquetas_reporte_proyectos();
+            Deaparece_elementos_reporte_usuarios_reporte();
             //Elimina_informacion_proyectos_disponibles();
+
         }
 
        
@@ -350,25 +352,25 @@ namespace Coset_Sistema_Produccion
 
         private void Aparece_textbox_ingeniero_cliente()
         {
-            textBoxIngenieroCliente.Visible = true;
+            //textBoxIngenieroCliente.Visible = true;
         }
 
         private void Aparece_textbox_ingeniero_coset()
         {
-            textBoxIngenieroCoset.Visible = true;
+            //textBoxIngenieroCoset.Visible = true;
         }
 
         
 
         private void Aparece_textbox_atencion_copia()
         {
-            textBoxIngenieroCoset.Visible = true;
+            //textBoxIngenieroCoset.Visible = true;
         }
 
 
         private void Aparece_textbox_nombre_cliente()
         {
-            textBoxNombreCliente.Visible = true;
+            //textBoxNombreCliente.Visible = true;
         }
 
        
@@ -427,7 +429,7 @@ namespace Coset_Sistema_Produccion
         
         private void Desaparece_textbox_ingeniero_coset()
         {
-            textBoxIngenieroCoset.Visible = false;
+            //textBoxIngenieroCoset.Visible = false;
         }
 
         
@@ -491,7 +493,7 @@ namespace Coset_Sistema_Produccion
                         , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Valores NO Numericos", "Reportes Proyecto"
                         , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -512,7 +514,7 @@ namespace Coset_Sistema_Produccion
                 {
                     Material_busqueda.Codigo = material.Codigo_material;
                     Materiales_disponibles = Class_Materiales.
-                        Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                        Adquiere_materiales_codigo_material_en_base_datos(Material_busqueda);
                     material_seleccion = Materiales_disponibles.
                             Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
                     if (material_seleccion.divisa == "Pesos")
@@ -573,7 +575,7 @@ namespace Coset_Sistema_Produccion
                         Partida_orden_compra_seleccion = Partidas_ordenes_compra_disponibles.
                             Find(partida_orden_compra => partida_orden_compra.Codigo_orden.Contains(material.Orden_compra));
                         Material_busqueda.Codigo = material.Codigo_material;
-                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_material_en_base_datos(Material_busqueda);
                         material_seleccion = Materiales_disponibles.
                             Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
                         if (material_seleccion.divisa == "Pesos")
@@ -602,7 +604,7 @@ namespace Coset_Sistema_Produccion
                     {
                        
                         Material_busqueda.Codigo = material.Codigo_material;
-                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material_busqueda);
+                        Materiales_disponibles = Class_Materiales.Adquiere_materiales_codigo_material_en_base_datos(Material_busqueda);
                         material_seleccion = Materiales_disponibles.
                             Find(material_combo => material_combo.Codigo.Contains(material.Codigo_material));
                         if (material_seleccion.divisa == "Pesos")
@@ -637,6 +639,112 @@ namespace Coset_Sistema_Produccion
         private void Asigna_campos_salida_materiales()
         {
             Busqueda_salida_material.Proyecto = comboBoxCodigoProyecto.Text;
+        }
+
+        private void buttonReporteProyectos_Click(object sender, EventArgs e)
+        {
+            Aparece_cajas_etiquetas_reporte_proyectos();
+            Obtener_datos_proyectos_disponibles_base_datos();
+            Rellena_combo_codigo_proyecto();
+
+        }
+
+        private void Aparece_cajas_etiquetas_reporte_proyectos()
+        {
+            labelCodigoProyecto.Visible = true;
+            comboBoxCodigoProyecto.Visible = true;
+            textBoxNombreProyecto.Visible = true;
+            labelNombreProyecto.Visible = true;
+            textBoxCodigoCliente.Visible = true;
+            labelCodigoCliente.Visible = true;
+            textBoxNombreCliente.Visible = true;
+            labelNombreCliente.Visible = true;
+            textBoxIngenieroCoset.Visible = true;
+            labelIngenieroCoset.Visible = true;
+            textBoxIngenieroCliente.Visible = true;
+            labelIngenieroCliente.Visible = true;
+            labelTotalSalidas.Visible = true;
+            textBoxTotalPrecioProyectoSalidas.Visible = true;
+            labelTotalDevoluciones.Visible = true;
+            textBoxTotalPrecioProyectoDevoluciones.Visible = true;
+            labelTotalProyectoPrecio.Visible = true;
+            textBoxTotalPrecioProyecto.Visible = true;
+        }
+
+        private void Desaparece_cajas_etiquetas_reporte_proyectos()
+        {
+            labelCodigoProyecto.Visible = false;
+            comboBoxCodigoProyecto.Visible = false;
+            textBoxNombreProyecto.Visible = false;
+            labelNombreProyecto.Visible = false;
+            textBoxCodigoCliente.Visible = false;
+            labelCodigoCliente.Visible = false;
+            textBoxNombreCliente.Visible = false;
+            labelNombreCliente.Visible = false;
+            textBoxIngenieroCoset.Visible = false;
+            labelIngenieroCoset.Visible = false;
+            textBoxIngenieroCliente.Visible = false;
+            labelIngenieroCliente.Visible = false;
+            labelTotalSalidas.Visible = false;
+            textBoxTotalPrecioProyectoSalidas.Visible = false;
+            labelTotalDevoluciones.Visible = false;
+            textBoxTotalPrecioProyectoDevoluciones.Visible = false;
+            labelTotalProyectoPrecio.Visible = false;
+            textBoxTotalPrecioProyecto.Visible = false;
+        }
+
+        private void buttonReporteUsuarios_Click(object sender, EventArgs e)
+        {
+            Aparece_elementos_reporte_usuarios_reporte();
+            Obtener_empleados_disponibles();
+            Rellena_combo_usuarios();
+
+        }
+
+        private void Rellena_combo_usuarios()
+        {
+            foreach (Usuario usuario in Usuarios_disponibles)
+            {
+                if (usuario.error == "")
+                    comboBoxNombreEmpleado.Items.Add(usuario.nombre_empleado);
+                else
+                {
+                    MessageBox.Show(usuario.error);
+                    break;
+                }
+            }
+        }
+
+        private void Obtener_empleados_disponibles()
+        {
+            Usuarios_disponibles = clase_usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+        }
+
+        private void Aparece_elementos_reporte_usuarios_reporte()
+        {
+            labelNombreEmpleado.Visible = true;
+            comboBoxNombreEmpleado.Visible = true;
+        }
+        private void Deaparece_elementos_reporte_usuarios_reporte()
+        {
+            labelNombreEmpleado.Visible = false;
+            comboBoxNombreEmpleado.Visible = false;
+        }
+
+        private void comboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            limpia_datagrid_materiales_proyecto();
+            Activa_datagridview_dibujos_proyecto();
+            obtener_salida_materiales_usuario();
+            Rellena_partida_materiales_salida_proyecto();
+        }
+
+
+        private void obtener_salida_materiales_usuario()
+        {
+            Busqueda_salida_material.Nombre_empleado = comboBoxNombreEmpleado.Text;
+            Salida_materiales_disponibles = Class_salida_material
+                .Adquiere_salida_materiales_empleado_base_datos(Busqueda_salida_material);
         }
     }
 }

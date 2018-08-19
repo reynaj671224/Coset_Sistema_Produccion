@@ -85,7 +85,7 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_materiales;
         }
 
-        public List<Material> Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Material material)
+        public List<Material> Adquiere_materiales_codigo_material_en_base_datos(Material material)
         {
             List<Material> Material_existente_disponibles_materiales = new List<Material>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_materiales());

@@ -1258,7 +1258,6 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_modificar_en_base_de_datos_orden_compra()
         {
             string tipo_moneda = "";
-            string divisa = "";
             if (radioButtonPesos.Checked)
             {
                 tipo_moneda = "Pesos";

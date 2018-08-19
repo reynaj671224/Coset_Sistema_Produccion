@@ -843,7 +843,7 @@ namespace Coset_Sistema_Produccion
                 Busqueda_material.Codigo = dataGridViewPartidasEntradaMaterialesEntrada[
                     (int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
                 Materiales_disponibles_busqueda = Class_Materiales.
-                    Adquiere_materiales_codigo_proveedor_descripcion_en_base_datos(Busqueda_material);
+                    Adquiere_materiales_codigo_material_en_base_datos(Busqueda_material);
                 Visualizar_material = Materiales_disponibles_busqueda.Find(material_disponible =>
                 material_disponible.Codigo.Contains(Busqueda_material.Codigo));
 

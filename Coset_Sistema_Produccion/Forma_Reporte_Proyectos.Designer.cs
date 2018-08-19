@@ -69,11 +69,13 @@
             this.textBoxTotalPrecioProyectoDevoluciones = new System.Windows.Forms.TextBox();
             this.labelTotalDevoluciones = new System.Windows.Forms.Label();
             this.textBoxTotalPrecioProyecto = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelTotalProyectoPrecio = new System.Windows.Forms.Label();
             this.buttonReporteProyectos = new System.Windows.Forms.Button();
             this.buttonReporteUsuarios = new System.Windows.Forms.Button();
             this.buttonReoprteMateriales = new System.Windows.Forms.Button();
             this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
+            this.comboBoxNombreEmpleado = new System.Windows.Forms.ComboBox();
+            this.labelNombreEmpleado = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).BeginInit();
             this.SuspendLayout();
@@ -451,17 +453,17 @@
             this.textBoxTotalPrecioProyecto.TabIndex = 82;
             this.textBoxTotalPrecioProyecto.Visible = false;
             // 
-            // label6
+            // labelTotalProyectoPrecio
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
-            this.label6.Location = new System.Drawing.Point(573, 149);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 16);
-            this.label6.TabIndex = 81;
-            this.label6.Text = "Total Precio";
-            this.label6.Visible = false;
+            this.labelTotalProyectoPrecio.AutoSize = true;
+            this.labelTotalProyectoPrecio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalProyectoPrecio.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalProyectoPrecio.Image")));
+            this.labelTotalProyectoPrecio.Location = new System.Drawing.Point(573, 149);
+            this.labelTotalProyectoPrecio.Name = "labelTotalProyectoPrecio";
+            this.labelTotalProyectoPrecio.Size = new System.Drawing.Size(71, 16);
+            this.labelTotalProyectoPrecio.TabIndex = 81;
+            this.labelTotalProyectoPrecio.Text = "Total Precio";
+            this.labelTotalProyectoPrecio.Visible = false;
             // 
             // buttonReporteProyectos
             // 
@@ -474,6 +476,7 @@
             this.buttonReporteProyectos.Text = "Proyectos";
             this.buttonReporteProyectos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonReporteProyectos.UseVisualStyleBackColor = true;
+            this.buttonReporteProyectos.Click += new System.EventHandler(this.buttonReporteProyectos_Click);
             // 
             // buttonReporteUsuarios
             // 
@@ -487,6 +490,7 @@
             this.buttonReporteUsuarios.Text = "Empleados";
             this.buttonReporteUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonReporteUsuarios.UseVisualStyleBackColor = true;
+            this.buttonReporteUsuarios.Click += new System.EventHandler(this.buttonReporteUsuarios_Click);
             // 
             // buttonReoprteMateriales
             // 
@@ -514,17 +518,42 @@
             this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
             this.buttonBusquedaBaseDatos.Visible = false;
             // 
+            // comboBoxNombreEmpleado
+            // 
+            this.comboBoxNombreEmpleado.FormattingEnabled = true;
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 90);
+            this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
+            this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxNombreEmpleado.Sorted = true;
+            this.comboBoxNombreEmpleado.TabIndex = 88;
+            this.comboBoxNombreEmpleado.Visible = false;
+            this.comboBoxNombreEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreEmpleado_SelectedIndexChanged);
+            // 
+            // labelNombreEmpleado
+            // 
+            this.labelNombreEmpleado.AutoSize = true;
+            this.labelNombreEmpleado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombreEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreEmpleado.Image")));
+            this.labelNombreEmpleado.Location = new System.Drawing.Point(99, 95);
+            this.labelNombreEmpleado.Name = "labelNombreEmpleado";
+            this.labelNombreEmpleado.Size = new System.Drawing.Size(106, 16);
+            this.labelNombreEmpleado.TabIndex = 87;
+            this.labelNombreEmpleado.Text = "Nombre Empleado";
+            this.labelNombreEmpleado.Visible = false;
+            // 
             // Forma_Reporte_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.Controls.Add(this.comboBoxNombreEmpleado);
+            this.Controls.Add(this.labelNombreEmpleado);
             this.Controls.Add(this.buttonBusquedaBaseDatos);
             this.Controls.Add(this.buttonReoprteMateriales);
             this.Controls.Add(this.buttonReporteUsuarios);
             this.Controls.Add(this.buttonReporteProyectos);
             this.Controls.Add(this.textBoxTotalPrecioProyecto);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.labelTotalProyectoPrecio);
             this.Controls.Add(this.textBoxTotalPrecioProyectoDevoluciones);
             this.Controls.Add(this.labelTotalDevoluciones);
             this.Controls.Add(this.textBoxTotalPrecioProyectoSalidas);
@@ -600,10 +629,12 @@
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoDevoluciones;
         private System.Windows.Forms.Label labelTotalDevoluciones;
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyecto;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelTotalProyectoPrecio;
         private System.Windows.Forms.Button buttonReporteProyectos;
         private System.Windows.Forms.Button buttonReporteUsuarios;
         private System.Windows.Forms.Button buttonReoprteMateriales;
         private System.Windows.Forms.Button buttonBusquedaBaseDatos;
+        private System.Windows.Forms.ComboBox comboBoxNombreEmpleado;
+        private System.Windows.Forms.Label labelNombreEmpleado;
     }
 }
