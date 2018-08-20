@@ -65,7 +65,7 @@ namespace Coset_Sistema_Produccion
             proceso, tiempo_estimado
         };
 
-        public string Operacio_proyectos = "";
+        public string Operacio_reporte_proyectos = "";
 
         public Forma_Reporte_Proyectos()
         {
@@ -120,7 +120,7 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
-            Operacio_proyectos = "Visualizar";
+            Operacio_reporte_proyectos = "Visualizar";
         }
 
         private void Activa_combo_codigo_proyecto()
@@ -187,7 +187,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Operacio_proyectos = "Cancelar";           
+            Operacio_reporte_proyectos = "Cancelar";           
             Limpia_cajas_captura_despues_de_agregar_proyecto();
             //Limpia_combo_proyecto();
             Desaparece_boton_guardar_base_de_datos();
@@ -195,16 +195,31 @@ namespace Coset_Sistema_Produccion
             //Aparece_textbox_ingeniero_cliente();
             //Aparece_textbox_ingeniero_coset();
             //Aparece_textbox_nombre_cliente();
+            Limpia_combo_nombre_empleados();
             limpia_datagrid_materiales_proyecto();
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();
             Desaparece_cajas_etiquetas_reporte_proyectos();
             Deaparece_elementos_reporte_usuarios_reporte();
+            Desaparece_elementos_reporte_materiales();
+            Desactiva_timer_busqueda();
+            Desaparece_boton_busqueda();
             //Elimina_informacion_proyectos_disponibles();
 
         }
 
-       
+        private void Desaparece_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Visible = false;
+        }
+
+        private void Desactiva_timer_busqueda()
+        {
+            if (timerBusquedaMaterial.Enabled)
+                timerBusquedaMaterial.Enabled = false;
+
+        }
+
         private void Limpia_combo_proyecto()
         {
             comboBoxCodigoProyecto.Items.Clear();
@@ -345,7 +360,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_operaciones_proyectos()
         {
-            Operacio_proyectos = "";
+            Operacio_reporte_proyectos = "";
         }
 
        
@@ -413,6 +428,10 @@ namespace Coset_Sistema_Produccion
             textBoxTotalPrecioProyectoSalidas.Text = "";
 
             comboBoxCodigoProyecto.Text = "";
+
+            textBoxDescripcionMaterial.Text = "";
+            textCodigoMaterial.Text = "";
+            textBoxCodigoProveedor.Text = "";
 
         }
 
@@ -536,6 +555,7 @@ namespace Coset_Sistema_Produccion
                             Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
                             "",
                             "",
+                            "",
                             "Devolucion", material.Motivo_devolucion);
 
                 }
@@ -598,6 +618,7 @@ namespace Coset_Sistema_Produccion
                            Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
                            Partida_orden_compra_seleccion.Proyecto,
                            Partida_orden_compra_seleccion.Cantidad,
+                           Partida_orden_compra_seleccion.Codigo_orden,
                            "Salida", "");
                     }
                     else if (material.Orden_compra == "NA")
@@ -625,6 +646,7 @@ namespace Coset_Sistema_Produccion
                             Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
                             "",
                             "",
+                            "",
                             "Salida", "");
                     }
                 }
@@ -643,6 +665,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReporteProyectos_Click(object sender, EventArgs e)
         {
+            Operacio_reporte_proyectos = "proyectos";
             Aparece_cajas_etiquetas_reporte_proyectos();
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_combo_codigo_proyecto();
@@ -695,10 +718,19 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReporteUsuarios_Click(object sender, EventArgs e)
         {
+            Operacio_reporte_proyectos = "Usuarios";
+            Aparece_boton_cancelar_operacio();
             Aparece_elementos_reporte_usuarios_reporte();
             Obtener_empleados_disponibles();
+            Limpia_combo_nombre_empleados();
             Rellena_combo_usuarios();
 
+        }
+
+        private void Limpia_combo_nombre_empleados()
+        {
+            comboBoxNombreEmpleado.Items.Clear();
+            comboBoxNombreEmpleado.Text = "";
         }
 
         private void Rellena_combo_usuarios()
@@ -737,14 +769,87 @@ namespace Coset_Sistema_Produccion
             Activa_datagridview_dibujos_proyecto();
             obtener_salida_materiales_usuario();
             Rellena_partida_materiales_salida_proyecto();
+            Obtener_devoluciones_materiales_usuarios();
+            Rellena_partida_materiales_devolucion_proyecto();
+
         }
 
+        private void Obtener_devoluciones_materiales_usuarios()
+        {
+            Devolucion_Material_busqueda.Nombre_empleado = comboBoxNombreEmpleado.Text;
+            Material_devolucion_disponibles = Class_Devolucion_Material
+                .Adquiere_devolucion_materiales_busqueda_usuario_en_base_datos(Devolucion_Material_busqueda);
+        }
 
         private void obtener_salida_materiales_usuario()
         {
             Busqueda_salida_material.Nombre_empleado = comboBoxNombreEmpleado.Text;
             Salida_materiales_disponibles = Class_salida_material
                 .Adquiere_salida_materiales_empleado_base_datos(Busqueda_salida_material);
+        }
+
+        private void buttonReoprteMateriales_Click(object sender, EventArgs e)
+        {
+            Operacio_reporte_proyectos = "Materiales";
+            Aparece_elementos_reporte_materiales();
+            Asigna_caracter_busqueda_material();
+            Aparece_boton_cancelar_operacio();
+            Inicia_timer_para_buscar_informacion_materiales_busqueda();
+        }
+
+        private void Inicia_timer_para_buscar_informacion_materiales_busqueda()
+        {
+            timerBusquedaMaterial.Enabled = true;
+        }
+
+        private void Asigna_caracter_busqueda_material()
+        {
+            textBoxCodigoProveedor.BackColor = Color.Yellow;
+            textCodigoMaterial.BackColor = Color.Yellow;
+            textBoxDescripcionMaterial.BackColor = Color.Yellow;
+        }
+
+        private void Aparece_elementos_reporte_materiales()
+        {
+            labelCodigoMaterial.Visible = true;
+            textCodigoMaterial.Visible = true;
+            labelCodigoMaterialProveedor.Visible = true;
+            textBoxCodigoProveedor.Visible = true;
+            labelMaterialDescripcion.Visible = true;
+            textBoxDescripcionMaterial.Visible = true;
+        }
+
+        private void Desaparece_elementos_reporte_materiales()
+        {
+            labelCodigoMaterial.Visible = false;
+            textCodigoMaterial.Visible = false;
+            labelCodigoMaterialProveedor.Visible = false;
+            textBoxCodigoProveedor.Visible = false;
+            labelMaterialDescripcion.Visible = false;
+            textBoxDescripcionMaterial.Visible = false;
+        }
+
+        private void timerBusquedaMaterial_Tick(object sender, EventArgs e)
+        {
+            if (
+                textBoxCodigoProveedor.Text != "" ||
+                textCodigoMaterial.Text != "" ||
+                textBoxDescripcionMaterial.Text != "")
+            {
+                timerBusquedaMaterial.Enabled = false;
+                buttonBusquedaBaseDatos.Visible = true;
+            }
+        }
+
+        private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
+        {
+            Desactiva_boton_busqueda();
+           
+        }
+
+        private void Desactiva_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Enabled = false;
         }
     }
 }

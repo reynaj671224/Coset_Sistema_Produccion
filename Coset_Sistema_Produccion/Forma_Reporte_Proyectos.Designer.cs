@@ -52,6 +52,7 @@
             this.Total_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProyectoOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantidadOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrdenCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OperacionProyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
@@ -76,6 +77,13 @@
             this.buttonBusquedaBaseDatos = new System.Windows.Forms.Button();
             this.comboBoxNombreEmpleado = new System.Windows.Forms.ComboBox();
             this.labelNombreEmpleado = new System.Windows.Forms.Label();
+            this.textCodigoMaterial = new System.Windows.Forms.TextBox();
+            this.labelCodigoMaterial = new System.Windows.Forms.Label();
+            this.textBoxCodigoProveedor = new System.Windows.Forms.TextBox();
+            this.labelCodigoMaterialProveedor = new System.Windows.Forms.Label();
+            this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
+            this.labelMaterialDescripcion = new System.Windows.Forms.Label();
+            this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).BeginInit();
             this.SuspendLayout();
@@ -214,6 +222,7 @@
             this.Total_Precio,
             this.ProyectoOC,
             this.CantidadOC,
+            this.OrdenCompra,
             this.OperacionProyecto,
             this.Observaciones});
             this.dataGridViewProyectoReportes.Enabled = false;
@@ -292,6 +301,12 @@
             this.CantidadOC.HeaderText = "Total Unidades OC";
             this.CantidadOC.Name = "CantidadOC";
             this.CantidadOC.ReadOnly = true;
+            // 
+            // OrdenCompra
+            // 
+            this.OrdenCompra.HeaderText = "Orden Compra";
+            this.OrdenCompra.Name = "OrdenCompra";
+            this.OrdenCompra.ReadOnly = true;
             // 
             // OperacionProyecto
             // 
@@ -407,7 +422,7 @@
             this.textBoxTotalPrecioProyectoSalidas.Enabled = false;
             this.textBoxTotalPrecioProyectoSalidas.Location = new System.Drawing.Point(771, 99);
             this.textBoxTotalPrecioProyectoSalidas.Name = "textBoxTotalPrecioProyectoSalidas";
-            this.textBoxTotalPrecioProyectoSalidas.Size = new System.Drawing.Size(121, 20);
+            this.textBoxTotalPrecioProyectoSalidas.Size = new System.Drawing.Size(124, 20);
             this.textBoxTotalPrecioProyectoSalidas.TabIndex = 78;
             this.textBoxTotalPrecioProyectoSalidas.Visible = false;
             // 
@@ -428,7 +443,7 @@
             this.textBoxTotalPrecioProyectoDevoluciones.Enabled = false;
             this.textBoxTotalPrecioProyectoDevoluciones.Location = new System.Drawing.Point(771, 125);
             this.textBoxTotalPrecioProyectoDevoluciones.Name = "textBoxTotalPrecioProyectoDevoluciones";
-            this.textBoxTotalPrecioProyectoDevoluciones.Size = new System.Drawing.Size(121, 20);
+            this.textBoxTotalPrecioProyectoDevoluciones.Size = new System.Drawing.Size(124, 20);
             this.textBoxTotalPrecioProyectoDevoluciones.TabIndex = 80;
             this.textBoxTotalPrecioProyectoDevoluciones.Visible = false;
             // 
@@ -449,7 +464,7 @@
             this.textBoxTotalPrecioProyecto.Enabled = false;
             this.textBoxTotalPrecioProyecto.Location = new System.Drawing.Point(771, 151);
             this.textBoxTotalPrecioProyecto.Name = "textBoxTotalPrecioProyecto";
-            this.textBoxTotalPrecioProyecto.Size = new System.Drawing.Size(121, 20);
+            this.textBoxTotalPrecioProyecto.Size = new System.Drawing.Size(124, 20);
             this.textBoxTotalPrecioProyecto.TabIndex = 82;
             this.textBoxTotalPrecioProyecto.Visible = false;
             // 
@@ -503,6 +518,7 @@
             this.buttonReoprteMateriales.Text = "Materiales";
             this.buttonReoprteMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonReoprteMateriales.UseVisualStyleBackColor = true;
+            this.buttonReoprteMateriales.Click += new System.EventHandler(this.buttonReoprteMateriales_Click);
             // 
             // buttonBusquedaBaseDatos
             // 
@@ -517,6 +533,7 @@
             this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
             this.buttonBusquedaBaseDatos.Visible = false;
+            this.buttonBusquedaBaseDatos.Click += new System.EventHandler(this.buttonBusquedaBaseDatos_Click);
             // 
             // comboBoxNombreEmpleado
             // 
@@ -541,11 +558,82 @@
             this.labelNombreEmpleado.Text = "Nombre Empleado";
             this.labelNombreEmpleado.Visible = false;
             // 
+            // textCodigoMaterial
+            // 
+            this.textCodigoMaterial.Location = new System.Drawing.Point(771, 177);
+            this.textCodigoMaterial.Name = "textCodigoMaterial";
+            this.textCodigoMaterial.Size = new System.Drawing.Size(124, 20);
+            this.textCodigoMaterial.TabIndex = 90;
+            this.textCodigoMaterial.Visible = false;
+            // 
+            // labelCodigoMaterial
+            // 
+            this.labelCodigoMaterial.AutoSize = true;
+            this.labelCodigoMaterial.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoMaterial.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoMaterial.Image")));
+            this.labelCodigoMaterial.Location = new System.Drawing.Point(574, 177);
+            this.labelCodigoMaterial.Name = "labelCodigoMaterial";
+            this.labelCodigoMaterial.Size = new System.Drawing.Size(94, 16);
+            this.labelCodigoMaterial.TabIndex = 89;
+            this.labelCodigoMaterial.Text = "Codigo Material";
+            this.labelCodigoMaterial.Visible = false;
+            // 
+            // textBoxCodigoProveedor
+            // 
+            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(771, 203);
+            this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
+            this.textBoxCodigoProveedor.Size = new System.Drawing.Size(124, 20);
+            this.textBoxCodigoProveedor.TabIndex = 92;
+            this.textBoxCodigoProveedor.Visible = false;
+            // 
+            // labelCodigoMaterialProveedor
+            // 
+            this.labelCodigoMaterialProveedor.AutoSize = true;
+            this.labelCodigoMaterialProveedor.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoMaterialProveedor.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoMaterialProveedor.Image")));
+            this.labelCodigoMaterialProveedor.Location = new System.Drawing.Point(573, 201);
+            this.labelCodigoMaterialProveedor.Name = "labelCodigoMaterialProveedor";
+            this.labelCodigoMaterialProveedor.Size = new System.Drawing.Size(150, 16);
+            this.labelCodigoMaterialProveedor.TabIndex = 91;
+            this.labelCodigoMaterialProveedor.Text = "Codigo Proveedor Material";
+            this.labelCodigoMaterialProveedor.Visible = false;
+            // 
+            // textBoxDescripcionMaterial
+            // 
+            this.textBoxDescripcionMaterial.Location = new System.Drawing.Point(771, 230);
+            this.textBoxDescripcionMaterial.Name = "textBoxDescripcionMaterial";
+            this.textBoxDescripcionMaterial.Size = new System.Drawing.Size(246, 20);
+            this.textBoxDescripcionMaterial.TabIndex = 94;
+            this.textBoxDescripcionMaterial.Visible = false;
+            // 
+            // labelMaterialDescripcion
+            // 
+            this.labelMaterialDescripcion.AutoSize = true;
+            this.labelMaterialDescripcion.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMaterialDescripcion.Image = ((System.Drawing.Image)(resources.GetObject("labelMaterialDescripcion.Image")));
+            this.labelMaterialDescripcion.Location = new System.Drawing.Point(574, 228);
+            this.labelMaterialDescripcion.Name = "labelMaterialDescripcion";
+            this.labelMaterialDescripcion.Size = new System.Drawing.Size(120, 16);
+            this.labelMaterialDescripcion.TabIndex = 93;
+            this.labelMaterialDescripcion.Text = "Material Descripcion";
+            this.labelMaterialDescripcion.Visible = false;
+            // 
+            // timerBusquedaMaterial
+            // 
+            this.timerBusquedaMaterial.Interval = 1000;
+            this.timerBusquedaMaterial.Tick += new System.EventHandler(this.timerBusquedaMaterial_Tick);
+            // 
             // Forma_Reporte_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.Controls.Add(this.textBoxDescripcionMaterial);
+            this.Controls.Add(this.labelMaterialDescripcion);
+            this.Controls.Add(this.textBoxCodigoProveedor);
+            this.Controls.Add(this.labelCodigoMaterialProveedor);
+            this.Controls.Add(this.textCodigoMaterial);
+            this.Controls.Add(this.labelCodigoMaterial);
             this.Controls.Add(this.comboBoxNombreEmpleado);
             this.Controls.Add(this.labelNombreEmpleado);
             this.Controls.Add(this.buttonBusquedaBaseDatos);
@@ -613,6 +701,16 @@
         private System.Windows.Forms.TextBox textBoxIngenieroCliente;
         private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoSalidas;
         private System.Windows.Forms.Label labelTotalSalidas;
+        private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoDevoluciones;
+        private System.Windows.Forms.Label labelTotalDevoluciones;
+        private System.Windows.Forms.TextBox textBoxTotalPrecioProyecto;
+        private System.Windows.Forms.Label labelTotalProyectoPrecio;
+        private System.Windows.Forms.Button buttonReporteProyectos;
+        private System.Windows.Forms.Button buttonReporteUsuarios;
+        private System.Windows.Forms.Button buttonReoprteMateriales;
+        private System.Windows.Forms.Button buttonBusquedaBaseDatos;
+        private System.Windows.Forms.ComboBox comboBoxNombreEmpleado;
+        private System.Windows.Forms.Label labelNombreEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_material;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
@@ -624,17 +722,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProyectoOC;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrdenCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn OperacionProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
-        private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoDevoluciones;
-        private System.Windows.Forms.Label labelTotalDevoluciones;
-        private System.Windows.Forms.TextBox textBoxTotalPrecioProyecto;
-        private System.Windows.Forms.Label labelTotalProyectoPrecio;
-        private System.Windows.Forms.Button buttonReporteProyectos;
-        private System.Windows.Forms.Button buttonReporteUsuarios;
-        private System.Windows.Forms.Button buttonReoprteMateriales;
-        private System.Windows.Forms.Button buttonBusquedaBaseDatos;
-        private System.Windows.Forms.ComboBox comboBoxNombreEmpleado;
-        private System.Windows.Forms.Label labelNombreEmpleado;
+        private System.Windows.Forms.TextBox textCodigoMaterial;
+        private System.Windows.Forms.Label labelCodigoMaterial;
+        private System.Windows.Forms.TextBox textBoxCodigoProveedor;
+        private System.Windows.Forms.Label labelCodigoMaterialProveedor;
+        private System.Windows.Forms.TextBox textBoxDescripcionMaterial;
+        private System.Windows.Forms.Label labelMaterialDescripcion;
+        private System.Windows.Forms.Timer timerBusquedaMaterial;
     }
 }
