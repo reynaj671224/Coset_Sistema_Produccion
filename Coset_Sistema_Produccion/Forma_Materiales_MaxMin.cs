@@ -50,7 +50,11 @@ namespace Coset_Sistema_Produccion
                     {
                         if (Convert.ToInt32(material.Cantidad) < ((Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Minimo)) / 2))
                         {
-                            Material_requerido = (((Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Minimo)) / 2) - Convert.ToInt32(material.Cantidad))+Convert.ToInt32(material.Minimo);
+                            Material_requerido = Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Cantidad);
+                            if(Material_requerido < 0)
+                            {
+                                Material_requerido = 0;
+                            }
                         }
 
 
@@ -135,12 +139,11 @@ namespace Coset_Sistema_Produccion
 
         private void buttonExcel_Click(object sender, EventArgs e)
         {
-
+            Desactiva_boton_excel();
             try
             {
                 //Start Excel and get Application object.
                 oXL = new Excel.Application();
-                oXL.Visible = true;
                 oSheet = oXL.ActiveSheet;
                 Imprime_titiulos_excel();
 
@@ -153,6 +156,7 @@ namespace Coset_Sistema_Produccion
                 }
 
                 oSheet.Cells.EntireColumn.AutoFit();
+                oXL.Visible = true;
             }
             catch(Exception ex)
             {
@@ -160,6 +164,11 @@ namespace Coset_Sistema_Produccion
             }
 
             
+        }
+
+        private void Desactiva_boton_excel()
+        {
+            buttonExcel.Enabled = false;
         }
 
         private void Imprime_titiulos_excel()

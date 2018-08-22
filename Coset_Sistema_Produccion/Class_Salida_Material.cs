@@ -30,6 +30,7 @@ namespace Coset_Sistema_Produccion
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                        Orden_compra = mySqlDataReader["orden_compra"].ToString(),
                     });
                 }
             }
@@ -62,6 +63,7 @@ namespace Coset_Sistema_Produccion
                         Codigo_proveedor = mySqlDataReader["codigo_proveedor_material"].ToString(),
                         Nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         Descripcion_material = mySqlDataReader["descripcion_material"].ToString(),
+                        Orden_compra = mySqlDataReader["orden_compra"].ToString(),
                     });
                 }
             }
