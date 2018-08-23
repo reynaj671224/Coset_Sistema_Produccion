@@ -169,9 +169,9 @@ namespace Coset_Sistema_Produccion
                 oSheet.Cells.EntireColumn.AutoFit();
                 
             }
-            catch(Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("datos");
             }
 
             
