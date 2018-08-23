@@ -27,6 +27,7 @@ namespace Coset_Sistema_Produccion
         public string agregar_seleccion = "";
         public Excel.Application oXL = null;
         public Excel._Worksheet oSheet = null;
+        public Excel.Workbook oWB = null;
         public Forma_Materiales_MaxMin()
         {
             InitializeComponent();
@@ -143,8 +144,18 @@ namespace Coset_Sistema_Produccion
             try
             {
                 //Start Excel and get Application object.
-                oXL = new Excel.Application();
-                oSheet = oXL.ActiveSheet;
+                try
+                {
+                    oXL = new Excel.Application();
+                    oSheet = new Excel.Worksheet();
+                    oXL.Visible = true;
+                    oSheet = oXL.ActiveSheet;
+
+                }
+                catch
+                {
+                    MessageBox.Show("configuracion");
+                }
                 Imprime_titiulos_excel();
 
                 for (int Row=0; Row<dataGridViewPartidasMaterialSeleccion.RowCount-1; Row++)
@@ -156,7 +167,7 @@ namespace Coset_Sistema_Produccion
                 }
 
                 oSheet.Cells.EntireColumn.AutoFit();
-                oXL.Visible = true;
+                
             }
             catch(Exception ex)
             {
