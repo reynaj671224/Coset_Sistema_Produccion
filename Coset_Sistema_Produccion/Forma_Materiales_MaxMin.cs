@@ -26,8 +26,7 @@ namespace Coset_Sistema_Produccion
         public Material Material_seleccionado_data_view = new Material();
         public string agregar_seleccion = "";
         public Excel.Application oXL = null;
-        public Excel._Worksheet oSheet = null;
-        public Excel.Workbook oWB = null;
+        public Excel.Worksheet oSheet = null;
         public Forma_Materiales_MaxMin()
         {
             InitializeComponent();
