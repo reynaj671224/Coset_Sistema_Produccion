@@ -143,20 +143,27 @@ namespace Coset_Sistema_Produccion
             Desactiva_boton_excel();
             try
             {
-                //Start Excel and get Application object.
-                try
-                {
-                    oXL = new Excel.Application();
-                    oSheet = new Excel.Worksheet();
-                    oXL.Visible = true;
-                    oSheet = oXL.ActiveSheet;
+                oXL = new Excel.Application();
+                oSheet = new Excel.Worksheet();
+                oXL.Visible = true;
+                oSheet = oXL.ActiveSheet;
+            }
+            catch
+            {
+                MessageBox.Show("configuracion");
+            }
 
-                }
-                catch
-                {
-                    MessageBox.Show("configuracion");
-                }
+            try
+            {
                 Imprime_titiulos_excel();
+            }
+            catch
+            {
+                MessageBox.Show("titulos");
+            }
+            try
+            {
+                //Start Excel and get Application object.
 
                 for (int Row=0; Row<dataGridViewPartidasMaterialSeleccion.RowCount-1; Row++)
                 {
@@ -166,7 +173,7 @@ namespace Coset_Sistema_Produccion
                     }
                 }
 
-                oSheet.Cells.EntireColumn.AutoFit();
+                
                 
             }
             catch
@@ -174,7 +181,14 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show("datos");
             }
 
-            
+            try
+            {
+                oSheet.Cells.EntireColumn.AutoFit();
+            }
+            catch
+            {
+                MessageBox.Show("autofit");
+            }
         }
 
         private void Desactiva_boton_excel()
