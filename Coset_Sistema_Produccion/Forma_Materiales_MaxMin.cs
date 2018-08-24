@@ -27,6 +27,7 @@ namespace Coset_Sistema_Produccion
         public string agregar_seleccion = "";
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
+        public Excel.Workbook oWB = null;
         public Forma_Materiales_MaxMin()
         {
             InitializeComponent();
@@ -140,12 +141,14 @@ namespace Coset_Sistema_Produccion
         private void buttonExcel_Click(object sender, EventArgs e)
         {
             Desactiva_boton_excel();
+            Borrar_archivo_excel();
             try
             {
                 oXL = new Excel.Application();
-                oSheet = new Excel.Worksheet();
                 oXL.Visible = true;
-                oSheet = oXL.ActiveSheet;
+                oWB = oXL.ActiveWorkbook;
+                oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
+
             }
             catch
             {
@@ -187,7 +190,9 @@ namespace Coset_Sistema_Produccion
             catch
             {
                 MessageBox.Show("autofit");
+
             }
+                Guarda_archivo_excel();
         }
 
         private void Desactiva_boton_excel()
@@ -216,14 +221,40 @@ namespace Coset_Sistema_Produccion
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(oXL);
             }
         }
-
+        public bool Borrar_archivo_excel()
+        {
+            try
+            {
+                File.Delete(appPath + "\\maximos-mininos.xlsx");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool Guarda_archivo_excel()
+        {
+            try
+            {
+                oWB.SaveAs(appPath + "\\maximos-mininos.xlsx");
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Probelmas Para Guardar Archivo");
+                return false;
+            }
+        }
         private void Close_Excel()
         {
-            if(oXL!=null)
+            Borrar_archivo_excel();
+            if (oXL!=null)
             {
                 oXL.Quit();
                 oXL = null;
                 oSheet = null;
+                oWB = null;
             }
             
         }
