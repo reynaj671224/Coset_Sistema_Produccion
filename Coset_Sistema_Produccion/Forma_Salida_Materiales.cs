@@ -92,6 +92,7 @@ namespace Coset_Sistema_Produccion
             Ordenes_compra_disponibles = null;
             Ordenes_compra_con_material_abiertas = null;
             Partidas_orden_compra_disponibles = null;
+            Entrada_materiales_disponibles = null;
             this.Dispose();
             GC.Collect();
             this.Close();
