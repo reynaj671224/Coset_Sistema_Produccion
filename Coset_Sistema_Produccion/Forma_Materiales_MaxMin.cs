@@ -145,21 +145,48 @@ namespace Coset_Sistema_Produccion
             if (Inicia_Excel())
             {
                 oXL.Visible = true;
-                Obterner_wokbook_activo();
-                oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
-                Imprime_titiulos_excel();
-
-                for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
+                //Obterner_wokbook_activo();
+                if (Abrir_Archivo_Excel())
                 {
-                    for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
+                    
+                    try
                     {
-                        oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                        
+                       
+                        oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
+                        Imprime_titiulos_excel();
+
+                        for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
+                        {
+                            for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
+                            {
+                                oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                            }
+                        }
+                        oSheet.Cells.EntireColumn.AutoFit();
+                        Guarda_archivo_excel();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Probelmas para mostrar informacion en Excel", "Maximos-Minimos",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+            }
+        }
 
-                oSheet.Cells.EntireColumn.AutoFit();
-
-                Guarda_archivo_excel();
+        private bool Abrir_Archivo_Excel()
+        {
+            try
+            {
+                oWB = oXL.Workbooks.Open(appPath + "\\Excel_template.xlsx");
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Excel_tamplate.xlsx No existe en el Folder de aplicacion", "Maximos Minimos",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
         }
 
@@ -180,11 +207,13 @@ namespace Coset_Sistema_Produccion
             try
             {
                 oXL = new Excel.Application();
+               
                 return true;
             }
             catch
             {
-                MessageBox.Show("No Excel Instalado");
+                MessageBox.Show("No Excel Instalado", "Maximox-Minimos",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
