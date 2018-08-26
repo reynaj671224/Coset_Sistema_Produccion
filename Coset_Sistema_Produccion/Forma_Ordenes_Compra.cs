@@ -173,6 +173,7 @@ namespace Coset_Sistema_Produccion
         
         private void Visualiza_orden_compra()
         {
+            Operacio_orden_compra = "Visualizar";
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
             Aparece_boton_cancelar_operacio();
@@ -187,7 +188,10 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_ordenes_compra();
             obtener_proyectos_disponibles();
             Rellenar_combo_proyectos_partidas_requisiciones();
-            Operacio_orden_compra = "Visualizar";
+            Obtener_proveedores_disponibles();
+            Aparecer_combo_nombre_proveedor();
+            Rellena_combo_nombre_proveedor();
+            
         }
 
         private void Aparece_label_estado()
@@ -207,16 +211,42 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_ordenes_compra()
         {
-            foreach (Orden_compra orden in ordenes_compra_disponibles)
+            if (Operacio_orden_compra == "Visualizar")
             {
-                if (orden.error == "")
+                foreach (Orden_compra orden in ordenes_compra_disponibles)
                 {
-                    comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                    if (orden.error == "")
+                    {
+                        if(comboBoxNombreProveedor.Text=="")
+                        {
+                            comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                        }
+                        if (orden.Proveedor == comboBoxNombreProveedor.Text)
+                        {
+
+                            comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(orden.error);
+                        break;
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach (Orden_compra orden in ordenes_compra_disponibles)
                 {
-                    MessageBox.Show(orden.error);
-                    break;
+                    if (orden.error == "")
+                    {
+                        comboBoxCodigoOrdenCompra.Items.Add(orden.Codigo);
+                    }
+                    else
+                    {
+                        MessageBox.Show(orden.error);
+                        break;
+                    }
                 }
             }
         }
@@ -593,7 +623,7 @@ namespace Coset_Sistema_Produccion
 
             textBoxCotizacion.Text = orden_compra_visualizar.Cotizacion;
             dateTimePickerFechaActual.Text = orden_compra_visualizar.Fecha;
-            textBoxNombreProveedor.Text = orden_compra_visualizar.Proveedor;
+            comboBoxNombreProveedor.Text = orden_compra_visualizar.Proveedor;
             textBoxCotizado.Text = orden_compra_visualizar.Cotizado;
             Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxNombreProveedor.Text);
             textBoxRazonSocialProveedor.Text = Proveedor_seleccionado.RazonSocial;
@@ -2387,12 +2417,20 @@ namespace Coset_Sistema_Produccion
             //Limpia_datagridview_ordenes_compra();
             //Limpia_combo_requisiciones_partidas_orden_compra();
             //Rellena_combo_requisicion_partidas_orden_compra();
-            Rellena_razon_social_proveedor();
-            Limpia_combo_cotizado();
-            Aparece_combo_cotizado();
-            Activa_combo_cotizado();
-            Obtener_contactos_disponibles_proveedor();
-            Rellena_combo_contactos_proveedor();
+            if (Operacio_orden_compra == "Visualizar")
+            {
+                limpia_combo_ordenes_compra();
+                Rellenar_combo_ordenes_compra();
+            }
+            else
+            {
+                Rellena_razon_social_proveedor();
+                Limpia_combo_cotizado();
+                Aparece_combo_cotizado();
+                Activa_combo_cotizado();
+                Obtener_contactos_disponibles_proveedor();
+                Rellena_combo_contactos_proveedor();
+            }
 
         }
 

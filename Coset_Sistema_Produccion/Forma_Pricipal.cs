@@ -424,6 +424,7 @@ namespace Coset_Sistema_Produccion
         {
             Muestra_Menu_Almacen();
             Muestra_Menu_Compras();
+            Muestra_Menu_reportes();
             Oculta_Menus_de_Compras_Prohibidas_Para_almacen_compras();
             toolStripStatusUsuario.Text = "Almacen-Compras";
         }
@@ -432,6 +433,12 @@ namespace Coset_Sistema_Produccion
         {
             Oculta_Menu_Compras_Proveedores();
             Oculta_menu_compras_requisiciones_pendientes();
+            Oculta_menu_reportes_produccion();
+        }
+
+        private void Oculta_menu_reportes_produccion()
+        {
+            produccionToolStripMenuItem1.Enabled = false;
         }
 
         private void Revisa_por_reqisiciones_abiertas()

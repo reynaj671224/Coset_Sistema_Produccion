@@ -28,6 +28,7 @@ namespace Coset_Sistema_Produccion
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
         public Excel.Workbook oWB = null;
+        public string Archivo_Excel_nombre= "";
         public Forma_Materiales_MaxMin()
         {
             InitializeComponent();
@@ -88,6 +89,7 @@ namespace Coset_Sistema_Produccion
             
             Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_MaxMIn_en_base_datos();
             Rellena_partidas_materiales_disponibles();
+            
         }
 
         private void dataGridViewPartidasMaterialSeleccion_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -132,20 +134,28 @@ namespace Coset_Sistema_Produccion
         private void buttonRegresarNoAgregar_Click(object sender, EventArgs e)
         {
             Materiales_disponibles_busqueda = null;
-            Cierra_archivo();
+            Cierra_archivo_Excel();
             Close_Excel();
             Termina_applicacion();
             Elimina_archivo_excel();
             oXL = null;
             oSheet = null;
             oWB = null;
+            Archivo_Excel_nombre = "";
             this.Close();
             GC.Collect();
         }
 
-        private void Cierra_archivo()
+        private void Cierra_archivo_Excel()
         {
-            oWB.Close();
+            try
+            {
+                oWB.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void buttonExcel_Click(object sender, EventArgs e)
@@ -189,13 +199,13 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                oWB = oXL.Workbooks.Open(@appPath + "\\Maximos_minimos.xlsx");
+                oWB = oXL.Workbooks.Open(@appPath + Archivo_Excel_nombre);
                 return true;
             }
             catch
             {
-                MessageBox.Show("Maximos_minimos.xlsx No existe en el Folder de aplicacion", "Maximos Minimos",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Archivo_Excel_nombre + " No existe en el Folder de aplicacion", 
+                    "Maximos Minimos",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
         }
@@ -230,9 +240,11 @@ namespace Coset_Sistema_Produccion
 
         private bool Copiar_template_a_maximos_minimos()
         {
+            Archivo_Excel_nombre = "\\Maximos_minimos-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
             try
             {
-                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", false);
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + Archivo_Excel_nombre, false);
                 return true;
             }
             catch 
@@ -245,7 +257,7 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                File.Delete(@appPath + "\\Maximos_minimos.xlsx");
+                File.Delete(@appPath + Archivo_Excel_nombre);
             }
             catch
             {
@@ -284,18 +296,7 @@ namespace Coset_Sistema_Produccion
             }
 
         }
-        public bool Borrar_archivo_excel()
-        {
-            try
-            {
-                File.Delete(appPath + "\\maximos-mininos.xlsx");
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        
         public void Guarda_archivo_excel()
         {
             try

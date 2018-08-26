@@ -41,6 +41,21 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.labelCodigoProyecto = new System.Windows.Forms.Label();
             this.dataGridViewProyectoReportes = new System.Windows.Forms.DataGridView();
+            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio_Unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProyectoOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrdenCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OperacionProyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
@@ -70,21 +85,7 @@
             this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
             this.labelMaterialDescripcion = new System.Windows.Forms.Label();
             this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
-            this.Codigo_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio_Unitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total_Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProyectoOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrdenCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OperacionProyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProyectoReportes)).BeginInit();
             this.SuspendLayout();
@@ -121,7 +122,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1177, 251);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1177, 275);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -234,6 +235,101 @@
             this.dataGridViewProyectoReportes.Size = new System.Drawing.Size(1148, 234);
             this.dataGridViewProyectoReportes.TabIndex = 48;
             this.dataGridViewProyectoReportes.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
+            // 
+            // Codigo_material
+            // 
+            this.Codigo_material.HeaderText = "Codigo Material";
+            this.Codigo_material.Name = "Codigo_material";
+            this.Codigo_material.ReadOnly = true;
+            // 
+            // Codigo_proveedor
+            // 
+            this.Codigo_proveedor.HeaderText = "Codigo Proveedor";
+            this.Codigo_proveedor.Name = "Codigo_proveedor";
+            this.Codigo_proveedor.ReadOnly = true;
+            // 
+            // Descripcion_dibujo
+            // 
+            this.Descripcion_dibujo.HeaderText = "Descripcion";
+            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
+            this.Descripcion_dibujo.ReadOnly = true;
+            this.Descripcion_dibujo.Width = 350;
+            // 
+            // NombreProveedor
+            // 
+            this.NombreProveedor.HeaderText = "Nombre Proveedor";
+            this.NombreProveedor.Name = "NombreProveedor";
+            this.NombreProveedor.ReadOnly = true;
+            this.NombreProveedor.Width = 200;
+            // 
+            // Cantidad_dibujos
+            // 
+            this.Cantidad_dibujos.HeaderText = "Cantidad";
+            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
+            this.Cantidad_dibujos.ReadOnly = true;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.ReadOnly = true;
+            this.Empleado.Width = 250;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
+            // Precio_Unitario
+            // 
+            this.Precio_Unitario.HeaderText = "Precio Unitario";
+            this.Precio_Unitario.Name = "Precio_Unitario";
+            this.Precio_Unitario.ReadOnly = true;
+            // 
+            // Total_Precio
+            // 
+            this.Total_Precio.HeaderText = "Total Precio";
+            this.Total_Precio.Name = "Total_Precio";
+            this.Total_Precio.ReadOnly = true;
+            // 
+            // Proyecto
+            // 
+            this.Proyecto.HeaderText = "Proyecto";
+            this.Proyecto.Name = "Proyecto";
+            this.Proyecto.ReadOnly = true;
+            // 
+            // ProyectoOC
+            // 
+            this.ProyectoOC.HeaderText = "Proyecto OC";
+            this.ProyectoOC.Name = "ProyectoOC";
+            this.ProyectoOC.ReadOnly = true;
+            // 
+            // CantidadOC
+            // 
+            this.CantidadOC.HeaderText = "Total Unidades OC";
+            this.CantidadOC.Name = "CantidadOC";
+            this.CantidadOC.ReadOnly = true;
+            // 
+            // OrdenCompra
+            // 
+            this.OrdenCompra.HeaderText = "Orden Compra";
+            this.OrdenCompra.Name = "OrdenCompra";
+            this.OrdenCompra.ReadOnly = true;
+            // 
+            // OperacionProyecto
+            // 
+            this.OperacionProyecto.HeaderText = "Operacion";
+            this.OperacionProyecto.Name = "OperacionProyecto";
+            this.OperacionProyecto.ReadOnly = true;
+            this.OperacionProyecto.Width = 150;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.ReadOnly = true;
+            this.Observaciones.Width = 300;
             // 
             // comboBoxCodigoProyecto
             // 
@@ -451,7 +547,7 @@
             // comboBoxNombreEmpleado
             // 
             this.comboBoxNombreEmpleado.FormattingEnabled = true;
-            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 91);
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(211, 77);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreEmpleado.Sorted = true;
@@ -536,106 +632,27 @@
             this.timerBusquedaMaterial.Interval = 1000;
             this.timerBusquedaMaterial.Tick += new System.EventHandler(this.timerBusquedaMaterial_Tick);
             // 
-            // Codigo_material
+            // buttonExcel
             // 
-            this.Codigo_material.HeaderText = "Codigo Material";
-            this.Codigo_material.Name = "Codigo_material";
-            this.Codigo_material.ReadOnly = true;
-            // 
-            // Codigo_proveedor
-            // 
-            this.Codigo_proveedor.HeaderText = "Codigo Proveedor";
-            this.Codigo_proveedor.Name = "Codigo_proveedor";
-            this.Codigo_proveedor.ReadOnly = true;
-            // 
-            // Descripcion_dibujo
-            // 
-            this.Descripcion_dibujo.HeaderText = "Descripcion";
-            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
-            this.Descripcion_dibujo.ReadOnly = true;
-            this.Descripcion_dibujo.Width = 350;
-            // 
-            // NombreProveedor
-            // 
-            this.NombreProveedor.HeaderText = "Nombre Proveedor";
-            this.NombreProveedor.Name = "NombreProveedor";
-            this.NombreProveedor.ReadOnly = true;
-            this.NombreProveedor.Width = 200;
-            // 
-            // Cantidad_dibujos
-            // 
-            this.Cantidad_dibujos.HeaderText = "Cantidad";
-            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
-            this.Cantidad_dibujos.ReadOnly = true;
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empleado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.ReadOnly = true;
-            this.Empleado.Width = 250;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            // 
-            // Precio_Unitario
-            // 
-            this.Precio_Unitario.HeaderText = "Precio Unitario";
-            this.Precio_Unitario.Name = "Precio_Unitario";
-            this.Precio_Unitario.ReadOnly = true;
-            // 
-            // Total_Precio
-            // 
-            this.Total_Precio.HeaderText = "Total Precio";
-            this.Total_Precio.Name = "Total_Precio";
-            this.Total_Precio.ReadOnly = true;
-            // 
-            // Proyecto
-            // 
-            this.Proyecto.HeaderText = "Proyecto";
-            this.Proyecto.Name = "Proyecto";
-            this.Proyecto.ReadOnly = true;
-            // 
-            // ProyectoOC
-            // 
-            this.ProyectoOC.HeaderText = "Proyecto OC";
-            this.ProyectoOC.Name = "ProyectoOC";
-            this.ProyectoOC.ReadOnly = true;
-            // 
-            // CantidadOC
-            // 
-            this.CantidadOC.HeaderText = "Total Unidades OC";
-            this.CantidadOC.Name = "CantidadOC";
-            this.CantidadOC.ReadOnly = true;
-            // 
-            // OrdenCompra
-            // 
-            this.OrdenCompra.HeaderText = "Orden Compra";
-            this.OrdenCompra.Name = "OrdenCompra";
-            this.OrdenCompra.ReadOnly = true;
-            // 
-            // OperacionProyecto
-            // 
-            this.OperacionProyecto.HeaderText = "Operacion";
-            this.OperacionProyecto.Name = "OperacionProyecto";
-            this.OperacionProyecto.ReadOnly = true;
-            this.OperacionProyecto.Width = 150;
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.ReadOnly = true;
-            this.Observaciones.Width = 300;
+            this.buttonExcel.AutoSize = true;
+            this.buttonExcel.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExcel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExcel.Image")));
+            this.buttonExcel.Location = new System.Drawing.Point(1177, 275);
+            this.buttonExcel.Name = "buttonExcel";
+            this.buttonExcel.Size = new System.Drawing.Size(79, 74);
+            this.buttonExcel.TabIndex = 95;
+            this.buttonExcel.Text = "Excel";
+            this.buttonExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonExcel.UseVisualStyleBackColor = true;
+            this.buttonExcel.Visible = false;
+            this.buttonExcel.Click += new System.EventHandler(this.buttonExcel_Click);
             // 
             // Forma_Reporte_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.Controls.Add(this.buttonExcel);
             this.Controls.Add(this.textBoxDescripcionMaterial);
             this.Controls.Add(this.labelMaterialDescripcion);
             this.Controls.Add(this.textBoxCodigoProveedor);
@@ -741,5 +758,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdenCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn OperacionProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
+        private System.Windows.Forms.Button buttonExcel;
     }
 }
