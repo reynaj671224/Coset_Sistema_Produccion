@@ -146,30 +146,30 @@ namespace Coset_Sistema_Produccion
             if (Inicia_Excel())
             {
                 oXL.Visible = true;
-                Copiar_template_a_maximos_minimos();
-                if (Abrir_Archivo_Excel())
+                if (Copiar_template_a_maximos_minimos())
                 {
-                    
-                    try
+                    if (Abrir_Archivo_Excel())
                     {
-                        
-                       
-                        oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
-                        Imprime_titiulos_excel();
 
-                        for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
+                        try
                         {
-                            for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
+                            oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
+                            Imprime_titiulos_excel();
+
+                            for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
                             {
-                                oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                                for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
+                                {
+                                    oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                                }
                             }
+                            oSheet.Cells.EntireColumn.AutoFit();
                         }
-                        oSheet.Cells.EntireColumn.AutoFit();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Probelmas para mostrar informacion en Excel", "Maximos-Minimos",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        catch
+                        {
+                            MessageBox.Show("Probelmas para mostrar informacion en Excel", "Maximos-Minimos",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
                 Guarda_archivo_excel();
@@ -185,7 +185,7 @@ namespace Coset_Sistema_Produccion
             }
             catch
             {
-                MessageBox.Show("Excel_tamplate.xlsx No existe en el Folder de aplicacion", "Maximos Minimos",
+                MessageBox.Show("Maximos_minimos.xlsx No existe en el Folder de aplicacion", "Maximos Minimos",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
@@ -219,15 +219,17 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void Copiar_template_a_maximos_minimos()
+        private bool Copiar_template_a_maximos_minimos()
         {
             try
             {
-                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", false);
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", true);
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
         }
 
