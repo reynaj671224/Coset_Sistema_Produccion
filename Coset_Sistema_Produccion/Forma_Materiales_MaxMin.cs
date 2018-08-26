@@ -132,11 +132,20 @@ namespace Coset_Sistema_Produccion
         private void buttonRegresarNoAgregar_Click(object sender, EventArgs e)
         {
             Materiales_disponibles_busqueda = null;
+            Cierra_archivo();
             Close_Excel();
             Termina_applicacion();
             Elimina_archivo_excel();
+            oXL = null;
+            oSheet = null;
+            oWB = null;
             this.Close();
             GC.Collect();
+        }
+
+        private void Cierra_archivo()
+        {
+            oWB.Close();
         }
 
         private void buttonExcel_Click(object sender, EventArgs e)
@@ -265,10 +274,15 @@ namespace Coset_Sistema_Produccion
 
         private void Termina_applicacion()
         {
-            if (oXL != null)
+            try
             {
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(oXL);
             }
+            catch
+            {
+
+            }
+
         }
         public bool Borrar_archivo_excel()
         {
@@ -284,18 +298,25 @@ namespace Coset_Sistema_Produccion
         }
         public void Guarda_archivo_excel()
         {
-            oWB.Save();
+            try
+            {
+                oWB.Save();
+            }
+            catch
+            {
+
+            }
         }
         private void Close_Excel()
         {
-            if (oXL!=null)
+            try
             {
                 oXL.Quit();
-                oXL = null;
-                oSheet = null;
-                oWB = null;
             }
-            
+            catch
+            {
+
+            }
         }
     }
 }
