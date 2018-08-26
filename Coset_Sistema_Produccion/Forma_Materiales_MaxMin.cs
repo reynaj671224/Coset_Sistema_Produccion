@@ -221,16 +221,13 @@ namespace Coset_Sistema_Produccion
 
         private bool Copiar_template_a_maximos_minimos()
         {
-            MessageBox.Show(appPath);
             try
             {
                 File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", false);
-                MessageBox.Show(@appPath + "\\Maximos_minimos.xlsx");
                 return true;
             }
-            catch (Exception ex)
+            catch 
             {
-                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -291,7 +288,6 @@ namespace Coset_Sistema_Produccion
         }
         private void Close_Excel()
         {
-            Elimina_archivo_excel();
             if (oXL!=null)
             {
                 oXL.Quit();
