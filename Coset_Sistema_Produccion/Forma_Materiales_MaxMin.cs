@@ -134,6 +134,7 @@ namespace Coset_Sistema_Produccion
             Materiales_disponibles_busqueda = null;
             Close_Excel();
             Termina_applicacion();
+            Elimina_archivo_excel();
             this.Close();
             GC.Collect();
         }
@@ -141,11 +142,11 @@ namespace Coset_Sistema_Produccion
         private void buttonExcel_Click(object sender, EventArgs e)
         {
             Desactiva_boton_excel();
-            Borrar_archivo_excel();
+            Elimina_archivo_excel();
             if (Inicia_Excel())
             {
                 oXL.Visible = true;
-                //Obterner_wokbook_activo();
+                Copiar_template_a_maximos_minimos();
                 if (Abrir_Archivo_Excel())
                 {
                     
@@ -164,7 +165,6 @@ namespace Coset_Sistema_Produccion
                             }
                         }
                         oSheet.Cells.EntireColumn.AutoFit();
-                        Guarda_archivo_excel();
                     }
                     catch
                     {
@@ -172,6 +172,7 @@ namespace Coset_Sistema_Produccion
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+                Guarda_archivo_excel();
             }
         }
 
@@ -179,7 +180,7 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                oWB = oXL.Workbooks.Open(appPath + "\\Excel_template.xlsx");
+                oWB = oXL.Workbooks.Open(appPath + "\\Maximos_minimos.xlsx");
                 return true;
             }
             catch
@@ -215,6 +216,30 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show("No Excel Instalado", "Maximox-Minimos",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
+            }
+        }
+
+        private void Copiar_template_a_maximos_minimos()
+        {
+            try
+            {
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Elimina_archivo_excel()
+        {
+            try
+            {
+                File.Delete(@appPath + "\\Maximos_minimos.xlsx");
+            }
+            catch
+            {
+
             }
         }
 
@@ -256,22 +281,13 @@ namespace Coset_Sistema_Produccion
                 return false;
             }
         }
-        public bool Guarda_archivo_excel()
+        public void Guarda_archivo_excel()
         {
-            try
-            {
-                oWB.SaveAs(appPath + "\\maximos-mininos.xlsx");
-                return true;
-            }
-            catch
-            {
-                MessageBox.Show("Probelmas Para Guardar Archivo");
-                return false;
-            }
+            oWB.Save();
         }
         private void Close_Excel()
         {
-            Borrar_archivo_excel();
+            Elimina_archivo_excel();
             if (oXL!=null)
             {
                 oXL.Quit();
