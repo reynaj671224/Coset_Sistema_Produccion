@@ -1129,7 +1129,7 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                if (oXL != null)
+                if (oXL == null)
                 {
                     oXL = new Excel.Application();
                 }
