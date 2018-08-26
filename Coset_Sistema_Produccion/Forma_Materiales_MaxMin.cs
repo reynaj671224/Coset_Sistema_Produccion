@@ -142,57 +142,51 @@ namespace Coset_Sistema_Produccion
         {
             Desactiva_boton_excel();
             Borrar_archivo_excel();
-            try
+            if (Inicia_Excel())
             {
-                oXL = new Excel.Application();
                 oXL.Visible = true;
-                oWB = oXL.ActiveWorkbook;
+                Obterner_wokbook_activo();
                 oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
-
-            }
-            catch
-            {
-                MessageBox.Show("configuracion");
-            }
-
-            try
-            {
                 Imprime_titiulos_excel();
-            }
-            catch
-            {
-                MessageBox.Show("titulos");
-            }
-            try
-            {
-                //Start Excel and get Application object.
 
-                for (int Row=0; Row<dataGridViewPartidasMaterialSeleccion.RowCount-1; Row++)
+                for (int Row = 0; Row < dataGridViewPartidasMaterialSeleccion.RowCount - 1; Row++)
                 {
                     for (int Column = 0; Column < dataGridViewPartidasMaterialSeleccion.ColumnCount; Column++)
                     {
-                        oSheet.Cells[Row+2, Column+1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
+                        oSheet.Cells[Row + 2, Column + 1] = dataGridViewPartidasMaterialSeleccion[Column, Row].Value.ToString();
                     }
                 }
 
-                
-                
-            }
-            catch
-            {
-                MessageBox.Show("datos");
-            }
+                oSheet.Cells.EntireColumn.AutoFit();
 
+                Guarda_archivo_excel();
+            }
+        }
+
+        private void Obterner_wokbook_activo()
+        {
             try
             {
-                oSheet.Cells.EntireColumn.AutoFit();
+                oWB = oXL.ActiveWorkbook;
             }
             catch
             {
-                MessageBox.Show("autofit");
-
+                oWB = oXL.Workbooks.Add();
             }
-                Guarda_archivo_excel();
+        }
+
+        public bool Inicia_Excel()
+        {
+            try
+            {
+                oXL = new Excel.Application();
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("No Excel Instalado");
+                return false;
+            }
         }
 
         private void Desactiva_boton_excel()
