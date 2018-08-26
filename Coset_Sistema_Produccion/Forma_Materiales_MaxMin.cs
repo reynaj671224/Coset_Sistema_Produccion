@@ -180,7 +180,7 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                oWB = oXL.Workbooks.Open(appPath + "\\Maximos_minimos.xlsx");
+                oWB = oXL.Workbooks.Open(@appPath + "\\Maximos_minimos.xlsx");
                 return true;
             }
             catch
@@ -221,9 +221,11 @@ namespace Coset_Sistema_Produccion
 
         private bool Copiar_template_a_maximos_minimos()
         {
+            MessageBox.Show(appPath);
             try
             {
-                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", true);
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + "\\Maximos_minimos.xlsx", false);
+                MessageBox.Show(@appPath + "\\Maximos_minimos.xlsx");
                 return true;
             }
             catch (Exception ex)
