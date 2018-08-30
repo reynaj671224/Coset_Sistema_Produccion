@@ -50,20 +50,18 @@ namespace Coset_Sistema_Produccion
                 {
                     try
                     {
-                        if (Convert.ToInt32(material.Cantidad) < ((Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Minimo)) / 2))
-                        {
-                            Material_requerido = Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Cantidad);
-                            if(Material_requerido < 0)
-                            {
-                                Material_requerido = 0;
-                            }
-                        }
 
+                        Material_requerido = Convert.ToInt32(material.Maximo) - Convert.ToInt32(material.Cantidad);
+                        if (Material_requerido < 0)
+                        {
+                            Material_requerido = 0;
+                        }
 
                         dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
                             material.Descripcion, material.Minimo, material.Maximo, material.Cantidad, Material_requerido.ToString(), material.Marca, material.Unidad_medida, material.foto);
+
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                         break;
@@ -74,6 +72,7 @@ namespace Coset_Sistema_Produccion
                     MessageBox.Show(material.error);
                     break;
                 }
+                Material_requerido = 0;
             }
             Activa_datagrid_materiales();
             
