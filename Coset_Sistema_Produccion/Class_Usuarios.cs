@@ -176,7 +176,10 @@ namespace Coset_Sistema_Produccion
                         tipo_empleado = mySqlDataReader["tipo_empleado"].ToString(),
                         codigo_empleado = mySqlDataReader["codigo_empleado"].ToString(),
                         nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
-                        Correo_electronico = mySqlDataReader["correo_electonico"].ToString()
+                        Correo_electronico = mySqlDataReader["correo_electonico"].ToString(),
+                        Numero_licencia = mySqlDataReader["numero_licencia"].ToString(),
+                        Fecha_vencimiento_licencia = mySqlDataReader["fecha_vencimiento_licencia"].ToString(),
+
                     });
                 }
             }
@@ -271,6 +274,8 @@ namespace Coset_Sistema_Produccion
         public string codigo_empleado = "";
         public string nombre_empleado = "";
         public string Correo_electronico = "";
+        public string Numero_licencia = "";
+        public string Fecha_vencimiento_licencia = "";
         public string error = "";
     }
 }

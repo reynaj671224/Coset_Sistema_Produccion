@@ -933,7 +933,18 @@ namespace Coset_Sistema_Produccion
             {
                 if (usario.error == "")
                 {
-                    comboBoxEmpleado.Items.Add(usario.nombre_empleado);
+                    try
+                    {
+
+                        if (Convert.ToDateTime(usario.Fecha_vencimiento_licencia) >= DateTime.Today)
+                        {
+                            comboBoxEmpleado.Items.Add(usario.nombre_empleado);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 else
                 {
@@ -1100,7 +1111,8 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_usuarios_disponibles_base_datos()
         {
-            Usuarios_disponibles = Class_Usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+            Usuarios_disponibles = Class_Usuarios.
+                Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void Limpia_datagridview_empleados()

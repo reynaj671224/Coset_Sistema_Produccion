@@ -44,13 +44,14 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_usuario()
         {
+            Operacio_usuarios = "Agregar";
             Desactiva_botones_operacion();
             Aparece_caja_codigo_empleado();
             Desaparece_combo_nombre_empleado();
             Activa_cajas_informacion();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
             Activa_boton_cancelar_operacio();
-            Operacio_usuarios = "Agregar";
+            
         }
 
         private void Aparece_caja_codigo_empleado()
@@ -127,8 +128,19 @@ namespace Coset_Sistema_Produccion
             Activa_caja_nombre_usuario();
             Activa_caja_clave_usuario();
             Activa_caja_correo_electronico();
+            Activa_caja_numero_licencia();
+            Activa_datapick_licencia_fecha();
         }
 
+        private void Activa_caja_numero_licencia()
+        {
+            textBoxNoLicencia.Enabled=true;
+        }
+
+        private void Deactiva_caja_numero_licencia()
+        {
+            textBoxNoLicencia.Enabled = false;
+        }
         private void Activa_caja_correo_electronico()
         {
             textBoxCorreoElectronico.Enabled = true;
@@ -166,7 +178,7 @@ namespace Coset_Sistema_Produccion
                 dateTimePickerEmpleado.Text !="" && textBoxPuestoempleado.Text !="" &&
                 textBoxCostosemana.Text!="" && textBoxCostohora.Text !="" &&
                 comboBoxTipoempleado.Text!="" && textBoxNombreususario.Text!="" &&
-                textBoxClaveusuario.Text!="")
+                textBoxClaveusuario.Text!=""  && textBoxNoLicencia.Text!="")
             {
                 timerAgregarUsuario.Enabled = false;
                 Activa_boton_guardar_base_de_datos();
@@ -200,6 +212,8 @@ namespace Coset_Sistema_Produccion
                     Desaparece_combo_nombre_empleado();
                     Activa_botones_operacion();
                     Aparece_caja_nombre_empleado();
+                    Desactiva_datapick_licencia_fecha();
+                    Deactiva_caja_numero_licencia();
                     Elimina_informacion_usuarios_disponibles();
                 }
             }
@@ -219,6 +233,8 @@ namespace Coset_Sistema_Produccion
                     Desaparece_combo_nombre_empleado();
                     Activa_botones_operacion();
                     Aparece_caja_nombre_empleado();
+                    Desactiva_datapick_licencia_fecha();
+                    Deactiva_caja_numero_licencia();
                     Elimina_informacion_usuarios_disponibles();
                 }
             }
@@ -392,6 +408,18 @@ namespace Coset_Sistema_Produccion
             Limpia_caja_nombre_usuario();
             Limpia_caja_clave_usuario();
             Limpia_caja_correo_electronico();
+            Limpia_caja_no_licencia();
+            Limpia_caja_licencia_fecha();
+        }
+
+        private void Limpia_caja_licencia_fecha()
+        {
+             dateTimePickerLiceciaFecha.Text= DateTime.Today.ToString();
+        }
+
+        private void Limpia_caja_no_licencia()
+        {
+            textBoxNoLicencia.Text = "";
         }
 
         private void Limpia_caja_correo_electronico()
@@ -475,6 +503,9 @@ namespace Coset_Sistema_Produccion
                 "',nombre_usuario_empleado='" + textBoxNombreususario.Text +
                 "',clave_usuario_empleado='" + textBoxClaveusuario.Text +
                 "',correo_electonico='" + textBoxCorreoElectronico.Text +
+                "',numero_licencia='" + textBoxNoLicencia.Text +
+                "',fecha_vencimiento_licencia='" + dateTimePickerLiceciaFecha.Text +
+                
                 "' where codigo_empleado='" + textBoxCodigoempleado.Text + "';";
         }
 
@@ -502,12 +533,14 @@ namespace Coset_Sistema_Produccion
         {
             return "INSERT INTO empleados(codigo_empleado, nombre_empleado,fecha_ingreso_empleado," +
                 "puesto,costo_semana_empleado,costo_hora_empleado,tipo_empleado," +
-                "nombre_usuario_empleado,clave_usuario_empleado,correo_electonico) " +
+                "nombre_usuario_empleado,clave_usuario_empleado,correo_electonico, numero_licencia," +
+                "fecha_vencimiento_licencia) " +
                 "VALUES('" + textBoxCodigoempleado.Text + "','" + textBoxNOmbreempleado.Text + "'," +
                 "'" + dateTimePickerEmpleado.Text + "','" + textBoxPuestoempleado.Text + "'" +
                 ",'" + textBoxCostosemana.Text + "','" + textBoxCostohora.Text + "'," +
                 "'" + comboBoxTipoempleado.Text + "','" + textBoxNombreususario.Text + "'," +
-                "'" + textBoxClaveusuario.Text + "','" + textBoxCorreoElectronico.Text + "');";
+                "'" + textBoxClaveusuario.Text + "','" + textBoxCorreoElectronico.Text + "'," +
+                "'" + textBoxNoLicencia.Text + "','" + dateTimePickerLiceciaFecha.Text + "');";
         }
 
         private bool Elimina_datos_usuario()
@@ -548,6 +581,7 @@ namespace Coset_Sistema_Produccion
 
         private void Modifica_usuario()
         {
+            Operacio_usuarios = "Modificar";
             Desactiva_botones_operacion();
             Desaparce_caja_nombre_empleado();
             Aparece_combo_nombre_emplaedo();
@@ -555,7 +589,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_usuarios_disponibles_base_datos();
             Rellenar_combo_nombre_empleado();
             Activa_boton_cancelar_operacio();
-            Operacio_usuarios = "Modificar";
+            
         }
 
         private void Obtener_datos_usuarios_disponibles_base_datos()
@@ -664,6 +698,8 @@ namespace Coset_Sistema_Produccion
             textBoxNombreususario.Text = Usuario_Modificaciones.nombre_usuario;
             textBoxClaveusuario.Text = Usuario_Modificaciones.clave_usuario;
             textBoxCorreoElectronico.Text = Usuario_Modificaciones.Correo_electronico;
+            textBoxNoLicencia.Text = Usuario_Modificaciones.Numero_licencia;
+            dateTimePickerLiceciaFecha.Text = Usuario_Modificaciones.Fecha_vencimiento_licencia;
 
         }
 
@@ -686,6 +722,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            Operacio_usuarios = "Cancelar";
             Limpia_cajas_captura_despues_de_agregar_empleado();
             Limpia_combo_codigo_empleadlo();
             Limpia_combo_nombre_empleado();
@@ -756,6 +793,7 @@ namespace Coset_Sistema_Produccion
 
         private void Eliminar_usuarios()
         {
+            Operacio_usuarios = "Eliminar";
             Desactiva_botones_operacion();
             Desaparce_caja_nombre_empleado();
             Aparece_combo_nombre_emplaedo();
@@ -764,7 +802,7 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_nombre_empleado();
             Activa_boton_cancelar_operacio();
             Inicia_timer_eliminar_usuario();
-            Operacio_usuarios = "Eliminar";
+            
         }
 
         private void Inicia_timer_eliminar_usuario()
@@ -793,6 +831,7 @@ namespace Coset_Sistema_Produccion
 
         private void Visualiza_empleado()
         {
+            Operacio_usuarios = "Visualizar";
             Desactiva_botones_operacion();
             Desaparce_caja_nombre_empleado();
             Activa_combo_nombre_empleado();
@@ -800,7 +839,6 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_usuarios_disponibles_base_datos();
             Rellenar_combo_nombre_empleado();
             Activa_boton_cancelar_operacio();
-            Operacio_usuarios = "Visualizar";
         }
 
         private void Activa_combo_nombre_empleado()
@@ -852,6 +890,16 @@ namespace Coset_Sistema_Produccion
                 configura_forma_eliminar();
             else if (Operacio_usuarios == "Visualizar")
                 configura_forma_visualizar();
+        }
+
+        private void Activa_datapick_licencia_fecha()
+        {
+            dateTimePickerLiceciaFecha.Enabled = true;
+        }
+
+        private void Desactiva_datapick_licencia_fecha()
+        {
+            dateTimePickerLiceciaFecha.Enabled = false;
         }
 
     }
