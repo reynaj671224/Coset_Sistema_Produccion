@@ -480,6 +480,7 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
+            Operacio_orden_compra = "Visualizar_OC";
             limpia_partidas_ordenes_compra();
             Rellena_cajas_informacion_de_orden_compra();
             Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
@@ -488,7 +489,6 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_guardar_archivo_path();
             Activa_boton_visulizar_word_orden_compra();
             Activa_boton_guardar_archivo_localidad_path();
-
 
         }
 
@@ -619,13 +619,14 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_informacion_de_orden_compra()
         {
-            orden_compra_visualizar = ordenes_compra_disponibles.Find(orden_compra => orden_compra.Codigo.Contains(comboBoxCodigoOrdenCompra.SelectedItem.ToString()));
+            orden_compra_visualizar = ordenes_compra_disponibles.Find(orden_compra => orden_compra.Codigo.Contains(comboBoxCodigoOrdenCompra.Text));
 
             textBoxCotizacion.Text = orden_compra_visualizar.Cotizacion;
             dateTimePickerFechaActual.Text = orden_compra_visualizar.Fecha;
             comboBoxNombreProveedor.Text = orden_compra_visualizar.Proveedor;
             textBoxCotizado.Text = orden_compra_visualizar.Cotizado;
-            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxNombreProveedor.Text);
+            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(comboBoxNombreProveedor.Text);
+            Operacio_orden_compra = "Visualizar";
             textBoxRazonSocialProveedor.Text = Proveedor_seleccionado.RazonSocial;
             textBoxCorreoContacto.Text = orden_compra_visualizar.Correo_electronico;
             textBoxRequisitor.Text = orden_compra_visualizar.Realizado;
@@ -2268,10 +2269,10 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_informacio_proveedor()
         {
-            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(textBoxNombreProveedor.Text);
+            Proveedor_seleccionado = Class_proveedores.Adquiere_proveedor_disponibles_en_base_datos(comboBoxNombreProveedor.Text);
             Contacto_proveedor_seleccionado = Class_contactos_Proveedor.Adquiere_contacto_proveedor_disponibles_en_base_datos(textBoxCotizado.Text);
             Remplaza_texto_en_Documento("<nombre_provedor>",
-                    textBoxNombreProveedor.Text);
+                    comboBoxNombreProveedor.Text);
             Remplaza_texto_en_Documento("<dirección>",
                    Proveedor_seleccionado.Direccion);
             Remplaza_texto_en_Documento("<rfc>",
@@ -2411,27 +2412,26 @@ namespace Coset_Sistema_Produccion
             buttonWordPrevio.Enabled = true;
         }
 
-        private void comboBoxNombreProveedor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Obtener_requisiciones_sin_orden_compra_asiganda_por_proveedor();
-            //Limpia_datagridview_ordenes_compra();
-            //Limpia_combo_requisiciones_partidas_orden_compra();
-            //Rellena_combo_requisicion_partidas_orden_compra();
-            if (Operacio_orden_compra == "Visualizar")
-            {
-                limpia_combo_ordenes_compra();
-                Rellenar_combo_ordenes_compra();
-            }
-            else
-            {
-                Rellena_razon_social_proveedor();
-                Limpia_combo_cotizado();
-                Aparece_combo_cotizado();
-                Activa_combo_cotizado();
-                Obtener_contactos_disponibles_proveedor();
-                Rellena_combo_contactos_proveedor();
-            }
+        //private void comboBoxNombreProveedor_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (Operacio_orden_compra == "Visualizar_OC")
+        //    {
+        //        Rellena_razon_social_proveedor();
+        //        Operacio_orden_compra = "Visualizar";
+        //    }
+        //    else
+        //    {
+        //        Operacio_orden_compra = "Visualizar";
+        //        limpia_combo_ordenes_compra();
+        //        Rellenar_combo_ordenes_compra();
+        //    }
 
+        //}
+
+
+        private void Limpia_caja_cotizado()
+        {
+            textBoxCotizado.Text = "";
         }
 
         private void Rellena_correo_contacto_proveedor()
@@ -2493,7 +2493,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_razon_social_proveedor()
         {
-            Proveedor_seleccionado = Proveedores_disponibles.Find(proveedores => proveedores.Nombre.Contains(comboBoxNombreProveedor.SelectedItem.ToString()));
+            Proveedor_seleccionado = Proveedores_disponibles.Find(proveedores => proveedores.Nombre.Contains(comboBoxNombreProveedor.Text));
             textBoxRazonSocialProveedor.Text = Proveedor_seleccionado.RazonSocial;
         }
 
@@ -2711,7 +2711,7 @@ namespace Coset_Sistema_Produccion
                 configura_forma_modificar();
             else if (Operacio_orden_compra == "Eliminar")
                 configura_forma_eliminar();
-            else if (Operacio_orden_compra == "Visualizar")
+            else if (Operacio_orden_compra == "Visualizar" || Operacio_orden_compra == "Visualizar_OC")
                 configura_forma_visualizar();
             else if (Operacio_orden_compra == "Operaciones Patidas")
                 configura_forma_operaciones_partidas();
@@ -3184,6 +3184,21 @@ namespace Coset_Sistema_Produccion
             forma_Materiales.ShowDialog();
         }
 
-
+        private void comboBoxNombreProveedor_TextChanged(object sender, EventArgs e)
+        {
+            if (Operacio_orden_compra == "Visualizar_OC")
+            {
+                Rellena_razon_social_proveedor();
+                Operacio_orden_compra = "Visualizar";
+            }
+            else
+            {
+                Operacio_orden_compra = "Visualizar";
+                Limpia_cajas_captura_despues_de_agregar_orden_compra();
+                limpia_partidas_ordenes_compra();
+                limpia_combo_ordenes_compra();
+                Rellenar_combo_ordenes_compra();
+            }
+        }
     }
 }

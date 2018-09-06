@@ -505,12 +505,12 @@
             this.comboBoxNombreProveedor.Sorted = true;
             this.comboBoxNombreProveedor.TabIndex = 60;
             this.comboBoxNombreProveedor.Visible = false;
-            this.comboBoxNombreProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProveedor_SelectedIndexChanged);
+            this.comboBoxNombreProveedor.TextChanged += new System.EventHandler(this.comboBoxNombreProveedor_TextChanged);
             // 
             // comboBoxCotizado
             // 
             this.comboBoxCotizado.FormattingEnabled = true;
-            this.comboBoxCotizado.Location = new System.Drawing.Point(239, 218);
+            this.comboBoxCotizado.Location = new System.Drawing.Point(239, 219);
             this.comboBoxCotizado.Name = "comboBoxCotizado";
             this.comboBoxCotizado.Size = new System.Drawing.Size(246, 21);
             this.comboBoxCotizado.Sorted = true;

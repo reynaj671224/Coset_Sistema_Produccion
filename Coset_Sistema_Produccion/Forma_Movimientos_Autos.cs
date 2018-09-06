@@ -53,15 +53,22 @@ namespace Coset_Sistema_Produccion
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+            Habilita_combo_para_aceptar_buscar_empleado_en_ventana();
             TimePickerHora.Format = DateTimePickerFormat.Time;
             TimePickerHora.ShowUpDown = true;
             Genera_lineas_empleados_datagridview();
             deshabilita_datagridview_empleados();
-           
             Muestra_autos_usandode();
             
 
 
+        }
+
+        private void Habilita_combo_para_aceptar_buscar_empleado_en_ventana()
+        {
+            comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void Muestra_autos_usandode()
