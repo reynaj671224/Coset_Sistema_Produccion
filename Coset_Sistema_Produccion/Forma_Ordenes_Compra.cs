@@ -3184,20 +3184,30 @@ namespace Coset_Sistema_Produccion
             forma_Materiales.ShowDialog();
         }
 
-        private void comboBoxNombreProveedor_TextChanged(object sender, EventArgs e)
+
+        private void comboBoxNombreProveedor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Operacio_orden_compra == "Visualizar_OC")
             {
                 Rellena_razon_social_proveedor();
                 Operacio_orden_compra = "Visualizar";
             }
-            else
+            else if (Operacio_orden_compra == "Visualizar")
             {
                 Operacio_orden_compra = "Visualizar";
                 Limpia_cajas_captura_despues_de_agregar_orden_compra();
                 limpia_partidas_ordenes_compra();
                 limpia_combo_ordenes_compra();
                 Rellenar_combo_ordenes_compra();
+            }
+            else if(Operacio_orden_compra == "Agregar")
+            {
+                Rellena_razon_social_proveedor();
+                Limpia_combo_cotizado();
+                Aparece_combo_cotizado();
+                Activa_combo_cotizado();
+                Obtener_contactos_disponibles_proveedor();
+                Rellena_combo_contactos_proveedor();
             }
         }
     }

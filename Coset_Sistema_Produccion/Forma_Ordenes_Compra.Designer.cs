@@ -505,7 +505,7 @@
             this.comboBoxNombreProveedor.Sorted = true;
             this.comboBoxNombreProveedor.TabIndex = 60;
             this.comboBoxNombreProveedor.Visible = false;
-            this.comboBoxNombreProveedor.TextChanged += new System.EventHandler(this.comboBoxNombreProveedor_TextChanged);
+            this.comboBoxNombreProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProveedor_SelectedIndexChanged);
             // 
             // comboBoxCotizado
             // 
