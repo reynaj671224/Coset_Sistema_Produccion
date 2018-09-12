@@ -376,18 +376,23 @@ namespace Coset_Sistema_Produccion
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
             Inicia_timer_busqueda_dibujo();
-            //Secuencia_usuarios_produccion();
+            Secuencia_usuarios_produccion();
 
         }
 
         private void Secuencia_usuarios_produccion()
         {
-            Obtener_usuarios();
+            Obtener_usuarios_produccion();
             Limpia_combo_empleados_produccion();
             Muestra_combo_empleados_produccion();
             Activa_Combo_codigo_empleado();
             Rellenar_combo_nombre_proceso();
             
+        }
+
+        private void Obtener_usuarios_produccion()
+        {
+            Empleados_produccion_disponibles = Class_Usuarios.Adquiere_usuarios_produccion_disponibles_en_base_datos();
         }
 
         private void Muestra_combo_empleados_produccion()
@@ -415,10 +420,47 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Activa_caja_numero_dibujo();
-            Inicia_timer_busqueda_dibujo();
+            Limpia_datagridview_secuencia_produccion();
+            Limpia_datagridview_dibujos_produccion();
+            Aparece_datagrid_produccion_dibujos();
             Activa_boton_cancelar_operacio();
-            
+            Desactiva_caja_numero_dibujo();
+            obtener_dibujos_produccio_por_empleado_disponibles();
+            Asigna_valores_datagridview_dibujos_produccion();
+
+        }
+
+        private void Desactiva_caja_numero_dibujo()
+        {
+            textBoxNumeroDibujo.Enabled = false;
+        }
+
+        private void Activa_caja_numero_dibujo()
+        {
+            textBoxNumeroDibujo.Enabled = true;
+        }
+
+        private void Limpia_datagridview_dibujos_produccion()
+        {
+            dataGridViewProduccionDibujos.Rows.Clear();
+        }
+
+        private void Aparece_datagrid_produccion_dibujos()
+        {
+            dataGridViewProduccionDibujos.Visible = true;
+        }
+
+        private void Desaparece_datagrid_produccion_dibujos()
+        {
+            dataGridViewProduccionDibujos.Visible = false;
+        }
+
+        private void obtener_dibujos_produccio_por_empleado_disponibles()
+        {
+            Dibujos_produccion_busqueda.Empleado = comboBoxEmpleado.Text;
+            Dibujos_produccion_disponible = Class_Dibujos_Produccion.
+                Adquiere_dibujos_produccion_por_empleado_busqueda_en_base_datos(Dibujos_produccion_busqueda);
+
         }
 
         private void Activa_boton_visualizar_secuencia()
@@ -429,11 +471,6 @@ namespace Coset_Sistema_Produccion
         private void Inicia_timer_busqueda_dibujo()
         {
             timerInciarProcesoBusqueda.Enabled = true;
-        }
-
-        private void Activa_caja_numero_dibujo()
-        {
-            textBoxNumeroDibujo.Enabled = true;
         }
 
         private void configura_forma_visualizar()
@@ -745,6 +782,22 @@ namespace Coset_Sistema_Produccion
             }
         }
 
+        private void Asigna_valores_datagridview_dibujos_produccion()
+        {
+
+            foreach (Dibujo_produccion dibujo in Dibujos_produccion_disponible)
+            {
+
+                dataGridViewProduccionDibujos.Rows.Add(
+               dibujo.Numero_dibujo,
+               dibujo.Empleado,
+               dibujo.Proceso,
+               dibujo.Estado,
+               dibujo.Calidad,
+               dibujo.proyecto);
+            }
+        }
+
         private void Secuencia_proceso_terminado()
         {
             MessageBox.Show("Dibujo Terminado en Produccion", "Dibujos Produccion",
@@ -794,6 +847,10 @@ namespace Coset_Sistema_Produccion
             Limpia_seleccion_secuencia_operacion();
             Limpia_datagridview_secuencia_produccion();
             Inicia_timer_busqueda_dibujo();
+            Desaparece_datagrid_secuencia_produccion();
+            Desaparece_datagrid_produccion_dibujos();
+            Activa_caja_numero_dibujo();
+            Activa_Combo_codigo_empleado();
         }
 
         private void Limpia_seleccion_secuencia_operacion()
@@ -955,14 +1012,26 @@ namespace Coset_Sistema_Produccion
         private void buttonBuscarSecuenciaDibujo_Click(object sender, EventArgs e)
         {
             Limpia_datagridview_secuencia_produccion();
+            Aparece_datagrid_secuencia_produccion();
             Deabilita_boton_busqueda_dibujo();
             Deactiva_boton_visualizar();
+            Desactiva_Combo_codigo_empleado();
             Activa_boton_cancelar_operacio();
             if (obtener_dibujos_produccio_disponibles())
             {
                 Asigna_valores_forma_secuencia_produccion();
                 Rellena_datagridview_secuencias_produccion();
             }
+        }
+
+        private void Aparece_datagrid_secuencia_produccion()
+        {
+            dataGridViewSecuenciasProduccion.Visible = true;
+        }
+
+        private void Desaparece_datagrid_secuencia_produccion()
+        {
+            dataGridViewSecuenciasProduccion.Visible = false;
         }
 
         private void Deactiva_boton_visualizar()

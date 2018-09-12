@@ -161,7 +161,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxCodigoProveedor.Enabled = true;
             textBoxDescripcion.Enabled = true;
-            textBoxCantidad.Enabled = true;
+            //textBoxCantidad.Enabled = true;
             textBoxMinimo.Enabled = true;
             textBoxMaximo.Enabled = true;
             textBoxNombreFoto.Enabled = true;
@@ -835,7 +835,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoMaterial.Enabled = false;
             textBoxCodigoProveedor.Enabled = true;
             textBoxDescripcion.Enabled = true;
-            textBoxCantidad.Enabled = true;
+            //textBoxCantidad.Enabled = true;
             textBoxMinimo.Enabled = true;
             textBoxMaximo.Enabled = true;
             textBoxNombreFoto.Enabled = true;

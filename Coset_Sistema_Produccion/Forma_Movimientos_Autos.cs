@@ -54,6 +54,7 @@ namespace Coset_Sistema_Produccion
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
             Habilita_combo_para_aceptar_buscar_empleado_en_ventana();
+            Habilita_combo_para_aceptar_buscar_cliente_proveedores_en_ventana();
             TimePickerHora.Format = DateTimePickerFormat.Time;
             TimePickerHora.ShowUpDown = true;
             Genera_lineas_empleados_datagridview();
@@ -63,6 +64,15 @@ namespace Coset_Sistema_Produccion
 
 
         }
+
+        private void Habilita_combo_para_aceptar_buscar_cliente_proveedores_en_ventana()
+        {
+            comboBoxClienteProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxClienteProveedor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxClienteProveedor.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        
 
         private void Habilita_combo_para_aceptar_buscar_empleado_en_ventana()
         {

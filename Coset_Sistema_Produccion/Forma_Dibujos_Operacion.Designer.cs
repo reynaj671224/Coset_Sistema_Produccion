@@ -71,8 +71,16 @@
             this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
             this.textBoxUnidades = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.dataGridViewProduccionDibujos = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calidad_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyecto_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduccionDibujos)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -175,7 +183,6 @@
             this.labelEmpleado.Size = new System.Drawing.Size(61, 16);
             this.labelEmpleado.TabIndex = 6;
             this.labelEmpleado.Text = "Empleado";
-            this.labelEmpleado.Visible = false;
             // 
             // textBoxEmpleado
             // 
@@ -232,7 +239,6 @@
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(196, 21);
             this.comboBoxEmpleado.TabIndex = 25;
-            this.comboBoxEmpleado.Visible = false;
             this.comboBoxEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleado_SelectedIndexChanged);
             // 
             // timerActualizrempleado
@@ -360,6 +366,7 @@
             this.dataGridViewSecuenciasProduccion.Name = "dataGridViewSecuenciasProduccion";
             this.dataGridViewSecuenciasProduccion.Size = new System.Drawing.Size(994, 202);
             this.dataGridViewSecuenciasProduccion.TabIndex = 49;
+            this.dataGridViewSecuenciasProduccion.Visible = false;
             // 
             // Codigo_partida
             // 
@@ -487,11 +494,62 @@
             this.label6.Text = "Unidades";
             this.label6.Visible = false;
             // 
+            // dataGridViewProduccionDibujos
+            // 
+            this.dataGridViewProduccionDibujos.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewProduccionDibujos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProduccionDibujos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.Calidad_dibujo,
+            this.Proyecto_dibujo});
+            this.dataGridViewProduccionDibujos.Location = new System.Drawing.Point(135, 298);
+            this.dataGridViewProduccionDibujos.Name = "dataGridViewProduccionDibujos";
+            this.dataGridViewProduccionDibujos.Size = new System.Drawing.Size(699, 202);
+            this.dataGridViewProduccionDibujos.TabIndex = 57;
+            this.dataGridViewProduccionDibujos.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Numero Dibujo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Empleado";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Proceso";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Estado";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // Calidad_dibujo
+            // 
+            this.Calidad_dibujo.HeaderText = "Calidad Dibujo";
+            this.Calidad_dibujo.Name = "Calidad_dibujo";
+            // 
+            // Proyecto_dibujo
+            // 
+            this.Proyecto_dibujo.HeaderText = "Proyecto";
+            this.Proyecto_dibujo.Name = "Proyecto_dibujo";
+            // 
             // Forma_Dibujos_Operacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.dataGridViewProduccionDibujos);
             this.Controls.Add(this.textBoxUnidades);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonBuscarSecuenciaDibujo);
@@ -527,6 +585,7 @@
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduccionDibujos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -575,5 +634,12 @@
         private System.Windows.Forms.Button buttonBuscarSecuenciaDibujo;
         private System.Windows.Forms.TextBox textBoxUnidades;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dataGridViewProduccionDibujos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calidad_dibujo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proyecto_dibujo;
     }
 }
