@@ -80,10 +80,27 @@ namespace Coset_Sistema_Produccion
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
             Desactiva_columna_codigo_partidas_cotizaciones();
+            Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+        }
+
+        private void Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana()
+        {
+            comboBoxCodigoProyecto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoProyecto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoProyecto.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            comboBoxOC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxOC.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxOC.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
 
         }
 
-        private void buttonHome_Click(object sender, EventArgs e)
+            private void buttonHome_Click(object sender, EventArgs e)
         {
             Salida_materiales_disponibles = null;
             Usuarios_administrativos = null;
@@ -306,7 +323,7 @@ namespace Coset_Sistema_Produccion
                 Activa_combo_proyectos();
                 obtener_proyectos_base_datos_disponibles();
                 Rellenar_combo_proyectos();
-                obtener_usuarios_administrativos_compras_disponibles();
+                obtener_usuarios_todos_compras_disponibles();
                 Rellena_combo_empleado();
                 Activa_seleccion_fecha_actual();
                 Activa_textbox_cantidad_material();
@@ -360,7 +377,7 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_empleado();
             Aparece_combo_empleado();
             Activa_combo_empleado();
-            obtener_usuarios_administrativos_compras_disponibles();
+            obtener_usuarios_todos_compras_disponibles();
             Rellena_combo_empleado();
             Activa_seleccion_fecha_actual();
             Activa_textbox_codigo_proveedor();
@@ -406,9 +423,10 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void obtener_usuarios_administrativos_compras_disponibles()
+        private void obtener_usuarios_todos_compras_disponibles()
         {
-            Usuarios_administrativos = class_Usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+            Usuarios_administrativos = class_Usuarios.
+                Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void Limpia_combo_empleado()
@@ -1885,7 +1903,7 @@ namespace Coset_Sistema_Produccion
                 Limpia_combo_empleado();
                 Aparece_combo_empleado();
                 Activa_combo_empleado();
-                obtener_usuarios_administrativos_compras_disponibles();
+                obtener_usuarios_todos_compras_disponibles();
                 Rellena_combo_empleado();
                 Activa_seleccion_fecha_actual();
             }
