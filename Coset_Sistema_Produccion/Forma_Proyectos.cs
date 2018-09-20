@@ -81,8 +81,9 @@ namespace Coset_Sistema_Produccion
             comboBoxCodigoProyecto.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             comboBoxCodigoCotizacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            comboBoxCodigoCotizacion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoCotizacion.AutoCompleteMode = AutoCompleteMode.None;
             comboBoxCodigoCotizacion.AutoCompleteSource = AutoCompleteSource.ListItems;
+          
 
             comboBoxNombreCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxNombreCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -443,7 +444,7 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProyecto.Visible = true;
         }
 
-        private void comboBoxCodigoCliente_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Operacio_proyectos == "Modificar")
                 configura_forma_modificar();
@@ -2537,5 +2538,21 @@ namespace Coset_Sistema_Produccion
             textBoxUbicacionDibujos.Text = proyecto_visualizar.Ubliacion_dibujos;
             textBoxCodigoCotizacion.Text = proyecto_visualizar.Codigo_cotizacion;
         }
+
+        //private void comboBoxCodigoProyecto_TextChanged(object sender, EventArgs e)
+        //{
+        //    AutoCompleteStringCollection ListaDeValores = new AutoCompleteStringCollection();
+        //    foreach(string item in  comboBoxCodigoProyecto.Items)
+        //    {
+        //        if (item.Contains(comboBoxCodigoProyecto.Text))
+        //        {
+        //            ListaDeValores.Add(item);
+        //        }
+        //    }
+
+        //    comboBoxCodigoProyecto.AutoCompleteCustomSource = ListaDeValores;
+        //}
+
+        
     }
 }

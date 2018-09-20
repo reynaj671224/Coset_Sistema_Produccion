@@ -34,6 +34,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -72,6 +73,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -110,6 +112,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -163,6 +166,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -201,6 +205,8 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
+                        
 
                     });
                 }
@@ -326,6 +332,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -365,6 +372,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
                     });
                 }
             }
@@ -402,6 +410,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -440,6 +449,7 @@ namespace Coset_Sistema_Produccion
                         foto = mySqlDataReader["material_foto"].ToString(),
                         precio = mySqlDataReader["material_precio"].ToString(),
                         divisa = mySqlDataReader["material_divisa"].ToString(),
+                        Generico = mySqlDataReader["material_generico"].ToString(),
 
                     });
                 }
@@ -541,13 +551,13 @@ namespace Coset_Sistema_Produccion
         {
             return "INSERT INTO materiales(codigo_material, codigo_proveedor,material_descripcion," +
                     "material_unidad_medida,material_marca,material_ubicacion,material_cantidad,material_maximo,material_minimo," +
-                    "material_foto,material_precio,material_divisa) " +
+                    "material_foto,material_precio,material_divisa,material_generico) " +
                     "VALUES('" + material.Codigo + "','" + material.Codigo_proveedor + "','" +
                     material.Descripcion + "','" + material.Unidad_medida + "','" + material.Marca + "','" +
                     material.Ubicacion + "','" + material.Cantidad + "','" + material.Maximo + "','" +
-                    material.Minimo + "','" + material.foto + "','" + material.precio + "','" + material.divisa + "');";
-        }
-
+                    material.Minimo + "','" + material.foto + "','" + material.precio + "','" 
+                    + material.divisa + "','" + material.Generico + "');";
+        } 
         private string Commando_leer_Mysql_busqueda_material(Material material)
         {
 
@@ -666,6 +676,7 @@ namespace Coset_Sistema_Produccion
               "',material_foto='" + Actualiza_material.foto +
               "',material_precio='" + Actualiza_material.precio +
               "',material_divisa='" + Actualiza_material.divisa +
+              "',material_generico='" + Actualiza_material.Generico +
               "' where codigo_material='" + Actualiza_material.Codigo + "';";
         }
     }
@@ -683,6 +694,7 @@ namespace Coset_Sistema_Produccion
         public string foto = "";
         public string precio = "";
         public string divisa = "";
+        public string Generico = "";
         public string error = "";
         
 

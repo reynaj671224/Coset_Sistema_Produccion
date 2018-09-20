@@ -517,17 +517,42 @@ namespace Coset_Sistema_Produccion
                 {
                     try
                     {
-                        dataGridViewPartidasOrdenCompra.Rows.Add(
-                            partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(), 
-                            partidas_ordenes_compra_disponibles[partidas].Partida,
-                            partidas_ordenes_compra_disponibles[partidas].Cantidad, 
-                            partidas_ordenes_compra_disponibles[partidas].Material,  
-                            partidas_ordenes_compra_disponibles[partidas].Parte,
-                            partidas_ordenes_compra_disponibles[partidas].Descripcion,
-                            partidas_ordenes_compra_disponibles[partidas].Unidad_medida, 
-                            partidas_ordenes_compra_disponibles[partidas].Proyecto, 
-                            partidas_ordenes_compra_disponibles[partidas].precio_unitario, 
-                            partidas_ordenes_compra_disponibles[partidas].Total);
+                        
+                        Visualizar_material.Codigo = partidas_ordenes_compra_disponibles[partidas].Material;
+                        Materiales_disponibles_busqueda = class_materiales.
+                            Adquiere_materiales_codigo_material_en_base_datos(Visualizar_material);
+
+                        if (Materiales_disponibles_busqueda[0].Generico == "1")
+                        {
+                            dataGridViewPartidasOrdenCompra.Rows.Add(
+                                partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(),
+                                partidas_ordenes_compra_disponibles[partidas].Partida,
+                                partidas_ordenes_compra_disponibles[partidas].Cantidad,
+                                partidas_ordenes_compra_disponibles[partidas].Material,
+                                partidas_ordenes_compra_disponibles[partidas].Parte,
+                                partidas_ordenes_compra_disponibles[partidas].Descripcion,
+                                partidas_ordenes_compra_disponibles[partidas].Unidad_medida,
+                                partidas_ordenes_compra_disponibles[partidas].Proyecto,
+                                partidas_ordenes_compra_disponibles[partidas].precio_unitario,
+                                partidas_ordenes_compra_disponibles[partidas].Total);
+                        }
+                        else
+                        {
+                            dataGridViewPartidasOrdenCompra.Rows.Add(
+                                partidas_ordenes_compra_disponibles[partidas].Codigo.ToString(),
+                                partidas_ordenes_compra_disponibles[partidas].Partida,
+                                partidas_ordenes_compra_disponibles[partidas].Cantidad,
+                                partidas_ordenes_compra_disponibles[partidas].Material,
+                                Materiales_disponibles_busqueda[0].Codigo_proveedor,
+                                //partidas_ordenes_compra_disponibles[partidas].Parte,
+                                //partidas_ordenes_compra_disponibles[partidas].Descripcion,
+                                Materiales_disponibles_busqueda[0].Descripcion,
+                                partidas_ordenes_compra_disponibles[partidas].Unidad_medida,
+                                partidas_ordenes_compra_disponibles[partidas].Proyecto,
+                                partidas_ordenes_compra_disponibles[partidas].precio_unitario,
+                                partidas_ordenes_compra_disponibles[partidas].Total);
+                        }
+
                         ///*Rellena combo requisiciones partidas ordenes compra*/
                         //DataGridViewComboBoxCell combo_codigo_requisicion = 
                         //    (DataGridViewComboBoxCell)dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[(int)Campos_orden_compra.requisicion];

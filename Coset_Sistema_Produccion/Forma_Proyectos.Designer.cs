@@ -361,7 +361,7 @@
             this.comboBoxCodigoProyecto.Sorted = true;
             this.comboBoxCodigoProyecto.TabIndex = 49;
             this.comboBoxCodigoProyecto.Visible = false;
-            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoCliente_SelectedIndexChanged);
+            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoProyecto_SelectedIndexChanged);
             // 
             // timerModificarClientes
             // 

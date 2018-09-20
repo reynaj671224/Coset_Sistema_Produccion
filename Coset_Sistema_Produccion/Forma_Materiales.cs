@@ -25,6 +25,7 @@ namespace Coset_Sistema_Produccion
         public Material Visualizar_material = new Material();
         public Material Modificar_material = new Material();
         public List<Material> Materiales_disponibles_busqueda = new List<Material>();
+        public bool Grupo_genericos_cambio = false;
         public Forma_Materiales()
         {
             InitializeComponent();
@@ -55,6 +56,7 @@ namespace Coset_Sistema_Produccion
             if (Asigna_codigo_proceso_foilio_disponible())
             {
                 //Asigna_folio_material_temporal_en_uso();
+                Operacio_materiales = "Agregar";
                 Desactiva_botones_operacion();
                 Aparece_caja_codigo_proveedor();
                 Desaparece_combo_codigo_material();
@@ -62,7 +64,9 @@ namespace Coset_Sistema_Produccion
                 Rellena_cajas_busqueda_interrogacion_agregar();
                 Inicia_timer_para_asegurar_informacion_busqueda_agregar();
                 Activa_boton_cancelar_operacio();
-                Operacio_materiales = "Agregar";
+                Activar_grupo_genericos();
+                Activar_grupo_modeda();
+                
             }
             else
             {
@@ -218,6 +222,8 @@ namespace Coset_Sistema_Produccion
                     Desaparece_foto_material();
                     Asigna_nuevo_folio_material();
                     Elimina_informacion_materiales_disponibles();
+                    Desactivar_grupo_genericos();
+                    Desactivar_grupo_modeda();
                 }
             }
      
@@ -252,6 +258,8 @@ namespace Coset_Sistema_Produccion
                     Activa_botones_operacion();
                     Desaparece_foto_material();
                     Elimina_informacion_materiales_disponibles();
+                    Desactivar_grupo_modeda();
+                    Desactivar_grupo_genericos();
                 }
             }
         }
@@ -469,6 +477,11 @@ namespace Coset_Sistema_Produccion
             else if (radioButtonPesos.Checked)
                 Modificar_material.divisa = "Pesos";
 
+            if (radioButtonGenericoMaterial.Checked)
+                Modificar_material.Generico = "1";
+            else if (radioButtonNoGenericoMaterial.Checked)
+                Modificar_material.Generico = "0";
+
         }
 
         private bool Guarda_datos_agregar_Material()
@@ -508,6 +521,12 @@ namespace Coset_Sistema_Produccion
                 Agregar_material.divisa = "Dolares";
             else if (radioButtonPesos.Checked)
                 Agregar_material.divisa = "Pesos";
+
+            if (radioButtonGenericoMaterial.Checked)
+                Agregar_material.Generico = "1";
+            else if(radioButtonNoGenericoMaterial.Checked)
+                Agregar_material.Generico = "0";
+
 
             respuesta = class_materiales.Inserta_nuevo_material_base_datos(Agregar_material);
             if (respuesta == "NO errores")
@@ -565,6 +584,7 @@ namespace Coset_Sistema_Produccion
 
         private void Modifica_material()
         {
+            Operacio_materiales = "Modificar";
             Desactiva_botones_operacion();
             //Aparece_boton_busqueda_base_datos();
             Activa_boton_busqueda_base_datos();
@@ -572,7 +592,9 @@ namespace Coset_Sistema_Produccion
             Rellena_cajas_busqueda_interrogacion();
             Activa_boton_cancelar_operacio();
             Inicia_timer_para_asegurar_informacion_busqueda_agregar();
-            Operacio_materiales = "Modificar";
+            Activar_grupo_genericos();
+            Activar_grupo_modeda();
+           
         }
 
 
@@ -677,6 +699,8 @@ namespace Coset_Sistema_Produccion
             Desaparece_foto_material();
             pinta_blanco_cajas_busqueda();
             Desaparece_boton_busqueda_base_datos();
+            Desactivar_grupo_genericos();
+            Desactivar_grupo_modeda();
         }
 
         private void pinta_blanco_cajas_busqueda()
@@ -715,7 +739,8 @@ namespace Coset_Sistema_Produccion
                     Desactiva_cajas_captura_busqueda_material();
                     Rellena_cajas_informacion_despues_busqueda(Materiales_disponibles_busqueda[0]);
                     Muestra_foto_material();
-                    
+                    pinta_blanco_cajas_busqueda();
+
                 }
                 else if(Operacio_materiales == "Modificar")
                 {
@@ -895,6 +920,11 @@ namespace Coset_Sistema_Produccion
                 radioButtonDolares.Select();
             else if (material_busqueda.divisa == "Pesos")
                 radioButtonPesos.Select();
+
+            if (material_busqueda.Generico == "1")
+                radioButtonGenericoMaterial.Select();
+            else if(material_busqueda.Generico == "0")
+                radioButtonNoGenericoMaterial.Select();
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
@@ -952,8 +982,31 @@ namespace Coset_Sistema_Produccion
             Rellena_cajas_busqueda_interrogacion();
             Activa_boton_cancelar_operacio();
             Inicia_timer_para_asegurar_informacion_busqueda_agregar();
+            Activar_grupo_modeda();
+            Activar_grupo_genericos();
             Operacio_materiales = "Visualizar";
         }
+
+        private void Activar_grupo_genericos()
+        {
+            groupBoxGenericos.Enabled = true;
+        }
+
+        private void Desactivar_grupo_genericos()
+        {
+            groupBoxGenericos.Enabled = false;
+        }
+
+        private void Activar_grupo_modeda()
+        {
+            groupBoxModeda.Enabled = true;
+        }
+
+        private void Desactivar_grupo_modeda()
+        {
+            groupBoxModeda.Enabled = false;
+        }
+
 
         private void Cambia_Color_aqua_fondo_cajas_busqueda()
         {
@@ -1142,6 +1195,40 @@ namespace Coset_Sistema_Produccion
 
         private void timerEliminaempleado_Tick(object sender, EventArgs e)
         {
+
+        }
+
+       
+
+        private void radioButtonGenericoMaterial_Click(object sender, EventArgs e)
+        {
+            //if (radioButtonGenericoMaterial.Checked)
+            //    //radioButtonGenericoMaterial.Checked = false;
+            //else
+            //    //radioButtonGenericoMaterial.Select();
+        }
+
+        private void radioButtonGenericoMaterial_Checked(object sender, EventArgs e)
+        {
+            if (Grupo_genericos_cambio == false)
+            {
+                if (radioButtonGenericoMaterial.Checked)
+                {
+                    Grupo_genericos_cambio = true;
+                    radioButtonGenericoMaterial.Checked = false;
+                    
+                }
+                else
+                {
+                    Grupo_genericos_cambio = true;
+                    radioButtonGenericoMaterial.Select();
+                   
+                }
+            }
+            else
+            {
+                Grupo_genericos_cambio = false;
+            }
 
         }
     }

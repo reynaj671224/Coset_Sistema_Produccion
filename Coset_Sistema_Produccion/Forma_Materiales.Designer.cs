@@ -66,12 +66,16 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBoxPrecio = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxModeda = new System.Windows.Forms.GroupBox();
             this.radioButtonDolares = new System.Windows.Forms.RadioButton();
             this.radioButtonPesos = new System.Windows.Forms.RadioButton();
+            this.groupBoxGenericos = new System.Windows.Forms.GroupBox();
+            this.radioButtonNoGenericoMaterial = new System.Windows.Forms.RadioButton();
+            this.radioButtonGenericoMaterial = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxModeda.SuspendLayout();
+            this.groupBoxGenericos.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -80,7 +84,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(782, 593);
+            this.pictureBox1.Size = new System.Drawing.Size(782, 645);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -135,7 +139,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(668, 507);
+            this.buttonHome.Location = new System.Drawing.Point(668, 537);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
@@ -149,7 +153,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(668, 347);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(668, 377);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 4;
@@ -175,7 +179,7 @@
             this.textBoxCodigoMaterial.Enabled = false;
             this.textBoxCodigoMaterial.Location = new System.Drawing.Point(173, 110);
             this.textBoxCodigoMaterial.Name = "textBoxCodigoMaterial";
-            this.textBoxCodigoMaterial.Size = new System.Drawing.Size(135, 20);
+            this.textBoxCodigoMaterial.Size = new System.Drawing.Size(149, 20);
             this.textBoxCodigoMaterial.TabIndex = 7;
             this.textBoxCodigoMaterial.TextChanged += new System.EventHandler(this.textBoxCodigoMaterial_TextChanged);
             // 
@@ -184,7 +188,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(41, 141);
+            this.label2.Location = new System.Drawing.Point(43, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 16);
             this.label2.TabIndex = 8;
@@ -193,9 +197,9 @@
             // textBoxCodigoProveedor
             // 
             this.textBoxCodigoProveedor.Enabled = false;
-            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(173, 139);
+            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(172, 139);
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
-            this.textBoxCodigoProveedor.Size = new System.Drawing.Size(135, 20);
+            this.textBoxCodigoProveedor.Size = new System.Drawing.Size(149, 20);
             this.textBoxCodigoProveedor.TabIndex = 9;
             this.textBoxCodigoProveedor.TextChanged += new System.EventHandler(this.textBoxCodigoProveedor_TextChanged);
             // 
@@ -204,7 +208,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(668, 335);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(668, 361);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 20;
@@ -224,7 +228,7 @@
             this.comboBoxCodigoMaterial.FormattingEnabled = true;
             this.comboBoxCodigoMaterial.Location = new System.Drawing.Point(172, 108);
             this.comboBoxCodigoMaterial.Name = "comboBoxCodigoMaterial";
-            this.comboBoxCodigoMaterial.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxCodigoMaterial.Size = new System.Drawing.Size(150, 21);
             this.comboBoxCodigoMaterial.TabIndex = 25;
             this.comboBoxCodigoMaterial.Visible = false;
             // 
@@ -238,7 +242,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(668, 427);
+            this.buttonCancelar.Location = new System.Drawing.Point(668, 457);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 26;
@@ -270,9 +274,9 @@
             // textBoxDescripcion
             // 
             this.textBoxDescripcion.Enabled = false;
-            this.textBoxDescripcion.Location = new System.Drawing.Point(175, 168);
+            this.textBoxDescripcion.Location = new System.Drawing.Point(172, 168);
             this.textBoxDescripcion.Name = "textBoxDescripcion";
-            this.textBoxDescripcion.Size = new System.Drawing.Size(430, 20);
+            this.textBoxDescripcion.Size = new System.Drawing.Size(446, 20);
             this.textBoxDescripcion.TabIndex = 29;
             this.textBoxDescripcion.TextChanged += new System.EventHandler(this.textBoxDescripcion_TextChanged);
             // 
@@ -290,7 +294,7 @@
             // textBoxUnidadMedida
             // 
             this.textBoxUnidadMedida.Enabled = false;
-            this.textBoxUnidadMedida.Location = new System.Drawing.Point(445, 112);
+            this.textBoxUnidadMedida.Location = new System.Drawing.Point(458, 116);
             this.textBoxUnidadMedida.Name = "textBoxUnidadMedida";
             this.textBoxUnidadMedida.Size = new System.Drawing.Size(160, 20);
             this.textBoxUnidadMedida.TabIndex = 31;
@@ -300,7 +304,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(328, 112);
+            this.label4.Location = new System.Drawing.Point(344, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(108, 16);
             this.label4.TabIndex = 30;
@@ -309,7 +313,7 @@
             // textBoxCantidad
             // 
             this.textBoxCantidad.Enabled = false;
-            this.textBoxCantidad.Location = new System.Drawing.Point(445, 143);
+            this.textBoxCantidad.Location = new System.Drawing.Point(458, 142);
             this.textBoxCantidad.Name = "textBoxCantidad";
             this.textBoxCantidad.Size = new System.Drawing.Size(160, 20);
             this.textBoxCantidad.TabIndex = 33;
@@ -319,7 +323,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
-            this.label5.Location = new System.Drawing.Point(328, 141);
+            this.label5.Location = new System.Drawing.Point(344, 141);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 16);
             this.label5.TabIndex = 32;
@@ -328,9 +332,9 @@
             // textBoxMinimo
             // 
             this.textBoxMinimo.Enabled = false;
-            this.textBoxMinimo.Location = new System.Drawing.Point(175, 197);
+            this.textBoxMinimo.Location = new System.Drawing.Point(172, 197);
             this.textBoxMinimo.Name = "textBoxMinimo";
-            this.textBoxMinimo.Size = new System.Drawing.Size(135, 20);
+            this.textBoxMinimo.Size = new System.Drawing.Size(149, 20);
             this.textBoxMinimo.TabIndex = 35;
             // 
             // label6
@@ -347,9 +351,9 @@
             // textBoxMaximo
             // 
             this.textBoxMaximo.Enabled = false;
-            this.textBoxMaximo.Location = new System.Drawing.Point(175, 226);
+            this.textBoxMaximo.Location = new System.Drawing.Point(172, 226);
             this.textBoxMaximo.Name = "textBoxMaximo";
-            this.textBoxMaximo.Size = new System.Drawing.Size(135, 20);
+            this.textBoxMaximo.Size = new System.Drawing.Size(150, 20);
             this.textBoxMaximo.TabIndex = 37;
             // 
             // label7
@@ -366,9 +370,9 @@
             // textBoxNombreFoto
             // 
             this.textBoxNombreFoto.Enabled = false;
-            this.textBoxNombreFoto.Location = new System.Drawing.Point(172, 287);
+            this.textBoxNombreFoto.Location = new System.Drawing.Point(172, 285);
             this.textBoxNombreFoto.Name = "textBoxNombreFoto";
-            this.textBoxNombreFoto.Size = new System.Drawing.Size(160, 20);
+            this.textBoxNombreFoto.Size = new System.Drawing.Size(150, 20);
             this.textBoxNombreFoto.TabIndex = 39;
             this.textBoxNombreFoto.Click += new System.EventHandler(this.textBoxNombreFoto_Click);
             // 
@@ -377,7 +381,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Image = ((System.Drawing.Image)(resources.GetObject("label8.Image")));
-            this.label8.Location = new System.Drawing.Point(39, 287);
+            this.label8.Location = new System.Drawing.Point(43, 287);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 16);
             this.label8.TabIndex = 38;
@@ -387,7 +391,7 @@
             // 
             this.pictureBoxMaterial.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxMaterial.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMaterial.Image")));
-            this.pictureBoxMaterial.Location = new System.Drawing.Point(172, 359);
+            this.pictureBoxMaterial.Location = new System.Drawing.Point(173, 411);
             this.pictureBoxMaterial.Name = "pictureBoxMaterial";
             this.pictureBoxMaterial.Size = new System.Drawing.Size(379, 222);
             this.pictureBoxMaterial.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -398,7 +402,7 @@
             // textBoxMarca
             // 
             this.textBoxMarca.Enabled = false;
-            this.textBoxMarca.Location = new System.Drawing.Point(445, 202);
+            this.textBoxMarca.Location = new System.Drawing.Point(458, 202);
             this.textBoxMarca.Name = "textBoxMarca";
             this.textBoxMarca.Size = new System.Drawing.Size(160, 20);
             this.textBoxMarca.TabIndex = 42;
@@ -409,7 +413,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Image = ((System.Drawing.Image)(resources.GetObject("label9.Image")));
-            this.label9.Location = new System.Drawing.Point(328, 199);
+            this.label9.Location = new System.Drawing.Point(344, 206);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 16);
             this.label9.TabIndex = 41;
@@ -418,9 +422,9 @@
             // textBoxUbicacion
             // 
             this.textBoxUbicacion.Enabled = false;
-            this.textBoxUbicacion.Location = new System.Drawing.Point(175, 255);
+            this.textBoxUbicacion.Location = new System.Drawing.Point(172, 255);
             this.textBoxUbicacion.Name = "textBoxUbicacion";
-            this.textBoxUbicacion.Size = new System.Drawing.Size(135, 20);
+            this.textBoxUbicacion.Size = new System.Drawing.Size(150, 20);
             this.textBoxUbicacion.TabIndex = 44;
             // 
             // label10
@@ -439,7 +443,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
-            this.label11.Location = new System.Drawing.Point(328, 233);
+            this.label11.Location = new System.Drawing.Point(344, 228);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 16);
             this.label11.TabIndex = 45;
@@ -448,25 +452,26 @@
             // textBoxPrecio
             // 
             this.textBoxPrecio.Enabled = false;
-            this.textBoxPrecio.Location = new System.Drawing.Point(445, 229);
+            this.textBoxPrecio.Location = new System.Drawing.Point(458, 228);
             this.textBoxPrecio.Name = "textBoxPrecio";
             this.textBoxPrecio.Size = new System.Drawing.Size(160, 20);
             this.textBoxPrecio.TabIndex = 46;
             // 
-            // groupBox1
+            // groupBoxModeda
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
-            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox1.Controls.Add(this.radioButtonDolares);
-            this.groupBox1.Controls.Add(this.radioButtonPesos);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox1.Location = new System.Drawing.Point(445, 255);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(160, 65);
-            this.groupBox1.TabIndex = 71;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tipo Moneda";
+            this.groupBoxModeda.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBoxModeda.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBoxModeda.BackgroundImage")));
+            this.groupBoxModeda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBoxModeda.Controls.Add(this.radioButtonDolares);
+            this.groupBoxModeda.Controls.Add(this.radioButtonPesos);
+            this.groupBoxModeda.Enabled = false;
+            this.groupBoxModeda.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxModeda.Location = new System.Drawing.Point(460, 255);
+            this.groupBoxModeda.Name = "groupBoxModeda";
+            this.groupBoxModeda.Size = new System.Drawing.Size(160, 65);
+            this.groupBoxModeda.TabIndex = 71;
+            this.groupBoxModeda.TabStop = false;
+            this.groupBoxModeda.Text = "Tipo Moneda";
             // 
             // radioButtonDolares
             // 
@@ -498,12 +503,59 @@
             this.radioButtonPesos.Text = "Pesos";
             this.radioButtonPesos.UseVisualStyleBackColor = false;
             // 
+            // groupBoxGenericos
+            // 
+            this.groupBoxGenericos.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBoxGenericos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBoxGenericos.BackgroundImage")));
+            this.groupBoxGenericos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBoxGenericos.Controls.Add(this.radioButtonNoGenericoMaterial);
+            this.groupBoxGenericos.Controls.Add(this.radioButtonGenericoMaterial);
+            this.groupBoxGenericos.Enabled = false;
+            this.groupBoxGenericos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxGenericos.Location = new System.Drawing.Point(460, 330);
+            this.groupBoxGenericos.Name = "groupBoxGenericos";
+            this.groupBoxGenericos.Size = new System.Drawing.Size(160, 65);
+            this.groupBoxGenericos.TabIndex = 72;
+            this.groupBoxGenericos.TabStop = false;
+            this.groupBoxGenericos.Text = "Material Generico";
+            // 
+            // radioButtonNoGenericoMaterial
+            // 
+            this.radioButtonNoGenericoMaterial.AutoSize = true;
+            this.radioButtonNoGenericoMaterial.BackColor = System.Drawing.SystemColors.Highlight;
+            this.radioButtonNoGenericoMaterial.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("radioButtonNoGenericoMaterial.BackgroundImage")));
+            this.radioButtonNoGenericoMaterial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.radioButtonNoGenericoMaterial.Checked = true;
+            this.radioButtonNoGenericoMaterial.ForeColor = System.Drawing.Color.White;
+            this.radioButtonNoGenericoMaterial.Location = new System.Drawing.Point(7, 19);
+            this.radioButtonNoGenericoMaterial.Name = "radioButtonNoGenericoMaterial";
+            this.radioButtonNoGenericoMaterial.Size = new System.Drawing.Size(85, 17);
+            this.radioButtonNoGenericoMaterial.TabIndex = 66;
+            this.radioButtonNoGenericoMaterial.TabStop = true;
+            this.radioButtonNoGenericoMaterial.Text = "No Generico";
+            this.radioButtonNoGenericoMaterial.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonGenericoMaterial
+            // 
+            this.radioButtonGenericoMaterial.AutoSize = true;
+            this.radioButtonGenericoMaterial.BackColor = System.Drawing.Color.White;
+            this.radioButtonGenericoMaterial.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("radioButtonGenericoMaterial.BackgroundImage")));
+            this.radioButtonGenericoMaterial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.radioButtonGenericoMaterial.ForeColor = System.Drawing.Color.White;
+            this.radioButtonGenericoMaterial.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonGenericoMaterial.Name = "radioButtonGenericoMaterial";
+            this.radioButtonGenericoMaterial.Size = new System.Drawing.Size(68, 17);
+            this.radioButtonGenericoMaterial.TabIndex = 65;
+            this.radioButtonGenericoMaterial.Text = "Generico";
+            this.radioButtonGenericoMaterial.UseVisualStyleBackColor = false;
+            // 
             // Forma_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 593);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(782, 645);
+            this.Controls.Add(this.groupBoxGenericos);
+            this.Controls.Add(this.groupBoxModeda);
             this.Controls.Add(this.textBoxPrecio);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBoxUbicacion);
@@ -543,8 +595,10 @@
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxModeda.ResumeLayout(false);
+            this.groupBoxModeda.PerformLayout();
+            this.groupBoxGenericos.ResumeLayout(false);
+            this.groupBoxGenericos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -588,8 +642,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxPrecio;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxModeda;
         private System.Windows.Forms.RadioButton radioButtonDolares;
         private System.Windows.Forms.RadioButton radioButtonPesos;
+        private System.Windows.Forms.GroupBox groupBoxGenericos;
+        private System.Windows.Forms.RadioButton radioButtonNoGenericoMaterial;
+        private System.Windows.Forms.RadioButton radioButtonGenericoMaterial;
     }
 }
