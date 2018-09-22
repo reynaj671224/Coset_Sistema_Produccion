@@ -1223,9 +1223,22 @@ namespace Coset_Sistema_Produccion
 
                 try
                 {
-                    dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
+                    Busqueda_material.Codigo = material.Codigo_material;
+
+                    Materiales_disponibles_busqueda = Class_Materiales.
+                        Adquiere_materiales_codigo_material_en_base_datos(Busqueda_material);
+                    if (Materiales_disponibles_busqueda[0].Generico == "1")
+                    {
+                        dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
                         material.Fecha, material.Codigo_material, material.Codigo_proveedor,
                         material.Nombre_empleado, material.Descripcion_material, material.Cantidad);
+                    }
+                    else
+                    {
+                        dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
+                        material.Fecha, Materiales_disponibles_busqueda[0].Codigo, Materiales_disponibles_busqueda[0].Codigo_proveedor,
+                        material.Nombre_empleado, Materiales_disponibles_busqueda[0].Descripcion, material.Cantidad);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -1876,9 +1889,23 @@ namespace Coset_Sistema_Produccion
                     Adquiere_salida_materiales_orden_compra_base_datos(Salida_materiales_seleccion);
                 foreach(Salida_Material material in Salida_materiales_disponibles)
                 {
-                    dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
-                        material.Fecha, material.Codigo_material, material.Codigo_proveedor,
-                        material.Nombre_empleado, material.Descripcion_material, material.Cantidad);
+                    Busqueda_material.Codigo = material.Codigo_material;
+
+                    Materiales_disponibles_busqueda = Class_Materiales.
+                        Adquiere_materiales_codigo_material_en_base_datos(Busqueda_material);
+                    if (Materiales_disponibles_busqueda[0].Generico == "1")
+                    {
+
+                        dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
+                            material.Fecha, material.Codigo_material, material.Codigo_proveedor,
+                            material.Nombre_empleado, material.Descripcion_material, material.Cantidad);
+                    }
+                    else
+                    {
+                        dataGridViewSalidasMateriales.Rows.Add(material.Codigo.ToString(), material.Proyecto,
+                            material.Fecha, Materiales_disponibles_busqueda[0].Codigo, Materiales_disponibles_busqueda[0].Codigo_proveedor,
+                            material.Nombre_empleado, Materiales_disponibles_busqueda[0].Descripcion, material.Cantidad);
+                    }
                 }
             }
         }
@@ -1939,10 +1966,18 @@ namespace Coset_Sistema_Produccion
                     Buscaqueda_material_almacen_codigo_material(partida);                  
                     if (Unidades_disponibles_para_salida != 0)
                     {
-                        dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, partida.Parte,
-                        partida.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
-                        partida.Cantidad, Seleccion_material.Cantidad);
-
+                        if (Seleccion_material.Generico == "1")
+                        {
+                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, partida.Parte,
+                            partida.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
+                            partida.Cantidad, Seleccion_material.Cantidad);
+                        }
+                        else
+                        {
+                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, Seleccion_material.Codigo_proveedor,
+                            Seleccion_material.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
+                            partida.Cantidad, Seleccion_material.Cantidad);
+                        }
                         dataGridViewSalidasMaterialesOC
                             [(int)Campos_salida_materiales_orden_compra.cantidad, Row_material].Style.BackColor = Color.Yellow;
                         Row_material++;
