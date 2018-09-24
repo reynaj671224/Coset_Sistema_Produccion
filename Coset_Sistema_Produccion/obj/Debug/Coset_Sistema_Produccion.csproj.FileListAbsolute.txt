@@ -57,3 +57,4 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.csprojAssemblyReference.cache
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Materiales_MaxMin.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Reporte_Proyectos.resources
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Reporte_Dibujos_Proyecto.resources

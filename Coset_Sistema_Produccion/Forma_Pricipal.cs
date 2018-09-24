@@ -690,5 +690,11 @@ namespace Coset_Sistema_Produccion
             Forma_Reporte_Proyectos forma_Reporte_Proyectos = new Forma_Reporte_Proyectos();
             forma_Reporte_Proyectos.ShowDialog();
         }
+
+        private void dibujosProyectoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Reporte_Dibujos_Proyecto forma_Reporte_Dibujos_Proyecto = new Forma_Reporte_Dibujos_Proyecto();
+            forma_Reporte_Dibujos_Proyecto.ShowDialog();
+        }
     }
 }

@@ -656,7 +656,32 @@ namespace Coset_Sistema_Produccion
 
                         }
                         Total_precio_proyecto_salidas += Total_precio;
-
+                        if(Material_seleccion.Generico=="1")
+                        {
+                            dataGridViewProyectoReportes.Rows.Add(Material_seleccion.Codigo,
+                           Material_seleccion.Codigo_proveedor,
+                           Material_seleccion.Descripcion, Material_seleccion.Marca,
+                           material.Cantidad, material.Nombre_empleado, material.Fecha,
+                           Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                           material.Proyecto,
+                           Partida_orden_compra_seleccion.Proyecto,
+                           Partida_orden_compra_seleccion.Cantidad,
+                           Partida_orden_compra_seleccion.Codigo_orden,
+                           "Salida", "");
+                        }
+                        else
+                        {
+                            dataGridViewProyectoReportes.Rows.Add(Material_seleccion.Codigo,
+                          Material_seleccion.Codigo_proveedor,
+                           Material_seleccion.Descripcion, Material_seleccion.Marca,
+                           material.Cantidad, material.Nombre_empleado, material.Fecha,
+                           Precio_unitario.ToString("0.00"), Total_precio.ToString("0.00"),
+                           material.Proyecto,
+                           Partida_orden_compra_seleccion.Proyecto,
+                           Partida_orden_compra_seleccion.Cantidad,
+                           Partida_orden_compra_seleccion.Codigo_orden,
+                           "Salida", "");
+                        }
                         dataGridViewProyectoReportes.Rows.Add(Material_seleccion.Codigo,
                           Material_seleccion.Codigo_proveedor,
                            Material_seleccion.Descripcion, Material_seleccion.Marca,

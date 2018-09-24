@@ -76,6 +76,8 @@ namespace Coset_Sistema_Produccion
 
         }
 
+       
+
         public string Actualiza_base_datos_dibujo_proyecto(Dibujos_proyecto numero_dibujo)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_dibujos_proyecto());
