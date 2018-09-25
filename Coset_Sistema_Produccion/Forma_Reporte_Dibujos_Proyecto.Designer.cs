@@ -51,12 +51,12 @@
             this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
             this.labelIngenieroCliente = new System.Windows.Forms.Label();
             this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
-            this.textBoxTotalPrecioProyectoSalidas = new System.Windows.Forms.TextBox();
-            this.labelTotalSalidas = new System.Windows.Forms.Label();
-            this.textBoxTotalPrecioProyectoDevoluciones = new System.Windows.Forms.TextBox();
-            this.labelTotalDevoluciones = new System.Windows.Forms.Label();
-            this.textBoxTotalPrecioProyecto = new System.Windows.Forms.TextBox();
-            this.labelTotalProyectoPrecio = new System.Windows.Forms.Label();
+            this.textBoxTotalDibujos = new System.Windows.Forms.TextBox();
+            this.labelTotalDibujos = new System.Windows.Forms.Label();
+            this.textBoxTotalDibujoCompletos = new System.Windows.Forms.TextBox();
+            this.labelTotalDibujosCompletos = new System.Windows.Forms.Label();
+            this.textBoxPorcentajeProyecto = new System.Windows.Forms.TextBox();
+            this.labelTotalPorcentajeDibujos = new System.Windows.Forms.Label();
             this.buttonReporteProyectos = new System.Windows.Forms.Button();
             this.buttonReporteUsuarios = new System.Windows.Forms.Button();
             this.buttonReoprteMateriales = new System.Windows.Forms.Button();
@@ -75,6 +75,7 @@
             this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_Unidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Secuencia_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -211,6 +212,7 @@
             this.Numero_dibujo,
             this.Proyecto,
             this.Descripcion_dibujo,
+            this.Cantidad_Unidades,
             this.Proceso_dibujo,
             this.Estado_dibujo,
             this.Secuencia_dibujo,
@@ -320,68 +322,68 @@
             this.textBoxIngenieroCliente.TabIndex = 76;
             this.textBoxIngenieroCliente.Visible = false;
             // 
-            // textBoxTotalPrecioProyectoSalidas
+            // textBoxTotalDibujos
             // 
-            this.textBoxTotalPrecioProyectoSalidas.Enabled = false;
-            this.textBoxTotalPrecioProyectoSalidas.Location = new System.Drawing.Point(771, 99);
-            this.textBoxTotalPrecioProyectoSalidas.Name = "textBoxTotalPrecioProyectoSalidas";
-            this.textBoxTotalPrecioProyectoSalidas.Size = new System.Drawing.Size(124, 20);
-            this.textBoxTotalPrecioProyectoSalidas.TabIndex = 78;
-            this.textBoxTotalPrecioProyectoSalidas.Visible = false;
+            this.textBoxTotalDibujos.Enabled = false;
+            this.textBoxTotalDibujos.Location = new System.Drawing.Point(771, 99);
+            this.textBoxTotalDibujos.Name = "textBoxTotalDibujos";
+            this.textBoxTotalDibujos.Size = new System.Drawing.Size(124, 20);
+            this.textBoxTotalDibujos.TabIndex = 78;
+            this.textBoxTotalDibujos.Visible = false;
             // 
-            // labelTotalSalidas
+            // labelTotalDibujos
             // 
-            this.labelTotalSalidas.AutoSize = true;
-            this.labelTotalSalidas.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalSalidas.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalSalidas.Image")));
-            this.labelTotalSalidas.Location = new System.Drawing.Point(573, 99);
-            this.labelTotalSalidas.Name = "labelTotalSalidas";
-            this.labelTotalSalidas.Size = new System.Drawing.Size(161, 16);
-            this.labelTotalSalidas.TabIndex = 77;
-            this.labelTotalSalidas.Text = "Total Precio Salidas Proyecto";
-            this.labelTotalSalidas.Visible = false;
+            this.labelTotalDibujos.AutoSize = true;
+            this.labelTotalDibujos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalDibujos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDibujos.Image")));
+            this.labelTotalDibujos.Location = new System.Drawing.Point(573, 99);
+            this.labelTotalDibujos.Name = "labelTotalDibujos";
+            this.labelTotalDibujos.Size = new System.Drawing.Size(127, 16);
+            this.labelTotalDibujos.TabIndex = 77;
+            this.labelTotalDibujos.Text = "Total Dibujos Proyecto";
+            this.labelTotalDibujos.Visible = false;
             // 
-            // textBoxTotalPrecioProyectoDevoluciones
+            // textBoxTotalDibujoCompletos
             // 
-            this.textBoxTotalPrecioProyectoDevoluciones.Enabled = false;
-            this.textBoxTotalPrecioProyectoDevoluciones.Location = new System.Drawing.Point(771, 125);
-            this.textBoxTotalPrecioProyectoDevoluciones.Name = "textBoxTotalPrecioProyectoDevoluciones";
-            this.textBoxTotalPrecioProyectoDevoluciones.Size = new System.Drawing.Size(124, 20);
-            this.textBoxTotalPrecioProyectoDevoluciones.TabIndex = 80;
-            this.textBoxTotalPrecioProyectoDevoluciones.Visible = false;
+            this.textBoxTotalDibujoCompletos.Enabled = false;
+            this.textBoxTotalDibujoCompletos.Location = new System.Drawing.Point(771, 125);
+            this.textBoxTotalDibujoCompletos.Name = "textBoxTotalDibujoCompletos";
+            this.textBoxTotalDibujoCompletos.Size = new System.Drawing.Size(124, 20);
+            this.textBoxTotalDibujoCompletos.TabIndex = 80;
+            this.textBoxTotalDibujoCompletos.Visible = false;
             // 
-            // labelTotalDevoluciones
+            // labelTotalDibujosCompletos
             // 
-            this.labelTotalDevoluciones.AutoSize = true;
-            this.labelTotalDevoluciones.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalDevoluciones.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDevoluciones.Image")));
-            this.labelTotalDevoluciones.Location = new System.Drawing.Point(573, 125);
-            this.labelTotalDevoluciones.Name = "labelTotalDevoluciones";
-            this.labelTotalDevoluciones.Size = new System.Drawing.Size(192, 16);
-            this.labelTotalDevoluciones.TabIndex = 79;
-            this.labelTotalDevoluciones.Text = "Total Precio Devoluciones Proyecto";
-            this.labelTotalDevoluciones.Visible = false;
+            this.labelTotalDibujosCompletos.AutoSize = true;
+            this.labelTotalDibujosCompletos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalDibujosCompletos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDibujosCompletos.Image")));
+            this.labelTotalDibujosCompletos.Location = new System.Drawing.Point(573, 125);
+            this.labelTotalDibujosCompletos.Name = "labelTotalDibujosCompletos";
+            this.labelTotalDibujosCompletos.Size = new System.Drawing.Size(138, 16);
+            this.labelTotalDibujosCompletos.TabIndex = 79;
+            this.labelTotalDibujosCompletos.Text = "Total Dibujos Completos";
+            this.labelTotalDibujosCompletos.Visible = false;
             // 
-            // textBoxTotalPrecioProyecto
+            // textBoxPorcentajeProyecto
             // 
-            this.textBoxTotalPrecioProyecto.Enabled = false;
-            this.textBoxTotalPrecioProyecto.Location = new System.Drawing.Point(771, 151);
-            this.textBoxTotalPrecioProyecto.Name = "textBoxTotalPrecioProyecto";
-            this.textBoxTotalPrecioProyecto.Size = new System.Drawing.Size(124, 20);
-            this.textBoxTotalPrecioProyecto.TabIndex = 82;
-            this.textBoxTotalPrecioProyecto.Visible = false;
+            this.textBoxPorcentajeProyecto.Enabled = false;
+            this.textBoxPorcentajeProyecto.Location = new System.Drawing.Point(771, 151);
+            this.textBoxPorcentajeProyecto.Name = "textBoxPorcentajeProyecto";
+            this.textBoxPorcentajeProyecto.Size = new System.Drawing.Size(124, 20);
+            this.textBoxPorcentajeProyecto.TabIndex = 82;
+            this.textBoxPorcentajeProyecto.Visible = false;
             // 
-            // labelTotalProyectoPrecio
+            // labelTotalPorcentajeDibujos
             // 
-            this.labelTotalProyectoPrecio.AutoSize = true;
-            this.labelTotalProyectoPrecio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalProyectoPrecio.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalProyectoPrecio.Image")));
-            this.labelTotalProyectoPrecio.Location = new System.Drawing.Point(573, 149);
-            this.labelTotalProyectoPrecio.Name = "labelTotalProyectoPrecio";
-            this.labelTotalProyectoPrecio.Size = new System.Drawing.Size(71, 16);
-            this.labelTotalProyectoPrecio.TabIndex = 81;
-            this.labelTotalProyectoPrecio.Text = "Total Precio";
-            this.labelTotalProyectoPrecio.Visible = false;
+            this.labelTotalPorcentajeDibujos.AutoSize = true;
+            this.labelTotalPorcentajeDibujos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalPorcentajeDibujos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalPorcentajeDibujos.Image")));
+            this.labelTotalPorcentajeDibujos.Location = new System.Drawing.Point(573, 149);
+            this.labelTotalPorcentajeDibujos.Name = "labelTotalPorcentajeDibujos";
+            this.labelTotalPorcentajeDibujos.Size = new System.Drawing.Size(133, 16);
+            this.labelTotalPorcentajeDibujos.TabIndex = 81;
+            this.labelTotalPorcentajeDibujos.Text = "Porcentaje Proyecto (%)";
+            this.labelTotalPorcentajeDibujos.Visible = false;
             // 
             // buttonReporteProyectos
             // 
@@ -421,6 +423,7 @@
             this.buttonReoprteMateriales.Text = "Materiales";
             this.buttonReoprteMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonReoprteMateriales.UseVisualStyleBackColor = true;
+            this.buttonReoprteMateriales.Visible = false;
             this.buttonReoprteMateriales.Click += new System.EventHandler(this.buttonReoprteMateriales_Click);
             // 
             // buttonBusquedaBaseDatos
@@ -441,7 +444,7 @@
             // comboBoxNombreEmpleado
             // 
             this.comboBoxNombreEmpleado.FormattingEnabled = true;
-            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 90);
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 91);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreEmpleado.Sorted = true;
@@ -571,6 +574,12 @@
             this.Descripcion_dibujo.ReadOnly = true;
             this.Descripcion_dibujo.Width = 350;
             // 
+            // Cantidad_Unidades
+            // 
+            this.Cantidad_Unidades.HeaderText = "Cantidad Unidades";
+            this.Cantidad_Unidades.Name = "Cantidad_Unidades";
+            this.Cantidad_Unidades.ReadOnly = true;
+            // 
             // Proceso_dibujo
             // 
             this.Proceso_dibujo.HeaderText = "Proceso Dibujo";
@@ -627,12 +636,12 @@
             this.Controls.Add(this.buttonReoprteMateriales);
             this.Controls.Add(this.buttonReporteUsuarios);
             this.Controls.Add(this.buttonReporteProyectos);
-            this.Controls.Add(this.textBoxTotalPrecioProyecto);
-            this.Controls.Add(this.labelTotalProyectoPrecio);
-            this.Controls.Add(this.textBoxTotalPrecioProyectoDevoluciones);
-            this.Controls.Add(this.labelTotalDevoluciones);
-            this.Controls.Add(this.textBoxTotalPrecioProyectoSalidas);
-            this.Controls.Add(this.labelTotalSalidas);
+            this.Controls.Add(this.textBoxPorcentajeProyecto);
+            this.Controls.Add(this.labelTotalPorcentajeDibujos);
+            this.Controls.Add(this.textBoxTotalDibujoCompletos);
+            this.Controls.Add(this.labelTotalDibujosCompletos);
+            this.Controls.Add(this.textBoxTotalDibujos);
+            this.Controls.Add(this.labelTotalDibujos);
             this.Controls.Add(this.textBoxIngenieroCliente);
             this.Controls.Add(this.labelIngenieroCliente);
             this.Controls.Add(this.textBoxCodigoCliente);
@@ -686,12 +695,12 @@
         private System.Windows.Forms.TextBox textBoxCodigoCliente;
         private System.Windows.Forms.Label labelIngenieroCliente;
         private System.Windows.Forms.TextBox textBoxIngenieroCliente;
-        private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoSalidas;
-        private System.Windows.Forms.Label labelTotalSalidas;
-        private System.Windows.Forms.TextBox textBoxTotalPrecioProyectoDevoluciones;
-        private System.Windows.Forms.Label labelTotalDevoluciones;
-        private System.Windows.Forms.TextBox textBoxTotalPrecioProyecto;
-        private System.Windows.Forms.Label labelTotalProyectoPrecio;
+        private System.Windows.Forms.TextBox textBoxTotalDibujos;
+        private System.Windows.Forms.Label labelTotalDibujos;
+        private System.Windows.Forms.TextBox textBoxTotalDibujoCompletos;
+        private System.Windows.Forms.Label labelTotalDibujosCompletos;
+        private System.Windows.Forms.TextBox textBoxPorcentajeProyecto;
+        private System.Windows.Forms.Label labelTotalPorcentajeDibujos;
         private System.Windows.Forms.Button buttonReporteProyectos;
         private System.Windows.Forms.Button buttonReporteUsuarios;
         private System.Windows.Forms.Button buttonReoprteMateriales;
@@ -710,6 +719,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Unidades;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Secuencia_dibujo;

@@ -262,6 +262,10 @@ namespace Coset_Sistema_Produccion
             Elimina_archivo_excel();
             Activa_boton_excel();
             Desaparece_boton_Excel();
+            Desapare_combo_nombre_proyecto();
+            Desaparece_textbox_codigo_proyecto();
+
+
             //Elimina_informacion_proyectos_disponibles();
 
         }
@@ -287,6 +291,11 @@ namespace Coset_Sistema_Produccion
         private void Aparece_textbox_codigo_proyecto()
         {
             textBoxCodigoProyecto.Visible = true;
+        }
+
+        private void Desaparece_textbox_codigo_proyecto()
+        {
+            textBoxCodigoProyecto.Visible = false;
         }
 
         private void Desaparece_combo_codigo_proyecto()
@@ -483,7 +492,7 @@ namespace Coset_Sistema_Produccion
             textBoxIngenieroCliente.Text = "";
             textBoxIngenieroCoset.Text = "";
 
-            textBoxTotalPrecioProyectoSalidas.Text = "";
+            textBoxTotalDibujos.Text = "";
 
             comboBoxCodigoProyecto.Text = "";
 
@@ -534,6 +543,9 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_partidas_dibujos_proyecto()
         {
+            int Total_dibujos = 0;
+            int Total_completos = 0;
+            double Porcentaje_completo = 0;
             foreach(Dibujos_proyecto dibujo in dibujos_Proyectos_disponibles)
             {
                 dibujo_Produccion_busqueda.Numero_dibujo = dibujo.Numero;
@@ -545,17 +557,28 @@ namespace Coset_Sistema_Produccion
                         Find(dibujo_produccion => dibujo_produccion.Numero_dibujo.Contains(dibujo.Numero));
 
                     dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
-                       dibujo.Descripcion, dibujo.proceso, dibujo_Produccion_seleccion.Estado,
+                       dibujo.Descripcion,dibujo.Cantidad,dibujo.proceso, dibujo_Produccion_seleccion.Estado,
                        dibujo_Produccion_seleccion.Secuencia, dibujo_Produccion_seleccion.Empleado,
                        dibujo_Produccion_seleccion.Horas_produccion, dibujo_Produccion_seleccion.Horas_retrabajo);
+                    if(dibujo_Produccion_seleccion.Estado== "Terminado")
+                    {
+                        Total_completos++;
+                    }
+                    
                 }
                 else
                 {
                     dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
-                                           dibujo.Descripcion, dibujo.proceso, "No En Produccion",
+                                           dibujo.Descripcion, dibujo.Cantidad, dibujo.proceso, "No En Produccion",
                                            " ", " "," ", " ");
                 }
+                Total_dibujos++;
+                
             }
+            Porcentaje_completo = (Convert.ToSingle(Total_completos) / Convert.ToSingle(Total_dibujos)) * 100;
+            textBoxTotalDibujos.Text = Total_dibujos.ToString();
+            textBoxTotalDibujoCompletos.Text = Total_completos.ToString();
+            textBoxPorcentajeProyecto.Text = Porcentaje_completo.ToString();
         }
 
         private void Obtener_dibujos_proyecto_disponibles()
@@ -612,10 +635,10 @@ namespace Coset_Sistema_Produccion
         {
             try
             {
-                if (textBoxTotalPrecioProyectoSalidas.Text != "" && textBoxTotalPrecioProyectoDevoluciones.Text != "")
+                if (textBoxTotalDibujos.Text != "" && textBoxTotalDibujoCompletos.Text != "")
                 {
-                    textBoxTotalPrecioProyecto.Text = (Convert.ToDouble(textBoxTotalPrecioProyectoSalidas.Text) -
-                        Convert.ToDouble(textBoxTotalPrecioProyectoDevoluciones.Text)).ToString("0.00");
+                    textBoxPorcentajeProyecto.Text = (Convert.ToDouble(textBoxTotalDibujos.Text) -
+                        Convert.ToDouble(textBoxTotalDibujoCompletos.Text)).ToString("0.00");
                 }
                 else
                 {
@@ -679,7 +702,7 @@ namespace Coset_Sistema_Produccion
 
 
             }
-            textBoxTotalPrecioProyectoDevoluciones.Text = Total_precio_proyecto_devolucion.ToString("0.00");
+            textBoxTotalDibujoCompletos.Text = Total_precio_proyecto_devolucion.ToString("0.00");
         }
 
         private void Rellena_partida_materiales_salida_proyecto()
@@ -794,7 +817,7 @@ namespace Coset_Sistema_Produccion
                     MessageBox.Show(ex.Message);
                 }
             }
-            textBoxTotalPrecioProyectoSalidas.Text = Total_precio_proyecto_salidas.ToString("0.00");
+            textBoxTotalDibujos.Text = Total_precio_proyecto_salidas.ToString("0.00");
         }
 
         private void Asigna_campos_salida_materiales()
@@ -859,12 +882,12 @@ namespace Coset_Sistema_Produccion
             labelIngenieroCoset.Visible = true;
             textBoxIngenieroCliente.Visible = true;
             labelIngenieroCliente.Visible = true;
-            labelTotalSalidas.Visible = true;
-            textBoxTotalPrecioProyectoSalidas.Visible = true;
-            labelTotalDevoluciones.Visible = true;
-            textBoxTotalPrecioProyectoDevoluciones.Visible = true;
-            labelTotalProyectoPrecio.Visible = true;
-            textBoxTotalPrecioProyecto.Visible = true;
+            labelTotalDibujos.Visible = true;
+            textBoxTotalDibujos.Visible = true;
+            labelTotalDibujosCompletos.Visible = true;
+            textBoxTotalDibujoCompletos.Visible = true;
+            labelTotalPorcentajeDibujos.Visible = true;
+            textBoxPorcentajeProyecto.Visible = true;
         }
 
         private void Desaparece_cajas_etiquetas_reporte_proyectos()
@@ -881,12 +904,12 @@ namespace Coset_Sistema_Produccion
             labelIngenieroCoset.Visible = false;
             textBoxIngenieroCliente.Visible = false;
             labelIngenieroCliente.Visible = false;
-            labelTotalSalidas.Visible = false;
-            textBoxTotalPrecioProyectoSalidas.Visible = false;
-            labelTotalDevoluciones.Visible = false;
-            textBoxTotalPrecioProyectoDevoluciones.Visible = false;
-            labelTotalProyectoPrecio.Visible = false;
-            textBoxTotalPrecioProyecto.Visible = false;
+            labelTotalDibujos.Visible = false;
+            textBoxTotalDibujos.Visible = false;
+            labelTotalDibujosCompletos.Visible = false;
+            textBoxTotalDibujoCompletos.Visible = false;
+            labelTotalPorcentajeDibujos.Visible = false;
+            textBoxPorcentajeProyecto.Visible = false;
         }
 
         private void buttonReporteUsuarios_Click(object sender, EventArgs e)
@@ -924,7 +947,8 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_empleados_disponibles()
         {
-            Usuarios_disponibles = clase_usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+            Usuarios_disponibles = clase_usuarios.
+                Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void Aparece_elementos_reporte_usuarios_reporte()
@@ -956,11 +980,16 @@ namespace Coset_Sistema_Produccion
         {
            foreach(Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
             {
-                //se quedo pendiente
-                //dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
-                //    Adquiere_dibujos_proyecto_disponibles_en_base_datos(dibujo.proyecto);
-                //dibujos_Proyecto_seleccion = dibujos_Proyectos_disponibles.
-                //       Find(dibujo_proyecto => dibujo_proyecto.Numero_dibujo.Contains(dibujo.Numero));
+                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
+                    Adquiere_dibujos_proyecto_disponibles_en_base_datos(dibujo.proyecto);
+
+                dibujos_Proyecto_seleccion = dibujos_Proyectos_disponibles.
+                       Find(dibujo_proyecto => dibujo_proyecto.Numero.Contains(dibujo.Numero_dibujo));
+
+                dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujo.proyecto,
+                       dibujos_Proyecto_seleccion.Descripcion, dibujos_Proyecto_seleccion.Cantidad,
+                       dibujos_Proyecto_seleccion.proceso, dibujo.Estado,dibujo.Secuencia, 
+                       dibujo.Empleado,dibujo.Horas_produccion, dibujo.Horas_retrabajo);
 
             }
         }
@@ -1150,6 +1179,8 @@ namespace Coset_Sistema_Produccion
             if (Inicia_Excel())
             {
                 oXL.Visible = true;
+                Asigna_nombre_archivo_excel();
+                Elimina_archivo_excel();
                 if (Copiar_template_a_reportes())
                 {
                     if (Abrir_Archivo_Excel())
@@ -1172,28 +1203,30 @@ namespace Coset_Sistema_Produccion
             }
         }
 
+        private void Asigna_nombre_archivo_excel()
+        {
+            Archivo_Excel_nombre = "\\reportes-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+        }
+
         private void Escribe_titulos_proyecto()
         {
-            oSheet.Cells[7, 1] = "Codigo Material";
-            oSheet.Cells[7, 2] = "Codigo Proveedor";
-            oSheet.Cells[7, 3] = "Descripcion Material";
-            oSheet.Cells[7, 4] = "Nombre Proveedor";
-            oSheet.Cells[7, 5] = "Cantidad Salida";
-            oSheet.Cells[7, 6] = "Nombre Empleado";
-            oSheet.Cells[7, 7] = "Fecha Salida";
-            oSheet.Cells[7, 8] = "Precio Unitario";
-            oSheet.Cells[7, 9] = "Precio Total";
-            oSheet.Cells[7, 10] = "Proyecto Asignado";
-            oSheet.Cells[7, 11] = "Proyecto Orden de Compra";
-            oSheet.Cells[7, 12] = "Total Uniddaes Orden De Compra";
-            oSheet.Cells[7, 13] = "Orden de Compra";
-            oSheet.Cells[7, 14] = "Operacion";
-            oSheet.Cells[7, 15] = "Observaciones";
+            oSheet.Cells[7, 1] = "Numero Dibujo";
+            oSheet.Cells[7, 2] = "Proyecto";
+            oSheet.Cells[7, 3] = "Dibujo Descripcion";
+            oSheet.Cells[7, 4] = "Cantidad_Unidades";
+            oSheet.Cells[7, 5] = "Proceso Dibujo";
+            oSheet.Cells[7, 6] = "EStado Dibujo";
+            oSheet.Cells[7, 7] = "Secuencia Dibujo";
+            oSheet.Cells[7, 8] = "Empleado";
+            oSheet.Cells[7, 9] = "Horas Produccion";
+            oSheet.Cells[7, 10] = "Horas Re-trabajo";
+
         }
 
         private void Escribe_informacion_Proyecto()
         {
-            if(Operacio_reporte_proyectos == "proyectos")
+            if(Operacio_reporte_proyectos == "proyectos_codigo" || Operacio_reporte_proyectos == "proyectos_nombre")
             {
                 oSheet.Cells[1, 1] = "Nombre Proyecto";
                 oSheet.Cells[2, 1] = "Nombre Cliente";
@@ -1207,13 +1240,13 @@ namespace Coset_Sistema_Produccion
                 oSheet.Cells[4, 2] = textBoxIngenieroCliente.Text;
                 oSheet.Cells[5, 2] = textBoxIngenieroCoset.Text;
 
-                oSheet.Cells[1, 4] = "Total Precio Salidas";
-                oSheet.Cells[2, 4] = "Total Precio Devoluciones";
-                oSheet.Cells[3, 4] = "Total Precio Proyecto";
+                oSheet.Cells[1, 4] = "Total Dibujos Proyecto";
+                oSheet.Cells[2, 4] = "Total Dibujos Completos";
+                oSheet.Cells[3, 4] = "Porcenataje Proyecto (%)";
 
-                oSheet.Cells[1, 5] = textBoxTotalPrecioProyectoSalidas.Text;
-                oSheet.Cells[2, 5] = textBoxTotalPrecioProyectoDevoluciones.Text;
-                oSheet.Cells[3, 5] = textBoxTotalPrecioProyecto.Text;
+                oSheet.Cells[1, 5] = textBoxTotalDibujos.Text;
+                oSheet.Cells[2, 5] = textBoxTotalDibujoCompletos.Text;
+                oSheet.Cells[3, 5] = textBoxPorcentajeProyecto.Text;
             }
         }
 
@@ -1234,8 +1267,7 @@ namespace Coset_Sistema_Produccion
 
         private bool Copiar_template_a_reportes()
         {
-            Archivo_Excel_nombre = "\\reportes-" +
-                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+            
             try
             {
                 File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + Archivo_Excel_nombre, false);

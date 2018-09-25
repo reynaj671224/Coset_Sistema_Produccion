@@ -850,7 +850,8 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_empleados_disponibles()
         {
-            Usuarios_disponibles = clase_usuarios.Adquiere_usuarios_disponibles_en_base_datos();
+            Usuarios_disponibles = clase_usuarios.
+                Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void Aparece_elementos_reporte_usuarios_reporte()
@@ -1053,6 +1054,8 @@ namespace Coset_Sistema_Produccion
             if (Inicia_Excel())
             {
                 oXL.Visible = true;
+                Asigna_nombre_archivo_excel();
+                Elimina_archivo_excel();
                 if (Copiar_template_a_reportes())
                 {
                     if (Abrir_Archivo_Excel())
@@ -1073,6 +1076,12 @@ namespace Coset_Sistema_Produccion
                     }
                 }
             }
+        }
+
+        private void Asigna_nombre_archivo_excel()
+        {
+            Archivo_Excel_nombre = "\\reportes-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
         }
 
         private void Escribe_titulos_proyecto()
@@ -1137,8 +1146,7 @@ namespace Coset_Sistema_Produccion
 
         private bool Copiar_template_a_reportes()
         {
-            Archivo_Excel_nombre = "\\reportes-" +
-                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+           
             try
             {
                 File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + Archivo_Excel_nombre, false);
