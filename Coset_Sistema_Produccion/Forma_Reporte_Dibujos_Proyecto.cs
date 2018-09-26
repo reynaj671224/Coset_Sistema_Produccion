@@ -122,6 +122,8 @@ namespace Coset_Sistema_Produccion
             Partidas_ordenes_compra_disponibles = null;
             Material_devolucion_disponibles = null;
             Materiales_disponibles_busqueda = null;
+            dibujos_Proyectos_disponibles = null;
+            dibujo_Produccions_disponibles = null;
             Cierra_archivo_Excel();
             Close_Excel();
             Termina_applicacion();
