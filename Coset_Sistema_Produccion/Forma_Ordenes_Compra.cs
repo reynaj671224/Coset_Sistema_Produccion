@@ -2321,6 +2321,8 @@ namespace Coset_Sistema_Produccion
                         "");
                 Remplaza_texto_en_Documento("<c" + partida + ">",
                     "");
+                Remplaza_texto_en_Documento("<ag" + partida + ">",
+                    "");
                 Remplaza_texto_en_Documento("<np" + partida + ">",
                    "");
                 Remplaza_texto_en_Documento("<d" + partida + ">",
@@ -2352,6 +2354,8 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.partida, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<c" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.cantidad, partida - 1].Value.ToString());
+                    Remplaza_texto_en_Documento("<ag" + partida + ">",
+                        dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<pr" + partida + ">",
                         dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.proyecto, partida - 1].Value.ToString());
                     Remplaza_texto_en_Documento("<np" + partida + ">",
@@ -2391,7 +2395,7 @@ namespace Coset_Sistema_Produccion
         {
             Remplaza_texto_en_Documento("<ocn>", comboBoxCodigoOrdenCompra.Text);
             Remplaza_texto_en_Documento("<fecha>", dateTimePickerFechaActual.Text);
-            Remplaza_texto_en_Documento("<realizado>", textBoxRequisitor.Text);
+            Remplaza_texto_en_Documento("<realizado>", textBoxRequisicion.Text);
             Remplaza_texto_en_Documento("<cotizacion>", textBoxCotizacion.Text);
             if (radioButtonPesos.Checked)
                 Remplaza_texto_en_Documento("<moneda>",

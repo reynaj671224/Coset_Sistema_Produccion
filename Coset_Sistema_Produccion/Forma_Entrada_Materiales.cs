@@ -533,6 +533,7 @@ namespace Coset_Sistema_Produccion
 
         private void Agrega_entrada_materiales()
         {
+            Operacio_entrada_materiales = "Agregar";
             Aparece_datagridview_entrada_visualizar();
             Desactiva_botones_operacion();
             Acepta_datagridview_agregar_renglones();
@@ -545,7 +546,7 @@ namespace Coset_Sistema_Produccion
             Activa_grupo_referencia();
             Asigna_caracter_busqueda_material();
             Inicia_timer_busqueda_materiales();
-            Operacio_entrada_materiales = "Agregar";
+            
         }
 
         private void Aparece_datagridview_entrada_visualizar()
@@ -1716,7 +1717,7 @@ namespace Coset_Sistema_Produccion
                     secuencia_despues_de_busqueda_material();
                 }
 
-                if (Operacio_entrada_materiales == "Visualizar" || Operacio_entrada_materiales == "Agregar")
+                if (Operacio_entrada_materiales == "Visualizar" /*|| Operacio_entrada_materiales == "Agregar"*/)
                 {
                     Rellenar_partidas_entrada_materiales();
                 }
@@ -1749,6 +1750,7 @@ namespace Coset_Sistema_Produccion
                 textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxUnidadesEntradas.Text = material.Cantidad;
                 textBoxDivisa.Text = material.divisa;
+                textBoxPrecioMaterial.Text = material.precio;
             }
         }
 
