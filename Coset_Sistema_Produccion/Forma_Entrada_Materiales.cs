@@ -277,6 +277,7 @@ namespace Coset_Sistema_Produccion
                 Obtener_materiales_ordenes_compra();
                 if (Rellena_datagridview_agregar_materiales() != 0)
                 {
+                    No_acepta_datagridview_agregar_renglones();
                     Limpia_combo_empleado();
                     Aparece_combo_empleado();
                     Activa_combo_empleado();
@@ -719,6 +720,11 @@ namespace Coset_Sistema_Produccion
             dataGridViewPartidasEntradaMaterialesVisualizar.AllowUserToAddRows = true;
         }
 
+        private void No_acepta_datagridview_agregar_renglones()
+        {
+            dataGridViewPartidasEntradaMaterialesEntrada.AllowUserToAddRows = false;
+        }
+
         private void Activa_datagridview_partidas_entrada_materiales()
         {
             dataGridViewPartidasEntradaMaterialesEntrada.Enabled = true;
@@ -845,65 +851,72 @@ namespace Coset_Sistema_Produccion
         private bool Agrega_entrada_materiales_base_datos()
         {
             string respuesta = "";
-            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count - 1; partidas++)
+            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count; partidas++)
             {
-                /*Busqueda_material.Descripcion = dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();*/
-                Busqueda_material.Codigo = dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
-                Materiales_disponibles_busqueda = Class_Materiales.
-                    Adquiere_materiales_codigo_material_en_base_datos(Busqueda_material);
-                Visualizar_material = Materiales_disponibles_busqueda.Find(material_disponible =>
-                material_disponible.Codigo.Contains(Busqueda_material.Codigo));
-
-               Visualizar_material.Cantidad = (Convert.ToInt32(
-               Visualizar_material.Cantidad.ToString()) +
-                           Convert.ToUInt32(dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString())).ToString();
-                Visualizar_material.precio =
-                    dataGridViewPartidasEntradaMaterialesEntrada[
-                    (int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
-
-                respuesta = Class_Materiales.Actualiza_base_datos_materiales(
-                Visualizar_material);
-                if (respuesta != "NO errores")
+                if (dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.
+                    cantidad_entrada, partidas].Value.ToString() != "")
                 {
-                    MessageBox.Show(respuesta, "Entrada Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
+                    /*Busqueda_material.Descripcion = dataGridViewPartidasEntradaMaterialesEntrada[
+                        (int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();*/
+                    Busqueda_material.Codigo = dataGridViewPartidasEntradaMaterialesEntrada[
+                    (int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
+                    Materiales_disponibles_busqueda = Class_Materiales.
+                        Adquiere_materiales_codigo_material_en_base_datos(Busqueda_material);
+                    Visualizar_material = Materiales_disponibles_busqueda.Find(material_disponible =>
+                    material_disponible.Codigo.Contains(Busqueda_material.Codigo));
 
+                    Visualizar_material.Cantidad = (Convert.ToInt32(
+                    Visualizar_material.Cantidad.ToString()) +
+                                Convert.ToUInt32(dataGridViewPartidasEntradaMaterialesEntrada[
+                         (int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString())).ToString();
+                    Visualizar_material.precio =
+                        dataGridViewPartidasEntradaMaterialesEntrada[
+                        (int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
+
+                    respuesta = Class_Materiales.Actualiza_base_datos_materiales(
+                    Visualizar_material);
+                    if (respuesta != "NO errores")
+                    {
+                        MessageBox.Show(respuesta, "Entrada Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
             }
             return true;
         }
 
         private bool Insertar_datos_entrada_materiales()
         {
-            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count - 1; partidas++)
+            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count; partidas++)
             {
-                Insertar_entrada_materiales.Orden_compra = comboBoxCodigoOrdenCompra.Text;
-                if (radioButtonFactura.Checked)
-                    Insertar_entrada_materiales.Referencia = "F-" + textBoxReferencia.Text;
-                else if(radioButtonRemision.Checked)
-                    Insertar_entrada_materiales.Referencia = "R-" + textBoxReferencia.Text;
-                Insertar_entrada_materiales.Descripcion_material =
-                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();
-                Insertar_entrada_materiales.Codigo_proveedor =
-                     dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_proveedor, partidas].Value.ToString();
-                Insertar_entrada_materiales.Nombre_empleado = comboBoxEmpleado.Text;
-                Insertar_entrada_materiales.Fecha = dateTimePickerFechaActual.Text;
-                Insertar_entrada_materiales.Codigo_material =
-                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_material,partidas].Value.ToString();
-                Insertar_entrada_materiales.Precio =
-                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
-                Insertar_entrada_materiales.Cantidad =
-                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString();
-                Insertar_entrada_materiales.Divisa =
-                    dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.divisa, partidas].Value.ToString();
-                if (Convert.ToInt32(Insertar_entrada_materiales.Cantidad) != 0)
+                if (dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.
+                    cantidad_entrada, partidas].Value.ToString() != "")
                 {
-                    if (!Insertar_datos_entrada_materiales_class())
+                    Insertar_entrada_materiales.Orden_compra = comboBoxCodigoOrdenCompra.Text;
+                    if (radioButtonFactura.Checked)
+                        Insertar_entrada_materiales.Referencia = "F-" + textBoxReferencia.Text;
+                    else if (radioButtonRemision.Checked)
+                        Insertar_entrada_materiales.Referencia = "R-" + textBoxReferencia.Text;
+                    Insertar_entrada_materiales.Descripcion_material =
+                        dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();
+                    Insertar_entrada_materiales.Codigo_proveedor =
+                         dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_proveedor, partidas].Value.ToString();
+                    Insertar_entrada_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                    Insertar_entrada_materiales.Fecha = dateTimePickerFechaActual.Text;
+                    Insertar_entrada_materiales.Codigo_material =
+                        dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
+                    Insertar_entrada_materiales.Precio =
+                        dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.precio, partidas].Value.ToString();
+                    Insertar_entrada_materiales.Cantidad =
+                        dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.cantidad_entrada, partidas].Value.ToString();
+                    Insertar_entrada_materiales.Divisa =
+                        dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.divisa, partidas].Value.ToString();
+                    if (Convert.ToInt32(Insertar_entrada_materiales.Cantidad) != 0)
                     {
-                        return false;
+                        if (!Insertar_datos_entrada_materiales_class())
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -911,16 +924,19 @@ namespace Coset_Sistema_Produccion
         }
         private bool Verifica_datos_partidas_entradas_materiales()
         {
-            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count - 1; partidas++)
+            for (int partidas = 0; partidas < dataGridViewPartidasEntradaMaterialesEntrada.Rows.Count; partidas++)
             {
                 for (int campo = 1; campo < dataGridViewPartidasEntradaMaterialesEntrada.Rows[partidas].Cells.Count; campo++)
                 {
-                    if (dataGridViewPartidasEntradaMaterialesEntrada.Rows[partidas].Cells[campo].Value.ToString() == "")
+                    if (dataGridViewPartidasEntradaMaterialesEntrada.Rows[partidas].
+                        Cells[(int)Campos_entrada_materiales_agregar.cantidad_entrada].Value.ToString() != "")
                     {
-                        MessageBox.Show("campo en blanco");
-                        return false;
+                        if (dataGridViewPartidasEntradaMaterialesEntrada.Rows[partidas].Cells[campo].Value.ToString() == "")
+                        {
+                            MessageBox.Show("campo en blanco");
+                            return false;
+                        }
                     }
-
                 }
             }
             return true;
@@ -1851,6 +1867,12 @@ namespace Coset_Sistema_Produccion
         private void textCodigoMaterial_TextChanged(object sender, EventArgs e)
         {
             textCodigoMaterial.BackColor = Color.White;
+        }
+
+        private void buttonMateriales_Click(object sender, EventArgs e)
+        {
+            Forma_Materiales forma_Materiales = new Forma_Materiales();
+            forma_Materiales.ShowDialog();
         }
     }
 }

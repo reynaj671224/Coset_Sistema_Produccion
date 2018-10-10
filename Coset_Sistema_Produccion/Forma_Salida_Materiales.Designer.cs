@@ -266,6 +266,8 @@
             // 
             // dataGridViewSalidasMateriales
             // 
+            this.dataGridViewSalidasMateriales.AllowUserToAddRows = false;
+            this.dataGridViewSalidasMateriales.AllowUserToDeleteRows = false;
             this.dataGridViewSalidasMateriales.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewSalidasMateriales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSalidasMateriales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -280,6 +282,7 @@
             this.dataGridViewSalidasMateriales.Enabled = false;
             this.dataGridViewSalidasMateriales.Location = new System.Drawing.Point(25, 347);
             this.dataGridViewSalidasMateriales.Name = "dataGridViewSalidasMateriales";
+            this.dataGridViewSalidasMateriales.ReadOnly = true;
             this.dataGridViewSalidasMateriales.Size = new System.Drawing.Size(1132, 202);
             this.dataGridViewSalidasMateriales.TabIndex = 48;
             this.dataGridViewSalidasMateriales.Visible = false;
@@ -572,6 +575,7 @@
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 50;
             // 
@@ -586,17 +590,20 @@
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Codigo Material";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Parte Proveedor";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 300;
             // 
             // dataGridViewTextBoxColumn8
@@ -608,21 +615,25 @@
             // 
             this.cantidad_disponible.HeaderText = "Cantidad Disponible OC";
             this.cantidad_disponible.Name = "cantidad_disponible";
+            this.cantidad_disponible.ReadOnly = true;
             // 
             // CantidadEntradaOC
             // 
             this.CantidadEntradaOC.HeaderText = "Cantidad Entrada OC";
             this.CantidadEntradaOC.Name = "CantidadEntradaOC";
+            this.CantidadEntradaOC.ReadOnly = true;
             // 
             // CantidadTotalOC
             // 
             this.CantidadTotalOC.HeaderText = "Cantidad Total OC";
             this.CantidadTotalOC.Name = "CantidadTotalOC";
+            this.CantidadTotalOC.ReadOnly = true;
             // 
             // CantidadAlmacen
             // 
             this.CantidadAlmacen.HeaderText = "Cantidad Almacen";
             this.CantidadAlmacen.Name = "CantidadAlmacen";
+            this.CantidadAlmacen.ReadOnly = true;
             // 
             // Forma_Salida_Materiales
             // 
