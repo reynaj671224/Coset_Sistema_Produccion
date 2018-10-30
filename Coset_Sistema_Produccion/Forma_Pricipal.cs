@@ -696,5 +696,12 @@ namespace Coset_Sistema_Produccion
             Forma_Reporte_Dibujos_Proyecto forma_Reporte_Dibujos_Proyecto = new Forma_Reporte_Dibujos_Proyecto();
             forma_Reporte_Dibujos_Proyecto.ShowDialog();
         }
+
+        private void ConsultaMaterialesOCtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Consulta_Materiales_Ordenes_Compra forma_Consulta_Materiales_Ordenes_Compra = 
+                new Forma_Consulta_Materiales_Ordenes_Compra();
+            forma_Consulta_Materiales_Ordenes_Compra.ShowDialog();
+        }
     }
 }
