@@ -389,7 +389,7 @@ namespace Coset_Sistema_Produccion
             Activa_textbox_descripcion_material();
             Activa_textbox_codigo_material();
             Asigna_caracter_busqueda_material();
-            //Activa_combo_OC();
+            Activa_combo_OC();
             Inicia_timer_para_buscar_informacion_materiales_busqueda();
             //Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
         }
@@ -1384,6 +1384,7 @@ namespace Coset_Sistema_Produccion
             Desaparece_boton_buscar_base_datos();
             Desaparece_combo_OC();
             Desaparece_label_OC();
+            Desactiva_boton_proyecto_asignacion();
             Desaparece_label_proyecto();
             Desaparece_datagrid_salida_materiales_orden_compra();
             Desactiva_datagrid_salida_materiales_orden_compra();
@@ -1699,6 +1700,7 @@ namespace Coset_Sistema_Produccion
             Operacio_salida_materiales = "SalidaOC";
             Limpia_combo_orden_compra();
             Activa_combo_OC();
+            Activa_boton_proyecto_asignacion();
             Aparece_combo_orden_compra();
             Aparece_label_orden_compra();
             Aparece_boton_cancelar_operacio();
@@ -1706,6 +1708,17 @@ namespace Coset_Sistema_Produccion
             Obtener_ordenes_compra_disponibles();
             Rellena_combo_ordenes_compra();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
+        }
+
+        private void Activa_boton_proyecto_asignacion()
+        {
+            buttonAsignarProyecto.Enabled = true;
+        }
+
+        private void Desactiva_boton_proyecto_asignacion()
+        {
+            buttonAsignarProyecto.Enabled = false;
+            buttonAsignarProyecto.Text = "Individual";
         }
 
         private void Rellena_combo_ordenes_compra()
@@ -2164,6 +2177,7 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewSalidasMaterialesOC_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            string Proyecto_Rellenar_Grupos = "";
             if(Operacio_salida_materiales=="SalidaOC")
             {
                 try
@@ -2180,6 +2194,18 @@ namespace Coset_Sistema_Produccion
 
                         dataGridViewSalidasMaterialesOC[
                             (int)Campos_salida_materiales_orden_compra.cantidad, e.RowIndex].Style.BackColor = Color.White;
+                    }
+                    else if(e.ColumnIndex == (int)Campos_salida_materiales_orden_compra.proyecto)
+                    {
+                        if (buttonAsignarProyecto.Text == "Todas Partidas")
+                        {
+                            Proyecto_Rellenar_Grupos = dataGridViewSalidasMaterialesOC[e.ColumnIndex, e.RowIndex].Value.ToString();
+                            for (int index = 0; index < dataGridViewSalidasMaterialesOC.Rows.Count; index++)
+                            {
+                                dataGridViewSalidasMaterialesOC[e.ColumnIndex, index].Value = Proyecto_Rellenar_Grupos;
+                            }
+                        }
+                        
                     }
                 }
                 catch(Exception ex)
@@ -2199,9 +2225,20 @@ namespace Coset_Sistema_Produccion
             forma_Consulta_Materiales.ShowDialog();
         }
 
-        private void dataGridViewSalidasMaterialesOC_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void buttonAsignarProyecto_Click(object sender, EventArgs e)
         {
+            if(buttonAsignarProyecto.Text == "Individual")
+            {
+                buttonAsignarProyecto.Text = "Todas Partidas";
+            }
+            else
+            {
+                buttonAsignarProyecto.Text = "Individual";
+            }
 
         }
+
+      
     }
 }

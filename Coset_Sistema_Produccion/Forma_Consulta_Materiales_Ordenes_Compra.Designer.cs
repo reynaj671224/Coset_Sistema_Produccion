@@ -46,15 +46,14 @@
             this.textBoxUbicacion = new System.Windows.Forms.TextBox();
             this.labelUbicacion = new System.Windows.Forms.Label();
             this.dataGridViewPartidasMaterialSelecionOrdenesCompra = new System.Windows.Forms.DataGridView();
+            this.buttonCancelar = new System.Windows.Forms.Button();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad_medida_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ubicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Orden_Compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidades_Ordenadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidades_recibidas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.foto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasMaterialSelecionOrdenesCompra)).BeginInit();
@@ -233,65 +232,16 @@
             this.Codigo_partida,
             this.Codigo_Proveedor,
             this.Descripcion,
-            this.Cantidad,
-            this.Marca,
-            this.Unidad_medida_partida,
-            this.Ubicacion,
+            this.Orden_Compra,
+            this.Unidades_Ordenadas,
+            this.Unidades_recibidas,
             this.foto});
             this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Enabled = false;
-            this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Location = new System.Drawing.Point(30, 284);
+            this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Location = new System.Drawing.Point(12, 284);
             this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Name = "dataGridViewPartidasMaterialSelecionOrdenesCompra";
-            this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Size = new System.Drawing.Size(866, 234);
+            this.dataGridViewPartidasMaterialSelecionOrdenesCompra.Size = new System.Drawing.Size(825, 234);
             this.dataGridViewPartidasMaterialSelecionOrdenesCompra.TabIndex = 50;
             this.dataGridViewPartidasMaterialSelecionOrdenesCompra.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasMaterialSeleccion_CellClick);
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Width = 80;
-            // 
-            // Codigo_Proveedor
-            // 
-            this.Codigo_Proveedor.HeaderText = "Codigo Proveedor";
-            this.Codigo_Proveedor.Name = "Codigo_Proveedor";
-            this.Codigo_Proveedor.Width = 80;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 400;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 50;
-            // 
-            // Marca
-            // 
-            this.Marca.HeaderText = "Marca";
-            this.Marca.Name = "Marca";
-            this.Marca.Width = 80;
-            // 
-            // Unidad_medida_partida
-            // 
-            this.Unidad_medida_partida.HeaderText = "Unidad Medida";
-            this.Unidad_medida_partida.Name = "Unidad_medida_partida";
-            this.Unidad_medida_partida.Width = 50;
-            // 
-            // Ubicacion
-            // 
-            this.Ubicacion.HeaderText = "Ubicacion";
-            this.Ubicacion.Name = "Ubicacion";
-            this.Ubicacion.Width = 80;
-            // 
-            // foto
-            // 
-            this.foto.HeaderText = "foto";
-            this.foto.Name = "foto";
-            this.foto.Visible = false;
             // 
             // buttonCancelar
             // 
@@ -307,6 +257,45 @@
             this.buttonCancelar.UseVisualStyleBackColor = true;
             this.buttonCancelar.Visible = false;
             this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
+            // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo Material";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Width = 80;
+            // 
+            // Codigo_Proveedor
+            // 
+            this.Codigo_Proveedor.HeaderText = "Codigo Proveedor";
+            this.Codigo_Proveedor.Name = "Codigo_Proveedor";
+            this.Codigo_Proveedor.Width = 80;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.Width = 300;
+            // 
+            // Orden_Compra
+            // 
+            this.Orden_Compra.HeaderText = "Orden Compra";
+            this.Orden_Compra.Name = "Orden_Compra";
+            // 
+            // Unidades_Ordenadas
+            // 
+            this.Unidades_Ordenadas.HeaderText = "Unidades Ordenadas";
+            this.Unidades_Ordenadas.Name = "Unidades_Ordenadas";
+            // 
+            // Unidades_recibidas
+            // 
+            this.Unidades_recibidas.HeaderText = "Unidades Recibidas";
+            this.Unidades_recibidas.Name = "Unidades_recibidas";
+            // 
+            // foto
+            // 
+            this.foto.HeaderText = "foto";
+            this.foto.Name = "foto";
+            this.foto.Visible = false;
             // 
             // Forma_Consulta_Materiales_Ordenes_Compra
             // 
@@ -363,10 +352,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad_medida_partida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ubicacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Orden_Compra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidades_Ordenadas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidades_recibidas;
         private System.Windows.Forms.DataGridViewTextBoxColumn foto;
     }
 }

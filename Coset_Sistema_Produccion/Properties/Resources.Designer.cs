@@ -59,5 +59,15 @@ namespace Coset_Sistema_Produccion.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fabulous_page_background_color_web_for_html_coloring_pages_671x419__1_ {
+            get {
+                object obj = ResourceManager.GetObject("fabulous-page-background-color-web-for-html-coloring-pages-671x419 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

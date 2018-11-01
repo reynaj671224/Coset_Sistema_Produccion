@@ -54,6 +54,7 @@
             this.almacenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaMaterialesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConsultaMaterialesOCtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidaMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,6 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.timerStart = new System.Windows.Forms.Timer(this.components);
-            this.ConsultaMaterialesOCtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -291,6 +291,13 @@
             this.consultaMaterialesToolStripMenuItem1.Size = new System.Drawing.Size(198, 22);
             this.consultaMaterialesToolStripMenuItem1.Text = "Consulta Materiales";
             this.consultaMaterialesToolStripMenuItem1.Click += new System.EventHandler(this.consultaMaterialesToolStripMenuItem1_Click);
+            // 
+            // ConsultaMaterialesOCtoolStripMenuItem
+            // 
+            this.ConsultaMaterialesOCtoolStripMenuItem.Name = "ConsultaMaterialesOCtoolStripMenuItem";
+            this.ConsultaMaterialesOCtoolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.ConsultaMaterialesOCtoolStripMenuItem.Text = "Consulta Materiales OC";
+            this.ConsultaMaterialesOCtoolStripMenuItem.Click += new System.EventHandler(this.ConsultaMaterialesOCtoolStripMenuItem_Click);
             // 
             // entradaMaterialesToolStripMenuItem
             // 
@@ -517,13 +524,6 @@
             this.timerStart.Enabled = true;
             this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
             // 
-            // ConsultaMaterialesOCtoolStripMenuItem
-            // 
-            this.ConsultaMaterialesOCtoolStripMenuItem.Name = "ConsultaMaterialesOCtoolStripMenuItem";
-            this.ConsultaMaterialesOCtoolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.ConsultaMaterialesOCtoolStripMenuItem.Text = "Consulta Materiales OC";
-            this.ConsultaMaterialesOCtoolStripMenuItem.Click += new System.EventHandler(this.ConsultaMaterialesOCtoolStripMenuItem_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,7 +541,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 8.8";
+            this.Text = "Coset Sistema Produccion Rev 8.9";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

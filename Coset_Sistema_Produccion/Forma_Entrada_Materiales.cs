@@ -1874,5 +1874,7 @@ namespace Coset_Sistema_Produccion
             Forma_Materiales forma_Materiales = new Forma_Materiales();
             forma_Materiales.ShowDialog();
         }
+
+
     }
 }
