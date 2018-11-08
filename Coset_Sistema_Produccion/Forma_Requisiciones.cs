@@ -586,7 +586,7 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_datos_usuarios_requisitores_disponibles_base_datos()
         {
-            Usuarios_requisitores = class_Usuarios.Adquiere_usuarios_requsitores_disponibles_en_base_datos();
+            Usuarios_requisitores = class_Usuarios.Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
         private void rellena_combo_dirigido()
