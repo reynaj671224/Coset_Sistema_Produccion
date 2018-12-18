@@ -547,7 +547,7 @@
             // comboBoxNombreEmpleado
             // 
             this.comboBoxNombreEmpleado.FormattingEnabled = true;
-            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 75);
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 90);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreEmpleado.Sorted = true;

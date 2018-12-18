@@ -3203,7 +3203,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonMaterialesBusqueda_Click(object sender, EventArgs e)
         {
-            Forma_Consulta_Materiales_Ordenes_Compra forma_Consulta_Materiales = new Forma_Consulta_Materiales_Ordenes_Compra();
+            Forma_Consulta_Materiales forma_Consulta_Materiales = new Forma_Consulta_Materiales();
             forma_Consulta_Materiales.ShowDialog();
         }
 
