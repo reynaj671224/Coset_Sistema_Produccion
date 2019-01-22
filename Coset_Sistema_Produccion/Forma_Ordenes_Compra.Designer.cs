@@ -90,6 +90,9 @@
             this.buttonCancelarOC = new System.Windows.Forms.Button();
             this.buttonMaterialesBusqueda = new System.Windows.Forms.Button();
             this.buttonMateriales = new System.Windows.Forms.Button();
+            this.textBoxIvaAplicado = new System.Windows.Forms.TextBox();
+            this.labelIvaAplicado = new System.Windows.Forms.Label();
+            this.labelIvaPorcentaje = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasOrdenCompra)).BeginInit();
             this.groupBoxTipoMoneda.SuspendLayout();
@@ -582,7 +585,7 @@
             this.groupBoxTipoMoneda.Controls.Add(this.radioButtonPesos);
             this.groupBoxTipoMoneda.Enabled = false;
             this.groupBoxTipoMoneda.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBoxTipoMoneda.Location = new System.Drawing.Point(691, 134);
+            this.groupBoxTipoMoneda.Location = new System.Drawing.Point(691, 117);
             this.groupBoxTipoMoneda.Name = "groupBoxTipoMoneda";
             this.groupBoxTipoMoneda.Size = new System.Drawing.Size(134, 65);
             this.groupBoxTipoMoneda.TabIndex = 70;
@@ -631,7 +634,6 @@
             this.labelEstado.Size = new System.Drawing.Size(43, 16);
             this.labelEstado.TabIndex = 71;
             this.labelEstado.Text = "Estado";
-            this.labelEstado.Visible = false;
             // 
             // textBoxEstado
             // 
@@ -640,7 +642,6 @@
             this.textBoxEstado.Name = "textBoxEstado";
             this.textBoxEstado.Size = new System.Drawing.Size(134, 20);
             this.textBoxEstado.TabIndex = 72;
-            this.textBoxEstado.Visible = false;
             // 
             // label7
             // 
@@ -751,11 +752,47 @@
             this.buttonMateriales.UseVisualStyleBackColor = true;
             this.buttonMateriales.Click += new System.EventHandler(this.buttonMateriales_Click);
             // 
+            // textBoxIvaAplicado
+            // 
+            this.textBoxIvaAplicado.Enabled = false;
+            this.textBoxIvaAplicado.Location = new System.Drawing.Point(691, 194);
+            this.textBoxIvaAplicado.Name = "textBoxIvaAplicado";
+            this.textBoxIvaAplicado.Size = new System.Drawing.Size(134, 20);
+            this.textBoxIvaAplicado.TabIndex = 83;
+            this.textBoxIvaAplicado.Visible = false;
+            // 
+            // labelIvaAplicado
+            // 
+            this.labelIvaAplicado.AutoSize = true;
+            this.labelIvaAplicado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIvaAplicado.Image = ((System.Drawing.Image)(resources.GetObject("labelIvaAplicado.Image")));
+            this.labelIvaAplicado.Location = new System.Drawing.Point(523, 194);
+            this.labelIvaAplicado.Name = "labelIvaAplicado";
+            this.labelIvaAplicado.Size = new System.Drawing.Size(81, 16);
+            this.labelIvaAplicado.TabIndex = 82;
+            this.labelIvaAplicado.Text = "IVA Aplicado";
+            this.labelIvaAplicado.Visible = false;
+            // 
+            // labelIvaPorcentaje
+            // 
+            this.labelIvaPorcentaje.AutoSize = true;
+            this.labelIvaPorcentaje.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIvaPorcentaje.Image = ((System.Drawing.Image)(resources.GetObject("labelIvaPorcentaje.Image")));
+            this.labelIvaPorcentaje.Location = new System.Drawing.Point(831, 196);
+            this.labelIvaPorcentaje.Name = "labelIvaPorcentaje";
+            this.labelIvaPorcentaje.Size = new System.Drawing.Size(18, 16);
+            this.labelIvaPorcentaje.TabIndex = 84;
+            this.labelIvaPorcentaje.Text = "%";
+            this.labelIvaPorcentaje.Visible = false;
+            // 
             // Forma_Ordenes_Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1334, 582);
+            this.Controls.Add(this.labelIvaPorcentaje);
+            this.Controls.Add(this.textBoxIvaAplicado);
+            this.Controls.Add(this.labelIvaAplicado);
             this.Controls.Add(this.buttonMateriales);
             this.Controls.Add(this.buttonMaterialesBusqueda);
             this.Controls.Add(this.buttonCancelarOC);
@@ -877,5 +914,8 @@
         private System.Windows.Forms.Button buttonCancelarOC;
         private System.Windows.Forms.Button buttonMaterialesBusqueda;
         private System.Windows.Forms.Button buttonMateriales;
+        private System.Windows.Forms.TextBox textBoxIvaAplicado;
+        private System.Windows.Forms.Label labelIvaAplicado;
+        private System.Windows.Forms.Label labelIvaPorcentaje;
     }
 }

@@ -22,8 +22,6 @@ namespace Coset_Sistema_Produccion
 
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
-        public Datos_generales datos_generales = new Datos_generales();
-        public Class_Datos_Generales Class_Datos_Generales = new Class_Datos_Generales();
         public List<Partida_requisicion> Partidas_requisiciones_disponibles_ordenes_compra_no_asignadas 
             = new List<Partida_requisicion>();
         public Class_Partidas_Requisiciones Class_partidas_requisiciones = new Class_Partidas_Requisiciones();
@@ -39,7 +37,7 @@ namespace Coset_Sistema_Produccion
         public Partida_orden_compra Partida_orden_compra_agregar = new Partida_orden_compra();
         public Partida_orden_compra Partida_orden_compra_modificar = new Partida_orden_compra();
         public Class_Datos_Generales Class_datos_generales = new Class_Datos_Generales();
-        public Datos_generales datos_Generales = new Datos_generales();
+        public Datos_generales datos_generales = new Datos_generales();
         public List<Orden_compra> ordenes_compra_disponibles = new List<Orden_compra>();
         public Class_Ordenes_Compra Class_ordenes_compra = new Class_Ordenes_Compra();
         public Orden_compra orden_compra_visualizar = new Orden_compra();
@@ -174,6 +172,8 @@ namespace Coset_Sistema_Produccion
         private void Visualiza_orden_compra()
         {
             Operacio_orden_compra = "Visualizar";
+            Obtener_datos_generales();
+            Activa_boton_cotizacion_previo();
             Desactiva_botones_operacion();
             Desaparece_caja_captura_codigo_orden_compra();
             Aparece_boton_cancelar_operacio();
@@ -183,6 +183,10 @@ namespace Coset_Sistema_Produccion
             Aparece_combo_orden_compra();
             Aparece_textbox_estado();
             Aparece_label_estado();
+            Aparece_label_IvaAplicado();
+            Aparece_textbox_IvaAplicado();
+            Aparece_label_PorcentajeIvaAplicado();
+            Activa_textbox_IvaAplicado();
             Activa_combo_orden_compra();
             obtener_ordenes_compra_disponibles();
             Rellenar_combo_ordenes_compra();
@@ -191,7 +195,13 @@ namespace Coset_Sistema_Produccion
             Obtener_proveedores_disponibles();
             Aparecer_combo_nombre_proveedor();
             Rellena_combo_nombre_proveedor();
+            Asigna_valor_IvaPlicado();
             
+        }
+
+        private void Asigna_valor_IvaPlicado()
+        {
+            textBoxIvaAplicado.Text = datos_generales.Iva.ToString();
         }
 
         private void Aparece_label_estado()
@@ -202,6 +212,44 @@ namespace Coset_Sistema_Produccion
         private void Aparece_textbox_estado()
         {
             textBoxEstado.Visible = true;
+        }
+
+        private void Aparece_label_IvaAplicado()
+        {
+            labelIvaAplicado.Visible = true;
+        }
+
+        private void Aparece_textbox_IvaAplicado()
+        {
+            textBoxIvaAplicado.Visible = true;
+        }
+        private void Aparece_label_PorcentajeIvaAplicado()
+        {
+            labelIvaPorcentaje.Visible = true;
+        }
+
+        private void Desaparece_label_IvaAplicado()
+        {
+            labelIvaAplicado.Visible = false;
+        }
+
+        private void Desaparece_textbox_IvaAplicado()
+        {
+            textBoxIvaAplicado.Visible = false;
+        }
+        private void Desaparece_label_PorcentajeIvaAplicado()
+        {
+            labelIvaPorcentaje.Visible = false;
+        }
+
+        private void Activa_textbox_IvaAplicado()
+        {
+            textBoxIvaAplicado.Enabled = true;
+        }
+
+        private void Desactiva_textbox_IvaAplicado()
+        {
+            textBoxIvaAplicado.Enabled = true;
         }
 
         private void Aparece_boton_visulizar_word_orden_compra()
@@ -863,7 +911,7 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_datos_generales()
         {
-            datos_Generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
+            datos_generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
         }
 
         private void Activa_seleccion_fecha_actual()
@@ -1636,6 +1684,7 @@ namespace Coset_Sistema_Produccion
             textBoxCotizacion.Text = "";
             textBoxCondicionPago.Text = "";
             textBoxEstado.Text = "";
+            textBoxIvaAplicado.Text = "";
             textBoxRequisicion.Text = "";
             radioButtonPesos.Select();
         }
@@ -2202,18 +2251,35 @@ namespace Coset_Sistema_Produccion
 
         private void buttonWordPrevio_Click(object sender, EventArgs e)
         {
-            if (Inicia_variables_word())
+            if (Verifica_valor_Iva_numerico())
             {
-                Desactiva_boton_ordenes_compra_previo();
-                Desactiva_boton_guardar_archivo_path();
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_a_orden_compra();
-                Abrir_documento_word();
-                Rellenar_campos_orden_compra();
-                Visible_instancia_word();
+                if (Inicia_variables_word())
+                {
+                    Desactiva_boton_ordenes_compra_previo();
+                    Desactiva_boton_guardar_archivo_path();
+                    Asigna_nombre_archivo_para_analizar();
+                    Elimina_archivo();
+                    Copiar_template_a_orden_compra();
+                    Abrir_documento_word();
+                    Rellenar_campos_orden_compra();
+                    Visible_instancia_word();
+                }
             }
+        }
 
+        private bool Verifica_valor_Iva_numerico()
+        {
+            try
+            {
+                Convert.ToSingle(textBoxIvaAplicado.Text);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("IVA NO Numerico", "Inicio EWord", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxIvaAplicado.Text = datos_generales.Iva;
+                return false;
+            }
         }
 
         private void Desactiva_boton_guardar_archivo_path()
@@ -2372,12 +2438,12 @@ namespace Coset_Sistema_Produccion
                      total.ToString("C"));
                     Total_partidas += total;
                 }
-                datos_generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
+                //datos_generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
                 Remplaza_texto_en_Documento("<importe>",
                     Total_partidas.ToString("C"));
                 Remplaza_texto_en_Documento("<iva>",
-                    datos_generales.Iva);
-                iva_total = (Convert.ToSingle(datos_generales.Iva)/100.0) * Total_partidas;
+                    textBoxIvaAplicado.Text);
+                iva_total = (Convert.ToSingle(textBoxIvaAplicado.Text)/100.0) * Total_partidas;
                 Remplaza_texto_en_Documento("<iva_total>",
                     iva_total.ToString("C"));
                 total = Total_partidas + iva_total;
@@ -2800,18 +2866,21 @@ namespace Coset_Sistema_Produccion
 
         private void buttonSaveFile_Click(object sender, EventArgs e)
         {
-            if (Inicia_variables_word())
+            if (Verifica_valor_Iva_numerico())
             {
-                Desactiva_boton_ordenes_compra_previo();
-                Desactiva_boton_guardar_archivo_path();
-                Asigna_nombre_archivo_para_analizar();
-                Elimina_archivo();
-                Copiar_template_a_orden_compra();
-                Abrir_documento_word();
-                Rellenar_campos_orden_compra();
-                Guardar_archivo_word_en_ruta_en_datos_generales();
-                Cierra_documento_word();
-                Termina_secuencia_save_file();
+                if (Inicia_variables_word())
+                {
+                    Desactiva_boton_ordenes_compra_previo();
+                    Desactiva_boton_guardar_archivo_path();
+                    Asigna_nombre_archivo_para_analizar();
+                    Elimina_archivo();
+                    Copiar_template_a_orden_compra();
+                    Abrir_documento_word();
+                    Rellenar_campos_orden_compra();
+                    Guardar_archivo_word_en_ruta_en_datos_generales();
+                    Cierra_documento_word();
+                    Termina_secuencia_save_file();
+                }
             }
         }
 
@@ -2851,7 +2920,11 @@ namespace Coset_Sistema_Produccion
             Selecciona_pesos_tipo_modeda();
             Desaparece_textbox_estado();
             Desaparece_label_estado();
+            Desaparece_label_IvaAplicado();
+            Desaparece_textbox_IvaAplicado();
+            Desactiva_textbox_IvaAplicado();
             Desactiva_grupo_Tipo_moneda();
+            Desaparece_label_PorcentajeIvaAplicado();
             Elimina_archivo();
             Elimina_informacion_orden_compra_disponibles();
 
@@ -2881,7 +2954,7 @@ namespace Coset_Sistema_Produccion
         {
             string nombre_archivo = "";
             string nombre_folder = "";
-            datos_generales = Class_Datos_Generales.Obtener_informacion_datos_generales_base_datos();
+            datos_generales = Class_datos_generales.Obtener_informacion_datos_generales_base_datos();
             nombre_archivo = datos_generales.folder_ordenes_compra.Replace("/", @"\") + @"\" + comboBoxCodigoOrdenCompra.Text + ".docx";
             nombre_folder = datos_generales.folder_ordenes_compra.Replace("/", @"\");
             if (Directory.Exists(nombre_folder))
