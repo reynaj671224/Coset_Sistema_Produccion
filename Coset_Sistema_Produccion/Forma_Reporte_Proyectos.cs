@@ -96,6 +96,10 @@ namespace Coset_Sistema_Produccion
             comboBoxCodigoProyecto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxCodigoProyecto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxCodigoProyecto.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxNombreEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxNombreEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxNombreEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void buttonHome_Click(object sender, EventArgs e)

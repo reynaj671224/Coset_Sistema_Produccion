@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
+using Microsoft.Office.Core;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace Coset_Sistema_Produccion
 {
@@ -34,6 +38,11 @@ namespace Coset_Sistema_Produccion
         public Movimiento_auto Movimiento_salida = new Movimiento_auto();
         public Movimiento_auto Movimiento_entrada = new Movimiento_auto();
         public Movimiento_auto Movimiento_visualizar = new Movimiento_auto();
+        string appPath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+        public string Archivo_Excel_nombre = "";
+        public Excel.Application oXL = null;
+        public Excel.Worksheet oSheet = null;
+        public Excel.Workbook oWB = null;
 
         public string Operacion_autos = "";
 
@@ -113,12 +122,27 @@ namespace Coset_Sistema_Produccion
             comboBoxAutoDescripcion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxAutoDescripcion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxAutoDescripcion.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxClienteProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxClienteProveedor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxClienteProveedor.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
             Elimina_informacion_auto_disponibles();
-            this.Dispose();
+            Cierra_archivo_Excel();
+            Close_Excel();
+            Termina_applicacion();
+            Elimina_archivo_excel();
+            oXL = null;
+            oSheet = null;
+            oWB = null;
+            Archivo_Excel_nombre = "";
             GC.Collect();
             this.Close();
         }
@@ -131,16 +155,32 @@ namespace Coset_Sistema_Produccion
         private void Visualiza_Movimientos()
         {
             Operacion_autos = "Visualizar";
+            Limpia_combo_descripcion_auto();
+            Limpia_combo_nombre_empleado();
             Desactiva_botones_operacion();
             Desaparece_caja_descripcion_auto();
             Aparece_combo_descrpcion_auto();
             Activa_combo_descripcion_auto();
+            Aparece_combo_empleados();
+            Activa_combo_empleados();
             Obtener_datos_autos_disponibles_base_datos();
             Rellena_combo_auto_descripcion();
+            Obtener_usuarios_disponibles_base_datos();
+            Rellenar_combo_empleados();
             Aparece_boton_cancelar_operacio();
             Activa_datagridview_movimiento_autos();
            
             
+        }
+
+        private void Aparece_boton_excel()
+        {
+            buttonExcel.Visible = true;
+        }
+
+        private void Desaparece_boton_excel()
+        {
+            buttonExcel.Visible = false;
         }
 
         private void Desactiva_datagridview_movimiento_autos()
@@ -194,6 +234,16 @@ namespace Coset_Sistema_Produccion
         private void Aparece_combo_descrpcion_auto()
         {
             comboBoxAutoDescripcion.Visible=true;
+        }
+
+        private void Desactiva_combo_descripcion_auto()
+        {
+            comboBoxAutoDescripcion.Enabled = false;
+        }
+
+        private void Desaparece_combo_descrpcion_auto()
+        {
+            comboBoxAutoDescripcion.Visible = false;
         }
 
         private void Desaparece_caja_descripcion_auto()
@@ -272,6 +322,8 @@ namespace Coset_Sistema_Produccion
             Aparece_caja_nombre_cliente();
             Desactiva_seleccion_fecha();
             Desactiva_seleccion_hora();
+            Desaparece_boton_excel();
+            Desaparece_combo_empleados();
             Elimina_informacion_auto_disponibles();
             
         }
@@ -334,6 +386,7 @@ namespace Coset_Sistema_Produccion
 
         private void configura_forma_visualizar()
         {
+            Desaparece_boton_excel();
             Obtener_usuarios_disponibles_base_datos();
             Limpia_combo_nombre_empleado_en_datagridview();
             Limpia_datagridview_movimiento_autos();
@@ -344,7 +397,10 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_movimientos_visualizar_base_datos()
         {
-            Movimientos_auto_visualizar_disponibles = Class_Movimientos_Autos.Adquiere_movimientos_autos_busqueda_en_base_datos(comboBoxAutoDescripcion.Text);
+            Movimientos_auto_visualizar_disponibles = Class_Movimientos_Autos.
+                Adquiere_movimientos_autos_busqueda_en_base_datos(comboBoxAutoDescripcion.Text);
+            if (Movimientos_auto_visualizar_disponibles.Count > 0)
+                Aparece_boton_excel();
         }
 
         private void Rellena_cajas_informacion_de_clientes()
@@ -1092,9 +1148,12 @@ namespace Coset_Sistema_Produccion
             else if (Operacion_autos == "Entrada")
                 configura_forma_entrada();
             else if (Operacion_autos == "Visualizar")
+            {
                 configura_forma_visualizar();
-
+                Desactiva_combo_empleados();
+            }
         }
+      
 
         private void comboBoxContactoClienteProveedor_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1193,11 +1252,193 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Aparece_combo_descrpcion_auto();
-            Activa_combo_descripcion_auto();
-            Limpia_combo_descripcion_auto();
-            Obtener_datos_autos_disponibles_base_datos();
-            Rellena_combo_auto_descripcion();
+            if (Operacion_autos == "Visualizar")
+            {
+                Desaparece_boton_excel();
+                Desactiva_combo_descripcion_auto();
+                Limpia_datagridview_movimiento_autos();
+                Obtener_movimientos_usuario_visualizar_base_datos();
+                Rellenar_datagridview_movimientos_autos();
+
+            }
+            else
+            {
+                Aparece_combo_descrpcion_auto();
+                Activa_combo_descripcion_auto();
+                Limpia_combo_descripcion_auto();
+                Obtener_datos_autos_disponibles_base_datos();
+                Rellena_combo_auto_descripcion();
+            }
+        }
+
+        private void Obtener_movimientos_usuario_visualizar_base_datos()
+        {
+            Movimientos_auto_visualizar_disponibles = Class_Movimientos_Autos.
+                Adquiere_movimientos_empleados_autos_busqueda_en_base_datos(comboBoxEmpleado.Text);
+
+            if(Movimientos_auto_visualizar_disponibles.Count >0)
+                Aparece_boton_excel();
+        }
+
+        private void buttonExcel_Click(object sender, EventArgs e)
+        {
+            Desactiva_boton_excel();
+            Elimina_archivo_excel();
+            if (Inicia_Excel())
+            {
+
+                if (Copiar_template_a_movimientos_autos())
+                {
+                    if (Abrir_Archivo_Excel())
+                    {
+
+                        try
+                        {
+                            oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
+                            Imprime_titiulos_excel();
+
+                            for (int Row = 0; Row < dataGridViewMovimientosAutos.RowCount - 1; Row++)
+                            {
+                                for (int Column = 0; Column < dataGridViewMovimientosAutos.ColumnCount-1; Column++)
+                                {
+                                    oSheet.Cells[Row + 2, Column + 1] = dataGridViewMovimientosAutos[Column + 1, Row].Value.ToString();
+                                }
+                            }
+                            oSheet.Cells.EntireColumn.AutoFit();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Probelmas para mostrar informacion en Excel", "Movimientos Autos",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                Guarda_archivo_excel();
+                oXL.Visible = true;
+            }
+        }
+
+        private void Desactiva_boton_excel()
+        {
+            buttonExcel.Enabled = false;
+        }
+
+        private void Elimina_archivo_excel()
+        {
+            Archivo_Excel_nombre = "\\Movimientos_autos-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+            try
+            {
+                File.Delete(@appPath + Archivo_Excel_nombre);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public bool Inicia_Excel()
+        {
+            try
+            {
+                oXL = new Excel.Application();
+
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("No Excel Instalado", "Maximox-Minimos",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+        private bool Copiar_template_a_movimientos_autos()
+        {
+            Archivo_Excel_nombre = "\\Movimientos_autos-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+            try
+            {
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + Archivo_Excel_nombre, false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool Abrir_Archivo_Excel()
+        {
+            try
+            {
+                oWB = oXL.Workbooks.Open(@appPath + Archivo_Excel_nombre);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show(Archivo_Excel_nombre + " No existe en el Folder de aplicacion",
+                    "Movimientos Autos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+        }
+
+        private void Imprime_titiulos_excel()
+        {
+            oSheet.Cells[1, 1] = "Auto";
+            oSheet.Cells[1, 2] = "Hora Salida";
+            oSheet.Cells[1, 3] = "Fecha Salida";
+            oSheet.Cells[1, 4] = "Hora Entrada";
+            oSheet.Cells[1, 5] = "Fecha Entrada";
+            oSheet.Cells[1, 6] = "Compañia Visita";
+            oSheet.Cells[1, 7] = "Contacto Visita";
+            oSheet.Cells[1, 8] = "Estado";
+            oSheet.Cells[1, 9] = "Empleado";
+        }
+        private void Termina_applicacion()
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(oXL);
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        public void Guarda_archivo_excel()
+        {
+            try
+            {
+                oWB.Save();
+            }
+            catch
+            {
+
+            }
+        }
+        private void Close_Excel()
+        {
+            try
+            {
+                oXL.Quit();
+            }
+            catch
+            {
+
+            }
+        }
+        private void Cierra_archivo_Excel()
+        {
+            try
+            {
+                oWB.Close();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

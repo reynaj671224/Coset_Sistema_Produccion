@@ -44,6 +44,46 @@ namespace Coset_Sistema_Produccion
             return Movimientos_autos_disponibles;
         }
 
+        public List<Movimiento_auto> Adquiere_movimientos_empleados_autos_busqueda_en_base_datos(string empleado)
+        {
+            List<Movimiento_auto> Movimientos_autos_disponibles = new List<Movimiento_auto>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_almacen_autos());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_movimiento_autos_empleados(empleado), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Movimientos_autos_disponibles.Add(new Movimiento_auto()
+                    {
+                        Codigo = mySqlDataReader["codigo_movimiento"].ToString(),
+                        Hora_salida = mySqlDataReader["salida_hora"].ToString(),
+                        Fecha_salida = mySqlDataReader["salida_fecha"].ToString(),
+                        Hora_entrada = mySqlDataReader["entrada_hora"].ToString(),
+                        Fecha_entrada = mySqlDataReader["entrada_fecha"].ToString(),
+                        Auto_descripcion = mySqlDataReader["auto_descripcion"].ToString(),
+                        Nombre_visita = mySqlDataReader["nombre_visita"].ToString(),
+                        Nombre_contacto = mySqlDataReader["nombre_contacto"].ToString(),
+                        Empleados = mySqlDataReader["empleados"].ToString(),
+                        Status = mySqlDataReader["status"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Movimientos_autos_disponibles.Add(new Movimiento_auto()
+                { Error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Movimientos_autos_disponibles;
+        }
+
+        private string Commando_leer_Mysql_busqueda_movimiento_autos_empleados(string empleado)
+        {
+            return "SELECT * FROM movimientos_autos where empleados ='" + empleado + "'";
+        }
+
         public List<Movimiento_auto> Adquiere_movimientos_autos_en_uso()
         {
             List<Movimiento_auto> Movimientos_autos_disponibles = new List<Movimiento_auto>();

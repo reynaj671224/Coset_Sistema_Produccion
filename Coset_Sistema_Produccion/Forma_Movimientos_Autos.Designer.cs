@@ -57,9 +57,6 @@
             this.Responsable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.comboBoxContactoClienteProveedor = new System.Windows.Forms.ComboBox();
             this.dataGridViewMovimientosAutos = new System.Windows.Forms.DataGridView();
-            this.comboBoxEmpleado = new System.Windows.Forms.ComboBox();
-            this.textBoxEmpleado = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Auto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +67,10 @@
             this.Contacto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.empleados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxEmpleado = new System.Windows.Forms.ComboBox();
+            this.textBoxEmpleado = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleadosAuto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovimientosAutos)).BeginInit();
@@ -380,36 +381,6 @@
             this.dataGridViewMovimientosAutos.TabIndex = 62;
             this.dataGridViewMovimientosAutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMovimientosAutos_CellClick);
             // 
-            // comboBoxEmpleado
-            // 
-            this.comboBoxEmpleado.FormattingEnabled = true;
-            this.comboBoxEmpleado.Location = new System.Drawing.Point(208, 113);
-            this.comboBoxEmpleado.Name = "comboBoxEmpleado";
-            this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
-            this.comboBoxEmpleado.Sorted = true;
-            this.comboBoxEmpleado.TabIndex = 65;
-            this.comboBoxEmpleado.Visible = false;
-            this.comboBoxEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleado_SelectedIndexChanged);
-            // 
-            // textBoxEmpleado
-            // 
-            this.textBoxEmpleado.Enabled = false;
-            this.textBoxEmpleado.Location = new System.Drawing.Point(208, 113);
-            this.textBoxEmpleado.Name = "textBoxEmpleado";
-            this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
-            this.textBoxEmpleado.TabIndex = 64;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
-            this.label3.Location = new System.Drawing.Point(86, 113);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 16);
-            this.label3.TabIndex = 63;
-            this.label3.Text = "Empleado";
-            // 
             // codigo
             // 
             this.codigo.HeaderText = "Codigo";
@@ -468,11 +439,57 @@
             this.empleados.Name = "empleados";
             this.empleados.Width = 200;
             // 
+            // comboBoxEmpleado
+            // 
+            this.comboBoxEmpleado.FormattingEnabled = true;
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(208, 113);
+            this.comboBoxEmpleado.Name = "comboBoxEmpleado";
+            this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxEmpleado.Sorted = true;
+            this.comboBoxEmpleado.TabIndex = 65;
+            this.comboBoxEmpleado.Visible = false;
+            this.comboBoxEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleado_SelectedIndexChanged);
+            // 
+            // textBoxEmpleado
+            // 
+            this.textBoxEmpleado.Enabled = false;
+            this.textBoxEmpleado.Location = new System.Drawing.Point(208, 113);
+            this.textBoxEmpleado.Name = "textBoxEmpleado";
+            this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
+            this.textBoxEmpleado.TabIndex = 64;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
+            this.label3.Location = new System.Drawing.Point(86, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 16);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "Empleado";
+            // 
+            // buttonExcel
+            // 
+            this.buttonExcel.AutoSize = true;
+            this.buttonExcel.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExcel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExcel.Image")));
+            this.buttonExcel.Location = new System.Drawing.Point(948, 240);
+            this.buttonExcel.Name = "buttonExcel";
+            this.buttonExcel.Size = new System.Drawing.Size(79, 74);
+            this.buttonExcel.TabIndex = 66;
+            this.buttonExcel.Text = "Excel";
+            this.buttonExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonExcel.UseVisualStyleBackColor = true;
+            this.buttonExcel.Visible = false;
+            this.buttonExcel.Click += new System.EventHandler(this.buttonExcel_Click);
+            // 
             // Forma_Movimientos_Autos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1039, 486);
+            this.Controls.Add(this.buttonExcel);
             this.Controls.Add(this.comboBoxEmpleado);
             this.Controls.Add(this.textBoxEmpleado);
             this.Controls.Add(this.label3);
@@ -553,5 +570,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Contacto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn empleados;
+        private System.Windows.Forms.Button buttonExcel;
     }
 }

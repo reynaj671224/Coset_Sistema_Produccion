@@ -44,6 +44,8 @@ namespace Coset_Sistema_Produccion
         private void Rellena_partidas_materiales_disponibles() 
         {
             int Material_requerido = 0;
+            string Material_requerido_string = "";
+            string Material_cantidad_string = "";
             foreach (Material material in Materiales_disponibles_busqueda)
             {
                 if (material.error == "")
@@ -55,10 +57,21 @@ namespace Coset_Sistema_Produccion
                         if (Material_requerido < 0)
                         {
                             Material_requerido = 0;
+                            
                         }
 
+                        Material_requerido_string = Material_requerido.ToString();
+                        if (Convert.ToInt32(material.Cantidad) > Convert.ToInt32(material.Maximo))
+                        {
+                            Material_cantidad_string = "*" + material.Cantidad + "*";
+                        }
+                        else
+                        {
+                            Material_cantidad_string = material.Cantidad.ToString();
+                        }
                         dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
-                            material.Descripcion, material.Minimo, material.Maximo, material.Cantidad, Material_requerido.ToString(), material.Marca, material.Unidad_medida, material.foto);
+                            material.Descripcion, material.Minimo, material.Maximo, Material_cantidad_string, Material_requerido_string, 
+                            material.Marca, material.Unidad_medida, material.Ubicacion,material.foto);
 
                     }
                     catch (Exception ex)
@@ -93,31 +106,31 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewPartidasMaterialSeleccion_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value != null)
-            {
-                Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material =>
-                        material.Codigo.Contains(dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"]
-                        .Value.ToString()));
-                if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString() != "")
-                {
-                    Aparece_foto_material();
-                    try
-                    {
-                        dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
-                        pictureBoxMaterial.Image = Image.FromFile(@appPath + "\\Fotos\\" +
-                            dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString());
+            //if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value != null)
+            //{
+            //    Material_seleccionado_data_view = Materiales_disponibles_busqueda.Find(material =>
+            //            material.Codigo.Contains(dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"]
+            //            .Value.ToString()));
+            //    if (dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString() != "")
+            //    {
+            //        Aparece_foto_material();
+            //        try
+            //        {
+            //            dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Codigo_partida"].Value.ToString();
+            //            pictureBoxMaterial.Image = Image.FromFile(@appPath + "\\Fotos\\" +
+            //                dataGridViewPartidasMaterialSeleccion.Rows[e.RowIndex].Cells["Foto"].Value.ToString());
 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else
-                {
-                    Desaparece_foto_material();
-                }
-            }
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show(ex.Message);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Desaparece_foto_material();
+            //    }
+            //}
         }
 
         private void Desaparece_foto_material()
@@ -163,7 +176,7 @@ namespace Coset_Sistema_Produccion
             Elimina_archivo_excel();
             if (Inicia_Excel())
             {
-                oXL.Visible = true;
+                
                 if (Copiar_template_a_maximos_minimos())
                 {
                     if (Abrir_Archivo_Excel())
@@ -191,6 +204,7 @@ namespace Coset_Sistema_Produccion
                     }
                 }
                 Guarda_archivo_excel();
+                oXL.Visible = true;
             }
         }
 
@@ -254,6 +268,8 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_archivo_excel()
         {
+            Archivo_Excel_nombre = "\\Maximos_minimos-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
             try
             {
                 File.Delete(@appPath + Archivo_Excel_nombre);
@@ -280,6 +296,7 @@ namespace Coset_Sistema_Produccion
             oSheet.Cells[1, 7] = "Requerido";
             oSheet.Cells[1, 8] = "Marca";
             oSheet.Cells[1, 9] = "Unidad Medida";
+            oSheet.Cells[1, 10] = "Ubicacion";
 
         }
 

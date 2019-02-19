@@ -48,6 +48,7 @@ namespace Coset_Sistema_Produccion
         public word.Application application = null;
         public word.Document Documento = null;
         public List<Proyecto> proyectos_disponibles = new List<Proyecto>();
+        public Proyecto proyecto_seleccion = new Proyecto();
         public Class_Proyectos Class_Proyectos = new Class_Proyectos();
         public Proyecto proyecto_visualizar = new Proyecto();
         public Dibujos_proyecto dibujos_proyecto_modificar = new Dibujos_proyecto();
@@ -454,7 +455,18 @@ namespace Coset_Sistema_Produccion
                 configura_forma_visualizar_codigo_proyecto();
             else if (Operacio_proyectos == "Operaciones Dibujos")
                 configura_forma_operaciones_dibujos();
+            else if (Operacio_proyectos == "Agregar SubProyecto")
+                configura_forma_subproyecto();
+        }
 
+        private void configura_forma_subproyecto()
+        {
+            proyecto_seleccion = proyectos_disponibles.Find(proyecto => proyecto.Codigo.Contains(comboBoxCodigoProyecto.Text));
+            textBoxNombreProyecto.Text = proyecto_seleccion.Nombre;
+            comboBoxNombreCliente.Text = proyecto_seleccion.Nombre_cliente;
+            comboBoxCodigoCotizacion.Text = proyecto_seleccion.Codigo_cotizacion;
+            comboBoxIngenieroCliente.Text = proyecto_seleccion.Ingeriero_cliente;
+            textBoxCodigoOC.Text = proyecto_seleccion.Codigo_orden_compra;
 
         }
 

@@ -63,10 +63,6 @@
             this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelClock = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -75,19 +71,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxpassword = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timertipoususraio = new System.Windows.Forms.Timer(this.components);
             this.timerClock = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewRequisicionesAbiertas = new System.Windows.Forms.DataGridView();
             this.Requisicion_pendiente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.timerStart = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItemInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -272,6 +273,7 @@
             this.salidaMaterialesToolStripMenuItem,
             this.devolucionToolStripMenuItem,
             this.toolStripMenuItemMaxMin,
+            this.toolStripMenuItemInventarioGeneral,
             this.toolStripMenuItemInventarios,
             this.movimientosautosToolStripMenuItem});
             this.almacenToolStripMenuItem.Name = "almacenToolStripMenuItem";
@@ -357,38 +359,6 @@
             this.capturaDeProduccionToolStripMenuItem.Text = "Captura de Produccion";
             this.capturaDeProduccionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeProduccionToolStripMenuItem_Click);
             // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
-            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.produccionToolStripMenuItem1,
-            this.proyectosToolStripMenuItem1});
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            // 
-            // produccionToolStripMenuItem1
-            // 
-            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dibujosProyectoToolStripMenuItem});
-            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
-            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
-            this.produccionToolStripMenuItem1.Text = "Produccion";
-            // 
-            // dibujosProyectoToolStripMenuItem
-            // 
-            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
-            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
-            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
-            // 
-            // proyectosToolStripMenuItem1
-            // 
-            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
-            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
-            this.proyectosToolStripMenuItem1.Text = "Proyectos";
-            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -456,17 +426,6 @@
             this.textBoxpassword.TabIndex = 5;
             this.textBoxpassword.Text = "Jaqueline5!";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(866, 413);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // timertipoususraio
             // 
             this.timertipoususraio.Interval = 1000;
@@ -506,6 +465,18 @@
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
             // 
+            // timerStart
+            // 
+            this.timerStart.Enabled = true;
+            this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
+            // 
+            // toolStripMenuItemInventarioGeneral
+            // 
+            this.toolStripMenuItemInventarioGeneral.Name = "toolStripMenuItemInventarioGeneral";
+            this.toolStripMenuItemInventarioGeneral.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItemInventarioGeneral.Text = "Inventario General";
+            this.toolStripMenuItemInventarioGeneral.Click += new System.EventHandler(this.toolStripMenuItemInventarioGeneral_Click);
+            // 
             // labelREquisicionesAbiertas
             // 
             this.labelREquisicionesAbiertas.AutoSize = true;
@@ -519,10 +490,48 @@
             this.labelREquisicionesAbiertas.Visible = false;
             this.labelREquisicionesAbiertas.Click += new System.EventHandler(this.labelREquisicionesAbiertas_Click);
             // 
-            // timerStart
+            // pictureBox1
             // 
-            this.timerStart.Enabled = true;
-            this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(866, 413);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.produccionToolStripMenuItem1,
+            this.proyectosToolStripMenuItem1});
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // produccionToolStripMenuItem1
+            // 
+            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dibujosProyectoToolStripMenuItem});
+            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
+            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.produccionToolStripMenuItem1.Text = "Produccion";
+            // 
+            // dibujosProyectoToolStripMenuItem
+            // 
+            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
+            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
+            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
+            // 
+            // proyectosToolStripMenuItem1
+            // 
+            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
+            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.proyectosToolStripMenuItem1.Text = "Proyectos";
+            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
             // 
             // Coset_Sistema_Produccion
             // 
@@ -541,15 +550,15 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 9.2";
+            this.Text = "Coset Sistema Produccion Rev 9.3";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,6 +620,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMaxMin;
         private System.Windows.Forms.ToolStripMenuItem dibujosProyectoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ConsultaMaterialesOCtoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInventarioGeneral;
     }
 }
 

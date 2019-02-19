@@ -703,5 +703,11 @@ namespace Coset_Sistema_Produccion
                 new Forma_Consulta_Materiales_Ordenes_Compra();
             forma_Consulta_Materiales_Ordenes_Compra.ShowDialog();
         }
+
+        private void toolStripMenuItemInventarioGeneral_Click(object sender, EventArgs e)
+        {
+            Forma_Materiales_Inventario_General forma_Materiales_Inventario_General = new Forma_Materiales_Inventario_General();
+            forma_Materiales_Inventario_General.ShowDialog();
+        }
     }
 }

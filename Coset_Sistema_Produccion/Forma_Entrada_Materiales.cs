@@ -27,6 +27,7 @@ namespace Coset_Sistema_Produccion
         public Class_Usuarios class_Usuarios = new Class_Usuarios();
         public Usuario Usuario_requisitores = new Usuario();
         public List<Usuario> Usuarios_administrativos = new List<Usuario>();
+        public Usuario Usuario_seleccionado = new Usuario();
         public Class_Datos_Generales Class_datos_generales = new Class_Datos_Generales();
         public Datos_generales datos_Generales = new Datos_generales();
         public List<Orden_compra> ordenes_compra_disponibles = new List<Orden_compra>();
@@ -93,6 +94,10 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxCodigoEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
 
         }
 
@@ -279,8 +284,11 @@ namespace Coset_Sistema_Produccion
                 {
                     No_acepta_datagridview_agregar_renglones();
                     Limpia_combo_empleado();
+                    Limpia_combo_empleado_codigo();
                     Aparece_combo_empleado();
                     Activa_combo_empleado();
+                    Aparece_combo_empleado_codigo();
+                    Activa_combo_empleado_codigo();
                     obtener_usuarios_administrativos_compras_disponibles();
                     Rellena_combo_empleado();
                     Activa_seleccion_fecha_actual();
@@ -447,6 +455,16 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Visible = true;
         }
 
+        private void Activa_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Enabled = true;
+        }
+
+        private void Aparece_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Visible = true;
+        }
+
         private void Desaparece_textbox_requisitor()
         {
             textBoxEmpleado.Visible = false;
@@ -564,6 +582,7 @@ namespace Coset_Sistema_Produccion
             else
             {
                 Limpia_combo_empleado();
+                Limpia_combo_empleado_codigo();
                 Aparece_combo_empleado();
                 Activa_combo_empleado();
                 obtener_usuarios_administrativos_compras_disponibles();
@@ -669,7 +688,10 @@ namespace Coset_Sistema_Produccion
             foreach (Usuario usuario in Usuarios_administrativos)
             {
                 if (usuario.error == "")
+                {
                     comboBoxEmpleado.Items.Add(usuario.nombre_empleado);
+                    comboBoxCodigoEmpleado.Items.Add(usuario.codigo_empleado);
+                }
                 else
                 {
                     MessageBox.Show(usuario.error);
@@ -687,6 +709,12 @@ namespace Coset_Sistema_Produccion
         {
             comboBoxEmpleado.Items.Clear();
             comboBoxEmpleado.Text = "";
+        }
+
+        private void Limpia_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Items.Clear();
+            comboBoxCodigoEmpleado.Text = "";
         }
 
         private void Activa_textbox_codigo_proveedor()
@@ -792,6 +820,8 @@ namespace Coset_Sistema_Produccion
                             Desactiva_datagridview_partidas();
                             Desaparece_combo_cliente_nombre();
                             Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_cliente_codigo();
+                            Desactiva_combo_cliente_codigo();
                             Desaparece_combo_atencion();
                             Desactiva_combo_atencion();
                             Desactiva_grupo_referencia();
@@ -964,6 +994,8 @@ namespace Coset_Sistema_Produccion
                             Desactiva_datagridview_partidas();
                             Desaparece_combo_cliente_nombre();
                             Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_cliente_codigo();
+                            Desactiva_combo_cliente_codigo();
                             Desaparece_combo_atencion();
                             Desactiva_combo_atencion();
                             Aparece_textbox_nombre_cliente();
@@ -1211,6 +1243,15 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Visible = false;
         }
 
+        private void Desactiva_combo_cliente_codigo()
+        {
+            comboBoxCodigoEmpleado.Enabled = false;
+        }
+
+        private void Desaparece_combo_cliente_codigo()
+        {
+            comboBoxCodigoEmpleado.Visible = false;
+        }
         private void Desactiva_datagridview_partidas()
         {
             dataGridViewPartidasEntradaMaterialesVisualizar.Enabled = false;
@@ -1619,6 +1660,9 @@ namespace Coset_Sistema_Produccion
             Desaparece_combo_atencion();
             Desaparece_combo_codigo_cotizacion();
             Desaparece_combo_cliente_nombre();
+            Desactiva_combo_cliente_nombre();
+            Desaparece_combo_cliente_codigo();
+            Desactiva_combo_cliente_codigo();
             Activa_botones_operacion();
             limpia_partidas_ordenes_compra_visualizar();
             Desactiva_datagridview_partidas();
@@ -1875,6 +1919,12 @@ namespace Coset_Sistema_Produccion
             forma_Materiales.ShowDialog();
         }
 
+        private void comboBoxCodigoEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Usuario_seleccionado = Usuarios_administrativos.Find( usuario_seleccion =>
+            usuario_seleccion.codigo_empleado.Contains(comboBoxCodigoEmpleado.Text));
 
+            comboBoxEmpleado.Text = Usuario_seleccionado.nombre_empleado;
+        }
     }
 }

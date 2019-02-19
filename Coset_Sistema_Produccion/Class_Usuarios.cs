@@ -200,7 +200,8 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_requisitores_Mysql()
         {
             return "SELECT * FROM empleados where tipo_empleado='Ingenieria' or tipo_empleado='Almacen'" +
-                "or tipo_empleado='Administrativo'";
+                "or tipo_empleado='Administrativo' or tipo_empleado='Produccion'or tipo_empleado='Admin-Compras' " +
+                "or tipo_empleado='Almacen-Compras'";
         }
 
         private string Commando_leer_Mysql()
