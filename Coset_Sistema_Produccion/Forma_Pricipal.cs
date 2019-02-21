@@ -203,6 +203,18 @@ namespace Coset_Sistema_Produccion
             Oculta_Menu_Almacen_Inventarios();
             Oculta_Menu_Almacen_Devoluciones();
             Oculta_Menu_Almacen_Movimiento_autos();
+            Oculta_Menu_Maximos_Minimos();
+            Oculta_Menu_Inventario_General();
+        }
+
+        private void Oculta_Menu_Inventario_General()
+        {
+            toolStripMenuItemInventarioGeneral.Enabled = false;
+        }
+
+        private void Oculta_Menu_Maximos_Minimos()
+        {
+            toolStripMenuItemMaxMin.Enabled = false;
         }
 
         private void Oculta_Menu_Almacen_Movimiento_autos()
@@ -286,8 +298,20 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Almacen_Movimientos_autos();
             Muestra_menu_almacen_devolucion_materiales();
             Muestra_menu_almacen_inventarios_materiales();
+            Muestra_menu_maximos_minimos();
+            Muestra_menu_inventario_generales();
 
 
+        }
+
+        private void Muestra_menu_inventario_generales()
+        {
+            toolStripMenuItemInventarioGeneral.Enabled = true;
+        }
+
+        private void Muestra_menu_maximos_minimos()
+        {
+            toolStripMenuItemMaxMin.Enabled = true;
         }
 
         private void Muestra_menu_almacen_devolucion_materiales()
@@ -330,6 +354,7 @@ namespace Coset_Sistema_Produccion
         {
             Muestra_Menu_Almacen();
             Muestra_Menu_Compras();
+            Muestra_Menus_de_Almacen_Proibidas_Para_Ingenieria();
             Oculta_Menus_de_Compras_Prohibidas_Para_Almacen();
             toolStripStatusUsuario.Text = "Almacen";
         }
