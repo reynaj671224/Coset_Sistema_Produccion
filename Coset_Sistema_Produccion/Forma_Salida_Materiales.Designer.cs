@@ -88,6 +88,8 @@
             this.labelOCtotalUnits = new System.Windows.Forms.Label();
             this.buttonAsignarProyecto = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxCodigoEmpleado = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMateriales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMaterialesOC)).BeginInit();
@@ -229,7 +231,7 @@
             // textBoxEmpleado
             // 
             this.textBoxEmpleado.Enabled = false;
-            this.textBoxEmpleado.Location = new System.Drawing.Point(264, 273);
+            this.textBoxEmpleado.Location = new System.Drawing.Point(264, 275);
             this.textBoxEmpleado.Name = "textBoxEmpleado";
             this.textBoxEmpleado.Size = new System.Drawing.Size(246, 20);
             this.textBoxEmpleado.TabIndex = 40;
@@ -239,11 +241,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(108, 275);
+            this.label1.Location = new System.Drawing.Point(108, 281);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 16);
+            this.label1.Size = new System.Drawing.Size(106, 16);
             this.label1.TabIndex = 39;
-            this.label1.Text = "Empleado";
+            this.label1.Text = "Nombre Empleado";
             // 
             // textBoxCodigoProyecto
             // 
@@ -383,7 +385,7 @@
             // comboBoxEmpleado
             // 
             this.comboBoxEmpleado.FormattingEnabled = true;
-            this.comboBoxEmpleado.Location = new System.Drawing.Point(264, 273);
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(264, 274);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(246, 21);
             this.comboBoxEmpleado.Sorted = true;
@@ -648,7 +650,7 @@
             // 
             this.buttonAsignarProyecto.BackColor = System.Drawing.SystemColors.Window;
             this.buttonAsignarProyecto.Enabled = false;
-            this.buttonAsignarProyecto.Location = new System.Drawing.Point(264, 300);
+            this.buttonAsignarProyecto.Location = new System.Drawing.Point(671, 303);
             this.buttonAsignarProyecto.Name = "buttonAsignarProyecto";
             this.buttonAsignarProyecto.Size = new System.Drawing.Size(246, 23);
             this.buttonAsignarProyecto.TabIndex = 95;
@@ -661,17 +663,41 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(108, 307);
+            this.label4.Location = new System.Drawing.Point(550, 312);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 16);
             this.label4.TabIndex = 96;
             this.label4.Text = "Asignar Proyecto";
+            // 
+            // comboBoxCodigoEmpleado
+            // 
+            this.comboBoxCodigoEmpleado.FormattingEnabled = true;
+            this.comboBoxCodigoEmpleado.Location = new System.Drawing.Point(264, 303);
+            this.comboBoxCodigoEmpleado.Name = "comboBoxCodigoEmpleado";
+            this.comboBoxCodigoEmpleado.Size = new System.Drawing.Size(246, 21);
+            this.comboBoxCodigoEmpleado.Sorted = true;
+            this.comboBoxCodigoEmpleado.TabIndex = 98;
+            this.comboBoxCodigoEmpleado.Visible = false;
+            this.comboBoxCodigoEmpleado.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoEmpleado_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Image = ((System.Drawing.Image)(resources.GetObject("label8.Image")));
+            this.label8.Location = new System.Drawing.Point(108, 305);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 16);
+            this.label8.TabIndex = 97;
+            this.label8.Text = "Clave Empleado";
             // 
             // Forma_Salida_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1254, 582);
+            this.Controls.Add(this.comboBoxCodigoEmpleado);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonAsignarProyecto);
             this.Controls.Add(this.textBoxOCtotalUnits);
@@ -782,5 +808,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadAlmacen;
         private System.Windows.Forms.Button buttonAsignarProyecto;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxCodigoEmpleado;
+        private System.Windows.Forms.Label label8;
     }
 }

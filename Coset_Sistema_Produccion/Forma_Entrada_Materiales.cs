@@ -585,6 +585,8 @@ namespace Coset_Sistema_Produccion
                 Limpia_combo_empleado_codigo();
                 Aparece_combo_empleado();
                 Activa_combo_empleado();
+                Aparece_combo_empleado_codigo();
+                Activa_combo_empleado_codigo();
                 obtener_usuarios_administrativos_compras_disponibles();
                 Rellena_combo_empleado();
                 Activa_seleccion_fecha_actual();
@@ -1926,5 +1928,6 @@ namespace Coset_Sistema_Produccion
 
             comboBoxEmpleado.Text = Usuario_seleccionado.nombre_empleado;
         }
+
     }
 }

@@ -23,6 +23,7 @@ namespace Coset_Sistema_Produccion
         public Class_Datos_Generales Class_Datos_Generales = new Class_Datos_Generales();
         public Class_Usuarios class_Usuarios = new Class_Usuarios();
         public Usuario Usuario_requisitores = new Usuario();
+        public Usuario Usuario_seleccionado = new Usuario();
         public List<Usuario> Usuarios_administrativos = new List<Usuario>();
         public Class_Datos_Generales Class_datos_generales = new Class_Datos_Generales();
         public Datos_generales datos_Generales = new Datos_generales();
@@ -97,6 +98,10 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             comboBoxEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            comboBoxCodigoEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBoxCodigoEmpleado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxCodigoEmpleado.AutoCompleteSource = AutoCompleteSource.ListItems;
 
         }
 
@@ -210,6 +215,11 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Items.Clear();
             comboBoxEmpleado.Text = "";
         }
+        private void Limpia_combo_nombre_cliente_codigo()
+        {
+            comboBoxCodigoEmpleado.Items.Clear();
+            comboBoxCodigoEmpleado.Text = "";
+        }
 
         private void Aparece_caja_codigo_proyecto()
         {
@@ -238,6 +248,16 @@ namespace Coset_Sistema_Produccion
         private void Aparece_combo_empleado()
         {
             comboBoxEmpleado.Visible = true;
+        }
+
+        private void Activa_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Enabled = true;
+        }
+
+        private void Aparece_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Visible = true;
         }
 
         private void Desaparece_textbox_requisitor()
@@ -321,6 +341,9 @@ namespace Coset_Sistema_Produccion
             else
             {
                 Limpia_combo_empleado();
+                Limpia_combo_empleado_codigo();
+                Aparece_combo_empleado_codigo();
+                Activa_combo_empleado_codigo();
                 Aparece_combo_empleado();
                 Activa_combo_empleado();
                 Aparece_combo_proyectos();
@@ -419,7 +442,10 @@ namespace Coset_Sistema_Produccion
             foreach (Usuario usuario in Usuarios_administrativos)
             {
                 if (usuario.error == "")
+                {
                     comboBoxEmpleado.Items.Add(usuario.nombre_empleado);
+                    comboBoxCodigoEmpleado.Items.Add(usuario.codigo_empleado);
+                }
                 else
                 {
                     MessageBox.Show(usuario.error);
@@ -440,6 +466,11 @@ namespace Coset_Sistema_Produccion
             comboBoxEmpleado.Text = "";
         }
 
+        private void Limpia_combo_empleado_codigo()
+        {
+            comboBoxCodigoEmpleado.Items.Clear();
+            comboBoxCodigoEmpleado.Text = "";
+        }
         private void Activa_textbox_codigo_proveedor()
         {
             textBoxCodigoProveedor.Enabled = true;
@@ -516,6 +547,7 @@ namespace Coset_Sistema_Produccion
                             Asigna_estado_orden_compra_salida_materiales();
                             Limpia_cajas_captura_despues_de_agregar_salida_material();
                             Limpia_combo_nombre_cliente();
+                            Limpia_combo_nombre_cliente_codigo();
                             Limpia_datagrid_salida_materiales_orden_compra();
                             Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
                             Desaparece_boton_guardar_base_de_datos();
@@ -526,6 +558,8 @@ namespace Coset_Sistema_Produccion
                             Desactiva_datagridview_partidas();
                             Desaparece_combo_cliente_nombre();
                             Desactiva_combo_cliente_nombre();
+                            Desaparece_combo_cliente_nombre_codigo();
+                            Desactiva_combo_cliente_nombre_codigo();
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_nombre_cliente();
                             Aparece_textbox_descripcion();
@@ -1061,7 +1095,17 @@ namespace Coset_Sistema_Produccion
 
         private void Desaparece_combo_cliente_nombre()
         {
-            comboBoxEmpleado.Visible = false;
+            comboBoxCodigoEmpleado.Visible = false;
+        }
+
+        private void Desactiva_combo_cliente_nombre_codigo()
+        {
+            comboBoxEmpleado.Enabled = false;
+        }
+
+        private void Desaparece_combo_cliente_nombre_codigo()
+        {
+            comboBoxCodigoEmpleado.Visible = false;
         }
 
         private void Desactiva_datagridview_partidas()
@@ -1367,12 +1411,16 @@ namespace Coset_Sistema_Produccion
         private void Termina_secuencia_operaciones_salida_materiales()
         {
             Limpia_combo_nombre_cliente();
+            Limpia_combo_empleado();
+            Limpia_combo_empleado_codigo();
             Limpia_cajas_captura_despues_de_agregar_salida_material();
             Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
             Desaparece_boton_guardar_base_de_datos();
             Desaparece_boton_cancelar();
             Desaparece_combo_codigo_proyecto();
             Desaparece_combo_cliente_nombre();
+            Desaparece_combo_cliente_nombre_codigo();
+            Desactiva_combo_cliente_nombre_codigo();
             Activa_botones_operacion();
             limpia_partidas_salida_materiales();
             Desactiva_datagridview_partidas();
@@ -1965,6 +2013,9 @@ namespace Coset_Sistema_Produccion
             {
                 No_aceptar_agregar_partidas_salida_materiales_OC();
                 Limpia_combo_empleado();
+                Limpia_combo_nombre_cliente_codigo();
+                Aparece_combo_empleado_codigo();
+                Activa_combo_empleado_codigo();
                 Aparece_combo_empleado();
                 Activa_combo_empleado();
                 obtener_usuarios_todos_compras_disponibles();
@@ -2239,6 +2290,12 @@ namespace Coset_Sistema_Produccion
 
         }
 
-      
+        private void comboBoxCodigoEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Usuario_seleccionado = Usuarios_administrativos.Find(usuario_seleccion =>
+           usuario_seleccion.codigo_empleado.Contains(comboBoxCodigoEmpleado.Text));
+
+            comboBoxEmpleado.Text = Usuario_seleccionado.nombre_empleado;
+        }
     }
 }
