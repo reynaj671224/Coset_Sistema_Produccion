@@ -90,7 +90,7 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_Mysql_busqueda_entrada_material(Entrada_Material material)
         {
             return "SELECT * FROM entrada_material where codigo_material ='" + material.Codigo_material +
-                "' and orden_compra ='"+ material.Orden_compra + "';";
+                "' and orden_compra ='"+ material.Orden_compra + "' and descripcion_material ='" + material.Descripcion_material + "';";
         }
 
         public string Inserta_nuevo_entrada_material_base_datos(Entrada_Material material)

@@ -189,7 +189,8 @@ namespace Coset_Sistema_Produccion
         private string Commando_busqueda_salida_material_orden_compra(Salida_Material salida_material)
         {
             return "SELECT * FROM salida_material where codigo_material ='" + salida_material.Codigo_material +
-               "' and orden_compra='" + salida_material.Orden_compra +"';";
+               "' and orden_compra='" + salida_material.Orden_compra + "' and descripcion_material ='" + 
+               salida_material.Descripcion_material + "';";
         }
 
         private string Commando_leer_Mysql_busqueda_salida_material_proyecto(Salida_Material material)

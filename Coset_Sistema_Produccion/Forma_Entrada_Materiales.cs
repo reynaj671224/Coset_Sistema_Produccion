@@ -334,7 +334,7 @@ namespace Coset_Sistema_Produccion
                         material_disponible => material_disponible.Codigo.Contains(partida_orden_compra.Material));
                     }
 
-                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas();
+                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas(partida_orden_compra);
                     if (Unidades_ordenadas != 0)
                     {
                         if (Material_disponible_entrada_materiales.Generico == "1")
@@ -382,7 +382,7 @@ namespace Coset_Sistema_Produccion
                         material_disponible => material_disponible.Codigo.Contains(partida_orden_compra.Material));
                     }
 
-                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas();
+                    Unidades_ordenadas = Convert.ToInt32(partida_orden_compra.Cantidad) - Calculo_unidades_entradas(partida_orden_compra);
                     if (Unidades_ordenadas != 0)
                     {
                         Row_material++;
@@ -398,9 +398,9 @@ namespace Coset_Sistema_Produccion
             return Row_material;
         }
 
-        private int Calculo_unidades_entradas()
+        private int Calculo_unidades_entradas(Partida_orden_compra material)
         {
-            Obtener_partidas_entrada_materiales();
+            Obtener_partidas_entrada_materiales(material);
             int Total_cantidad = 0;
             for (int renglones = 0; renglones < Entrada_materiales_disponibles.Count; renglones++)
             {
@@ -477,6 +477,7 @@ namespace Coset_Sistema_Produccion
             //Limpia_combo_descripcion_materiales();
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
+            Limpia_datagridview_entrada_material();
             Desaparece_textbox_descripcion_materiales();
             Mostrar_materiales_entrada();
             
@@ -491,6 +492,7 @@ namespace Coset_Sistema_Produccion
             {
                 Entrada_materiales_seleccion.Codigo_material = orden.Material;
                 Entrada_materiales_seleccion.Orden_compra = orden.Codigo_orden;
+                Entrada_materiales_seleccion.Descripcion_material = orden.Descripcion;
                 Entrada_materiales_disponibles = Class_entrada_material.
                     Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_seleccion);
                 Rellena_datagrid_entrada_materiales();
@@ -1433,7 +1435,8 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_partidas_entrada_materiales()
         {
-            Obtener_partidas_entrada_materiales();
+            Partida_orden_compra material=null;
+            Obtener_partidas_entrada_materiales(material);
             Rellena_datagrid_entrada_materiales();
             Rellena_caja_cantidad_entradas_anteriormente();
             Verfica_total_unidades_entradas();
@@ -1473,9 +1476,9 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void Obtener_partidas_entrada_materiales()
+        private void Obtener_partidas_entrada_materiales(Partida_orden_compra material)
         {
-            Asigna_valores_entrada_materiales_visualizar();
+            Asigna_valores_entrada_materiales_visualizar(material);
             if (Operacio_entrada_materiales == "Visualizar")
             {
                 Entrada_materiales_disponibles = Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos_no_orden_compra(Entrada_materiales_seleccion);
@@ -1488,7 +1491,7 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private void Asigna_valores_entrada_materiales_visualizar()
+        private void Asigna_valores_entrada_materiales_visualizar(Partida_orden_compra material)
         {
             if (Operacio_entrada_materiales == "Visualizar OC")
             {
@@ -1516,6 +1519,7 @@ namespace Coset_Sistema_Produccion
             {
                 Entrada_materiales_seleccion.Orden_compra = comboBoxCodigoOrdenCompra.Text;
                 Entrada_materiales_seleccion.Codigo_material = Material_disponible_entrada_materiales.Codigo;
+                Entrada_materiales_seleccion.Descripcion_material = material.Descripcion;
             }
 
 

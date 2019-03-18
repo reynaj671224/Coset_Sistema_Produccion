@@ -465,7 +465,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_consulta_entrada_material(Partida_orden_compra material)
         {
-            return "SELECT * FROM materiales WHERE codigo_material ='" + material.Material+ "';";
+            return "SELECT * FROM materiales WHERE codigo_material ='" + material.Material + "';";
         }
 
         private string Commando_leer_Mysql_busqueda_material_codigo_descripcion(Material material)

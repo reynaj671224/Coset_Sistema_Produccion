@@ -36,6 +36,7 @@ namespace Coset_Sistema_Produccion
         public List<Salida_Material> Salida_materiales_disponibles = new List<Salida_Material>();
         public Class_Partidas_Orden_compra class_partidas_Orden_compra = new Class_Partidas_Orden_compra();
         public Partida_orden_compra Partida_orden_compra_seleccionada = new Partida_orden_compra();
+        public Partida_orden_compra Almacen_partida_orden_compra_seleccionada = new Partida_orden_compra();
         public Partida_orden_compra Partida_orden_compra_busqueda = new Partida_orden_compra();
         public Material Visualizar_material = new Material();
         public Material Busqueda_material = new Material();
@@ -657,13 +658,12 @@ namespace Coset_Sistema_Produccion
 
         private bool Revisa_almacen()
         {
+            
             try
             {
-                Visualizar_material.Codigo = Salida_materiales_seleccion.Codigo_material;
-                Visualizar_material.Codigo_proveedor = Salida_materiales_seleccion.Codigo_proveedor;
-                Visualizar_material.Descripcion = Salida_materiales_seleccion.Descripcion_material;
+                Almacen_partida_orden_compra_seleccionada.Material = Salida_materiales_seleccion.Codigo_material;
                 Materiales_disponibles_busqueda = Class_Materiales.
-                    Adquiere_materiales_busqueda_entrada_materiales_en_base_datos(Visualizar_material);
+                    Adquiere_materiales_Consulta_Entrada_materiales_en_base_datos(Almacen_partida_orden_compra_seleccionada);
                 Materiales_disponibles_busqueda[0].Cantidad = (Convert.ToInt32(
                     Materiales_disponibles_busqueda[0].Cantidad.ToString()) -
                                 Convert.ToUInt32(Salida_materiales_seleccion.Cantidad)).ToString();
@@ -719,11 +719,9 @@ namespace Coset_Sistema_Produccion
             string respuesta = "";
             try
             {
-                Visualizar_material.Codigo = Salida_materiales_seleccion.Codigo_material;
-                Visualizar_material.Codigo_proveedor = Salida_materiales_seleccion.Codigo_proveedor;
-                Visualizar_material.Descripcion = Salida_materiales_seleccion.Descripcion_material;
+                Almacen_partida_orden_compra_seleccionada.Material = Salida_materiales_seleccion.Codigo_material;
                 Materiales_disponibles_busqueda = Class_Materiales.
-                    Adquiere_materiales_busqueda_entrada_materiales_en_base_datos(Visualizar_material);
+                    Adquiere_materiales_Consulta_Entrada_materiales_en_base_datos(Almacen_partida_orden_compra_seleccionada);
                 Materiales_disponibles_busqueda[0].Cantidad = (Convert.ToInt32(
                     Materiales_disponibles_busqueda[0].Cantidad.ToString()) -
                                 Convert.ToUInt32(Salida_materiales_seleccion.Cantidad)).ToString();
@@ -1858,6 +1856,7 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxOC_SelectedIndexChanged(object sender, EventArgs e)
         {
+            limpia_partidas_salida_materiales();
             if (Operacio_salida_materiales == "SalidaOC")
             {
                 configura_salida_orden_compra();
@@ -1969,6 +1968,7 @@ namespace Coset_Sistema_Produccion
             {
                 Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
                 Salida_materiales_seleccion.Codigo_material = partida.Material;
+                Salida_materiales_seleccion.Descripcion_material = partida.Descripcion;
                 Salida_materiales_disponibles = Class_salida_material.
                     Adquiere_salida_materiales_orden_compra_base_datos(Salida_materiales_seleccion);
                 foreach(Salida_Material material in Salida_materiales_disponibles)
@@ -2119,6 +2119,7 @@ namespace Coset_Sistema_Produccion
         {
             Entrada_materiales_busqueda.Codigo_material = partida.Material;
             Entrada_materiales_busqueda.Orden_compra = partida.Codigo_orden;
+            Entrada_materiales_busqueda.Descripcion_material = partida.Descripcion;
             Entrada_materiales_disponibles = 
                 Class_entrada_material.Adquiere_entrada_materiales_busqueda_en_base_datos(Entrada_materiales_busqueda);
         }
