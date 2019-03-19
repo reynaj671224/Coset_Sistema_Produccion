@@ -750,13 +750,16 @@ namespace Coset_Sistema_Produccion
         {
             for (int partidas = 0; partidas < dataGridViewSalidasMaterialesOC.Rows.Count; partidas++)
             {
-                //if(dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.proyecto,partidas].Value==null
-                //    || dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.proyecto,partidas].Value.ToString() =="")
-                //{
-                //    MessageBox.Show("No valor en Proyecto", "Salida Materiales",
-                //        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    return false;
-                //}
+                if (dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.cantidad, partidas].Value.ToString() != "")
+                {
+                    if (dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.proyecto, partidas].Value == null
+                        || dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.proyecto, partidas].Value.ToString() == "")
+                    {
+                        MessageBox.Show("No valor en Proyecto", "Salida Materiales",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+                }
                 //else if (dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.cantidad, partidas].Value == null
                 //    || dataGridViewSalidasMaterialesOC[(int)Campos_salida_materiales_orden_compra.cantidad, partidas].Value.ToString() == "")
 
@@ -2161,6 +2164,7 @@ namespace Coset_Sistema_Produccion
             {
                 Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
                 Salida_materiales_seleccion.Codigo_material = partida.Material;
+                Salida_materiales_seleccion.Descripcion_material = partida.Descripcion;
             }
             else if (Operacio_salida_materiales == "Salida")
             {
