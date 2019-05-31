@@ -884,6 +884,7 @@ namespace Coset_Sistema_Produccion
                     {
                         MessageBox.Show("Unidades Orden Compra Disponibles Menor a las requeridas", "Salida Materiales",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxUnidadesSalida.Text = "";
                         return false;
                     }
                 }
@@ -1909,6 +1910,7 @@ namespace Coset_Sistema_Produccion
             Obtener_partidas_ordenes_compra_disponibles_material_orden_compra();
             Ordene_compra_seleccion.Codigo = comboBoxOC.Text;
             Unidades_pendientes_orden_compra = Verifica_unidades_pendientes_salida_ordenes_compra_material_indivudual();
+            
             if (Unidades_pendientes_orden_compra > 0)
             {
                 textBoxOCtotalUnits.Text =  Unidades_pendientes_orden_compra.ToString();
@@ -1937,13 +1939,17 @@ namespace Coset_Sistema_Produccion
 
         private int Verifica_unidades_pendientes_salida_ordenes_compra_material_indivudual()
         {
-            int Unidades_salidas = 0;
+            int Unidades_disponibles_para_salida = 0;
+            int Unidades_entradas = 0;
             try
             {
 
                 foreach (Partida_orden_compra partida in Partidas_orden_compra_disponibles)
                 {
-                    Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_salidas(partida);
+
+                    Unidades_entradas = Calculo_unidades_entradas(partida);
+                    Unidades_disponibles_para_salida = Unidades_entradas - Calculo_unidades_salidas(partida);
+                    //Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_salidas(partida);
                 }
             }
             catch (Exception ex)
@@ -1951,7 +1957,7 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show(ex.Message);
                 return 0;
             }
-            return Unidades_salidas;
+            return Unidades_disponibles_para_salida;
         }
 
         private void Desactiva_combo_OC()
@@ -2172,12 +2178,14 @@ namespace Coset_Sistema_Produccion
                 {
                     Salida_materiales_seleccion.Orden_compra = comboBoxOC.Text;
                     Salida_materiales_seleccion.Codigo_material = partida.Material;
+                    Salida_materiales_seleccion.Descripcion_material = partida.Descripcion;
                 }
 
                 else
                 {
                     Salida_materiales_seleccion.Orden_compra = partida.Codigo_orden;
                     Salida_materiales_seleccion.Codigo_material = partida.Material;
+                    Salida_materiales_seleccion.Descripcion_material = partida.Descripcion;
                 }
             }
         }

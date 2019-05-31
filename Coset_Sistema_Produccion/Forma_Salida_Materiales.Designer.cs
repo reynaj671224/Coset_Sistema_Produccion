@@ -641,9 +641,9 @@
             this.labelOCtotalUnits.Image = ((System.Drawing.Image)(resources.GetObject("labelOCtotalUnits.Image")));
             this.labelOCtotalUnits.Location = new System.Drawing.Point(108, 199);
             this.labelOCtotalUnits.Name = "labelOCtotalUnits";
-            this.labelOCtotalUnits.Size = new System.Drawing.Size(79, 16);
+            this.labelOCtotalUnits.Size = new System.Drawing.Size(145, 16);
             this.labelOCtotalUnits.TabIndex = 92;
-            this.labelOCtotalUnits.Text = "OC Unidades";
+            this.labelOCtotalUnits.Text = "OC Unidades Disponibles";
             this.labelOCtotalUnits.Visible = false;
             // 
             // buttonAsignarProyecto

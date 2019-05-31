@@ -979,6 +979,7 @@ namespace Coset_Sistema_Produccion
         {
             Entrada_materiales_seleccion.Codigo_material = Partida_orden_compra_seleccionada.Material;
             Entrada_materiales_seleccion.Orden_compra = Partida_orden_compra_seleccionada.Codigo_orden;
+            Entrada_materiales_seleccion.Descripcion_material = Partida_orden_compra_seleccionada.Descripcion;
         }
     }
 }
