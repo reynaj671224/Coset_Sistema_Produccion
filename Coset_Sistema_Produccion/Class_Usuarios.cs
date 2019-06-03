@@ -81,7 +81,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_usuarios_producion()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Produccion'";
+            return "SELECT * FROM empleados where tipo_empleado='Produccion' or tipo_empleado='Ingenieria'";
         }
 
         public List<Usuario> Adquiere_usuarios_administrativos_compras_disponibles_en_base_datos()
@@ -208,7 +208,7 @@ namespace Coset_Sistema_Produccion
         {
             return "SELECT * FROM sistema.empleados where tipo_empleado='Admin-Compras' or " +
                 "tipo_empleado='Administrativo' or tipo_empleado='Ingenieria' " +
-                "or tipo_empleado='Almacen' or tipo_empleado='Almacen-Compras'";
+                "or tipo_empleado='Almacen' or tipo_empleado='Almacen-Compras' or tipo_empleado='Usuario-Produccion'";
         }
 
         private string Commando_leer_administrativos_compras_Mysql()

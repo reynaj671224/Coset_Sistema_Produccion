@@ -289,7 +289,8 @@
             "Almacen",
             "Produccion",
             "Admin-Compras",
-            "Almacen-Compras"});
+            "Almacen-Compras",
+            "Usuario-Produccion"});
             this.comboBoxTipoempleado.Location = new System.Drawing.Point(172, 301);
             this.comboBoxTipoempleado.Name = "comboBoxTipoempleado";
             this.comboBoxTipoempleado.Size = new System.Drawing.Size(121, 21);

@@ -41,6 +41,7 @@ namespace Coset_Sistema_Produccion
             
         }
 
+
         private void Obten_configuracion_systema()
         {
             StreamReader Archivo_configuracion_sistema = new StreamReader(@appPath + "\\" + "Configuracion.txt");
@@ -379,6 +380,12 @@ namespace Coset_Sistema_Produccion
             toolStripStatusUsuario.Text = "Produccion";
         }
 
+        private void Muestra_Menus_Para_Usuarios_Usuarios_produccion()
+        {
+            Muestra_Menu_Produccion();
+            toolStripStatusUsuario.Text = "Usuario-Produccion";
+        }
+
         private void SalirDeProgramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -434,6 +441,8 @@ namespace Coset_Sistema_Produccion
                 Configura_menus_para_usuarios_almacen();
             else if (Tipo_Usuario == "Produccion")
                 Configura_menus_para_usuarios_produccion();
+            else if (Tipo_Usuario == "Usuario-Produccion")
+                Configura_menus_para_usuarios_usuario_produccion();
             else if (Tipo_Usuario == "Almacen-Compras")
                 Configura_menus_para_usuarios_almacen_compras();
 
@@ -528,6 +537,11 @@ namespace Coset_Sistema_Produccion
         private void Configura_menus_para_usuarios_produccion()
         {
             Muestra_Menus_Para_Usuarios_produccion();
+        }
+
+        private void Configura_menus_para_usuarios_usuario_produccion()
+        {
+            Muestra_Menus_Para_Usuarios_Usuarios_produccion();
         }
 
         private void Configura_menus_para_usuarios_almacen()
@@ -734,5 +748,7 @@ namespace Coset_Sistema_Produccion
             Forma_Materiales_Inventario_General forma_Materiales_Inventario_General = new Forma_Materiales_Inventario_General();
             forma_Materiales_Inventario_General.ShowDialog();
         }
+
+ 
     }
 }

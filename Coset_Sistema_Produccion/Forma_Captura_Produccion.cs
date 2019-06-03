@@ -13,6 +13,8 @@ namespace Coset_Sistema_Produccion
 {
     public partial class Forma_Captura_Produccion : Form
     {
+        public static bool Usuario_permitido_cerrar_operacion = false;
+        public string forma_cerrada_por = "";
         public List<Proceso> procesos_disponibles = new List<Proceso>();
         public Class_Procesos clase_procesos = new Class_Procesos();
         public Proceso Proceso_Modificaciones = new Proceso();
@@ -46,7 +48,26 @@ namespace Coset_Sistema_Produccion
 
         private void ButtonHome_Click(object sender, EventArgs e)
         {
-            Regresar_forma_principal();
+            forma_cerrada_por = "boton_cancel";
+            if (Coset_Sistema_Produccion.Tipo_Usuario == "Usuario-Produccion")
+            {
+                Forma_Produccion_Usuario forma_Produccion_Usuario = new Forma_Produccion_Usuario();
+                forma_Produccion_Usuario.ShowDialog();
+
+                if (Forma_Captura_Produccion.Usuario_permitido_cerrar_operacion == false)
+                {
+
+                }
+                else
+                {
+                    Regresar_forma_principal();
+                }
+            }
+            else
+            {
+                Regresar_forma_principal();
+            }
+
         }
 
         private void Regresar_forma_principal()
@@ -54,6 +75,7 @@ namespace Coset_Sistema_Produccion
             procesos_disponibles = null;
             clase_procesos = null;
             Proceso_Modificaciones = null;
+            Forma_Captura_Produccion.Usuario_permitido_cerrar_operacion = false;
             this.Dispose();
             GC.Collect();
             this.Close();
@@ -371,6 +393,27 @@ namespace Coset_Sistema_Produccion
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
             Secuencia_usuarios_produccion();
            
+        }
+
+        protected void Forma_Captura_Produccion_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (forma_cerrada_por != "boton_cancel")
+            {
+                if (Coset_Sistema_Produccion.Tipo_Usuario == "Usuario-Produccion")
+                {
+                    Forma_Produccion_Usuario forma_Produccion_Usuario = new Forma_Produccion_Usuario();
+                    forma_Produccion_Usuario.ShowDialog();
+
+                    if (Forma_Captura_Produccion.Usuario_permitido_cerrar_operacion == false)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        Regresar_forma_principal();
+                    }
+                }
+            }
         }
 
         private void Secuencia_usuarios_produccion()

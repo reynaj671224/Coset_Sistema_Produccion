@@ -519,6 +519,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Captura Produccion";
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
+            //this.FormClosed += new System.Windows.Forms.FormClosingEventHandler()
+            //this.FormClosed += new System.Windows.Forms.FormClosingEventArgs(this.Forma_Captura_Produccion_FormClosing);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.Forma_Captura_Produccion_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).EndInit();
             this.ResumeLayout(false);
