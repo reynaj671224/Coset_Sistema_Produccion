@@ -53,6 +53,11 @@
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSecuenciasCalidad = new System.Windows.Forms.DataGridView();
+            this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
+            this.textBoxMotivoRechazo = new System.Windows.Forms.TextBox();
+            this.labelDescripcionRechazo = new System.Windows.Forms.Label();
+            this.labelaccionCorrectiva = new System.Windows.Forms.Label();
+            this.textBoxAccionCorrectiva = new System.Windows.Forms.TextBox();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,9 +65,7 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Motivo_rechazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
-            this.textBoxMotivoRechazo = new System.Windows.Forms.TextBox();
-            this.labelDescripcionRechazo = new System.Windows.Forms.Label();
+            this.Accion_Correctiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasCalidad)).BeginInit();
             this.SuspendLayout();
@@ -321,11 +324,70 @@
             this.Proceso,
             this.Fecha,
             this.Calidad,
-            this.Motivo_rechazo});
+            this.Motivo_rechazo,
+            this.Accion_Correctiva});
             this.dataGridViewSecuenciasCalidad.Location = new System.Drawing.Point(22, 298);
             this.dataGridViewSecuenciasCalidad.Name = "dataGridViewSecuenciasCalidad";
             this.dataGridViewSecuenciasCalidad.Size = new System.Drawing.Size(994, 202);
             this.dataGridViewSecuenciasCalidad.TabIndex = 49;
+            // 
+            // buttonBuscarSecuenciaDibujo
+            // 
+            this.buttonBuscarSecuenciaDibujo.Enabled = false;
+            this.buttonBuscarSecuenciaDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuscarSecuenciaDibujo.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarSecuenciaDibujo.Image")));
+            this.buttonBuscarSecuenciaDibujo.Location = new System.Drawing.Point(292, 12);
+            this.buttonBuscarSecuenciaDibujo.Name = "buttonBuscarSecuenciaDibujo";
+            this.buttonBuscarSecuenciaDibujo.Size = new System.Drawing.Size(79, 74);
+            this.buttonBuscarSecuenciaDibujo.TabIndex = 54;
+            this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
+            this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
+            this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
+            // 
+            // textBoxMotivoRechazo
+            // 
+            this.textBoxMotivoRechazo.Enabled = false;
+            this.textBoxMotivoRechazo.Location = new System.Drawing.Point(547, 120);
+            this.textBoxMotivoRechazo.Multiline = true;
+            this.textBoxMotivoRechazo.Name = "textBoxMotivoRechazo";
+            this.textBoxMotivoRechazo.Size = new System.Drawing.Size(311, 72);
+            this.textBoxMotivoRechazo.TabIndex = 56;
+            this.textBoxMotivoRechazo.Visible = false;
+            // 
+            // labelDescripcionRechazo
+            // 
+            this.labelDescripcionRechazo.AutoSize = true;
+            this.labelDescripcionRechazo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescripcionRechazo.Image = ((System.Drawing.Image)(resources.GetObject("labelDescripcionRechazo.Image")));
+            this.labelDescripcionRechazo.Location = new System.Drawing.Point(396, 126);
+            this.labelDescripcionRechazo.Name = "labelDescripcionRechazo";
+            this.labelDescripcionRechazo.Size = new System.Drawing.Size(145, 16);
+            this.labelDescripcionRechazo.TabIndex = 55;
+            this.labelDescripcionRechazo.Text = "Motivo Rechazo/Retrabajo";
+            this.labelDescripcionRechazo.Visible = false;
+            // 
+            // labelaccionCorrectiva
+            // 
+            this.labelaccionCorrectiva.AutoSize = true;
+            this.labelaccionCorrectiva.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelaccionCorrectiva.Image = ((System.Drawing.Image)(resources.GetObject("labelaccionCorrectiva.Image")));
+            this.labelaccionCorrectiva.Location = new System.Drawing.Point(396, 202);
+            this.labelaccionCorrectiva.Name = "labelaccionCorrectiva";
+            this.labelaccionCorrectiva.Size = new System.Drawing.Size(155, 16);
+            this.labelaccionCorrectiva.TabIndex = 57;
+            this.labelaccionCorrectiva.Text = "Acciòn Correctiva Retrabajo";
+            this.labelaccionCorrectiva.Visible = false;
+            // 
+            // textBoxAccionCorrectiva
+            // 
+            this.textBoxAccionCorrectiva.Enabled = false;
+            this.textBoxAccionCorrectiva.Location = new System.Drawing.Point(547, 202);
+            this.textBoxAccionCorrectiva.Multiline = true;
+            this.textBoxAccionCorrectiva.Name = "textBoxAccionCorrectiva";
+            this.textBoxAccionCorrectiva.Size = new System.Drawing.Size(311, 72);
+            this.textBoxAccionCorrectiva.TabIndex = 58;
+            this.textBoxAccionCorrectiva.Visible = false;
             // 
             // Codigo_partida
             // 
@@ -368,47 +430,19 @@
             this.Motivo_rechazo.Name = "Motivo_rechazo";
             this.Motivo_rechazo.Width = 400;
             // 
-            // buttonBuscarSecuenciaDibujo
+            // Accion_Correctiva
             // 
-            this.buttonBuscarSecuenciaDibujo.Enabled = false;
-            this.buttonBuscarSecuenciaDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBuscarSecuenciaDibujo.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarSecuenciaDibujo.Image")));
-            this.buttonBuscarSecuenciaDibujo.Location = new System.Drawing.Point(292, 12);
-            this.buttonBuscarSecuenciaDibujo.Name = "buttonBuscarSecuenciaDibujo";
-            this.buttonBuscarSecuenciaDibujo.Size = new System.Drawing.Size(79, 74);
-            this.buttonBuscarSecuenciaDibujo.TabIndex = 54;
-            this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
-            this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
-            this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
-            // 
-            // textBoxMotivoRechazo
-            // 
-            this.textBoxMotivoRechazo.Enabled = false;
-            this.textBoxMotivoRechazo.Location = new System.Drawing.Point(547, 120);
-            this.textBoxMotivoRechazo.Multiline = true;
-            this.textBoxMotivoRechazo.Name = "textBoxMotivoRechazo";
-            this.textBoxMotivoRechazo.Size = new System.Drawing.Size(311, 72);
-            this.textBoxMotivoRechazo.TabIndex = 56;
-            this.textBoxMotivoRechazo.Visible = false;
-            // 
-            // labelDescripcionRechazo
-            // 
-            this.labelDescripcionRechazo.AutoSize = true;
-            this.labelDescripcionRechazo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescripcionRechazo.Image = ((System.Drawing.Image)(resources.GetObject("labelDescripcionRechazo.Image")));
-            this.labelDescripcionRechazo.Location = new System.Drawing.Point(396, 126);
-            this.labelDescripcionRechazo.Name = "labelDescripcionRechazo";
-            this.labelDescripcionRechazo.Size = new System.Drawing.Size(145, 16);
-            this.labelDescripcionRechazo.TabIndex = 55;
-            this.labelDescripcionRechazo.Text = "Motivo Rechazo/Retrabajo";
-            this.labelDescripcionRechazo.Visible = false;
+            this.Accion_Correctiva.HeaderText = "Acciòn Correctiva Retrabajo";
+            this.Accion_Correctiva.Name = "Accion_Correctiva";
+            this.Accion_Correctiva.Width = 400;
             // 
             // Forma_Calidad_Operaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.textBoxAccionCorrectiva);
+            this.Controls.Add(this.labelaccionCorrectiva);
             this.Controls.Add(this.textBoxMotivoRechazo);
             this.Controls.Add(this.labelDescripcionRechazo);
             this.Controls.Add(this.buttonBuscarSecuenciaDibujo);
@@ -469,6 +503,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewSecuenciasCalidad;
         private System.Windows.Forms.Button buttonBuscarSecuenciaDibujo;
+        private System.Windows.Forms.TextBox textBoxMotivoRechazo;
+        private System.Windows.Forms.Label labelDescripcionRechazo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
@@ -476,7 +512,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Calidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Motivo_rechazo;
-        private System.Windows.Forms.TextBox textBoxMotivoRechazo;
-        private System.Windows.Forms.Label labelDescripcionRechazo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Accion_Correctiva;
+        private System.Windows.Forms.Label labelaccionCorrectiva;
+        private System.Windows.Forms.TextBox textBoxAccionCorrectiva;
     }
 }

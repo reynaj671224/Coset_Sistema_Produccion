@@ -762,7 +762,9 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_combo_codigo_proyectos_no_subproyectos();
 
-            
+            Activa_columna_numero_dibujo_datagrid();
+
+
         }
 
         private void Activa_textbox_subproyecto()
@@ -816,6 +818,7 @@ namespace Coset_Sistema_Produccion
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_proyecto();
             Aparece_boton_cancelar_operacio();
             Activa_datagridview_dibujos_proyecto();
+            Activa_columna_numero_dibujo_datagrid();
 
             Desaparece_textbox_nombre_cliente();
             Aparece_combo_nombre_cliente();
@@ -1236,6 +1239,7 @@ namespace Coset_Sistema_Produccion
                         Aparece_textbox_ingeniero_coset();
                         Aparece_textbox_ingeniero_cliente();
                         Aparece_textbox_codigo_proyecto();
+                        Activa_columna_numero_dibujo_datagrid();
 
                         Elimina_informacion_proyectos_disponibles();
                     }
@@ -1389,9 +1393,34 @@ namespace Coset_Sistema_Produccion
                             Elimina_informacion_proyectos_disponibles();
                         }
                     }
+                   
                 }
             }
 
+        }
+
+        private bool Verifica_existe_numero_dibujo()
+        {
+
+            for (int partidas = 0; partidas < dataGridViewDibujosProyecto.Rows.Count - 1; partidas++)
+            {
+                for (int campo = 1; campo < dataGridViewDibujosProyecto.Rows[partidas].Cells.Count; campo++)
+                {
+                    dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_proyecto_disponibles_en_base_datos(
+                        dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString());
+                    if(dibujos_proyecto_disponibles.Count!=0)
+                    {
+                        MessageBox.Show("Numero de Dibujo existe en proyecto","Agregar Dibujo",
+                            MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                        dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value = "";
+                        return false;
+                    }
+                      
+                }
+
+                
+            }
+            return true;
         }
 
         private void Limpia_operaciones_proyectos()
@@ -1700,6 +1729,19 @@ namespace Coset_Sistema_Produccion
                                 dibujo_agregar.proceso = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_dibujos.tiempo_estimado)
                                 dibujo_agregar.tiempo_estimado_horas = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                            if (campo == (int)Campos_dibujos.numero)
+                            {
+                                dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_disponibles_en_base_datos(
+                            dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString());
+                                if (dibujos_proyecto_disponibles.Count != 0)
+                                {
+                                    MessageBox.Show("Numero de Dibujo existe en proyecto", "Agregar Dibujo",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value = "";
+                                    connection.Close();
+                                    return false;
+                                }
+                            }
                         }
 
                         else
@@ -1822,7 +1864,19 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
+            Desactiva_columna_numero_dibujo_datagrid();
+            
 
+        }
+
+        private void Desactiva_columna_numero_dibujo_datagrid()
+        {
+           dataGridViewDibujosProyecto.Columns[(int)Campos_dibujos.numero].ReadOnly = true;
+        }
+
+        private void Activa_columna_numero_dibujo_datagrid()
+        {
+            dataGridViewDibujosProyecto.Columns[(int)Campos_dibujos.numero].ReadOnly = false;
         }
 
         private void buttonEliminarCliente_Click(object sender, EventArgs e)
@@ -2105,7 +2159,8 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
-            
+            Activa_columna_numero_dibujo_datagrid();
+
         }
 
         private void Aparece_boton_eliminar_dibujo()

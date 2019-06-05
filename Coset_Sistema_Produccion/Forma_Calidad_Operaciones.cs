@@ -307,6 +307,7 @@ namespace Coset_Sistema_Produccion
         private void Activa_caja_descripcion_rechazo()
         {
             textBoxMotivoRechazo.Enabled = true;
+            textBoxAccionCorrectiva.Enabled = true;
         }
 
         private void Aparece_boton_guardar_base_datos()
@@ -318,6 +319,9 @@ namespace Coset_Sistema_Produccion
         {
             textBoxMotivoRechazo.Visible = true;
             labelDescripcionRechazo.Visible = true;
+            textBoxAccionCorrectiva.Visible = true;
+            labelaccionCorrectiva.Visible = true;
+
         }
 
         private void Genera_secuencia_produccion_pausar_transaccion()
@@ -397,8 +401,14 @@ namespace Coset_Sistema_Produccion
         private void Forma_Usuarios_Load(object sender, EventArgs e)
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
+            Rellena_datagrid_dibujos_en_calidad();
             Secuencia_usuarios_produccion();
            
+        }
+
+        private void Rellena_datagrid_dibujos_en_calidad()
+        {
+            throw new NotImplementedException();
         }
 
         private void Secuencia_usuarios_produccion()
@@ -740,12 +750,16 @@ namespace Coset_Sistema_Produccion
         {
             textBoxMotivoRechazo.Enabled = false;
             labelDescripcionRechazo.Enabled = false;
+            textBoxAccionCorrectiva.Enabled = false;
+            labelaccionCorrectiva.Enabled = false;
         }
 
         private void Desaparece_textbox_descripcion_rechazo()
         {
             textBoxMotivoRechazo.Visible = false;
             labelDescripcionRechazo.Visible = false;
+            textBoxAccionCorrectiva.Visible = false;
+            labelaccionCorrectiva.Visible = false;
 
         }
 
