@@ -1183,16 +1183,16 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_botones_operacion_contactos()
         {
-            Activa_boton_agregar_contactos();
-            Activa_boton_eliminar_contactos();
+            Activa_boton_agregar_dibujos();
+            Activa_boton_eliminar_dibujos();
         }
 
-        private void Activa_boton_eliminar_contactos()
+        private void Activa_boton_eliminar_dibujos()
         {
             buttonEliminarDibujo.Enabled = true;
         }
 
-        private void Activa_boton_agregar_contactos()
+        private void Activa_boton_agregar_dibujos()
         {
             buttonAgregarDibujo.Enabled=true;
         }
@@ -2160,6 +2160,7 @@ namespace Coset_Sistema_Produccion
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
             Activa_columna_numero_dibujo_datagrid();
+            Activa_botones_operacion_contactos();
 
         }
 
