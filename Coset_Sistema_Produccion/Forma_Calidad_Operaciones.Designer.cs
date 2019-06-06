@@ -53,14 +53,14 @@
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSecuenciasCalidad = new System.Windows.Forms.DataGridView();
+            this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
             this.textBoxMotivoRechazo = new System.Windows.Forms.TextBox();
             this.labelDescripcionRechazo = new System.Windows.Forms.Label();
             this.labelaccionCorrectiva = new System.Windows.Forms.Label();
             this.textBoxAccionCorrectiva = new System.Windows.Forms.TextBox();
-            this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasCalidad)).BeginInit();
             this.SuspendLayout();
@@ -121,6 +121,7 @@
             this.buttonBuscarDibujo.Text = "Buscar";
             this.buttonBuscarDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarDibujo.UseVisualStyleBackColor = false;
+            this.buttonBuscarDibujo.Visible = false;
             this.buttonBuscarDibujo.Click += new System.EventHandler(this.buttonBuscarDibujo_Click);
             // 
             // buttonHome
@@ -320,6 +321,27 @@
             this.dataGridViewSecuenciasCalidad.Name = "dataGridViewSecuenciasCalidad";
             this.dataGridViewSecuenciasCalidad.Size = new System.Drawing.Size(642, 212);
             this.dataGridViewSecuenciasCalidad.TabIndex = 49;
+            this.dataGridViewSecuenciasCalidad.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSecuenciasCalidad_CellClick);
+            // 
+            // Numero_Dibujo
+            // 
+            this.Numero_Dibujo.HeaderText = "Numero Dibujo";
+            this.Numero_Dibujo.Name = "Numero_Dibujo";
+            this.Numero_Dibujo.Width = 200;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado.Width = 200;
+            // 
+            // Proceso
+            // 
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.Width = 200;
             // 
             // buttonBuscarSecuenciaDibujo
             // 
@@ -333,6 +355,7 @@
             this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
             this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
+            this.buttonBuscarSecuenciaDibujo.Visible = false;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
             // 
             // textBoxMotivoRechazo
@@ -378,26 +401,6 @@
             this.textBoxAccionCorrectiva.Size = new System.Drawing.Size(311, 72);
             this.textBoxAccionCorrectiva.TabIndex = 58;
             this.textBoxAccionCorrectiva.Visible = false;
-            // 
-            // Numero_Dibujo
-            // 
-            this.Numero_Dibujo.HeaderText = "Numero Dibujo";
-            this.Numero_Dibujo.Name = "Numero_Dibujo";
-            this.Numero_Dibujo.Width = 200;
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empleado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Empleado.Width = 200;
-            // 
-            // Proceso
-            // 
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso.Width = 200;
             // 
             // Forma_Calidad_Operaciones
             // 

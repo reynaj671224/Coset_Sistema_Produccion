@@ -307,7 +307,9 @@ namespace Coset_Sistema_Produccion
         private void Activa_caja_descripcion_rechazo()
         {
             textBoxMotivoRechazo.Enabled = true;
+            labelDescripcionRechazo.Enabled = true;
             textBoxAccionCorrectiva.Enabled = true;
+            labelaccionCorrectiva.Enabled = true;
         }
 
         private void Aparece_boton_guardar_base_datos()
@@ -401,12 +403,15 @@ namespace Coset_Sistema_Produccion
         private void Forma_Usuarios_Load(object sender, EventArgs e)
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
-            obtener_dibujos_en_calidad();
+            Obtener_dibujos_en_calidad();
+            //aqui se 
             Secuencia_usuarios_produccion();
            
         }
 
-        private void obtener_dibujos_en_calidad()
+
+
+        private void Obtener_dibujos_en_calidad()
         {
             Buscar_dibujos_en_calidad();
             Rellena_datagrid_dibujos_en_calidad();
@@ -607,7 +612,8 @@ namespace Coset_Sistema_Produccion
         {
             if (Dibujo_existe_base_datos_produccion() == false)
             {
-                Inserta_nuevo_registro_dibujos_produccion_base_datos();
+                /*Inserta_nuevo_registro_dibujos_produccion_base_datos();
+                   solo aplica para captura de produccion */
                 return false;
             }
             else
@@ -671,7 +677,7 @@ namespace Coset_Sistema_Produccion
         {
             textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
             textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
-            Rellena_datagridview_secuencias_calidad();
+            //Rellena_datagridview_secuencias_calidad();
             Activa_botones_operacion();
         }
 
@@ -758,7 +764,7 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_usuario();
             Limpia_seleccion_secuencia_operacion();
             Limpia_datagridview_secuencia_calidad();
-            
+            Obtener_dibujos_en_calidad();
         }
 
         private void Desaparece_boton_guardar_base_datos()
@@ -797,7 +803,6 @@ namespace Coset_Sistema_Produccion
         {
             textBoxNumeroDibujo.Enabled = false;
             textBoxNombreProceso.Enabled = false;
-
             textBoxCalidad.Enabled = false;
 
         }
@@ -807,8 +812,8 @@ namespace Coset_Sistema_Produccion
             textBoxNumeroDibujo.Text = "";
             textBoxNombreProceso.Text = "";
             textBoxCalidad.Text = "";
-
-
+            textBoxMotivoRechazo.Text = "";
+            textBoxAccionCorrectiva.Text = "";
 
         }
 
@@ -892,7 +897,9 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = "";
+                Secuencia_calidad_insertar.Accion_correctiva = "";
                 Secuencia_calidad_insertar.calidad = "Aceptado";
+
             }
             else if(secuencia_operacion == "retrabajo")
             {
@@ -901,6 +908,7 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;
+                Secuencia_calidad_insertar.Accion_correctiva = textBoxAccionCorrectiva.Text;
                 Secuencia_calidad_insertar.calidad = "Re-trabajo";
             }
             else if(secuencia_operacion == "desecho")
@@ -910,6 +918,7 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;
+                Secuencia_calidad_insertar.Accion_correctiva = textBoxAccionCorrectiva.Text;
                 Secuencia_calidad_insertar.calidad = "Desecho";
             }
         }
@@ -973,6 +982,17 @@ namespace Coset_Sistema_Produccion
         {
             textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
             textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
+        }
+
+        private void dataGridViewSecuenciasCalidad_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
+                Cells["Numero_Dibujo"].Value != null)
+            {
+                textBoxNumeroDibujo.Text = dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
+                    Cells["Numero_Dibujo"].Value.ToString();
+                buscar_dibujo_secuencia_calidad_base_datos();
+            }
         }
     }
 }
