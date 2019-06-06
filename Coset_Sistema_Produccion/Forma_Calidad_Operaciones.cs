@@ -401,14 +401,34 @@ namespace Coset_Sistema_Produccion
         private void Forma_Usuarios_Load(object sender, EventArgs e)
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
-            Rellena_datagrid_dibujos_en_calidad();
+            obtener_dibujos_en_calidad();
             Secuencia_usuarios_produccion();
            
         }
 
+        private void obtener_dibujos_en_calidad()
+        {
+            Buscar_dibujos_en_calidad();
+            Rellena_datagrid_dibujos_en_calidad();
+
+    }
+
         private void Rellena_datagrid_dibujos_en_calidad()
         {
-            throw new NotImplementedException();
+            foreach (Dibujo_produccion dibujo_en_calidad in Dibujos_produccion_disponible)
+            {
+                dataGridViewSecuenciasCalidad.Rows.Add(
+               dibujo_en_calidad.Numero_dibujo,
+               dibujo_en_calidad.Empleado,
+               dibujo_en_calidad.Proceso);
+
+            }
+        }
+
+        private void Buscar_dibujos_en_calidad()
+        {
+            Dibujos_produccion_disponible = Class_Dibujos_Produccion.
+                Adquiere_dibujos_produccion_busqueda_en_base_datos_en_calidad();
         }
 
         private void Secuencia_usuarios_produccion()

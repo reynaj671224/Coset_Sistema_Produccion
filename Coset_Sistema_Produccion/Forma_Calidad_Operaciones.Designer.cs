@@ -58,14 +58,9 @@
             this.labelDescripcionRechazo = new System.Windows.Forms.Label();
             this.labelaccionCorrectiva = new System.Windows.Forms.Label();
             this.textBoxAccionCorrectiva = new System.Windows.Forms.TextBox();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Motivo_rechazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Accion_Correctiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasCalidad)).BeginInit();
             this.SuspendLayout();
@@ -318,17 +313,12 @@
             this.dataGridViewSecuenciasCalidad.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewSecuenciasCalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSecuenciasCalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Codigo_partida,
             this.Numero_Dibujo,
             this.Empleado,
-            this.Proceso,
-            this.Fecha,
-            this.Calidad,
-            this.Motivo_rechazo,
-            this.Accion_Correctiva});
-            this.dataGridViewSecuenciasCalidad.Location = new System.Drawing.Point(22, 298);
+            this.Proceso});
+            this.dataGridViewSecuenciasCalidad.Location = new System.Drawing.Point(246, 288);
             this.dataGridViewSecuenciasCalidad.Name = "dataGridViewSecuenciasCalidad";
-            this.dataGridViewSecuenciasCalidad.Size = new System.Drawing.Size(994, 202);
+            this.dataGridViewSecuenciasCalidad.Size = new System.Drawing.Size(642, 212);
             this.dataGridViewSecuenciasCalidad.TabIndex = 49;
             // 
             // buttonBuscarSecuenciaDibujo
@@ -389,52 +379,25 @@
             this.textBoxAccionCorrectiva.TabIndex = 58;
             this.textBoxAccionCorrectiva.Visible = false;
             // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Visible = false;
-            this.Codigo_partida.Width = 50;
-            // 
             // Numero_Dibujo
             // 
             this.Numero_Dibujo.HeaderText = "Numero Dibujo";
             this.Numero_Dibujo.Name = "Numero_Dibujo";
+            this.Numero_Dibujo.Width = 200;
             // 
             // Empleado
             // 
             this.Empleado.HeaderText = "Empleado";
             this.Empleado.Name = "Empleado";
             this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Empleado.Width = 150;
+            this.Empleado.Width = 200;
             // 
             // Proceso
             // 
             this.Proceso.HeaderText = "Proceso";
             this.Proceso.Name = "Proceso";
             this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            // 
-            // Calidad
-            // 
-            this.Calidad.HeaderText = "Calidad";
-            this.Calidad.Name = "Calidad";
-            // 
-            // Motivo_rechazo
-            // 
-            this.Motivo_rechazo.HeaderText = "Motivo Rechazo/Re-trabajo";
-            this.Motivo_rechazo.Name = "Motivo_rechazo";
-            this.Motivo_rechazo.Width = 400;
-            // 
-            // Accion_Correctiva
-            // 
-            this.Accion_Correctiva.HeaderText = "Acciòn Correctiva Retrabajo";
-            this.Accion_Correctiva.Name = "Accion_Correctiva";
-            this.Accion_Correctiva.Width = 400;
+            this.Proceso.Width = 200;
             // 
             // Forma_Calidad_Operaciones
             // 
@@ -505,15 +468,10 @@
         private System.Windows.Forms.Button buttonBuscarSecuenciaDibujo;
         private System.Windows.Forms.TextBox textBoxMotivoRechazo;
         private System.Windows.Forms.Label labelDescripcionRechazo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
+        private System.Windows.Forms.Label labelaccionCorrectiva;
+        private System.Windows.Forms.TextBox textBoxAccionCorrectiva;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Motivo_rechazo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Accion_Correctiva;
-        private System.Windows.Forms.Label labelaccionCorrectiva;
-        private System.Windows.Forms.TextBox textBoxAccionCorrectiva;
     }
 }

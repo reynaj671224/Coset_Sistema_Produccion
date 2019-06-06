@@ -757,6 +757,11 @@ namespace Coset_Sistema_Produccion
             dataGridViewPartidasEntradaMaterialesEntrada.AllowUserToAddRows = false;
         }
 
+        private void Activa_datagridview_partidas_entrada_materiales_visualizar()
+        {
+            dataGridViewPartidasEntradaMaterialesVisualizar.Enabled = true;
+        }
+
         private void Activa_datagridview_partidas_entrada_materiales()
         {
             dataGridViewPartidasEntradaMaterialesEntrada.Enabled = true;
@@ -1631,7 +1636,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_botones_operacion();
             Acepta_datagridview_agregar_renglones();
             Aparece_boton_cancelar_operacio();
-            Activa_datagridview_partidas_entrada_materiales();
+            Activa_datagridview_partidas_entrada_materiales_visualizar();
             Activa_textbox_codigo_proveedor();
             Activa_textbox_descripcion_material();
             Activa_textbox_codigo_material();
