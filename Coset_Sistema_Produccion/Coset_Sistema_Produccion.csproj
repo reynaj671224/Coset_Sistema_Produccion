@@ -246,6 +246,12 @@
     <Compile Include="Forma_Proyectos.Designer.cs">
       <DependentUpon>Forma_Proyectos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Reporte_Calidad_Produccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Reporte_Calidad_Produccion.Designer.cs">
+      <DependentUpon>Forma_Reporte_Calidad_Produccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Reporte_Dibujos_Proyecto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Proyectos.resx">
       <DependentUpon>Forma_Proyectos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Reporte_Calidad_Produccion.resx">
+      <DependentUpon>Forma_Reporte_Calidad_Produccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Reporte_Dibujos_Proyecto.resx">
       <DependentUpon>Forma_Reporte_Dibujos_Proyecto.cs</DependentUpon>

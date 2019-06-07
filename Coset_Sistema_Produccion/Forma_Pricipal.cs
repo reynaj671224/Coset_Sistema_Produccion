@@ -749,6 +749,10 @@ namespace Coset_Sistema_Produccion
             forma_Materiales_Inventario_General.ShowDialog();
         }
 
- 
+        private void ReporteCalidadOperacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Reporte_Calidad_Produccion forma_Reporte_Calidad_Produccion = new Forma_Reporte_Calidad_Produccion();
+            forma_Reporte_Calidad_Produccion.ShowDialog();
+        }
     }
 }
