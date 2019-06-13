@@ -175,7 +175,7 @@ namespace Coset_Sistema_Produccion
             {
                 timerInciarProcesoBusqueda.Enabled = false;
                 Activa_boton_buscar_dibujo_base_de_datos();
-                Activa_boton_visualizar_secuencia();
+                //Activa_boton_visualizar_secuencia();
             }
         }
 
@@ -457,6 +457,7 @@ namespace Coset_Sistema_Produccion
         {
             Activa_caja_numero_dibujo();
             Inicia_timer_busqueda_dibujo();
+            Deactiva_boton_visualizar();
             Activa_boton_cancelar_operacio();
             
         }
@@ -550,9 +551,17 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBuscarDibujo_Click(object sender, EventArgs e)
         {
-            buscar_dibujo_proyectos_base_datos();
-            Deabilita_boton_busqueda_dibujo();
-            Deactiva_boton_visualizar();
+            if (Operacio_procesos == "Visualizar")
+            {
+                Rellena_datagridview_secuencias_produccion();
+                Deabilita_boton_busqueda_dibujo();
+            }
+            else
+            {
+                buscar_dibujo_proyectos_base_datos();
+                Deabilita_boton_busqueda_dibujo();
+
+            }
         }
 
         private void Deabilita_boton_busqueda_dibujo()
@@ -865,7 +874,8 @@ namespace Coset_Sistema_Produccion
             Desactiva_cajas_captura_despues_de_secuencia();
             Desactiva_botones_operacion();
             Desactiva_boton_cancelar();
-            Deactiva_boton_visualizar();
+            Activa_boton_visualizar();
+            Activa_Combo_codigo_empleado();
             Limpia_combo_usuario();
             Limpia_seleccion_secuencia_operacion();
             Limpia_datagridview_secuencia_produccion();
@@ -1030,17 +1040,28 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBuscarSecuenciaDibujo_Click(object sender, EventArgs e)
         {
-            Limpia_datagridview_secuencia_produccion();
-            Deabilita_boton_busqueda_dibujo();
+            Operacio_procesos = "Visualizar";
+            //Limpia_datagridview_secuencia_produccion();
+            //Deabilita_boton_busqueda_dibujo();
+            //Deactiva_boton_visualizar();
+            //obtener_dibujos_produccio_disponibles();
+            //Asigna_valores_forma_secuencia_produccion();
+            //Rellena_datagridview_secuencias_produccion();
             Deactiva_boton_visualizar();
-            obtener_dibujos_produccio_disponibles();
-            Asigna_valores_forma_secuencia_produccion();
-            Rellena_datagridview_secuencias_produccion();
+            Desactiva_Combo_codigo_empleado();
+            Activa_caja_numero_dibujo();
+            Activa_boton_cancelar_operacio();
+            Inicia_timer_busqueda_dibujo();
         }
 
         private void Deactiva_boton_visualizar()
         {
             buttonBuscarSecuenciaDibujo.Enabled=false;
+        }
+
+        private void Activa_boton_visualizar()
+        {
+            buttonBuscarSecuenciaDibujo.Enabled = true;
         }
 
         private void Asigna_valores_forma_secuencia_produccion()

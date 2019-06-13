@@ -449,7 +449,6 @@
             // 
             // buttonBuscarSecuenciaDibujo
             // 
-            this.buttonBuscarSecuenciaDibujo.Enabled = false;
             this.buttonBuscarSecuenciaDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBuscarSecuenciaDibujo.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarSecuenciaDibujo.Image")));
             this.buttonBuscarSecuenciaDibujo.Location = new System.Drawing.Point(292, 12);
@@ -459,7 +458,6 @@
             this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
             this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
-            this.buttonBuscarSecuenciaDibujo.Visible = false;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
             // 
             // textBoxUnidades
@@ -518,10 +516,8 @@
             this.Name = "Forma_Captura_Produccion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Captura Produccion";
-            this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
-            //this.FormClosed += new System.Windows.Forms.FormClosingEventHandler()
-            //this.FormClosed += new System.Windows.Forms.FormClosingEventArgs(this.Forma_Captura_Produccion_FormClosing);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Forma_Captura_Produccion_FormClosing);
+            this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).EndInit();
             this.ResumeLayout(false);

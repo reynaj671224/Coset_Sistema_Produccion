@@ -70,7 +70,8 @@ namespace Coset_Sistema_Produccion
         public Dibujo_produccion dibujo_Produccion_seleccion = new Dibujo_produccion();
         public Class_Secuencia_Calidad Class_Secuencia_Calidad = new Class_Secuencia_Calidad();
         public List<Secuencia_calidad> secuencia_Calidad_disponibles = new List<Secuencia_calidad>();
-        //aqui me quede
+        public Secuencia_calidad dibujo_calidad_busqueda = new Secuencia_calidad();
+        public Secuencia_calidad dibujo_calidad_seleccion = new Secuencia_calidad();
 
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
@@ -83,7 +84,7 @@ namespace Coset_Sistema_Produccion
             proceso, tiempo_estimado
         };
 
-        public string Operacio_reporte_proyectos = "";
+        public string Operacio_reporte_dibujo_calidad = "";
 
         public Forma_Reporte_Calidad_Produccion()
         {
@@ -179,7 +180,7 @@ namespace Coset_Sistema_Produccion
             Aparece_boton_cancelar_operacio();
             No_aceptar_agregar_dibujos_proyecto();
             Activa_dataview_dibujos_proyecto();
-            Operacio_reporte_proyectos = "Visualizar";
+            Operacio_reporte_dibujo_calidad = "Visualizar";
         }
 
         private void Activa_combo_codigo_proyecto()
@@ -204,17 +205,17 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_dataview_dibujos_proyecto()
         {
-            dataGridViewReporteDibujosProyecto.Enabled = true;
+            dataGridViewReporteDibujosCalidad.Enabled = true;
         }
 
-        private void limpia_datagrid_reporte_dibujos_proyecto()
+        private void limpia_datagrid_reporte_dibujos_calidad()
         {
-            dataGridViewReporteDibujosProyecto.Rows.Clear();
+            dataGridViewReporteDibujosCalidad.Rows.Clear();
         }
 
         private void No_aceptar_agregar_dibujos_proyecto()
         {
-            dataGridViewReporteDibujosProyecto.AllowUserToAddRows = false;
+            dataGridViewReporteDibujosCalidad.AllowUserToAddRows = false;
         }
 
         private void Aparece_boton_cancelar_operacio()
@@ -250,11 +251,11 @@ namespace Coset_Sistema_Produccion
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Cancelar";
+            Operacio_reporte_dibujo_calidad = "Cancelar";
             Desaparce_boton_cancelar();
             Limpia_cajas_captura_despues_de_agregar_proyecto();
             Limpia_combo_nombre_empleados();
-            limpia_datagrid_reporte_dibujos_proyecto();
+            limpia_datagrid_reporte_dibujos_calidad();
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();
             Desaparece_cajas_etiquetas_reporte_proyectos();
@@ -278,6 +279,11 @@ namespace Coset_Sistema_Produccion
         private void Desaparece_boton_busqueda()
         {
             buttonBusquedaBaseDatos.Visible = false;
+        }
+
+        private void Aparece_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Visible = true;
         }
 
         private void Desactiva_timer_busqueda()
@@ -332,7 +338,7 @@ namespace Coset_Sistema_Produccion
             textBoxIngenieroCoset.Text = proyecto_visualizar.Ingeniero_coset; ;
             textBoxIngenieroCliente.Text = proyecto_visualizar.Ingeriero_cliente;
             textBoxCodigoCliente.Text = proyecto_visualizar.Codigo_cliente;
-            textBoxNombreProyecto.Text = proyecto_visualizar.Nombre;
+            textBoxNumeroDibujo.Text = proyecto_visualizar.Nombre;
 
         }
 
@@ -390,17 +396,17 @@ namespace Coset_Sistema_Produccion
 
         private void Acepta_datagridview_agregar_renglones()
         {
-            dataGridViewReporteDibujosProyecto.AllowUserToAddRows = true;
+            dataGridViewReporteDibujosCalidad.AllowUserToAddRows = true;
         }
 
-        private void Activa_datagridview_dibujos_proyecto()
+        private void Activa_datagridview_dibujos_calidad()
         {
-            dataGridViewReporteDibujosProyecto.Enabled = true;
+            dataGridViewReporteDibujosCalidad.Enabled = true;
         }
 
         private void Desactiva_columna_codigo_partidas_cotizaciones()
         {
-            dataGridViewReporteDibujosProyecto.Columns[0].Visible = false;
+            dataGridViewReporteDibujosCalidad.Columns[0].Visible = false;
         }
 
         private void Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_proyecto()
@@ -411,7 +417,7 @@ namespace Coset_Sistema_Produccion
         private void Activa_cajas_informacion_proyecto()
         {
             textBoxNombreCliente.Enabled = true;
-            textBoxNombreProyecto.Enabled = true;
+            textBoxNumeroDibujo.Enabled = true;
 
         }
 
@@ -432,7 +438,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_operaciones_proyectos()
         {
-            Operacio_reporte_proyectos = "";
+            Operacio_reporte_dibujo_calidad = "";
         }
 
 
@@ -464,7 +470,7 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_datagridview_dibujos()
         {
-            dataGridViewReporteDibujosProyecto.Enabled = false;
+            dataGridViewReporteDibujosCalidad.Enabled = false;
         }
 
         private void Elimina_informacion_proyectos_disponibles()
@@ -489,7 +495,7 @@ namespace Coset_Sistema_Produccion
         private void Limpia_cajas_captura_despues_de_agregar_proyecto()
         {
             textBoxCodigoProyecto.Text = "";
-            textBoxNombreProyecto.Text = "";
+            textBoxNumeroDibujo.Text = "";
 
             textBoxCodigoCliente.Text = "";
 
@@ -524,19 +530,16 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void dataGridViewDibujosProyecto_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
 
-        }
 
         private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos_codigo";
-            limpia_datagrid_reporte_dibujos_proyecto();
+            Operacio_reporte_dibujo_calidad = "proyectos_codigo";
+            limpia_datagrid_reporte_dibujos_calidad();
             Desapare_combo_nombre_proyecto();
             Rellena_cajas_informacion_de_proyectos_codigo();
             Obtener_dibujos_proyectos();
-            Activa_datagrid_reporte_dibujos_proyectos();
+            Activa_datagrid_reporte_dibujos_calidad();
             Aparece_boton_Excel();
         }
 
@@ -561,7 +564,7 @@ namespace Coset_Sistema_Produccion
                     dibujo_Produccion_seleccion = dibujo_Produccions_disponibles.
                         Find(dibujo_produccion => dibujo_produccion.Numero_dibujo.Contains(dibujo.Numero));
 
-                    dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
+                    dataGridViewReporteDibujosCalidad.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
                        dibujo.Descripcion,dibujo.Cantidad,dibujo.proceso, dibujo_Produccion_seleccion.Estado,
                        dibujo_Produccion_seleccion.Secuencia, dibujo_Produccion_seleccion.Empleado,
                        dibujo_Produccion_seleccion.Horas_produccion, dibujo_Produccion_seleccion.Horas_retrabajo);
@@ -573,7 +576,7 @@ namespace Coset_Sistema_Produccion
                 }
                 else
                 {
-                    dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
+                    dataGridViewReporteDibujosCalidad.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
                                            dibujo.Descripcion, dibujo.Cantidad, dibujo.proceso, "No En Produccion",
                                            " ", " "," ", " ");
                 }
@@ -588,12 +591,12 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_dibujos_proyecto_disponibles()
         {
-            if (Operacio_reporte_proyectos == "proyectos_codigo")
+            if (Operacio_reporte_dibujo_calidad == "proyectos_codigo")
             {
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proyecto_disponibles_en_base_datos(comboBoxCodigoProyecto.Text);
             }
-            else if(Operacio_reporte_proyectos == "proyectos_nombre")
+            else if(Operacio_reporte_dibujo_calidad == "proyectos_nombre")
             {
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                    Adquiere_dibujos_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
@@ -614,14 +617,14 @@ namespace Coset_Sistema_Produccion
         {
             buttonCancelar.Visible = false;
         }
-        private void Activa_datagrid_reporte_dibujos_proyectos()
+        private void Activa_datagrid_reporte_dibujos_calidad()
         {
-            dataGridViewReporteDibujosProyecto.Enabled = true;
+            dataGridViewReporteDibujosCalidad.Enabled = true;
         }
 
-        private void Desactiva_datagrid_reporte_dibujos_proyectos()
+        private void Desactiva_datagrid_reporte_dibujos_calidad()
         {
-            dataGridViewReporteDibujosProyecto.Enabled = true;
+            dataGridViewReporteDibujosCalidad.Enabled = true;
         }
 
         private void Obtener_materiales_asignados_proyecto(string text)
@@ -832,15 +835,19 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReporteProyectos_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos";
-            Limpia_combo_proyecto();
-            Limpia_combo_nombre_proyecto();
+            Operacio_reporte_dibujo_calidad = "NumeroDibujo";
             Desactica_botones_operacion();
             Aparce_boton_cancelar();
-            Aparece_cajas_etiquetas_reporte_proyectos();
-            Obtener_datos_proyectos_disponibles_base_datos();
-            Rellena_combo_codigo_proyecto();
+            Activa_caja_numero_dibujo();
+            Aparece_cajas_etiquetas_reporte_dibujo_calidad();
+            //Obtener_datos_proyectos_disponibles_base_datos();
+            //Rellena_combo_codigo_proyecto();
 
+        }
+
+        private void Activa_caja_numero_dibujo()
+        {
+            textBoxNumeroDibujo.Enabled = true;
         }
 
         private void Limpia_combo_nombre_proyecto()
@@ -862,45 +869,43 @@ namespace Coset_Sistema_Produccion
         {
             buttonReporteDibujos.Enabled = false;
             buttonReporteUsuarios.Enabled = false;
-            buttonReoprteMateriales.Enabled = false;
         }
 
         private void Activa_botones_operacion()
         {
             buttonReporteDibujos.Enabled = true;
             buttonReporteUsuarios.Enabled = true;
-            buttonReoprteMateriales.Enabled = true;
         }
 
-        private void Aparece_cajas_etiquetas_reporte_proyectos()
+        private void Aparece_cajas_etiquetas_reporte_dibujo_calidad()
         {
-            labelCodigoProyecto.Visible = true;
-            comboBoxCodigoProyecto.Visible = true;
-            comboBoxNombreProyecto.Visible = true;
-            textBoxNombreProyecto.Visible = true;
-            labelNombreProyecto.Visible = true;
-            textBoxCodigoCliente.Visible = true;
-            labelCodigoCliente.Visible = true;
-            textBoxNombreCliente.Visible = true;
-            labelNombreCliente.Visible = true;
-            textBoxIngenieroCoset.Visible = true;
-            labelIngenieroCoset.Visible = true;
-            textBoxIngenieroCliente.Visible = true;
-            labelIngenieroCliente.Visible = true;
-            labelTotalDibujos.Visible = true;
-            textBoxTotalDibujos.Visible = true;
-            labelTotalDibujosCompletos.Visible = true;
-            textBoxTotalDibujoCompletos.Visible = true;
-            labelTotalPorcentajeDibujos.Visible = true;
-            textBoxPorcentajeProyecto.Visible = true;
+            //labelCodigoProyecto.Visible = true;
+            //comboBoxCodigoProyecto.Visible = true;
+            //comboBoxNombreProyecto.Visible = true;
+            textBoxNumeroDibujo.Visible = true;
+            labelNumeroDibujo.Visible = true;
+            //textBoxCodigoCliente.Visible = true;
+            //labelCodigoCliente.Visible = true;
+            //textBoxNombreCliente.Visible = true;
+            //labelNombreCliente.Visible = true;
+            //textBoxIngenieroCoset.Visible = true;
+            //labelIngenieroCoset.Visible = true;
+            //textBoxIngenieroCliente.Visible = true;
+            //labelIngenieroCliente.Visible = true;
+            //labelTotalDibujos.Visible = true;
+            //textBoxTotalDibujos.Visible = true;
+            //labelTotalDibujosCompletos.Visible = true;
+            //textBoxTotalDibujoCompletos.Visible = true;
+            //labelTotalPorcentajeDibujos.Visible = true;
+            //textBoxPorcentajeProyecto.Visible = true;
         }
 
         private void Desaparece_cajas_etiquetas_reporte_proyectos()
         {
             labelCodigoProyecto.Visible = false;
             comboBoxCodigoProyecto.Visible = false;
-            textBoxNombreProyecto.Visible = false;
-            labelNombreProyecto.Visible = false;
+            textBoxNumeroDibujo.Visible = false;
+            labelNumeroDibujo.Visible = false;
             textBoxCodigoCliente.Visible = false;
             labelCodigoCliente.Visible = false;
             textBoxNombreCliente.Visible = false;
@@ -919,14 +924,13 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReporteUsuarios_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Usuarios";
+            Operacio_reporte_dibujo_calidad = "Usuarios";
             Desactica_botones_operacion();
             Aparece_boton_cancelar_operacio();
             Aparece_elementos_reporte_usuarios_reporte();
             Obtener_empleados_disponibles();
             Limpia_combo_nombre_empleados();
             Rellena_combo_usuarios();
-            Aparece_boton_Excel();
 
         }
 
@@ -969,41 +973,31 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            limpia_datagrid_reporte_dibujos_proyecto();
-            Activa_datagridview_dibujos_proyecto();
-            Obtener_dibujos_proyecto_por_empleado();
-            Rellenar_partidas_reporte_dibujos_proyecto();
-            //obtener_salida_materiales_usuario();
-            //Rellena_partida_materiales_salida_proyecto();
-            //Obtener_devoluciones_materiales_usuarios();
-            //Rellena_partida_materiales_devolucion_proyecto();
+            limpia_datagrid_reporte_dibujos_calidad();
+            Activa_datagridview_dibujos_calidad();
+            Obtener_dibujos_calidad_por_empleado();
+            Rellenar_partidas_reporte_dibujos_calidad();
             Aparece_boton_Excel();
 
         }
 
-        private void Rellenar_partidas_reporte_dibujos_proyecto()
+        private void Rellenar_partidas_reporte_dibujos_calidad()
         {
-           foreach(Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
+           foreach(Secuencia_calidad dibujo in secuencia_Calidad_disponibles)
             {
-                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
-                    Adquiere_dibujos_proyecto_disponibles_en_base_datos(dibujo.proyecto);
-
-                dibujos_Proyecto_seleccion = dibujos_Proyectos_disponibles.
-                       Find(dibujo_proyecto => dibujo_proyecto.Numero.Contains(dibujo.Numero_dibujo));
-
-                dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujo.proyecto,
-                       dibujos_Proyecto_seleccion.Descripcion, dibujos_Proyecto_seleccion.Cantidad,
-                       dibujos_Proyecto_seleccion.proceso, dibujo.Estado,dibujo.Secuencia, 
-                       dibujo.Empleado,dibujo.Horas_produccion, dibujo.Horas_retrabajo);
+               
+                dataGridViewReporteDibujosCalidad.Rows.Add(dibujo.Numero_Dibujo, dibujo.Empleado,
+                       dibujo.Fecha, dibujo.Proceso,dibujo.calidad, dibujo.Motivo_rechazo,dibujo.Accion_correctiva);
 
             }
         }
 
-        private void Obtener_dibujos_proyecto_por_empleado()
+        private void Obtener_dibujos_calidad_por_empleado()
         {
-            dibujo_Produccion_busqueda.Empleado = comboBoxNombreEmpleado.Text;
-            dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
-                Adquiere_dibujos_produccion_por_empleado_busqueda_en_base_datos(dibujo_Produccion_busqueda);
+
+            Asigna_datos_visualizar_calidad_dibujos();
+            secuencia_Calidad_disponibles = Class_Secuencia_Calidad.
+                Adquiere_secuencia_calidad_busqueda_en_base_datos_empleados(dibujo_calidad_busqueda);
 
         }
 
@@ -1023,7 +1017,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReoprteMateriales_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Materiales";
+            Operacio_reporte_dibujo_calidad = "Materiales";
             Aparece_elementos_reporte_materiales();
             Asigna_caracter_busqueda_material();
             Aparece_boton_cancelar_operacio();
@@ -1076,46 +1070,24 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
-            //Desaparece_boton_busqueda();
-            //Obtener_datos_materiales_busqueda();
+            Desaparece_boton_busqueda();
+            Obtener_datos_calidad_dibujos_busqueda();
             //Limpia_cajas_captura_despues_de_agregar_proyecto();
-            //if (Materiales_disponibles_busqueda.Count == 1)
-            //{
-            //    limpia_datagrid_reporte_dibujos_proyecto();
-            //    Activa_datagridview_dibujos_proyecto();
-            //    obtener_salida_materiales(Materiales_disponibles_busqueda[0]);
-            //    Rellena_partida_materiales_salida_proyecto();
-            //    Obtener_devoluciones_materiales(Materiales_disponibles_busqueda[0]);
-            //    Rellena_partida_materiales_devolucion_proyecto();
-            //    Aparece_boton_Excel();
-            //    Inicia_timer_para_buscar_informacion_materiales_busqueda();
+            if (secuencia_Calidad_disponibles.Count > 1)
+            {
+                limpia_datagrid_reporte_dibujos_calidad();
+                Activa_datagridview_dibujos_calidad();
+                Rellenar_partidas_reporte_dibujos_calidad();
+                Aparece_boton_Excel();
 
-            //}
-            //else if (Materiales_disponibles_busqueda.Count > 1)
-            //{
-            //    Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, "Entrada Materiales");
-            //    forma_Materiales_Seleccion.ShowDialog();
+            }
+            else if (secuencia_Calidad_disponibles.Count == 0)
+            {
 
-            //    if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
-            //    {
-            //        limpia_datagrid_reporte_dibujos_proyecto();
-            //        Activa_datagridview_dibujos_proyecto();
-            //        obtener_salida_materiales(forma_Materiales_Seleccion.Material_seleccionado_data_view);
-            //        Rellena_partida_materiales_salida_proyecto();
-            //        Obtener_devoluciones_materiales(forma_Materiales_Seleccion.Material_seleccionado_data_view);
-            //        Rellena_partida_materiales_devolucion_proyecto();
-            //        Aparece_boton_Excel();
-            //        Inicia_timer_para_buscar_informacion_materiales_busqueda();
-            //    }
-            //}
-            //else if (Materiales_disponibles_busqueda.Count == 0)
-            //{
+                MessageBox.Show("NO se encontro el numeo de Dibujo",
+                    "Busqueda Calidad Dibujo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            //    MessageBox.Show("NO se encontraron Material Con este criterio",
-            //        "Busqueda Material", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    Inicia_timer_para_buscar_informacion_materiales_busqueda();
-
-            //}
+            }
 
         }
 
@@ -1134,46 +1106,41 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Obtener_datos_materiales_busqueda()
+        private void Obtener_datos_calidad_dibujos_busqueda()
         {
-            //Asigna_datos_visualizar_material();
-            //Materiales_disponibles_busqueda = Class_Materiales.Adquiere_materiales_busqueda_entrada_materiales_en_base_datos(Visualizar_material);
+            Asigna_datos_visualizar_calidad_dibujos();
+            secuencia_Calidad_disponibles = Class_Secuencia_Calidad.Adquiere_secuencia_calidad_busqueda_en_base_datos(dibujo_calidad_busqueda);
         }
 
-        private void Asigna_datos_visualizar_material()
+        private void Asigna_datos_visualizar_calidad_dibujos()
         {
-            //if (textCodigoMaterial.Text == "")
-            //{
-            //    Visualizar_material.Codigo = "~";
-            //}
-            //else
-            //{
-            //    Visualizar_material.Codigo = textCodigoMaterial.Text;
-            //}
+            if (Operacio_reporte_dibujo_calidad == "NumeroDibujo")
+            {
+                if (textBoxNumeroDibujo.Text != "")
+                {
+                    dibujo_calidad_busqueda.Numero_Dibujo = textBoxNumeroDibujo.Text;
+                }
+                else
 
-            //if (textBoxCodigoProveedor.Text == "")
-            //{
-            //    Visualizar_material.Codigo_proveedor = "~";
-            //}
-            //else
-            //{
-            //    Visualizar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
-            //}
-
-            //if (textBoxDescripcionMaterial.Text == "")
-            //{
-            //    Visualizar_material.Descripcion = "~";
-            //}
-            //else
-            //{
-            //    Visualizar_material.Descripcion = textBoxDescripcionMaterial.Text;
-            //}
-
+                {
+                    MessageBox.Show("Numero de Dibujo en Blanco", "Busqueda Dibujo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else if(Operacio_reporte_dibujo_calidad == "Usuarios")
+            {
+                dibujo_calidad_busqueda.Empleado = comboBoxNombreEmpleado.Text;
+            }
         }
 
         private void Desactiva_boton_busqueda()
         {
             buttonBusquedaBaseDatos.Enabled = false;
+        }
+
+        private void Activa_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Enabled = true;
         }
 
         private void buttonExcel_Click(object sender, EventArgs e)
@@ -1191,13 +1158,13 @@ namespace Coset_Sistema_Produccion
                     if (Abrir_Archivo_Excel())
                     {
                         oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
-                        Escribe_informacion_Proyecto();
-                        Escribe_titulos_proyecto();
-                        for (int Row = 0; Row < dataGridViewReporteDibujosProyecto.RowCount - 1; Row++)
+                        //Escribe_informacion_dibujo_calidad();
+                        Escribe_titulos_calidad_dibujos();
+                        for (int Row = 0; Row < dataGridViewReporteDibujosCalidad.RowCount - 1; Row++)
                         {
-                            for (int Column = 0; Column < dataGridViewReporteDibujosProyecto.ColumnCount; Column++)
+                            for (int Column = 0; Column < dataGridViewReporteDibujosCalidad.ColumnCount; Column++)
                             {
-                                oSheet.Cells[Row + 8, Column + 1] = dataGridViewReporteDibujosProyecto[Column, Row].Value.ToString();
+                                oSheet.Cells[Row + 8, Column + 1] = dataGridViewReporteDibujosCalidad[Column, Row].Value.ToString();
                             }
                         }
 
@@ -1214,44 +1181,30 @@ namespace Coset_Sistema_Produccion
                     Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
         }
 
-        private void Escribe_titulos_proyecto()
+        private void Escribe_titulos_calidad_dibujos()
         {
-            oSheet.Cells[7, 1] = "Numero Dibujo";
-            oSheet.Cells[7, 2] = "Proyecto";
-            oSheet.Cells[7, 3] = "Dibujo Descripcion";
-            oSheet.Cells[7, 4] = "Cantidad_Unidades";
-            oSheet.Cells[7, 5] = "Proceso Dibujo";
-            oSheet.Cells[7, 6] = "EStado Dibujo";
-            oSheet.Cells[7, 7] = "Secuencia Dibujo";
-            oSheet.Cells[7, 8] = "Empleado";
-            oSheet.Cells[7, 9] = "Horas Produccion";
-            oSheet.Cells[7, 10] = "Horas Re-trabajo";
+            oSheet.Cells[7, 1] = "Numero De Dibujo";
+            oSheet.Cells[7, 2] = "Nombre Empleado";
+            oSheet.Cells[7, 3] = "Fecha Calidad";
+            oSheet.Cells[7, 4] = "Proceos Dibujo";
+            oSheet.Cells[7, 5] = "Estado Dibujo";
+            oSheet.Cells[7, 6] = "Motivo de Rechazo/Re-trabajo";
+            oSheet.Cells[7, 7] = "Accion Correctiva";
 
         }
 
-        private void Escribe_informacion_Proyecto()
+        private void Escribe_informacion_dibujo_calidad()
         {
-            if(Operacio_reporte_proyectos == "proyectos_codigo" || Operacio_reporte_proyectos == "proyectos_nombre")
+            if(Operacio_reporte_dibujo_calidad == "proyectos_codigo" || Operacio_reporte_dibujo_calidad == "proyectos_nombre")
             {
-                oSheet.Cells[1, 1] = "Nombre Proyecto";
-                oSheet.Cells[2, 1] = "Nombre Cliente";
-                oSheet.Cells[3, 1] = "Codigo Clinete";
-                oSheet.Cells[4, 1] = "Ingeniero Cliente";
-                oSheet.Cells[5, 1] = "Ingeniero Coset";
+                oSheet.Cells[1, 1] = "Numero De Dibujo";
+                oSheet.Cells[2, 1] = "Nombre Empleado";
+                oSheet.Cells[3, 1] = "Fecha Calidad";
+                oSheet.Cells[4, 1] = "Proceos Dibujo";
+                oSheet.Cells[5, 1] = "Estado Dibujo";
+                oSheet.Cells[1, 2] = "Motivo de Rechazo/Re-trabajo";
+                oSheet.Cells[2, 2] = "Accion Correctiva";
 
-                oSheet.Cells[1, 2] = textBoxNombreProyecto.Text;
-                oSheet.Cells[2, 2] = textBoxNombreCliente.Text;
-                oSheet.Cells[3, 2] = textBoxCodigoCliente.Text;
-                oSheet.Cells[4, 2] = textBoxIngenieroCliente.Text;
-                oSheet.Cells[5, 2] = textBoxIngenieroCoset.Text;
-
-                oSheet.Cells[1, 4] = "Total Dibujos Proyecto";
-                oSheet.Cells[2, 4] = "Total Dibujos Completos";
-                oSheet.Cells[3, 4] = "Porcenataje Proyecto (%)";
-
-                oSheet.Cells[1, 5] = textBoxTotalDibujos.Text;
-                oSheet.Cells[2, 5] = textBoxTotalDibujoCompletos.Text;
-                oSheet.Cells[3, 5] = textBoxPorcentajeProyecto.Text;
             }
         }
 
@@ -1351,13 +1304,13 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos_nombre";
-            limpia_datagrid_reporte_dibujos_proyecto();
+            Operacio_reporte_dibujo_calidad = "proyectos_nombre";
+            limpia_datagrid_reporte_dibujos_calidad();
             Desaparece_combo_codigo_proyecto();
             Aparece_textbox_codigo_proyecto();
             Rellena_cajas_informacion_de_proyectos_nombre();
             Obtener_dibujos_proyectos();
-            Activa_datagrid_reporte_dibujos_proyectos();
+            Activa_datagrid_reporte_dibujos_calidad();
             Aparece_boton_Excel();
         }
 
@@ -1369,6 +1322,12 @@ namespace Coset_Sistema_Produccion
             textBoxIngenieroCliente.Text = proyecto_visualizar.Ingeriero_cliente;
             textBoxCodigoCliente.Text = proyecto_visualizar.Codigo_cliente;
             textBoxCodigoProyecto.Text = proyecto_visualizar.Codigo;
+        }
+
+        private void textBoxNumeroDibujo_TextChanged(object sender, EventArgs e)
+        {
+            Aparece_boton_busqueda();
+            Activa_boton_busqueda();
         }
     }
 

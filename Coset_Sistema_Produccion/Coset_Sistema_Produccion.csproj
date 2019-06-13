@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E8C87ED241D10B8C675CA7A9C994805E7F8E3582</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D3634517B9EC9084B80AB50D0EA2C49A16BDF45E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Coset_Sistema_Produccion_TemporaryKey.pfx</ManifestKeyFile>
@@ -384,6 +384,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Coset_Sistema_Produccion_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -33,21 +33,11 @@
             this.timerAgregarProyecto = new System.Windows.Forms.Timer(this.components);
             this.textBoxNombreCliente = new System.Windows.Forms.TextBox();
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
-            this.dataGridViewReporteDibujosProyecto = new System.Windows.Forms.DataGridView();
-            this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_Unidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Secuencia_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas_produccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas_retrabajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewReporteDibujosCalidad = new System.Windows.Forms.DataGridView();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
-            this.textBoxNombreProyecto = new System.Windows.Forms.TextBox();
+            this.textBoxNumeroDibujo = new System.Windows.Forms.TextBox();
             this.textBoxCodigoCliente = new System.Windows.Forms.TextBox();
             this.textBoxIngenieroCliente = new System.Windows.Forms.TextBox();
             this.textBoxTotalDibujos = new System.Windows.Forms.TextBox();
@@ -73,7 +63,7 @@
             this.labelTotalDibujos = new System.Windows.Forms.Label();
             this.labelIngenieroCliente = new System.Windows.Forms.Label();
             this.labelCodigoCliente = new System.Windows.Forms.Label();
-            this.labelNombreProyecto = new System.Windows.Forms.Label();
+            this.labelNumeroDibujo = new System.Windows.Forms.Label();
             this.labelIngenieroCoset = new System.Windows.Forms.Label();
             this.labelNombreCliente = new System.Windows.Forms.Label();
             this.labelCodigoProyecto = new System.Windows.Forms.Label();
@@ -82,7 +72,14 @@
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).BeginInit();
+            this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado_Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MotivoRechazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AccionCorrectiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosCalidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,91 +107,25 @@
             this.textBoxCodigoProyecto.Visible = false;
             this.textBoxCodigoProyecto.WordWrap = false;
             // 
-            // dataGridViewReporteDibujosProyecto
+            // dataGridViewReporteDibujosCalidad
             // 
-            this.dataGridViewReporteDibujosProyecto.AllowUserToDeleteRows = false;
-            this.dataGridViewReporteDibujosProyecto.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridViewReporteDibujosProyecto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReporteDibujosProyecto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewReporteDibujosCalidad.AllowUserToDeleteRows = false;
+            this.dataGridViewReporteDibujosCalidad.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewReporteDibujosCalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReporteDibujosCalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Numero_dibujo,
-            this.Proyecto,
-            this.Descripcion_dibujo,
-            this.Cantidad_Unidades,
-            this.Proceso_dibujo,
-            this.Estado_dibujo,
-            this.Secuencia_dibujo,
             this.Empleado,
-            this.Horas_produccion,
-            this.Horas_retrabajo});
-            this.dataGridViewReporteDibujosProyecto.Enabled = false;
-            this.dataGridViewReporteDibujosProyecto.Location = new System.Drawing.Point(23, 275);
-            this.dataGridViewReporteDibujosProyecto.Name = "dataGridViewReporteDibujosProyecto";
-            this.dataGridViewReporteDibujosProyecto.ReadOnly = true;
-            this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(1148, 234);
-            this.dataGridViewReporteDibujosProyecto.TabIndex = 48;
-            this.dataGridViewReporteDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
-            // 
-            // Numero_dibujo
-            // 
-            this.Numero_dibujo.HeaderText = "Nunero Dibujo";
-            this.Numero_dibujo.Name = "Numero_dibujo";
-            this.Numero_dibujo.ReadOnly = true;
-            // 
-            // Proyecto
-            // 
-            this.Proyecto.HeaderText = "Proyecto";
-            this.Proyecto.Name = "Proyecto";
-            this.Proyecto.ReadOnly = true;
-            // 
-            // Descripcion_dibujo
-            // 
-            this.Descripcion_dibujo.HeaderText = "Dibujo Descripcion";
-            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
-            this.Descripcion_dibujo.ReadOnly = true;
-            this.Descripcion_dibujo.Width = 350;
-            // 
-            // Cantidad_Unidades
-            // 
-            this.Cantidad_Unidades.HeaderText = "Cantidad Unidades";
-            this.Cantidad_Unidades.Name = "Cantidad_Unidades";
-            this.Cantidad_Unidades.ReadOnly = true;
-            // 
-            // Proceso_dibujo
-            // 
-            this.Proceso_dibujo.HeaderText = "Proceso Dibujo";
-            this.Proceso_dibujo.Name = "Proceso_dibujo";
-            this.Proceso_dibujo.ReadOnly = true;
-            // 
-            // Estado_dibujo
-            // 
-            this.Estado_dibujo.HeaderText = "Estado Dibujo";
-            this.Estado_dibujo.Name = "Estado_dibujo";
-            this.Estado_dibujo.ReadOnly = true;
-            this.Estado_dibujo.Width = 150;
-            // 
-            // Secuencia_dibujo
-            // 
-            this.Secuencia_dibujo.HeaderText = "Secuencia Dibujo";
-            this.Secuencia_dibujo.Name = "Secuencia_dibujo";
-            this.Secuencia_dibujo.ReadOnly = true;
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empledado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.ReadOnly = true;
-            // 
-            // Horas_produccion
-            // 
-            this.Horas_produccion.HeaderText = "Horas Produccion";
-            this.Horas_produccion.Name = "Horas_produccion";
-            this.Horas_produccion.ReadOnly = true;
-            // 
-            // Horas_retrabajo
-            // 
-            this.Horas_retrabajo.HeaderText = "Horas Retrabajo";
-            this.Horas_retrabajo.Name = "Horas_retrabajo";
-            this.Horas_retrabajo.ReadOnly = true;
+            this.FechaCalidad,
+            this.Proceso_dibujo,
+            this.Estado_Calidad,
+            this.MotivoRechazo,
+            this.AccionCorrectiva});
+            this.dataGridViewReporteDibujosCalidad.Enabled = false;
+            this.dataGridViewReporteDibujosCalidad.Location = new System.Drawing.Point(23, 275);
+            this.dataGridViewReporteDibujosCalidad.Name = "dataGridViewReporteDibujosCalidad";
+            this.dataGridViewReporteDibujosCalidad.ReadOnly = true;
+            this.dataGridViewReporteDibujosCalidad.Size = new System.Drawing.Size(1148, 234);
+            this.dataGridViewReporteDibujosCalidad.TabIndex = 48;
             // 
             // comboBoxCodigoProyecto
             // 
@@ -216,14 +147,15 @@
             this.textBoxIngenieroCoset.TabIndex = 55;
             this.textBoxIngenieroCoset.Visible = false;
             // 
-            // textBoxNombreProyecto
+            // textBoxNumeroDibujo
             // 
-            this.textBoxNombreProyecto.Enabled = false;
-            this.textBoxNombreProyecto.Location = new System.Drawing.Point(220, 117);
-            this.textBoxNombreProyecto.Name = "textBoxNombreProyecto";
-            this.textBoxNombreProyecto.Size = new System.Drawing.Size(268, 20);
-            this.textBoxNombreProyecto.TabIndex = 69;
-            this.textBoxNombreProyecto.Visible = false;
+            this.textBoxNumeroDibujo.Enabled = false;
+            this.textBoxNumeroDibujo.Location = new System.Drawing.Point(220, 117);
+            this.textBoxNumeroDibujo.Name = "textBoxNumeroDibujo";
+            this.textBoxNumeroDibujo.Size = new System.Drawing.Size(268, 20);
+            this.textBoxNumeroDibujo.TabIndex = 69;
+            this.textBoxNumeroDibujo.Visible = false;
+            this.textBoxNumeroDibujo.TextChanged += new System.EventHandler(this.textBoxNumeroDibujo_TextChanged);
             // 
             // textBoxCodigoCliente
             // 
@@ -500,17 +432,17 @@
             this.labelCodigoCliente.Text = "Codigo Cliente";
             this.labelCodigoCliente.Visible = false;
             // 
-            // labelNombreProyecto
+            // labelNumeroDibujo
             // 
-            this.labelNombreProyecto.AutoSize = true;
-            this.labelNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNombreProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreProyecto.Image")));
-            this.labelNombreProyecto.Location = new System.Drawing.Point(99, 120);
-            this.labelNombreProyecto.Name = "labelNombreProyecto";
-            this.labelNombreProyecto.Size = new System.Drawing.Size(98, 16);
-            this.labelNombreProyecto.TabIndex = 68;
-            this.labelNombreProyecto.Text = "Nombre Proyecto";
-            this.labelNombreProyecto.Visible = false;
+            this.labelNumeroDibujo.AutoSize = true;
+            this.labelNumeroDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNumeroDibujo.Image = ((System.Drawing.Image)(resources.GetObject("labelNumeroDibujo.Image")));
+            this.labelNumeroDibujo.Location = new System.Drawing.Point(99, 120);
+            this.labelNumeroDibujo.Name = "labelNumeroDibujo";
+            this.labelNumeroDibujo.Size = new System.Drawing.Size(89, 16);
+            this.labelNumeroDibujo.TabIndex = 68;
+            this.labelNumeroDibujo.Text = "Nombre Dibujo";
+            this.labelNumeroDibujo.Visible = false;
             // 
             // labelIngenieroCoset
             // 
@@ -617,6 +549,51 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // Numero_dibujo
+            // 
+            this.Numero_dibujo.HeaderText = "Nunero Dibujo";
+            this.Numero_dibujo.Name = "Numero_dibujo";
+            this.Numero_dibujo.ReadOnly = true;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empledado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.ReadOnly = true;
+            // 
+            // FechaCalidad
+            // 
+            this.FechaCalidad.HeaderText = "Fecha";
+            this.FechaCalidad.Name = "FechaCalidad";
+            this.FechaCalidad.ReadOnly = true;
+            // 
+            // Proceso_dibujo
+            // 
+            this.Proceso_dibujo.HeaderText = "Proceso Dibujo";
+            this.Proceso_dibujo.Name = "Proceso_dibujo";
+            this.Proceso_dibujo.ReadOnly = true;
+            // 
+            // Estado_Calidad
+            // 
+            this.Estado_Calidad.HeaderText = "Estado Calidad";
+            this.Estado_Calidad.Name = "Estado_Calidad";
+            this.Estado_Calidad.ReadOnly = true;
+            this.Estado_Calidad.Width = 150;
+            // 
+            // MotivoRechazo
+            // 
+            this.MotivoRechazo.HeaderText = "Motivo Rechazo/ReTrabajo";
+            this.MotivoRechazo.Name = "MotivoRechazo";
+            this.MotivoRechazo.ReadOnly = true;
+            this.MotivoRechazo.Width = 300;
+            // 
+            // AccionCorrectiva
+            // 
+            this.AccionCorrectiva.HeaderText = "Accion Correctiva";
+            this.AccionCorrectiva.Name = "AccionCorrectiva";
+            this.AccionCorrectiva.ReadOnly = true;
+            this.AccionCorrectiva.Width = 300;
+            // 
             // Forma_Reporte_Calidad_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -646,12 +623,12 @@
             this.Controls.Add(this.labelIngenieroCliente);
             this.Controls.Add(this.textBoxCodigoCliente);
             this.Controls.Add(this.labelCodigoCliente);
-            this.Controls.Add(this.textBoxNombreProyecto);
-            this.Controls.Add(this.labelNombreProyecto);
+            this.Controls.Add(this.textBoxNumeroDibujo);
+            this.Controls.Add(this.labelNumeroDibujo);
             this.Controls.Add(this.textBoxIngenieroCoset);
             this.Controls.Add(this.labelIngenieroCoset);
             this.Controls.Add(this.comboBoxCodigoProyecto);
-            this.Controls.Add(this.dataGridViewReporteDibujosProyecto);
+            this.Controls.Add(this.dataGridViewReporteDibujosCalidad);
             this.Controls.Add(this.textBoxNombreCliente);
             this.Controls.Add(this.labelNombreCliente);
             this.Controls.Add(this.textBoxCodigoProyecto);
@@ -665,7 +642,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte Calidad Produccion";
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosCalidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -684,13 +661,13 @@
         private System.Windows.Forms.Label labelNombreCliente;
         private System.Windows.Forms.TextBox textBoxCodigoProyecto;
         private System.Windows.Forms.Label labelCodigoProyecto;
-        private System.Windows.Forms.DataGridView dataGridViewReporteDibujosProyecto;
+        private System.Windows.Forms.DataGridView dataGridViewReporteDibujosCalidad;
         private System.Windows.Forms.ComboBox comboBoxCodigoProyecto;
         private System.Windows.Forms.Timer timerModificarClientes;
         private System.Windows.Forms.TextBox textBoxIngenieroCoset;
         private System.Windows.Forms.Label labelIngenieroCoset;
-        private System.Windows.Forms.Label labelNombreProyecto;
-        private System.Windows.Forms.TextBox textBoxNombreProyecto;
+        private System.Windows.Forms.Label labelNumeroDibujo;
+        private System.Windows.Forms.TextBox textBoxNumeroDibujo;
         private System.Windows.Forms.Label labelCodigoCliente;
         private System.Windows.Forms.TextBox textBoxCodigoCliente;
         private System.Windows.Forms.Label labelIngenieroCliente;
@@ -717,14 +694,11 @@
         private System.Windows.Forms.Button buttonExcel;
         private System.Windows.Forms.ComboBox comboBoxNombreProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proyecto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Unidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso_dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado_dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Secuencia_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas_produccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas_retrabajo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso_dibujo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado_Calidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MotivoRechazo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AccionCorrectiva;
     }
 }
