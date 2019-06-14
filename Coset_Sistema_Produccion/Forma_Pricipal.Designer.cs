@@ -64,6 +64,11 @@
             this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReporteCalidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelClock = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -81,11 +86,7 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReporteCalidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenesCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -367,6 +368,47 @@
             this.capturaDeProduccionToolStripMenuItem.Text = "Captura de Produccion";
             this.capturaDeProduccionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeProduccionToolStripMenuItem_Click);
             // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.produccionToolStripMenuItem1,
+            this.proyectosToolStripMenuItem1});
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // produccionToolStripMenuItem1
+            // 
+            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dibujosProyectoToolStripMenuItem,
+            this.ReporteCalidadOperacionesToolStripMenuItem,
+            this.ordenesCompraToolStripMenuItem});
+            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
+            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.produccionToolStripMenuItem1.Text = "Produccion";
+            // 
+            // dibujosProyectoToolStripMenuItem
+            // 
+            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
+            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
+            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
+            // 
+            // ReporteCalidadOperacionesToolStripMenuItem
+            // 
+            this.ReporteCalidadOperacionesToolStripMenuItem.Name = "ReporteCalidadOperacionesToolStripMenuItem";
+            this.ReporteCalidadOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ReporteCalidadOperacionesToolStripMenuItem.Text = "Calidad Operaciones";
+            this.ReporteCalidadOperacionesToolStripMenuItem.Click += new System.EventHandler(this.ReporteCalidadOperacionesToolStripMenuItem_Click);
+            // 
+            // proyectosToolStripMenuItem1
+            // 
+            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
+            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.proyectosToolStripMenuItem1.Text = "Proyectos";
+            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -502,45 +544,12 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // reportesToolStripMenuItem
+            // ordenesCompraToolStripMenuItem
             // 
-            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
-            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.produccionToolStripMenuItem1,
-            this.proyectosToolStripMenuItem1});
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            // 
-            // produccionToolStripMenuItem1
-            // 
-            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dibujosProyectoToolStripMenuItem,
-            this.ReporteCalidadOperacionesToolStripMenuItem});
-            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
-            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.produccionToolStripMenuItem1.Text = "Produccion";
-            // 
-            // dibujosProyectoToolStripMenuItem
-            // 
-            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
-            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
-            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
-            // 
-            // ReporteCalidadOperacionesToolStripMenuItem
-            // 
-            this.ReporteCalidadOperacionesToolStripMenuItem.Name = "ReporteCalidadOperacionesToolStripMenuItem";
-            this.ReporteCalidadOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ReporteCalidadOperacionesToolStripMenuItem.Text = "Calidad Operaciones";
-            this.ReporteCalidadOperacionesToolStripMenuItem.Click += new System.EventHandler(this.ReporteCalidadOperacionesToolStripMenuItem_Click);
-            // 
-            // proyectosToolStripMenuItem1
-            // 
-            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
-            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.proyectosToolStripMenuItem1.Text = "Proyectos";
-            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
+            this.ordenesCompraToolStripMenuItem.Name = "ordenesCompraToolStripMenuItem";
+            this.ordenesCompraToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ordenesCompraToolStripMenuItem.Text = "Ordenes Compra";
+            this.ordenesCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesCompraToolStripMenuItem_Click);
             // 
             // Coset_Sistema_Produccion
             // 
@@ -631,6 +640,7 @@
         private System.Windows.Forms.ToolStripMenuItem ConsultaMaterialesOCtoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemInventarioGeneral;
         private System.Windows.Forms.ToolStripMenuItem ReporteCalidadOperacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordenesCompraToolStripMenuItem;
     }
 }
 
