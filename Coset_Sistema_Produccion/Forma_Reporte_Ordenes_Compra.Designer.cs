@@ -70,16 +70,6 @@
             this.textBoxTotalUnidades = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridViewSalidasMaterialesOC = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proyectos_ordenes_compra = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad_disponible = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadEntradaOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadTotalOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxOC = new System.Windows.Forms.ComboBox();
             this.textBoxOC = new System.Windows.Forms.TextBox();
             this.labelCodigoOC = new System.Windows.Forms.Label();
@@ -90,6 +80,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxCodigoEmpleado = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proyectos_ordenes_compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad_disponible = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadEntradaOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadTotalOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadAlmacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMateriales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalidasMaterialesOC)).BeginInit();
@@ -156,7 +156,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1163, 299);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1163, 235);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 34;
@@ -184,7 +184,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1163, 315);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1163, 235);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 32;
@@ -294,7 +294,7 @@
             this.dataGridViewSalidasMateriales.Location = new System.Drawing.Point(25, 347);
             this.dataGridViewSalidasMateriales.Name = "dataGridViewSalidasMateriales";
             this.dataGridViewSalidasMateriales.ReadOnly = true;
-            this.dataGridViewSalidasMateriales.Size = new System.Drawing.Size(1132, 202);
+            this.dataGridViewSalidasMateriales.Size = new System.Drawing.Size(1044, 202);
             this.dataGridViewSalidasMateriales.TabIndex = 48;
             this.dataGridViewSalidasMateriales.Visible = false;
             // 
@@ -521,7 +521,6 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
             this.cantidad_disponible,
             this.CantidadEntradaOC,
             this.CantidadTotalOC,
@@ -529,73 +528,9 @@
             this.dataGridViewSalidasMaterialesOC.Enabled = false;
             this.dataGridViewSalidasMaterialesOC.Location = new System.Drawing.Point(25, 347);
             this.dataGridViewSalidasMaterialesOC.Name = "dataGridViewSalidasMaterialesOC";
-            this.dataGridViewSalidasMaterialesOC.Size = new System.Drawing.Size(1132, 202);
+            this.dataGridViewSalidasMaterialesOC.Size = new System.Drawing.Size(1044, 202);
             this.dataGridViewSalidasMaterialesOC.TabIndex = 87;
             this.dataGridViewSalidasMaterialesOC.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSalidasMaterialesOC_CellEndEdit);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // Proyectos_ordenes_compra
-            // 
-            this.Proyectos_ordenes_compra.HeaderText = "Proyecto";
-            this.Proyectos_ordenes_compra.Name = "Proyectos_ordenes_compra";
-            this.Proyectos_ordenes_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proyectos_ordenes_compra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Codigo Material";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Parte Proveedor";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 300;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Cantidad";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // cantidad_disponible
-            // 
-            this.cantidad_disponible.HeaderText = "Cantidad Disponible OC";
-            this.cantidad_disponible.Name = "cantidad_disponible";
-            this.cantidad_disponible.ReadOnly = true;
-            // 
-            // CantidadEntradaOC
-            // 
-            this.CantidadEntradaOC.HeaderText = "Cantidad Entrada OC";
-            this.CantidadEntradaOC.Name = "CantidadEntradaOC";
-            this.CantidadEntradaOC.ReadOnly = true;
-            // 
-            // CantidadTotalOC
-            // 
-            this.CantidadTotalOC.HeaderText = "Cantidad Total OC";
-            this.CantidadTotalOC.Name = "CantidadTotalOC";
-            this.CantidadTotalOC.ReadOnly = true;
-            // 
-            // CantidadAlmacen
-            // 
-            this.CantidadAlmacen.HeaderText = "Cantidad Almacen";
-            this.CantidadAlmacen.Name = "CantidadAlmacen";
-            this.CantidadAlmacen.ReadOnly = true;
             // 
             // comboBoxOC
             // 
@@ -710,11 +645,85 @@
             this.label8.Text = "Clave Empleado";
             this.label8.Visible = false;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // Proyectos_ordenes_compra
+            // 
+            this.Proyectos_ordenes_compra.HeaderText = "Proyecto";
+            this.Proyectos_ordenes_compra.Name = "Proyectos_ordenes_compra";
+            this.Proyectos_ordenes_compra.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Codigo Material";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Codigo Parte Proveedor";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 300;
+            // 
+            // cantidad_disponible
+            // 
+            this.cantidad_disponible.HeaderText = "Cantidad Salidas OC";
+            this.cantidad_disponible.Name = "cantidad_disponible";
+            this.cantidad_disponible.ReadOnly = true;
+            // 
+            // CantidadEntradaOC
+            // 
+            this.CantidadEntradaOC.HeaderText = "Cantidad Entrada OC";
+            this.CantidadEntradaOC.Name = "CantidadEntradaOC";
+            this.CantidadEntradaOC.ReadOnly = true;
+            // 
+            // CantidadTotalOC
+            // 
+            this.CantidadTotalOC.HeaderText = "Cantidad Total OC";
+            this.CantidadTotalOC.Name = "CantidadTotalOC";
+            this.CantidadTotalOC.ReadOnly = true;
+            // 
+            // CantidadAlmacen
+            // 
+            this.CantidadAlmacen.HeaderText = "Cantidad Almacen";
+            this.CantidadAlmacen.Name = "CantidadAlmacen";
+            this.CantidadAlmacen.ReadOnly = true;
+            // 
+            // buttonExcel
+            // 
+            this.buttonExcel.AutoSize = true;
+            this.buttonExcel.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExcel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExcel.Image")));
+            this.buttonExcel.Location = new System.Drawing.Point(1163, 315);
+            this.buttonExcel.Name = "buttonExcel";
+            this.buttonExcel.Size = new System.Drawing.Size(79, 74);
+            this.buttonExcel.TabIndex = 99;
+            this.buttonExcel.Text = "Excel";
+            this.buttonExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonExcel.UseVisualStyleBackColor = true;
+            this.buttonExcel.Visible = false;
+            this.buttonExcel.Click += new System.EventHandler(this.buttonExcel_Click);
+            // 
             // Forma_Reporte_Ordenes_Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1254, 582);
+            this.Controls.Add(this.buttonExcel);
             this.Controls.Add(this.comboBoxCodigoEmpleado);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
@@ -815,19 +824,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.TextBox textBoxOCtotalUnits;
         private System.Windows.Forms.Label labelOCtotalUnits;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Proyectos_ordenes_compra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad_disponible;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadEntradaOC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadTotalOC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadAlmacen;
         private System.Windows.Forms.Button buttonAsignarProyecto;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxCodigoEmpleado;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proyectos_ordenes_compra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad_disponible;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadEntradaOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadTotalOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadAlmacen;
+        private System.Windows.Forms.Button buttonExcel;
     }
 }

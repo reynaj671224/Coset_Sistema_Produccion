@@ -14,6 +14,8 @@ using word = Microsoft.Office.Interop.Word;
 using System.IO;
 using System.Diagnostics;
 using System.Globalization;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace Coset_Sistema_Produccion
 {
@@ -59,6 +61,11 @@ namespace Coset_Sistema_Produccion
         public Class_Entrada_Material Class_entrada_material = new Class_Entrada_Material();
         public Entrada_Material Entrada_materiales_busqueda = new Entrada_Material();
 
+
+        public Excel.Application oXL = null;
+        public Excel.Worksheet oSheet = null;
+        public Excel.Workbook oWB = null;
+        public string Archivo_Excel_nombre = "";
 
         /*Revisar*/
         public enum Campos_entrada_materiales_proyectos
@@ -122,9 +129,41 @@ namespace Coset_Sistema_Produccion
             Ordenes_compra_con_material_abiertas = null;
             Partidas_orden_compra_disponibles = null;
             Entrada_materiales_disponibles = null;
+            Cierra_archivo_Excel();
+            Close_Excel();
+            Termina_applicacion();
+            Elimina_archivo_excel();
+            oXL = null;
+            oSheet = null;
+            oWB = null;
+            Archivo_Excel_nombre = "";
             this.Dispose();
             GC.Collect();
             this.Close();
+        }
+
+        private void Close_Excel()
+        {
+            try
+            {
+                oXL.Quit();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Termina_applicacion()
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(oXL);
+            }
+            catch
+            {
+
+            }
         }
 
         private void Rellenar_combo_proyectos()
@@ -1418,10 +1457,11 @@ namespace Coset_Sistema_Produccion
 
         private void Termina_secuencia_operaciones_salida_materiales()
         {
-            Limpia_combo_nombre_cliente();
-            Limpia_combo_empleado();
-            Limpia_combo_empleado_codigo();
-            Limpia_cajas_captura_despues_de_agregar_salida_material();
+            //Limpia_combo_nombre_cliente();
+            //Limpia_combo_empleado();
+            //Limpia_combo_empleado_codigo();
+            //Limpia_cajas_captura_despues_de_agregar_salida_material();
+            Limpia_combo_orden_compra();
             Desactiva_cajas_captura_despues_de_agregar_salida_materiales();
             Desaparece_boton_guardar_base_de_datos();
             Desaparece_boton_cancelar();
@@ -1431,25 +1471,26 @@ namespace Coset_Sistema_Produccion
             Desactiva_combo_cliente_nombre_codigo();
             Activa_botones_operacion();
             limpia_partidas_salida_materiales();
+            Limpia_datagrid_salida_materiales_orden_compra();
             Desactiva_datagridview_partidas();
-            Aparece_textbox_descripcion();
-            Aparece_textbox_nombre_cliente();
+            //Aparece_textbox_descripcion();
+            //Aparece_textbox_nombre_cliente();
             Acepta_datagridview_agregar_renglones();
             Pinta_color_blanco_cajas_busqueda_material();
             Termina_timer_busqueda();
             Desaparece_boton_buscar_base_datos();
-            Desaparece_combo_OC();
-            Desaparece_label_OC();
+            //Desaparece_combo_OC();
+            //Desaparece_label_OC();
             Desactiva_boton_proyecto_asignacion();
             Desaparece_label_proyecto();
-            Desaparece_datagrid_salida_materiales_orden_compra();
-            Desactiva_datagrid_salida_materiales_orden_compra();
+            //Desaparece_datagrid_salida_materiales_orden_compra();
+            //Desactiva_datagrid_salida_materiales_orden_compra();
             Desaparece_datagrid_salida_materiales_orden_compra_visualizar();
             Desactiva_datagrid_salida_materiales_orden_compra_visualizar();
             Desaparece_textbox_unidades_pendientes_OC();
             Desaparece_label_unidades_pendientes_OC();
+            Desaparece_boton_Excel();
             Elimina_informacion_salida_materiales_disponibles();
-
         }
 
         private void Desactiva_datagrid_salida_materiales_orden_compra_visualizar()
@@ -2012,7 +2053,7 @@ namespace Coset_Sistema_Produccion
         private void Limpia_combo_orden_compra()
         {
             comboBoxOC.Text = "";
-            comboBoxOC.Items.Clear();
+            //comboBoxOC.Items.Clear();
         }
 
         private void configura_salida_orden_compra()
@@ -2020,34 +2061,47 @@ namespace Coset_Sistema_Produccion
             Aparece_datagrid_salida_materiales_orden_compra();
             Activate_datagrid_salida_materiales_orden_compra();
             Limpia_datagrid_salida_materiales_orden_compra();
-            limpia_combo_proyectos_datagrid_salida_materiales();
-            obtener_proyectos_base_datos_disponibles();
-            Rellenar_combo_proyectos_datagrid_salida_materiales();
+            //Limpia_combo_orden_compra();
+            //limpia_combo_proyectos_datagrid_salida_materiales();
+            //obtener_proyectos_base_datos_disponibles();
+            //Rellenar_combo_proyectos_datagrid_salida_materiales();
             Obtener_partidas_ordenes_compra_disponibles();
             if (Rellenar_partidas_datagrid_ordenes_compra()!=0)
             {
                 No_aceptar_agregar_partidas_salida_materiales_OC();
-                Limpia_combo_empleado();
-                Limpia_combo_nombre_cliente_codigo();
-                Aparece_combo_empleado_codigo();
-                Activa_combo_empleado_codigo();
-                Aparece_combo_empleado();
-                Activa_combo_empleado();
-                obtener_usuarios_todos_compras_disponibles();
-                Rellena_combo_empleado();
-                Activa_seleccion_fecha_actual();
+                //Limpia_combo_empleado();
+                //Limpia_combo_nombre_cliente_codigo();
+                //Aparece_combo_empleado_codigo();
+                //Activa_combo_empleado_codigo();
+                //Aparece_combo_empleado();
+                //Activa_combo_empleado();
+                //obtener_usuarios_todos_compras_disponibles();
+                //Rellena_combo_empleado();
+                //Activa_seleccion_fecha_actual();
+                Aparece_boton_cancelar_operacio();
+                Aparece_boton_Excel();
             }
             else
             {
-                MessageBox.Show("NO hay Material disponible para salida en la OC",
-                    "Salida Material", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("NO hay Material disponible para salida en la OC",
+                //    "Salida Material", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Termina_secuencia_operaciones_salida_materiales();
             }
         }
 
+        private void Aparece_boton_Excel()
+        {
+            buttonExcel.Visible = true;
+        }
+
+        private void Desaparece_boton_Excel()
+        {
+            buttonExcel.Visible = false;
+        }
+
         private void limpia_combo_proyectos_datagrid_salida_materiales()
         {
-            Proyectos_ordenes_compra.Items.Clear();
+            //Proyectos_ordenes_compra.Items.Clear();
         }
 
         private int Rellenar_partidas_datagrid_ordenes_compra()
@@ -2063,28 +2117,27 @@ namespace Coset_Sistema_Produccion
                 foreach (Partida_orden_compra partida in Partidas_orden_compra_disponibles)
                 {
                     //Unidades_salidas = Convert.ToInt32(partida.Cantidad) - Calculo_unidades_salidas(partida);
-                    
+
                     Unidades_entradas = Calculo_unidades_entradas(partida);
-                    Unidades_disponibles_para_salida = Unidades_entradas - Calculo_unidades_salidas(partida);
-                    Buscaqueda_material_almacen_codigo_material(partida);                  
-                    if (Unidades_disponibles_para_salida != 0)
+                    Unidades_disponibles_para_salida = Calculo_unidades_salidas(partida);
+                    Buscaqueda_material_almacen_codigo_material(partida);
+
+                    if (Seleccion_material.Generico == "1")
                     {
-                        if (Seleccion_material.Generico == "1")
-                        {
-                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, partida.Parte,
-                            partida.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
-                            partida.Cantidad, Seleccion_material.Cantidad);
-                        }
-                        else
-                        {
-                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, Seleccion_material.Codigo_proveedor,
-                            Seleccion_material.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
-                            partida.Cantidad, Seleccion_material.Cantidad);
-                        }
-                        dataGridViewSalidasMaterialesOC
-                            [(int)Campos_salida_materiales_orden_compra.cantidad, Row_material].Style.BackColor = Color.Yellow;
-                        Row_material++;
+                        dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, partida.Parte,
+                        partida.Descripcion,Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
+                        partida.Cantidad, Seleccion_material.Cantidad);
                     }
+                    else
+                    {
+                        dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, Seleccion_material.Codigo_proveedor,
+                        Seleccion_material.Descripcion, Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
+                        partida.Cantidad, Seleccion_material.Cantidad);
+                    }
+                    //dataGridViewSalidasMaterialesOC
+                    //    [(int)Campos_salida_materiales_orden_compra.cantidad, Row_material].Style.BackColor = Color.Yellow;
+                    Row_material++;
+
                 }
             }
             catch (Exception ex)
@@ -2216,18 +2269,18 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_proyectos_datagrid_salida_materiales()
         {
-            foreach (Proyecto proyecto in Proyectos_disponibles)
-            {
-                if (proyecto.error == "")
-                {
-                    Proyectos_ordenes_compra.Items.Add(proyecto.Codigo);
-                }
-                else
-                {
-                    MessageBox.Show(proyecto.error);
-                    break;
-                }
-            }
+            //foreach (Proyecto proyecto in Proyectos_disponibles)
+            //{
+            //    if (proyecto.error == "")
+            //    {
+            //        Proyectos_ordenes_compra.Items.Add(proyecto.Codigo);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show(proyecto.error);
+            //        break;
+            //    }
+            //}
         }
 
         private void Aparece_datagrid_salida_materiales_orden_compra()
@@ -2283,8 +2336,8 @@ namespace Coset_Sistema_Produccion
                     MessageBox.Show(ex.Message);
                     dataGridViewSalidasMaterialesOC[
                         (int)Campos_salida_materiales_orden_compra.cantidad, e.RowIndex].Value = "";
-                    dataGridViewSalidasMaterialesOC[
-                        (int)Campos_salida_materiales_orden_compra.cantidad, e.RowIndex].Style.BackColor = Color.Yellow;
+                    //dataGridViewSalidasMaterialesOC[
+                    //    (int)Campos_salida_materiales_orden_compra.cantidad, e.RowIndex].Style.BackColor = Color.Yellow;
                 }
             }
         }
@@ -2315,6 +2368,169 @@ namespace Coset_Sistema_Produccion
            usuario_seleccion.codigo_empleado.Contains(comboBoxCodigoEmpleado.Text));
 
             comboBoxEmpleado.Text = Usuario_seleccionado.nombre_empleado;
+        }
+
+        private void buttonExcel_Click(object sender, EventArgs e)
+        {
+            Desactiva_boton_excel();
+            Elimina_archivo_excel();
+
+            if (Inicia_Excel())
+            {
+                oXL.Visible = true;
+                Asigna_nombre_archivo_excel();
+                Elimina_archivo_excel();
+                if (Copiar_template_a_reportes())
+                {
+                    if (Abrir_Archivo_Excel())
+                    {
+                        oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
+                        //Escribe_informacion_dibujo_calidad();
+                        Escribe_titulos_calidad_dibujos();
+                        for (int Row = 0; Row < dataGridViewSalidasMaterialesOC.RowCount - 1; Row++)
+                        {
+                            for (int Column = 1; Column < dataGridViewSalidasMaterialesOC.ColumnCount; Column++)
+                            {
+                                oSheet.Cells[Row + 8, Column] = dataGridViewSalidasMaterialesOC[Column, Row].Value.ToString();
+                            }
+                        }
+
+                        oSheet.Cells.EntireColumn.AutoFit();
+                        Guarda_archivo_excel();
+                    }
+                }
+            }
+        }
+
+        private void Asigna_nombre_archivo_excel()
+        {
+            Archivo_Excel_nombre = "\\reportes-" +
+                    Forma_Inicio_Usuario.Usuario_global.nombre_usuario + ".xlsx";
+        }
+
+        private void Escribe_titulos_calidad_dibujos()
+        {
+            oSheet.Cells[6, 1] = "OC =" + comboBoxOC.Text;
+            oSheet.Cells[7, 1] = "Numero De Proyecto";
+            oSheet.Cells[7, 2] = "Codigo Material";
+            oSheet.Cells[7, 3] = "Codigo Proveedor";
+            oSheet.Cells[7, 4] = "Material Descripcion";
+            oSheet.Cells[7, 5] = "Cantidad Salida OC";
+            oSheet.Cells[7, 6] = "Cantidad Entrada OC";
+            oSheet.Cells[7, 7] = "Cantidad Total OC";
+            oSheet.Cells[7, 8] = "Cantidad Total Almacen";
+
+
+        }
+
+        private void Escribe_informacion_dibujo_calidad()
+        {
+            if (Operacio_salida_materiales == "SalidaOC")
+            {
+                oSheet.Cells[1, 1] = "Numero De Dibujo";
+                oSheet.Cells[2, 1] = "Nombre Empleado";
+                oSheet.Cells[3, 1] = "Fecha Calidad";
+                oSheet.Cells[4, 1] = "Proceos Dibujo";
+                oSheet.Cells[5, 1] = "Estado Dibujo";
+                oSheet.Cells[1, 2] = "Motivo de Rechazo/Re-trabajo";
+                oSheet.Cells[2, 2] = "Accion Correctiva";
+
+            }
+        }
+
+        private bool Abrir_Archivo_Excel()
+        {
+            try
+            {
+                oWB = oXL.Workbooks.Open(@appPath + Archivo_Excel_nombre);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show(Archivo_Excel_nombre + " No existe en el Folder de aplicacion",
+                    "Reportes Materiales", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+        }
+
+        private bool Copiar_template_a_reportes()
+        {
+
+            try
+            {
+                File.Copy(@appPath + "\\Excel_template.xlsx", @appPath + Archivo_Excel_nombre, false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool Inicia_Excel()
+        {
+            try
+            {
+                if (oXL == null)
+                {
+                    oXL = new Excel.Application();
+                }
+
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("No Excel Instalado", "Reporte Materiales",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+        private void Elimina_archivo_excel()
+        {
+            try
+            {
+                File.Delete(@appPath + Archivo_Excel_nombre);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Desactiva_boton_excel()
+        {
+            buttonExcel.Enabled = false;
+        }
+
+        private void Activa_boton_excel()
+        {
+            buttonExcel.Enabled = true;
+        }
+
+
+        private void Cierra_archivo_Excel()
+        {
+            try
+            {
+                oWB.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void Guarda_archivo_excel()
+        {
+            try
+            {
+                oWB.Save();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
