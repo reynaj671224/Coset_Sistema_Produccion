@@ -69,6 +69,7 @@
             this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReporteCalidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenesCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelClock = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -86,7 +87,6 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ordenesCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -373,7 +373,8 @@
             this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
             this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.produccionToolStripMenuItem1,
-            this.proyectosToolStripMenuItem1});
+            this.proyectosToolStripMenuItem1,
+            this.ordenesCompraToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -382,8 +383,7 @@
             // 
             this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dibujosProyectoToolStripMenuItem,
-            this.ReporteCalidadOperacionesToolStripMenuItem,
-            this.ordenesCompraToolStripMenuItem});
+            this.ReporteCalidadOperacionesToolStripMenuItem});
             this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
             this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.produccionToolStripMenuItem1.Text = "Produccion";
@@ -408,6 +408,13 @@
             this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.proyectosToolStripMenuItem1.Text = "Proyectos";
             this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
+            // 
+            // ordenesCompraToolStripMenuItem
+            // 
+            this.ordenesCompraToolStripMenuItem.Name = "ordenesCompraToolStripMenuItem";
+            this.ordenesCompraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ordenesCompraToolStripMenuItem.Text = "Ordenes Compra";
+            this.ordenesCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesCompraToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -544,13 +551,6 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // ordenesCompraToolStripMenuItem
-            // 
-            this.ordenesCompraToolStripMenuItem.Name = "ordenesCompraToolStripMenuItem";
-            this.ordenesCompraToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ordenesCompraToolStripMenuItem.Text = "Ordenes Compra";
-            this.ordenesCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesCompraToolStripMenuItem_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,7 +568,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 9.8";
+            this.Text = "Coset Sistema Produccion Rev 9.9";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

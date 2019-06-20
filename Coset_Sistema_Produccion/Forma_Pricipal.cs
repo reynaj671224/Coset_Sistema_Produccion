@@ -754,11 +754,13 @@ namespace Coset_Sistema_Produccion
             Forma_Reporte_Calidad_Produccion forma_Reporte_Calidad_Produccion = new Forma_Reporte_Calidad_Produccion();
             forma_Reporte_Calidad_Produccion.ShowDialog();
         }
-
+        
         private void ordenesCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Forma_Reporte_Ordenes_Compra forma_Reporte_Ordenes_Compra = new Forma_Reporte_Ordenes_Compra();
             forma_Reporte_Ordenes_Compra.ShowDialog();
         }
+
+
     }
 }
