@@ -74,6 +74,8 @@
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.timerModificarDatosGenerales = new System.Windows.Forms.Timer(this.components);
             this.timerModificarControlFolios = new System.Windows.Forms.Timer(this.components);
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxFolioProcesosElectricos = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControlDatosGenerales.SuspendLayout();
             this.tabPageDatosgenerales.SuspendLayout();
@@ -290,6 +292,8 @@
             // 
             this.tabPageControlfolios.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPageControlfolios.BackgroundImage")));
             this.tabPageControlfolios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPageControlfolios.Controls.Add(this.textBoxFolioProcesosElectricos);
+            this.tabPageControlfolios.Controls.Add(this.label18);
             this.tabPageControlfolios.Controls.Add(this.textBoxRequisiciones);
             this.tabPageControlfolios.Controls.Add(this.label16);
             this.tabPageControlfolios.Controls.Add(this.textBoxFolioProcesos);
@@ -555,6 +559,25 @@
             this.timerModificarControlFolios.Interval = 1000;
             this.timerModificarControlFolios.Tick += new System.EventHandler(this.timerModificarControlFolios_Tick);
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Image = ((System.Drawing.Image)(resources.GetObject("label18.Image")));
+            this.label18.Location = new System.Drawing.Point(338, 156);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(98, 16);
+            this.label18.TabIndex = 40;
+            this.label18.Text = "Folio P Electricos";
+            // 
+            // textBoxFolioProcesosElectricos
+            // 
+            this.textBoxFolioProcesosElectricos.Enabled = false;
+            this.textBoxFolioProcesosElectricos.Location = new System.Drawing.Point(438, 152);
+            this.textBoxFolioProcesosElectricos.Name = "textBoxFolioProcesosElectricos";
+            this.textBoxFolioProcesosElectricos.Size = new System.Drawing.Size(113, 20);
+            this.textBoxFolioProcesosElectricos.TabIndex = 41;
+            // 
             // Forma_Datos_Generales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -627,5 +650,7 @@
         private System.Windows.Forms.TextBox textBoxFolderOrdenCompra;
         private System.Windows.Forms.TextBox textBoxFolderRequisiciones;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxFolioProcesosElectricos;
+        private System.Windows.Forms.Label label18;
     }
 }

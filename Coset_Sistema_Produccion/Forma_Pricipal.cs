@@ -761,6 +761,17 @@ namespace Coset_Sistema_Produccion
             forma_Reporte_Ordenes_Compra.ShowDialog();
         }
 
+        private void procesosElectricosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Procesos_Electricos forma_Procesos_Electricos = new Forma_Procesos_Electricos();
+            forma_Procesos_Electricos.ShowDialog();
+        }
 
+        private void actividadesProcesosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Actividades_Procesos_Electricos forma_Actividades_Procesos_Electricos = 
+                new Forma_Actividades_Procesos_Electricos();
+            forma_Actividades_Procesos_Electricos.ShowDialog();
+        }
     }
 }

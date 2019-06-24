@@ -42,6 +42,8 @@ namespace Coset_Sistema_Produccion
                 textBoxFolioProyectos.Text = folios_temporales.Folio_proyectos;
                 textBoxFolioMateriales.Text = folios_temporales.Folio_materiales;
                 textBoxFolioProcesos.Text = folios_temporales.Folio_procesos;
+                textBoxFolioProcesosElectricos.Text = folios_temporales.Folio_procesos_electricos;
+
                 textBoxRequisiciones.Text = folios_temporales.Folio_requisiciones;
             }
             else
@@ -122,6 +124,7 @@ namespace Coset_Sistema_Produccion
             folios_temporales.Folio_proyectos = textBoxFolioProyectos.Text;
             folios_temporales.Folio_materiales = textBoxFolioMateriales.Text;
             folios_temporales.Folio_procesos = textBoxFolioProcesos.Text;
+            folios_temporales.Folio_procesos_electricos = textBoxFolioProcesosElectricos.Text;
             folios_temporales.Folio_requisiciones = textBoxRequisiciones.Text;
         }
 
@@ -385,6 +388,7 @@ namespace Coset_Sistema_Produccion
             folios_temporales.Folio_proyectos != textBoxFolioProyectos.Text ||
             folios_temporales.Folio_materiales != textBoxFolioMateriales.Text ||
             folios_temporales.Folio_procesos != textBoxFolioProcesos.Text ||
+            folios_temporales.Folio_procesos != textBoxFolioProcesosElectricos.Text ||
             folios_temporales.Folio_requisiciones != textBoxRequisiciones.Text)
             {
                 timerModificarControlFolios.Enabled = false;

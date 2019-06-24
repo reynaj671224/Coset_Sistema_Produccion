@@ -53,7 +53,7 @@ namespace Coset_Sistema_Produccion
         public Proyecto proyecto_visualizar = new Proyecto();
         public Dibujos_proyecto dibujos_proyecto_modificar = new Dibujos_proyecto();
         public Class_Procesos Class_Procesos = new Class_Procesos();
-        public List<Proceso> procesos_disponibles = new List<Proceso>();
+        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
         public enum Campos_dibujos
         {
             codigo, cantidad, numero, descripcion,
@@ -2544,7 +2544,7 @@ namespace Coset_Sistema_Produccion
         private void Rellena_combo_procesos_datagridview_dibujos()
         {
             procesos_disponibles = Class_Procesos.Adquiere_procesos_disponibles_en_base_datos();
-            foreach(Proceso proceso in procesos_disponibles)
+            foreach(Proceso_electricos proceso in procesos_disponibles)
             {
                 Proceso_dibujo.Items.Add(proceso.Nombre);
             }

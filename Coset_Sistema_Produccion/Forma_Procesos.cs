@@ -13,9 +13,9 @@ namespace Coset_Sistema_Produccion
 {
     public partial class Forma_Procesos : Form
     {
-        public List<Proceso> procesos_disponibles = new List<Proceso>();
+        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
         public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso Proceso_Modificaciones = new Proceso();
+        public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public string Operacio_procesos = "";
@@ -61,6 +61,7 @@ namespace Coset_Sistema_Produccion
         {
             folio_disponible = class_folio_disponible.Obtener_informacion_control_folio_base_datos();
             textBoxCodigoProceso.Text = folio_disponible.Folio_procesos;
+
         }
 
         private void Aparece_caja_codigo_proceso()
@@ -466,8 +467,11 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_informacion_de_proceso()
         {
+            int numero_folio = 0;
+            
             Proceso_Modificaciones = procesos_disponibles.Find(usuario => usuario.Nombre.Contains(comboBoxNombreProceso.SelectedItem.ToString()));
-
+            numero_folio = Convert.ToInt32(Proceso_Modificaciones.Codigo.Substring(2, Proceso_Modificaciones.Codigo.Length - 2));
+            Proceso_Modificaciones.Codigo = Proceso_Modificaciones.Codigo.Substring(0, 2) + numero_folio.ToString("00000");
             textBoxCodigoProceso.Text = Proceso_Modificaciones.Codigo;
         }
 
@@ -606,7 +610,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_nombre_proceso()
         {
-            foreach (Proceso proceso in procesos_disponibles)
+            foreach (Proceso_electricos proceso in procesos_disponibles)
             {
                 if (proceso.error == "")
                     comboBoxNombreProceso.Items.Add(proceso.Nombre);

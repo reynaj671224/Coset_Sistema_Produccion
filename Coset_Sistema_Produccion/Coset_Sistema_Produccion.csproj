@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class_Actividades_Proceso_Electrico.cs" />
     <Compile Include="Class_Autos.cs" />
     <Compile Include="Class_Contactos_Clientes.cs" />
     <Compile Include="Class_Clientes.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Class_Partidas_Orden_compra.cs" />
     <Compile Include="Class_Partidas_Requisiciones.cs" />
     <Compile Include="Class_Procesos.cs" />
+    <Compile Include="Class_Procesos_Electrico.cs" />
     <Compile Include="Class_Proveedores.cs" />
     <Compile Include="Class_Proyectos.cs" />
     <Compile Include="Class_Requisiciones.cs" />
@@ -102,6 +104,12 @@
     <Compile Include="Class_Secuencia_Calidad.cs" />
     <Compile Include="Class_Secuencia_Produccion.cs" />
     <Compile Include="Class_Usuarios.cs" />
+    <Compile Include="Forma_Actividades_Procesos_Electricos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Actividades_Procesos_Electricos.Designer.cs">
+      <DependentUpon>Forma_Actividades_Procesos_Electricos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Autos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +236,12 @@
     <Compile Include="Forma_Procesos.Designer.cs">
       <DependentUpon>Forma_Procesos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forma_Procesos_Electricos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Procesos_Electricos.Designer.cs">
+      <DependentUpon>Forma_Procesos_Electricos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forma_Produccion_Usuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +304,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forma_Actividades_Procesos_Electricos.resx">
+      <DependentUpon>Forma_Actividades_Procesos_Electricos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forma_Autos.resx">
       <DependentUpon>Forma_Autos.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Procesos.resx">
       <DependentUpon>Forma_Procesos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Procesos_Electricos.resx">
+      <DependentUpon>Forma_Procesos_Electricos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Produccion_Usuario.resx">
       <DependentUpon>Forma_Produccion_Usuario.cs</DependentUpon>

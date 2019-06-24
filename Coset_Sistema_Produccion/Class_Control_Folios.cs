@@ -28,6 +28,7 @@ namespace Coset_Sistema_Produccion
                 control_Folio.Folio_materiales = mySqlDataReader["folio_materiales"].ToString();
                 control_Folio.Folio_control = mySqlDataReader["control_folio"].ToString();
                 control_Folio.Folio_procesos = mySqlDataReader["folio_procesos"].ToString();
+                control_Folio.Folio_procesos_electricos = mySqlDataReader["folio_procesos_electricos"].ToString();
                 control_Folio.Folio_requisiciones = mySqlDataReader["folio_requisiciones"].ToString();
             }
             catch (Exception ex)
@@ -76,6 +77,7 @@ namespace Coset_Sistema_Produccion
                "',folio_proyectos='" + control_folio.Folio_proyectos +
                "',folio_materiales='" + control_folio.Folio_materiales +
                "',folio_procesos='" + control_folio.Folio_procesos +
+               "',folio_procesos_electricos='" + control_folio.Folio_procesos_electricos +
                "',folio_requisiciones='" + control_folio.Folio_requisiciones +
                "' where control_folio = '1';";
         }
@@ -91,6 +93,7 @@ namespace Coset_Sistema_Produccion
         public string Folio_materiales = "";
         public string Folio_control = "";
         public string Folio_procesos = "";
+        public string Folio_procesos_electricos = "";
         public string Folio_requisiciones = "";
         public string error = "";
     }

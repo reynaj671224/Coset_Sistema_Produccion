@@ -13,9 +13,9 @@ namespace Coset_Sistema_Produccion
 {
     public partial class Forma_Dibujos_Operacion : Form
     {
-        public List<Proceso> procesos_disponibles = new List<Proceso>();
+        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
         public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso Proceso_Modificaciones = new Proceso();
+        public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public List<Usuario> Empleados_produccion_disponibles = new List<Usuario>();
