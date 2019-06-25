@@ -17,10 +17,13 @@ namespace Coset_Sistema_Produccion
         public Class_Procesos_Electrico clase_procesos_electrico = new Class_Procesos_Electrico();
         public Proceso_Electrico Proceso_Modificaciones = new Proceso_Electrico();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
+        public Class_Actividades_Proceso_Electrico Class_Actividades_Proceso_Electrico = new Class_Actividades_Proceso_Electrico();
         public List<Actividad_Proceso_Electrico> actividad_Proceso_Electricos_disponibles = new List<Actividad_Proceso_Electrico>();
         public Actividad_Proceso_Electrico Actividad_Proceso_Electrico_modificaciones = new Actividad_Proceso_Electrico();
+        public Actividad_Proceso_Electrico Actividad_Proceso_Electrico_visualizar = new Actividad_Proceso_Electrico();
+        public Actividad_Proceso_Electrico Actividad_Proceso_Electrico_eliminar = new Actividad_Proceso_Electrico();
         public Control_folio folio_disponible = new Control_folio();
-        public string Operacio_procesos = "";
+        public string Operacio_actividades_procesos = "";
         public Forma_Actividades_Procesos_Electricos()
         {
             InitializeComponent();
@@ -61,7 +64,7 @@ namespace Coset_Sistema_Produccion
             //Activa_cajas_informacion();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
             Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Agregar";
+            Operacio_actividades_procesos = "Agregar";
         }
 
         private void Buscar_todos_procesos_electricos_disponibles()
@@ -153,9 +156,9 @@ namespace Coset_Sistema_Produccion
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (Operacio_procesos == "Modificar")
-                Secuencia_modificar_usuario();
-            else if (Operacio_procesos == "Agregar")
+            if (Operacio_actividades_procesos == "Modificar")
+                Secuencia_modificar_actividad_proceso();
+            else if (Operacio_actividades_procesos == "Agregar")
                 Secuencia_agregar_actividad_proceso();
         }
 
@@ -172,7 +175,7 @@ namespace Coset_Sistema_Produccion
                 Desaparece_combo_nombre_proceso();
                 Desactiva_cajas_captura_despues_de_agregar_actividad_proceso();
                 Activa_botones_operacion();
-                Aparece_caja_nombre_empleado();
+                Aparece_caja_nombre_proceso();
                 Elimina_informacion_usuarios_disponibles();
             }
      
@@ -188,19 +191,21 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show(folio_disponible.error);
         }
 
-        private void Secuencia_modificar_usuario()
+        private void Secuencia_modificar_actividad_proceso()
         {
 
-            if (Guarda_datos_modificar_proceso_electrico())
+            if (Guarda_datos_modificar_proceso_electrico(Actividad_Proceso_Electrico_modificaciones))
             {
                 Limpia_cajas_captura_despues_de_agregar_proceso();
                 Limpia_combo_nombre_proceso();
+                Limpia_combo_actividades_proceso();
+                Desaparece_combo_actividad_proceso();
                 Desactiva_cajas_captura_despues_de_agregar_actividad_proceso();
                 Desactiva_boton_guardar_base_de_datos();
                 Desactiva_boton_cancelar();
                 Desaparece_combo_nombre_proceso();
                 Activa_botones_operacion();
-                Aparece_caja_nombre_empleado();
+                Aparece_caja_nombre_proceso();
                 Elimina_informacion_usuarios_disponibles();
             }    
             
@@ -299,13 +304,13 @@ namespace Coset_Sistema_Produccion
             textBoxActividadProcesoElectrico.Text = "";
         }
 
-        private bool Guarda_datos_modificar_proceso_electrico()
+        private bool Guarda_datos_modificar_proceso_electrico(Actividad_Proceso_Electrico actividad)
         {
             MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos(), connection);
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos(actividad), connection);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -319,10 +324,11 @@ namespace Coset_Sistema_Produccion
             return true;
         }
 
-        private string Configura_cadena_comando_modificar_en_base_de_datos()
+        private string Configura_cadena_comando_modificar_en_base_de_datos(Actividad_Proceso_Electrico actividad)
         {
-            return "UPDATE procesos_electricos set  nombre_proceso='" + comboBoxNombreProceso.Text +
-                "' where codigo_proceso='" + textBoxCodigoProceso.Text + "';";
+            return "UPDATE actividades_procesos_electricos set  actividad='" + comboBoxActividadProcesoElectrico.Text +
+                "',notas='" + textBoxNotasActividad.Text +
+                "' where codigo ='" + actividad.Codigo + "';";
         }
 
 
@@ -373,8 +379,8 @@ namespace Coset_Sistema_Produccion
         }
         private string Configura_cadena_comando_eliminar_en_base_de_datos()
         {
-            return "DELETE from procesos_electricos where nombre_proceso='" +
-               comboBoxNombreProceso.Text + "';";
+            return "DELETE from actividades_procesos_electricos where codigo='" +
+               Actividad_Proceso_Electrico_eliminar.Codigo + "';";
         }
 
         
@@ -396,7 +402,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_procesos_disponibles_base_datos();
             Rellenar_combo_nombre_proceso();
             Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Modificar";
+            Operacio_actividades_procesos = "Modificar";
         }
 
         private void Obtener_datos_procesos_disponibles_base_datos()
@@ -433,41 +439,66 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxCodigoempleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacio_procesos == "Modificar")
-                configura_forma_modificar();
-            else if (Operacio_procesos == "Eliminar")
-                configura_forma_eliminar();
-            else if (Operacio_procesos == "Visualizar")
-                configura_forma_visualizar();
+            if (Operacio_actividades_procesos == "Modificar")
+                configura_forma_modificar_actividad_proceso();
+            else if (Operacio_actividades_procesos == "Eliminar")
+                configura_forma_eliminar_actividad_proceso();
+            else if (Operacio_actividades_procesos == "Visualizar")
+                configura_forma_visualizar_actividad_proceso();
 
 
         }
 
-        private void configura_forma_visualizar()
+        private void configura_forma_visualizar_actividad_proceso()
         {
-            Rellena_cajas_informacion_de_proceso();
-        }
-
-        private void configura_forma_eliminar()
-        {
-            Activa_cajas_informacion();
-            Rellena_cajas_informacion_de_proceso();
-            Desactiva_combo_nombre_proceso();
-        }
-
-        private void configura_forma_modificar()
-        {
-            //Activa_cajas_informacion();
-            //Rellena_cajas_informacion_de_proceso();
-            //Desactiva_caja_actividad_proceso();
             Aparece_combo_actividad_proceso();
             Obtener_actividades_proceso();
-            Inicia_timer_modificar_empleado();
+            Limpia_combo_actividades_proceso();
+            Rellenar_combo_actividades_proceso();
+        }
+
+        private void configura_forma_eliminar_actividad_proceso()
+        {
+            Aparece_combo_actividad_proceso();
+            Obtener_actividades_proceso();
+            Limpia_combo_actividades_proceso();
+            Rellenar_combo_actividades_proceso();
+        }
+
+        private void configura_forma_modificar_actividad_proceso()
+        {
+           
+            Aparece_combo_actividad_proceso();
+            Obtener_actividades_proceso();
+            Limpia_combo_actividades_proceso();
+            Rellenar_combo_actividades_proceso();
+            
+        }
+
+        private void Rellenar_combo_actividades_proceso()
+        {
+            foreach (Actividad_Proceso_Electrico Actividad_proceso in actividad_Proceso_Electricos_disponibles)
+            {
+                if (Actividad_proceso.error == "")
+                    comboBoxActividadProcesoElectrico.Items.Add(Actividad_proceso.Actividad);
+                else
+                {
+                    MessageBox.Show(Actividad_proceso.error);
+                    break;
+                }
+            }
+        }
+
+        private void Limpia_combo_actividades_proceso()
+        {
+            comboBoxActividadProcesoElectrico.Items.Clear();
+            comboBoxActividadProcesoElectrico.Text = "";
         }
 
         private void Obtener_actividades_proceso()
         {
-            throw new NotImplementedException();
+            actividad_Proceso_Electricos_disponibles = Class_Actividades_Proceso_Electrico.
+                Adquiere_actividad_procesos_disponibles_en_base_datos();
         }
 
         private void Aparece_combo_actividad_proceso()
@@ -485,9 +516,14 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Enabled = false;
         }
 
-        private void Inicia_timer_modificar_empleado()
+        private void Inicia_timer_modificar_actividades_proceso()
         {
-            timerActualizrempleado.Enabled = true;
+            timerActualizarActividadesProceso.Enabled = true;
+        }
+
+        private void Termina_timer_modificar_actividades_proceso()
+        {
+            timerActualizarActividadesProceso.Enabled = false;
         }
 
         private void Desactiva_Combo_codigo_empleado()
@@ -505,11 +541,12 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProceso.Text = Proceso_Modificaciones.Codigo;
         }
 
-        private void timerActualizrempleado_Tick(object sender, EventArgs e)
+        private void timerActualizarActividadesProceso_Tick(object sender, EventArgs e)
         {
-            if(textBoxNombreProceso.Text!= Proceso_Modificaciones.Nombre)
+            if(comboBoxActividadProcesoElectrico.Text!= Actividad_Proceso_Electrico_modificaciones.Actividad
+                || textBoxNotasActividad.Text!= Actividad_Proceso_Electrico_modificaciones.Notas)
             {
-                timerActualizrempleado.Enabled = false;
+                timerActualizarActividadesProceso.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
             }
         }
@@ -517,18 +554,22 @@ namespace Coset_Sistema_Produccion
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             Limpia_cajas_captura_despues_de_agregar_proceso();
-            Limpia_combo_codigo_empleadlo();
             Limpia_combo_nombre_proceso();
+            Limpia_combo_actividades_proceso();
             Desactiva_cajas_captura_despues_de_agregar_actividad_proceso();
             Desactiva_boton_guardar_base_de_datos();
             Desaparece_combo_nombre_proceso();
-            Desaparece_combo_codigo_empleado();
+            Desaparece_combo_actividad_proceso();
             Desactiva_boton_cancelar();
             Desactiva_boton_eliminar_base_de_datos();
             Activa_botones_operacion();
             Activa_Combo_codigo_empleado();
-            Aparece_caja_nombre_empleado();
-            Aparece_caja_codigo_proceso();
+            Aparece_caja_nombre_proceso();
+            Termina_timer_modificar_actividades_proceso();
+            Termina_timer_eliminar_actividad_proceso();
+            Desactiva_boton_eliminar_base_de_datos();
+            Desactiva_boton_guardar_base_de_datos();
+
         }
 
         private void Limpia_combo_nombre_proceso()
@@ -537,7 +578,7 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Text = "";
         }
 
-        private void Aparece_caja_nombre_empleado()
+        private void Aparece_caja_nombre_proceso()
         {
             textBoxNombreProceso.Visible = true;
         }
@@ -549,7 +590,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonEliminarUsuario_Click(object sender, EventArgs e)
         {
-            Eliminar_usuarios();
+            Eliminar_actividad_proceso();
             
         }
 
@@ -562,13 +603,15 @@ namespace Coset_Sistema_Produccion
                 {
                     Limpia_cajas_captura_despues_de_agregar_proceso();
                     Limpia_combo_nombre_proceso();
+                    Limpia_combo_actividades_proceso();
+                    Desaparece_combo_actividad_proceso();
                     Desactiva_cajas_captura_despues_de_agregar_actividad_proceso();
-                    Desactiva_boton_eliminar_base_de_datos();
+                    Desactiva_boton_guardar_base_de_datos();
                     Desactiva_boton_cancelar();
                     Desaparece_combo_nombre_proceso();
                     Activa_botones_operacion();
-                    Activa_Combo_codigo_empleado();
-                    Aparece_caja_nombre_empleado();
+                    Aparece_caja_nombre_proceso();
+                    Desactiva_boton_eliminar_base_de_datos();
                     Elimina_informacion_usuarios_disponibles();
                 }
             }
@@ -584,22 +627,25 @@ namespace Coset_Sistema_Produccion
             return Elimina_datos_proceso_electrico();
         }
 
-        private void Eliminar_usuarios()
+        private void Eliminar_actividad_proceso()
         {
             Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
             Aparece_combo_nombre_proceso();
             Activa_combo_nombre_proceso();
             Obtener_datos_procesos_disponibles_base_datos();
             Rellenar_combo_nombre_proceso();
             Activa_boton_cancelar_operacio();
-            Inicia_timer_eliminar_usuario();
-            Operacio_procesos = "Eliminar";
+            Operacio_actividades_procesos = "Eliminar";
         }
 
-        private void Inicia_timer_eliminar_usuario()
+        private void Inicia_timer_eliminar_actividad_proceso()
         {
-            timerEliminaempleado.Enabled = true;
+            timerEliminarActividadProceso.Enabled = true;
+        }
+
+        private void Termina_timer_eliminar_actividad_proceso()
+        {
+            timerEliminarActividadProceso.Enabled = false;
         }
 
         private void Activa_boton_borrar_ususraio_base_datos()
@@ -607,11 +653,11 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = true;
         }
 
-        private void timerEliminaempleado_Tick(object sender, EventArgs e)
+        private void timerEliminarActividadProceso_Tick(object sender, EventArgs e)
         {
-            if (comboBoxNombreProceso.Text != "")
+            if (comboBoxActividadProcesoElectrico.Text != "")
             {
-                timerEliminaempleado.Enabled = false;
+                timerEliminarActividadProceso.Enabled = false;
                 Activa_boton_borrar_ususraio_base_datos();
             }
         }
@@ -624,13 +670,12 @@ namespace Coset_Sistema_Produccion
         private void Visualiza_proceso()
         {
             Desactiva_botones_operacion();
-            Desaparce_caja_nombre_proceso();
-            Activa_combo_nombre_proceso();
             Aparece_combo_nombre_proceso();
+            Activa_combo_nombre_proceso();
             Obtener_datos_procesos_disponibles_base_datos();
             Rellenar_combo_nombre_proceso();
             Activa_boton_cancelar_operacio();
-            Operacio_procesos = "Visualizar";
+            Operacio_actividades_procesos = "Visualizar";
         }
 
         private void Activa_combo_nombre_proceso()
@@ -665,13 +710,13 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacio_procesos == "Modificar")
-                configura_forma_modificar();
-            else if (Operacio_procesos == "Eliminar")
-                configura_forma_eliminar();
-            else if (Operacio_procesos == "Visualizar")
-                configura_forma_visualizar();
-            else if(Operacio_procesos == "Agregar")
+            if (Operacio_actividades_procesos == "Modificar")
+                configura_forma_modificar_actividad_proceso();
+            else if (Operacio_actividades_procesos == "Eliminar")
+                configura_forma_eliminar_actividad_proceso();
+            else if (Operacio_actividades_procesos == "Visualizar")
+                configura_forma_visualizar_actividad_proceso();
+            else if(Operacio_actividades_procesos == "Agregar")
                 configura_forma_agregar();
         }
 
@@ -680,6 +725,49 @@ namespace Coset_Sistema_Produccion
             Desactiva_combo_nombre_proceso();
             Activa_cajas_informacion();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos();
+        }
+
+        private void comboBoxActividadProcesoElectrico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Operacio_actividades_procesos == "Modificar")
+                configura_forma_modificar_notas_actividad();
+            else if (Operacio_actividades_procesos == "Eliminar")
+                configura_forma_eliminar_notas_actividad();
+            else if (Operacio_actividades_procesos == "Visualizar")
+                configura_forma_visualizar_notas_actividad();
+            else if (Operacio_actividades_procesos == "Agregar")
+                configura_forma_agregar();
+        }
+
+        private void configura_forma_eliminar_notas_actividad()
+        {
+            
+                Desactiva_combo_nombre_proceso();
+            Actividad_Proceso_Electrico_eliminar = actividad_Proceso_Electricos_disponibles.
+                Find(actividades => actividades.Actividad.Contains(comboBoxActividadProcesoElectrico.SelectedItem.ToString()));
+            textBoxNotasActividad.Text = Actividad_Proceso_Electrico_eliminar.Notas;
+            Inicia_timer_eliminar_actividad_proceso();
+            Activa_caja_notas_actividad();
+        }
+
+        private void configura_forma_visualizar_notas_actividad()
+        {
+            
+                Desactiva_combo_nombre_proceso();
+            Actividad_Proceso_Electrico_visualizar = actividad_Proceso_Electricos_disponibles.
+                Find(actividades => actividades.Actividad.Contains(comboBoxActividadProcesoElectrico.SelectedItem.ToString()));
+            textBoxNotasActividad.Text = Actividad_Proceso_Electrico_visualizar.Notas;
+            Activa_caja_notas_actividad();
+        }
+
+        private void configura_forma_modificar_notas_actividad()
+        {
+            Desactiva_combo_nombre_proceso();
+            Actividad_Proceso_Electrico_modificaciones = actividad_Proceso_Electricos_disponibles.
+                Find(actividades => actividades.Actividad.Contains(comboBoxActividadProcesoElectrico.SelectedItem.ToString()));
+            textBoxNotasActividad.Text = Actividad_Proceso_Electrico_modificaciones.Notas;
+            Activa_caja_notas_actividad();
+            Inicia_timer_modificar_actividades_proceso();
         }
     }
 }

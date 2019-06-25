@@ -43,9 +43,9 @@
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.timerAgregarProceso = new System.Windows.Forms.Timer(this.components);
             this.comboBoxCodigoProceso = new System.Windows.Forms.ComboBox();
-            this.timerActualizrempleado = new System.Windows.Forms.Timer(this.components);
+            this.timerActualizarActividadesProceso = new System.Windows.Forms.Timer(this.components);
             this.buttonCancelar = new System.Windows.Forms.Button();
-            this.timerEliminaempleado = new System.Windows.Forms.Timer(this.components);
+            this.timerEliminarActividadProceso = new System.Windows.Forms.Timer(this.components);
             this.buttonBuscarProceso = new System.Windows.Forms.Button();
             this.comboBoxNombreProceso = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -210,10 +210,10 @@
             this.comboBoxCodigoProceso.Visible = false;
             this.comboBoxCodigoProceso.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoempleado_SelectedIndexChanged);
             // 
-            // timerActualizrempleado
+            // timerActualizarActividadesProceso
             // 
-            this.timerActualizrempleado.Interval = 1000;
-            this.timerActualizrempleado.Tick += new System.EventHandler(this.timerActualizrempleado_Tick);
+            this.timerActualizarActividadesProceso.Interval = 1000;
+            this.timerActualizarActividadesProceso.Tick += new System.EventHandler(this.timerActualizarActividadesProceso_Tick);
             // 
             // buttonCancelar
             // 
@@ -230,10 +230,10 @@
             this.buttonCancelar.Visible = false;
             this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
-            // timerEliminaempleado
+            // timerEliminarActividadProceso
             // 
-            this.timerEliminaempleado.Interval = 1000;
-            this.timerEliminaempleado.Tick += new System.EventHandler(this.timerEliminaempleado_Tick);
+            this.timerEliminarActividadProceso.Interval = 1000;
+            this.timerEliminarActividadProceso.Tick += new System.EventHandler(this.timerEliminarActividadProceso_Tick);
             // 
             // buttonBuscarProceso
             // 
@@ -278,6 +278,7 @@
             this.comboBoxActividadProcesoElectrico.Size = new System.Drawing.Size(465, 21);
             this.comboBoxActividadProcesoElectrico.TabIndex = 31;
             this.comboBoxActividadProcesoElectrico.Visible = false;
+            this.comboBoxActividadProcesoElectrico.SelectedIndexChanged += new System.EventHandler(this.comboBoxActividadProcesoElectrico_SelectedIndexChanged);
             // 
             // textBoxActividadProcesoElectrico
             // 
@@ -357,9 +358,9 @@
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Timer timerAgregarProceso;
         private System.Windows.Forms.ComboBox comboBoxCodigoProceso;
-        private System.Windows.Forms.Timer timerActualizrempleado;
+        private System.Windows.Forms.Timer timerActualizarActividadesProceso;
         private System.Windows.Forms.Button buttonCancelar;
-        private System.Windows.Forms.Timer timerEliminaempleado;
+        private System.Windows.Forms.Timer timerEliminarActividadProceso;
         private System.Windows.Forms.Button buttonBuscarProceso;
         private System.Windows.Forms.ComboBox comboBoxNombreProceso;
         private System.Windows.Forms.Label label3;

@@ -24,7 +24,8 @@ namespace Coset_Sistema_Produccion
                     {
                         Actividad = mySqlDataReader["actividad"].ToString(),
                         Notas = mySqlDataReader["notas"].ToString(),
-
+                        Codigo = mySqlDataReader["codigo"].ToString(),
+                        Codigo_Proceso_Electrico = mySqlDataReader["proceso_electrico"].ToString(),
                     });
                 }
             }
@@ -49,7 +50,7 @@ namespace Coset_Sistema_Produccion
     }
     public class Actividad_Proceso_Electrico
     {
-        public int Codigo = 0;
+        public string Codigo = "";
         public string Codigo_Proceso_Electrico = "";
         public string Actividad = "";
         public string Notas = "";
