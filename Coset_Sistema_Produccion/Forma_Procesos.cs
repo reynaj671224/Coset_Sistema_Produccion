@@ -18,7 +18,12 @@ namespace Coset_Sistema_Produccion
         public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
+        public List<Dibujos_proyecto> dibujos_proyecto_disponibles = new List<Dibujos_proyecto>();
+        public Class_Dibujos_Proyecto clase_dibujos_proyecto = new Class_Dibujos_Proyecto();
         public string Operacio_procesos = "";
+        public string proceso_actual = "";
+
+
         public Forma_Procesos()
         {
             InitializeComponent();
@@ -178,7 +183,7 @@ namespace Coset_Sistema_Produccion
         private void Secuencia_modificar_usuario()
         {
 
-            if (Guarda_datos_modificar_usuario())
+            if (Guarda_datos_modificar_usuario() && secuencia_modificar_registros_procesos_dibujos_proyecto())
             {
                 Limpia_cajas_captura_despues_de_agregar_proceso();
                 Limpia_combo_nombre_proceso();
@@ -191,6 +196,53 @@ namespace Coset_Sistema_Produccion
                 Elimina_informacion_usuarios_disponibles();
             }    
             
+        }
+
+        private bool secuencia_modificar_registros_procesos_dibujos_proyecto()
+        {
+            obtener_registros_dibujos_proyectos_actual_proceso();
+            modifca_regitros_proceso_modificado();
+            return true;
+        }
+
+        private void modifca_regitros_proceso_modificado()
+        {
+            foreach(Dibujos_proyecto dibujo_proyecto in dibujos_proyecto_disponibles)
+            {
+                modifica_proceso_dibujo_proyectos(dibujo_proyecto);
+            }
+        }
+
+        private void obtener_registros_dibujos_proyectos_actual_proceso()
+        {
+            dibujos_proyecto_disponibles = 
+                clase_dibujos_proyecto.Adquiere_dibujos_proyecto_disponibles_procesos(proceso_actual);
+        }
+
+        private bool modifica_proceso_dibujo_proyectos(Dibujos_proyecto dibujo_proyecto)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_proceso_dibiujos_proyecto(dibujo_proyecto), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_modificar_proceso_dibiujos_proyecto(Dibujos_proyecto dibujo_proyecto)
+        {
+            return "UPDATE dibujos_proyecto set  proceso='" + comboBoxNombreProceso.Text +
+                "' where codigo_dibujo='" + dibujo_proyecto.Codigo.ToString() + "';";
         }
 
         private void Elimina_informacion_usuarios_disponibles()
@@ -308,7 +360,7 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_modificar_en_base_de_datos()
         {
-            return "UPDATE procesos set  nombre_proceso='" + comboBoxNombreProceso.Text +
+            return "UPDATE procesos set  nombre_proceso ='" + comboBoxNombreProceso.Text +
                 "' where codigo_proceso='" + textBoxCodigoProceso.Text + "';";
         }
 
@@ -447,7 +499,13 @@ namespace Coset_Sistema_Produccion
             Activa_cajas_informacion();
             Rellena_cajas_informacion_de_proceso();
             Desactiva_caja_codigo_proceso();
+            Guarda_valor_actual_proceso();
             Inicia_timer_modificar_empleado();
+        }
+
+        private void Guarda_valor_actual_proceso()
+        {
+            proceso_actual = comboBoxNombreProceso.Text;
         }
 
         private void Desactiva_combo_nombre_empleado()

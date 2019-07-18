@@ -1893,13 +1893,13 @@ namespace Coset_Sistema_Produccion
 
         private bool Elimina_informacion_proyecto_en_base_de_datos()
         {
-            if (Elimina_datos_proyecto() && Elinina_partidas_cotizacion())
+            if (Elimina_datos_proyecto() && Elinina_dibujos_proyecto())
                 return true;
             else
                 return false;
         }
 
-        private bool Elinina_partidas_cotizacion()
+        private bool Elinina_dibujos_proyecto()
         {
             MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria());
             try

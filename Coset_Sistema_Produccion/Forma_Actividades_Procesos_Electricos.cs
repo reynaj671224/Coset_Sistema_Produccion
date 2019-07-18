@@ -16,6 +16,7 @@ namespace Coset_Sistema_Produccion
         public List<Proceso_Electrico> procesos_disponibles = new List<Proceso_Electrico>();
         public Class_Procesos_Electrico clase_procesos_electrico = new Class_Procesos_Electrico();
         public Proceso_Electrico Proceso_Modificaciones = new Proceso_Electrico();
+        public Proceso_Electrico Proceso_agregar = new Proceso_Electrico();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Class_Actividades_Proceso_Electrico Class_Actividades_Proceso_Electrico = new Class_Actividades_Proceso_Electrico();
         public List<Actividad_Proceso_Electrico> actividad_Proceso_Electricos_disponibles = new List<Actividad_Proceso_Electrico>();
@@ -354,8 +355,17 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos()
         {
-            return "INSERT INTO actividades_procesos_electricos(proceso_electrico,actividad, notas) " +
-                "VALUES('" + comboBoxNombreProceso.Text + "','"+ textBoxActividadProcesoElectrico.Text + "','" + textBoxNotasActividad.Text  + "');";
+            Proceso_agregar = procesos_disponibles.
+                Find(proceso => proceso.Nombre.Contains(comboBoxNombreProceso.SelectedItem.ToString()));
+            if (Proceso_agregar != null)
+            {
+                return "INSERT INTO actividades_procesos_electricos(codigo_proceso_electrico," +
+                    "proceso_electrico,actividad, notas) " +
+                    "VALUES('" + Proceso_agregar.Codigo + "','" + Proceso_agregar.Nombre + "','" +
+                    textBoxActividadProcesoElectrico.Text + "','" + textBoxNotasActividad.Text + "');";
+            }
+            else
+                return "";
         }
 
         private bool Elimina_datos_proceso_electrico()

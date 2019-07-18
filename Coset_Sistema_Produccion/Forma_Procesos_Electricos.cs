@@ -142,7 +142,7 @@ namespace Coset_Sistema_Produccion
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
             if (Operacio_procesos == "Modificar")
-                Secuencia_modificar_usuario();
+                Secuencia_modificar_proceso_electrico();
             else if (Operacio_procesos == "Agregar")
                 Secuencia_agregar_proceso();
         }
@@ -175,10 +175,10 @@ namespace Coset_Sistema_Produccion
                 MessageBox.Show(folio_disponible.error);
         }
 
-        private void Secuencia_modificar_usuario()
+        private void Secuencia_modificar_proceso_electrico()
         {
 
-            if (Guarda_datos_modificar_proceso_electrico())
+            if (Guarda_datos_modificar_proceso_electrico() && modifica_actividades_proceso_electrico() )
             {
                 Limpia_cajas_captura_despues_de_agregar_proceso();
                 Limpia_combo_nombre_proceso();
@@ -191,6 +191,32 @@ namespace Coset_Sistema_Produccion
                 Elimina_informacion_usuarios_disponibles();
             }    
             
+        }
+
+        private bool modifica_actividades_proceso_electrico()
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_actividades_proceso_electrico(), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_modificar_actividades_proceso_electrico()
+        {
+            return "UPDATE actividades_procesos_electricos set  proceso_electrico='" + comboBoxNombreProceso.Text +
+                 "' where codigo_proceso_electrico='" + textBoxCodigoProceso.Text + "';";
         }
 
         private void Elimina_informacion_usuarios_disponibles()
@@ -292,7 +318,7 @@ namespace Coset_Sistema_Produccion
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_en_base_de_datos(), connection);
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_modificar_proceso_electrico(), connection);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -306,7 +332,7 @@ namespace Coset_Sistema_Produccion
             return true;
         }
 
-        private string Configura_cadena_comando_modificar_en_base_de_datos()
+        private string Configura_cadena_comando_modificar_proceso_electrico()
         {
             return "UPDATE procesos_electricos set  nombre_proceso='" + comboBoxNombreProceso.Text +
                 "' where codigo_proceso='" + textBoxCodigoProceso.Text + "';";
@@ -526,10 +552,10 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Esta Seguro de Eiliminar Este Proceso?", "Eliminar Proceso",
+            if (MessageBox.Show("Esta Seguro de Eiliminar Este Proceso y Todas las actividades asociadas?", "Eliminar Proceso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (Elimina_informacion_en_base_de_datos())
+                if (Elimina_informacion_en_base_de_datos_procesos_electricos())
                 {
                     Limpia_cajas_captura_despues_de_agregar_proceso();
                     Limpia_combo_nombre_proceso();
@@ -550,9 +576,35 @@ namespace Coset_Sistema_Produccion
             buttonBorrarBasedeDatos.Visible = false;
         }
 
-        private bool Elimina_informacion_en_base_de_datos()
+        private bool Elimina_informacion_en_base_de_datos_procesos_electricos()
         {
-            return Elimina_datos_proceso_electrico();
+            return (Elimina_datos_proceso_electrico() & Elimina_actividades_procesos_electrico(comboBoxNombreProceso.Text));
+        }
+
+        private bool Elimina_actividades_procesos_electrico(string nombre_proceso)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_cadena_conexion_MySQL_ingenieria_procesos());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_eliminar_actividades_proceso_electrico(nombre_proceso), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+
+            connection.Close();
+            return true;
+        }
+
+        private string Configura_cadena_comando_eliminar_actividades_proceso_electrico(string nombre_proceso)
+        {
+            return "DELETE from actividades_procesos_electricos where proceso_electrico='" +
+              nombre_proceso + "';";
         }
 
         private void Eliminar_usuarios()
