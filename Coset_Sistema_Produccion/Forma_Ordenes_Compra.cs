@@ -1719,7 +1719,25 @@ namespace Coset_Sistema_Produccion
                                     Partida_orden_compra_agregar.precio_unitario = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
                                 else if (campo == (int)Campos_orden_compra.total)
                                     Partida_orden_compra_agregar.Total = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            if (campo == (int)Campos_orden_compra.material)
+                            {
+                                /*aqui me quede*/
+                                if (Operacio_orden_compra == "Agregar")
+                                    partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
+                            textBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
+                                else if (Operacio_orden_compra == "Agregar Partidas")
+                                    partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
+                            comboBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
+                                if (partidas_ordenes_compra_disponibles.Count != 0)
+                                {
+                                    MessageBox.Show("Numero de Material existe en Orden De Compra", "Agregar Material",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value = "";
+                                    connection.Close();
+                                    return false;
+                                }
                             }
+                        }
                             else
                             {
                                 MessageBox.Show("campo en blanco");

@@ -403,7 +403,7 @@
             // comboBoxCodigoOrdenCompra
             // 
             this.comboBoxCodigoOrdenCompra.FormattingEnabled = true;
-            this.comboBoxCodigoOrdenCompra.Location = new System.Drawing.Point(239, 110);
+            this.comboBoxCodigoOrdenCompra.Location = new System.Drawing.Point(238, 109);
             this.comboBoxCodigoOrdenCompra.Name = "comboBoxCodigoOrdenCompra";
             this.comboBoxCodigoOrdenCompra.Size = new System.Drawing.Size(149, 21);
             this.comboBoxCodigoOrdenCompra.Sorted = true;

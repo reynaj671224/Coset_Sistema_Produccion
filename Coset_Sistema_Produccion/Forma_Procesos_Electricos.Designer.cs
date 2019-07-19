@@ -104,6 +104,7 @@
             this.buttonEliminarProceso.Text = "Eliminar";
             this.buttonEliminarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEliminarProceso.UseVisualStyleBackColor = false;
+            this.buttonEliminarProceso.Visible = false;
             this.buttonEliminarProceso.Click += new System.EventHandler(this.buttonEliminarUsuario_Click);
             // 
             // buttonHome
