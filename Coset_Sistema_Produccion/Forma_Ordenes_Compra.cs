@@ -66,6 +66,7 @@ namespace Coset_Sistema_Produccion
         public Class_Materiales class_materiales = new Class_Materiales();
         public int Numero_partidas_disponibles = 0;
         public int RenglonParaEliminardatagridview = 0;
+        public int Partidas_orden_compra_agregar = 0;
         public enum Campos_orden_compra
         {
             codigo, partida, cantidad, material, parte,descripcion,unidad_medida,
@@ -881,7 +882,7 @@ namespace Coset_Sistema_Produccion
             obtener_proyectos_disponibles();
             Activa_grupo_Tipo_moneda();
             Rellenar_combo_proyectos_partidas_requisiciones();
-            
+            Partidas_orden_compra_agregar = 0;
         }
 
         private void Activa_grupo_Tipo_moneda()
@@ -1260,8 +1261,8 @@ namespace Coset_Sistema_Produccion
                     Desaparece_boton_guardar_base_de_datos();
                     Limpia_operaciones_ordenes_compra();
                     Activa_botones_operacion_partidas();
-                    limpia_partidas_ordenes_compra();
                     Obtener_datos_partidas_ordenes_compra_disponibles_base_datos(comboBoxCodigoOrdenCompra.Text);
+                    limpia_partidas_ordenes_compra();
                     Rellena_cajas_informacion_de_partidas_orden_compra();
                     Elimina_informacion_orden_compra_disponibles();
                 }
@@ -1462,8 +1463,8 @@ namespace Coset_Sistema_Produccion
             {
                 /*if (Verifica_divisa_numero())
                 {*/
-                    if (Guarda_datos_partidas_orden_compra())
-                    {
+                if (Guarda_datos_partidas_orden_compra())
+                {
                     if (Guarda_datos_orden_compra())
                     {
                         Limpia_cajas_captura_despues_de_agregar_orden_compra();
@@ -1497,7 +1498,7 @@ namespace Coset_Sistema_Produccion
                         Limpia_combo_combo_condicion_pago();
                         Elimina_informacion_orden_compra_disponibles();
                     }
-                    }
+                }
                /* }*/
             }
 
@@ -1695,7 +1696,8 @@ namespace Coset_Sistema_Produccion
             try
             {
                 connection.Open();
-                for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
+               
+                for (int partidas = Partidas_orden_compra_agregar; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
                 {
                     for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
                     {    
@@ -1750,6 +1752,7 @@ namespace Coset_Sistema_Produccion
                     command.ExecuteNonQuery();
                     MySqlCommand command_requisiciones_orden_compra = new MySqlCommand(Configura_cadena_comando_actualizar_en_base_de_datos_partidas_requisiciones(Partida_orden_compra_agregar), connection);
                     command_requisiciones_orden_compra.ExecuteNonQuery();
+                    Partidas_orden_compra_agregar++;
                 }
             }
             catch (Exception ex)
@@ -1937,6 +1940,7 @@ namespace Coset_Sistema_Produccion
             //Rellena_combo_requisicion_partidas_orden_compra();
             Acepta_datagridview_agregar_renglones();
             Aparce_boton_guardar_base_datos();
+            Partidas_orden_compra_agregar = 0;
         }
 
         private void Desactiva_botones_operacion_partidas()
