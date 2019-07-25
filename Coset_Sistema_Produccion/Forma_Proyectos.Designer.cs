@@ -49,12 +49,6 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewDibujosProyecto = new System.Windows.Forms.DataGridView();
-            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.buttonDibujos = new System.Windows.Forms.Button();
@@ -85,6 +79,14 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxSerie = new System.Windows.Forms.TextBox();
             this.comboBoxNombreProyecto = new System.Windows.Forms.ComboBox();
+            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo_Proceso = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Actividad_proceso_electrico = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -305,7 +307,9 @@
             this.Cantidad_dibujos,
             this.Dibujo_proyecto,
             this.Descripcion_dibujo,
+            this.Tipo_Proceso,
             this.Proceso_dibujo,
+            this.Actividad_proceso_electrico,
             this.Descrpcion_partida});
             this.dataGridViewDibujosProyecto.Enabled = false;
             this.dataGridViewDibujosProyecto.Location = new System.Drawing.Point(103, 353);
@@ -314,43 +318,8 @@
             this.dataGridViewDibujosProyecto.TabIndex = 48;
             this.dataGridViewDibujosProyecto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellClick);
             this.dataGridViewDibujosProyecto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellEndEdit);
+            this.dataGridViewDibujosProyecto.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDibujosProyecto_EditingControlShowing);
             this.dataGridViewDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
-            // 
-            // Codigo_proyecto
-            // 
-            this.Codigo_proyecto.HeaderText = "Codigo";
-            this.Codigo_proyecto.Name = "Codigo_proyecto";
-            this.Codigo_proyecto.Width = 50;
-            // 
-            // Cantidad_dibujos
-            // 
-            this.Cantidad_dibujos.HeaderText = "Cantidad";
-            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
-            this.Cantidad_dibujos.Width = 50;
-            // 
-            // Dibujo_proyecto
-            // 
-            this.Dibujo_proyecto.HeaderText = "Dibujo";
-            this.Dibujo_proyecto.Name = "Dibujo_proyecto";
-            // 
-            // Descripcion_dibujo
-            // 
-            this.Descripcion_dibujo.HeaderText = "Descripcion";
-            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
-            this.Descripcion_dibujo.Width = 450;
-            // 
-            // Proceso_dibujo
-            // 
-            this.Proceso_dibujo.HeaderText = "Proceso";
-            this.Proceso_dibujo.Name = "Proceso_dibujo";
-            this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Proceso_dibujo.Width = 150;
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
             // 
             // comboBoxCodigoProyecto
             // 
@@ -658,6 +627,53 @@
             this.comboBoxNombreProyecto.Visible = false;
             this.comboBoxNombreProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProyecto_SelectedIndexChanged);
             // 
+            // Codigo_proyecto
+            // 
+            this.Codigo_proyecto.HeaderText = "Codigo";
+            this.Codigo_proyecto.Name = "Codigo_proyecto";
+            this.Codigo_proyecto.Width = 50;
+            // 
+            // Cantidad_dibujos
+            // 
+            this.Cantidad_dibujos.HeaderText = "Cantidad";
+            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
+            this.Cantidad_dibujos.Width = 50;
+            // 
+            // Dibujo_proyecto
+            // 
+            this.Dibujo_proyecto.HeaderText = "Dibujo";
+            this.Dibujo_proyecto.Name = "Dibujo_proyecto";
+            // 
+            // Descripcion_dibujo
+            // 
+            this.Descripcion_dibujo.HeaderText = "Descripcion";
+            this.Descripcion_dibujo.Name = "Descripcion_dibujo";
+            this.Descripcion_dibujo.Width = 450;
+            // 
+            // Tipo_Proceso
+            // 
+            this.Tipo_Proceso.HeaderText = "Tipo Proceso";
+            this.Tipo_Proceso.Name = "Tipo_Proceso";
+            // 
+            // Proceso_dibujo
+            // 
+            this.Proceso_dibujo.HeaderText = "Proceso";
+            this.Proceso_dibujo.Name = "Proceso_dibujo";
+            this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Proceso_dibujo.Width = 150;
+            // 
+            // Actividad_proceso_electrico
+            // 
+            this.Actividad_proceso_electrico.HeaderText = "Actividad Proceso Electrico";
+            this.Actividad_proceso_electrico.Name = "Actividad_proceso_electrico";
+            this.Actividad_proceso_electrico.Visible = false;
+            // 
+            // Descrpcion_partida
+            // 
+            this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
+            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            // 
             // Forma_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -771,12 +787,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxSerie;
+        private System.Windows.Forms.ComboBox comboBoxNombreProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_dibujos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dibujo_proyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion_dibujo;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Tipo_Proceso;
         private System.Windows.Forms.DataGridViewComboBoxColumn Proceso_dibujo;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Actividad_proceso_electrico;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
-        private System.Windows.Forms.ComboBox comboBoxNombreProyecto;
     }
 }

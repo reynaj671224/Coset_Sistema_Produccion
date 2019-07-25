@@ -56,11 +56,13 @@ namespace Coset_Sistema_Produccion
         public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
         public enum Campos_dibujos
         {
-            codigo, cantidad, numero, descripcion,
-            proceso, tiempo_estimado
+            codigo, cantidad, numero, descripcion, tipo_proceso,
+            proceso, actividad_proceso_electrico,tiempo_estimado
         };
 
         public string Operacio_proyectos = "";
+
+        public object Combo_tipo_proceso_index_select { get; private set; }
 
         public Forma_Proyectos()
         {
@@ -70,7 +72,6 @@ namespace Coset_Sistema_Produccion
         private void Forma_Clientes_Load(object sender, EventArgs e)
         {
             Desactiva_columna_codigo_partidas_cotizaciones();
-            Rellena_combo_procesos_datagridview_dibujos();
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
 
         }
@@ -832,8 +833,20 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_cotizaciones_disponibles_base_datos();
             Rellena_combo_codigo_cotizacion();
 
+            limpia_combo_tipo_proceso_datagrid_dibujo_proyecto();
+            Rellenar_combo_tipo_proceso_datagrid_dibujo_proyecto();
             
-            
+        }
+
+        private void limpia_combo_tipo_proceso_datagrid_dibujo_proyecto()
+        {
+            Tipo_Proceso.Items.Clear();
+        }
+
+        private void Rellenar_combo_tipo_proceso_datagrid_dibujo_proyecto()
+        {
+            Tipo_Proceso.Items.Add("Mecanico");
+            Tipo_Proceso.Items.Add("Electrico");
         }
 
         private void Asigna_codigo_OC_folio_disponible()
@@ -2607,6 +2620,52 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoCotizacion.Text = proyecto_visualizar.Codigo_cotizacion;
         }
 
+        private void dataGridViewDibujosProyecto_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            ComboBox combo = (ComboBox)e.Control;
+
+                int valor = combo.SelectedIndex;
+                combo.SelectedIndexChanged -= new EventHandler (combo_select_index_tipo_proceso);
+                combo.SelectedIndexChanged += combo_select_index_tipo_proceso;
+        }
+
+    private void combo_select_index_tipo_proceso(object sender, EventArgs e)
+    {
+        object combo = new ComboBox();
+        combo = ((ComboBox)sender).SelectedItem;
+            int integer = dataGridViewDibujosProyecto.CurrentRow.Index;
+        if (combo != null)
+        {
+            if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tipo_proceso)
+            {
+
+                    if (combo.ToString() == "Electrico")
+                    {
+                        limpia_combo_proceso_datagrid_dibujo_proyecto();
+                    }
+                    else if (combo.ToString() == "Mecanico")
+                    {
+                        
+                        if (Proceso_dibujo.Items.Count != 0)
+                        {
+                            dataGridViewDibujosProyecto.Rows[dataGridViewDibujosProyecto.CurrentRow.Index]
+                                .Cells["Proceso_dibujo"].Value = "";
+
+                        }
+                        limpia_combo_proceso_datagrid_dibujo_proyecto();
+                        Rellena_combo_procesos_datagridview_dibujos();
+                    }
+            }
+        }
+
+    }
+
+        private void limpia_combo_proceso_datagrid_dibujo_proyecto()
+        {
+            Proceso_dibujo.Items.Clear();
+        }
+
+
         //private void comboBoxCodigoProyecto_TextChanged(object sender, EventArgs e)
         //{
         //    AutoCompleteStringCollection ListaDeValores = new AutoCompleteStringCollection();
@@ -2621,6 +2680,6 @@ namespace Coset_Sistema_Produccion
         //    comboBoxCodigoProyecto.AutoCompleteCustomSource = ListaDeValores;
         //}
 
-        
+
     }
 }

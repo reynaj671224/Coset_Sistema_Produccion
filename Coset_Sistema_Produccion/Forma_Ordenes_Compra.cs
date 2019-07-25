@@ -1472,13 +1472,13 @@ namespace Coset_Sistema_Produccion
                         Limpia_combo_atencion();
                         Limpia_combo_atencio_copia();
                         Limpia_operaciones_ordenes_compra();
-                        Limpia_combo_proyectos_partidas();
                         Desactiva_cajas_captura_despues_de_agregar_orden_compra();
                         Desaparece_boton_guardar_base_de_datos();
                         Desaparece_boton_cancelar();
                         Desaparece_combo_codigo_cotizacion();
                         Activa_botones_operacion();
                         limpia_partidas_ordenes_compra();
+                        Limpia_combo_proyectos_partidas();
                         Desactiva_datagridview_partidas();
                         Desaparece_combo_cliente_nombre();
                         Desactiva_combo_cliente_nombre();
