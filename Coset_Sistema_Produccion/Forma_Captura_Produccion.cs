@@ -15,9 +15,9 @@ namespace Coset_Sistema_Produccion
     {
         public static bool Usuario_permitido_cerrar_operacion = false;
         public string forma_cerrada_por = "";
-        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
+        public List<Proceso> procesos_disponibles = new List<Proceso>();
         public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
+        public Proceso Proceso_Modificaciones = new Proceso();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public List<Usuario> Empleados_produccion_disponibles = new List<Usuario>();

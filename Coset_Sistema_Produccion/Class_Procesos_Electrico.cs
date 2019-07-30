@@ -9,9 +9,9 @@ namespace Coset_Sistema_Produccion
 {
     public class Class_Procesos_Electrico
     {
-        public List<Proceso_Electrico> Adquiere_procesos_disponibles_en_base_datos()
+        public List<Proceso_electrico> Adquiere_procesos_disponibles_en_base_datos()
         {
-            List<Proceso_Electrico> procesos_electricos_disponibles = new List<Proceso_Electrico>();
+            List<Proceso_electrico> procesos_electricos_disponibles = new List<Proceso_electrico>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_procesos());
             try
             {
@@ -20,7 +20,7 @@ namespace Coset_Sistema_Produccion
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
                 {
-                    procesos_electricos_disponibles.Add(new Proceso_Electrico()
+                    procesos_electricos_disponibles.Add(new Proceso_electrico()
                     {
                         Codigo = mySqlDataReader["codigo_proceso"].ToString(),
                         Nombre = mySqlDataReader["nombre_proceso"].ToString(),
@@ -30,7 +30,7 @@ namespace Coset_Sistema_Produccion
             }
             catch (Exception ex)
             {
-                procesos_electricos_disponibles.Add(new Proceso_Electrico()
+                procesos_electricos_disponibles.Add(new Proceso_electrico()
                 { error = ex.Message.ToString() });
             }
             connection.Close();
@@ -48,7 +48,7 @@ namespace Coset_Sistema_Produccion
         }
     }
 
-    public class Proceso_Electrico
+    public class Proceso_electrico
     {
         public string Codigo = "";
         public string Nombre = "";

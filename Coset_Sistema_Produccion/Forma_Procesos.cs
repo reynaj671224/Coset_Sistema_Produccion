@@ -13,9 +13,9 @@ namespace Coset_Sistema_Produccion
 {
     public partial class Forma_Procesos : Form
     {
-        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
+        public List<Proceso> procesos_disponibles = new List<Proceso>();
         public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
+        public Proceso Proceso_Modificaciones = new Proceso();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public List<Dibujos_proyecto> dibujos_proyecto_disponibles = new List<Dibujos_proyecto>();
@@ -668,7 +668,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_nombre_proceso()
         {
-            foreach (Proceso_electricos proceso in procesos_disponibles)
+            foreach (Proceso proceso in procesos_disponibles)
             {
                 if (proceso.error == "")
                     comboBoxNombreProceso.Items.Add(proceso.Nombre);

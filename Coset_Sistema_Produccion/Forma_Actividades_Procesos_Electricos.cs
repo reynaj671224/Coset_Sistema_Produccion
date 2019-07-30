@@ -13,10 +13,10 @@ namespace Coset_Sistema_Produccion
 {
     public partial class Forma_Actividades_Procesos_Electricos : Form
     {
-        public List<Proceso_Electrico> procesos_disponibles = new List<Proceso_Electrico>();
+        public List<Proceso_electrico> procesos_disponibles = new List<Proceso_electrico>();
         public Class_Procesos_Electrico clase_procesos_electrico = new Class_Procesos_Electrico();
-        public Proceso_Electrico Proceso_Modificaciones = new Proceso_Electrico();
-        public Proceso_Electrico Proceso_agregar = new Proceso_Electrico();
+        public Proceso_electrico Proceso_Modificaciones = new Proceso_electrico();
+        public Proceso_electrico Proceso_agregar = new Proceso_electrico();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Class_Actividades_Proceso_Electrico Class_Actividades_Proceso_Electrico = new Class_Actividades_Proceso_Electrico();
         public List<Actividad_Proceso_Electrico> actividad_Proceso_Electricos_disponibles = new List<Actividad_Proceso_Electrico>();
@@ -695,7 +695,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_nombre_proceso()
         {
-            foreach (Proceso_Electrico proceso in procesos_disponibles)
+            foreach (Proceso_electrico proceso in procesos_disponibles)
             {
                 if (proceso.error == "")
                     comboBoxNombreProceso.Items.Add(proceso.Nombre);

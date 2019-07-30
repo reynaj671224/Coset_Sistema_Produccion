@@ -661,13 +661,14 @@
             this.Proceso_dibujo.Name = "Proceso_dibujo";
             this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Proceso_dibujo.Width = 150;
+            this.Proceso_dibujo.Width = 200;
             // 
             // Actividad_proceso_electrico
             // 
             this.Actividad_proceso_electrico.HeaderText = "Actividad Proceso Electrico";
             this.Actividad_proceso_electrico.Name = "Actividad_proceso_electrico";
             this.Actividad_proceso_electrico.Visible = false;
+            this.Actividad_proceso_electrico.Width = 500;
             // 
             // Descrpcion_partida
             // 

@@ -53,7 +53,13 @@ namespace Coset_Sistema_Produccion
         public Proyecto proyecto_visualizar = new Proyecto();
         public Dibujos_proyecto dibujos_proyecto_modificar = new Dibujos_proyecto();
         public Class_Procesos Class_Procesos = new Class_Procesos();
-        public List<Proceso_electricos> procesos_disponibles = new List<Proceso_electricos>();
+        public List<Proceso> procesos_disponibles = new List<Proceso>();
+        public Class_Procesos_Electrico  Class_Procesos_Electrico = new Class_Procesos_Electrico();
+        public List<Proceso_electrico> procesos_electricos_disponibles = new List<Proceso_electrico>();
+        public Class_Actividades_Proceso_Electrico 
+            Class_Actividades_Proceso_Electrico = new Class_Actividades_Proceso_Electrico();
+        public List<Actividad_Proceso_Electrico> 
+            Actividades_proceso_electrico_disponibles = new List<Actividad_Proceso_Electrico>();
         public enum Campos_dibujos
         {
             codigo, cantidad, numero, descripcion, tipo_proceso,
@@ -2557,7 +2563,7 @@ namespace Coset_Sistema_Produccion
         private void Rellena_combo_procesos_datagridview_dibujos()
         {
             procesos_disponibles = Class_Procesos.Adquiere_procesos_disponibles_en_base_datos();
-            foreach(Proceso_electricos proceso in procesos_disponibles)
+            foreach(Proceso proceso in procesos_disponibles)
             {
                 Proceso_dibujo.Items.Add(proceso.Nombre);
             }
@@ -2636,32 +2642,85 @@ namespace Coset_Sistema_Produccion
             int integer = dataGridViewDibujosProyecto.CurrentRow.Index;
         if (combo != null)
         {
-            if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tipo_proceso)
-            {
+                if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tipo_proceso)
+                {
 
                     if (combo.ToString() == "Electrico")
                     {
                         limpia_combo_proceso_datagrid_dibujo_proyecto();
+                        limpia_combo_actividades_proceso_electrico_datagrid_dibujo_proyecto();
+                        Rellena_combo_procesos_electricos_datagridview_dibujos();
+                        Aparece_combo_actividades_procesos_electricos_datagrid();
                     }
                     else if (combo.ToString() == "Mecanico")
                     {
                         
-                        if (Proceso_dibujo.Items.Count != 0)
-                        {
-                            dataGridViewDibujosProyecto.Rows[dataGridViewDibujosProyecto.CurrentRow.Index]
-                                .Cells["Proceso_dibujo"].Value = "";
-
-                        }
                         limpia_combo_proceso_datagrid_dibujo_proyecto();
                         Rellena_combo_procesos_datagridview_dibujos();
+                        Desaparece_combo_actividades_procesos_electricos_datagrid();
                     }
-            }
+                }
+                else if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.proceso)
+                {
+                    limpia_combo_actividades_proceso_electrico_datagrid_dibujo_proyecto();
+                    Rellena_combo_actividades_procesos_electrico_datagridview_dibujos(combo.ToString());
+
+                }
+                    
         }
 
     }
 
+        private void Rellena_combo_actividades_procesos_electrico_datagridview_dibujos(string Proceso)
+        {
+           
+            Actividades_proceso_electrico_disponibles = Class_Actividades_Proceso_Electrico.
+                Adquiere_actividad_procesos_disponibles_en_base_datos_por_proceso(Proceso);
+            foreach (Actividad_Proceso_Electrico Actividad in Actividades_proceso_electrico_disponibles)
+            {
+                Actividad_proceso_electrico.Items.Add(Actividad.Actividad);
+            }
+}
+
+        private void limpia_combo_actividades_proceso_electrico_datagrid_dibujo_proyecto()
+        {
+            if (Actividad_proceso_electrico.Items.Count != 0)
+            {
+                dataGridViewDibujosProyecto.Rows[dataGridViewDibujosProyecto.CurrentRow.Index]
+                    .Cells["Actividad_proceso_electrico"].Value = "";
+
+            }
+            Actividad_proceso_electrico.Items.Clear();
+        }
+
+        private void Aparece_combo_actividades_procesos_electricos_datagrid()
+        {
+            dataGridViewDibujosProyecto.Columns["Actividad_proceso_electrico"].Visible = true;
+        }
+
+        private void Desaparece_combo_actividades_procesos_electricos_datagrid()
+        {
+            dataGridViewDibujosProyecto.Columns["Actividad_proceso_electrico"].Visible = false;
+        }
+
+        private void Rellena_combo_procesos_electricos_datagridview_dibujos()
+        {
+
+            procesos_electricos_disponibles = Class_Procesos_Electrico.Adquiere_procesos_disponibles_en_base_datos();
+            foreach (Proceso_electrico proceso in procesos_electricos_disponibles)
+            {
+                Proceso_dibujo.Items.Add(proceso.Nombre);
+            }
+        }
+
         private void limpia_combo_proceso_datagrid_dibujo_proyecto()
         {
+            if (Proceso_dibujo.Items.Count != 0)
+            {
+                dataGridViewDibujosProyecto.Rows[dataGridViewDibujosProyecto.CurrentRow.Index]
+                    .Cells["Proceso_dibujo"].Value = "";
+
+            }
             Proceso_dibujo.Items.Clear();
         }
 

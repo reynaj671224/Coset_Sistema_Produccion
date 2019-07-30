@@ -15,7 +15,7 @@ namespace Coset_Sistema_Produccion
     public partial class Forma_Materiales : Form
     {
         public Class_Procesos clase_procesos = new Class_Procesos();
-        public Proceso_electricos Proceso_Modificaciones = new Proceso_electricos();
+        public Proceso Proceso_Modificaciones = new Proceso();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public string Operacio_materiales = "";
