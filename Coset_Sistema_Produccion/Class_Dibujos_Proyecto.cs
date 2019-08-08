@@ -28,6 +28,8 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
                         Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
                     });
                 }
@@ -61,6 +63,8 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
                         Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
                     });
                 }
@@ -100,7 +104,10 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
                         Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
+
                     });
                 }
             }
@@ -138,6 +145,8 @@ namespace Coset_Sistema_Produccion
                         Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
                         tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
                         Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString(),
                         
                     });
@@ -197,6 +206,8 @@ namespace Coset_Sistema_Produccion
                 "',descripcion_dibujo='" + partidas_proyecto.Descripcion +
                 "',proceso='" + partidas_proyecto.proceso +
                 "',tiempo_estimado_horas='" + partidas_proyecto.tiempo_estimado_horas +
+                "',tipo_proceso='" + partidas_proyecto.Tipo_proceso +
+                "',actividades_proceso_electrico='" + partidas_proyecto.Tipo_proceso +
                 "' where codigo_dibujo='" + partidas_proyecto.Codigo + "';";
         }
 
@@ -211,6 +222,8 @@ namespace Coset_Sistema_Produccion
         public string proceso = "";
         public string tiempo_estimado_horas = "";
         public string Codigo_proyecto = "";
+        public string Tipo_proceso = "";
+        public string Actividades_proceso_electrico = "";
         public string error = "";
 
     }

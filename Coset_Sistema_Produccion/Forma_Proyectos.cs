@@ -63,7 +63,7 @@ namespace Coset_Sistema_Produccion
         public enum Campos_dibujos
         {
             codigo, cantidad, numero, descripcion, tipo_proceso,
-            proceso, actividad_proceso_electrico,tiempo_estimado
+            proceso, actividad_proceso_electrico,tiempo_estimado,
         };
 
         public string Operacio_proyectos = "";
@@ -1451,12 +1451,18 @@ namespace Coset_Sistema_Produccion
         {
             for (int partidas = 0; partidas < dataGridViewDibujosProyecto.Rows.Count - 1; partidas++)
             {
+                
                 for (int campo = 1; campo < dataGridViewDibujosProyecto.Rows[partidas].Cells.Count; campo++)
                 {
-                    if (dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value == null)
+                    if (dataGridViewDibujosProyecto.Rows[partidas].Cells["Tipo_Proceso"].Value.ToString() == "Electrico"
+                           || (dataGridViewDibujosProyecto.Rows[partidas].Cells["Tipo_Proceso"].Value.ToString() == "Mecanico"
+                               && campo != (int)Campos_dibujos.actividad_proceso_electrico))
                     {
-                        MessageBox.Show("campo en blanco");
-                        return false;
+                        if (dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value == null)
+                        {
+                            MessageBox.Show("campo en blanco");
+                            return false;
+                        }
                     }
 
                 }
@@ -1736,38 +1742,48 @@ namespace Coset_Sistema_Produccion
                 {
                     for (int campo = 1; campo < dataGridViewDibujosProyecto.Rows[partidas].Cells.Count; campo++)
                     {
-                        if (dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value != null)
+                        if (dataGridViewDibujosProyecto.Rows[partidas].Cells["Tipo_Proceso"].Value.ToString() == "Electrico"
+                           || (dataGridViewDibujosProyecto.Rows[partidas].Cells["Tipo_Proceso"].Value.ToString() == "Mecanico"
+                               && campo != (int)Campos_dibujos.actividad_proceso_electrico))
                         {
-                            if (campo == (int)Campos_dibujos.cantidad)
-                                dibujo_agregar.Cantidad = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_dibujos.numero)
-                                dibujo_agregar.Numero = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_dibujos.descripcion)
-                                dibujo_agregar.Descripcion = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_dibujos.proceso)
-                                dibujo_agregar.proceso = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            else if (campo == (int)Campos_dibujos.tiempo_estimado)
-                                dibujo_agregar.tiempo_estimado_horas = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            if (campo == (int)Campos_dibujos.numero)
+                            if (dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value != null)
                             {
-                                dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_disponibles_en_base_datos(
-                            dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString());
-                                if (dibujos_proyecto_disponibles.Count != 0)
+                                if (campo == (int)Campos_dibujos.cantidad)
+                                    dibujo_agregar.Cantidad = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.numero)
+                                    dibujo_agregar.Numero = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.descripcion)
+                                    dibujo_agregar.Descripcion = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.proceso)
+                                    dibujo_agregar.proceso = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.tiempo_estimado)
+                                    dibujo_agregar.tiempo_estimado_horas = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.tipo_proceso)
+                                    dibujo_agregar.Tipo_proceso = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+                                else if (campo == (int)Campos_dibujos.actividad_proceso_electrico)
+                                    dibujo_agregar.Actividades_proceso_electrico = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
+
+                                if (campo == (int)Campos_dibujos.numero)
                                 {
-                                    MessageBox.Show("Numero de Dibujo existe en proyecto", "Agregar Dibujo",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                    dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value = "";
-                                    connection.Close();
-                                    return false;
+                                    dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_disponibles_en_base_datos(
+                                dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString());
+                                    if (dibujos_proyecto_disponibles.Count != 0)
+                                    {
+                                        MessageBox.Show("Numero de Dibujo existe en proyecto", "Agregar Dibujo",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                        dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value = "";
+                                        connection.Close();
+                                        return false;
+                                    }
                                 }
                             }
-                        }
 
-                        else
-                        {
-                            MessageBox.Show("campo en blanco");
-                            connection.Close();
-                            return false;
+                            else
+                            {
+                                MessageBox.Show("campo en blanco");
+                                connection.Close();
+                                return false;
+                            }
                         }
                     }
                     Asigna_codigo_empleado_para_tipo_de_operacio();
@@ -1798,11 +1814,16 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_dibujos_proyecto(Dibujos_proyecto partida_cotizacion)
         {
+            if (partida_cotizacion.Tipo_proceso == "Mecanico")
+            {
+                partida_cotizacion.Actividades_proceso_electrico = "";
+            }
             return "INSERT INTO dibujos_proyecto(cantidad_dibujos, numero_dibujo,descripcion_dibujo," +
-                "proceso,tiempo_estimado_horas,codigo_proyecto) " +
+                "proceso,tiempo_estimado_horas,codigo_proyecto,tipo_proceso,actividades_proceso_electrico) " +
                 "VALUES('" + partida_cotizacion.Cantidad + "','" + partida_cotizacion.Numero + "'," +
                 "'" + partida_cotizacion.Descripcion + "','" + partida_cotizacion.proceso + "'" +
-                ",'" + partida_cotizacion.tiempo_estimado_horas + "','" + partida_cotizacion.Codigo_proyecto +"');";
+                ",'" + partida_cotizacion.tiempo_estimado_horas + "','" + partida_cotizacion.Codigo_proyecto + "'" +
+                ",'" + partida_cotizacion.Tipo_proceso + "','" + partida_cotizacion.Actividades_proceso_electrico + "');";
         }
 
         private bool Guarda_datos_proyecto()
@@ -2628,11 +2649,17 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewDibujosProyecto_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            ComboBox combo = (ComboBox)e.Control;
+            
 
+            if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tipo_proceso
+                || dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.proceso)
+            {
+                ComboBox combo = (ComboBox)e.Control;
                 int valor = combo.SelectedIndex;
-                combo.SelectedIndexChanged -= new EventHandler (combo_select_index_tipo_proceso);
+                combo.SelectedIndexChanged -= new EventHandler(combo_select_index_tipo_proceso);
                 combo.SelectedIndexChanged += combo_select_index_tipo_proceso;
+            }
+
         }
 
     private void combo_select_index_tipo_proceso(object sender, EventArgs e)
@@ -2711,6 +2738,7 @@ namespace Coset_Sistema_Produccion
             {
                 Proceso_dibujo.Items.Add(proceso.Nombre);
             }
+            //aqui me quede
         }
 
         private void limpia_combo_proceso_datagrid_dibujo_proyecto()
