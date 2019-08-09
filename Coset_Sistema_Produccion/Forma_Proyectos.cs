@@ -482,7 +482,7 @@ namespace Coset_Sistema_Produccion
             limpia_dibujos_proyecto();
             Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_partidas_cotizacion_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
             Aparce_boton_guardar_base_datos();
         }
 
@@ -537,7 +537,7 @@ namespace Coset_Sistema_Produccion
             Obtener_datos_proyectos_disponibles_base_datos();
             Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
             Aparecer_botones_operaciones_dibujos();
             
 
@@ -555,7 +555,7 @@ namespace Coset_Sistema_Produccion
             Desaparece_combo_cliente_nombre();
             Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
         }
 
         private void Obtener_datos_dibujos_proyectos_disponibles_base_datos(string codigo_proyecto)
@@ -568,7 +568,7 @@ namespace Coset_Sistema_Produccion
             dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
         }
 
-        private void Rellena_cajas_informacion_de_dibujos_proyecto()
+        private void Rellena_datagridview_informacion_de_dibujos_proyecto()
         {
 
             foreach(Dibujos_proyecto dibujo in dibujos_proyecto_disponibles)
@@ -576,8 +576,17 @@ namespace Coset_Sistema_Produccion
 
                 try
                 {
+                    if(dibujo.Tipo_proceso=="Mecanico")
+                    {
+
+                    }
+                    else if(dibujo.Tipo_proceso == "Electrico")
+                    {
+                        //aqui me quede
+                    }
                     dataGridViewDibujosProyecto.Rows.Add(dibujo.Codigo.ToString(), dibujo.Cantidad,
-                        dibujo.Numero, dibujo.Descripcion, dibujo.proceso, dibujo.tiempo_estimado_horas);
+                        dibujo.Numero, dibujo.Descripcion, dibujo.Tipo_proceso, dibujo.proceso, 
+                        dibujo.Actividades_proceso_electrico,dibujo.tiempo_estimado_horas);
                 }
                 catch(Exception ex)
                 {
@@ -625,7 +634,7 @@ namespace Coset_Sistema_Produccion
             limpia_dibujos_proyecto();
             Rellena_cajas_informacion_de_codigo_proyectos();
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
             Aparece_boton_eliminar_datos_en_base_de_datos();
         }
 
@@ -639,7 +648,7 @@ namespace Coset_Sistema_Produccion
             limpia_dibujos_proyecto();
             
             Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
             Activa_cajas_informacion_proyecto();
             Desactiva_combobox_codigo_proyecto();
             Aparce_boton_guardar_base_datos();
@@ -1194,7 +1203,7 @@ namespace Coset_Sistema_Produccion
                     Limpia_operaciones_proyectos();
                     No_aceptar_agregar_dibujos_proyecto();
                     Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-                    Rellena_cajas_informacion_de_dibujos_proyecto();
+                    Rellena_datagridview_informacion_de_dibujos_proyecto();
                     Elimina_informacion_proyectos_disponibles();
                 }
             }
@@ -1889,10 +1898,10 @@ namespace Coset_Sistema_Produccion
 
         private void buttonModificarCliente_Click(object sender, EventArgs e)
         {
-            Modifica_clientes();
+            Modifica_proyecto();
         }
 
-        private void Modifica_clientes()
+        private void Modifica_proyecto()
         {
             Operacio_proyectos = "Modificar";
             Desactiva_botones_operacion();
@@ -2055,7 +2064,7 @@ namespace Coset_Sistema_Produccion
                     Activa_botones_operacion_contactos();
                     limpia_dibujos_proyecto();
                     Obtener_datos_dibujos_proyectos_disponibles_base_datos(comboBoxCodigoProyecto.Text);
-                    Rellena_cajas_informacion_de_dibujos_proyecto();
+                    Rellena_datagridview_informacion_de_dibujos_proyecto();
                     limpia_texto_eliminar_contacto();
                 }
             }
@@ -2581,13 +2590,15 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void Rellena_combo_procesos_datagridview_dibujos()
+        private DataGridViewComboBoxCell Rellena_combo_procesos_datagridview_dibujos()
         {
+            DataGridViewComboBoxCell Lista_procesos = new DataGridViewComboBoxCell();
             procesos_disponibles = Class_Procesos.Adquiere_procesos_disponibles_en_base_datos();
             foreach(Proceso proceso in procesos_disponibles)
             {
-                Proceso_dibujo.Items.Add(proceso.Nombre);
+                Lista_procesos.Items.Add(proceso.Nombre);
             }
+            return Lista_procesos;
 
         }
 
@@ -2622,7 +2633,7 @@ namespace Coset_Sistema_Produccion
             Desaparece_combo_cliente_nombre();
             Rellena_cajas_informacion_de_nombre_proyectos();
             Obtener_datos_dibujos_nombre_proyectos_disponibles_base_datos(textBoxCodigoProyecto.Text);
-            Rellena_cajas_informacion_de_dibujos_proyecto();
+            Rellena_datagridview_informacion_de_dibujos_proyecto();
         }
 
         private void Rellena_cajas_informacion_de_nombre_proyectos()
@@ -2676,15 +2687,20 @@ namespace Coset_Sistema_Produccion
                     {
                         limpia_combo_proceso_datagrid_dibujo_proyecto();
                         limpia_combo_actividades_proceso_electrico_datagrid_dibujo_proyecto();
-                        Rellena_combo_procesos_electricos_datagridview_dibujos();
-                        Aparece_combo_actividades_procesos_electricos_datagrid();
+                        //Aparece_combo_actividades_procesos_electricos_datagrid();
+                        dataGridViewDibujosProyecto["Proceso_dibujo", dataGridViewDibujosProyecto.CurrentRow.Index] 
+                            = Rellena_combo_procesos_electricos_datagridview_dibujos();
+
+
                     }
                     else if (combo.ToString() == "Mecanico")
                     {
                         
                         limpia_combo_proceso_datagrid_dibujo_proyecto();
-                        Rellena_combo_procesos_datagridview_dibujos();
-                        Desaparece_combo_actividades_procesos_electricos_datagrid();
+                        Desactiva_combo_actividades_procesos_electricos_datagrid();
+                        dataGridViewDibujosProyecto["Proceso_dibujo", dataGridViewDibujosProyecto.CurrentRow.Index]
+                            = Rellena_combo_procesos_datagridview_dibujos();
+                        
                     }
                 }
                 else if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.proceso)
@@ -2725,20 +2741,22 @@ namespace Coset_Sistema_Produccion
             dataGridViewDibujosProyecto.Columns["Actividad_proceso_electrico"].Visible = true;
         }
 
-        private void Desaparece_combo_actividades_procesos_electricos_datagrid()
+        private void Desactiva_combo_actividades_procesos_electricos_datagrid()
         {
-            dataGridViewDibujosProyecto.Columns["Actividad_proceso_electrico"].Visible = false;
+            //dataGridViewDibujosProyecto.Columns["Actividad_proceso_electrico"].Visible = false;
+            dataGridViewDibujosProyecto["Actividad_proceso_electrico", dataGridViewDibujosProyecto.CurrentRow.Index].
+                ReadOnly = true;
         }
 
-        private void Rellena_combo_procesos_electricos_datagridview_dibujos()
+        private DataGridViewComboBoxCell Rellena_combo_procesos_electricos_datagridview_dibujos()
         {
-
+            DataGridViewComboBoxCell Lista_procesos_electricos = new DataGridViewComboBoxCell();
             procesos_electricos_disponibles = Class_Procesos_Electrico.Adquiere_procesos_disponibles_en_base_datos();
             foreach (Proceso_electrico proceso in procesos_electricos_disponibles)
             {
-                Proceso_dibujo.Items.Add(proceso.Nombre);
+                Lista_procesos_electricos.Items.Add(proceso.Nombre);
             }
-            //aqui me quede
+            return Lista_procesos_electricos;
         }
 
         private void limpia_combo_proceso_datagrid_dibujo_proyecto()
