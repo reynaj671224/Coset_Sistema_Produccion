@@ -51,6 +51,9 @@
             this.calidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujosOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.integracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.procesosElectricosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actividadesProcesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.almacenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaMaterialesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +67,12 @@
             this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReporteCalidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenesCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelClock = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -79,17 +88,8 @@
             this.Requisitor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timerStart = new System.Windows.Forms.Timer(this.components);
-            this.integracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.procesosElectricosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actividadesProcesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReporteCalidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.proyectosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ordenesCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -269,6 +269,29 @@
             this.procesosToolStripMenuItem1.Text = "Procesos";
             this.procesosToolStripMenuItem1.Click += new System.EventHandler(this.procesosToolStripMenuItem1_Click);
             // 
+            // integracionToolStripMenuItem
+            // 
+            this.integracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.procesosElectricosToolStripMenuItem,
+            this.actividadesProcesosToolStripMenuItem});
+            this.integracionToolStripMenuItem.Name = "integracionToolStripMenuItem";
+            this.integracionToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.integracionToolStripMenuItem.Text = "Integracion";
+            // 
+            // procesosElectricosToolStripMenuItem
+            // 
+            this.procesosElectricosToolStripMenuItem.Name = "procesosElectricosToolStripMenuItem";
+            this.procesosElectricosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.procesosElectricosToolStripMenuItem.Text = "Procesos Electricos";
+            this.procesosElectricosToolStripMenuItem.Click += new System.EventHandler(this.procesosElectricosToolStripMenuItem_Click);
+            // 
+            // actividadesProcesosToolStripMenuItem
+            // 
+            this.actividadesProcesosToolStripMenuItem.Name = "actividadesProcesosToolStripMenuItem";
+            this.actividadesProcesosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.actividadesProcesosToolStripMenuItem.Text = "Actividades Procesos";
+            this.actividadesProcesosToolStripMenuItem.Click += new System.EventHandler(this.actividadesProcesosToolStripMenuItem_Click);
+            // 
             // almacenToolStripMenuItem
             // 
             this.almacenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -371,6 +394,54 @@
             this.capturaDeProduccionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.capturaDeProduccionToolStripMenuItem.Text = "Captura de Produccion";
             this.capturaDeProduccionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeProduccionToolStripMenuItem_Click);
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.produccionToolStripMenuItem1,
+            this.proyectosToolStripMenuItem1,
+            this.ordenesCompraToolStripMenuItem});
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // produccionToolStripMenuItem1
+            // 
+            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dibujosProyectoToolStripMenuItem,
+            this.ReporteCalidadOperacionesToolStripMenuItem});
+            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
+            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.produccionToolStripMenuItem1.Text = "Produccion";
+            // 
+            // dibujosProyectoToolStripMenuItem
+            // 
+            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
+            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
+            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
+            // 
+            // ReporteCalidadOperacionesToolStripMenuItem
+            // 
+            this.ReporteCalidadOperacionesToolStripMenuItem.Name = "ReporteCalidadOperacionesToolStripMenuItem";
+            this.ReporteCalidadOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ReporteCalidadOperacionesToolStripMenuItem.Text = "Calidad Operaciones";
+            this.ReporteCalidadOperacionesToolStripMenuItem.Click += new System.EventHandler(this.ReporteCalidadOperacionesToolStripMenuItem_Click);
+            // 
+            // proyectosToolStripMenuItem1
+            // 
+            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
+            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.proyectosToolStripMenuItem1.Text = "Proyectos";
+            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
+            // 
+            // ordenesCompraToolStripMenuItem
+            // 
+            this.ordenesCompraToolStripMenuItem.Name = "ordenesCompraToolStripMenuItem";
+            this.ordenesCompraToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.ordenesCompraToolStripMenuItem.Text = "Ordenes Compra";
+            this.ordenesCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesCompraToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -483,29 +554,6 @@
             this.timerStart.Enabled = true;
             this.timerStart.Tick += new System.EventHandler(this.timerStart_Tick);
             // 
-            // integracionToolStripMenuItem
-            // 
-            this.integracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.procesosElectricosToolStripMenuItem,
-            this.actividadesProcesosToolStripMenuItem});
-            this.integracionToolStripMenuItem.Name = "integracionToolStripMenuItem";
-            this.integracionToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.integracionToolStripMenuItem.Text = "Integracion";
-            // 
-            // procesosElectricosToolStripMenuItem
-            // 
-            this.procesosElectricosToolStripMenuItem.Name = "procesosElectricosToolStripMenuItem";
-            this.procesosElectricosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.procesosElectricosToolStripMenuItem.Text = "Procesos Electricos";
-            this.procesosElectricosToolStripMenuItem.Click += new System.EventHandler(this.procesosElectricosToolStripMenuItem_Click);
-            // 
-            // actividadesProcesosToolStripMenuItem
-            // 
-            this.actividadesProcesosToolStripMenuItem.Name = "actividadesProcesosToolStripMenuItem";
-            this.actividadesProcesosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.actividadesProcesosToolStripMenuItem.Text = "Actividades Procesos";
-            this.actividadesProcesosToolStripMenuItem.Click += new System.EventHandler(this.actividadesProcesosToolStripMenuItem_Click);
-            // 
             // labelREquisicionesAbiertas
             // 
             this.labelREquisicionesAbiertas.AutoSize = true;
@@ -530,54 +578,6 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
-            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.produccionToolStripMenuItem1,
-            this.proyectosToolStripMenuItem1,
-            this.ordenesCompraToolStripMenuItem});
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            // 
-            // produccionToolStripMenuItem1
-            // 
-            this.produccionToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dibujosProyectoToolStripMenuItem,
-            this.ReporteCalidadOperacionesToolStripMenuItem});
-            this.produccionToolStripMenuItem1.Name = "produccionToolStripMenuItem1";
-            this.produccionToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
-            this.produccionToolStripMenuItem1.Text = "Produccion";
-            // 
-            // dibujosProyectoToolStripMenuItem
-            // 
-            this.dibujosProyectoToolStripMenuItem.Name = "dibujosProyectoToolStripMenuItem";
-            this.dibujosProyectoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.dibujosProyectoToolStripMenuItem.Text = "Dibujos Proyecto";
-            this.dibujosProyectoToolStripMenuItem.Click += new System.EventHandler(this.dibujosProyectoToolStripMenuItem_Click);
-            // 
-            // ReporteCalidadOperacionesToolStripMenuItem
-            // 
-            this.ReporteCalidadOperacionesToolStripMenuItem.Name = "ReporteCalidadOperacionesToolStripMenuItem";
-            this.ReporteCalidadOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ReporteCalidadOperacionesToolStripMenuItem.Text = "Calidad Operaciones";
-            this.ReporteCalidadOperacionesToolStripMenuItem.Click += new System.EventHandler(this.ReporteCalidadOperacionesToolStripMenuItem_Click);
-            // 
-            // proyectosToolStripMenuItem1
-            // 
-            this.proyectosToolStripMenuItem1.Name = "proyectosToolStripMenuItem1";
-            this.proyectosToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
-            this.proyectosToolStripMenuItem1.Text = "Proyectos";
-            this.proyectosToolStripMenuItem1.Click += new System.EventHandler(this.proyectosToolStripMenuItem1_Click);
-            // 
-            // ordenesCompraToolStripMenuItem
-            // 
-            this.ordenesCompraToolStripMenuItem.Name = "ordenesCompraToolStripMenuItem";
-            this.ordenesCompraToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.ordenesCompraToolStripMenuItem.Text = "Ordenes Compra";
-            this.ordenesCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenesCompraToolStripMenuItem_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,7 +595,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 9.9";
+            this.Text = "Coset Sistema Produccion Rev 10.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

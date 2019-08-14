@@ -71,6 +71,12 @@
             this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
             this.textBoxUnidades = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBoxActividadesProcesoElectrico = new System.Windows.Forms.TextBox();
+            this.labelActividadesProcesoElectrico = new System.Windows.Forms.Label();
+            this.textBoxNotasActividad = new System.Windows.Forms.TextBox();
+            this.labelNotasActividad = new System.Windows.Forms.Label();
+            this.textBoxTipoProceso = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
             this.SuspendLayout();
@@ -412,7 +418,7 @@
             // textBoxHorasProceso
             // 
             this.textBoxHorasProceso.Enabled = false;
-            this.textBoxHorasProceso.Location = new System.Drawing.Point(540, 118);
+            this.textBoxHorasProceso.Location = new System.Drawing.Point(569, 118);
             this.textBoxHorasProceso.Name = "textBoxHorasProceso";
             this.textBoxHorasProceso.Size = new System.Drawing.Size(94, 20);
             this.textBoxHorasProceso.TabIndex = 51;
@@ -431,7 +437,7 @@
             // textBoxHorasRetrabajo
             // 
             this.textBoxHorasRetrabajo.Enabled = false;
-            this.textBoxHorasRetrabajo.Location = new System.Drawing.Point(540, 144);
+            this.textBoxHorasRetrabajo.Location = new System.Drawing.Point(569, 144);
             this.textBoxHorasRetrabajo.Name = "textBoxHorasRetrabajo";
             this.textBoxHorasRetrabajo.Size = new System.Drawing.Size(94, 20);
             this.textBoxHorasRetrabajo.TabIndex = 53;
@@ -463,7 +469,7 @@
             // textBoxUnidades
             // 
             this.textBoxUnidades.Enabled = false;
-            this.textBoxUnidades.Location = new System.Drawing.Point(540, 174);
+            this.textBoxUnidades.Location = new System.Drawing.Point(569, 174);
             this.textBoxUnidades.Name = "textBoxUnidades";
             this.textBoxUnidades.Size = new System.Drawing.Size(94, 20);
             this.textBoxUnidades.TabIndex = 56;
@@ -479,11 +485,79 @@
             this.label6.TabIndex = 55;
             this.label6.Text = "Unidades";
             // 
+            // textBoxActividadesProcesoElectrico
+            // 
+            this.textBoxActividadesProcesoElectrico.Enabled = false;
+            this.textBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(569, 202);
+            this.textBoxActividadesProcesoElectrico.Name = "textBoxActividadesProcesoElectrico";
+            this.textBoxActividadesProcesoElectrico.Size = new System.Drawing.Size(447, 20);
+            this.textBoxActividadesProcesoElectrico.TabIndex = 58;
+            this.textBoxActividadesProcesoElectrico.Visible = false;
+            // 
+            // labelActividadesProcesoElectrico
+            // 
+            this.labelActividadesProcesoElectrico.AutoSize = true;
+            this.labelActividadesProcesoElectrico.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelActividadesProcesoElectrico.Image = ((System.Drawing.Image)(resources.GetObject("labelActividadesProcesoElectrico.Image")));
+            this.labelActividadesProcesoElectrico.Location = new System.Drawing.Point(412, 204);
+            this.labelActividadesProcesoElectrico.Name = "labelActividadesProcesoElectrico";
+            this.labelActividadesProcesoElectrico.Size = new System.Drawing.Size(151, 16);
+            this.labelActividadesProcesoElectrico.TabIndex = 57;
+            this.labelActividadesProcesoElectrico.Text = "Actividad Proceso Electrico";
+            this.labelActividadesProcesoElectrico.Visible = false;
+            // 
+            // textBoxNotasActividad
+            // 
+            this.textBoxNotasActividad.Enabled = false;
+            this.textBoxNotasActividad.Location = new System.Drawing.Point(569, 231);
+            this.textBoxNotasActividad.Multiline = true;
+            this.textBoxNotasActividad.Name = "textBoxNotasActividad";
+            this.textBoxNotasActividad.Size = new System.Drawing.Size(447, 50);
+            this.textBoxNotasActividad.TabIndex = 60;
+            this.textBoxNotasActividad.Visible = false;
+            // 
+            // labelNotasActividad
+            // 
+            this.labelNotasActividad.AutoSize = true;
+            this.labelNotasActividad.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNotasActividad.Image = ((System.Drawing.Image)(resources.GetObject("labelNotasActividad.Image")));
+            this.labelNotasActividad.Location = new System.Drawing.Point(412, 231);
+            this.labelNotasActividad.Name = "labelNotasActividad";
+            this.labelNotasActividad.Size = new System.Drawing.Size(130, 16);
+            this.labelNotasActividad.TabIndex = 59;
+            this.labelNotasActividad.Text = "Notas Proceso Electrico";
+            this.labelNotasActividad.Visible = false;
+            // 
+            // textBoxTipoProceso
+            // 
+            this.textBoxTipoProceso.Enabled = false;
+            this.textBoxTipoProceso.Location = new System.Drawing.Point(171, 253);
+            this.textBoxTipoProceso.Name = "textBoxTipoProceso";
+            this.textBoxTipoProceso.Size = new System.Drawing.Size(196, 20);
+            this.textBoxTipoProceso.TabIndex = 62;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Image = ((System.Drawing.Image)(resources.GetObject("label7.Image")));
+            this.label7.Location = new System.Drawing.Point(43, 257);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 16);
+            this.label7.TabIndex = 61;
+            this.label7.Text = "Tipo Proceso";
+            // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.textBoxTipoProceso);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBoxNotasActividad);
+            this.Controls.Add(this.labelNotasActividad);
+            this.Controls.Add(this.textBoxActividadesProcesoElectrico);
+            this.Controls.Add(this.labelActividadesProcesoElectrico);
             this.Controls.Add(this.textBoxUnidades);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonBuscarSecuenciaDibujo);
@@ -568,5 +642,11 @@
         private System.Windows.Forms.Button buttonBuscarSecuenciaDibujo;
         private System.Windows.Forms.TextBox textBoxUnidades;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxActividadesProcesoElectrico;
+        private System.Windows.Forms.Label labelActividadesProcesoElectrico;
+        private System.Windows.Forms.TextBox textBoxNotasActividad;
+        private System.Windows.Forms.Label labelNotasActividad;
+        private System.Windows.Forms.TextBox textBoxTipoProceso;
+        private System.Windows.Forms.Label label7;
     }
 }

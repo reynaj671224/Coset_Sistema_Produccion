@@ -39,6 +39,12 @@ namespace Coset_Sistema_Produccion
         public Secuencia_produccion Secuencia_produccion_modificacion = new Secuencia_produccion();
         public Secuencia_produccion Secuencia_produccion_insertar = new Secuencia_produccion();
         public Secuencia_produccion Secuencia_produccion_busqueda = new Secuencia_produccion();
+        public Class_Actividades_Proceso_Electrico Class_Actividades_Proceso_Electrico =
+            new Class_Actividades_Proceso_Electrico();
+        public List<Actividad_Proceso_Electrico> actividad_Proceso_Electricos_disponibles =
+            new List<Actividad_Proceso_Electrico>();
+        public Actividad_Proceso_Electrico Actividad_Proceso_Electrico_busqueda =
+            new Actividad_Proceso_Electrico();
         public string secuencia_operacion = "";
 
         public Forma_Captura_Produccion()
@@ -75,6 +81,7 @@ namespace Coset_Sistema_Produccion
             procesos_disponibles = null;
             clase_procesos = null;
             Proceso_Modificaciones = null;
+            actividad_Proceso_Electricos_disponibles = null; 
             Forma_Captura_Produccion.Usuario_permitido_cerrar_operacion = false;
             this.Dispose();
             GC.Collect();
@@ -97,6 +104,7 @@ namespace Coset_Sistema_Produccion
             Dibujos_proyectos_disponibles = null;
             Dibujos_produccion_disponible = null;
             Secuencias_produccion_disponibles = null;
+            actividad_Proceso_Electricos_disponibles = null;
         }
 
         private void Genera_secuencia_produccion_terminar_transaccion()
@@ -123,7 +131,7 @@ namespace Coset_Sistema_Produccion
             buttonGuardarBasedeDatos.Visible = true;
         }
 
-       
+
         private void Activa_caja_nombre_proceso()
         {
             textBoxNombreProceso.Enabled = true;
@@ -171,7 +179,7 @@ namespace Coset_Sistema_Produccion
 
         private void timerInciarProcesoBusqueda_Tick(object sender, EventArgs e)
         {
-            if(textBoxNumeroDibujo.Text!="")
+            if (textBoxNumeroDibujo.Text != "")
             {
                 timerInciarProcesoBusqueda.Enabled = false;
                 Activa_boton_buscar_dibujo_base_de_datos();
@@ -191,7 +199,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonGuardarBasedeDatos_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Elimina_informacion_usuarios_disponibles()
@@ -275,7 +283,7 @@ namespace Coset_Sistema_Produccion
             Limpia_caja_nombre_proceso();
         }
 
-       
+
 
         private void Limpia_caja_nombre_proceso()
         {
@@ -311,7 +319,7 @@ namespace Coset_Sistema_Produccion
             DateTime Final = Convert.ToDateTime(Secuencia_produccion_seleccion.final_proceso);
             DateTime Inicio = Convert.ToDateTime(Secuencia_produccion_seleccion.inicio_proceso);
             TimeSpan timeSpan = Final - Inicio;
-            if(Dibujos_produccion_disponible[0].Calidad == "Proceso")
+            if (Dibujos_produccion_disponible[0].Calidad == "Proceso")
             {
                 try
                 {
@@ -319,12 +327,12 @@ namespace Coset_Sistema_Produccion
                         (Convert.ToSingle(Dibujos_produccion_disponible[0].Horas_produccion) +
                         Convert.ToSingle(timeSpan.TotalMinutes / 60.0)).ToString();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
-            else if(Dibujos_produccion_disponible[0].Calidad == "Re-trabajo" || 
+            else if (Dibujos_produccion_disponible[0].Calidad == "Re-trabajo" ||
                 Dibujos_produccion_disponible[0].Calidad == "Desecho")
             {
                 try
@@ -339,8 +347,8 @@ namespace Coset_Sistema_Produccion
                 }
 
             }
-            
-            if(secuencia_operacion == "Terminar")
+
+            if (secuencia_operacion == "Terminar")
             {
                 Dibujos_produccion_disponible[0].Secuencia = "Calidad";
             }
@@ -392,7 +400,7 @@ namespace Coset_Sistema_Produccion
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
             Secuencia_usuarios_produccion();
-           
+
         }
 
         protected void Forma_Captura_Produccion_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -423,7 +431,7 @@ namespace Coset_Sistema_Produccion
             Muestra_combo_empleados_produccion();
             Activa_Combo_codigo_empleado();
             Rellenar_combo_nombre_proceso();
-            
+
         }
 
         private void Muestra_combo_empleados_produccion()
@@ -459,7 +467,7 @@ namespace Coset_Sistema_Produccion
             Inicia_timer_busqueda_dibujo();
             Deactiva_boton_visualizar();
             Activa_boton_cancelar_operacio();
-            
+
         }
 
         private void Activa_boton_visualizar_secuencia()
@@ -521,7 +529,7 @@ namespace Coset_Sistema_Produccion
 
         private void timerActualizrempleado_Tick(object sender, EventArgs e)
         {
-            if(textBoxNombreProceso.Text!= Proceso_Modificaciones.Nombre)
+            if (textBoxNombreProceso.Text != Proceso_Modificaciones.Nombre)
             {
                 timerActualizrempleado.Enabled = false;
                 buttonGuardarBasedeDatos.Visible = true;
@@ -546,7 +554,7 @@ namespace Coset_Sistema_Produccion
 
         private void Desaparece_combo_nombre_proceso()
         {
-            comboBoxNombreProceso.Visible=false;
+            comboBoxNombreProceso.Visible = false;
         }
 
         private void buttonBuscarDibujo_Click(object sender, EventArgs e)
@@ -566,7 +574,7 @@ namespace Coset_Sistema_Produccion
 
         private void Deabilita_boton_busqueda_dibujo()
         {
-            buttonBuscarDibujo.Enabled=false;
+            buttonBuscarDibujo.Enabled = false;
         }
 
         private void buscar_dibujo_proyectos_base_datos()
@@ -576,7 +584,7 @@ namespace Coset_Sistema_Produccion
                 if (Busca_dibujo_produccion_base_datos())
                 {
                     if (dibujo_esta_iniciado())
-                    {  
+                    {
                         if (verifica_dibujo_asignado_empleado_solicitante())
                         {
                             if (verifica_dibujo_en_produccion())
@@ -603,7 +611,7 @@ namespace Coset_Sistema_Produccion
                             }
                             else
                             {
-                               
+
                             }
                         }
                         else
@@ -623,7 +631,7 @@ namespace Coset_Sistema_Produccion
                 Cancela_operacio_produccion();
             }
 
-            
+
         }
 
         private bool Asigna_dibujo_empleado()
@@ -639,7 +647,7 @@ namespace Coset_Sistema_Produccion
 
         private bool dibujo_esta_iniciado()
         {
-            
+
             return Dibujos_produccion_disponible[0].Estado == "Iniciado";
         }
 
@@ -675,12 +683,12 @@ namespace Coset_Sistema_Produccion
         {
 
             return obtener_dibujos_produccio_disponibles();
-            
+
         }
 
         private bool verifica_dibujo_asignado_empleado_solicitante()
         {
-            if((Dibujos_produccion_disponible[0].Empleado == comboBoxEmpleado.Text))
+            if ((Dibujos_produccion_disponible[0].Empleado == comboBoxEmpleado.Text))
             {
                 return true;
             }
@@ -690,7 +698,7 @@ namespace Coset_Sistema_Produccion
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            
+
 
         }
 
@@ -731,25 +739,43 @@ namespace Coset_Sistema_Produccion
                 textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
                 textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
                 textBoxUnidades.Text = Dibujos_proyectos_disponibles[0].Cantidad;
+                textBoxTipoProceso.Text = Dibujos_proyectos_disponibles[0].Tipo_proceso;
+                if (Dibujos_proyectos_disponibles[0].Tipo_proceso == "Electrico")
+                {
+                    Muestra_informacion_actividades_proceso_electrico();
+                    textBoxActividadesProcesoElectrico.Text = Dibujos_proyectos_disponibles[0].Actividades_proceso_electrico;
+                    Muestra_informacion_notas_actividades_prceso_electrico();
+                    Busca_notas_activida_proceso_electrico(Dibujos_proyectos_disponibles[0].Actividades_proceso_electrico);
+                    textBoxNotasActividad.Text = actividad_Proceso_Electricos_disponibles[0].Notas;
+                }
             }
             else
             {
                 Dibujos_produccion_disponible = Class_Dibujos_Produccion.
                     Adquiere_dibujos_produccion_busqueda_en_base_datos(Dibujos_produccion_insertar);
-                if(Dibujos_produccion_disponible.Count==1)
+                if (Dibujos_produccion_disponible.Count == 1)
                 {
                     textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
                     textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
                     textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
                     textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
                     textBoxUnidades.Text = Dibujos_proyectos_disponibles[0].Cantidad;
+                    textBoxTipoProceso.Text = Dibujos_proyectos_disponibles[0].Tipo_proceso;
+                    if (Dibujos_proyectos_disponibles[0].Tipo_proceso == "Electrico")
+                    {
+                        Muestra_informacion_actividades_proceso_electrico();
+                        textBoxActividadesProcesoElectrico.Text = Dibujos_proyectos_disponibles[0].Actividades_proceso_electrico;
+                        Muestra_informacion_notas_actividades_prceso_electrico();
+                        Busca_notas_activida_proceso_electrico(Dibujos_proyectos_disponibles[0].Actividades_proceso_electrico);
+                        textBoxNotasActividad.Text = actividad_Proceso_Electricos_disponibles[0].Notas;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Dibujo No se encontro en Produccion", "Dibujos Produccion",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
             }
             switch (textBoxEstado.Text)
             {
@@ -778,6 +804,63 @@ namespace Coset_Sistema_Produccion
             Rellena_datagridview_secuencias_produccion();
         }
 
+        private void Busca_notas_activida_proceso_electrico(string Actividad_prceso_elecgtrico)
+        {
+            actividad_Proceso_Electricos_disponibles = Class_Actividades_Proceso_Electrico.
+                Adquiere_notas_actividad_procesos_disponibles_en_base_datos(Actividad_prceso_elecgtrico);
+        }
+
+        private void Muestra_informacion_notas_actividades_prceso_electrico()
+        {
+            Aparece_label_notas_actividad_proceso_electrico();
+            Aparece_textbox_notas_actividades_proceso_electrico();
+        }
+
+        private void Aparece_textbox_notas_actividades_proceso_electrico()
+        {
+            textBoxNotasActividad.Visible = true;
+        }
+
+        private void Desaparece_textbox_notas_actividades_proceso_electrico()
+        {
+            textBoxNotasActividad.Visible = false;
+        }
+
+        private void Aparece_label_notas_actividad_proceso_electrico()
+        {
+            labelNotasActividad.Visible = true;
+        }
+
+        private void Desaparece_label_notas_actividad_proceso_electrico()
+        {
+            labelNotasActividad.Visible = false;
+        }
+
+        private void Muestra_informacion_actividades_proceso_electrico()
+        {
+            Aparece_label_actividad_proceso_electrico();
+            Aparece_textbox_actividades_proceso_electrico();
+        }
+
+        private void Aparece_textbox_actividades_proceso_electrico()
+        {
+            textBoxActividadesProcesoElectrico.Visible = true;
+        }
+        private void Desaparece_textbox_actividades_proceso_electrico()
+        {
+            textBoxActividadesProcesoElectrico.Visible = false;
+        }
+
+        private void Aparece_label_actividad_proceso_electrico()
+        {
+            labelActividadesProcesoElectrico.Visible = true;
+        }
+
+        private void Desaparece_label_actividad_proceso_electrico()
+        {
+            labelActividadesProcesoElectrico.Visible = false;
+        }
+
         private void Rellena_datagridview_secuencias_produccion()
         {
             Limpia_datagridview_secuencia_produccion();
@@ -792,7 +875,7 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_datagridview_secuencias_produccion()
         {
-            
+
             foreach (Secuencia_produccion secuencia in Secuencias_produccion_disponibles)
             {
                 DateTime Inicial, Final;
@@ -825,8 +908,8 @@ namespace Coset_Sistema_Produccion
                    secuencia.calidad);
 
                 }
-               
-                
+
+
             }
         }
 
@@ -849,7 +932,7 @@ namespace Coset_Sistema_Produccion
 
         private void Inserta_nuevo_registro_dibujos_produccion_base_datos()
         {
-            MessageBox.Show("El numero de Dibujo se agregara a produccion", "Dibujos Produccion", 
+            MessageBox.Show("El numero de Dibujo se agregara a produccion", "Dibujos Produccion",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             textBoxEstado.Text = "Nuevo";
             textBoxCalidad.Text = "Proceso";
@@ -879,7 +962,12 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_usuario();
             Limpia_seleccion_secuencia_operacion();
             Limpia_datagridview_secuencia_produccion();
-            
+            Desaparece_label_actividad_proceso_electrico();
+            Desaparece_textbox_actividades_proceso_electrico();
+            Desaparece_label_notas_actividad_proceso_electrico();
+            Desaparece_textbox_notas_actividades_proceso_electrico();
+
+
         }
 
         private void Limpia_seleccion_secuencia_operacion()
@@ -913,6 +1001,9 @@ namespace Coset_Sistema_Produccion
             textBoxHorasProceso.Text = "";
             textBoxHorasRetrabajo.Text = "";
             textBoxUnidades.Text = "";
+            textBoxNotasActividad.Text = "";
+            textBoxActividadesProcesoElectrico.Text = "";
+            textBoxTipoProceso.Text = "";
 
 
         }
