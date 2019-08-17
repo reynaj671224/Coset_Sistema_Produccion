@@ -560,7 +560,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_actividades_proceso()
         {
             actividad_Proceso_Electricos_disponibles = Class_Actividades_Proceso_Electrico.
-                Adquiere_actividad_procesos_disponibles_en_base_datos();
+                Adquiere_actividad_procesos_disponibles_en_base_datos_por_proceso(comboBoxNombreProceso.Text);
         }
 
         private void Aparece_combo_actividad_proceso()
