@@ -1696,56 +1696,58 @@ namespace Coset_Sistema_Produccion
             try
             {
                 connection.Open();
-               
-                for (int partidas = Partidas_orden_compra_agregar; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
+                /*permite detectar partidas OC duplicadas*/
+                //for (int partidas = Partidas_orden_compra_agregar; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
+                    for (int partidas = 0; partidas < dataGridViewPartidasOrdenCompra.Rows.Count - 1; partidas++)
                 {
                     for (int campo = 1; campo < dataGridViewPartidasOrdenCompra.Rows[partidas].Cells.Count; campo++)
-                    {    
-                            if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value != null)
-                            {
-                                if (campo == (int)Campos_orden_compra.partida)
-                                    Partida_orden_compra_agregar.Partida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.material)
-                                    Partida_orden_compra_agregar.Material = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.cantidad)
-                                    Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.parte)
-                                    Partida_orden_compra_agregar.Parte = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.descripcion)
-                                    Partida_orden_compra_agregar.Descripcion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.unidad_medida)
-                                    Partida_orden_compra_agregar.Unidad_medida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.proyecto)
-                                    Partida_orden_compra_agregar.Proyecto = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.precio)
-                                    Partida_orden_compra_agregar.precio_unitario = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                                else if (campo == (int)Campos_orden_compra.total)
-                                    Partida_orden_compra_agregar.Total = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
-                            if (campo == (int)Campos_orden_compra.material)
-                            {
-                                /*aqui me quede*/
-                                if (Operacio_orden_compra == "Agregar")
-                                    partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
-                            textBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
-                                else if (Operacio_orden_compra == "Agregar Partidas")
-                                    partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
-                            comboBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
-                                if (partidas_ordenes_compra_disponibles.Count != 0)
-                                {
-                                    MessageBox.Show("Numero de Material existe en Orden De Compra", "Agregar Material",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                    dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value = "";
-                                    connection.Close();
-                                    return false;
-                                }
-                            }
+                    {
+                        if (dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value != null)
+                        {
+                            if (campo == (int)Campos_orden_compra.partida)
+                                Partida_orden_compra_agregar.Partida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.material)
+                                Partida_orden_compra_agregar.Material = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.cantidad)
+                                Partida_orden_compra_agregar.Cantidad = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.parte)
+                                Partida_orden_compra_agregar.Parte = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.descripcion)
+                                Partida_orden_compra_agregar.Descripcion = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.unidad_medida)
+                                Partida_orden_compra_agregar.Unidad_medida = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.proyecto)
+                                Partida_orden_compra_agregar.Proyecto = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.precio)
+                                Partida_orden_compra_agregar.precio_unitario = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            else if (campo == (int)Campos_orden_compra.total)
+                                Partida_orden_compra_agregar.Total = dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString();
+                            /*permite detectar partidas OC duplicadas*/
+                            //if (campo == (int)Campos_orden_compra.material)
+                            //{
+                                
+                            //    if (Operacio_orden_compra == "Agregar")
+                            //        partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
+                            //textBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
+                            //    else if (Operacio_orden_compra == "Agregar Partidas")
+                            //        partidas_ordenes_compra_disponibles = class_partidas_Orden_compra.Adquiere_partidas_ordenes_compra_duplicadas(
+                            //comboBoxCodigoOrdenCompra.Text, dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value.ToString());
+                            //    if (partidas_ordenes_compra_disponibles.Count != 0)
+                            //    {
+                            //        MessageBox.Show("Numero de Material existe en Orden De Compra", "Agregar Material",
+                            //            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            //        dataGridViewPartidasOrdenCompra.Rows[partidas].Cells[campo].Value = "";
+                            //        connection.Close();
+                            //        return false;
+                            //    }
+                            //}
                         }
-                            else
-                            {
-                                MessageBox.Show("campo en blanco");
-                                connection.Close();
-                                return false;
-                            }
+                        else
+                        {
+                            MessageBox.Show("campo en blanco");
+                            connection.Close();
+                            return false;
+                        }
                     }
                     Asigna_codigo_orden_compra_para_tipo_de_operacio();
                     MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_partidas_orden_compra(Partida_orden_compra_agregar), connection);
