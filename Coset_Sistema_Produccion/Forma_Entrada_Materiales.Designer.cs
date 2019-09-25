@@ -281,7 +281,7 @@
             // textBoxCodigoProveedor
             // 
             this.textBoxCodigoProveedor.Enabled = false;
-            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 188);
+            this.textBoxCodigoProveedor.Location = new System.Drawing.Point(262, 186);
             this.textBoxCodigoProveedor.Name = "textBoxCodigoProveedor";
             this.textBoxCodigoProveedor.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProveedor.TabIndex = 66;
@@ -734,7 +734,7 @@
             // comboBoxCodigoEmpleado
             // 
             this.comboBoxCodigoEmpleado.FormattingEnabled = true;
-            this.comboBoxCodigoEmpleado.Location = new System.Drawing.Point(262, 240);
+            this.comboBoxCodigoEmpleado.Location = new System.Drawing.Point(262, 239);
             this.comboBoxCodigoEmpleado.Name = "comboBoxCodigoEmpleado";
             this.comboBoxCodigoEmpleado.Size = new System.Drawing.Size(246, 21);
             this.comboBoxCodigoEmpleado.Sorted = true;

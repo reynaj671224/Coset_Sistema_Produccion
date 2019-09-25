@@ -2065,13 +2065,13 @@ namespace Coset_Sistema_Produccion
                     {
                         if (Seleccion_material.Generico == "1")
                         {
-                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, partida.Parte,
+                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, partida.Parte,
                             partida.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
                             partida.Cantidad, Seleccion_material.Cantidad);
                         }
                         else
                         {
-                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, "", partida.Material, Seleccion_material.Codigo_proveedor,
+                            dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, Seleccion_material.Codigo_proveedor,
                             Seleccion_material.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
                             partida.Cantidad, Seleccion_material.Cantidad);
                         }

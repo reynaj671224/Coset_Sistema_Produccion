@@ -74,6 +74,7 @@ namespace Coset_Sistema_Produccion
             {
 
                 Coset_Sistema_Produccion.Tipo_Usuario = Usuario_global.tipo_empleado;
+                Coset_Sistema_Produccion.Nombre_Usuario = Usuario_global.nombre_empleado;
                 Termina_instancia_Usuarios();
             }
             else

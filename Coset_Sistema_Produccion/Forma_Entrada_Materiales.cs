@@ -272,6 +272,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_combobox_codigo_orden_compra();
             Obtener_orden_compra_seleccionada();
             Muestra_informacion_orden_compra();
+            Aparece_textbox_nombre_empleado();
             //Limpia_combo_descripcion_materiales();
             //Aparecer_combo_descripcion_materiales();
             //Activa_combo_descripcion_materiales();
@@ -283,14 +284,15 @@ namespace Coset_Sistema_Produccion
                 if (Rellena_datagridview_agregar_materiales() != 0)
                 {
                     No_acepta_datagridview_agregar_renglones();
-                    Limpia_combo_empleado();
-                    Limpia_combo_empleado_codigo();
-                    Aparece_combo_empleado();
-                    Activa_combo_empleado();
-                    Aparece_combo_empleado_codigo();
-                    Activa_combo_empleado_codigo();
-                    obtener_usuarios_administrativos_compras_disponibles();
-                    Rellena_combo_empleado();
+                    //Limpia_combo_empleado();
+                    //Limpia_combo_empleado_codigo();
+                    //Aparece_combo_empleado();
+                    //Activa_combo_empleado();
+                    //Aparece_combo_empleado_codigo();
+                    //Activa_combo_empleado_codigo();
+                    //obtener_usuarios_administrativos_compras_disponibles();
+                    //Rellena_combo_empleado();
+                    textBoxEmpleado.Text = Coset_Sistema_Produccion.Nombre_Usuario;
                     Activa_seleccion_fecha_actual();
                     Activa_grupo_referencia();
                     Activa_textbox_referencia();
@@ -583,14 +585,16 @@ namespace Coset_Sistema_Produccion
             }
             else
             {
-                Limpia_combo_empleado();
-                Limpia_combo_empleado_codigo();
-                Aparece_combo_empleado();
-                Activa_combo_empleado();
-                Aparece_combo_empleado_codigo();
-                Activa_combo_empleado_codigo();
-                obtener_usuarios_administrativos_compras_disponibles();
-                Rellena_combo_empleado();
+                //Limpia_combo_empleado();
+                //Limpia_combo_empleado_codigo();
+                //Aparece_combo_empleado();
+                //Activa_combo_empleado();
+                //Aparece_combo_empleado_codigo();
+                //Activa_combo_empleado_codigo();
+                //obtener_usuarios_administrativos_compras_disponibles();
+                //Rellena_combo_empleado();
+                Aparece_textbox_nombre_empleado();
+                textBoxEmpleado.Text = Coset_Sistema_Produccion.Nombre_Usuario;
                 Activa_seleccion_fecha_actual();
                 Activa_textbox_cantidad_material();
                 Activa_textbox_precio();
@@ -834,8 +838,8 @@ namespace Coset_Sistema_Produccion
                             Desaparece_combo_atencion();
                             Desactiva_combo_atencion();
                             Desactiva_grupo_referencia();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_nombre_empleado();
+                            Aparece_textbox_nombre_empleado();
                             Aparece_textbox_atencion();
                             Desaparece_textbox_estadoOC();
                             Desaparece_label_estadoOC();
@@ -940,7 +944,7 @@ namespace Coset_Sistema_Produccion
                         dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.descripcion, partidas].Value.ToString();
                     Insertar_entrada_materiales.Codigo_proveedor =
                          dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_proveedor, partidas].Value.ToString();
-                    Insertar_entrada_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                    Insertar_entrada_materiales.Nombre_empleado = textBoxEmpleado.Text;
                     Insertar_entrada_materiales.Fecha = dateTimePickerFechaActual.Text;
                     Insertar_entrada_materiales.Codigo_material =
                         dataGridViewPartidasEntradaMaterialesEntrada[(int)Campos_entrada_materiales_agregar.codigo_material, partidas].Value.ToString();
@@ -1007,8 +1011,8 @@ namespace Coset_Sistema_Produccion
                             Desactiva_combo_cliente_codigo();
                             Desaparece_combo_atencion();
                             Desactiva_combo_atencion();
-                            Aparece_textbox_nombre_cliente();
-                            Aparece_textbox_nombre_cliente();
+                            Aparece_textbox_nombre_empleado();
+                            Aparece_textbox_nombre_empleado();
                             Aparece_textbox_atencion();
                             Desaparece_datagridview_entrada_visualizar();
                             Elimina_informacion_orden_compra_disponibles();
@@ -1099,7 +1103,7 @@ namespace Coset_Sistema_Produccion
                 Insertar_entrada_materiales.Orden_compra = comboBoxCodigoOrdenCompra.Text;
                 Insertar_entrada_materiales.Descripcion_material = comboBoxDescripcionMaterial.Text;
                 Insertar_entrada_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
-                Insertar_entrada_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                Insertar_entrada_materiales.Nombre_empleado = textBoxEmpleado.Text;
                 Insertar_entrada_materiales.Fecha = dateTimePickerFechaActual.Text;
                 Insertar_entrada_materiales.Codigo_material = textCodigoMaterial.Text;
                 Insertar_entrada_materiales.Precio = textBoxPrecioMaterial.Text;
@@ -1110,7 +1114,7 @@ namespace Coset_Sistema_Produccion
                 Insertar_entrada_materiales.Orden_compra = "NA";
                 Insertar_entrada_materiales.Descripcion_material = textBoxDescripcionMaterial.Text;
                 Insertar_entrada_materiales.Codigo_proveedor = textBoxCodigoProveedor.Text;
-                Insertar_entrada_materiales.Nombre_empleado = comboBoxEmpleado.Text;
+                Insertar_entrada_materiales.Nombre_empleado = textBoxEmpleado.Text;
                 Insertar_entrada_materiales.Fecha = dateTimePickerFechaActual.Text;
                 Insertar_entrada_materiales.Codigo_material = textCodigoMaterial.Text;
                 Insertar_entrada_materiales.Precio = textBoxPrecioMaterial.Text;
@@ -1128,7 +1132,7 @@ namespace Coset_Sistema_Produccion
             if (Operacio_entrada_materiales == "Agregar OC")
             {
                 if (comboBoxCodigoOrdenCompra.Text != "" &&
-                comboBoxEmpleado.Text != "")
+                textBoxEmpleado.Text != "")
                 {
                     return true;
                 }
@@ -1144,7 +1148,7 @@ namespace Coset_Sistema_Produccion
                 if (
                 textBoxDescripcionMaterial.Text != "" &&
                 textBoxCodigoProveedor.Text != "" &&
-                comboBoxEmpleado.Text != "" &&
+                textBoxEmpleado.Text != "" &&
                 textCodigoMaterial.Text != "" &&
                 textBoxPrecioMaterial.Text != "" &&
                 textBoxUnidadesEntrada.Text != "")
@@ -1227,9 +1231,14 @@ namespace Coset_Sistema_Produccion
             textBoxDescripcionMaterial.Visible = true;
         }
 
-        private void Aparece_textbox_nombre_cliente()
+        private void Aparece_textbox_nombre_empleado()
         {
             textBoxEmpleado.Visible = true;
+        }
+
+        private void Activa_textbox_nombre_empleado()
+        {
+            textBoxEmpleado.Enabled = true;
         }
 
         private void Desactiva_combo_atencion()
@@ -1503,7 +1512,7 @@ namespace Coset_Sistema_Produccion
                 Entrada_materiales_seleccion.Orden_compra = comboBoxCodigoOrdenCompra.Text;
                 Entrada_materiales_seleccion.Descripcion_material = comboBoxDescripcionMaterial.Text;
                 Entrada_materiales_seleccion.Codigo_proveedor = textBoxCodigoProveedor.Text;
-                Entrada_materiales_seleccion.Nombre_empleado = comboBoxEmpleado.Text;
+                Entrada_materiales_seleccion.Nombre_empleado = textBoxEmpleado.Text;
                 Entrada_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
                 Entrada_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
                 Entrada_materiales_seleccion.Precio = textBoxPrecioMaterial.Text;
@@ -1514,7 +1523,7 @@ namespace Coset_Sistema_Produccion
                 Entrada_materiales_seleccion.Orden_compra = "NA";
                 Entrada_materiales_seleccion.Descripcion_material = comboBoxDescripcionMaterial.Text;
                 Entrada_materiales_seleccion.Codigo_proveedor = textBoxCodigoProveedor.Text;
-                Entrada_materiales_seleccion.Nombre_empleado = comboBoxEmpleado.Text;
+                Entrada_materiales_seleccion.Nombre_empleado = textBoxEmpleado.Text;
                 Entrada_materiales_seleccion.Fecha = dateTimePickerFechaActual.Text;
                 Entrada_materiales_seleccion.Codigo_material = textCodigoMaterial.Text;
                 Entrada_materiales_seleccion.Precio = textBoxPrecioMaterial.Text;
@@ -1680,7 +1689,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_grupo_referencia();
             Aparece_caja_codigo_empleado();
             Aparece_textbox_atencion();
-            Aparece_textbox_nombre_cliente();
+            Aparece_textbox_nombre_empleado();
             Acepta_datagridview_agregar_renglones();
             Desaparece_datagridview_entrada_visualizar();
             Desaparece_datagridview_entrada_materiales();
@@ -1725,7 +1734,7 @@ namespace Coset_Sistema_Produccion
             if (Operacio_entrada_materiales == "Agregar OC")
             {
                 if (comboBoxCodigoOrdenCompra.Text != "" &&
-                    comboBoxEmpleado.Text != "" &&
+                    textBoxEmpleado.Text != "" &&
                     textBoxReferencia.Text !="")
                 {
                     timerAgregarEntradaMateriales.Enabled = false;
@@ -1735,7 +1744,7 @@ namespace Coset_Sistema_Produccion
             else if (Operacio_entrada_materiales == "Agregar")
             {
                 if (
-                    comboBoxEmpleado.Text != "" &&
+                    textBoxEmpleado.Text != "" &&
                     textBoxPrecioMaterial.Text != "" &&
                     textBoxUnidadesEntrada.Text != "" &&
                     textBoxReferencia.Text != "")

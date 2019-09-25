@@ -15,6 +15,7 @@ namespace Coset_Sistema_Produccion
     public partial class Coset_Sistema_Produccion : Form
     {
         public static string Tipo_Usuario = "";
+        public static string Nombre_Usuario = "";
         public static string ip_addres_server = "";
         public static string password_server = "";
         string appPath = Path.GetDirectoryName(Application.ExecutablePath);
