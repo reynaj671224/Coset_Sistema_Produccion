@@ -1826,10 +1826,10 @@ namespace Coset_Sistema_Produccion
                 {
                     if (orden_compra.error == "")
                     {
-                        if (orden_compra.Estado_salida != "Cerrada")
-                        {
+                        //if (orden_compra.Estado_salida != "Cerrada")
+                        //{
                             comboBoxOC.Items.Add(orden_compra.Codigo);
-                        }
+                       // }
                     }
                     else
                     {

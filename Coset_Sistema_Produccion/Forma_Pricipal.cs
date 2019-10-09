@@ -774,5 +774,11 @@ namespace Coset_Sistema_Produccion
                 new Forma_Actividades_Procesos_Electricos();
             forma_Actividades_Procesos_Electricos.ShowDialog();
         }
+
+        private void ordenesCompraAbiertasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Reporte_Ordenes_Compra_Abiertas forma_Reporte_Ordenes_Compra_abiertas = new Forma_Reporte_Ordenes_Compra_Abiertas();
+            forma_Reporte_Ordenes_Compra_abiertas.ShowDialog();
+        }
     }
 }
