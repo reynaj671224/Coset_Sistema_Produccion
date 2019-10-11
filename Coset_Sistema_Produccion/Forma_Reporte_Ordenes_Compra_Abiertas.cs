@@ -1396,7 +1396,6 @@ namespace Coset_Sistema_Produccion
             Activate_datagrid_salida_materiales_orden_compra();
             Limpia_datagrid_salida_materiales_orden_compra();
             Obtener_ordenes_compra_disponibles();
-            //aqui me quede
 
             foreach (Orden_compra orden_compra in Ordenes_compra_disponibles)
             {
@@ -1506,7 +1505,8 @@ namespace Coset_Sistema_Produccion
             Desaparece_textbox_unidades_pendientes_OC();
             Desaparece_label_unidades_pendientes_OC();
             Desaparece_boton_Excel();
-            Aparece_boton_excel_general();
+            Desaparece_label_orden_compra();
+            Desaparece_combo_OC();
             Elimina_informacion_salida_materiales_disponibles();
         }
 
@@ -1819,6 +1819,8 @@ namespace Coset_Sistema_Produccion
             Aparece_label_orden_compra();
             Aparece_boton_cancelar_operacio();
             Desactiva_botones_operacion();
+            Aparece_combo_orden_compra();
+            Aparece_label_orden_compra();
             Obtener_ordenes_compra_disponibles();
             Rellena_combo_ordenes_compra();
             Inicia_timer_para_asegurar_informacion_en_todos_los_campos_agreagar_material();
@@ -1902,9 +1904,19 @@ namespace Coset_Sistema_Produccion
             labelCodigoOC.Visible = true;
         }
 
+        private void Desaparece_label_orden_compra()
+        {
+            labelCodigoOC.Visible = false;
+        }
+
         private void Aparece_combo_orden_compra()
         {
             comboBoxOC.Visible = true;
+        }
+
+        private void Desparece_combo_orden_compra()
+        {
+            comboBoxOC.Visible = false;
         }
 
         private void textBoxDescripcionMaterial_TextChanged(object sender, EventArgs e)
@@ -2070,7 +2082,7 @@ namespace Coset_Sistema_Produccion
         private void Limpia_combo_orden_compra()
         {
             comboBoxOC.Text = "";
-            //comboBoxOC.Items.Clear();
+            comboBoxOC.Items.Clear();
         }
 
         private void configura_salida_orden_compra()
