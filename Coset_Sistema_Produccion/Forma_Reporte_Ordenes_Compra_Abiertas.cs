@@ -2204,7 +2204,11 @@ namespace Coset_Sistema_Produccion
 
                 try
                 {
-                    Total_cantidad = Total_cantidad + Convert.ToInt32(Entrada_materiales_disponibles[renglones].Cantidad);
+                    if (Entrada_materiales_disponibles[renglones].Cantidad != "" &&
+                        Entrada_materiales_disponibles[renglones].Cantidad != null)
+                    {
+                        Total_cantidad = Total_cantidad + Convert.ToInt32(Entrada_materiales_disponibles[renglones].Cantidad);
+                    }
                 }
                 catch
                 {
