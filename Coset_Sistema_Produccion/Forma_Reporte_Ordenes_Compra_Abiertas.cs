@@ -2208,10 +2208,10 @@ namespace Coset_Sistema_Produccion
                 }
                 catch
                 {
-                    MessageBox.Show("No valores numericos en cantidad", "Salida Materriales",
+                    MessageBox.Show("No valores numericos en cantidad = " + Entrada_materiales_disponibles[renglones].Cantidad
+                        + ", OC = " + Entrada_materiales_disponibles[renglones].Codigo, "Salida Materriales",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             return Total_cantidad;
 
