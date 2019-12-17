@@ -594,8 +594,8 @@ namespace Coset_Sistema_Produccion
                                 partidas_ordenes_compra_disponibles[partidas].Material,
                                 Materiales_disponibles_busqueda[0].Codigo_proveedor,
                                 //partidas_ordenes_compra_disponibles[partidas].Parte,
-                                //partidas_ordenes_compra_disponibles[partidas].Descripcion,
-                                Materiales_disponibles_busqueda[0].Descripcion,
+                                partidas_ordenes_compra_disponibles[partidas].Descripcion,
+                                //Materiales_disponibles_busqueda[0].Descripcion,
                                 partidas_ordenes_compra_disponibles[partidas].Unidad_medida,
                                 partidas_ordenes_compra_disponibles[partidas].Proyecto,
                                 partidas_ordenes_compra_disponibles[partidas].precio_unitario,
@@ -2665,6 +2665,7 @@ namespace Coset_Sistema_Produccion
 
                     //    }
                     //}
+                                            
                 }
                 else if (e.ColumnIndex == (int)Campos_orden_compra.descripcion && e.RowIndex >= 0) //check if combobox column
                 {
@@ -3117,7 +3118,9 @@ namespace Coset_Sistema_Produccion
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Style.BackColor = Color.White;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Style.BackColor = Color.White;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.material, rowIndex].Style.BackColor = Color.White;
-
+            /*Oculta coluna descrpcion y numero de parte si el material no es */
+            if (material_seleccionado_data_view.Generico == "0")
+                dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].ReadOnly = true;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.parte, rowIndex].Value =
                 material_seleccionado_data_view.Codigo_proveedor;
             dataGridViewPartidasOrdenCompra[(int)Campos_orden_compra.descripcion, rowIndex].Value =
