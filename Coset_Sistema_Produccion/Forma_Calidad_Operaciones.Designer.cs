@@ -61,8 +61,14 @@
             this.labelDescripcionRechazo = new System.Windows.Forms.Label();
             this.labelaccionCorrectiva = new System.Windows.Forms.Label();
             this.textBoxAccionCorrectiva = new System.Windows.Forms.TextBox();
+            this.dataGridViewDibujoDimenciones = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Medida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasCalidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujoDimenciones)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -402,11 +408,53 @@
             this.textBoxAccionCorrectiva.TabIndex = 58;
             this.textBoxAccionCorrectiva.Visible = false;
             // 
+            // dataGridViewDibujoDimenciones
+            // 
+            this.dataGridViewDibujoDimenciones.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewDibujoDimenciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDibujoDimenciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.Medida});
+            this.dataGridViewDibujoDimenciones.Location = new System.Drawing.Point(246, 288);
+            this.dataGridViewDibujoDimenciones.Name = "dataGridViewDibujoDimenciones";
+            this.dataGridViewDibujoDimenciones.Size = new System.Drawing.Size(642, 212);
+            this.dataGridViewDibujoDimenciones.TabIndex = 59;
+            this.dataGridViewDibujoDimenciones.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Dimensión Nombre";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Dimensión Definida";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Dimensión Medida";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.Width = 150;
+            // 
+            // Medida
+            // 
+            this.Medida.HeaderText = "Medida";
+            this.Medida.Name = "Medida";
+            this.Medida.Width = 150;
+            // 
             // Forma_Calidad_Operaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.dataGridViewDibujoDimenciones);
             this.Controls.Add(this.textBoxAccionCorrectiva);
             this.Controls.Add(this.labelaccionCorrectiva);
             this.Controls.Add(this.textBoxMotivoRechazo);
@@ -438,6 +486,7 @@
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasCalidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujoDimenciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,5 +525,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridView dataGridViewDibujoDimenciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Medida;
     }
 }

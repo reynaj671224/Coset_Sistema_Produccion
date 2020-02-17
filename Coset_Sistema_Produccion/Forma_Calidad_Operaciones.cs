@@ -404,12 +404,14 @@ namespace Coset_Sistema_Produccion
         {
             Habilita_combo_para_aceptar_buscar_elemento_escribiendo_en_ventana();
             Obtener_dibujos_en_calidad();
-            //aqui se 
-            Secuencia_usuarios_produccion();
-           
+            //Secuencia_usuarios_produccion();
+            Asigna_usuario_forma_calidad();
         }
 
-
+        private void Asigna_usuario_forma_calidad()
+        {
+            textBoxEmpleado.Text = Coset_Sistema_Produccion.Nombre_Usuario;
+        }
 
         private void Obtener_dibujos_en_calidad()
         {
@@ -762,9 +764,27 @@ namespace Coset_Sistema_Produccion
             Desaparece_boton_guardar_base_datos();
             Desactiva_textbox_descripcion_rechazo();
             Limpia_combo_usuario();
+            Limpia_datagridview_dimenciones();
+            Desaparece_datagridvie_dimenciones();
+            Aparece_datagridview_secuencia_calidad();
             Limpia_seleccion_secuencia_operacion();
             Limpia_datagridview_secuencia_calidad();
             Obtener_dibujos_en_calidad();
+        }
+
+        private void Aparece_datagridview_secuencia_calidad()
+        {
+            dataGridViewSecuenciasCalidad.Visible = true;
+        }
+
+        private void Desaparece_datagridvie_dimenciones()
+        {
+            dataGridViewDibujoDimenciones.Visible = false;
+        }
+
+        private void Limpia_datagridview_dimenciones()
+        {
+            dataGridViewDibujoDimenciones.Rows.Clear();
         }
 
         private void Desaparece_boton_guardar_base_datos()
@@ -898,6 +918,7 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = "";
                 Secuencia_calidad_insertar.Accion_correctiva = "";
+                Secuencia_calidad_insertar.dimenciones = obtener_dimencoines_dibujo();
                 Secuencia_calidad_insertar.calidad = "Aceptado";
 
             }
@@ -909,6 +930,8 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;
                 Secuencia_calidad_insertar.Accion_correctiva = textBoxAccionCorrectiva.Text;
+                Secuencia_calidad_insertar.dimenciones = obtener_dimencoines_dibujo();
+
                 Secuencia_calidad_insertar.calidad = "Re-trabajo";
             }
             else if(secuencia_operacion == "desecho")
@@ -919,8 +942,24 @@ namespace Coset_Sistema_Produccion
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;
                 Secuencia_calidad_insertar.Accion_correctiva = textBoxAccionCorrectiva.Text;
+                Secuencia_calidad_insertar.dimenciones = obtener_dimencoines_dibujo();
                 Secuencia_calidad_insertar.calidad = "Desecho";
             }
+        }
+
+        private string obtener_dimencoines_dibujo()
+        {
+            string Dimenciones = "";
+            for (int partidas = 0; partidas < dataGridViewDibujoDimenciones.Rows.Count - 1; partidas++)
+            {
+                for (int campo = 0; campo < dataGridViewDibujoDimenciones.Rows[partidas].Cells.Count; campo++)
+                {
+                    Dimenciones = Dimenciones  + dataGridViewDibujoDimenciones.Rows[partidas].Cells[campo].Value.ToString() + ",";
+                }
+                Dimenciones=  Dimenciones.Substring(0, Dimenciones.Length-1);
+                Dimenciones = Dimenciones + ";";
+            }
+            return Dimenciones;
         }
 
         private void Activa_combo_nombre_proceso()
@@ -986,6 +1025,8 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewSecuenciasCalidad_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dataGridViewSecuenciasCalidad.Visible = false;
+            dataGridViewDibujoDimenciones.Visible = true;
             if (dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
                 Cells["Numero_Dibujo"].Value != null)
             {

@@ -30,6 +30,7 @@ namespace Coset_Sistema_Produccion
                         Motivo_rechazo = mySqlDataReader["motivo_rechazo"].ToString(),
                         Accion_correctiva = mySqlDataReader["accion_correctiva"].ToString(),
                         calidad = mySqlDataReader["calidad"].ToString(),
+                        dimenciones = mySqlDataReader["dibujo_dimenciones"].ToString(),
                     });
                 }
             }
@@ -63,6 +64,7 @@ namespace Coset_Sistema_Produccion
                         Motivo_rechazo = mySqlDataReader["motivo_rechazo"].ToString(),
                         Accion_correctiva = mySqlDataReader["accion_correctiva"].ToString(),
                         calidad = mySqlDataReader["calidad"].ToString(),
+                        dimenciones = mySqlDataReader["dibujo_dimenciones"].ToString(),
                     });
                 }
             }
@@ -103,10 +105,11 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_secuencia_calidad(Secuencia_calidad numero_dibujo)
         {
             return "INSERT INTO secuencia_calidad(numero_dibujo,empleado," +
-                   "fecha,proceso,motivo_rechazo,calidad,accion_correctiva) " +
+                   "fecha,proceso,motivo_rechazo,calidad,accion_correctiva, dibujo_dimenciones) " +
                    "VALUES('" + numero_dibujo.Numero_Dibujo + "','" + numero_dibujo.Empleado + "','" +
                    numero_dibujo.Fecha + "','" + numero_dibujo.Proceso + "','" + numero_dibujo.Motivo_rechazo + "','" +
-                   numero_dibujo.calidad + "','" + numero_dibujo.Accion_correctiva + "'); ";
+                   numero_dibujo.calidad + "','" + numero_dibujo.Accion_correctiva + "','" +
+                   numero_dibujo.dimenciones + "'); ";
         }
 
         private string Commando_leer_Mysql_busqueda_secuencia_calidad(Secuencia_calidad numero_dibujo)
@@ -130,6 +133,7 @@ namespace Coset_Sistema_Produccion
         public string Motivo_rechazo = "";
         public string Accion_correctiva = "";
         public string calidad = "";
+        public string dimenciones = "";
         public string error = "";
     }
 

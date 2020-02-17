@@ -117,6 +117,7 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Produccion();
             Muestra_Menu_reportes();
             Muestra_Menu_Compras();
+            Muestra_Menus_de_Calidad_de_dibujos_ocultos();
             Muestra_Menus_de_Compras_Prohibidas_Para_Ingenieria();
             toolStripStatusUsuario.Text = "Administrativo";
         }
@@ -157,9 +158,17 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Almacen();
             Muestra_Menu_Compras();
             Muestra_Menu_Produccion();
+            Muestra_Menus_de_Calidad_de_dibujos_ocultos();
+            Oculta_Menus_de_Ingenieria_Prohibidas_para_ingenieria();
             Oculta_Menus_de_Almacen_Prohibidas_Para_Ingenieria();
             Oculta_Menus_de_Compras_Prohibidas_Para_Ingenieria();
+            
             toolStripStatusUsuario.Text = "Ingenieria";
+        }
+
+        private void Oculta_Menus_de_Ingenieria_Prohibidas_para_ingenieria()
+        {
+            calidadOperacionesToolStripMenuItem.Enabled = false;
         }
 
         private void Muestra_Menus_de_Compras_Prohibidas_Para_Ingenieria()
@@ -357,6 +366,7 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Almacen();
             Muestra_Menu_Compras();
             Muestra_Menus_de_Almacen_Proibidas_Para_Ingenieria();
+            Muestra_Menus_de_Calidad_de_dibujos_ocultos();
             Oculta_Menus_de_Compras_Prohibidas_Para_Almacen();
             toolStripStatusUsuario.Text = "Almacen";
         }
@@ -446,10 +456,46 @@ namespace Coset_Sistema_Produccion
                 Configura_menus_para_usuarios_usuario_produccion();
             else if (Tipo_Usuario == "Almacen-Compras")
                 Configura_menus_para_usuarios_almacen_compras();
+            else if(Tipo_Usuario == "Calidad-Dibujos")
+                Configura_menus_para_usuarios_calidad_dibujos();
 
 
         }
 
+        private void Configura_menus_para_usuarios_calidad_dibujos()
+        {
+            Muestra_Menus_para_Usuarios_Calidad_Dibujos();
+        }
+
+        private void Muestra_Menus_para_Usuarios_Calidad_Dibujos()
+        {
+            Muestra_Menu_Ingenieria();
+            Muestra_Menu_reportes();
+            toolStripStatusUsuario.Text = "Calidad-Dibujos";
+            Oculta_Menus_de_Calidad_de_dibujos();
+        }
+
+        private void Oculta_Menus_de_Calidad_de_dibujos()
+        {
+            proyectosToolStripMenuItem.Enabled = false;
+            dibujosOperacionesToolStripMenuItem.Enabled = false;
+            procesosToolStripMenuItem1.Enabled = false;
+            integracionToolStripMenuItem.Enabled = false;
+            integracionToolStripMenuItem.Enabled = false;
+            ordenesCompraToolStripMenuItem.Enabled = false;
+            ordenesCompraAbiertasToolStripMenuItem.Enabled = false;
+        }
+
+        private void Muestra_Menus_de_Calidad_de_dibujos_ocultos()
+        {
+            proyectosToolStripMenuItem.Enabled = true;
+            dibujosOperacionesToolStripMenuItem.Enabled = true;
+            procesosToolStripMenuItem1.Enabled = true;
+            integracionToolStripMenuItem.Enabled = true;
+            integracionToolStripMenuItem.Enabled = true;
+            ordenesCompraToolStripMenuItem.Enabled = true;
+            ordenesCompraAbiertasToolStripMenuItem.Enabled = true;
+        }
         private void Configura_menus_para_usuarios_almacen_compras()
         {
             Muestra_Menus_Para_Usuarios_almacen_compras();
@@ -460,6 +506,7 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_Almacen();
             Muestra_Menu_Compras();
             Muestra_Menu_reportes();
+            Muestra_Menus_de_Calidad_de_dibujos_ocultos();
             Oculta_Menus_de_Compras_Prohibidas_Para_almacen_compras();
             toolStripStatusUsuario.Text = "Almacen-Compras";
         }

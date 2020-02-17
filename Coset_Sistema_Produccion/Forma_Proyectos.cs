@@ -872,8 +872,15 @@ namespace Coset_Sistema_Produccion
 
             //limpia_combo_tipo_proceso_datagrid_dibujo_proyecto();
             //Rellenar_combo_tipo_proceso_datagrid_dibujo_proyecto();
+            Limpiar_combo_proceso_dibujo();
             Rellenar_combo_proceso_dibujo();
             
+        }
+
+        private void Limpiar_combo_proceso_dibujo()
+        {
+            Proceso_dibujo.Items.Clear();
+
         }
 
         private void Rellenar_combo_proceso_dibujo()
@@ -2225,6 +2232,8 @@ namespace Coset_Sistema_Produccion
             Activa_dataview_dibujos_proyecto();
             Activa_columna_numero_dibujo_datagrid();
             Activa_botones_operacion_contactos();
+            Limpiar_combo_proceso_dibujo();
+            Rellenar_combo_proceso_dibujo();
 
         }
 
