@@ -803,6 +803,9 @@ namespace Coset_Sistema_Produccion
 
             //limpia_combo_tipo_proceso_datagrid_dibujo_proyecto();
             //Rellenar_combo_tipo_proceso_datagrid_dibujo_proyecto();
+
+            Limpiar_combo_proceso_dibujo();
+            Rellenar_combo_proceso_dibujo();
         }
 
         private void Activa_textbox_subproyecto()

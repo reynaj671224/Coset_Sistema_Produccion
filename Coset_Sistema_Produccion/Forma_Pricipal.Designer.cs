@@ -91,6 +91,7 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.capturaDeIntegracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -384,7 +385,8 @@
             // produccionToolStripMenuItem
             // 
             this.produccionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.capturaDeProduccionToolStripMenuItem});
+            this.capturaDeProduccionToolStripMenuItem,
+            this.capturaDeIntegracionToolStripMenuItem});
             this.produccionToolStripMenuItem.Name = "produccionToolStripMenuItem";
             this.produccionToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.produccionToolStripMenuItem.Text = "Produccion";
@@ -587,6 +589,13 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // capturaDeIntegracionToolStripMenuItem
+            // 
+            this.capturaDeIntegracionToolStripMenuItem.Name = "capturaDeIntegracionToolStripMenuItem";
+            this.capturaDeIntegracionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.capturaDeIntegracionToolStripMenuItem.Text = "Captura de Integracion";
+            this.capturaDeIntegracionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeIntegracionToolStripMenuItem_Click);
+            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -681,6 +690,7 @@
         private System.Windows.Forms.ToolStripMenuItem procesosElectricosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actividadesProcesosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenesCompraAbiertasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem capturaDeIntegracionToolStripMenuItem;
     }
 }
 

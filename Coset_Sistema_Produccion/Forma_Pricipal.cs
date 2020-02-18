@@ -118,8 +118,15 @@ namespace Coset_Sistema_Produccion
             Muestra_Menu_reportes();
             Muestra_Menu_Compras();
             Muestra_Menus_de_Calidad_de_dibujos_ocultos();
+            Muestra_Menus_de_prodcuccion();
             Muestra_Menus_de_Compras_Prohibidas_Para_Ingenieria();
             toolStripStatusUsuario.Text = "Administrativo";
+        }
+
+        private void Muestra_Menus_de_prodcuccion()
+        {
+            capturaDeProduccionToolStripMenuItem.Enabled = true;
+            capturaDeIntegracionToolStripMenuItem.Enabled = true;
         }
 
         private void Muestra_Menu_Compras()
@@ -388,12 +395,19 @@ namespace Coset_Sistema_Produccion
         private void Muestra_Menus_Para_Usuarios_produccion()
         {
             Muestra_Menu_Produccion();
+            Oculta_Menu_Prohibidos_de_Produccion();
             toolStripStatusUsuario.Text = "Produccion";
+        }
+
+        private void Oculta_Menu_Prohibidos_de_Produccion()
+        {
+            capturaDeIntegracionToolStripMenuItem.Enabled = false;
         }
 
         private void Muestra_Menus_Para_Usuarios_Usuarios_produccion()
         {
             Muestra_Menu_Produccion();
+            Oculta_Menu_Prohibidos_de_Produccion();
             toolStripStatusUsuario.Text = "Usuario-Produccion";
         }
 
@@ -458,8 +472,27 @@ namespace Coset_Sistema_Produccion
                 Configura_menus_para_usuarios_almacen_compras();
             else if(Tipo_Usuario == "Calidad-Dibujos")
                 Configura_menus_para_usuarios_calidad_dibujos();
+            else if (Tipo_Usuario == "Electrico")
+                Configura_menus_para_usuarios_electrico();
 
 
+        }
+
+        private void Configura_menus_para_usuarios_electrico()
+        {
+            Muestra_Menus_Para_Usuarios_Usuarios_integracion();
+        }
+
+        private void Muestra_Menus_Para_Usuarios_Usuarios_integracion()
+        {
+            Muestra_Menu_Produccion();
+            Oculta_Menu_Prohibidos_de_integracion();
+            toolStripStatusUsuario.Text = "Integracion";
+        }
+
+        private void Oculta_Menu_Prohibidos_de_integracion()
+        {
+            capturaDeProduccionToolStripMenuItem.Enabled = false;
         }
 
         private void Configura_menus_para_usuarios_calidad_dibujos()
@@ -826,6 +859,12 @@ namespace Coset_Sistema_Produccion
         {
             Forma_Reporte_Ordenes_Compra_Abiertas forma_Reporte_Ordenes_Compra_abiertas = new Forma_Reporte_Ordenes_Compra_Abiertas();
             forma_Reporte_Ordenes_Compra_abiertas.ShowDialog();
+        }
+
+        private void capturaDeIntegracionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Captura_Integracion forma_Captura_Integracion = new Forma_Captura_Integracion();
+            forma_Captura_Integracion.ShowDialog();
         }
     }
 }
