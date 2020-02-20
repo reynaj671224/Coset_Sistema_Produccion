@@ -89,6 +89,7 @@
     <Compile Include="Class_Dibujos_Produccion.cs" />
     <Compile Include="Class_Dibujos_Proyecto.cs" />
     <Compile Include="Class_Entrada_Material.cs" />
+    <Compile Include="Class_Integracion_Procesos.cs" />
     <Compile Include="Class_Materiales.cs" />
     <Compile Include="Class_Movimientos_Autos.cs" />
     <Compile Include="Class_Ordenes_Compra.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Class_Requisiciones.cs" />
     <Compile Include="Class_Salida_Material.cs" />
     <Compile Include="Class_Secuencia_Calidad.cs" />
+    <Compile Include="Class_Secuencia_Integracion.cs" />
     <Compile Include="Class_Secuencia_Produccion.cs" />
     <Compile Include="Class_Usuarios.cs" />
     <Compile Include="Forma_Actividades_Procesos_Electricos.cs">

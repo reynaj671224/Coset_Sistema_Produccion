@@ -474,7 +474,6 @@ namespace Coset_Sistema_Produccion
             Obtener_procesos_electrcos_disponibles();
             Limpiar_combo_procesos_electricos();
             Rellenar_combo_procesos_electricos();
-
         }
 
         private void Activa_combo_proceso_electrico()
@@ -1224,7 +1223,8 @@ namespace Coset_Sistema_Produccion
         private void comboBoxActividadesProcesoElectrico_SelectedIndexChanged(object sender, EventArgs e)
         {
             Actividad_Proceso_Electrico_busqueda = actividad_Proceso_Electricos_disponibles.Find(nota => nota.Actividad.Contains(comboBoxActividadesProcesoElectrico.SelectedItem.ToString()));
-            textBoxNotasActividad.Text = Actividad_Proceso_Electrico_busqueda.Notas;
+            if (Actividad_Proceso_Electrico_busqueda!=null)
+                textBoxNotasActividad.Text = Actividad_Proceso_Electrico_busqueda.Notas;
         }
     }
 }

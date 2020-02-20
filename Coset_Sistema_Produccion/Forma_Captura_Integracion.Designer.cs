@@ -200,6 +200,7 @@
             this.label2.Size = new System.Drawing.Size(97, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Proceso Electrico";
+            this.label2.Visible = false;
             // 
             // textBoxNombreProceso
             // 
@@ -208,6 +209,7 @@
             this.textBoxNombreProceso.Name = "textBoxNombreProceso";
             this.textBoxNombreProceso.Size = new System.Drawing.Size(447, 20);
             this.textBoxNombreProceso.TabIndex = 9;
+            this.textBoxNombreProceso.Visible = false;
             // 
             // buttonBorrarBasedeDatos
             // 
@@ -283,10 +285,11 @@
             // 
             this.comboBoxNombreProceso.Enabled = false;
             this.comboBoxNombreProceso.FormattingEnabled = true;
-            this.comboBoxNombreProceso.Location = new System.Drawing.Point(200, 148);
+            this.comboBoxNombreProceso.Location = new System.Drawing.Point(219, 148);
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(447, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
+            this.comboBoxNombreProceso.Visible = false;
             this.comboBoxNombreProceso.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreEmpleado_SelectedIndexChanged);
             // 
             // textBoxNumeroDibujo
@@ -520,15 +523,17 @@
             this.labelActividadesProcesoElectrico.Size = new System.Drawing.Size(151, 16);
             this.labelActividadesProcesoElectrico.TabIndex = 57;
             this.labelActividadesProcesoElectrico.Text = "Actividad Proceso Electrico";
+            this.labelActividadesProcesoElectrico.Visible = false;
             // 
             // textBoxNotasActividad
             // 
             this.textBoxNotasActividad.Enabled = false;
-            this.textBoxNotasActividad.Location = new System.Drawing.Point(200, 203);
+            this.textBoxNotasActividad.Location = new System.Drawing.Point(200, 202);
             this.textBoxNotasActividad.Multiline = true;
             this.textBoxNotasActividad.Name = "textBoxNotasActividad";
             this.textBoxNotasActividad.Size = new System.Drawing.Size(447, 50);
             this.textBoxNotasActividad.TabIndex = 60;
+            this.textBoxNotasActividad.Visible = false;
             // 
             // labelNotasActividad
             // 
@@ -540,6 +545,7 @@
             this.labelNotasActividad.Size = new System.Drawing.Size(130, 16);
             this.labelNotasActividad.TabIndex = 59;
             this.labelNotasActividad.Text = "Notas Proceso Electrico";
+            this.labelNotasActividad.Visible = false;
             // 
             // textBoxTipoProceso
             // 
@@ -566,10 +572,11 @@
             // 
             this.comboBoxActividadesProcesoElectrico.Enabled = false;
             this.comboBoxActividadesProcesoElectrico.FormattingEnabled = true;
-            this.comboBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(200, 176);
+            this.comboBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(219, 176);
             this.comboBoxActividadesProcesoElectrico.Name = "comboBoxActividadesProcesoElectrico";
             this.comboBoxActividadesProcesoElectrico.Size = new System.Drawing.Size(447, 21);
             this.comboBoxActividadesProcesoElectrico.TabIndex = 63;
+            this.comboBoxActividadesProcesoElectrico.Visible = false;
             this.comboBoxActividadesProcesoElectrico.SelectedIndexChanged += new System.EventHandler(this.comboBoxActividadesProcesoElectrico_SelectedIndexChanged);
             // 
             // Forma_Captura_Integracion
