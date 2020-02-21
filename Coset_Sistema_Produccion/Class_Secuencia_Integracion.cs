@@ -46,6 +46,12 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        private string Commando_leer_Mysql_busqueda_secuencia_integracion(Secuencia_integracion secuencia_Integracion)
+        {
+            return "SELECT * FROM secuencia_integracion WHERE empleado='" + secuencia_Integracion.Empleado +
+                "' and estado='Iniciado';";
+        }
+
         public string Inserta_nuevo_secuencia_integracion_base_datos(Secuencia_integracion secuencia_Integracion)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_integracion());
@@ -109,10 +115,7 @@ namespace Coset_Sistema_Produccion
 
         }
 
-        private string Commando_leer_Mysql_busqueda_secuencia_integracion(Secuencia_integracion secuencia_Integracion)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private string Configura_Cadena_Conexion_MySQL_secuencia_integracion()
         {

@@ -47,6 +47,13 @@ namespace Coset_Sistema_Produccion
             new Actividad_Proceso_Electrico();
         public Class_Procesos_Electrico class_Procesos_Electrico = new Class_Procesos_Electrico();
         public List<Proceso_electrico> proceso_Electricos_disponibles = new List<Proceso_electrico>();
+        public Class_Integracion_Procesos Class_Integracion_Procesos = new Class_Integracion_Procesos();
+        public List<Integracion_proceso> integracion_Procesos_disponibles = new List<Integracion_proceso>();
+        public Integracion_proceso integracion_proceso_busqueda = new Integracion_proceso();
+        public Integracion_proceso integracion_proceso_nuevo_empleado = new Integracion_proceso();
+        public Class_Secuencia_Integracion Class_Secuencia_Integracion = new Class_Secuencia_Integracion();
+        public List<Secuencia_integracion> secuencia_Integracions_disponibles = new List<Secuencia_integracion>();
+        public Secuencia_integracion secuencia_Integracion_busqueda = new Secuencia_integracion();
 
         public string secuencia_operacion = "";
 
@@ -466,14 +473,72 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Activa_caja_numero_dibujo();
-            Inicia_timer_busqueda_dibujo();
-            Deactiva_boton_visualizar();
+            //Activa_caja_numero_dibujo();
+            //Inicia_timer_busqueda_dibujo();
+            //Deactiva_boton_visualizar();
+            asigna_valores_integracion_proceso_busqueda();
+            integracion_Procesos_disponibles = Class_Integracion_Procesos.
+                Adquiere_secuencia_proceso_integracion_busqueda_en_base_datos(integracion_proceso_busqueda);
+
+            if (integracion_Procesos_disponibles == null && comboBoxEmpleado.Text != "")
+            {
+                asigna_valores_integracion_proceso_inserta_nuevo_empleado();
+                Class_Integracion_Procesos.Inserta_nuevo_integracion_proceso_base_datos(integracion_proceso_nuevo_empleado);
+                secuencia_activa_combos_proceso_actividades();
+            }
+            else
+            {
+                if (integracion_Procesos_disponibles[0].estado == "activo")
+                {
+                    asigna_valores_secuencia_integracion_busqueda();
+                    secuencia_Integracions_disponibles = Class_Secuencia_Integracion.
+                        Adquiere_secuencia_integracion_busqueda_en_base_datos(secuencia_Integracion_busqueda);
+                    if (secuencia_Integracions_disponibles != null)
+                    {
+                        Reellena_datagridview_secuencia_integracion();
+                    }
+                }
+                else if(integracion_Procesos_disponibles[0].estado == "desactivo")
+                {
+                    secuencia_activa_combos_proceso_actividades();
+                }
+            }
+            
+        }
+
+        private void Reellena_datagridview_secuencia_integracion()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void asigna_valores_secuencia_integracion_busqueda()
+        {
+            secuencia_Integracion_busqueda.Empleado = comboBoxEmpleado.Text;
+        }
+
+        private void secuencia_activa_combos_proceso_actividades()
+        {
             Activa_boton_cancelar_operacio();
             Activa_combo_proceso_electrico();
             Obtener_procesos_electrcos_disponibles();
             Limpiar_combo_procesos_electricos();
             Rellenar_combo_procesos_electricos();
+        }
+
+        private void asigna_valores_integracion_proceso_inserta_nuevo_empleado()
+        {
+            integracion_proceso_nuevo_empleado.Empleado = comboBoxEmpleado.Text;
+            integracion_proceso_nuevo_empleado.Empleado = "Deasctivo";
+        }
+
+        private void asigna_valores_integracion_proceso_busqueda()
+        {
+            integracion_proceso_busqueda.Empleado = comboBoxEmpleado.Text;
+        }
+
+        private object busca_empledo_integracion_procesos()
+        {
+            throw new NotImplementedException();
         }
 
         private void Activa_combo_proceso_electrico()
@@ -908,7 +973,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_datagridview_secuencia_produccion()
         {
-            dataGridViewSecuenciasProduccion.Rows.Clear();
+            dataGridViewSecuenciasIntegracion.Rows.Clear();
         }
 
         private void Asigna_valores_datagridview_secuencias_produccion()
@@ -922,7 +987,7 @@ namespace Coset_Sistema_Produccion
                     Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
                     Final = Convert.ToDateTime(secuencia.final_proceso);
                     TimeSpan timeSpan = Final - Inicial;
-                    dataGridViewSecuenciasProduccion.Rows.Add(
+                    dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
                    secuencia.Numero_Dibujo,
                    secuencia.Empleado,
@@ -935,7 +1000,7 @@ namespace Coset_Sistema_Produccion
                 }
                 else
                 {
-                    dataGridViewSecuenciasProduccion.Rows.Add(
+                    dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
                    secuencia.Numero_Dibujo,
                    secuencia.Empleado,

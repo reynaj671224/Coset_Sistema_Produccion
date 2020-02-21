@@ -54,7 +54,7 @@
             this.textBoxEstado = new System.Windows.Forms.TextBox();
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridViewSecuenciasProduccion = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSecuenciasIntegracion = new System.Windows.Forms.DataGridView();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,7 +79,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxActividadesProcesoElectrico = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasIntegracion)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -355,11 +355,11 @@
             this.label1.Text = "Calidad";
             this.label1.Visible = false;
             // 
-            // dataGridViewSecuenciasProduccion
+            // dataGridViewSecuenciasIntegracion
             // 
-            this.dataGridViewSecuenciasProduccion.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridViewSecuenciasProduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSecuenciasProduccion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewSecuenciasIntegracion.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewSecuenciasIntegracion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSecuenciasIntegracion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
             this.Numero_Dibujo,
             this.Empleado,
@@ -369,10 +369,10 @@
             this.Estado,
             this.Calidad,
             this.Tiempo});
-            this.dataGridViewSecuenciasProduccion.Location = new System.Drawing.Point(22, 298);
-            this.dataGridViewSecuenciasProduccion.Name = "dataGridViewSecuenciasProduccion";
-            this.dataGridViewSecuenciasProduccion.Size = new System.Drawing.Size(994, 202);
-            this.dataGridViewSecuenciasProduccion.TabIndex = 49;
+            this.dataGridViewSecuenciasIntegracion.Location = new System.Drawing.Point(22, 298);
+            this.dataGridViewSecuenciasIntegracion.Name = "dataGridViewSecuenciasIntegracion";
+            this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(994, 202);
+            this.dataGridViewSecuenciasIntegracion.TabIndex = 49;
             // 
             // Codigo_partida
             // 
@@ -598,7 +598,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxHorasProceso);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dataGridViewSecuenciasProduccion);
+            this.Controls.Add(this.dataGridViewSecuenciasIntegracion);
             this.Controls.Add(this.textBoxCalidad);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxEstado);
@@ -626,7 +626,7 @@
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Forma_Captura_Produccion_FormClosing);
             this.Load += new System.EventHandler(this.Forma_Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasIntegracion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -658,7 +658,7 @@
         private System.Windows.Forms.TextBox textBoxEstado;
         private System.Windows.Forms.TextBox textBoxCalidad;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridViewSecuenciasProduccion;
+        private System.Windows.Forms.DataGridView dataGridViewSecuenciasIntegracion;
         private System.Windows.Forms.TextBox textBoxHorasProceso;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxHorasRetrabajo;
