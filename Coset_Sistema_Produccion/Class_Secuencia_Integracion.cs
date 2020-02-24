@@ -74,7 +74,7 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_secuencia_integracion(Secuencia_integracion secuencia_Integracion)
         {
-            return "INSERT INTO secuencia_produccion(empleado," +
+            return "INSERT INTO secuencia_integracion(empleado," +
                    "inicio_proceso,final_proceso,proceso,actividad,estado) " +
                    "VALUES('" + secuencia_Integracion.Empleado + "','" +secuencia_Integracion.inicio_proceso + "','" + 
                    secuencia_Integracion.final_proceso + "','" + secuencia_Integracion.proceso + "','" +
@@ -105,7 +105,7 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_en_base_de_datos_modificar_secuencia_integracion(Secuencia_integracion secuencia_Integracion)
         {
 
-            return "UPDATE secuencia_produccion set  empleado='" + secuencia_Integracion.Empleado +
+            return "UPDATE secuencia_integracion set  empleado='" + secuencia_Integracion.Empleado +
                 "',inicio_proceso='" + secuencia_Integracion.inicio_proceso +
                 "',final_proceso='" + secuencia_Integracion.final_proceso +
                 "',proceso='" + secuencia_Integracion.proceso +

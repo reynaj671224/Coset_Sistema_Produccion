@@ -64,8 +64,36 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_insertar_en_base_de_datos_integracion_proceso(Integracion_proceso integracion_Proceso)
         {
-            return "INSERT INTO secuencia_produccion(empleado,estado) " +
+            return "INSERT INTO integracion_procesos(empleado,estado) " +
                    "VALUES('" + integracion_Proceso.Empleado + "','" +integracion_Proceso.estado + "'); ";
+
+        }
+
+        public string Actualiza_base_datos_integracion_procesos(Integracion_proceso integracion_Proceso)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_integracion_proceso());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_en_base_de_datos_modificar_integracion_proceso(integracion_Proceso), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+
+        private string Configura_cadena_comando_en_base_de_datos_modificar_integracion_proceso(Integracion_proceso integracion_Proceso)
+        {
+
+            return "UPDATE integracion_procesos set  estado='" + integracion_Proceso.estado +
+                "' where empleado='" + integracion_Proceso.Empleado + "';";
 
         }
         private string Configura_Cadena_Conexion_MySQL_integracion_proceso()

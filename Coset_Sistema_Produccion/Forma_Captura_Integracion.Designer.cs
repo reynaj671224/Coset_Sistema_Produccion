@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Captura_Integracion));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonPausaProceso = new System.Windows.Forms.Button();
             this.buttonTerminarProceso = new System.Windows.Forms.Button();
@@ -38,7 +39,7 @@
             this.buttonGuardarBasedeDatos = new System.Windows.Forms.Button();
             this.labelEmpleado = new System.Windows.Forms.Label();
             this.textBoxEmpleado = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelProcesosElectricos = new System.Windows.Forms.Label();
             this.textBoxNombreProceso = new System.Windows.Forms.TextBox();
             this.buttonBorrarBasedeDatos = new System.Windows.Forms.Button();
             this.timerInciarProcesoBusqueda = new System.Windows.Forms.Timer(this.components);
@@ -55,15 +56,6 @@
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSecuenciasIntegracion = new System.Windows.Forms.DataGridView();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Inicio_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Final_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxHorasProceso = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxHorasRetrabajo = new System.Windows.Forms.TextBox();
@@ -78,6 +70,13 @@
             this.textBoxTipoProceso = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxActividadesProcesoElectrico = new System.Windows.Forms.ComboBox();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Inicio_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Final_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasIntegracion)).BeginInit();
             this.SuspendLayout();
@@ -190,17 +189,17 @@
             this.textBoxEmpleado.Size = new System.Drawing.Size(196, 20);
             this.textBoxEmpleado.TabIndex = 7;
             // 
-            // label2
+            // labelProcesosElectricos
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(43, 152);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 16);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Proceso Electrico";
-            this.label2.Visible = false;
+            this.labelProcesosElectricos.AutoSize = true;
+            this.labelProcesosElectricos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProcesosElectricos.Image = ((System.Drawing.Image)(resources.GetObject("labelProcesosElectricos.Image")));
+            this.labelProcesosElectricos.Location = new System.Drawing.Point(43, 152);
+            this.labelProcesosElectricos.Name = "labelProcesosElectricos";
+            this.labelProcesosElectricos.Size = new System.Drawing.Size(97, 16);
+            this.labelProcesosElectricos.TabIndex = 8;
+            this.labelProcesosElectricos.Text = "Proceso Electrico";
+            this.labelProcesosElectricos.Visible = false;
             // 
             // textBoxNombreProceso
             // 
@@ -361,71 +360,16 @@
             this.dataGridViewSecuenciasIntegracion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSecuenciasIntegracion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
-            this.Numero_Dibujo,
             this.Empleado,
             this.Inicio_Proceso,
             this.Final_Proceso,
             this.Proceso,
             this.Estado,
-            this.Calidad,
             this.Tiempo});
             this.dataGridViewSecuenciasIntegracion.Location = new System.Drawing.Point(22, 298);
             this.dataGridViewSecuenciasIntegracion.Name = "dataGridViewSecuenciasIntegracion";
             this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(994, 202);
             this.dataGridViewSecuenciasIntegracion.TabIndex = 49;
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Visible = false;
-            this.Codigo_partida.Width = 50;
-            // 
-            // Numero_Dibujo
-            // 
-            this.Numero_Dibujo.HeaderText = "Numero Dibujo";
-            this.Numero_Dibujo.Name = "Numero_Dibujo";
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empleado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Empleado.Width = 150;
-            // 
-            // Inicio_Proceso
-            // 
-            this.Inicio_Proceso.HeaderText = "Inicio Proceso";
-            this.Inicio_Proceso.Name = "Inicio_Proceso";
-            this.Inicio_Proceso.Width = 150;
-            // 
-            // Final_Proceso
-            // 
-            this.Final_Proceso.HeaderText = "Final Proceso";
-            this.Final_Proceso.Name = "Final_Proceso";
-            this.Final_Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Final_Proceso.Width = 150;
-            // 
-            // Proceso
-            // 
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            // 
-            // Calidad
-            // 
-            this.Calidad.HeaderText = "Calidad";
-            this.Calidad.Name = "Calidad";
-            // 
-            // Tiempo
-            // 
-            this.Tiempo.HeaderText = "Tiempo";
-            this.Tiempo.Name = "Tiempo";
             // 
             // textBoxHorasProceso
             // 
@@ -579,6 +523,52 @@
             this.comboBoxActividadesProcesoElectrico.Visible = false;
             this.comboBoxActividadesProcesoElectrico.SelectedIndexChanged += new System.EventHandler(this.comboBoxActividadesProcesoElectrico_SelectedIndexChanged);
             // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Visible = false;
+            this.Codigo_partida.Width = 50;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado.Width = 150;
+            // 
+            // Inicio_Proceso
+            // 
+            this.Inicio_Proceso.HeaderText = "Inicio Proceso";
+            this.Inicio_Proceso.Name = "Inicio_Proceso";
+            this.Inicio_Proceso.Width = 150;
+            // 
+            // Final_Proceso
+            // 
+            this.Final_Proceso.HeaderText = "Final Proceso";
+            this.Final_Proceso.Name = "Final_Proceso";
+            this.Final_Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Final_Proceso.Width = 150;
+            // 
+            // Proceso
+            // 
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.Width = 300;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            // 
+            // Tiempo
+            // 
+            this.Tiempo.HeaderText = "Tiempo";
+            this.Tiempo.Name = "Tiempo";
+            // 
             // Forma_Captura_Integracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -611,7 +601,7 @@
             this.Controls.Add(this.comboBoxEmpleado);
             this.Controls.Add(this.buttonBorrarBasedeDatos);
             this.Controls.Add(this.textBoxNombreProceso);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelProcesosElectricos);
             this.Controls.Add(this.textBoxEmpleado);
             this.Controls.Add(this.labelEmpleado);
             this.Controls.Add(this.buttonHome);
@@ -642,7 +632,7 @@
         private System.Windows.Forms.Button buttonGuardarBasedeDatos;
         private System.Windows.Forms.Label labelEmpleado;
         private System.Windows.Forms.TextBox textBoxEmpleado;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelProcesosElectricos;
         private System.Windows.Forms.TextBox textBoxNombreProceso;
         private System.Windows.Forms.Button buttonBorrarBasedeDatos;
         private System.Windows.Forms.Timer timerInciarProcesoBusqueda;
@@ -663,15 +653,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxHorasRetrabajo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Inicio_Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Final_Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tiempo;
         private System.Windows.Forms.Button buttonBuscarSecuenciaDibujo;
         private System.Windows.Forms.TextBox textBoxUnidades;
         private System.Windows.Forms.Label label6;
@@ -682,5 +663,12 @@
         private System.Windows.Forms.TextBox textBoxTipoProceso;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxActividadesProcesoElectrico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Inicio_Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Final_Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tiempo;
     }
 }

@@ -54,6 +54,7 @@ namespace Coset_Sistema_Produccion
         public Class_Secuencia_Integracion Class_Secuencia_Integracion = new Class_Secuencia_Integracion();
         public List<Secuencia_integracion> secuencia_Integracions_disponibles = new List<Secuencia_integracion>();
         public Secuencia_integracion secuencia_Integracion_busqueda = new Secuencia_integracion();
+        public Secuencia_integracion secuencia_Integracion_insetar = new Secuencia_integracion();
 
         public string secuencia_operacion = "";
 
@@ -111,9 +112,8 @@ namespace Coset_Sistema_Produccion
 
         private void Elimina_informacion_secuencia_disponibles()
         {
-            Dibujos_proyectos_disponibles = null;
-            Dibujos_produccion_disponible = null;
-            Secuencias_produccion_disponibles = null;
+            integracion_Procesos_disponibles = null;
+            secuencia_Integracions_disponibles = null;
             actividad_Proceso_Electricos_disponibles = null;
         }
 
@@ -480,7 +480,7 @@ namespace Coset_Sistema_Produccion
             integracion_Procesos_disponibles = Class_Integracion_Procesos.
                 Adquiere_secuencia_proceso_integracion_busqueda_en_base_datos(integracion_proceso_busqueda);
 
-            if (integracion_Procesos_disponibles == null && comboBoxEmpleado.Text != "")
+            if (integracion_Procesos_disponibles.Count == 0 && comboBoxEmpleado.Text != "")
             {
                 asigna_valores_integracion_proceso_inserta_nuevo_empleado();
                 Class_Integracion_Procesos.Inserta_nuevo_integracion_proceso_base_datos(integracion_proceso_nuevo_empleado);
@@ -488,27 +488,57 @@ namespace Coset_Sistema_Produccion
             }
             else
             {
-                if (integracion_Procesos_disponibles[0].estado == "activo")
+                if (integracion_Procesos_disponibles[0].estado == "Activo")
                 {
                     asigna_valores_secuencia_integracion_busqueda();
                     secuencia_Integracions_disponibles = Class_Secuencia_Integracion.
                         Adquiere_secuencia_integracion_busqueda_en_base_datos(secuencia_Integracion_busqueda);
                     if (secuencia_Integracions_disponibles != null)
                     {
-                        Reellena_datagridview_secuencia_integracion();
+                        Rellena_datagridview_secuencia_integracion();
                     }
                 }
-                else if(integracion_Procesos_disponibles[0].estado == "desactivo")
+                else if (integracion_Procesos_disponibles[0].estado == "Desactivo")
                 {
-                    secuencia_activa_combos_proceso_actividades();
+                    Rellena_datagridview_secuencia_integracion();
                 }
             }
             
         }
 
-        private void Reellena_datagridview_secuencia_integracion()
+        private void Rellena_datagridview_secuencia_integracion()
         {
-            throw new NotImplementedException();
+
+            foreach (Secuencia_integracion secuencia in secuencia_Integracions_disponibles)
+            {
+                DateTime Inicial, Final;
+                if (secuencia.final_proceso != "")
+                {
+                    Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
+                    Final = Convert.ToDateTime(secuencia.final_proceso);
+                    TimeSpan timeSpan = Final - Inicial;
+                    dataGridViewSecuenciasIntegracion.Rows.Add(
+                   secuencia.Codigo,
+                   secuencia.Empleado,
+                   secuencia.inicio_proceso,
+                   secuencia.final_proceso,
+                   secuencia.proceso,
+                   secuencia.estado,
+                   timeSpan.ToString());
+                }
+                else
+                {
+                    dataGridViewSecuenciasIntegracion.Rows.Add(
+                   secuencia.Codigo,
+                   secuencia.Empleado,
+                   secuencia.inicio_proceso,
+                   secuencia.final_proceso,
+                   secuencia.proceso,
+                   secuencia.estado);
+
+                }
+            }
+
         }
 
         private void asigna_valores_secuencia_integracion_busqueda()
@@ -518,6 +548,7 @@ namespace Coset_Sistema_Produccion
 
         private void secuencia_activa_combos_proceso_actividades()
         {
+            Secuencia_muestra_combos_procesos_electricos();
             Activa_boton_cancelar_operacio();
             Activa_combo_proceso_electrico();
             Obtener_procesos_electrcos_disponibles();
@@ -525,10 +556,20 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_procesos_electricos();
         }
 
+        private void Secuencia_muestra_combos_procesos_electricos()
+        {
+            labelProcesosElectricos.Visible = true;
+            labelActividadesProcesoElectrico.Visible = true;
+            labelNotasActividad.Visible = true;
+            comboBoxNombreProceso.Visible = true;
+            comboBoxActividadesProcesoElectrico.Visible = true;
+            textBoxNotasActividad.Visible = true;
+        }
+
         private void asigna_valores_integracion_proceso_inserta_nuevo_empleado()
         {
             integracion_proceso_nuevo_empleado.Empleado = comboBoxEmpleado.Text;
-            integracion_proceso_nuevo_empleado.Empleado = "Deasctivo";
+            integracion_proceso_nuevo_empleado.estado = "Desactivo";
         }
 
         private void asigna_valores_integracion_proceso_busqueda()
@@ -1166,30 +1207,28 @@ namespace Coset_Sistema_Produccion
         private void buttonIncioProceso_Click(object sender, EventArgs e)
         {
 
-            Dibujos_produccion_disponible[0].Estado = "Iniciado";
-            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
-            Genera_secuencia_produccion_iniciar_transaccion();
+            integracion_Procesos_disponibles[0].estado = "Activo";
+            Class_Integracion_Procesos.Actualiza_base_datos_integracion_procesos(integracion_Procesos_disponibles[0]);
+            Genera_secuencia_integracion_iniciar_transaccion();
             Cancela_operacio_produccion();
             Elimina_informacion_secuencia_disponibles();
 
         }
 
-        private void Genera_secuencia_produccion_iniciar_transaccion()
+        private void Genera_secuencia_integracion_iniciar_transaccion()
         {
-            Asigna_valores_variable_secuencia_produccion_iniciar();
-            Class_Secuencia_Produccion.Inserta_nuevo_secuencia_produccion_base_datos(Secuencia_produccion_insertar);
+            Asigna_valores_variable_secuencia_integracion_iniciar();
+            Class_Secuencia_Integracion.Inserta_nuevo_secuencia_integracion_base_datos(secuencia_Integracion_insetar);
         }
 
-        private void Asigna_valores_variable_secuencia_produccion_iniciar()
+        private void Asigna_valores_variable_secuencia_integracion_iniciar()
         {
-            Secuencia_produccion_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
-            Secuencia_produccion_insertar.Empleado = comboBoxEmpleado.Text;
-            Secuencia_produccion_insertar.inicio_proceso = DateTime.Now.ToString();
-            Secuencia_produccion_insertar.final_proceso = "";
-            Secuencia_produccion_insertar.proceso = textBoxNombreProceso.Text;
-            Secuencia_produccion_insertar.estado = "Iniciado";
-            Secuencia_produccion_insertar.calidad = textBoxCalidad.Text;
-
+            secuencia_Integracion_insetar.Empleado = comboBoxEmpleado.Text;
+            secuencia_Integracion_insetar.inicio_proceso = DateTime.Now.ToString();
+            secuencia_Integracion_insetar.final_proceso = "";
+            secuencia_Integracion_insetar.proceso = comboBoxNombreProceso.Text;
+            secuencia_Integracion_insetar.actividad = comboBoxActividadesProcesoElectrico.Text;
+            secuencia_Integracion_insetar.estado = "Iniciado";
         }
 
         private void Activa_combo_nombre_proceso()
@@ -1290,6 +1329,7 @@ namespace Coset_Sistema_Produccion
             Actividad_Proceso_Electrico_busqueda = actividad_Proceso_Electricos_disponibles.Find(nota => nota.Actividad.Contains(comboBoxActividadesProcesoElectrico.SelectedItem.ToString()));
             if (Actividad_Proceso_Electrico_busqueda!=null)
                 textBoxNotasActividad.Text = Actividad_Proceso_Electrico_busqueda.Notas;
+            Activa_boton_visualizar_usuarios();
         }
     }
 }
