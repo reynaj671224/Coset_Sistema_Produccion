@@ -94,6 +94,13 @@ namespace Coset_Sistema_Produccion
             clase_procesos = null;
             Proceso_Modificaciones = null;
             actividad_Proceso_Electricos_disponibles = null;
+            proceso_Electricos_disponibles = null;
+            Dibujos_proyectos_disponibles = null;
+            Secuencias_produccion_disponibles = null;
+            actividad_Proceso_Electricos_disponibles = null;
+            Actividad_Proceso_Electrico_busqueda = null;
+            integracion_Procesos_disponibles = null;
+            secuencia_Integracions_disponibles = null;
             Forma_Captura_Integracion.Usuario_permitido_cerrar_operacion = false;
             this.Dispose();
             GC.Collect();
