@@ -67,6 +67,7 @@
             this.movimientosautosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capturaDeProduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capturaDeIntegracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produccionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujosProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +92,6 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.capturaDeIntegracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -398,6 +398,13 @@
             this.capturaDeProduccionToolStripMenuItem.Text = "Captura de Produccion";
             this.capturaDeProduccionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeProduccionToolStripMenuItem_Click);
             // 
+            // capturaDeIntegracionToolStripMenuItem
+            // 
+            this.capturaDeIntegracionToolStripMenuItem.Name = "capturaDeIntegracionToolStripMenuItem";
+            this.capturaDeIntegracionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.capturaDeIntegracionToolStripMenuItem.Text = "Captura de Integracion";
+            this.capturaDeIntegracionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeIntegracionToolStripMenuItem_Click);
+            // 
             // reportesToolStripMenuItem
             // 
             this.reportesToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reportesToolStripMenuItem.BackgroundImage")));
@@ -589,13 +596,6 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // capturaDeIntegracionToolStripMenuItem
-            // 
-            this.capturaDeIntegracionToolStripMenuItem.Name = "capturaDeIntegracionToolStripMenuItem";
-            this.capturaDeIntegracionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.capturaDeIntegracionToolStripMenuItem.Text = "Captura de Integracion";
-            this.capturaDeIntegracionToolStripMenuItem.Click += new System.EventHandler(this.capturaDeIntegracionToolStripMenuItem_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -613,7 +613,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 10.5";
+            this.Text = "Coset Sistema Produccion Rev 10.6";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);

@@ -81,7 +81,8 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_usuarios_integracion()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Electrico' or tipo_empleado='Ingenieria'";
+            return "SELECT * FROM empleados where tipo_empleado='Electrico' tipo_empleado='Produccion'" +
+                "or tipo_empleado='Ingenieria'";
         }
 
         public List<Usuario> Adquiere_usuarios_produccion_disponibles_en_base_datos()

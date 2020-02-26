@@ -55,6 +55,7 @@ namespace Coset_Sistema_Produccion
         public List<Secuencia_integracion> secuencia_Integracions_disponibles = new List<Secuencia_integracion>();
         public Secuencia_integracion secuencia_Integracion_busqueda = new Secuencia_integracion();
         public Secuencia_integracion secuencia_Integracion_insetar = new Secuencia_integracion();
+        public Secuencia_integracion secuencia_Integracion_actualizar = new Secuencia_integracion();
 
         public string secuencia_operacion = "";
 
@@ -102,11 +103,13 @@ namespace Coset_Sistema_Produccion
         private void buttonTerminarProceso_Click(object sender, EventArgs e)
         {
             secuencia_operacion = "Terminar";
-            Dibujos_produccion_disponible[0].Estado = "Terminado";
-            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
-            Genera_secuencia_produccion_terminar_transaccion();
+            integracion_Procesos_disponibles[0].estado = "Desactivo";
+            Class_Integracion_Procesos.Actualiza_base_datos_integracion_procesos(integracion_Procesos_disponibles[0]);
+            Genera_secuencia_integracion_terminar_transaccion();
             Cancela_operacio_produccion();
             Elimina_informacion_secuencia_disponibles();
+            Secuencia_oculta_combos_procesos_electricos();
+            limpia_combos_procesos_actividades_electricos();
 
         }
 
@@ -240,13 +243,13 @@ namespace Coset_Sistema_Produccion
 
         private void Activa_botones_operacion()
         {
-            Activa_boton_agregar_usuarios();
+            Activa_boton_termina_proceso();
             Activa_boton_modificar_usuarios();
             Activa_boton_eliminar_usuarios();
-            Activa_boton_visualizar_usuarios();
+            Activa_boton_inicia_proceso();
         }
 
-        private void Activa_boton_visualizar_usuarios()
+        private void Activa_boton_inicia_proceso()
         {
             buttonIncioProceso.Enabled = true;
         }
@@ -261,7 +264,7 @@ namespace Coset_Sistema_Produccion
             buttonPausaProceso.Enabled = true;
         }
 
-        private void Activa_boton_agregar_usuarios()
+        private void Activa_boton_termina_proceso()
         {
             buttonTerminarProceso.Enabled = true;
         }
@@ -473,9 +476,9 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Activa_caja_numero_dibujo();
-            //Inicia_timer_busqueda_dibujo();
-            //Deactiva_boton_visualizar();
+            Secuencia_oculta_combos_procesos_electricos();
+            Limpia_datagridview_secuencia_integracion();
+            Limpia_botones_status();
             asigna_valores_integracion_proceso_busqueda();
             integracion_Procesos_disponibles = Class_Integracion_Procesos.
                 Adquiere_secuencia_proceso_integracion_busqueda_en_base_datos(integracion_proceso_busqueda);
@@ -495,15 +498,24 @@ namespace Coset_Sistema_Produccion
                         Adquiere_secuencia_integracion_busqueda_en_base_datos(secuencia_Integracion_busqueda);
                     if (secuencia_Integracions_disponibles != null)
                     {
+                        Limpia_datagridview_secuencia_integracion();
                         Rellena_datagridview_secuencia_integracion();
+                        Activa_boton_termina_proceso();
+                        Activa_boton_cancelar_operacio();
                     }
                 }
                 else if (integracion_Procesos_disponibles[0].estado == "Desactivo")
                 {
-                    Rellena_datagridview_secuencia_integracion();
+                    secuencia_activa_combos_proceso_actividades();
                 }
             }
             
+        }
+
+        private void Limpia_botones_status()
+        {
+            buttonIncioProceso.Enabled = false;
+            buttonTerminarProceso.Enabled = false;
         }
 
         private void Rellena_datagridview_secuencia_integracion()
@@ -564,6 +576,23 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Visible = true;
             comboBoxActividadesProcesoElectrico.Visible = true;
             textBoxNotasActividad.Visible = true;
+        }
+
+        private void Secuencia_oculta_combos_procesos_electricos()
+        {
+            labelProcesosElectricos.Visible = false;
+            labelActividadesProcesoElectrico.Visible = false;
+            labelNotasActividad.Visible = false;
+            comboBoxNombreProceso.Visible = false;
+            comboBoxActividadesProcesoElectrico.Visible = false;
+            textBoxNotasActividad.Visible = false;
+        }
+
+        private void limpia_combos_procesos_actividades_electricos()
+        {
+            comboBoxNombreProceso.Text = "";
+            comboBoxActividadesProcesoElectrico.Text = "";
+            comboBoxNombreProceso.Text = "";
         }
 
         private void asigna_valores_integracion_proceso_inserta_nuevo_empleado()
@@ -1007,12 +1036,12 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_datagridview_secuencias_produccion()
         {
-            Limpia_datagridview_secuencia_produccion();
+            Limpia_datagridview_secuencia_integracion();
             Obtener_secuencias_produccion_disponibles();
             Asigna_valores_datagridview_secuencias_produccion();
         }
 
-        private void Limpia_datagridview_secuencia_produccion()
+        private void Limpia_datagridview_secuencia_integracion()
         {
             dataGridViewSecuenciasIntegracion.Rows.Clear();
         }
@@ -1105,13 +1134,13 @@ namespace Coset_Sistema_Produccion
             Activa_Combo_codigo_empleado();
             Limpia_combo_usuario();
             Limpia_seleccion_secuencia_operacion();
-            Limpia_datagridview_secuencia_produccion();
+            Limpia_datagridview_secuencia_integracion();
             Desaparece_label_actividad_proceso_electrico();
             Desaparece_textbox_actividades_proceso_electrico();
             Desaparece_label_notas_actividad_proceso_electrico();
             Desaparece_textbox_notas_actividades_proceso_electrico();
-
-
+            Secuencia_oculta_combos_procesos_electricos();
+            limpia_combos_procesos_actividades_electricos();
         }
 
         private void Limpia_seleccion_secuencia_operacion()
@@ -1212,6 +1241,8 @@ namespace Coset_Sistema_Produccion
             Genera_secuencia_integracion_iniciar_transaccion();
             Cancela_operacio_produccion();
             Elimina_informacion_secuencia_disponibles();
+            Secuencia_oculta_combos_procesos_electricos();
+            limpia_combos_procesos_actividades_electricos();
 
         }
 
@@ -1229,6 +1260,18 @@ namespace Coset_Sistema_Produccion
             secuencia_Integracion_insetar.proceso = comboBoxNombreProceso.Text;
             secuencia_Integracion_insetar.actividad = comboBoxActividadesProcesoElectrico.Text;
             secuencia_Integracion_insetar.estado = "Iniciado";
+        }
+
+        private void Genera_secuencia_integracion_terminar_transaccion()
+        {
+            Asigna_valores_variable_secuencia_integracion_terminar();
+            Class_Secuencia_Integracion.Actualiza_base_datos_secuencia_integracion(secuencia_Integracions_disponibles[0]);
+        }
+
+        private void Asigna_valores_variable_secuencia_integracion_terminar()
+        {
+            secuencia_Integracions_disponibles[0].final_proceso = DateTime.Now.ToString();
+            secuencia_Integracions_disponibles[0].estado = "Terminado";
         }
 
         private void Activa_combo_nombre_proceso()
@@ -1329,7 +1372,8 @@ namespace Coset_Sistema_Produccion
             Actividad_Proceso_Electrico_busqueda = actividad_Proceso_Electricos_disponibles.Find(nota => nota.Actividad.Contains(comboBoxActividadesProcesoElectrico.SelectedItem.ToString()));
             if (Actividad_Proceso_Electrico_busqueda!=null)
                 textBoxNotasActividad.Text = Actividad_Proceso_Electrico_busqueda.Notas;
-            Activa_boton_visualizar_usuarios();
+            Activa_boton_inicia_proceso();
+            Activa_boton_cancelar_operacio();
         }
     }
 }
