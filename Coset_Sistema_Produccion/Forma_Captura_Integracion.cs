@@ -494,6 +494,8 @@ namespace Coset_Sistema_Produccion
             {
                 asigna_valores_integracion_proceso_inserta_nuevo_empleado();
                 Class_Integracion_Procesos.Inserta_nuevo_integracion_proceso_base_datos(integracion_proceso_nuevo_empleado);
+                integracion_Procesos_disponibles = Class_Integracion_Procesos.
+                Adquiere_secuencia_proceso_integracion_busqueda_en_base_datos(integracion_proceso_busqueda);
                 secuencia_activa_combos_proceso_actividades();
             }
             else
