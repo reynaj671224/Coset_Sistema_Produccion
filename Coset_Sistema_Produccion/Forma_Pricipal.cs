@@ -504,8 +504,11 @@ namespace Coset_Sistema_Produccion
         {
             Muestra_Menu_Ingenieria();
             Muestra_Menu_reportes();
-            toolStripStatusUsuario.Text = "Calidad-Dibujos";
+            Muestra_Menu_Produccion();
+            Oculta_Menu_Prohibidos_de_Produccion();
             Oculta_Menus_de_Calidad_de_dibujos();
+            toolStripStatusUsuario.Text = "Calidad-Dibujos";
+           
         }
 
         private void Oculta_Menus_de_Calidad_de_dibujos()

@@ -1025,14 +1025,18 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewSecuenciasCalidad_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewSecuenciasCalidad.Visible = false;
-            dataGridViewDibujoDimenciones.Visible = true;
-            if (dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
-                Cells["Numero_Dibujo"].Value != null)
+            if (e.ColumnIndex <=0 && e.RowIndex >=0 )
             {
-                textBoxNumeroDibujo.Text = dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
-                    Cells["Numero_Dibujo"].Value.ToString();
-                buscar_dibujo_secuencia_calidad_base_datos();
+                dataGridViewSecuenciasCalidad.Visible = false;
+                dataGridViewDibujoDimenciones.Visible = true;
+                if (dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
+                    Cells["Numero_Dibujo"].Value != null)
+                {
+                    textBoxNumeroDibujo.Text = dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
+                        Cells["Numero_Dibujo"].Value.ToString();
+                    buscar_dibujo_secuencia_calidad_base_datos();
+                }
+                Activa_boton_cancelar_operacio();
             }
         }
     }

@@ -87,7 +87,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1134, 522);
+            this.pictureBox1.Size = new System.Drawing.Size(1237, 613);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -146,7 +146,7 @@
             this.buttonHome.AutoSize = true;
             this.buttonHome.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Image = ((System.Drawing.Image)(resources.GetObject("buttonHome.Image")));
-            this.buttonHome.Location = new System.Drawing.Point(1038, 426);
+            this.buttonHome.Location = new System.Drawing.Point(1146, 510);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(79, 74);
             this.buttonHome.TabIndex = 5;
@@ -160,7 +160,7 @@
             this.buttonGuardarBasedeDatos.AutoSize = true;
             this.buttonGuardarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGuardarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonGuardarBasedeDatos.Image")));
-            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1038, 266);
+            this.buttonGuardarBasedeDatos.Location = new System.Drawing.Point(1146, 350);
             this.buttonGuardarBasedeDatos.Name = "buttonGuardarBasedeDatos";
             this.buttonGuardarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonGuardarBasedeDatos.TabIndex = 4;
@@ -215,7 +215,7 @@
             this.buttonBorrarBasedeDatos.AutoSize = true;
             this.buttonBorrarBasedeDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBorrarBasedeDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBorrarBasedeDatos.Image")));
-            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1038, 252);
+            this.buttonBorrarBasedeDatos.Location = new System.Drawing.Point(1146, 334);
             this.buttonBorrarBasedeDatos.Name = "buttonBorrarBasedeDatos";
             this.buttonBorrarBasedeDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBorrarBasedeDatos.TabIndex = 20;
@@ -250,7 +250,7 @@
             this.buttonCancelar.AutoSize = true;
             this.buttonCancelar.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancelar.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancelar.Image")));
-            this.buttonCancelar.Location = new System.Drawing.Point(1038, 346);
+            this.buttonCancelar.Location = new System.Drawing.Point(1146, 430);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(79, 74);
             this.buttonCancelar.TabIndex = 26;
@@ -368,7 +368,7 @@
             this.Tiempo});
             this.dataGridViewSecuenciasIntegracion.Location = new System.Drawing.Point(22, 298);
             this.dataGridViewSecuenciasIntegracion.Name = "dataGridViewSecuenciasIntegracion";
-            this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(994, 202);
+            this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(1101, 286);
             this.dataGridViewSecuenciasIntegracion.TabIndex = 49;
             // 
             // Codigo_partida
@@ -573,7 +573,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.ClientSize = new System.Drawing.Size(1237, 613);
             this.Controls.Add(this.comboBoxActividadesProcesoElectrico);
             this.Controls.Add(this.textBoxTipoProceso);
             this.Controls.Add(this.label7);
