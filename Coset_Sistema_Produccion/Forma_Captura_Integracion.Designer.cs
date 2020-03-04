@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Forma_Captura_Integracion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonPausaProceso = new System.Windows.Forms.Button();
             this.buttonTerminarProceso = new System.Windows.Forms.Button();
@@ -56,13 +56,6 @@
             this.textBoxCalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSecuenciasIntegracion = new System.Windows.Forms.DataGridView();
-            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Inicio_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Final_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxHorasProceso = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxHorasRetrabajo = new System.Windows.Forms.TextBox();
@@ -77,6 +70,19 @@
             this.textBoxTipoProceso = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxActividadesProcesoElectrico = new System.Windows.Forms.ComboBox();
+            this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
+            this.labelCodigoProyecto = new System.Windows.Forms.Label();
+            this.textBoxNombreCliente = new System.Windows.Forms.TextBox();
+            this.labelNombreCliente = new System.Windows.Forms.Label();
+            this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre_cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Inicio_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Final_Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasIntegracion)).BeginInit();
             this.SuspendLayout();
@@ -175,7 +181,7 @@
             this.labelEmpleado.AutoSize = true;
             this.labelEmpleado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("labelEmpleado.Image")));
-            this.labelEmpleado.Location = new System.Drawing.Point(43, 126);
+            this.labelEmpleado.Location = new System.Drawing.Point(43, 153);
             this.labelEmpleado.Name = "labelEmpleado";
             this.labelEmpleado.Size = new System.Drawing.Size(61, 16);
             this.labelEmpleado.TabIndex = 6;
@@ -184,7 +190,7 @@
             // textBoxEmpleado
             // 
             this.textBoxEmpleado.Enabled = false;
-            this.textBoxEmpleado.Location = new System.Drawing.Point(200, 122);
+            this.textBoxEmpleado.Location = new System.Drawing.Point(200, 153);
             this.textBoxEmpleado.Name = "textBoxEmpleado";
             this.textBoxEmpleado.Size = new System.Drawing.Size(196, 20);
             this.textBoxEmpleado.TabIndex = 7;
@@ -194,7 +200,7 @@
             this.labelProcesosElectricos.AutoSize = true;
             this.labelProcesosElectricos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProcesosElectricos.Image = ((System.Drawing.Image)(resources.GetObject("labelProcesosElectricos.Image")));
-            this.labelProcesosElectricos.Location = new System.Drawing.Point(43, 152);
+            this.labelProcesosElectricos.Location = new System.Drawing.Point(43, 231);
             this.labelProcesosElectricos.Name = "labelProcesosElectricos";
             this.labelProcesosElectricos.Size = new System.Drawing.Size(97, 16);
             this.labelProcesosElectricos.TabIndex = 8;
@@ -204,7 +210,7 @@
             // textBoxNombreProceso
             // 
             this.textBoxNombreProceso.Enabled = false;
-            this.textBoxNombreProceso.Location = new System.Drawing.Point(200, 149);
+            this.textBoxNombreProceso.Location = new System.Drawing.Point(200, 229);
             this.textBoxNombreProceso.Name = "textBoxNombreProceso";
             this.textBoxNombreProceso.Size = new System.Drawing.Size(447, 20);
             this.textBoxNombreProceso.TabIndex = 9;
@@ -233,7 +239,7 @@
             // comboBoxEmpleado
             // 
             this.comboBoxEmpleado.FormattingEnabled = true;
-            this.comboBoxEmpleado.Location = new System.Drawing.Point(200, 122);
+            this.comboBoxEmpleado.Location = new System.Drawing.Point(200, 153);
             this.comboBoxEmpleado.Name = "comboBoxEmpleado";
             this.comboBoxEmpleado.Size = new System.Drawing.Size(196, 21);
             this.comboBoxEmpleado.TabIndex = 25;
@@ -284,7 +290,7 @@
             // 
             this.comboBoxNombreProceso.Enabled = false;
             this.comboBoxNombreProceso.FormattingEnabled = true;
-            this.comboBoxNombreProceso.Location = new System.Drawing.Point(200, 148);
+            this.comboBoxNombreProceso.Location = new System.Drawing.Point(200, 229);
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(447, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
@@ -361,61 +367,17 @@
             this.dataGridViewSecuenciasIntegracion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo_partida,
             this.Empleado,
+            this.proyecto,
+            this.nombre_cliente,
             this.Inicio_Proceso,
             this.Final_Proceso,
             this.Proceso,
             this.Estado,
             this.Tiempo});
-            this.dataGridViewSecuenciasIntegracion.Location = new System.Drawing.Point(22, 298);
+            this.dataGridViewSecuenciasIntegracion.Location = new System.Drawing.Point(22, 365);
             this.dataGridViewSecuenciasIntegracion.Name = "dataGridViewSecuenciasIntegracion";
-            this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(1101, 286);
+            this.dataGridViewSecuenciasIntegracion.Size = new System.Drawing.Size(1101, 219);
             this.dataGridViewSecuenciasIntegracion.TabIndex = 49;
-            // 
-            // Codigo_partida
-            // 
-            this.Codigo_partida.HeaderText = "Codigo";
-            this.Codigo_partida.Name = "Codigo_partida";
-            this.Codigo_partida.Visible = false;
-            this.Codigo_partida.Width = 50;
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empleado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Empleado.Width = 150;
-            // 
-            // Inicio_Proceso
-            // 
-            this.Inicio_Proceso.HeaderText = "Inicio Proceso";
-            this.Inicio_Proceso.Name = "Inicio_Proceso";
-            this.Inicio_Proceso.Width = 150;
-            // 
-            // Final_Proceso
-            // 
-            this.Final_Proceso.HeaderText = "Final Proceso";
-            this.Final_Proceso.Name = "Final_Proceso";
-            this.Final_Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Final_Proceso.Width = 150;
-            // 
-            // Proceso
-            // 
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso.Width = 300;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            // 
-            // Tiempo
-            // 
-            this.Tiempo.HeaderText = "Tiempo";
-            this.Tiempo.Name = "Tiempo";
             // 
             // textBoxHorasProceso
             // 
@@ -497,7 +459,7 @@
             // textBoxActividadesProcesoElectrico
             // 
             this.textBoxActividadesProcesoElectrico.Enabled = false;
-            this.textBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(200, 176);
+            this.textBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(200, 255);
             this.textBoxActividadesProcesoElectrico.Name = "textBoxActividadesProcesoElectrico";
             this.textBoxActividadesProcesoElectrico.Size = new System.Drawing.Size(447, 20);
             this.textBoxActividadesProcesoElectrico.TabIndex = 58;
@@ -508,7 +470,7 @@
             this.labelActividadesProcesoElectrico.AutoSize = true;
             this.labelActividadesProcesoElectrico.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelActividadesProcesoElectrico.Image = ((System.Drawing.Image)(resources.GetObject("labelActividadesProcesoElectrico.Image")));
-            this.labelActividadesProcesoElectrico.Location = new System.Drawing.Point(43, 178);
+            this.labelActividadesProcesoElectrico.Location = new System.Drawing.Point(43, 257);
             this.labelActividadesProcesoElectrico.Name = "labelActividadesProcesoElectrico";
             this.labelActividadesProcesoElectrico.Size = new System.Drawing.Size(151, 16);
             this.labelActividadesProcesoElectrico.TabIndex = 57;
@@ -518,7 +480,7 @@
             // textBoxNotasActividad
             // 
             this.textBoxNotasActividad.Enabled = false;
-            this.textBoxNotasActividad.Location = new System.Drawing.Point(200, 202);
+            this.textBoxNotasActividad.Location = new System.Drawing.Point(200, 281);
             this.textBoxNotasActividad.Multiline = true;
             this.textBoxNotasActividad.Name = "textBoxNotasActividad";
             this.textBoxNotasActividad.Size = new System.Drawing.Size(447, 50);
@@ -530,7 +492,7 @@
             this.labelNotasActividad.AutoSize = true;
             this.labelNotasActividad.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNotasActividad.Image = ((System.Drawing.Image)(resources.GetObject("labelNotasActividad.Image")));
-            this.labelNotasActividad.Location = new System.Drawing.Point(43, 203);
+            this.labelNotasActividad.Location = new System.Drawing.Point(43, 283);
             this.labelNotasActividad.Name = "labelNotasActividad";
             this.labelNotasActividad.Size = new System.Drawing.Size(130, 16);
             this.labelNotasActividad.TabIndex = 59;
@@ -562,18 +524,123 @@
             // 
             this.comboBoxActividadesProcesoElectrico.Enabled = false;
             this.comboBoxActividadesProcesoElectrico.FormattingEnabled = true;
-            this.comboBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(200, 176);
+            this.comboBoxActividadesProcesoElectrico.Location = new System.Drawing.Point(200, 255);
             this.comboBoxActividadesProcesoElectrico.Name = "comboBoxActividadesProcesoElectrico";
             this.comboBoxActividadesProcesoElectrico.Size = new System.Drawing.Size(447, 21);
             this.comboBoxActividadesProcesoElectrico.TabIndex = 63;
             this.comboBoxActividadesProcesoElectrico.Visible = false;
             this.comboBoxActividadesProcesoElectrico.SelectedIndexChanged += new System.EventHandler(this.comboBoxActividadesProcesoElectrico_SelectedIndexChanged);
             // 
+            // comboBoxCodigoProyecto
+            // 
+            this.comboBoxCodigoProyecto.FormattingEnabled = true;
+            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(200, 178);
+            this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
+            this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCodigoProyecto.Sorted = true;
+            this.comboBoxCodigoProyecto.TabIndex = 65;
+            this.comboBoxCodigoProyecto.Visible = false;
+            this.comboBoxCodigoProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxCodigoProyecto_SelectedIndexChanged);
+            // 
+            // labelCodigoProyecto
+            // 
+            this.labelCodigoProyecto.AutoSize = true;
+            this.labelCodigoProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoProyecto.Image")));
+            this.labelCodigoProyecto.Location = new System.Drawing.Point(44, 178);
+            this.labelCodigoProyecto.Name = "labelCodigoProyecto";
+            this.labelCodigoProyecto.Size = new System.Drawing.Size(93, 16);
+            this.labelCodigoProyecto.TabIndex = 64;
+            this.labelCodigoProyecto.Text = "Codigo Proyecto";
+            this.labelCodigoProyecto.Visible = false;
+            // 
+            // textBoxNombreCliente
+            // 
+            this.textBoxNombreCliente.Enabled = false;
+            this.textBoxNombreCliente.Location = new System.Drawing.Point(200, 203);
+            this.textBoxNombreCliente.Name = "textBoxNombreCliente";
+            this.textBoxNombreCliente.Size = new System.Drawing.Size(268, 20);
+            this.textBoxNombreCliente.TabIndex = 67;
+            this.textBoxNombreCliente.Visible = false;
+            // 
+            // labelNombreCliente
+            // 
+            this.labelNombreCliente.AutoSize = true;
+            this.labelNombreCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombreCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreCliente.Image")));
+            this.labelNombreCliente.Location = new System.Drawing.Point(44, 205);
+            this.labelNombreCliente.Name = "labelNombreCliente";
+            this.labelNombreCliente.Size = new System.Drawing.Size(92, 16);
+            this.labelNombreCliente.TabIndex = 66;
+            this.labelNombreCliente.Text = "Nombre Cliente";
+            this.labelNombreCliente.Visible = false;
+            // 
+            // Codigo_partida
+            // 
+            this.Codigo_partida.HeaderText = "Codigo";
+            this.Codigo_partida.Name = "Codigo_partida";
+            this.Codigo_partida.Visible = false;
+            this.Codigo_partida.Width = 50;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Empleado.Width = 150;
+            // 
+            // proyecto
+            // 
+            this.proyecto.HeaderText = "Proyecto";
+            this.proyecto.Name = "proyecto";
+            // 
+            // nombre_cliente
+            // 
+            this.nombre_cliente.HeaderText = "Nombre Cliente";
+            this.nombre_cliente.Name = "nombre_cliente";
+            this.nombre_cliente.Width = 200;
+            // 
+            // Inicio_Proceso
+            // 
+            this.Inicio_Proceso.HeaderText = "Inicio Proceso";
+            this.Inicio_Proceso.Name = "Inicio_Proceso";
+            this.Inicio_Proceso.Width = 150;
+            // 
+            // Final_Proceso
+            // 
+            this.Final_Proceso.HeaderText = "Final Proceso";
+            this.Final_Proceso.Name = "Final_Proceso";
+            this.Final_Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Final_Proceso.Width = 150;
+            // 
+            // Proceso
+            // 
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.Width = 300;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            // 
+            // Tiempo
+            // 
+            this.Tiempo.HeaderText = "Tiempo";
+            this.Tiempo.Name = "Tiempo";
+            // 
             // Forma_Captura_Integracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1237, 613);
+            this.Controls.Add(this.textBoxNombreCliente);
+            this.Controls.Add(this.labelNombreCliente);
+            this.Controls.Add(this.comboBoxCodigoProyecto);
+            this.Controls.Add(this.labelCodigoProyecto);
             this.Controls.Add(this.comboBoxActividadesProcesoElectrico);
             this.Controls.Add(this.textBoxTipoProceso);
             this.Controls.Add(this.label7);
@@ -663,8 +730,14 @@
         private System.Windows.Forms.TextBox textBoxTipoProceso;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxActividadesProcesoElectrico;
+        private System.Windows.Forms.ComboBox comboBoxCodigoProyecto;
+        private System.Windows.Forms.Label labelCodigoProyecto;
+        private System.Windows.Forms.TextBox textBoxNombreCliente;
+        private System.Windows.Forms.Label labelNombreCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proyecto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre_cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Inicio_Proceso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Final_Proceso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;

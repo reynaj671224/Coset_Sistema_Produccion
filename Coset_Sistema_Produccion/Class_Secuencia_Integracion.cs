@@ -33,6 +33,8 @@ namespace Coset_Sistema_Produccion
                         proceso = mySqlDataReader["proceso"].ToString(),
                         estado = mySqlDataReader["estado"].ToString(),
                         actividad = mySqlDataReader["actividad"].ToString(),
+                        Proyecto = mySqlDataReader["proyecto"].ToString(),
+                        NombreCliente = mySqlDataReader["nombre_cliente"].ToString(),
                     });
                 }
             }
@@ -75,10 +77,11 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_secuencia_integracion(Secuencia_integracion secuencia_Integracion)
         {
             return "INSERT INTO secuencia_integracion(empleado," +
-                   "inicio_proceso,final_proceso,proceso,actividad,estado) " +
+                   "inicio_proceso,final_proceso,proceso,actividad,estado,proyecto,nombre_cliente) " +
                    "VALUES('" + secuencia_Integracion.Empleado + "','" +secuencia_Integracion.inicio_proceso + "','" + 
                    secuencia_Integracion.final_proceso + "','" + secuencia_Integracion.proceso + "','" +
-                   secuencia_Integracion.actividad  + "','" + secuencia_Integracion.estado + "'); ";
+                   secuencia_Integracion.actividad  + "','" + secuencia_Integracion.estado + "','" +
+                   secuencia_Integracion.Proyecto + "','" + secuencia_Integracion.NombreCliente+ "'); ";
 
         }
 
@@ -111,6 +114,8 @@ namespace Coset_Sistema_Produccion
                 "',proceso='" + secuencia_Integracion.proceso +
                 "',actividad='" + secuencia_Integracion.actividad +
                 "',estado='" + secuencia_Integracion.estado +
+                "',proyecto='" + secuencia_Integracion.Proyecto +
+                "',nombre_cliente='" + secuencia_Integracion.NombreCliente +
                 "' where codigo='" + secuencia_Integracion.Codigo + "';";
 
         }
@@ -128,6 +133,8 @@ namespace Coset_Sistema_Produccion
     {
         public string Codigo = "";
         public string Empleado = "";
+        public string Proyecto = "";
+        public string NombreCliente = "";
         public string inicio_proceso = "";
         public string final_proceso = "";
         public string proceso = "";

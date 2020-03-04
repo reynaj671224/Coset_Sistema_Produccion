@@ -56,6 +56,10 @@ namespace Coset_Sistema_Produccion
         public Secuencia_integracion secuencia_Integracion_busqueda = new Secuencia_integracion();
         public Secuencia_integracion secuencia_Integracion_insetar = new Secuencia_integracion();
         public Secuencia_integracion secuencia_Integracion_actualizar = new Secuencia_integracion();
+        public List<Proyecto> proyectos_disponibles = new List<Proyecto>();
+        public Proyecto proyecto_seleccion = new Proyecto();
+        public Class_Proyectos Class_Proyectos = new Class_Proyectos();
+        public Proyecto proyecto_visualizar = new Proyecto();
 
         public string secuencia_operacion = "";
 
@@ -496,7 +500,8 @@ namespace Coset_Sistema_Produccion
                 Class_Integracion_Procesos.Inserta_nuevo_integracion_proceso_base_datos(integracion_proceso_nuevo_empleado);
                 integracion_Procesos_disponibles = Class_Integracion_Procesos.
                 Adquiere_secuencia_proceso_integracion_busqueda_en_base_datos(integracion_proceso_busqueda);
-                secuencia_activa_combos_proceso_actividades();
+                Secuencia_muestra_combos_procesos_electricos_proyectos();
+                secuencia_activa_combo_proyectos();
             }
             else
             {
@@ -515,11 +520,48 @@ namespace Coset_Sistema_Produccion
                 }
                 else if (integracion_Procesos_disponibles[0].estado == "Desactivo")
                 {
-                    secuencia_activa_combos_proceso_actividades();
+                    Secuencia_muestra_combos_procesos_electricos_proyectos();
+                    secuencia_activa_combo_proyectos();
                 }
             }
             
         }
+
+        private void secuencia_activa_combo_proyectos()
+        {
+            Limpia_combo_proyecto();
+            Obtener_datos_proyectos_disponibles_base_datos();
+            Rellena_combo_codigo_proyecto();
+        }
+
+        private void Limpia_combo_proyecto()
+        {
+            comboBoxCodigoProyecto.Items.Clear();
+            comboBoxCodigoProyecto.Text = "";
+        }
+
+        private void Rellena_combo_codigo_proyecto()
+        {
+            foreach (Proyecto proyecto in proyectos_disponibles)
+            {
+                if (proyecto.error == "")
+                {
+                    comboBoxCodigoProyecto.Items.Add(proyecto.Codigo);
+                }
+                else
+                {
+                    MessageBox.Show(proyecto.error);
+                    break;
+                }
+            }
+        }
+
+        private void Obtener_datos_proyectos_disponibles_base_datos()
+        {
+            proyectos_disponibles = Class_Proyectos.Adquiere_proyectos_disponibles_en_base_datos();
+        }
+
+
 
         private void Limpia_botones_status()
         {
@@ -541,6 +583,8 @@ namespace Coset_Sistema_Produccion
                     dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
                    secuencia.Empleado,
+                   secuencia.Proyecto,
+                   secuencia.NombreCliente,
                    secuencia.inicio_proceso,
                    secuencia.final_proceso,
                    secuencia.proceso,
@@ -552,6 +596,8 @@ namespace Coset_Sistema_Produccion
                     dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
                    secuencia.Empleado,
+                   secuencia.Proyecto,
+                   secuencia.NombreCliente,
                    secuencia.inicio_proceso,
                    secuencia.final_proceso,
                    secuencia.proceso,
@@ -569,7 +615,7 @@ namespace Coset_Sistema_Produccion
 
         private void secuencia_activa_combos_proceso_actividades()
         {
-            Secuencia_muestra_combos_procesos_electricos();
+            //Secuencia_muestra_combos_procesos_electricos_proyectos();
             Activa_boton_cancelar_operacio();
             Activa_combo_proceso_electrico();
             Obtener_procesos_electrcos_disponibles();
@@ -577,7 +623,7 @@ namespace Coset_Sistema_Produccion
             Rellenar_combo_procesos_electricos();
         }
 
-        private void Secuencia_muestra_combos_procesos_electricos()
+        private void Secuencia_muestra_combos_procesos_electricos_proyectos()
         {
             labelProcesosElectricos.Visible = true;
             labelActividadesProcesoElectrico.Visible = true;
@@ -585,6 +631,10 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Visible = true;
             comboBoxActividadesProcesoElectrico.Visible = true;
             textBoxNotasActividad.Visible = true;
+            comboBoxCodigoProyecto.Visible = true;
+            labelCodigoProyecto.Visible = true;
+            labelNombreCliente.Visible = true;
+            textBoxNombreCliente.Visible = true;
         }
 
         private void Secuencia_oculta_combos_procesos_electricos()
@@ -595,6 +645,10 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Visible = false;
             comboBoxActividadesProcesoElectrico.Visible = false;
             textBoxNotasActividad.Visible = false;
+            comboBoxCodigoProyecto.Visible = false;
+            labelCodigoProyecto.Visible = false;
+            labelNombreCliente.Visible = false;
+            textBoxNombreCliente.Visible = false;
         }
 
         private void limpia_combos_procesos_actividades_electricos()
@@ -1268,6 +1322,8 @@ namespace Coset_Sistema_Produccion
             secuencia_Integracion_insetar.final_proceso = "";
             secuencia_Integracion_insetar.proceso = comboBoxNombreProceso.Text;
             secuencia_Integracion_insetar.actividad = comboBoxActividadesProcesoElectrico.Text;
+            secuencia_Integracion_insetar.Proyecto = comboBoxCodigoProyecto.Text;
+            secuencia_Integracion_insetar.NombreCliente = textBoxNombreCliente.Text;
             secuencia_Integracion_insetar.estado = "Iniciado";
         }
 
@@ -1319,6 +1375,7 @@ namespace Coset_Sistema_Produccion
             obtener_actividades_procesos_electricos();
             limpia_combo_actividades_procesos_electricos();
             Rellena_combo_actividades_proceso_electricos();
+            Limpia_botones_status();
         }
 
         private void Rellena_combo_actividades_proceso_electricos()
@@ -1333,6 +1390,7 @@ namespace Coset_Sistema_Produccion
         {
             comboBoxActividadesProcesoElectrico.Items.Clear();
             comboBoxActividadesProcesoElectrico.Text = "";
+            textBoxNotasActividad.Text = "";
         }
 
         private void obtener_actividades_procesos_electricos()
@@ -1383,6 +1441,24 @@ namespace Coset_Sistema_Produccion
                 textBoxNotasActividad.Text = Actividad_Proceso_Electrico_busqueda.Notas;
             Activa_boton_inicia_proceso();
             Activa_boton_cancelar_operacio();
+        }
+
+        private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            proyecto_seleccion = proyectos_disponibles.Find(proyecto => proyecto.Codigo.Contains(comboBoxCodigoProyecto.Text));
+            if(proyecto_seleccion != null)
+            {
+                textBoxNombreCliente.Text = proyecto_seleccion.Nombre_cliente;
+                limpia_combos_cajas_procesos();
+            }
+            secuencia_activa_combos_proceso_actividades();
+        }
+
+        private void limpia_combos_cajas_procesos()
+        {
+            comboBoxActividadesProcesoElectrico.Text = "";
+            comboBoxNombreProceso.Text = "";
+            textBoxNotasActividad.Text = "";
         }
     }
 }

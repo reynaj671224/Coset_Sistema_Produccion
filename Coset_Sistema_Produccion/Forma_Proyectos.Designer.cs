@@ -49,6 +49,11 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewDibujosProyecto = new System.Windows.Forms.DataGridView();
+            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.buttonDibujos = new System.Windows.Forms.Button();
@@ -79,11 +84,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxSerie = new System.Windows.Forms.TextBox();
             this.comboBoxNombreProyecto = new System.Windows.Forms.ComboBox();
-            this.Codigo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_dibujos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -315,6 +315,37 @@
             this.dataGridViewDibujosProyecto.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewDibujosProyecto_EditingControlShowing);
             this.dataGridViewDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
             // 
+            // Codigo_proyecto
+            // 
+            this.Codigo_proyecto.HeaderText = "Codigo";
+            this.Codigo_proyecto.Name = "Codigo_proyecto";
+            this.Codigo_proyecto.Width = 50;
+            // 
+            // Cantidad_dibujos
+            // 
+            this.Cantidad_dibujos.HeaderText = "Cantidad";
+            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
+            this.Cantidad_dibujos.Width = 50;
+            // 
+            // Dibujo_proyecto
+            // 
+            this.Dibujo_proyecto.HeaderText = "Dibujo";
+            this.Dibujo_proyecto.Name = "Dibujo_proyecto";
+            this.Dibujo_proyecto.Width = 200;
+            // 
+            // Proceso_dibujo
+            // 
+            this.Proceso_dibujo.HeaderText = "Proceso";
+            this.Proceso_dibujo.Name = "Proceso_dibujo";
+            this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Proceso_dibujo.Width = 200;
+            // 
+            // Descrpcion_partida
+            // 
+            this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
+            this.Descrpcion_partida.Name = "Descrpcion_partida";
+            // 
             // comboBoxCodigoProyecto
             // 
             this.comboBoxCodigoProyecto.FormattingEnabled = true;
@@ -457,7 +488,7 @@
             // comboBoxNombreCliente
             // 
             this.comboBoxNombreCliente.FormattingEnabled = true;
-            this.comboBoxNombreCliente.Location = new System.Drawing.Point(220, 241);
+            this.comboBoxNombreCliente.Location = new System.Drawing.Point(254, 242);
             this.comboBoxNombreCliente.Name = "comboBoxNombreCliente";
             this.comboBoxNombreCliente.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreCliente.Sorted = true;
@@ -620,37 +651,6 @@
             this.comboBoxNombreProyecto.TabIndex = 82;
             this.comboBoxNombreProyecto.Visible = false;
             this.comboBoxNombreProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProyecto_SelectedIndexChanged);
-            // 
-            // Codigo_proyecto
-            // 
-            this.Codigo_proyecto.HeaderText = "Codigo";
-            this.Codigo_proyecto.Name = "Codigo_proyecto";
-            this.Codigo_proyecto.Width = 50;
-            // 
-            // Cantidad_dibujos
-            // 
-            this.Cantidad_dibujos.HeaderText = "Cantidad";
-            this.Cantidad_dibujos.Name = "Cantidad_dibujos";
-            this.Cantidad_dibujos.Width = 50;
-            // 
-            // Dibujo_proyecto
-            // 
-            this.Dibujo_proyecto.HeaderText = "Dibujo";
-            this.Dibujo_proyecto.Name = "Dibujo_proyecto";
-            this.Dibujo_proyecto.Width = 200;
-            // 
-            // Proceso_dibujo
-            // 
-            this.Proceso_dibujo.HeaderText = "Proceso";
-            this.Proceso_dibujo.Name = "Proceso_dibujo";
-            this.Proceso_dibujo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso_dibujo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Proceso_dibujo.Width = 200;
-            // 
-            // Descrpcion_partida
-            // 
-            this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
-            this.Descrpcion_partida.Name = "Descrpcion_partida";
             // 
             // Forma_Proyectos
             // 
