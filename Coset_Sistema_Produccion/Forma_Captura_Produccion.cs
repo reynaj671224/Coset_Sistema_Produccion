@@ -430,7 +430,7 @@ namespace Coset_Sistema_Produccion
             Limpia_combo_empleados_produccion();
             Muestra_combo_empleados_produccion();
             Activa_Combo_codigo_empleado();
-            Rellenar_combo_nombre_proceso();
+            Rellenar_combo_nombre_empleado();
 
         }
 
@@ -1094,7 +1094,7 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Enabled = true;
         }
 
-        private void Rellenar_combo_nombre_proceso()
+        private void Rellenar_combo_nombre_empleado()
         {
             foreach (Usuario usuario in Empleados_produccion_disponibles)
             {
