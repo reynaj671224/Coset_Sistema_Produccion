@@ -673,11 +673,12 @@ namespace Coset_Sistema_Produccion
         {
             Dibujos_produccion_busqueda.Numero_dibujo = textBoxNumeroDibujo.Text;
             Dibujos_produccion_busqueda.Empleado = comboBoxEmpleado.Text;
+            Dibujos_produccion_busqueda.Proceso = textBoxNombreProceso.Text;
         }
 
         private void Configura_botones_operacion()
         {
-            textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
+            textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso; 
             textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
             //Rellena_datagridview_secuencias_calidad();
             Activa_botones_operacion();
@@ -1034,6 +1035,8 @@ namespace Coset_Sistema_Produccion
                 {
                     textBoxNumeroDibujo.Text = dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
                         Cells["Numero_Dibujo"].Value.ToString();
+                    textBoxNombreProceso.Text = dataGridViewSecuenciasCalidad.Rows[e.RowIndex].
+                        Cells["Proceso"].Value.ToString();
                     buscar_dibujo_secuencia_calidad_base_datos();
                 }
                 Activa_boton_cancelar_operacio();

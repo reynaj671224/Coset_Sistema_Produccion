@@ -203,7 +203,47 @@ namespace Coset_Sistema_Produccion
 
         }
 
-       
+        public List<Dibujos_proyecto> Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(Dibujos_proyecto dibujo)
+        {
+            List<Dibujos_proyecto> clientes_disponibles = new List<Dibujos_proyecto>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_dibujos_proyecto());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_numero_dibujo_proceso_proyecto(dibujo), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    clientes_disponibles.Add(new Dibujos_proyecto()
+                    {
+                        Codigo = (int)mySqlDataReader["codigo_dibujo"],
+                        Numero = mySqlDataReader["numero_dibujo"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_dibujos"].ToString(),
+                        Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
+                        proceso = mySqlDataReader["proceso"].ToString(),
+                        tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
+                        Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                clientes_disponibles.Add(new Dibujos_proyecto()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return clientes_disponibles;
+
+        }
+
+        private string Commando_leer_Mysql_numero_dibujo_proceso_proyecto(Dibujos_proyecto dibujo)
+        {
+            return "SELECT * FROM dibujos_proyecto WHERE numero_dibujo='" + dibujo.Numero +
+                "' and proceso='"+ dibujo.proceso + "';";
+        }
 
         public string Actualiza_base_datos_dibujo_proyecto(Dibujos_proyecto numero_dibujo)
         {

@@ -1797,13 +1797,14 @@ namespace Coset_Sistema_Produccion
                                 dibujo_agregar.proceso = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
                             else if (campo == (int)Campos_dibujos.tiempo_estimado)
                                 dibujo_agregar.tiempo_estimado_horas = dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString();
-                            if (campo == (int)Campos_dibujos.numero)
+                            if (campo == (int)Campos_dibujos.proceso)
                             {
-                                dibujos_proyecto_disponibles = clase_dibujos_proyecto.Adquiere_dibujos_disponibles_en_base_datos(
-                            dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value.ToString());
+                                Asigna_codigo_empleado_para_tipo_de_operacio();
+                                dibujos_proyecto_disponibles = clase_dibujos_proyecto.
+                                    Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujo_agregar);
                                 if (dibujos_proyecto_disponibles.Count != 0)
                                 {
-                                    MessageBox.Show("Numero de Dibujo existe en proyecto", "Agregar Dibujo",
+                                    MessageBox.Show("Numero de Dibujo y proceso existe en proyecto", "Agregar Dibujo",
                                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                     dataGridViewDibujosProyecto.Rows[partidas].Cells[campo].Value = "";
                                     connection.Close();
@@ -1820,6 +1821,7 @@ namespace Coset_Sistema_Produccion
                         }
                         
                     }
+
                     Asigna_codigo_empleado_para_tipo_de_operacio();
                     MySqlCommand command = new MySqlCommand(Configura_cadena_comando_insertar_en_base_de_datos_dibujos_proyecto(dibujo_agregar), connection);
                     command.ExecuteNonQuery();

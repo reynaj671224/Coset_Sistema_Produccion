@@ -107,7 +107,8 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_secuencia_produccion(Secuencia_produccion numero_dibujo)
         {
-            return "SELECT * FROM secuencia_produccion WHERE numero_dibujo='" + numero_dibujo.Numero_Dibujo +"';";
+            return "SELECT * FROM secuencia_produccion WHERE numero_dibujo='" + numero_dibujo.Numero_Dibujo +
+                "' and proceso='"+ numero_dibujo.proceso+"' ;";
         }
 
         private string Configura_Cadena_Conexion_MySQL_secuencia_produccion()

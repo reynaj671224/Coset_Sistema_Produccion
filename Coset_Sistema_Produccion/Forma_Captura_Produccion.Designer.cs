@@ -205,6 +205,7 @@
             this.textBoxNombreProceso.Name = "textBoxNombreProceso";
             this.textBoxNombreProceso.Size = new System.Drawing.Size(196, 20);
             this.textBoxNombreProceso.TabIndex = 9;
+            this.textBoxNombreProceso.Visible = false;
             // 
             // buttonBorrarBasedeDatos
             // 
@@ -278,12 +279,12 @@
             // 
             // comboBoxNombreProceso
             // 
+            this.comboBoxNombreProceso.Enabled = false;
             this.comboBoxNombreProceso.FormattingEnabled = true;
             this.comboBoxNombreProceso.Location = new System.Drawing.Point(171, 173);
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(196, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
-            this.comboBoxNombreProceso.Visible = false;
             this.comboBoxNombreProceso.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreEmpleado_SelectedIndexChanged);
             // 
             // textBoxNumeroDibujo

@@ -18,6 +18,7 @@ namespace Coset_Sistema_Produccion
         public List<Proceso> procesos_disponibles = new List<Proceso>();
         public Class_Procesos clase_procesos = new Class_Procesos();
         public Proceso Proceso_Modificaciones = new Proceso();
+        public Proceso Proceso_busqueda = new Proceso();
         public Class_Control_Folios class_folio_disponible = new Class_Control_Folios();
         public Control_folio folio_disponible = new Control_folio();
         public List<Usuario> Empleados_produccion_disponibles = new List<Usuario>();
@@ -27,6 +28,7 @@ namespace Coset_Sistema_Produccion
         public List<Dibujos_proyecto> Dibujos_proyectos_disponibles = new List<Dibujos_proyecto>();
         public Class_Dibujos_Proyecto Class_Dibujos_Proyecto = new Class_Dibujos_Proyecto();
         public Dibujos_proyecto Dibujo_seleccion = new Dibujos_proyecto();
+        public Dibujos_proyecto Dibujo_busqueda = new Dibujos_proyecto();
         public List<Dibujo_produccion> Dibujos_produccion_disponible = new List<Dibujo_produccion>();
         public Class_Dibujos_Produccion Class_Dibujos_Produccion = new Class_Dibujos_Produccion();
         public Dibujo_produccion Dibujos_produccion_seleccion = new Dibujo_produccion();
@@ -179,7 +181,7 @@ namespace Coset_Sistema_Produccion
 
         private void timerInciarProcesoBusqueda_Tick(object sender, EventArgs e)
         {
-            if (textBoxNumeroDibujo.Text != "")
+            if (textBoxNumeroDibujo.Text != "" && comboBoxNombreProceso.Text!="")
             {
                 timerInciarProcesoBusqueda.Enabled = false;
                 Activa_boton_buscar_dibujo_base_de_datos();
@@ -374,6 +376,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_secuencias_produccion_disponibles()
         {
             Secuencia_produccion_busqueda.Numero_Dibujo = textBoxNumeroDibujo.Text;
+            Secuencia_produccion_busqueda.proceso = comboBoxNombreProceso.Text;
             Secuencias_produccion_disponibles = Class_Secuencia_Produccion.
                 Adquiere_secuencia_produccion_busqueda_en_base_datos(Secuencia_produccion_busqueda);
             Secuencia_produccion_seleccion = Secuencias_produccion_disponibles.Find
@@ -431,7 +434,24 @@ namespace Coset_Sistema_Produccion
             Muestra_combo_empleados_produccion();
             Activa_Combo_codigo_empleado();
             Rellenar_combo_nombre_empleado();
+            Limpia_combo_nombre_proceso();
+            Obtener_datos_procesos_disponibles_base_datos();
+            Rellena_combo_proceso_disponibles();
 
+        }
+
+        private void Rellena_combo_proceso_disponibles()
+        {
+            foreach (Proceso proceso in procesos_disponibles)
+            {
+                if (proceso.error == "")
+                    comboBoxNombreProceso.Items.Add(proceso.Nombre);
+                else
+                {
+                    MessageBox.Show(proceso.error);
+                    break;
+                }
+            }
         }
 
         private void Muestra_combo_empleados_produccion()
@@ -464,6 +484,7 @@ namespace Coset_Sistema_Produccion
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
             Activa_caja_numero_dibujo();
+            Activa_combo_nombre_proceso();
             Inicia_timer_busqueda_dibujo();
             Deactiva_boton_visualizar();
             Activa_boton_cancelar_operacio();
@@ -726,6 +747,7 @@ namespace Coset_Sistema_Produccion
         private void Asigna_valores_dibujo_produccion_busqueda()
         {
             Dibujos_produccion_busqueda.Numero_dibujo = textBoxNumeroDibujo.Text;
+            Dibujos_produccion_busqueda.Proceso = comboBoxNombreProceso.Text;
             Dibujos_produccion_busqueda.Empleado = comboBoxEmpleado.Text;
         }
 
@@ -966,8 +988,13 @@ namespace Coset_Sistema_Produccion
             Desaparece_textbox_actividades_proceso_electrico();
             Desaparece_label_notas_actividad_proceso_electrico();
             Desaparece_textbox_notas_actividades_proceso_electrico();
+            Limpia_combo_nombre_proceso_texto();
+            Desactiva_combo_nombre_proceso();
+        }
 
-
+        private void Limpia_combo_nombre_proceso_texto()
+        {
+            comboBoxNombreProceso.Text = "";
         }
 
         private void Limpia_seleccion_secuencia_operacion()
@@ -1010,12 +1037,15 @@ namespace Coset_Sistema_Produccion
 
         private bool obtener_dibujos_Proyectos_disponibles_base_datos()
         {
-            Dibujos_proyectos_disponibles = Class_Dibujos_Proyecto.Adquiere_dibujos_disponibles_en_base_datos(textBoxNumeroDibujo.Text);
+            Assigna_valores_dibujo_proceso_busqueda();
+              Dibujos_proyectos_disponibles = Class_Dibujos_Proyecto.
+                Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(Dibujo_busqueda);
             if(Dibujos_proyectos_disponibles.Count > 1 )
             {
-                MessageBox.Show("Numeo de dibujo Duplicado En Proyectos", "Busqueda Numero Dibujo", 
+                MessageBox.Show("Numeo de dibujo Duplicado En Proyectos", "Busqueda Numero Dibujo",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
+
             }
             else if(Dibujos_proyectos_disponibles.Count < 1)
             {
@@ -1027,7 +1057,13 @@ namespace Coset_Sistema_Produccion
             {
                 return true;
             }
-            
+
+        }
+
+        private void Assigna_valores_dibujo_proceso_busqueda()
+        {
+            Dibujo_busqueda.proceso = comboBoxNombreProceso.Text;
+            Dibujo_busqueda.Numero = textBoxNumeroDibujo.Text;
         }
 
         private void buttonBorrarBasedeDatos_Click(object sender, EventArgs e)
@@ -1094,6 +1130,12 @@ namespace Coset_Sistema_Produccion
             comboBoxNombreProceso.Enabled = true;
         }
 
+        private void Desactiva_combo_nombre_proceso()
+        {
+            comboBoxNombreProceso.Enabled = false;
+        }
+
+
         private void Rellenar_combo_nombre_empleado()
         {
             foreach (Usuario usuario in Empleados_produccion_disponibles)
@@ -1142,6 +1184,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_Combo_codigo_empleado();
             Activa_caja_numero_dibujo();
             Activa_boton_cancelar_operacio();
+            Activa_combo_nombre_proceso();
             Inicia_timer_busqueda_dibujo();
         }
 
@@ -1163,6 +1206,8 @@ namespace Coset_Sistema_Produccion
             textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
             textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
         }
+
+
     }
 }
  

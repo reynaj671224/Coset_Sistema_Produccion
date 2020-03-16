@@ -178,7 +178,8 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_busqueda_dibujos_produccion(Dibujo_produccion numero_dibujo)
         {
-            return "SELECT * FROM produccion_dibujos WHERE numero_dibujo='" + numero_dibujo.Numero_dibujo + "';";
+            return "SELECT * FROM produccion_dibujos WHERE numero_dibujo='" + numero_dibujo.Numero_dibujo +
+                "' and proceso='" + numero_dibujo.Proceso + "'; ";
         }
 
         private string Configura_Cadena_Conexion_MySQL_dibujos_produccion()
@@ -189,15 +190,15 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_en_base_de_datos_modificar_dibujos_produccion(Dibujo_produccion numero_dibujo)
         {
-            return "UPDATE produccion_dibujos set  proceso='" + numero_dibujo.Proceso +
-                "',estado='" + numero_dibujo.Estado +
+            return "UPDATE produccion_dibujos set  estado='" + numero_dibujo.Estado +
                 "',calidad='" + numero_dibujo.Calidad +
                 "',secuencia='" + numero_dibujo.Secuencia +
                 "',horas_produccion='" + numero_dibujo.Horas_produccion +
                 "',horas_retrabajo='" + numero_dibujo.Horas_retrabajo +
                 "',proyecto='" + numero_dibujo.proyecto +
                 "',empleado='" + numero_dibujo.Empleado +
-                "' where numero_dibujo='" + numero_dibujo.Numero_dibujo + "';";
+                "' where numero_dibujo='" + numero_dibujo.Numero_dibujo +
+                "' and proceso='" + numero_dibujo.Proceso + "';";
         }
 
 
