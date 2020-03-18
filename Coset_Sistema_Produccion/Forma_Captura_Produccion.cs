@@ -488,6 +488,9 @@ namespace Coset_Sistema_Produccion
             Inicia_timer_busqueda_dibujo();
             Deactiva_boton_visualizar();
             Activa_boton_cancelar_operacio();
+            Desactiva_botones_operacion();
+            Limpia_cajas_despues_combo_proceso_seleccion();
+            Limpia_datagridview_secuencia_produccion();
 
         }
 
@@ -619,7 +622,9 @@ namespace Coset_Sistema_Produccion
                         }
                         else
                         {
-                            Cancela_operacio_produccion();
+                            Desactiva_botones_operacion();
+                            Limpia_cajas_despues_combo_nombre_empleado_seleccion();
+                            Limpia_datagridview_secuencia_produccion();
                         }
                     }
                     else
@@ -1031,8 +1036,6 @@ namespace Coset_Sistema_Produccion
             textBoxNotasActividad.Text = "";
             textBoxActividadesProcesoElectrico.Text = "";
             textBoxTipoProceso.Text = "";
-
-
         }
 
         private bool obtener_dibujos_Proyectos_disponibles_base_datos()
@@ -1161,14 +1164,43 @@ namespace Coset_Sistema_Produccion
         }
 
 
-        private void comboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Operacio_procesos == "Modificar")
-                configura_forma_modificar();
-            else if (Operacio_procesos == "Eliminar")
-                configura_forma_eliminar();
-            else if (Operacio_procesos == "Visualizar")
-                configura_forma_visualizar();
+           if(!timerInciarProcesoBusqueda.Enabled)
+            {
+                timerInciarProcesoBusqueda.Enabled = true;
+                Desactiva_botones_operacion();
+                Limpia_cajas_despues_combo_proceso_seleccion();
+                Limpia_datagridview_secuencia_produccion();
+            }
+        }
+
+        private void Limpia_cajas_despues_combo_proceso_seleccion()
+        {
+           
+            textBoxHorasProceso.Text = "";
+            textBoxEstado.Text = "";
+            textBoxCalidad.Text = "";
+            textBoxHorasProceso.Text = "";
+            textBoxHorasRetrabajo.Text = "";
+            textBoxUnidades.Text = "";
+            textBoxTipoProceso.Text = "";
+
+
+        }
+
+        private void Limpia_cajas_despues_combo_nombre_empleado_seleccion()
+        {
+            comboBoxEmpleado.Text = "";
+            textBoxHorasProceso.Text = "";
+            textBoxEstado.Text = "";
+            textBoxCalidad.Text = "";
+            textBoxHorasProceso.Text = "";
+            textBoxHorasRetrabajo.Text = "";
+            textBoxUnidades.Text = "";
+            textBoxTipoProceso.Text = "";
+
+
         }
 
         private void buttonBuscarSecuenciaDibujo_Click(object sender, EventArgs e)

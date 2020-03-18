@@ -285,7 +285,7 @@
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(196, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
-            this.comboBoxNombreProceso.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreEmpleado_SelectedIndexChanged);
+            this.comboBoxNombreProceso.SelectedIndexChanged += new System.EventHandler(this.ComboBoxNombreEmpleado_SelectedIndexChanged);
             // 
             // textBoxNumeroDibujo
             // 
