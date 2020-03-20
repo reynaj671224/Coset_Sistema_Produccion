@@ -78,7 +78,7 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_Mysql_busqueda_secuencia_produccion_dibujos_pendientes(string empleado)
         {
             return "SELECT * FROM secuencia_produccion WHERE empleado='" + empleado +
-                "' and estado='pausado' or estado='Iniciado';";
+                "' and estado='pausado' or estado='Iniciado' and empleado='" + empleado + "';";
         }
 
         public string Actualiza_base_datos_secuencia_produccion(Secuencia_produccion numero_dibujo)
