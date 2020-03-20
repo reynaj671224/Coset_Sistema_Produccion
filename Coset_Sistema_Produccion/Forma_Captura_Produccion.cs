@@ -483,16 +483,40 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Activa_caja_numero_dibujo();
-            Activa_combo_nombre_proceso();
-            Inicia_timer_busqueda_dibujo();
-            Deactiva_boton_visualizar();
-            Activa_boton_cancelar_operacio();
-            Desactiva_botones_operacion();
-            Limpia_cajas_despues_combo_proceso_seleccion();
-            Limpia_datagridview_secuencia_produccion();
+            if (Operacio_procesos == "Visualizar_empleados")
+            {
+                Deactiva_boton_visualizar();
+                Deactiva_boton_visualizar_empleados();
+                Activa_boton_cancelar_operacio();
+                Desactiva_botones_operacion();
+                Limpia_datagridview_secuencia_produccion();
+                obtener_dibujos_iniciados_pausados_por_empleado();
+                Asigna_valores_datagridview_secuencias_produccion();
+            }
+            else
+            {
+                Activa_caja_numero_dibujo();
+                Activa_combo_nombre_proceso();
+                Inicia_timer_busqueda_dibujo();
+                Deactiva_boton_visualizar();
+                Deactiva_boton_visualizar_empleados();
+                Activa_boton_cancelar_operacio();
+                Desactiva_botones_operacion();
+                Limpia_cajas_despues_combo_proceso_seleccion();
+                Limpia_datagridview_secuencia_produccion();
+            }
 
         }
+
+        private void obtener_dibujos_iniciados_pausados_por_empleado()
+        {
+            Secuencias_produccion_disponibles.Clear();
+
+            Secuencias_produccion_disponibles = Class_Secuencia_Produccion
+                .Adquiere_secuencia_produccion_busqueda_dibujos_pendientes_empleados(comboBoxEmpleado.Text);
+
+
+    }
 
         private void Activa_boton_visualizar_secuencia()
         {
@@ -985,6 +1009,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_botones_operacion();
             Desactiva_boton_cancelar();
             Activa_boton_visualizar();
+            Activa_boton_visualizar_empleados();
             Activa_Combo_codigo_empleado();
             Limpia_combo_usuario();
             Limpia_seleccion_secuencia_operacion();
@@ -1213,6 +1238,7 @@ namespace Coset_Sistema_Produccion
             //Asigna_valores_forma_secuencia_produccion();
             //Rellena_datagridview_secuencias_produccion();
             Deactiva_boton_visualizar();
+            Deactiva_boton_visualizar_empleados();
             Desactiva_Combo_codigo_empleado();
             Activa_caja_numero_dibujo();
             Activa_boton_cancelar_operacio();
@@ -1230,6 +1256,18 @@ namespace Coset_Sistema_Produccion
             buttonBuscarSecuenciaDibujo.Enabled = true;
         }
 
+        private void Deactiva_boton_visualizar_empleados()
+        {
+            buttonBuscarSecuenciaEmplados.Enabled = false;
+        }
+
+        private void Activa_boton_visualizar_empleados()
+        {
+            buttonBuscarSecuenciaEmplados.Enabled = true;
+        }
+
+
+
         private void Asigna_valores_forma_secuencia_produccion()
         {
             textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
@@ -1239,7 +1277,13 @@ namespace Coset_Sistema_Produccion
             textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
         }
 
-
+        private void buttonBuscarSecuenciaEmplados_Click(object sender, EventArgs e)
+        {
+            Operacio_procesos = "Visualizar_empleados";
+            Deactiva_boton_visualizar();
+            Deactiva_boton_visualizar_empleados();
+            Activa_boton_cancelar_operacio();
+        }
     }
 }
  

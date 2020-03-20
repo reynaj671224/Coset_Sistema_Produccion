@@ -77,6 +77,7 @@
             this.labelNotasActividad = new System.Windows.Forms.Label();
             this.textBoxTipoProceso = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.buttonBuscarSecuenciaEmplados = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecuenciasProduccion)).BeginInit();
             this.SuspendLayout();
@@ -462,7 +463,7 @@
             this.buttonBuscarSecuenciaDibujo.Name = "buttonBuscarSecuenciaDibujo";
             this.buttonBuscarSecuenciaDibujo.Size = new System.Drawing.Size(79, 74);
             this.buttonBuscarSecuenciaDibujo.TabIndex = 54;
-            this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
+            this.buttonBuscarSecuenciaDibujo.Text = "Dibujos";
             this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
@@ -548,11 +549,25 @@
             this.label7.TabIndex = 61;
             this.label7.Text = "Tipo Proceso";
             // 
+            // buttonBuscarSecuenciaEmplados
+            // 
+            this.buttonBuscarSecuenciaEmplados.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuscarSecuenciaEmplados.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarSecuenciaEmplados.Image")));
+            this.buttonBuscarSecuenciaEmplados.Location = new System.Drawing.Point(207, 12);
+            this.buttonBuscarSecuenciaEmplados.Name = "buttonBuscarSecuenciaEmplados";
+            this.buttonBuscarSecuenciaEmplados.Size = new System.Drawing.Size(79, 74);
+            this.buttonBuscarSecuenciaEmplados.TabIndex = 63;
+            this.buttonBuscarSecuenciaEmplados.Text = "Emplaedos";
+            this.buttonBuscarSecuenciaEmplados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBuscarSecuenciaEmplados.UseVisualStyleBackColor = true;
+            this.buttonBuscarSecuenciaEmplados.Click += new System.EventHandler(this.buttonBuscarSecuenciaEmplados_Click);
+            // 
             // Forma_Captura_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 522);
+            this.Controls.Add(this.buttonBuscarSecuenciaEmplados);
             this.Controls.Add(this.textBoxTipoProceso);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBoxNotasActividad);
@@ -649,5 +664,6 @@
         private System.Windows.Forms.Label labelNotasActividad;
         private System.Windows.Forms.TextBox textBoxTipoProceso;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonBuscarSecuenciaEmplados;
     }
 }

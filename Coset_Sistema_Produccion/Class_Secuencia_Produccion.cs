@@ -42,6 +42,45 @@ namespace Coset_Sistema_Produccion
             return secuencia_existente_disponibles_produccion;
         }
 
+        public List<Secuencia_produccion> Adquiere_secuencia_produccion_busqueda_dibujos_pendientes_empleados(string empleado)
+        {
+            List<Secuencia_produccion> secuencia_existente_disponibles_produccion = new List<Secuencia_produccion>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_produccion());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_secuencia_produccion_dibujos_pendientes(empleado), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    secuencia_existente_disponibles_produccion.Add(new Secuencia_produccion()
+                    {
+                        Codigo = mySqlDataReader["codigo"].ToString(),
+                        Numero_Dibujo = mySqlDataReader["numero_dibujo"].ToString(),
+                        Empleado = mySqlDataReader["empleado"].ToString(),
+                        inicio_proceso = mySqlDataReader["inicio_proceso"].ToString(),
+                        final_proceso = mySqlDataReader["final_proceso"].ToString(),
+                        proceso = mySqlDataReader["proceso"].ToString(),
+                        estado = mySqlDataReader["estado"].ToString(),
+                        calidad = mySqlDataReader["calidad"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                secuencia_existente_disponibles_produccion.Add(new Secuencia_produccion()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return secuencia_existente_disponibles_produccion;
+        }
+
+        private string Commando_leer_Mysql_busqueda_secuencia_produccion_dibujos_pendientes(string empleado)
+        {
+            return "SELECT * FROM secuencia_produccion WHERE empleado='" + empleado +
+                "' and estado='pausado' or estado='Iniciado';";
+        }
+
         public string Actualiza_base_datos_secuencia_produccion(Secuencia_produccion numero_dibujo)
         {
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_produccion());
