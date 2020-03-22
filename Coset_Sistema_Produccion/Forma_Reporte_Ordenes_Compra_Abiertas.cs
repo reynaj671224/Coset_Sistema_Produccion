@@ -1401,7 +1401,7 @@ namespace Coset_Sistema_Produccion
             {
                 if (orden_compra.error == "")
                 {
-                    if ((orden_compra.Estado_salida != "Cerrada") || (orden_compra.Estado_salida != "Cerrada"))
+                    if ((orden_compra.Estado_entrada != "Cerrada") || (orden_compra.Estado_salida != "Cerrada"))
                     {
                         Obtener_partidas_ordenes_compra_disponibles(orden_compra.Codigo);
                         Rellenar_partidas_datagrid_ordenes_compra();
