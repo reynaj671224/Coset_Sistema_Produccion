@@ -173,6 +173,7 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Enabled = true;
             textBoxUbicacion.Enabled = true;
             textBoxPrecio.Enabled = true;
+            textBoxCategoria.Enabled = true;
         }
 
         private void Desactiva_boton_buscar_base_datos()
@@ -405,6 +406,7 @@ namespace Coset_Sistema_Produccion
             textBoxUbicacion.Enabled = false;
             textBoxPrecio.Enabled = false;
             textBoxCodigoProveedor.Enabled = false;
+            textBoxCategoria.Enabled = false;
         }
 
         private void Desactiva_caja_nombre_proceso()
@@ -430,6 +432,7 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Text = "";
             textBoxUbicacion.Text = "";
             textBoxPrecio.Text = "";
+            textBoxCategoria.Text = "";
         }
 
        
@@ -472,6 +475,7 @@ namespace Coset_Sistema_Produccion
             Modificar_material.Ubicacion = textBoxUbicacion.Text;
             Modificar_material.Codigo_proveedor = textBoxCodigoProveedor.Text;
             Modificar_material.precio = textBoxPrecio.Text;
+            Modificar_material.Categoria = textBoxCategoria.Text;
             if (radioButtonDolares.Checked)
                 Modificar_material.divisa = "Dolares";
             else if (radioButtonPesos.Checked)
@@ -494,9 +498,10 @@ namespace Coset_Sistema_Produccion
             Agregar_material.Unidad_medida = textBoxUnidadMedida.Text;
             Agregar_material.Marca = textBoxMarca.Text;
             Agregar_material.Ubicacion = textBoxUbicacion.Text;
+            Agregar_material.Categoria = textBoxCategoria.Text;
 
 
-            if(textBoxCantidad.Text == "")
+            if (textBoxCantidad.Text == "")
                 Agregar_material.Cantidad = "0";
             else
                 Agregar_material.Cantidad = textBoxCantidad.Text;
@@ -868,6 +873,7 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Enabled = true;
             textBoxUbicacion.Enabled = true;
             textBoxPrecio.Enabled = true;
+            textBoxCategoria.Enabled = true;
         }
 
         private void Cambia_Color_window_fondo_cajas_busqueda()
@@ -916,6 +922,7 @@ namespace Coset_Sistema_Produccion
             textBoxMarca.Text = material_busqueda.Marca;
             textBoxUbicacion.Text = material_busqueda.Ubicacion;
             textBoxPrecio.Text = material_busqueda.precio;
+            textBoxCategoria.Text = material_busqueda.Categoria;
             if (material_busqueda.divisa == "Dolares")
                 radioButtonDolares.Select();
             else if (material_busqueda.divisa == "Pesos")

@@ -72,6 +72,8 @@
             this.groupBoxGenericos = new System.Windows.Forms.GroupBox();
             this.radioButtonNoGenericoMaterial = new System.Windows.Forms.RadioButton();
             this.radioButtonGenericoMaterial = new System.Windows.Forms.RadioButton();
+            this.textBoxCategoria = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaterial)).BeginInit();
             this.groupBoxModeda.SuspendLayout();
@@ -549,11 +551,32 @@
             this.radioButtonGenericoMaterial.Text = "Generico";
             this.radioButtonGenericoMaterial.UseVisualStyleBackColor = false;
             // 
+            // textBoxCategoria
+            // 
+            this.textBoxCategoria.Enabled = false;
+            this.textBoxCategoria.Location = new System.Drawing.Point(172, 315);
+            this.textBoxCategoria.Name = "textBoxCategoria";
+            this.textBoxCategoria.Size = new System.Drawing.Size(150, 20);
+            this.textBoxCategoria.TabIndex = 74;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Image = ((System.Drawing.Image)(resources.GetObject("label12.Image")));
+            this.label12.Location = new System.Drawing.Point(43, 317);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 16);
+            this.label12.TabIndex = 73;
+            this.label12.Text = "Categoria";
+            // 
             // Forma_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 645);
+            this.Controls.Add(this.textBoxCategoria);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.groupBoxGenericos);
             this.Controls.Add(this.groupBoxModeda);
             this.Controls.Add(this.textBoxPrecio);
@@ -648,5 +671,7 @@
         private System.Windows.Forms.GroupBox groupBoxGenericos;
         private System.Windows.Forms.RadioButton radioButtonNoGenericoMaterial;
         private System.Windows.Forms.RadioButton radioButtonGenericoMaterial;
+        private System.Windows.Forms.TextBox textBoxCategoria;
+        private System.Windows.Forms.Label label12;
     }
 }

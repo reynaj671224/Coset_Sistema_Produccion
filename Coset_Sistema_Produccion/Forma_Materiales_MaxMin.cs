@@ -71,7 +71,7 @@ namespace Coset_Sistema_Produccion
                         }
                         dataGridViewPartidasMaterialSeleccion.Rows.Add(material.Codigo, material.Codigo_proveedor,
                             material.Descripcion, material.Minimo, material.Maximo, Material_cantidad_string, Material_requerido_string, 
-                            material.Marca, material.Unidad_medida, material.Ubicacion,material.foto);
+                            material.Marca, material.Unidad_medida, material.Ubicacion,material.Categoria,material.foto);
 
                     }
                     catch (Exception ex)
@@ -99,8 +99,7 @@ namespace Coset_Sistema_Produccion
         private void Forma_Materiales_Seleccion_Load(object sender, EventArgs e)
         {
             
-            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_MaxMIn_en_base_datos();
-            Rellena_partidas_materiales_disponibles();
+            
             
         }
 
@@ -297,6 +296,8 @@ namespace Coset_Sistema_Produccion
             oSheet.Cells[1, 8] = "Marca";
             oSheet.Cells[1, 9] = "Unidad Medida";
             oSheet.Cells[1, 10] = "Ubicacion";
+            oSheet.Cells[1, 11] = "Categoria";
+
 
         }
 
@@ -334,6 +335,35 @@ namespace Coset_Sistema_Produccion
             {
 
             }
+        }
+
+        private void buttonMaxMin_Click(object sender, EventArgs e)
+        {
+            Limpia_datagridview_datos();
+            Materiales_disponibles_busqueda.Clear();
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_MaxMIn_en_base_datos();
+            Rellena_partidas_materiales_disponibles();
+        }
+
+        private void Limpia_datagridview_datos()
+        {
+            dataGridViewPartidasMaterialSeleccion.Rows.Clear();
+        }
+
+        private void buttonMin_Click(object sender, EventArgs e)
+        {
+            Limpia_datagridview_datos();
+            Materiales_disponibles_busqueda.Clear();
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_Min_en_base_datos();
+            Rellena_partidas_materiales_disponibles();
+        }
+
+        private void buttonMax_Click(object sender, EventArgs e)
+        {
+            Limpia_datagridview_datos();
+            Materiales_disponibles_busqueda.Clear();
+            Materiales_disponibles_busqueda = class_materiales.Adquiere_materiales_Max_en_base_datos();
+            Rellena_partidas_materiales_disponibles();
         }
     }
 }
