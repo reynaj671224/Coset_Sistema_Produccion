@@ -44,6 +44,47 @@ namespace Coset_Sistema_Produccion
 
         }
 
+        public List<Dibujos_proyecto> Adquiere_dibujos_reporte_proyecto_disponibles_en_base_datos(string Codigo_proyecto)
+        {
+            List<Dibujos_proyecto> clientes_disponibles = new List<Dibujos_proyecto>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_ingenieria_dibujos_proyecto());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_proyectos_reporte(Codigo_proyecto), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    clientes_disponibles.Add(new Dibujos_proyecto()
+                    {
+                        Codigo = (int)mySqlDataReader["codigo_dibujo"],
+                        Numero = mySqlDataReader["numero_dibujo"].ToString(),
+                        Cantidad = mySqlDataReader["cantidad_dibujos"].ToString(),
+                        Descripcion = mySqlDataReader["descripcion_dibujo"].ToString(),
+                        proceso = mySqlDataReader["proceso"].ToString(),
+                        tiempo_estimado_horas = mySqlDataReader["tiempo_estimado_horas"].ToString(),
+                        Tipo_proceso = mySqlDataReader["tipo_proceso"].ToString(),
+                        Actividades_proceso_electrico = mySqlDataReader["actividades_proceso_electrico"].ToString(),
+                        Codigo_proyecto = mySqlDataReader["codigo_proyecto"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                clientes_disponibles.Add(new Dibujos_proyecto()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return clientes_disponibles;
+
+        }
+
+        private string Commando_leer_Mysql_proyectos_reporte(string codigo_proyecto)
+        {
+            return "SELECT * FROM dibujos_proyecto WHERE numero_dibujo='" + codigo_proyecto +
+                "' and estado='Terminado';";
+        }
+
         public List<Dibujos_proyecto> adquiere_dibujos_proyecto_duplicados(string codigo_proyecto,string numero_dibujo)
         {
             List<Dibujos_proyecto> clientes_disponibles = new List<Dibujos_proyecto>();

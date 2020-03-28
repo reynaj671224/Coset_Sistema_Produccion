@@ -545,55 +545,39 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_partidas_dibujos_proyecto()
         {
-            int Total_dibujos = 0;
-            int Total_completos = 0;
-            double Porcentaje_completo = 0;
-            foreach(Dibujos_proyecto dibujo in dibujos_Proyectos_disponibles)
+            //int Total_dibujos = 0;
+            //int Total_completos = 0;
+            //double Porcentaje_completo = 0;
+            foreach(Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
             {
-                dibujo_Produccion_busqueda.Numero_dibujo = dibujo.Numero;
-                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
-                    Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
-                if (dibujo_Produccions_disponibles.Count > 0)
-                {
-                    dibujo_Produccion_seleccion = dibujo_Produccions_disponibles.
-                        Find(dibujo_produccion => dibujo_produccion.Numero_dibujo.Contains(dibujo.Numero));
+                dibujos_Proyecto_busqueda.Numero = dibujo.Numero_dibujo;
+                dibujos_Proyecto_busqueda.proceso = dibujo.Proceso;
+                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
+                    Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
 
-                    dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
-                       dibujo.Descripcion,dibujo.Cantidad,dibujo.proceso, dibujo_Produccion_seleccion.Estado,
-                       dibujo_Produccion_seleccion.Secuencia, dibujo_Produccion_seleccion.Empleado,
-                       dibujo_Produccion_seleccion.Horas_produccion, dibujo_Produccion_seleccion.Horas_retrabajo);
-                    if(dibujo_Produccion_seleccion.Estado== "Terminado")
-                    {
-                        Total_completos++;
-                    }
-                    
-                }
-                else
-                {
-                    dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero, dibujo.Codigo_proyecto,
-                                           dibujo.Descripcion, dibujo.Cantidad, dibujo.proceso, "No En Produccion",
-                                           " ", " "," ", " ");
-                }
-                Total_dibujos++;
-                
+                dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
+                   dibujo.Proceso, dibujo.Estado, dibujo.Empleado, dibujo.Horas_produccion,
+                   dibujo.Horas_retrabajo);
+  
             }
-            Porcentaje_completo = (Convert.ToSingle(Total_completos) / Convert.ToSingle(Total_dibujos)) * 100;
-            textBoxTotalDibujos.Text = Total_dibujos.ToString();
-            textBoxTotalDibujoCompletos.Text = Total_completos.ToString();
-            textBoxPorcentajeProyecto.Text = Porcentaje_completo.ToString();
+            //Porcentaje_completo = (Convert.ToSingle(Total_completos) / Convert.ToSingle(Total_dibujos)) * 100;
+            //textBoxTotalDibujos.Text = Total_dibujos.ToString();
+            //textBoxTotalDibujoCompletos.Text = Total_completos.ToString();
+            //textBoxPorcentajeProyecto.Text = Porcentaje_completo.ToString();
         }
 
         private void Obtener_dibujos_proyecto_disponibles()
         {
             if (Operacio_reporte_proyectos == "proyectos_codigo")
             {
-                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
-                    Adquiere_dibujos_proyecto_disponibles_en_base_datos(comboBoxCodigoProyecto.Text);
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                Adquiere_dibujos_producion_reporte_proyecto_disponibles_en_base_datos(comboBoxCodigoProyecto.Text);
+                    
             }
             else if(Operacio_reporte_proyectos == "proyectos_nombre")
             {
-                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
-                   Adquiere_dibujos_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                Adquiere_dibujos_producion_reporte_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
             }
         }
 
@@ -860,6 +844,7 @@ namespace Coset_Sistema_Produccion
             buttonReporteProyectos.Enabled = false;
             buttonReporteUsuarios.Enabled = false;
             buttonReoprteMateriales.Enabled = false;
+            buttonFecha.Enabled = false;
         }
 
         private void Activa_botones_operacion()
@@ -867,6 +852,7 @@ namespace Coset_Sistema_Produccion
             buttonReporteProyectos.Enabled = true;
             buttonReporteUsuarios.Enabled = true;
             buttonReoprteMateriales.Enabled = true;
+            buttonFecha.Enabled = true;
         }
 
         private void Aparece_cajas_etiquetas_reporte_proyectos()
@@ -884,12 +870,12 @@ namespace Coset_Sistema_Produccion
             labelIngenieroCoset.Visible = true;
             textBoxIngenieroCliente.Visible = true;
             labelIngenieroCliente.Visible = true;
-            labelTotalDibujos.Visible = true;
-            textBoxTotalDibujos.Visible = true;
-            labelTotalDibujosCompletos.Visible = true;
-            textBoxTotalDibujoCompletos.Visible = true;
-            labelTotalPorcentajeDibujos.Visible = true;
-            textBoxPorcentajeProyecto.Visible = true;
+            //labelTotalDibujos.Visible = true;
+            //textBoxTotalDibujos.Visible = true;
+            //labelTotalDibujosCompletos.Visible = true;
+            //textBoxTotalDibujoCompletos.Visible = true;
+            //labelTotalPorcentajeDibujos.Visible = true;
+            //textBoxPorcentajeProyecto.Visible = true;
         }
 
         private void Desaparece_cajas_etiquetas_reporte_proyectos()
@@ -1366,6 +1352,24 @@ namespace Coset_Sistema_Produccion
             textBoxIngenieroCliente.Text = proyecto_visualizar.Ingeriero_cliente;
             textBoxCodigoCliente.Text = proyecto_visualizar.Codigo_cliente;
             textBoxCodigoProyecto.Text = proyecto_visualizar.Codigo;
+        }
+
+        private void buttonFecha_Click(object sender, EventArgs e)
+        {
+            Operacio_reporte_proyectos = "Fecha";
+            Desactica_botones_operacion();
+            Aparce_boton_cancelar();
+
+        }
+
+        private void dateTimePickerFechaInicio_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerFechaFinal_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
