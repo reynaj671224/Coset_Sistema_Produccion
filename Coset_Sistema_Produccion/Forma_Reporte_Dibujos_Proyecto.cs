@@ -1065,11 +1065,29 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
-            obtener_secuencia_produccion_dusponibles();
+            obtener_secuencia_produccion_disponibles();
             limpia_datagrid_reporte_dibujos_proyecto();
             rellena_datagridview_proyectos_fechas();
+            Verifica_datos_en_datagridview();
+            
+        }
 
+        private void Verifica_datos_en_datagridview()
+        {
+            if (dataGridViewReporteDibujosProyecto.Rows.Count > 1)
+            {
+                Aparece_boton_filtros();
+            }
+        }
 
+        private void Aparece_boton_filtros()
+        {
+            buttonFiltros.Visible = true;
+        }
+
+        private void Deaparece_boton_filtros()
+        {
+            buttonFiltros.Visible = false;
         }
 
         private void rellena_datagridview_proyectos_fechas()
@@ -1098,19 +1116,35 @@ namespace Coset_Sistema_Produccion
             }
         }
 
-        private void obtener_secuencia_produccion_dusponibles()
+        private void obtener_secuencia_produccion_disponibles()
         {
 
             DateTime dateTime_inicio = dateTimePickerFechaInicio.Value;
             DateTime dateTime_final = dateTimePickerFechaFinal.Value;
 
+
             secuencia_produccion_disponibles.Clear();
             string fecha_inicio_analizar = dateTime_inicio.Year+"-"+ dateTime_inicio.Month +"-"+ dateTime_inicio.Day;
             string fecha_final_analizar = dateTime_final.Year + "-" + dateTime_final.Month + "-" + dateTime_final.Day;
 
+            if (comboBoxFechaFiltro.Text == "Tiempo Inicio")
+            {
 
-            secuencia_produccion_disponibles = Class_Secuencia_Produccion.
-                Adquiere_secuencia_produccion_reporte_fecha(fecha_inicio_analizar, fecha_final_analizar);
+                secuencia_produccion_disponibles = Class_Secuencia_Produccion.
+                Adquiere_secuencia_produccion_reporte_fecha_inicio(fecha_inicio_analizar, fecha_final_analizar);
+            }
+            else if (comboBoxFechaFiltro.Text == "Tiempo Termino")
+            {
+
+                secuencia_produccion_disponibles = Class_Secuencia_Produccion.
+                    Adquiere_secuencia_produccion_reporte_fecha_termino(fecha_inicio_analizar, fecha_final_analizar);
+            }
+            else
+            {
+                MessageBox.Show("No Fecha Inicio/Final seleccionado", "Reporte Proyectos por Fecha"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         
@@ -1426,6 +1460,35 @@ namespace Coset_Sistema_Produccion
             buttonBusquedaBaseDatos.Visible = false;
         }
 
+        private void buttonFiltros_Click(object sender, EventArgs e)
+        {
+            Desaparece_combos_label_fecha();
+            Desaparece_boton_busqueda();
+            Termina_timer_fecha_filtros();
+            Aparece_combo_codigo_proyecto();
+            Aparece_label_proyecto();
+            Aparece_elementos_reporte_usuarios_reporte();
+        }
+
+        private void Aparece_label_empleado()
+        {
+            labelNombreEmpleado.Visible = true;
+        }
+
+        private void Aparece_label_proyecto()
+        {
+            labelCodigoProyecto.Visible = true;
+        }
+
+        private void Desaparece_label_empleado()
+        {
+            labelNombreEmpleado.Visible = false;
+        }
+
+        private void Desaparece_label_proyecto()
+        {
+            labelCodigoProyecto.Visible = false;
+        }
     }
 
 }

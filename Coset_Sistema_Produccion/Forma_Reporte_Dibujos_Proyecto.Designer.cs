@@ -86,6 +86,7 @@
             this.labelFechaFinal = new System.Windows.Forms.Label();
             this.comboBoxFechaFiltro = new System.Windows.Forms.ComboBox();
             this.labelFechaFiltro = new System.Windows.Forms.Label();
+            this.buttonFiltros = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -97,7 +98,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1265, 521);
+            this.pictureBox1.Size = new System.Drawing.Size(1265, 599);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -167,7 +168,7 @@
             // textBoxNombreCliente
             // 
             this.textBoxNombreCliente.Enabled = false;
-            this.textBoxNombreCliente.Location = new System.Drawing.Point(220, 174);
+            this.textBoxNombreCliente.Location = new System.Drawing.Point(220, 208);
             this.textBoxNombreCliente.Name = "textBoxNombreCliente";
             this.textBoxNombreCliente.Size = new System.Drawing.Size(268, 20);
             this.textBoxNombreCliente.TabIndex = 40;
@@ -178,7 +179,7 @@
             this.labelNombreCliente.AutoSize = true;
             this.labelNombreCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNombreCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreCliente.Image")));
-            this.labelNombreCliente.Location = new System.Drawing.Point(99, 174);
+            this.labelNombreCliente.Location = new System.Drawing.Point(99, 208);
             this.labelNombreCliente.Name = "labelNombreCliente";
             this.labelNombreCliente.Size = new System.Drawing.Size(92, 16);
             this.labelNombreCliente.TabIndex = 39;
@@ -188,7 +189,7 @@
             // textBoxCodigoProyecto
             // 
             this.textBoxCodigoProyecto.Enabled = false;
-            this.textBoxCodigoProyecto.Location = new System.Drawing.Point(220, 91);
+            this.textBoxCodigoProyecto.Location = new System.Drawing.Point(220, 98);
             this.textBoxCodigoProyecto.Name = "textBoxCodigoProyecto";
             this.textBoxCodigoProyecto.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoProyecto.TabIndex = 38;
@@ -200,7 +201,7 @@
             this.labelCodigoProyecto.AutoSize = true;
             this.labelCodigoProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCodigoProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoProyecto.Image")));
-            this.labelCodigoProyecto.Location = new System.Drawing.Point(99, 95);
+            this.labelCodigoProyecto.Location = new System.Drawing.Point(99, 100);
             this.labelCodigoProyecto.Name = "labelCodigoProyecto";
             this.labelCodigoProyecto.Size = new System.Drawing.Size(93, 16);
             this.labelCodigoProyecto.TabIndex = 37;
@@ -220,7 +221,7 @@
             this.Empleado,
             this.Horas_produccion,
             this.Horas_retrabajo});
-            this.dataGridViewReporteDibujosProyecto.Location = new System.Drawing.Point(135, 275);
+            this.dataGridViewReporteDibujosProyecto.Location = new System.Drawing.Point(135, 353);
             this.dataGridViewReporteDibujosProyecto.Name = "dataGridViewReporteDibujosProyecto";
             this.dataGridViewReporteDibujosProyecto.ReadOnly = true;
             this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(795, 234);
@@ -273,7 +274,7 @@
             // comboBoxCodigoProyecto
             // 
             this.comboBoxCodigoProyecto.FormattingEnabled = true;
-            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 90);
+            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 98);
             this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCodigoProyecto.Sorted = true;
@@ -284,7 +285,7 @@
             // textBoxIngenieroCoset
             // 
             this.textBoxIngenieroCoset.Enabled = false;
-            this.textBoxIngenieroCoset.Location = new System.Drawing.Point(220, 203);
+            this.textBoxIngenieroCoset.Location = new System.Drawing.Point(220, 237);
             this.textBoxIngenieroCoset.Name = "textBoxIngenieroCoset";
             this.textBoxIngenieroCoset.Size = new System.Drawing.Size(268, 20);
             this.textBoxIngenieroCoset.TabIndex = 55;
@@ -295,7 +296,7 @@
             this.labelIngenieroCoset.AutoSize = true;
             this.labelIngenieroCoset.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelIngenieroCoset.Image = ((System.Drawing.Image)(resources.GetObject("labelIngenieroCoset.Image")));
-            this.labelIngenieroCoset.Location = new System.Drawing.Point(99, 203);
+            this.labelIngenieroCoset.Location = new System.Drawing.Point(99, 237);
             this.labelIngenieroCoset.Name = "labelIngenieroCoset";
             this.labelIngenieroCoset.Size = new System.Drawing.Size(100, 16);
             this.labelIngenieroCoset.TabIndex = 54;
@@ -307,7 +308,7 @@
             this.labelNombreProyecto.AutoSize = true;
             this.labelNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNombreProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreProyecto.Image")));
-            this.labelNombreProyecto.Location = new System.Drawing.Point(99, 120);
+            this.labelNombreProyecto.Location = new System.Drawing.Point(99, 155);
             this.labelNombreProyecto.Name = "labelNombreProyecto";
             this.labelNombreProyecto.Size = new System.Drawing.Size(98, 16);
             this.labelNombreProyecto.TabIndex = 68;
@@ -317,7 +318,7 @@
             // textBoxNombreProyecto
             // 
             this.textBoxNombreProyecto.Enabled = false;
-            this.textBoxNombreProyecto.Location = new System.Drawing.Point(220, 117);
+            this.textBoxNombreProyecto.Location = new System.Drawing.Point(220, 151);
             this.textBoxNombreProyecto.Name = "textBoxNombreProyecto";
             this.textBoxNombreProyecto.Size = new System.Drawing.Size(268, 20);
             this.textBoxNombreProyecto.TabIndex = 69;
@@ -328,7 +329,7 @@
             this.labelCodigoCliente.AutoSize = true;
             this.labelCodigoCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCodigoCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelCodigoCliente.Image")));
-            this.labelCodigoCliente.Location = new System.Drawing.Point(99, 145);
+            this.labelCodigoCliente.Location = new System.Drawing.Point(99, 179);
             this.labelCodigoCliente.Name = "labelCodigoCliente";
             this.labelCodigoCliente.Size = new System.Drawing.Size(87, 16);
             this.labelCodigoCliente.TabIndex = 72;
@@ -338,7 +339,7 @@
             // textBoxCodigoCliente
             // 
             this.textBoxCodigoCliente.Enabled = false;
-            this.textBoxCodigoCliente.Location = new System.Drawing.Point(220, 145);
+            this.textBoxCodigoCliente.Location = new System.Drawing.Point(220, 179);
             this.textBoxCodigoCliente.Name = "textBoxCodigoCliente";
             this.textBoxCodigoCliente.Size = new System.Drawing.Size(121, 20);
             this.textBoxCodigoCliente.TabIndex = 74;
@@ -349,7 +350,7 @@
             this.labelIngenieroCliente.AutoSize = true;
             this.labelIngenieroCliente.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelIngenieroCliente.Image = ((System.Drawing.Image)(resources.GetObject("labelIngenieroCliente.Image")));
-            this.labelIngenieroCliente.Location = new System.Drawing.Point(99, 230);
+            this.labelIngenieroCliente.Location = new System.Drawing.Point(99, 264);
             this.labelIngenieroCliente.Name = "labelIngenieroCliente";
             this.labelIngenieroCliente.Size = new System.Drawing.Size(101, 16);
             this.labelIngenieroCliente.TabIndex = 75;
@@ -359,7 +360,7 @@
             // textBoxIngenieroCliente
             // 
             this.textBoxIngenieroCliente.Enabled = false;
-            this.textBoxIngenieroCliente.Location = new System.Drawing.Point(220, 230);
+            this.textBoxIngenieroCliente.Location = new System.Drawing.Point(220, 264);
             this.textBoxIngenieroCliente.Name = "textBoxIngenieroCliente";
             this.textBoxIngenieroCliente.Size = new System.Drawing.Size(268, 20);
             this.textBoxIngenieroCliente.TabIndex = 76;
@@ -461,7 +462,7 @@
             this.buttonReoprteMateriales.Image = ((System.Drawing.Image)(resources.GetObject("buttonReoprteMateriales.Image")));
             this.buttonReoprteMateriales.Location = new System.Drawing.Point(808, 12);
             this.buttonReoprteMateriales.Name = "buttonReoprteMateriales";
-            this.buttonReoprteMateriales.Size = new System.Drawing.Size(79, 74);
+            this.buttonReoprteMateriales.Size = new System.Drawing.Size(70, 73);
             this.buttonReoprteMateriales.TabIndex = 85;
             this.buttonReoprteMateriales.Text = "Materiales";
             this.buttonReoprteMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -487,7 +488,7 @@
             // comboBoxNombreEmpleado
             // 
             this.comboBoxNombreEmpleado.FormattingEnabled = true;
-            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(251, 91);
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(220, 125);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreEmpleado.Sorted = true;
@@ -500,7 +501,7 @@
             this.labelNombreEmpleado.AutoSize = true;
             this.labelNombreEmpleado.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNombreEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("labelNombreEmpleado.Image")));
-            this.labelNombreEmpleado.Location = new System.Drawing.Point(99, 95);
+            this.labelNombreEmpleado.Location = new System.Drawing.Point(99, 129);
             this.labelNombreEmpleado.Name = "labelNombreEmpleado";
             this.labelNombreEmpleado.Size = new System.Drawing.Size(106, 16);
             this.labelNombreEmpleado.TabIndex = 87;
@@ -590,7 +591,7 @@
             // comboBoxNombreProyecto
             // 
             this.comboBoxNombreProyecto.FormattingEnabled = true;
-            this.comboBoxNombreProyecto.Location = new System.Drawing.Point(220, 117);
+            this.comboBoxNombreProyecto.Location = new System.Drawing.Point(220, 150);
             this.comboBoxNombreProyecto.Name = "comboBoxNombreProyecto";
             this.comboBoxNombreProyecto.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreProyecto.Sorted = true;
@@ -678,11 +679,27 @@
             this.labelFechaFiltro.Text = "Fecha";
             this.labelFechaFiltro.Visible = false;
             // 
+            // buttonFiltros
+            // 
+            this.buttonFiltros.BackColor = System.Drawing.Color.White;
+            this.buttonFiltros.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFiltros.Image = ((System.Drawing.Image)(resources.GetObject("buttonFiltros.Image")));
+            this.buttonFiltros.Location = new System.Drawing.Point(702, 11);
+            this.buttonFiltros.Name = "buttonFiltros";
+            this.buttonFiltros.Size = new System.Drawing.Size(79, 74);
+            this.buttonFiltros.TabIndex = 104;
+            this.buttonFiltros.Text = "Filtros";
+            this.buttonFiltros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonFiltros.UseVisualStyleBackColor = false;
+            this.buttonFiltros.Visible = false;
+            this.buttonFiltros.Click += new System.EventHandler(this.buttonFiltros_Click);
+            // 
             // Forma_Reporte_Dibujos_Proyecto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.ClientSize = new System.Drawing.Size(1265, 599);
+            this.Controls.Add(this.buttonFiltros);
             this.Controls.Add(this.labelFechaFiltro);
             this.Controls.Add(this.comboBoxFechaFiltro);
             this.Controls.Add(this.labelFechaFinal);
@@ -798,5 +815,6 @@
         private System.Windows.Forms.Label labelFechaFinal;
         private System.Windows.Forms.ComboBox comboBoxFechaFiltro;
         private System.Windows.Forms.Label labelFechaFiltro;
+        private System.Windows.Forms.Button buttonFiltros;
     }
 }

@@ -75,13 +75,13 @@ namespace Coset_Sistema_Produccion
             return secuencia_existente_disponibles_produccion;
         }
 
-        public List<Secuencia_produccion> Adquiere_secuencia_produccion_reporte_fecha(string fecha_inicio, string fecha_final)
+        public List<Secuencia_produccion> Adquiere_secuencia_produccion_reporte_fecha_inicio(string fecha_inicio, string fecha_final)
         {
             List<Secuencia_produccion> secuencia_existente_disponibles_produccion = new List<Secuencia_produccion>();
             MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_produccion());
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha(fecha_inicio, fecha_final), connection);
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha_inicio(fecha_inicio, fecha_final), connection);
                 connection.Open();
                 MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
                 while (mySqlDataReader.Read())
@@ -108,7 +108,72 @@ namespace Coset_Sistema_Produccion
             return secuencia_existente_disponibles_produccion;
         }
 
-        private string Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha(string fecha_inicio, string fecha_final)
+        public List<Secuencia_produccion> Adquiere_secuencia_produccion_reporte_fecha_termino(string fecha_inicio, string fecha_final)
+        {
+            List<Secuencia_produccion> secuencia_existente_disponibles_produccion = new List<Secuencia_produccion>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_produccion());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha_termino(fecha_inicio, fecha_final), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    secuencia_existente_disponibles_produccion.Add(new Secuencia_produccion()
+                    {
+                        Codigo = mySqlDataReader["codigo"].ToString(),
+                        Numero_Dibujo = mySqlDataReader["numero_dibujo"].ToString(),
+                        Empleado = mySqlDataReader["empleado"].ToString(),
+                        inicio_proceso = mySqlDataReader["inicio_proceso"].ToString(),
+                        final_proceso = mySqlDataReader["final_proceso"].ToString(),
+                        proceso = mySqlDataReader["proceso"].ToString(),
+                        estado = mySqlDataReader["estado"].ToString(),
+                        calidad = mySqlDataReader["calidad"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                secuencia_existente_disponibles_produccion.Add(new Secuencia_produccion()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return secuencia_existente_disponibles_produccion;
+        }
+
+        private string Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha_termino(string fecha_inicio, string fecha_final)
+        {
+            return "SELECT* FROM produccion.secuencia_produccion " +
+
+             "where " +
+
+             "cast( " +
+             "concat( " +
+             "substring(produccion.secuencia_produccion.final_proceso," +
+             "instr(produccion.secuencia_produccion.final_proceso, ' ') - 4, 4)" +
+             ",'/'," +
+             "substring(produccion.secuencia_produccion.final_proceso,1," +
+             "length(produccion.secuencia_produccion.final_proceso)" +
+             "- length(right(produccion.secuencia_produccion.final_proceso," +
+             "length(produccion.secuencia_produccion.final_proceso) -" +
+             "(instr(produccion.secuencia_produccion.final_proceso, ' ') - 6))))) " +
+             "as date) >= '" + fecha_inicio + "' and " +
+
+             "cast( " +
+             "concat( " +
+             "substring(produccion.secuencia_produccion.final_proceso," +
+             "instr(produccion.secuencia_produccion.final_proceso, ' ') - 4, 4)" +
+             ",'/'," +
+             "substring(produccion.secuencia_produccion.final_proceso,1," +
+             "length(produccion.secuencia_produccion.final_proceso)" +
+             "- length(right(produccion.secuencia_produccion.final_proceso," +
+             "length(produccion.secuencia_produccion.final_proceso) -" +
+             "(instr(produccion.secuencia_produccion.final_proceso, ' ') - 6))))) " +
+             "as date) <= '" + fecha_final +
+             "' and estado='Terminado';";
+        }
+
+        private string Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha_inicio(string fecha_inicio, string fecha_final)
         {
             return "SELECT* FROM produccion.secuencia_produccion " +
 
