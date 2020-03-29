@@ -68,6 +68,9 @@ namespace Coset_Sistema_Produccion
         public List<Dibujo_produccion> dibujo_Produccions_disponibles = new List<Dibujo_produccion>();
         public Dibujo_produccion dibujo_Produccion_busqueda = new Dibujo_produccion();
         public Dibujo_produccion dibujo_Produccion_seleccion = new Dibujo_produccion();
+        public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
+        public List<Secuencia_produccion> secuencia_produccion_disponibles = new List<Secuencia_produccion>();
+
 
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
@@ -266,10 +269,24 @@ namespace Coset_Sistema_Produccion
             Desaparece_boton_Excel();
             Desapare_combo_nombre_proyecto();
             Desaparece_textbox_codigo_proyecto();
-
+            Desaparece_combos_label_fecha();
+            limpia_combo_fecha_filtro();
+            limpia_fechas_filtros();
+            Termina_timer_fecha_filtros();
 
             //Elimina_informacion_proyectos_disponibles();
 
+        }
+
+        private void limpia_fechas_filtros()
+        {
+            dateTimePickerFechaFinal.Value = DateTime.Now;
+            dateTimePickerFechaInicio.Value = DateTime.Now;
+        }
+
+        private void limpia_combo_fecha_filtro()
+        {
+            comboBoxFechaFiltro.Text = "";
         }
 
         private void Desaparece_boton_busqueda()
@@ -279,8 +296,8 @@ namespace Coset_Sistema_Produccion
 
         private void Desactiva_timer_busqueda()
         {
-            if (timerBusquedaMaterial.Enabled)
-                timerBusquedaMaterial.Enabled = false;
+            if (timerBusquedaFecha.Enabled)
+                timerBusquedaFecha.Enabled = false;
 
         }
 
@@ -1015,7 +1032,7 @@ namespace Coset_Sistema_Produccion
 
         private void Inicia_timer_para_buscar_informacion_materiales_busqueda()
         {
-            timerBusquedaMaterial.Enabled = true;
+            timerBusquedaFecha.Enabled = true;
         }
 
         private void Asigna_caracter_busqueda_material()
@@ -1045,62 +1062,58 @@ namespace Coset_Sistema_Produccion
             textBoxDescripcionMaterial.Visible = false;
         }
 
-        private void timerBusquedaMaterial_Tick(object sender, EventArgs e)
-        {
-            if (
-                textBoxCodigoProveedor.Text != "" ||
-                textCodigoMaterial.Text != "" ||
-                textBoxDescripcionMaterial.Text != "")
-            {
-                timerBusquedaMaterial.Enabled = false;
-                buttonBusquedaBaseDatos.Visible = true;
-            }
-        }
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
-            Desaparece_boton_busqueda();
-            Obtener_datos_materiales_busqueda();
-            Limpia_cajas_captura_despues_de_agregar_proyecto();
-            if (Materiales_disponibles_busqueda.Count == 1)
-            {
-                limpia_datagrid_reporte_dibujos_proyecto();
-                Activa_datagridview_dibujos_proyecto();
-                obtener_salida_materiales(Materiales_disponibles_busqueda[0]);
-                Rellena_partida_materiales_salida_proyecto();
-                Obtener_devoluciones_materiales(Materiales_disponibles_busqueda[0]);
-                Rellena_partida_materiales_devolucion_proyecto();
-                Aparece_boton_Excel();
-                Inicia_timer_para_buscar_informacion_materiales_busqueda();
+            obtener_secuencia_produccion_dusponibles();
+            limpia_datagrid_reporte_dibujos_proyecto();
+            rellena_datagridview_proyectos_fechas();
 
-            }
-            else if (Materiales_disponibles_busqueda.Count > 1)
-            {
-                Forma_Materiales_Seleccion forma_Materiales_Seleccion = new Forma_Materiales_Seleccion(Materiales_disponibles_busqueda, "Entrada Materiales");
-                forma_Materiales_Seleccion.ShowDialog();
-
-                if (forma_Materiales_Seleccion.Material_seleccionado_data_view != null)
-                {
-                    limpia_datagrid_reporte_dibujos_proyecto();
-                    Activa_datagridview_dibujos_proyecto();
-                    obtener_salida_materiales(forma_Materiales_Seleccion.Material_seleccionado_data_view);
-                    Rellena_partida_materiales_salida_proyecto();
-                    Obtener_devoluciones_materiales(forma_Materiales_Seleccion.Material_seleccionado_data_view);
-                    Rellena_partida_materiales_devolucion_proyecto();
-                    Aparece_boton_Excel();
-                    Inicia_timer_para_buscar_informacion_materiales_busqueda();
-                }
-            }
-            else if (Materiales_disponibles_busqueda.Count == 0)
-            {
-
-                MessageBox.Show("NO se encontraron Material Con este criterio",
-                    "Busqueda Material", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Inicia_timer_para_buscar_informacion_materiales_busqueda();
-
-            }
 
         }
+
+        private void rellena_datagridview_proyectos_fechas()
+        {
+            dibujos_Proyectos_disponibles.Clear();
+            dibujo_Produccions_disponibles.Clear();
+            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            {
+                dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
+                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                    Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
+
+                
+                dibujos_Proyecto_busqueda.Numero = secuencia.Numero_Dibujo;
+                dibujos_Proyecto_busqueda.proceso = secuencia.proceso;
+
+                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
+                    Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
+
+                dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
+                   secuencia.proceso, secuencia.estado, secuencia.Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                   dibujo_Produccions_disponibles[0].Horas_retrabajo);
+
+            }
+        }
+
+        private void obtener_secuencia_produccion_dusponibles()
+        {
+
+            DateTime dateTime_inicio = dateTimePickerFechaInicio.Value;
+            DateTime dateTime_final = dateTimePickerFechaFinal.Value;
+
+            secuencia_produccion_disponibles.Clear();
+            string fecha_inicio_analizar = dateTime_inicio.Year+"-"+ dateTime_inicio.Month +"-"+ dateTime_inicio.Day;
+            string fecha_final_analizar = dateTime_final.Year + "-" + dateTime_final.Month + "-" + dateTime_final.Day;
+
+
+            secuencia_produccion_disponibles = Class_Secuencia_Produccion.
+                Adquiere_secuencia_produccion_reporte_fecha(fecha_inicio_analizar, fecha_final_analizar);
+        }
+
+        
 
         private void Obtener_devoluciones_materiales(Material material)
         {
@@ -1359,18 +1372,60 @@ namespace Coset_Sistema_Produccion
             Operacio_reporte_proyectos = "Fecha";
             Desactica_botones_operacion();
             Aparce_boton_cancelar();
-
+            Aparece_combos_label_fecha();
+            Inicia_timer_fecha_filtros();
         }
 
-        private void dateTimePickerFechaInicio_ValueChanged(object sender, EventArgs e)
+        private void Inicia_timer_fecha_filtros()
         {
-
+            timerBusquedaFecha.Enabled = true;
         }
 
-        private void dateTimePickerFechaFinal_ValueChanged(object sender, EventArgs e)
+        private void Termina_timer_fecha_filtros()
         {
-
+            timerBusquedaFecha.Enabled = false;
         }
+
+        private void Aparece_combos_label_fecha()
+        {
+            labelFechaFiltro.Visible = true;
+            labelFechaInicio.Visible = true;
+            labelFechaFinal.Visible = true;
+            comboBoxFechaFiltro.Visible = true;
+            dateTimePickerFechaInicio.Visible = true;
+            dateTimePickerFechaFinal.Visible = true;
+        }
+
+        private void Desaparece_combos_label_fecha()
+        {
+            labelFechaFiltro.Visible = false;
+            labelFechaInicio.Visible = false;
+            labelFechaFinal.Visible = false;
+            comboBoxFechaFiltro.Visible = false;
+            dateTimePickerFechaInicio.Visible = false;
+            dateTimePickerFechaFinal.Visible = false;
+        }
+
+        
+
+        private void timerBusquedaFecha_Tick(object sender, EventArgs e)
+        {
+            if(comboBoxFechaFiltro.Text != "")
+            {
+                aparce_boton_busqueda();
+            }
+        }
+
+        private void aparce_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Visible = true;
+        }
+
+        private void Desaparce_boton_busqueda()
+        {
+            buttonBusquedaBaseDatos.Visible = false;
+        }
+
     }
 
 }

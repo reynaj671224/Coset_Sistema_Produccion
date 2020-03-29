@@ -76,14 +76,16 @@
             this.labelCodigoMaterialProveedor = new System.Windows.Forms.Label();
             this.textBoxDescripcionMaterial = new System.Windows.Forms.TextBox();
             this.labelMaterialDescripcion = new System.Windows.Forms.Label();
-            this.timerBusquedaMaterial = new System.Windows.Forms.Timer(this.components);
+            this.timerBusquedaFecha = new System.Windows.Forms.Timer(this.components);
             this.buttonExcel = new System.Windows.Forms.Button();
             this.comboBoxNombreProyecto = new System.Windows.Forms.ComboBox();
             this.buttonFecha = new System.Windows.Forms.Button();
             this.dateTimePickerFechaFinal = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFechaInicio = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelFechaInicio = new System.Windows.Forms.Label();
+            this.labelFechaFinal = new System.Windows.Forms.Label();
+            this.comboBoxFechaFiltro = new System.Windows.Forms.ComboBox();
+            this.labelFechaFiltro = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -218,11 +220,10 @@
             this.Empleado,
             this.Horas_produccion,
             this.Horas_retrabajo});
-            this.dataGridViewReporteDibujosProyecto.Enabled = false;
             this.dataGridViewReporteDibujosProyecto.Location = new System.Drawing.Point(135, 275);
             this.dataGridViewReporteDibujosProyecto.Name = "dataGridViewReporteDibujosProyecto";
             this.dataGridViewReporteDibujosProyecto.ReadOnly = true;
-            this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(846, 234);
+            this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(795, 234);
             this.dataGridViewReporteDibujosProyecto.TabIndex = 48;
             this.dataGridViewReporteDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
             // 
@@ -367,7 +368,7 @@
             // textBoxTotalDibujos
             // 
             this.textBoxTotalDibujos.Enabled = false;
-            this.textBoxTotalDibujos.Location = new System.Drawing.Point(723, 95);
+            this.textBoxTotalDibujos.Location = new System.Drawing.Point(1132, 129);
             this.textBoxTotalDibujos.Name = "textBoxTotalDibujos";
             this.textBoxTotalDibujos.Size = new System.Drawing.Size(124, 20);
             this.textBoxTotalDibujos.TabIndex = 78;
@@ -378,7 +379,7 @@
             this.labelTotalDibujos.AutoSize = true;
             this.labelTotalDibujos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalDibujos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDibujos.Image")));
-            this.labelTotalDibujos.Location = new System.Drawing.Point(525, 95);
+            this.labelTotalDibujos.Location = new System.Drawing.Point(934, 129);
             this.labelTotalDibujos.Name = "labelTotalDibujos";
             this.labelTotalDibujos.Size = new System.Drawing.Size(127, 16);
             this.labelTotalDibujos.TabIndex = 77;
@@ -388,7 +389,7 @@
             // textBoxTotalDibujoCompletos
             // 
             this.textBoxTotalDibujoCompletos.Enabled = false;
-            this.textBoxTotalDibujoCompletos.Location = new System.Drawing.Point(723, 121);
+            this.textBoxTotalDibujoCompletos.Location = new System.Drawing.Point(1132, 155);
             this.textBoxTotalDibujoCompletos.Name = "textBoxTotalDibujoCompletos";
             this.textBoxTotalDibujoCompletos.Size = new System.Drawing.Size(124, 20);
             this.textBoxTotalDibujoCompletos.TabIndex = 80;
@@ -399,7 +400,7 @@
             this.labelTotalDibujosCompletos.AutoSize = true;
             this.labelTotalDibujosCompletos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalDibujosCompletos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalDibujosCompletos.Image")));
-            this.labelTotalDibujosCompletos.Location = new System.Drawing.Point(525, 121);
+            this.labelTotalDibujosCompletos.Location = new System.Drawing.Point(934, 155);
             this.labelTotalDibujosCompletos.Name = "labelTotalDibujosCompletos";
             this.labelTotalDibujosCompletos.Size = new System.Drawing.Size(138, 16);
             this.labelTotalDibujosCompletos.TabIndex = 79;
@@ -409,7 +410,7 @@
             // textBoxPorcentajeProyecto
             // 
             this.textBoxPorcentajeProyecto.Enabled = false;
-            this.textBoxPorcentajeProyecto.Location = new System.Drawing.Point(723, 147);
+            this.textBoxPorcentajeProyecto.Location = new System.Drawing.Point(1132, 181);
             this.textBoxPorcentajeProyecto.Name = "textBoxPorcentajeProyecto";
             this.textBoxPorcentajeProyecto.Size = new System.Drawing.Size(124, 20);
             this.textBoxPorcentajeProyecto.TabIndex = 82;
@@ -420,7 +421,7 @@
             this.labelTotalPorcentajeDibujos.AutoSize = true;
             this.labelTotalPorcentajeDibujos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalPorcentajeDibujos.Image = ((System.Drawing.Image)(resources.GetObject("labelTotalPorcentajeDibujos.Image")));
-            this.labelTotalPorcentajeDibujos.Location = new System.Drawing.Point(525, 145);
+            this.labelTotalPorcentajeDibujos.Location = new System.Drawing.Point(934, 179);
             this.labelTotalPorcentajeDibujos.Name = "labelTotalPorcentajeDibujos";
             this.labelTotalPorcentajeDibujos.Size = new System.Drawing.Size(133, 16);
             this.labelTotalPorcentajeDibujos.TabIndex = 81;
@@ -431,7 +432,7 @@
             // 
             this.buttonReporteProyectos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonReporteProyectos.Image = ((System.Drawing.Image)(resources.GetObject("buttonReporteProyectos.Image")));
-            this.buttonReporteProyectos.Location = new System.Drawing.Point(468, 12);
+            this.buttonReporteProyectos.Location = new System.Drawing.Point(362, 11);
             this.buttonReporteProyectos.Name = "buttonReporteProyectos";
             this.buttonReporteProyectos.Size = new System.Drawing.Size(79, 74);
             this.buttonReporteProyectos.TabIndex = 83;
@@ -444,7 +445,7 @@
             // 
             this.buttonReporteUsuarios.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonReporteUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("buttonReporteUsuarios.Image")));
-            this.buttonReporteUsuarios.Location = new System.Drawing.Point(553, 12);
+            this.buttonReporteUsuarios.Location = new System.Drawing.Point(447, 11);
             this.buttonReporteUsuarios.Name = "buttonReporteUsuarios";
             this.buttonReporteUsuarios.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonReporteUsuarios.Size = new System.Drawing.Size(79, 74);
@@ -473,11 +474,11 @@
             this.buttonBusquedaBaseDatos.BackColor = System.Drawing.Color.White;
             this.buttonBusquedaBaseDatos.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBusquedaBaseDatos.Image = ((System.Drawing.Image)(resources.GetObject("buttonBusquedaBaseDatos.Image")));
-            this.buttonBusquedaBaseDatos.Location = new System.Drawing.Point(723, 12);
+            this.buttonBusquedaBaseDatos.Location = new System.Drawing.Point(617, 11);
             this.buttonBusquedaBaseDatos.Name = "buttonBusquedaBaseDatos";
             this.buttonBusquedaBaseDatos.Size = new System.Drawing.Size(79, 74);
             this.buttonBusquedaBaseDatos.TabIndex = 86;
-            this.buttonBusquedaBaseDatos.Text = "Buscar";
+            this.buttonBusquedaBaseDatos.Text = "Fechas";
             this.buttonBusquedaBaseDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBusquedaBaseDatos.UseVisualStyleBackColor = false;
             this.buttonBusquedaBaseDatos.Visible = false;
@@ -486,7 +487,7 @@
             // comboBoxNombreEmpleado
             // 
             this.comboBoxNombreEmpleado.FormattingEnabled = true;
-            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(237, 90);
+            this.comboBoxNombreEmpleado.Location = new System.Drawing.Point(251, 91);
             this.comboBoxNombreEmpleado.Name = "comboBoxNombreEmpleado";
             this.comboBoxNombreEmpleado.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreEmpleado.Sorted = true;
@@ -566,10 +567,10 @@
             this.labelMaterialDescripcion.Text = "Material Descripcion";
             this.labelMaterialDescripcion.Visible = false;
             // 
-            // timerBusquedaMaterial
+            // timerBusquedaFecha
             // 
-            this.timerBusquedaMaterial.Interval = 1000;
-            this.timerBusquedaMaterial.Tick += new System.EventHandler(this.timerBusquedaMaterial_Tick);
+            this.timerBusquedaFecha.Interval = 1000;
+            this.timerBusquedaFecha.Tick += new System.EventHandler(this.timerBusquedaFecha_Tick);
             // 
             // buttonExcel
             // 
@@ -601,7 +602,7 @@
             // 
             this.buttonFecha.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFecha.Image = ((System.Drawing.Image)(resources.GetObject("buttonFecha.Image")));
-            this.buttonFecha.Location = new System.Drawing.Point(638, 12);
+            this.buttonFecha.Location = new System.Drawing.Point(532, 11);
             this.buttonFecha.Name = "buttonFecha";
             this.buttonFecha.Size = new System.Drawing.Size(79, 74);
             this.buttonFecha.TabIndex = 97;
@@ -612,55 +613,80 @@
             // 
             // dateTimePickerFechaFinal
             // 
-            this.dateTimePickerFechaFinal.Enabled = false;
             this.dateTimePickerFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerFechaFinal.Location = new System.Drawing.Point(651, 229);
+            this.dateTimePickerFechaFinal.Location = new System.Drawing.Point(656, 167);
             this.dateTimePickerFechaFinal.Name = "dateTimePickerFechaFinal";
             this.dateTimePickerFechaFinal.Size = new System.Drawing.Size(120, 20);
             this.dateTimePickerFechaFinal.TabIndex = 99;
-            this.dateTimePickerFechaFinal.ValueChanged += new System.EventHandler(this.dateTimePickerFechaFinal_ValueChanged);
+            this.dateTimePickerFechaFinal.Visible = false;
             // 
             // dateTimePickerFechaInicio
             // 
-            this.dateTimePickerFechaInicio.Enabled = false;
             this.dateTimePickerFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerFechaInicio.Location = new System.Drawing.Point(651, 203);
+            this.dateTimePickerFechaInicio.Location = new System.Drawing.Point(656, 141);
             this.dateTimePickerFechaInicio.Name = "dateTimePickerFechaInicio";
             this.dateTimePickerFechaInicio.Size = new System.Drawing.Size(120, 20);
             this.dateTimePickerFechaInicio.TabIndex = 98;
-            this.dateTimePickerFechaInicio.ValueChanged += new System.EventHandler(this.dateTimePickerFechaInicio_ValueChanged);
+            this.dateTimePickerFechaInicio.Visible = false;
             // 
-            // label1
+            // labelFechaInicio
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(536, 207);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 16);
-            this.label1.TabIndex = 100;
-            this.label1.Text = "Fecha Inicio";
-            this.label1.Visible = false;
+            this.labelFechaInicio.AutoSize = true;
+            this.labelFechaInicio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFechaInicio.Image = ((System.Drawing.Image)(resources.GetObject("labelFechaInicio.Image")));
+            this.labelFechaInicio.Location = new System.Drawing.Point(541, 145);
+            this.labelFechaInicio.Name = "labelFechaInicio";
+            this.labelFechaInicio.Size = new System.Drawing.Size(71, 16);
+            this.labelFechaInicio.TabIndex = 100;
+            this.labelFechaInicio.Text = "Fecha Inicio";
+            this.labelFechaInicio.Visible = false;
             // 
-            // label2
+            // labelFechaFinal
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(536, 234);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 16);
-            this.label2.TabIndex = 101;
-            this.label2.Text = "Fecha Final";
-            this.label2.Visible = false;
+            this.labelFechaFinal.AutoSize = true;
+            this.labelFechaFinal.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFechaFinal.Image = ((System.Drawing.Image)(resources.GetObject("labelFechaFinal.Image")));
+            this.labelFechaFinal.Location = new System.Drawing.Point(541, 172);
+            this.labelFechaFinal.Name = "labelFechaFinal";
+            this.labelFechaFinal.Size = new System.Drawing.Size(68, 16);
+            this.labelFechaFinal.TabIndex = 101;
+            this.labelFechaFinal.Text = "Fecha Final";
+            this.labelFechaFinal.Visible = false;
+            // 
+            // comboBoxFechaFiltro
+            // 
+            this.comboBoxFechaFiltro.FormattingEnabled = true;
+            this.comboBoxFechaFiltro.Items.AddRange(new object[] {
+            "Tiempo Inicio",
+            "Tiempo Termino"});
+            this.comboBoxFechaFiltro.Location = new System.Drawing.Point(656, 103);
+            this.comboBoxFechaFiltro.Name = "comboBoxFechaFiltro";
+            this.comboBoxFechaFiltro.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxFechaFiltro.Sorted = true;
+            this.comboBoxFechaFiltro.TabIndex = 102;
+            this.comboBoxFechaFiltro.Visible = false;
+            // 
+            // labelFechaFiltro
+            // 
+            this.labelFechaFiltro.AutoSize = true;
+            this.labelFechaFiltro.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFechaFiltro.Image = ((System.Drawing.Image)(resources.GetObject("labelFechaFiltro.Image")));
+            this.labelFechaFiltro.Location = new System.Drawing.Point(541, 108);
+            this.labelFechaFiltro.Name = "labelFechaFiltro";
+            this.labelFechaFiltro.Size = new System.Drawing.Size(38, 16);
+            this.labelFechaFiltro.TabIndex = 103;
+            this.labelFechaFiltro.Text = "Fecha";
+            this.labelFechaFiltro.Visible = false;
             // 
             // Forma_Reporte_Dibujos_Proyecto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 521);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelFechaFiltro);
+            this.Controls.Add(this.comboBoxFechaFiltro);
+            this.Controls.Add(this.labelFechaFinal);
+            this.Controls.Add(this.labelFechaInicio);
             this.Controls.Add(this.dateTimePickerFechaFinal);
             this.Controls.Add(this.dateTimePickerFechaInicio);
             this.Controls.Add(this.buttonFecha);
@@ -755,7 +781,7 @@
         private System.Windows.Forms.Label labelCodigoMaterialProveedor;
         private System.Windows.Forms.TextBox textBoxDescripcionMaterial;
         private System.Windows.Forms.Label labelMaterialDescripcion;
-        private System.Windows.Forms.Timer timerBusquedaMaterial;
+        private System.Windows.Forms.Timer timerBusquedaFecha;
         private System.Windows.Forms.Button buttonExcel;
         private System.Windows.Forms.ComboBox comboBoxNombreProyecto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_dibujo;
@@ -768,7 +794,9 @@
         private System.Windows.Forms.Button buttonFecha;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaFinal;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaInicio;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelFechaInicio;
+        private System.Windows.Forms.Label labelFechaFinal;
+        private System.Windows.Forms.ComboBox comboBoxFechaFiltro;
+        private System.Windows.Forms.Label labelFechaFiltro;
     }
 }
