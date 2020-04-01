@@ -70,6 +70,7 @@ namespace Coset_Sistema_Produccion
         public Dibujo_produccion dibujo_Produccion_seleccion = new Dibujo_produccion();
         public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
         public List<Secuencia_produccion> secuencia_produccion_disponibles = new List<Secuencia_produccion>();
+        public List<Secuencia_produccion> secuencia_produccion_filtros = new List<Secuencia_produccion>();
 
 
         public Excel.Application oXL = null;
@@ -545,13 +546,91 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxCodigoProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos_codigo";
-            limpia_datagrid_reporte_dibujos_proyecto();
-            Desapare_combo_nombre_proyecto();
-            Rellena_cajas_informacion_de_proyectos_codigo();
-            Obtener_dibujos_proyectos();
-            Activa_datagrid_reporte_dibujos_proyectos();
-            Aparece_boton_Excel();
+            if(Operacio_reporte_proyectos == "Filtro_Fechas")
+            {
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Activa_datagrid_reporte_dibujos_proyectos();
+                obtener_proyectos_empleados_filtrados();
+                rellena_datagridview_proyectos_filtrados();
+            }
+            else
+            {
+                Operacio_reporte_proyectos = "proyectos_codigo";
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Desapare_combo_nombre_proyecto();
+                Rellena_cajas_informacion_de_proyectos_codigo();
+                Obtener_dibujos_proyectos();
+                Activa_datagrid_reporte_dibujos_proyectos();
+                Aparece_boton_Excel();
+            }
+            
+        }
+
+        private void obtener_proyectos_empleados_filtrados()
+        {
+            dibujo_Produccions_disponibles.Clear();
+            secuencia_produccion_filtros.Clear();
+            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            {
+                dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
+                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                    Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
+
+                if(comboBoxNombreEmpleado.Text != "" && comboBoxCodigoProyecto.Text!="")
+                {
+                    if (comboBoxNombreEmpleado.Text == secuencia.Empleado &&
+                        comboBoxCodigoProyecto.Text == dibujo_Produccions_disponibles[0].proyecto)
+                    {
+                        secuencia_produccion_filtros.Add(secuencia);
+                    }
+                }
+                else if( comboBoxNombreEmpleado.Text == "" && comboBoxCodigoProyecto.Text != "")
+                {
+                    if (comboBoxCodigoProyecto.Text == dibujo_Produccions_disponibles[0].proyecto)
+                    {
+                        secuencia_produccion_filtros.Add(secuencia);
+                    }
+                }
+                else if(comboBoxNombreEmpleado.Text != "" && comboBoxCodigoProyecto.Text == "")
+                {
+
+                    if (comboBoxNombreEmpleado.Text == secuencia.Empleado)
+                    {
+                        secuencia_produccion_filtros.Add(secuencia);
+                    }
+                }
+                
+
+            }
+        }
+
+        private void rellena_datagridview_proyectos_filtrados()
+        {
+            dibujos_Proyectos_disponibles.Clear();
+            dibujo_Produccions_disponibles.Clear();
+            foreach (Secuencia_produccion secuencia in secuencia_produccion_filtros)
+            {
+                dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
+                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                    Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
+
+
+                dibujos_Proyecto_busqueda.Numero = secuencia.Numero_Dibujo;
+                dibujos_Proyecto_busqueda.proceso = secuencia.proceso;
+
+                dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
+                    Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
+
+                dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
+                   secuencia.proceso, secuencia.estado, secuencia.Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                   dibujo_Produccions_disponibles[0].Horas_retrabajo);
+
+            }
+
         }
 
         private void Obtener_dibujos_proyectos()
@@ -969,16 +1048,41 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            limpia_datagrid_reporte_dibujos_proyecto();
-            Activa_datagridview_dibujos_proyecto();
-            Obtener_dibujos_proyecto_por_empleado();
-            Rellenar_partidas_reporte_dibujos_proyecto();
-            //obtener_salida_materiales_usuario();
-            //Rellena_partida_materiales_salida_proyecto();
-            //Obtener_devoluciones_materiales_usuarios();
-            //Rellena_partida_materiales_devolucion_proyecto();
-            Aparece_boton_Excel();
+            if (Operacio_reporte_proyectos == "Filtro_Fechas")
+            {
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Activa_datagridview_dibujos_proyecto();
+                obtener_proyectos_empleados_filtrados();
+                rellena_datagridview_proyectos_filtrados();
+                Aparece_boton_Excel();
+            }
+            else
+            {
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Activa_datagridview_dibujos_proyecto();
+                Obtener_dibujos_proyecto_por_empleado();
+                Rellenar_partidas_reporte_dibujos_proyecto();
+                //obtener_salida_materiales_usuario();
+                //Rellena_partida_materiales_salida_proyecto();
+                //Obtener_devoluciones_materiales_usuarios();
+                //Rellena_partida_materiales_devolucion_proyecto();
+                Aparece_boton_Excel();
+            }
 
+        }
+
+        private void obtener_empleados_filtrados()
+        {
+            secuencia_produccion_filtros.Clear();
+            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            {
+                
+                if (comboBoxNombreEmpleado.Text == secuencia.Empleado)
+                {
+                    secuencia_produccion_filtros.Add(secuencia);
+                }
+
+            }
         }
 
         private void Rellenar_partidas_reporte_dibujos_proyecto()
@@ -1065,8 +1169,9 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
+            Operacio_reporte_proyectos = "Reporte_Fechas";
             obtener_secuencia_produccion_disponibles();
-            limpia_datagrid_reporte_dibujos_proyecto();
+            limpia_datagrid_reporte_dibujos_proyecto(); 
             rellena_datagridview_proyectos_fechas();
             Verifica_datos_en_datagridview();
             
@@ -1462,12 +1567,39 @@ namespace Coset_Sistema_Produccion
 
         private void buttonFiltros_Click(object sender, EventArgs e)
         {
+            Operacio_reporte_proyectos = "Filtro_Fechas";
             Desaparece_combos_label_fecha();
             Desaparece_boton_busqueda();
             Termina_timer_fecha_filtros();
             Aparece_combo_codigo_proyecto();
             Aparece_label_proyecto();
             Aparece_elementos_reporte_usuarios_reporte();
+            rellenar_combos_proyectos_empleados_filtrso();
+        }
+
+        private void rellenar_combos_proyectos_empleados_filtrso()
+        {
+
+            dibujo_Produccions_disponibles.Clear();
+            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            {
+                dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
+                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+
+                dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
+                    Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
+
+                if(!comboBoxNombreEmpleado.Items.Contains(secuencia.Empleado))
+                {
+                    comboBoxNombreEmpleado.Items.Add(secuencia.Empleado);
+                }
+
+                if(!comboBoxCodigoProyecto.Items.Contains(dibujo_Produccions_disponibles[0].proyecto))
+                {
+                    comboBoxCodigoProyecto.Items.Add(dibujo_Produccions_disponibles[0].proyecto);
+                }
+
+            }
         }
 
         private void Aparece_label_empleado()
