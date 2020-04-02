@@ -1568,6 +1568,7 @@ namespace Coset_Sistema_Produccion
         private void buttonFiltros_Click(object sender, EventArgs e)
         {
             Operacio_reporte_proyectos = "Filtro_Fechas";
+            Deaparece_boton_filtros();
             Desaparece_combos_label_fecha();
             Desaparece_boton_busqueda();
             Termina_timer_fecha_filtros();
