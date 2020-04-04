@@ -274,6 +274,7 @@ namespace Coset_Sistema_Produccion
             limpia_combo_fecha_filtro();
             limpia_fechas_filtros();
             Termina_timer_fecha_filtros();
+            Deaparece_boton_filtros();
 
             //Elimina_informacion_proyectos_disponibles();
 
@@ -553,15 +554,14 @@ namespace Coset_Sistema_Produccion
                 obtener_proyectos_empleados_filtrados();
                 rellena_datagridview_proyectos_filtrados();
             }
-            else
+            else if (Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
             {
-                Operacio_reporte_proyectos = "proyectos_codigo";
                 limpia_datagrid_reporte_dibujos_proyecto();
                 Desapare_combo_nombre_proyecto();
                 Rellena_cajas_informacion_de_proyectos_codigo();
                 Obtener_dibujos_proyectos();
                 Activa_datagrid_reporte_dibujos_proyectos();
-                Aparece_boton_Excel();
+                Verifica_datos_en_datagridview();
             }
             
         }
@@ -664,13 +664,13 @@ namespace Coset_Sistema_Produccion
 
         private void Obtener_dibujos_proyecto_disponibles()
         {
-            if (Operacio_reporte_proyectos == "proyectos_codigo")
+            if (Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
             {
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                 Adquiere_dibujos_producion_reporte_proyecto_disponibles_en_base_datos(comboBoxCodigoProyecto.Text);
                     
             }
-            else if(Operacio_reporte_proyectos == "proyectos_nombre")
+            else if(Operacio_reporte_proyectos == "Reporte_proyectos_nombre")
             {
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                 Adquiere_dibujos_producion_reporte_proyecto_disponibles_en_base_datos(textBoxCodigoProyecto.Text);
@@ -909,7 +909,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonReporteProyectos_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos";
+            Operacio_reporte_proyectos = "Reporte_proyectos_codigo";
             Limpia_combo_proyecto();
             Limpia_combo_nombre_proyecto();
             Desactica_botones_operacion();
@@ -1169,11 +1169,20 @@ namespace Coset_Sistema_Produccion
 
         private void buttonBusquedaBaseDatos_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Reporte_Fechas";
-            obtener_secuencia_produccion_disponibles();
-            limpia_datagrid_reporte_dibujos_proyecto(); 
-            rellena_datagridview_proyectos_fechas();
-            Verifica_datos_en_datagridview();
+            if (Operacio_reporte_proyectos == "Reporte_Fecha")
+            {
+                obtener_secuencia_produccion_disponibles();
+                limpia_datagrid_reporte_dibujos_proyecto();
+                rellena_datagridview_proyectos_fechas();
+                Activa_datagrid_reporte_dibujos_proyectos();
+                Verifica_datos_en_datagridview();
+            }
+            else if(Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
+            {
+
+            }
+
+
             
         }
 
@@ -1182,6 +1191,7 @@ namespace Coset_Sistema_Produccion
             if (dataGridViewReporteDibujosProyecto.Rows.Count > 1)
             {
                 Aparece_boton_filtros();
+                Aparece_boton_Excel();
             }
         }
 
@@ -1486,7 +1496,7 @@ namespace Coset_Sistema_Produccion
 
         private void comboBoxNombreProyecto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "proyectos_nombre";
+            Operacio_reporte_proyectos = "Reporte_proyectos_nombre";
             limpia_datagrid_reporte_dibujos_proyecto();
             Desaparece_combo_codigo_proyecto();
             Aparece_textbox_codigo_proyecto();
@@ -1508,7 +1518,7 @@ namespace Coset_Sistema_Produccion
 
         private void buttonFecha_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Fecha";
+            Operacio_reporte_proyectos = "Reporte_Fecha";
             Desactica_botones_operacion();
             Aparce_boton_cancelar();
             Aparece_combos_label_fecha();
@@ -1567,18 +1577,29 @@ namespace Coset_Sistema_Produccion
 
         private void buttonFiltros_Click(object sender, EventArgs e)
         {
-            Operacio_reporte_proyectos = "Filtro_Fechas";
-            Deaparece_boton_filtros();
-            Desaparece_combos_label_fecha();
-            Desaparece_boton_busqueda();
-            Termina_timer_fecha_filtros();
-            Aparece_combo_codigo_proyecto();
-            Aparece_label_proyecto();
-            Aparece_elementos_reporte_usuarios_reporte();
-            rellenar_combos_proyectos_empleados_filtrso();
+
+            if (Operacio_reporte_proyectos == "Reporte_Fecha")
+            {
+                Operacio_reporte_proyectos = "Filtro_Fechas";
+                Deaparece_boton_filtros();
+                Desaparece_combos_label_fecha();
+                Desaparece_boton_busqueda();
+                Termina_timer_fecha_filtros();
+                Limpia_combo_nombre_empleados();
+                Limpia_combo_proyecto();
+                Aparece_combo_codigo_proyecto();
+                Aparece_label_proyecto();
+                Aparece_elementos_reporte_usuarios_reporte();
+                rellenar_combos_proyectos_empleados_filtros();
+            }
+            else if(Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
+            {
+                Operacio_reporte_proyectos = "Filtro_proyectos_codigo";
+                Deaparece_boton_filtros();
+            }
         }
 
-        private void rellenar_combos_proyectos_empleados_filtrso()
+        private void rellenar_combos_proyectos_empleados_filtros()
         {
 
             dibujo_Produccions_disponibles.Clear();
