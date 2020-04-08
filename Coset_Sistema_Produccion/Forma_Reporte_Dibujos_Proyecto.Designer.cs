@@ -274,7 +274,7 @@
             // comboBoxCodigoProyecto
             // 
             this.comboBoxCodigoProyecto.FormattingEnabled = true;
-            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 98);
+            this.comboBoxCodigoProyecto.Location = new System.Drawing.Point(220, 95);
             this.comboBoxCodigoProyecto.Name = "comboBoxCodigoProyecto";
             this.comboBoxCodigoProyecto.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCodigoProyecto.Sorted = true;
@@ -462,7 +462,7 @@
             this.buttonReoprteMateriales.Image = ((System.Drawing.Image)(resources.GetObject("buttonReoprteMateriales.Image")));
             this.buttonReoprteMateriales.Location = new System.Drawing.Point(808, 12);
             this.buttonReoprteMateriales.Name = "buttonReoprteMateriales";
-            this.buttonReoprteMateriales.Size = new System.Drawing.Size(70, 73);
+            this.buttonReoprteMateriales.Size = new System.Drawing.Size(105, 73);
             this.buttonReoprteMateriales.TabIndex = 85;
             this.buttonReoprteMateriales.Text = "Materiales";
             this.buttonReoprteMateriales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;

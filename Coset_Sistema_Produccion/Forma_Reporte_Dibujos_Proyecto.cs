@@ -66,6 +66,7 @@ namespace Coset_Sistema_Produccion
         public Dibujos_proyecto dibujos_Proyecto_seleccion = new Dibujos_proyecto();
         public Class_Dibujos_Produccion Class_Dibujos_Produccion = new Class_Dibujos_Produccion();
         public List<Dibujo_produccion> dibujo_Produccions_disponibles = new List<Dibujo_produccion>();
+        public List<Dibujo_produccion> dibujo_Produccions_filtros = new List<Dibujo_produccion>();
         public Dibujo_produccion dibujo_Produccion_busqueda = new Dibujo_produccion();
         public Dibujo_produccion dibujo_Produccion_seleccion = new Dibujo_produccion();
         public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
@@ -198,6 +199,8 @@ namespace Coset_Sistema_Produccion
             comboBoxCodigoProyecto.Visible = true;
         }
 
+
+
         private void Activa_combo_codigo_cotizacion()
         {
 
@@ -248,6 +251,10 @@ namespace Coset_Sistema_Produccion
             textBoxCodigoProyecto.Visible = false;
         }
 
+        private void Aparece_caja_captura_codigo_proyecto()
+        {
+            textBoxCodigoProyecto.Visible = true;
+        }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
@@ -259,7 +266,7 @@ namespace Coset_Sistema_Produccion
             Desactiva_datagridview_dibujos();
             Acepta_datagridview_agregar_renglones();
             Desaparece_cajas_etiquetas_reporte_proyectos();
-            Deaparece_elementos_reporte_usuarios_reporte();
+            Deaparece_combo_label_empleado();
             Desaparece_elementos_reporte_materiales();
             Desactiva_timer_busqueda();
             Desaparece_boton_busqueda();
@@ -1001,7 +1008,7 @@ namespace Coset_Sistema_Produccion
             Operacio_reporte_proyectos = "Usuarios";
             Desactica_botones_operacion();
             Aparece_boton_cancelar_operacio();
-            Aparece_elementos_reporte_usuarios_reporte();
+            Aparece_combo_label_empleado();
             Obtener_empleados_disponibles();
             Limpia_combo_nombre_empleados();
             Rellena_combo_usuarios();
@@ -1035,12 +1042,12 @@ namespace Coset_Sistema_Produccion
                 Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
         }
 
-        private void Aparece_elementos_reporte_usuarios_reporte()
+        private void Aparece_combo_label_empleado()
         {
             labelNombreEmpleado.Visible = true;
             comboBoxNombreEmpleado.Visible = true;
         }
-        private void Deaparece_elementos_reporte_usuarios_reporte()
+        private void Deaparece_combo_label_empleado()
         {
             labelNombreEmpleado.Visible = false;
             comboBoxNombreEmpleado.Visible = false;
@@ -1056,6 +1063,14 @@ namespace Coset_Sistema_Produccion
                 rellena_datagridview_proyectos_filtrados();
                 Aparece_boton_Excel();
             }
+            else if(Operacio_reporte_proyectos == "Filtro_proyectos_codigo")
+            {
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Activa_datagridview_dibujos_proyecto();
+                obtener_proyectos_filtros_empleado();
+                rellena_datagridview_proyectos_filtro_empleados();
+                Aparece_boton_Excel();
+            }
             else
             {
                 limpia_datagrid_reporte_dibujos_proyecto();
@@ -1069,6 +1084,43 @@ namespace Coset_Sistema_Produccion
                 Aparece_boton_Excel();
             }
 
+        }
+
+        private void rellena_datagridview_proyectos_filtro_empleados()
+        {
+            foreach (Dibujo_produccion dibujo in dibujo_Produccions_filtros)
+            {
+
+                dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
+                   dibujo.Proceso, dibujo.Estado, dibujo.Empleado, dibujo.Horas_produccion,
+                   dibujo.Horas_retrabajo);
+            }
+        }
+
+        private void obtener_proyectos_filtros_empleado()
+        {
+            dibujo_Produccions_filtros.Clear();
+           foreach (Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
+            {
+
+
+                if(comboBoxNombreEmpleado.Text!="" && comboBoxFechaFiltro.Text!="")
+                {
+                    
+
+                } else if(comboBoxNombreEmpleado.Text == "" && comboBoxFechaFiltro.Text != "")
+                {
+
+                }else if(comboBoxNombreEmpleado.Text != "" && comboBoxFechaFiltro.Text == "")
+                {
+                    if(dibujo.Empleado == comboBoxNombreEmpleado.Text)
+                    {
+                        dibujo_Produccions_filtros.Add(dibujo);
+                    }
+                }
+                
+
+            }
         }
 
         private void obtener_empleados_filtrados()
@@ -1589,13 +1641,37 @@ namespace Coset_Sistema_Produccion
                 Limpia_combo_proyecto();
                 Aparece_combo_codigo_proyecto();
                 Aparece_label_proyecto();
-                Aparece_elementos_reporte_usuarios_reporte();
+                Aparece_combo_label_empleado();
                 rellenar_combos_proyectos_empleados_filtros();
             }
             else if(Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
             {
                 Operacio_reporte_proyectos = "Filtro_proyectos_codigo";
                 Deaparece_boton_filtros();
+                Aparece_caja_captura_codigo_proyecto();
+                textBoxCodigoProyecto.Text = comboBoxCodigoProyecto.Text;
+                Desaparece_combo_codigo_proyecto();
+                //Desaparece_cajas_etiquetas_reporte_proyectos();
+                Aparece_combo_label_empleado();
+                Aparece_combos_label_fecha();
+                Limpia_combo_nombre_empleados();
+                rellenar_combos_nombre_empleados_filtros();
+                Inicia_timer_fecha_filtros();
+            }
+        }
+
+        private void rellenar_combos_nombre_empleados_filtros()
+        {
+            
+            foreach (Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
+            {
+
+                if (!comboBoxNombreEmpleado.Items.Contains(dibujo.Empleado))
+                {
+                    comboBoxNombreEmpleado.Items.Add(dibujo.Empleado);
+                }
+
+
             }
         }
 
