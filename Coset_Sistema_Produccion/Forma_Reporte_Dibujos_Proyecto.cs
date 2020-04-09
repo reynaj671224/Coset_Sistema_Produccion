@@ -70,6 +70,7 @@ namespace Coset_Sistema_Produccion
         public Dibujo_produccion dibujo_Produccion_busqueda = new Dibujo_produccion();
         public Dibujo_produccion dibujo_Produccion_seleccion = new Dibujo_produccion();
         public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
+        public Secuencia_produccion secuencia_Produccion_busqueda = new Secuencia_produccion();
         public List<Secuencia_produccion> secuencia_produccion_disponibles = new List<Secuencia_produccion>();
         public List<Secuencia_produccion> secuencia_produccion_filtros = new List<Secuencia_produccion>();
 
@@ -1100,13 +1101,22 @@ namespace Coset_Sistema_Produccion
         private void obtener_proyectos_filtros_empleado()
         {
             dibujo_Produccions_filtros.Clear();
+            secuencia_produccion_disponibles.Clear();
+
            foreach (Dibujo_produccion dibujo in dibujo_Produccions_disponibles)
             {
 
 
                 if(comboBoxNombreEmpleado.Text!="" && comboBoxFechaFiltro.Text!="")
                 {
-                    
+                    secuencia_Produccion_busqueda.Numero_Dibujo = dibujo.Numero_dibujo;
+                    secuencia_Produccion_busqueda.proceso = dibujo.Proceso;
+
+
+                    secuencia_produccion_disponibles = Class_Secuencia_Produccion
+                        .Adquiere_secuencia_produccion_filtro_fecha_en_base_datos(secuencia_Produccion_busqueda);
+
+                    if((DateTime)  )
 
                 } else if(comboBoxNombreEmpleado.Text == "" && comboBoxFechaFiltro.Text != "")
                 {
@@ -1229,9 +1239,13 @@ namespace Coset_Sistema_Produccion
                 Activa_datagrid_reporte_dibujos_proyectos();
                 Verifica_datos_en_datagridview();
             }
-            else if(Operacio_reporte_proyectos == "Reporte_proyectos_codigo")
+            else if(Operacio_reporte_proyectos == "Filtro_proyectos_codigo")
             {
-
+                limpia_datagrid_reporte_dibujos_proyecto();
+                Activa_datagridview_dibujos_proyecto();
+                obtener_proyectos_filtros_empleado();
+                rellena_datagridview_proyectos_filtro_empleados();
+                Aparece_boton_Excel();
             }
 
 
