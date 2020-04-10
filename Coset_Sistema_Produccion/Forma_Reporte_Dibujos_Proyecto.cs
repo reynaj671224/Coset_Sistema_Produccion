@@ -73,7 +73,8 @@ namespace Coset_Sistema_Produccion
         public Secuencia_produccion secuencia_Produccion_busqueda = new Secuencia_produccion();
         public List<Secuencia_produccion> secuencia_produccion_disponibles = new List<Secuencia_produccion>();
         public List<Secuencia_produccion> secuencia_produccion_filtros = new List<Secuencia_produccion>();
-
+        public Class_Secuencia_Calidad Class_Secuencia_Calidad = new Class_Secuencia_Calidad();
+        public List<Secuencia_calidad> secuencia_calidad_disponibles = new List<Secuencia_calidad>();
 
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
@@ -1116,7 +1117,6 @@ namespace Coset_Sistema_Produccion
                     secuencia_produccion_disponibles = Class_Secuencia_Produccion
                         .Adquiere_secuencia_produccion_filtro_fecha_en_base_datos(secuencia_Produccion_busqueda);
 
-                    if((DateTime)  )
 
                 } else if(comboBoxNombreEmpleado.Text == "" && comboBoxFechaFiltro.Text != "")
                 {
@@ -1275,10 +1275,10 @@ namespace Coset_Sistema_Produccion
         {
             dibujos_Proyectos_disponibles.Clear();
             dibujo_Produccions_disponibles.Clear();
-            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            foreach (Secuencia_calidad secuencia in secuencia_calidad_disponibles)
             {
                 dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
-                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+                dibujo_Produccion_busqueda.Proceso = secuencia.Proceso;
 
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                     Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
@@ -1308,23 +1308,28 @@ namespace Coset_Sistema_Produccion
             string fecha_inicio_analizar = dateTime_inicio.Year+"-"+ dateTime_inicio.Month +"-"+ dateTime_inicio.Day;
             string fecha_final_analizar = dateTime_final.Year + "-" + dateTime_final.Month + "-" + dateTime_final.Day;
 
-            if (comboBoxFechaFiltro.Text == "Tiempo Inicio")
-            {
 
-                secuencia_produccion_disponibles = Class_Secuencia_Produccion.
-                Adquiere_secuencia_produccion_reporte_fecha_inicio(fecha_inicio_analizar, fecha_final_analizar);
-            }
-            else if (comboBoxFechaFiltro.Text == "Tiempo Termino")
-            {
 
-                secuencia_produccion_disponibles = Class_Secuencia_Produccion.
-                    Adquiere_secuencia_produccion_reporte_fecha_termino(fecha_inicio_analizar, fecha_final_analizar);
-            }
-            else
-            {
-                MessageBox.Show("No Fecha Inicio/Final seleccionado", "Reporte Proyectos por Fecha"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            secuencia_calidad_disponibles = Class_Secuencia_Calidad.
+                    Adquiere_secuencia_calidad_reporte_fecha(fecha_inicio_analizar, fecha_final_analizar);
+        
+            //if (comboBoxFechaFiltro.Text == "Tiempo Inicio")
+            //{
+
+            //    secuencia_produccion_disponibles = Class_Secuencia_Produccion.
+            //    Adquiere_secuencia_produccion_reporte_fecha_inicio(fecha_inicio_analizar, fecha_final_analizar);
+            //}
+            //else if (comboBoxFechaFiltro.Text == "Tiempo Termino")
+            //{
+
+            //    secuencia_produccion_disponibles = Class_Secuencia_Produccion.
+            //        Adquiere_secuencia_produccion_reporte_fecha_termino(fecha_inicio_analizar, fecha_final_analizar);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("No Fecha Inicio/Final seleccionado", "Reporte Proyectos por Fecha"
+            //        , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
 
         }
 
@@ -1588,7 +1593,8 @@ namespace Coset_Sistema_Produccion
             Desactica_botones_operacion();
             Aparce_boton_cancelar();
             Aparece_combos_label_fecha();
-            Inicia_timer_fecha_filtros();
+            aparce_boton_busqueda();
+            //Inicia_timer_fecha_filtros();
         }
 
         private void Inicia_timer_fecha_filtros()
@@ -1605,8 +1611,8 @@ namespace Coset_Sistema_Produccion
         {
             labelFechaFiltro.Visible = true;
             labelFechaInicio.Visible = true;
-            labelFechaFinal.Visible = true;
-            comboBoxFechaFiltro.Visible = true;
+            //labelFechaFinal.Visible = true;
+            //comboBoxFechaFiltro.Visible = true;
             dateTimePickerFechaInicio.Visible = true;
             dateTimePickerFechaFinal.Visible = true;
         }

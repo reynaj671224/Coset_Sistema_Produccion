@@ -914,7 +914,7 @@ namespace Coset_Sistema_Produccion
             if (secuencia_operacion == "Aceptar")
             {
                 Secuencia_calidad_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
-                Secuencia_calidad_insertar.Empleado = comboBoxEmpleado.Text;
+                Secuencia_calidad_insertar.Empleado = textBoxEmpleado.Text;
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = "";
@@ -926,7 +926,7 @@ namespace Coset_Sistema_Produccion
             else if(secuencia_operacion == "retrabajo")
             {
                 Secuencia_calidad_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
-                Secuencia_calidad_insertar.Empleado = comboBoxEmpleado.Text;
+                Secuencia_calidad_insertar.Empleado = textBoxEmpleado.Text;
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;
@@ -938,7 +938,7 @@ namespace Coset_Sistema_Produccion
             else if(secuencia_operacion == "desecho")
             {
                 Secuencia_calidad_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
-                Secuencia_calidad_insertar.Empleado = comboBoxEmpleado.Text;
+                Secuencia_calidad_insertar.Empleado = textBoxEmpleado.Text;
                 Secuencia_calidad_insertar.Fecha = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 Secuencia_calidad_insertar.Proceso = textBoxNombreProceso.Text;
                 Secuencia_calidad_insertar.Motivo_rechazo = textBoxMotivoRechazo.Text;

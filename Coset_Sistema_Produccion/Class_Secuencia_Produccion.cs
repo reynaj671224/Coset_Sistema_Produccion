@@ -180,6 +180,7 @@ namespace Coset_Sistema_Produccion
             return secuencia_existente_disponibles_produccion;
         }
 
+
         private string Commando_leer_Mysql_busqueda_secuencia_produccion_reporte_fecha_termino(string fecha_inicio, string fecha_final)
         {
             return "SELECT* FROM produccion.secuencia_produccion " +
