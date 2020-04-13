@@ -72,7 +72,7 @@ namespace Coset_Sistema_Produccion
         public Class_Secuencia_Produccion Class_Secuencia_Produccion = new Class_Secuencia_Produccion();
         public Secuencia_produccion secuencia_Produccion_busqueda = new Secuencia_produccion();
         public List<Secuencia_produccion> secuencia_produccion_disponibles = new List<Secuencia_produccion>();
-        public List<Secuencia_produccion> secuencia_produccion_filtros = new List<Secuencia_produccion>();
+        public List<Secuencia_calidad> secuencia_produccion_filtros = new List<Secuencia_calidad>();
         public Class_Secuencia_Calidad Class_Secuencia_Calidad = new Class_Secuencia_Calidad();
         public List<Secuencia_calidad> secuencia_calidad_disponibles = new List<Secuencia_calidad>();
 
@@ -579,17 +579,17 @@ namespace Coset_Sistema_Produccion
         {
             dibujo_Produccions_disponibles.Clear();
             secuencia_produccion_filtros.Clear();
-            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            foreach (Secuencia_calidad secuencia in secuencia_calidad_disponibles)
             {
                 dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
-                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+                dibujo_Produccion_busqueda.Proceso = secuencia.Proceso;
 
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                     Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
 
                 if(comboBoxNombreEmpleado.Text != "" && comboBoxCodigoProyecto.Text!="")
                 {
-                    if (comboBoxNombreEmpleado.Text == secuencia.Empleado &&
+                    if (comboBoxNombreEmpleado.Text == dibujo_Produccions_disponibles[0].Empleado &&
                         comboBoxCodigoProyecto.Text == dibujo_Produccions_disponibles[0].proyecto)
                     {
                         secuencia_produccion_filtros.Add(secuencia);
@@ -605,7 +605,7 @@ namespace Coset_Sistema_Produccion
                 else if(comboBoxNombreEmpleado.Text != "" && comboBoxCodigoProyecto.Text == "")
                 {
 
-                    if (comboBoxNombreEmpleado.Text == secuencia.Empleado)
+                    if (comboBoxNombreEmpleado.Text == dibujo_Produccions_disponibles[0].Empleado)
                     {
                         secuencia_produccion_filtros.Add(secuencia);
                     }
@@ -619,23 +619,23 @@ namespace Coset_Sistema_Produccion
         {
             dibujos_Proyectos_disponibles.Clear();
             dibujo_Produccions_disponibles.Clear();
-            foreach (Secuencia_produccion secuencia in secuencia_produccion_filtros)
+            foreach (Secuencia_calidad secuencia in secuencia_produccion_filtros)
             {
                 dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
-                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+                dibujo_Produccion_busqueda.Proceso = secuencia.Proceso;
 
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                     Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
 
 
                 dibujos_Proyecto_busqueda.Numero = secuencia.Numero_Dibujo;
-                dibujos_Proyecto_busqueda.proceso = secuencia.proceso;
+                dibujos_Proyecto_busqueda.proceso = secuencia.Proceso;
 
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
 
                 dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                   secuencia.proceso, secuencia.estado, secuencia.Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                   secuencia.Proceso, secuencia.calidad, dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
                    dibujo_Produccions_disponibles[0].Horas_retrabajo);
 
             }
@@ -1135,16 +1135,16 @@ namespace Coset_Sistema_Produccion
 
         private void obtener_empleados_filtrados()
         {
-            secuencia_produccion_filtros.Clear();
-            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
-            {
+            //secuencia_produccion_filtros.Clear();
+            //foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            //{
                 
-                if (comboBoxNombreEmpleado.Text == secuencia.Empleado)
-                {
-                    secuencia_produccion_filtros.Add(secuencia);
-                }
+            //    if (comboBoxNombreEmpleado.Text == secuencia.Empleado)
+            //    {
+            //        secuencia_produccion_filtros.Add(secuencia);
+            //    }
 
-            }
+            //}
         }
 
         private void Rellenar_partidas_reporte_dibujos_proyecto()
@@ -1285,13 +1285,13 @@ namespace Coset_Sistema_Produccion
 
                 
                 dibujos_Proyecto_busqueda.Numero = secuencia.Numero_Dibujo;
-                dibujos_Proyecto_busqueda.proceso = secuencia.proceso;
+                dibujos_Proyecto_busqueda.proceso = secuencia.Proceso;
 
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
 
                 dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                   secuencia.proceso, secuencia.estado, secuencia.Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                   secuencia.Proceso, secuencia.calidad, dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
                    dibujo_Produccions_disponibles[0].Horas_retrabajo);
 
             }
@@ -1699,17 +1699,17 @@ namespace Coset_Sistema_Produccion
         {
 
             dibujo_Produccions_disponibles.Clear();
-            foreach (Secuencia_produccion secuencia in secuencia_produccion_disponibles)
+            foreach (Secuencia_calidad secuencia in secuencia_calidad_disponibles)
             {
                 dibujo_Produccion_busqueda.Numero_dibujo = secuencia.Numero_Dibujo;
-                dibujo_Produccion_busqueda.Proceso = secuencia.proceso;
+                dibujo_Produccion_busqueda.Proceso = secuencia.Proceso;
 
                 dibujo_Produccions_disponibles = Class_Dibujos_Produccion.
                     Adquiere_dibujos_produccion_busqueda_en_base_datos(dibujo_Produccion_busqueda);
 
-                if(!comboBoxNombreEmpleado.Items.Contains(secuencia.Empleado))
+                if(!comboBoxNombreEmpleado.Items.Contains(dibujo_Produccions_disponibles[0].Empleado))
                 {
-                    comboBoxNombreEmpleado.Items.Add(secuencia.Empleado);
+                    comboBoxNombreEmpleado.Items.Add(dibujo_Produccions_disponibles[0].Empleado);
                 }
 
                 if(!comboBoxCodigoProyecto.Items.Contains(dibujo_Produccions_disponibles[0].proyecto))

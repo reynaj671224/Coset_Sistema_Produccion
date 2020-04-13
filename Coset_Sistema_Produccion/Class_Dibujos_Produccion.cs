@@ -82,7 +82,7 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_Mysql_busqueda_dibujos_produccion_reporte_proyectos(string proyecto)
         {
             return "SELECT * FROM produccion_dibujos WHERE proyecto='" + proyecto +
-                "' and estado='Terminado'; ";
+                "' and calidad='Aceptado'; ";
         }
 
         public List<Dibujo_produccion> Adquiere_dibujos_produccion_busqueda_en_base_datos_en_calidad()
