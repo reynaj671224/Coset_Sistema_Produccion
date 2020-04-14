@@ -43,6 +43,46 @@ namespace Coset_Sistema_Produccion
             return secuencia_existente_disponibles_produccion;
         }
 
+        public List<Secuencia_calidad> Adquiere_secuencia_calidad_busqueda_reporte_dibujos(Secuencia_calidad numero_dibujo)
+        {
+            List<Secuencia_calidad> secuencia_existente_disponibles_produccion = new List<Secuencia_calidad>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_secuencia_calidad());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_secuencia_calidad_reporte_dibujos(numero_dibujo), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    secuencia_existente_disponibles_produccion.Add(new Secuencia_calidad()
+                    {
+                        Codigo = mySqlDataReader["codigo"].ToString(),
+                        Numero_Dibujo = mySqlDataReader["numero_dibujo"].ToString(),
+                        Empleado = mySqlDataReader["empleado"].ToString(),
+                        Fecha = mySqlDataReader["fecha"].ToString(),
+                        Proceso = mySqlDataReader["proceso"].ToString(),
+                        Motivo_rechazo = mySqlDataReader["motivo_rechazo"].ToString(),
+                        Accion_correctiva = mySqlDataReader["accion_correctiva"].ToString(),
+                        calidad = mySqlDataReader["calidad"].ToString(),
+                        dimenciones = mySqlDataReader["dibujo_dimenciones"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                secuencia_existente_disponibles_produccion.Add(new Secuencia_calidad()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return secuencia_existente_disponibles_produccion;
+        }
+
+        private string Commando_leer_Mysql_busqueda_secuencia_calidad_reporte_dibujos(Secuencia_calidad numero_dibujo)
+        {
+            return "SELECT * FROM secuencia_calidad WHERE numero_dibujo='" + numero_dibujo.Numero_Dibujo + "' " +
+                "and proceso='" + numero_dibujo.Proceso + "'and calidad='Aceptado'; ";
+        }
+
         public List<Secuencia_calidad> Adquiere_secuencia_calidad_reporte_fecha(string fecha_inicio, string fecha_final)
         {
             List<Secuencia_calidad> secuencia_existente_disponibles_produccion = new List<Secuencia_calidad>();

@@ -160,6 +160,47 @@ namespace Coset_Sistema_Produccion
             return Material_existente_disponibles_dibujos;
         }
 
+        public List<Dibujo_produccion> Adquiere_dibujos_produccion_por_empleado_busqueda_reporte_dibujos(Dibujo_produccion numero_dibujo)
+        {
+            List<Dibujo_produccion> Material_existente_disponibles_dibujos = new List<Dibujo_produccion>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_dibujos_produccion());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_Mysql_busqueda_dibujos_por_empleado_produccion_reporte_dibujos(numero_dibujo), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    Material_existente_disponibles_dibujos.Add(new Dibujo_produccion()
+                    {
+                        Numero_dibujo = mySqlDataReader["numero_dibujo"].ToString(),
+                        Proceso = mySqlDataReader["proceso"].ToString(),
+                        Estado = mySqlDataReader["estado"].ToString(),
+                        Calidad = mySqlDataReader["calidad"].ToString(),
+                        Secuencia = mySqlDataReader["secuencia"].ToString(),
+                        Horas_produccion = mySqlDataReader["horas_produccion"].ToString(),
+                        Horas_retrabajo = mySqlDataReader["horas_retrabajo"].ToString(),
+                        proyecto = mySqlDataReader["proyecto"].ToString(),
+                        Empleado = mySqlDataReader["empleado"].ToString(),
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Material_existente_disponibles_dibujos.Add(new Dibujo_produccion()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return Material_existente_disponibles_dibujos;
+        }
+
+        private string Commando_leer_Mysql_busqueda_dibujos_por_empleado_produccion_reporte_dibujos(Dibujo_produccion numero_dibujo)
+        {
+            return "SELECT * FROM produccion_dibujos WHERE empleado='" + numero_dibujo.Empleado + "' and " +
+                "calidad='Aceptado';";
+        }
+
         private string Commando_leer_Mysql_busqueda_dibujos_por_empleado_produccion(Dibujo_produccion numero_dibujo)
         {
             return "SELECT * FROM produccion_dibujos WHERE empleado='" + numero_dibujo.Empleado + "';";
