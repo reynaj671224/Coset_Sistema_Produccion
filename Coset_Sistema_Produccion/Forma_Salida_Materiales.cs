@@ -1661,6 +1661,7 @@ namespace Coset_Sistema_Produccion
                 textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
+                textBoxUbicacionMaterial.Text = material.Ubicacion;
             }
             else
             {
@@ -1669,6 +1670,7 @@ namespace Coset_Sistema_Produccion
                 textBoxDescripcionMaterial.Text = material.Descripcion;
                 textBoxPrecioMaterial.Text = material.precio;
                 textBoxTotalUnidades.Text = material.Cantidad;
+                textBoxUbicacionMaterial.Text = material.Ubicacion;
             }
         }
 
@@ -2067,13 +2069,13 @@ namespace Coset_Sistema_Produccion
                         {
                             dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, partida.Parte,
                             partida.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
-                            partida.Cantidad, Seleccion_material.Cantidad);
+                            partida.Cantidad, Seleccion_material.Cantidad, Seleccion_material.Ubicacion);
                         }
                         else
                         {
                             dataGridViewSalidasMaterialesOC.Rows.Add(partida.Codigo, partida.Proyecto, partida.Material, Seleccion_material.Codigo_proveedor,
                             Seleccion_material.Descripcion, "", Unidades_disponibles_para_salida.ToString(), Unidades_entradas.ToString(),
-                            partida.Cantidad, Seleccion_material.Cantidad);
+                            partida.Cantidad, Seleccion_material.Cantidad, Seleccion_material.Ubicacion);
                         }
                         dataGridViewSalidasMaterialesOC
                             [(int)Campos_salida_materiales_orden_compra.cantidad, Row_material].Style.BackColor = Color.Yellow;

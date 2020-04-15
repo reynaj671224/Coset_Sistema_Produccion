@@ -132,6 +132,9 @@ namespace Coset_Sistema_Produccion
             Materiales_disponibles_busqueda = null;
             dibujos_Proyectos_disponibles = null;
             dibujo_Produccions_disponibles = null;
+            secuencia_produccion_disponibles = null;
+            secuencia_calidad_disponibles = null;
+            secuencia_produccion_filtros = null;
             Cierra_archivo_Excel();
             Close_Excel();
             Termina_applicacion();
@@ -1537,7 +1540,7 @@ namespace Coset_Sistema_Produccion
                     if (Abrir_Archivo_Excel())
                     {
                         oSheet = (Excel.Worksheet)oWB.Worksheets.get_Item(1);
-                        Escribe_informacion_Proyecto();
+                        //Escribe_informacion_Proyecto();
                         Escribe_titulos_proyecto();
                         for (int Row = 0; Row < dataGridViewReporteDibujosProyecto.RowCount - 1; Row++)
                         {
@@ -1563,15 +1566,12 @@ namespace Coset_Sistema_Produccion
         private void Escribe_titulos_proyecto()
         {
             oSheet.Cells[7, 1] = "Numero Dibujo";
-            oSheet.Cells[7, 2] = "Proyecto";
-            oSheet.Cells[7, 3] = "Dibujo Descripcion";
-            oSheet.Cells[7, 4] = "Cantidad_Unidades";
-            oSheet.Cells[7, 5] = "Proceso Dibujo";
-            oSheet.Cells[7, 6] = "EStado Dibujo";
-            oSheet.Cells[7, 7] = "Secuencia Dibujo";
-            oSheet.Cells[7, 8] = "Empleado";
-            oSheet.Cells[7, 9] = "Horas Produccion";
-            oSheet.Cells[7, 10] = "Horas Re-trabajo";
+            oSheet.Cells[7, 2] = "Cantidad_Unidades";
+            oSheet.Cells[7, 3] = "Proceso Dibujo";
+            oSheet.Cells[7, 4] = "EStado Dibujo";
+            oSheet.Cells[7, 5] = "Empleado";
+            oSheet.Cells[7, 6] = "Horas Produccion";
+            oSheet.Cells[7, 7] = "Horas Re-trabajo";
 
         }
 
