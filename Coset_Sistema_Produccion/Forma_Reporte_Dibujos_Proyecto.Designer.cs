@@ -80,14 +80,15 @@
             this.comboBoxFechaFiltro = new System.Windows.Forms.ComboBox();
             this.labelFechaFiltro = new System.Windows.Forms.Label();
             this.buttonFiltros = new System.Windows.Forms.Button();
+            this.textBoxNombreEmpleado = new System.Windows.Forms.TextBox();
             this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad_Unidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Horas_produccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Horas_retrabajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxNombreEmpleado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -219,13 +220,14 @@
             this.Cantidad_Unidades,
             this.Proceso_dibujo,
             this.Estado_dibujo,
+            this.Fecha,
             this.Empleado,
             this.Horas_produccion,
             this.Horas_retrabajo});
             this.dataGridViewReporteDibujosProyecto.Location = new System.Drawing.Point(135, 353);
             this.dataGridViewReporteDibujosProyecto.Name = "dataGridViewReporteDibujosProyecto";
             this.dataGridViewReporteDibujosProyecto.ReadOnly = true;
-            this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(795, 234);
+            this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(945, 234);
             this.dataGridViewReporteDibujosProyecto.TabIndex = 48;
             this.dataGridViewReporteDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
             // 
@@ -652,6 +654,16 @@
             this.buttonFiltros.Visible = false;
             this.buttonFiltros.Click += new System.EventHandler(this.buttonFiltros_Click);
             // 
+            // textBoxNombreEmpleado
+            // 
+            this.textBoxNombreEmpleado.Enabled = false;
+            this.textBoxNombreEmpleado.Location = new System.Drawing.Point(220, 123);
+            this.textBoxNombreEmpleado.Name = "textBoxNombreEmpleado";
+            this.textBoxNombreEmpleado.Size = new System.Drawing.Size(268, 20);
+            this.textBoxNombreEmpleado.TabIndex = 105;
+            this.textBoxNombreEmpleado.Visible = false;
+            this.textBoxNombreEmpleado.WordWrap = false;
+            // 
             // Numero_dibujo
             // 
             this.Numero_dibujo.HeaderText = "Numero Dibujo";
@@ -677,6 +689,13 @@
             this.Estado_dibujo.ReadOnly = true;
             this.Estado_dibujo.Width = 150;
             // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 150;
+            // 
             // Empleado
             // 
             this.Empleado.HeaderText = "Empledado";
@@ -694,16 +713,6 @@
             this.Horas_retrabajo.HeaderText = "Horas Retrabajo";
             this.Horas_retrabajo.Name = "Horas_retrabajo";
             this.Horas_retrabajo.ReadOnly = true;
-            // 
-            // textBoxNombreEmpleado
-            // 
-            this.textBoxNombreEmpleado.Enabled = false;
-            this.textBoxNombreEmpleado.Location = new System.Drawing.Point(220, 123);
-            this.textBoxNombreEmpleado.Name = "textBoxNombreEmpleado";
-            this.textBoxNombreEmpleado.Size = new System.Drawing.Size(268, 20);
-            this.textBoxNombreEmpleado.TabIndex = 105;
-            this.textBoxNombreEmpleado.Visible = false;
-            this.textBoxNombreEmpleado.WordWrap = false;
             // 
             // Forma_Reporte_Dibujos_Proyecto
             // 
@@ -821,13 +830,14 @@
         private System.Windows.Forms.ComboBox comboBoxFechaFiltro;
         private System.Windows.Forms.Label labelFechaFiltro;
         private System.Windows.Forms.Button buttonFiltros;
+        private System.Windows.Forms.TextBox textBoxNombreEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_Unidades;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado_dibujo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas_produccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas_retrabajo;
-        private System.Windows.Forms.TextBox textBoxNombreEmpleado;
     }
 }
