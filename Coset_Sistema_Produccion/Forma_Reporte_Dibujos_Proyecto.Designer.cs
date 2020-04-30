@@ -41,6 +41,14 @@
             this.textBoxCodigoProyecto = new System.Windows.Forms.TextBox();
             this.labelCodigoProyecto = new System.Windows.Forms.Label();
             this.dataGridViewReporteDibujosProyecto = new System.Windows.Forms.DataGridView();
+            this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_Unidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas_produccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas_retrabajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.textBoxIngenieroCoset = new System.Windows.Forms.TextBox();
@@ -81,14 +89,6 @@
             this.labelFechaFiltro = new System.Windows.Forms.Label();
             this.buttonFiltros = new System.Windows.Forms.Button();
             this.textBoxNombreEmpleado = new System.Windows.Forms.TextBox();
-            this.Numero_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_Unidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas_produccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas_retrabajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReporteDibujosProyecto)).BeginInit();
             this.SuspendLayout();
@@ -230,6 +230,56 @@
             this.dataGridViewReporteDibujosProyecto.Size = new System.Drawing.Size(945, 234);
             this.dataGridViewReporteDibujosProyecto.TabIndex = 48;
             this.dataGridViewReporteDibujosProyecto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDibujosProyecto_RowsAdded);
+            // 
+            // Numero_dibujo
+            // 
+            this.Numero_dibujo.HeaderText = "Numero Dibujo";
+            this.Numero_dibujo.Name = "Numero_dibujo";
+            this.Numero_dibujo.ReadOnly = true;
+            // 
+            // Cantidad_Unidades
+            // 
+            this.Cantidad_Unidades.HeaderText = "Cantidad Unidades";
+            this.Cantidad_Unidades.Name = "Cantidad_Unidades";
+            this.Cantidad_Unidades.ReadOnly = true;
+            // 
+            // Proceso_dibujo
+            // 
+            this.Proceso_dibujo.HeaderText = "Proceso Dibujo";
+            this.Proceso_dibujo.Name = "Proceso_dibujo";
+            this.Proceso_dibujo.ReadOnly = true;
+            // 
+            // Estado_dibujo
+            // 
+            this.Estado_dibujo.HeaderText = "Estado Dibujo";
+            this.Estado_dibujo.Name = "Estado_dibujo";
+            this.Estado_dibujo.ReadOnly = true;
+            this.Estado_dibujo.Width = 150;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 150;
+            // 
+            // Empleado
+            // 
+            this.Empleado.HeaderText = "Empledado";
+            this.Empleado.Name = "Empleado";
+            this.Empleado.ReadOnly = true;
+            // 
+            // Horas_produccion
+            // 
+            this.Horas_produccion.HeaderText = "Horas Produccion";
+            this.Horas_produccion.Name = "Horas_produccion";
+            this.Horas_produccion.ReadOnly = true;
+            // 
+            // Horas_retrabajo
+            // 
+            this.Horas_retrabajo.HeaderText = "Horas Retrabajo";
+            this.Horas_retrabajo.Name = "Horas_retrabajo";
+            this.Horas_retrabajo.ReadOnly = true;
             // 
             // comboBoxCodigoProyecto
             // 
@@ -663,56 +713,6 @@
             this.textBoxNombreEmpleado.TabIndex = 105;
             this.textBoxNombreEmpleado.Visible = false;
             this.textBoxNombreEmpleado.WordWrap = false;
-            // 
-            // Numero_dibujo
-            // 
-            this.Numero_dibujo.HeaderText = "Numero Dibujo";
-            this.Numero_dibujo.Name = "Numero_dibujo";
-            this.Numero_dibujo.ReadOnly = true;
-            // 
-            // Cantidad_Unidades
-            // 
-            this.Cantidad_Unidades.HeaderText = "Cantidad Unidades";
-            this.Cantidad_Unidades.Name = "Cantidad_Unidades";
-            this.Cantidad_Unidades.ReadOnly = true;
-            // 
-            // Proceso_dibujo
-            // 
-            this.Proceso_dibujo.HeaderText = "Proceso Dibujo";
-            this.Proceso_dibujo.Name = "Proceso_dibujo";
-            this.Proceso_dibujo.ReadOnly = true;
-            // 
-            // Estado_dibujo
-            // 
-            this.Estado_dibujo.HeaderText = "Estado Dibujo";
-            this.Estado_dibujo.Name = "Estado_dibujo";
-            this.Estado_dibujo.ReadOnly = true;
-            this.Estado_dibujo.Width = 150;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            this.Fecha.Width = 150;
-            // 
-            // Empleado
-            // 
-            this.Empleado.HeaderText = "Empledado";
-            this.Empleado.Name = "Empleado";
-            this.Empleado.ReadOnly = true;
-            // 
-            // Horas_produccion
-            // 
-            this.Horas_produccion.HeaderText = "Horas Produccion";
-            this.Horas_produccion.Name = "Horas_produccion";
-            this.Horas_produccion.ReadOnly = true;
-            // 
-            // Horas_retrabajo
-            // 
-            this.Horas_retrabajo.HeaderText = "Horas Retrabajo";
-            this.Horas_retrabajo.Name = "Horas_retrabajo";
-            this.Horas_retrabajo.ReadOnly = true;
             // 
             // Forma_Reporte_Dibujos_Proyecto
             // 

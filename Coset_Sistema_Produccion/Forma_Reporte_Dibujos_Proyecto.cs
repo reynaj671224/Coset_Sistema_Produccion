@@ -651,11 +651,12 @@ namespace Coset_Sistema_Produccion
 
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
+
                 if (dibujo_Produccions_disponibles.Count > 0 && dibujos_Proyectos_disponibles.Count > 0)
                 {
 
                     dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                       secuencia.Proceso, secuencia.calidad, dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                       secuencia.Proceso, secuencia.calidad, secuencia.Fecha, dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
                        dibujo_Produccions_disponibles[0].Horas_retrabajo);
                 }
 
@@ -680,10 +681,17 @@ namespace Coset_Sistema_Produccion
                 dibujos_Proyecto_busqueda.proceso = dibujo.Proceso;
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
-                if (dibujos_Proyectos_disponibles.Count > 0)
+
+                Secuencia_Calidad_busqueda.Proceso = dibujo.Proceso;
+                Secuencia_Calidad_busqueda.Numero_Dibujo = dibujo.Numero_dibujo;
+
+                secuencia_calidad_disponibles = Class_Secuencia_Calidad.
+                    Adquiere_secuencia_calidad_busqueda_reporte_dibujos(Secuencia_Calidad_busqueda);
+
+                if (dibujos_Proyectos_disponibles.Count > 0 && secuencia_calidad_disponibles.Count>0)
                 {
                     dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                       dibujo.Proceso, dibujo.Calidad, dibujo.Empleado, dibujo.Horas_produccion,
+                       dibujo.Proceso, dibujo.Calidad, secuencia_calidad_disponibles[0].Fecha,dibujo.Empleado, dibujo.Horas_produccion,
                        dibujo.Horas_retrabajo);
                 }
   
@@ -1132,11 +1140,18 @@ namespace Coset_Sistema_Produccion
 
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proceso_proyecto_disponibles_en_base_datos(dibujos_Proyecto_busqueda);
-                if (dibujos_Proyectos_disponibles.Count > 0)
+
+                Secuencia_Calidad_busqueda.Numero_Dibujo = dibujo.Numero_dibujo;
+                Secuencia_Calidad_busqueda.Proceso = dibujo.Proceso;
+
+                secuencia_calidad_disponibles = Class_Secuencia_Calidad.
+                    Adquiere_secuencia_calidad_busqueda_reporte_dibujos(Secuencia_Calidad_busqueda);
+
+                if (dibujos_Proyectos_disponibles.Count > 0 && secuencia_calidad_disponibles.Count>0)
                 {
 
                     dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                       dibujo.Proceso, dibujo.Calidad, dibujo.Empleado, dibujo.Horas_produccion,
+                       dibujo.Proceso, dibujo.Calidad, secuencia_calidad_disponibles[0].Fecha, dibujo.Empleado, dibujo.Horas_produccion,
                        dibujo.Horas_retrabajo);
                 }
             }
@@ -1289,7 +1304,13 @@ namespace Coset_Sistema_Produccion
                 dibujos_Proyectos_disponibles = Class_Dibujos_Proyecto.
                     Adquiere_dibujos_proyecto_disponibles_en_base_datos(dibujo.proyecto);
 
-                if (dibujos_Proyectos_disponibles.Count > 0)
+                Secuencia_Calidad_busqueda.Proceso = dibujo.Proceso;
+                Secuencia_Calidad_busqueda.Numero_Dibujo = dibujo.Numero_dibujo;
+
+                secuencia_calidad_disponibles = Class_Secuencia_Calidad.
+                    Adquiere_secuencia_calidad_busqueda_reporte_dibujos(Secuencia_Calidad_busqueda);
+
+                if (dibujos_Proyectos_disponibles.Count > 0 && secuencia_calidad_disponibles.Count > 0)
                 {
 
                     dibujos_Proyecto_seleccion = dibujos_Proyectos_disponibles.
@@ -1297,7 +1318,7 @@ namespace Coset_Sistema_Produccion
 
 
                     dataGridViewReporteDibujosProyecto.Rows.Add(dibujo.Numero_dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                       dibujo.Proceso, dibujo.Calidad, dibujo.Empleado, dibujo.Horas_produccion,
+                       dibujo.Proceso, dibujo.Calidad, secuencia_calidad_disponibles[0].Fecha, dibujo.Empleado, dibujo.Horas_produccion,
                        dibujo.Horas_retrabajo);
                 }
 
@@ -1439,7 +1460,7 @@ namespace Coset_Sistema_Produccion
                 {
 
                     dataGridViewReporteDibujosProyecto.Rows.Add(secuencia.Numero_Dibujo, dibujos_Proyectos_disponibles[0].Cantidad,
-                       secuencia.Proceso, secuencia.calidad, dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
+                       secuencia.Proceso, secuencia.calidad, secuencia.Fecha,dibujo_Produccions_disponibles[0].Empleado, dibujo_Produccions_disponibles[0].Horas_produccion,
                        dibujo_Produccions_disponibles[0].Horas_retrabajo);
                 }
 
