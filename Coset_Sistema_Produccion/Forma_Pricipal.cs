@@ -869,5 +869,11 @@ namespace Coset_Sistema_Produccion
             Forma_Captura_Integracion forma_Captura_Integracion = new Forma_Captura_Integracion();
             forma_Captura_Integracion.ShowDialog();
         }
+
+        private void dibujosCNCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forma_Dibujos_Cnc forma_Dibujos_Cnc = new Forma_Dibujos_Cnc();
+            forma_Dibujos_Cnc.ShowDialog();
+        }
     }
 }

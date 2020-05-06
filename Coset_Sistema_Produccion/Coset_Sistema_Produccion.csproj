@@ -86,6 +86,7 @@
     <Compile Include="Class_Cotizaciones.cs" />
     <Compile Include="Class_Datos_Generales.cs" />
     <Compile Include="Class_Devolucion_Material.cs" />
+    <Compile Include="Class_dibujos_Cnc.cs" />
     <Compile Include="Class_Dibujos_Produccion.cs" />
     <Compile Include="Class_Dibujos_Proyecto.cs" />
     <Compile Include="Class_Entrada_Material.cs" />
@@ -171,6 +172,12 @@
     </Compile>
     <Compile Include="Forma_Devolucion_Materiales.Designer.cs">
       <DependentUpon>Forma_Devolucion_Materiales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forma_Dibujos_Cnc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forma_Dibujos_Cnc.Designer.cs">
+      <DependentUpon>Forma_Dibujos_Cnc.cs</DependentUpon>
     </Compile>
     <Compile Include="Forma_Dibujos_Operacion.cs">
       <SubType>Form</SubType>
@@ -350,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Devolucion_Materiales.resx">
       <DependentUpon>Forma_Devolucion_Materiales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forma_Dibujos_Cnc.resx">
+      <DependentUpon>Forma_Dibujos_Cnc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forma_Dibujos_Operacion.resx">
       <DependentUpon>Forma_Dibujos_Operacion.cs</DependentUpon>

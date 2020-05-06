@@ -92,6 +92,7 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dibujosCNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -237,6 +238,7 @@
             this.proyectosToolStripMenuItem,
             this.calidadOperacionesToolStripMenuItem,
             this.dibujosOperacionesToolStripMenuItem,
+            this.dibujosCNCToolStripMenuItem,
             this.procesosToolStripMenuItem1,
             this.integracionToolStripMenuItem});
             this.ingenieriaToolStripMenuItem.Name = "ingenieriaToolStripMenuItem";
@@ -596,6 +598,13 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // dibujosCNCToolStripMenuItem
+            // 
+            this.dibujosCNCToolStripMenuItem.Name = "dibujosCNCToolStripMenuItem";
+            this.dibujosCNCToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.dibujosCNCToolStripMenuItem.Text = "Dibujos CNC";
+            this.dibujosCNCToolStripMenuItem.Click += new System.EventHandler(this.dibujosCNCToolStripMenuItem_Click);
+            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,6 +700,7 @@
         private System.Windows.Forms.ToolStripMenuItem actividadesProcesosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenesCompraAbiertasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capturaDeIntegracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dibujosCNCToolStripMenuItem;
     }
 }
 
