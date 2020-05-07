@@ -37,6 +37,11 @@ namespace Coset_Sistema_Produccion
         public Secuencia_produccion Secuencia_produccion_modificacion = new Secuencia_produccion();
         public Secuencia_produccion Secuencia_produccion_insertar = new Secuencia_produccion();
         public Secuencia_produccion Secuencia_produccion_busqueda = new Secuencia_produccion();
+        public Class_dibujos_Cnc class_Dibujos_Cnc = new Class_dibujos_Cnc();
+        public List<Dibujos_cnc> Dibujos_cnc_disponibles = new List<Dibujos_cnc>();
+        public Dibujos_cnc dibujos_cnc_seleccion = new Dibujos_cnc();
+        public Dibujos_cnc dibujos_cnc_insertar = new Dibujos_cnc();
+
         public string secuencia_operacion = "";
 
         public Forma_Dibujos_Cnc()
@@ -554,6 +559,15 @@ namespace Coset_Sistema_Produccion
             {
                 Deabilita_boton_busqueda_dibujo();
                 Deactiva_boton_visualizar();
+                Busca_dibujo_cnc_base_datos();
+                if(Dibujos_cnc_disponibles.Count==1)
+                {
+                    Rellenar_informacion_terminar_tiempo();
+                }
+                else if (Dibujos_cnc_disponibles.Count == 0)
+                {
+                    Rellenar_informacion_iniciar_tiempo();
+                }
             }
             else if(busqueda_proyecto == 0)
             {
@@ -572,6 +586,30 @@ namespace Coset_Sistema_Produccion
                 Inicia_timer_busqueda_dibujo();
             }
 
+        }
+
+        private void Rellenar_informacion_iniciar_tiempo()
+        {
+            textBoxNombreProceso.Text = dibujos_cnc_seleccion.proceso;
+            textBoxEstado.Text = "Nuevo";
+            textBoxUnidades.Text = Dibujo_seleccion.Cantidad;
+            textBoxProyecto.Text = Dibujo_seleccion.Codigo_proyecto;
+            Secuencia_inicia_proceso();
+            Activa_boton_cancelar_operacio();
+        }
+
+        private void Rellenar_informacion_terminar_tiempo()
+        {
+            
+        }
+
+        private void Busca_dibujo_cnc_base_datos()
+        {
+            Dibujos_cnc_disponibles.Clear();
+            dibujos_cnc_seleccion.Numero_Dibujo = Dibujo_seleccion.Numero;
+            dibujos_cnc_seleccion.proceso = Dibujo_seleccion.proceso;
+            Dibujos_cnc_disponibles = class_Dibujos_Cnc.
+                Adquiere_dibujos_cnc_en_base_datos(dibujos_cnc_seleccion);
         }
 
         private void Limpia_caja_numero_dibujo()
@@ -593,7 +631,7 @@ namespace Coset_Sistema_Produccion
                 {
                     if(dibujos.proceso == "CNC")
                     {
-                        Rellena_cajas_informacion_dibujo();
+                        Dibujo_seleccion = dibujos;
                         dibujos_cnc = 2;
                         break;
                     }
@@ -608,7 +646,7 @@ namespace Coset_Sistema_Produccion
             return dibujos_cnc;
         }
 
-        private void Rellena_cajas_informacion_dibujo()
+        private void Rellena_cajas_informacion_dibujo(Dibujos_proyecto dibujos)
         {
             throw new NotImplementedException();
         }
@@ -697,7 +735,7 @@ namespace Coset_Sistema_Produccion
         {
             if (textBoxEstado.Text == "") /*La unidad ya esiste en la base de datos de produccion*/
             {
-                textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
+                textBoxProyecto.Text = Dibujos_produccion_disponible[0].Calidad;
                 textBoxEstado.Text = Dibujos_produccion_disponible[0].Estado;
                 textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
                 textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
@@ -713,7 +751,7 @@ namespace Coset_Sistema_Produccion
                     textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
                     textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
                     textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
-                    textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
+                    textBoxProyecto.Text = Dibujos_produccion_disponible[0].Calidad;
                     textBoxUnidades.Text = Dibujos_proyectos_disponibles[0].Cantidad;
                 }
                 else
@@ -840,7 +878,7 @@ namespace Coset_Sistema_Produccion
             MessageBox.Show("El numero de Dibujo se agregara a produccion", "Dibujos Produccion", 
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             textBoxEstado.Text = "Nuevo";
-            textBoxCalidad.Text = "Proceso";
+            textBoxProyecto.Text = "Proceso";
             Asigna_valores_dibujo_produccion();
             Class_Dibujos_Produccion.Inserta_nuevo_dibujo_produccion_base_datos(Dibujos_produccion_insertar);
         }
@@ -889,7 +927,7 @@ namespace Coset_Sistema_Produccion
             textBoxHorasProceso.Enabled = false;
             textBoxNombreProceso.Enabled = false;
             textBoxEstado.Enabled = false;
-            textBoxCalidad.Enabled = false;
+            textBoxProyecto.Enabled = false;
             textBoxHorasProceso.Enabled = false;
             textBoxHorasRetrabajo.Enabled = false;
         }
@@ -900,7 +938,7 @@ namespace Coset_Sistema_Produccion
             textBoxHorasProceso.Text = "";
             textBoxNombreProceso.Text = "";
             textBoxEstado.Text = "";
-            textBoxCalidad.Text = "";
+            textBoxProyecto.Text = "";
             textBoxHorasProceso.Text = "";
             textBoxHorasRetrabajo.Text = "";
             textBoxUnidades.Text = "";
@@ -963,11 +1001,19 @@ namespace Coset_Sistema_Produccion
         private void buttonIncioProceso_Click(object sender, EventArgs e)
         {
 
-            Dibujos_produccion_disponible[0].Estado = "Iniciado";
-            Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
-            Genera_secuencia_produccion_iniciar_transaccion();
-            Cancela_operacio_produccion();
-            Elimina_informacion_secuencia_disponibles();
+            dibujos_cnc_insertar.codigo_proyecto = textBoxProyecto.Text;
+            dibujos_cnc_insertar.Empleado = textBoxEmpleado.Text;
+            dibujos_cnc_insertar.proceso = textBoxNombreProceso.Text;
+            dibujos_cnc_insertar.estado = "Inciado";
+            dibujos_cnc_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
+            dibujos_cnc_insertar.fecha_inicio = DateTime.Now.Date.Year + "-" + DateTime.Now.Date.Month + "-" + DateTime.Now.Day;
+            dibujos_cnc_insertar.fecha_final = DateTime.Now.Date.Year + "-" + DateTime.Now.Date.Month + "-" + DateTime.Now.Day;
+            class_Dibujos_Cnc.Inserta_nuevo_dibujo_cnc_base_datos(dibujos_cnc_insertar);
+            //Dibujos_produccion_disponible[0].Estado = "Iniciado";
+            //Class_Dibujos_Produccion.Actualiza_base_datos_dibujo_produccion(Dibujos_produccion_disponible[0]);
+            //Genera_secuencia_produccion_iniciar_transaccion();
+            //Cancela_operacio_produccion();
+            //Elimina_informacion_secuencia_disponibles();
 
         }
 
@@ -985,7 +1031,7 @@ namespace Coset_Sistema_Produccion
             Secuencia_produccion_insertar.final_proceso = "";
             Secuencia_produccion_insertar.proceso = textBoxNombreProceso.Text;
             Secuencia_produccion_insertar.estado = "Iniciado";
-            Secuencia_produccion_insertar.calidad = textBoxCalidad.Text;
+            Secuencia_produccion_insertar.calidad = textBoxProyecto.Text;
 
         }
 
@@ -1064,7 +1110,7 @@ namespace Coset_Sistema_Produccion
             textBoxHorasProceso.Text = Dibujos_produccion_disponible[0].Horas_produccion;
             textBoxNombreProceso.Text = Dibujos_produccion_disponible[0].Proceso;
             textBoxEstado.Text = Dibujos_produccion_disponible[0].Estado;
-            textBoxCalidad.Text = Dibujos_produccion_disponible[0].Calidad;
+            textBoxProyecto.Text = Dibujos_produccion_disponible[0].Calidad;
             textBoxHorasRetrabajo.Text = Dibujos_produccion_disponible[0].Horas_retrabajo;
         }
     }

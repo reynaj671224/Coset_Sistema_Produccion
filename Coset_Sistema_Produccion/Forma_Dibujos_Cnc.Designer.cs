@@ -39,7 +39,7 @@
             this.comboBoxNombreProceso = new System.Windows.Forms.ComboBox();
             this.textBoxNumeroDibujo = new System.Windows.Forms.TextBox();
             this.textBoxEstado = new System.Windows.Forms.TextBox();
-            this.textBoxCalidad = new System.Windows.Forms.TextBox();
+            this.textBoxProyecto = new System.Windows.Forms.TextBox();
             this.dataGridViewSecuenciasProduccion = new System.Windows.Forms.DataGridView();
             this.Codigo_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero_Dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,9 +62,9 @@
             this.Proyecto_dibujo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonBuscarSecuenciaDibujo = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelFechaFinal = new System.Windows.Forms.Label();
+            this.labelFechaInicio = new System.Windows.Forms.Label();
+            this.labelProyecto = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelNumeroDibujo = new System.Windows.Forms.Label();
             this.buttonIncioProceso = new System.Windows.Forms.Button();
@@ -127,7 +127,7 @@
             // comboBoxNombreProceso
             // 
             this.comboBoxNombreProceso.FormattingEnabled = true;
-            this.comboBoxNombreProceso.Location = new System.Drawing.Point(171, 173);
+            this.comboBoxNombreProceso.Location = new System.Drawing.Point(171, 174);
             this.comboBoxNombreProceso.Name = "comboBoxNombreProceso";
             this.comboBoxNombreProceso.Size = new System.Drawing.Size(196, 21);
             this.comboBoxNombreProceso.TabIndex = 28;
@@ -149,14 +149,13 @@
             this.textBoxEstado.Size = new System.Drawing.Size(196, 20);
             this.textBoxEstado.TabIndex = 32;
             // 
-            // textBoxCalidad
+            // textBoxProyecto
             // 
-            this.textBoxCalidad.Enabled = false;
-            this.textBoxCalidad.Location = new System.Drawing.Point(171, 227);
-            this.textBoxCalidad.Name = "textBoxCalidad";
-            this.textBoxCalidad.Size = new System.Drawing.Size(196, 20);
-            this.textBoxCalidad.TabIndex = 34;
-            this.textBoxCalidad.Visible = false;
+            this.textBoxProyecto.Enabled = false;
+            this.textBoxProyecto.Location = new System.Drawing.Point(171, 225);
+            this.textBoxProyecto.Name = "textBoxProyecto";
+            this.textBoxProyecto.Size = new System.Drawing.Size(196, 20);
+            this.textBoxProyecto.TabIndex = 34;
             // 
             // dataGridViewSecuenciasProduccion
             // 
@@ -236,7 +235,7 @@
             this.textBoxHorasProceso.Enabled = false;
             this.textBoxHorasProceso.Location = new System.Drawing.Point(532, 145);
             this.textBoxHorasProceso.Name = "textBoxHorasProceso";
-            this.textBoxHorasProceso.Size = new System.Drawing.Size(94, 20);
+            this.textBoxHorasProceso.Size = new System.Drawing.Size(124, 20);
             this.textBoxHorasProceso.TabIndex = 51;
             // 
             // textBoxHorasRetrabajo
@@ -244,17 +243,16 @@
             this.textBoxHorasRetrabajo.Enabled = false;
             this.textBoxHorasRetrabajo.Location = new System.Drawing.Point(532, 171);
             this.textBoxHorasRetrabajo.Name = "textBoxHorasRetrabajo";
-            this.textBoxHorasRetrabajo.Size = new System.Drawing.Size(94, 20);
+            this.textBoxHorasRetrabajo.Size = new System.Drawing.Size(124, 20);
             this.textBoxHorasRetrabajo.TabIndex = 53;
             // 
             // textBoxUnidades
             // 
             this.textBoxUnidades.Enabled = false;
-            this.textBoxUnidades.Location = new System.Drawing.Point(532, 201);
+            this.textBoxUnidades.Location = new System.Drawing.Point(171, 250);
             this.textBoxUnidades.Name = "textBoxUnidades";
             this.textBoxUnidades.Size = new System.Drawing.Size(94, 20);
             this.textBoxUnidades.TabIndex = 56;
-            this.textBoxUnidades.Visible = false;
             // 
             // dataGridViewProduccionDibujos
             // 
@@ -311,12 +309,11 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
-            this.label6.Location = new System.Drawing.Point(404, 203);
+            this.label6.Location = new System.Drawing.Point(43, 252);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 16);
             this.label6.TabIndex = 55;
             this.label6.Text = "Unidades";
-            this.label6.Visible = false;
             // 
             // buttonBuscarSecuenciaDibujo
             // 
@@ -332,39 +329,38 @@
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
             // 
-            // label5
+            // labelFechaFinal
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
-            this.label5.Location = new System.Drawing.Point(404, 173);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 16);
-            this.label5.TabIndex = 52;
-            this.label5.Text = "Horas Re-trabajo";
+            this.labelFechaFinal.AutoSize = true;
+            this.labelFechaFinal.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFechaFinal.Image = ((System.Drawing.Image)(resources.GetObject("labelFechaFinal.Image")));
+            this.labelFechaFinal.Location = new System.Drawing.Point(404, 173);
+            this.labelFechaFinal.Name = "labelFechaFinal";
+            this.labelFechaFinal.Size = new System.Drawing.Size(68, 16);
+            this.labelFechaFinal.TabIndex = 52;
+            this.labelFechaFinal.Text = "Fecha Final";
             // 
-            // label4
+            // labelFechaInicio
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(404, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 16);
-            this.label4.TabIndex = 50;
-            this.label4.Text = "Horas Proceso";
+            this.labelFechaInicio.AutoSize = true;
+            this.labelFechaInicio.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFechaInicio.Image = ((System.Drawing.Image)(resources.GetObject("labelFechaInicio.Image")));
+            this.labelFechaInicio.Location = new System.Drawing.Point(404, 147);
+            this.labelFechaInicio.Name = "labelFechaInicio";
+            this.labelFechaInicio.Size = new System.Drawing.Size(67, 16);
+            this.labelFechaInicio.TabIndex = 50;
+            this.labelFechaInicio.Text = "Fecha Incio";
             // 
-            // label1
+            // labelProyecto
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(43, 229);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 16);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Calidad";
-            this.label1.Visible = false;
+            this.labelProyecto.AutoSize = true;
+            this.labelProyecto.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProyecto.Image = ((System.Drawing.Image)(resources.GetObject("labelProyecto.Image")));
+            this.labelProyecto.Location = new System.Drawing.Point(43, 227);
+            this.labelProyecto.Name = "labelProyecto";
+            this.labelProyecto.Size = new System.Drawing.Size(53, 16);
+            this.labelProyecto.TabIndex = 33;
+            this.labelProyecto.Text = "Proyecto";
             // 
             // label3
             // 
@@ -401,7 +397,6 @@
             this.buttonIncioProceso.Text = "Inicio";
             this.buttonIncioProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonIncioProceso.UseVisualStyleBackColor = false;
-            this.buttonIncioProceso.Visible = false;
             this.buttonIncioProceso.Click += new System.EventHandler(this.buttonIncioProceso_Click);
             // 
             // buttonCancelar
@@ -491,7 +486,7 @@
             this.buttonBuscarDibujo.Enabled = false;
             this.buttonBuscarDibujo.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBuscarDibujo.Image = ((System.Drawing.Image)(resources.GetObject("buttonBuscarDibujo.Image")));
-            this.buttonBuscarDibujo.Location = new System.Drawing.Point(632, 12);
+            this.buttonBuscarDibujo.Location = new System.Drawing.Point(547, 12);
             this.buttonBuscarDibujo.Name = "buttonBuscarDibujo";
             this.buttonBuscarDibujo.Size = new System.Drawing.Size(79, 74);
             this.buttonBuscarDibujo.TabIndex = 3;
@@ -507,14 +502,13 @@
             this.buttonTerminarProceso.Enabled = false;
             this.buttonTerminarProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonTerminarProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonTerminarProceso.Image")));
-            this.buttonTerminarProceso.Location = new System.Drawing.Point(547, 12);
+            this.buttonTerminarProceso.Location = new System.Drawing.Point(462, 12);
             this.buttonTerminarProceso.Name = "buttonTerminarProceso";
             this.buttonTerminarProceso.Size = new System.Drawing.Size(79, 74);
             this.buttonTerminarProceso.TabIndex = 2;
             this.buttonTerminarProceso.Text = "Terminar";
             this.buttonTerminarProceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonTerminarProceso.UseVisualStyleBackColor = false;
-            this.buttonTerminarProceso.Visible = false;
             this.buttonTerminarProceso.Click += new System.EventHandler(this.buttonTerminarProceso_Click);
             // 
             // buttonPausaProceso
@@ -524,7 +518,7 @@
             this.buttonPausaProceso.Enabled = false;
             this.buttonPausaProceso.Font = new System.Drawing.Font("Book Antiqua", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPausaProceso.Image = ((System.Drawing.Image)(resources.GetObject("buttonPausaProceso.Image")));
-            this.buttonPausaProceso.Location = new System.Drawing.Point(462, 12);
+            this.buttonPausaProceso.Location = new System.Drawing.Point(632, 12);
             this.buttonPausaProceso.Name = "buttonPausaProceso";
             this.buttonPausaProceso.Size = new System.Drawing.Size(79, 74);
             this.buttonPausaProceso.TabIndex = 1;
@@ -555,12 +549,12 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonBuscarSecuenciaDibujo);
             this.Controls.Add(this.textBoxHorasRetrabajo);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelFechaFinal);
             this.Controls.Add(this.textBoxHorasProceso);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelFechaInicio);
             this.Controls.Add(this.dataGridViewSecuenciasProduccion);
-            this.Controls.Add(this.textBoxCalidad);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxProyecto);
+            this.Controls.Add(this.labelProyecto);
             this.Controls.Add(this.textBoxEstado);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNumeroDibujo);
@@ -616,13 +610,13 @@
         private System.Windows.Forms.Label labelNumeroDibujo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxEstado;
-        private System.Windows.Forms.TextBox textBoxCalidad;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxProyecto;
+        private System.Windows.Forms.Label labelProyecto;
         private System.Windows.Forms.DataGridView dataGridViewSecuenciasProduccion;
         private System.Windows.Forms.TextBox textBoxHorasProceso;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelFechaInicio;
         private System.Windows.Forms.TextBox textBoxHorasRetrabajo;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelFechaFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Empleado;

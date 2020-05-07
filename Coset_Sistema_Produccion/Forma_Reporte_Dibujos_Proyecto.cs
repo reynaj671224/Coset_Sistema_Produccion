@@ -1605,10 +1605,11 @@ namespace Coset_Sistema_Produccion
             oSheet.Cells[7, 1] = "Numero Dibujo";
             oSheet.Cells[7, 2] = "Cantidad_Unidades";
             oSheet.Cells[7, 3] = "Proceso Dibujo";
-            oSheet.Cells[7, 4] = "EStado Dibujo";
-            oSheet.Cells[7, 5] = "Empleado";
-            oSheet.Cells[7, 6] = "Horas Produccion";
-            oSheet.Cells[7, 7] = "Horas Re-trabajo";
+            oSheet.Cells[7, 4] = "Estado Dibujo";
+            oSheet.Cells[7, 5] = "Fecha";
+            oSheet.Cells[7, 6] = "Empleado";
+            oSheet.Cells[7, 7] = "Horas Produccion";
+            oSheet.Cells[7, 8] = "Horas Re-trabajo";
 
         }
 
