@@ -50,8 +50,8 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxHorasProceso = new System.Windows.Forms.TextBox();
-            this.textBoxHorasRetrabajo = new System.Windows.Forms.TextBox();
+            this.textBoxFechaInicio = new System.Windows.Forms.TextBox();
+            this.textBoxFechaFinal = new System.Windows.Forms.TextBox();
             this.textBoxUnidades = new System.Windows.Forms.TextBox();
             this.dataGridViewProduccionDibujos = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -230,21 +230,21 @@
             this.Tiempo.HeaderText = "Tiempo";
             this.Tiempo.Name = "Tiempo";
             // 
-            // textBoxHorasProceso
+            // textBoxFechaInicio
             // 
-            this.textBoxHorasProceso.Enabled = false;
-            this.textBoxHorasProceso.Location = new System.Drawing.Point(532, 145);
-            this.textBoxHorasProceso.Name = "textBoxHorasProceso";
-            this.textBoxHorasProceso.Size = new System.Drawing.Size(124, 20);
-            this.textBoxHorasProceso.TabIndex = 51;
+            this.textBoxFechaInicio.Enabled = false;
+            this.textBoxFechaInicio.Location = new System.Drawing.Point(532, 145);
+            this.textBoxFechaInicio.Name = "textBoxFechaInicio";
+            this.textBoxFechaInicio.Size = new System.Drawing.Size(124, 20);
+            this.textBoxFechaInicio.TabIndex = 51;
             // 
-            // textBoxHorasRetrabajo
+            // textBoxFechaFinal
             // 
-            this.textBoxHorasRetrabajo.Enabled = false;
-            this.textBoxHorasRetrabajo.Location = new System.Drawing.Point(532, 171);
-            this.textBoxHorasRetrabajo.Name = "textBoxHorasRetrabajo";
-            this.textBoxHorasRetrabajo.Size = new System.Drawing.Size(124, 20);
-            this.textBoxHorasRetrabajo.TabIndex = 53;
+            this.textBoxFechaFinal.Enabled = false;
+            this.textBoxFechaFinal.Location = new System.Drawing.Point(532, 171);
+            this.textBoxFechaFinal.Name = "textBoxFechaFinal";
+            this.textBoxFechaFinal.Size = new System.Drawing.Size(124, 20);
+            this.textBoxFechaFinal.TabIndex = 53;
             // 
             // textBoxUnidades
             // 
@@ -327,6 +327,7 @@
             this.buttonBuscarSecuenciaDibujo.Text = "Visualizar";
             this.buttonBuscarSecuenciaDibujo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonBuscarSecuenciaDibujo.UseVisualStyleBackColor = true;
+            this.buttonBuscarSecuenciaDibujo.Visible = false;
             this.buttonBuscarSecuenciaDibujo.Click += new System.EventHandler(this.buttonBuscarSecuenciaDibujo_Click);
             // 
             // labelFechaFinal
@@ -548,9 +549,9 @@
             this.Controls.Add(this.textBoxUnidades);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonBuscarSecuenciaDibujo);
-            this.Controls.Add(this.textBoxHorasRetrabajo);
+            this.Controls.Add(this.textBoxFechaFinal);
             this.Controls.Add(this.labelFechaFinal);
-            this.Controls.Add(this.textBoxHorasProceso);
+            this.Controls.Add(this.textBoxFechaInicio);
             this.Controls.Add(this.labelFechaInicio);
             this.Controls.Add(this.dataGridViewSecuenciasProduccion);
             this.Controls.Add(this.textBoxProyecto);
@@ -613,9 +614,9 @@
         private System.Windows.Forms.TextBox textBoxProyecto;
         private System.Windows.Forms.Label labelProyecto;
         private System.Windows.Forms.DataGridView dataGridViewSecuenciasProduccion;
-        private System.Windows.Forms.TextBox textBoxHorasProceso;
+        private System.Windows.Forms.TextBox textBoxFechaInicio;
         private System.Windows.Forms.Label labelFechaInicio;
-        private System.Windows.Forms.TextBox textBoxHorasRetrabajo;
+        private System.Windows.Forms.TextBox textBoxFechaFinal;
         private System.Windows.Forms.Label labelFechaFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Dibujo;

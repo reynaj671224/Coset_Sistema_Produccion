@@ -23,7 +23,7 @@ namespace Coset_Sistema_Produccion
                     secuencia_existente_disponibles_produccion.Add(new Dibujos_cnc()
                     {
                         Numero_Dibujo = mySqlDataReader["numero_dibujo"].ToString(),
-                        Empleado = mySqlDataReader["empleado"].ToString(),
+                        Empleado = mySqlDataReader["nombre_empleado"].ToString(),
                         fecha_inicio = mySqlDataReader["fecha_inicio"].ToString(),
                         fecha_final = mySqlDataReader["fecha_final"].ToString(),
                         proceso = mySqlDataReader["proceso"].ToString(),
@@ -76,6 +76,32 @@ namespace Coset_Sistema_Produccion
               numero_dibujo.estado + "','" + numero_dibujo.codigo_proyecto + "'); ";
         }
 
+        public string Actualiza_base_datos_dibujo_cnc(Dibujos_cnc numero_dibujo)
+        {
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_dibujos_cnc());
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(Configura_cadena_comando_en_base_de_datos_modificar_dibujos_cnc(numero_dibujo), connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                connection.Close();
+                return ex.Message;
+            }
+
+            connection.Close();
+            return "NO errores";
+        }
+
+        private string Configura_cadena_comando_en_base_de_datos_modificar_dibujos_cnc(Dibujos_cnc numero_dibujo)
+        {
+            return "UPDATE dibujos_cnc set  fecha_final='" + numero_dibujo.fecha_final +
+                 "',estado='" + numero_dibujo.estado +
+                "' where numero_dibujo='" + numero_dibujo.Numero_Dibujo + "';";
+        }
         private string Configura_Cadena_Conexion_MySQL_dibujos_cnc()
         {
             return "Server=" + Coset_Sistema_Produccion.ip_addres_server +
