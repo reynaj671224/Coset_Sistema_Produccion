@@ -50,6 +50,7 @@
             this.proyectosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calidadOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujosOperacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujosCNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.integracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosElectricosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,7 +93,6 @@
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.labelREquisicionesAbiertas = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dibujosCNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequisicionesAbiertas)).BeginInit();
@@ -265,6 +265,13 @@
             this.dibujosOperacionesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.dibujosOperacionesToolStripMenuItem.Text = "Dibujos Operaciones";
             this.dibujosOperacionesToolStripMenuItem.Click += new System.EventHandler(this.dibujosOperacionesToolStripMenuItem_Click);
+            // 
+            // dibujosCNCToolStripMenuItem
+            // 
+            this.dibujosCNCToolStripMenuItem.Name = "dibujosCNCToolStripMenuItem";
+            this.dibujosCNCToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.dibujosCNCToolStripMenuItem.Text = "Dibujos CNC";
+            this.dibujosCNCToolStripMenuItem.Click += new System.EventHandler(this.dibujosCNCToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem1
             // 
@@ -598,13 +605,6 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // dibujosCNCToolStripMenuItem
-            // 
-            this.dibujosCNCToolStripMenuItem.Name = "dibujosCNCToolStripMenuItem";
-            this.dibujosCNCToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.dibujosCNCToolStripMenuItem.Text = "Dibujos CNC";
-            this.dibujosCNCToolStripMenuItem.Click += new System.EventHandler(this.dibujosCNCToolStripMenuItem_Click);
-            // 
             // Coset_Sistema_Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -622,7 +622,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Coset_Sistema_Produccion";
-            this.Text = "Coset Sistema Produccion Rev 11.5";
+            this.Text = "Coset Sistema Produccion Rev 11.6";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Coset_Sistema_Produccion_Load);
             this.menuStrip1.ResumeLayout(false);
