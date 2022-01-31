@@ -90,7 +90,8 @@ namespace Coset_Sistema_Produccion
         private string Commando_leer_Mysql_busqueda_entrada_material(Entrada_Material material)
         {
             return "SELECT * FROM entrada_material where codigo_material ='" + material.Codigo_material +
-                "' and orden_compra ='"+ material.Orden_compra + "' and descripcion_material ='" + material.Descripcion_material + "';";
+                "' and orden_compra ='"+ material.Orden_compra + "' and descripcion_material ='" + 
+                    material.Descripcion_material + "' and partida ='" + material.partida + "';";
         }
 
         public string Inserta_nuevo_entrada_material_base_datos(Entrada_Material material)
@@ -116,11 +117,11 @@ namespace Coset_Sistema_Produccion
         private string Configura_cadena_comando_insertar_en_base_de_datos_entrada_material(Entrada_Material entrada_Material)
         {
             return "INSERT INTO entrada_material(orden_compra, fecha,codigo_material," +
-                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,precio,divisa,referencia_entrada) " +
+                   "cantidad_material,codigo_proveedor_material,nombre_empleado,descripcion_material,precio,divisa,referencia_entrada, partida) " +
                    "VALUES('" + entrada_Material.Orden_compra + "','" + entrada_Material.Fecha + "','" +
                    entrada_Material.Codigo_material + "','" + entrada_Material.Cantidad + "','" + entrada_Material.Codigo_proveedor + "','" +
                    entrada_Material.Nombre_empleado + "','" + entrada_Material.Descripcion_material + "','" + entrada_Material.Precio +
-                   "','" + entrada_Material.Divisa + "','" + entrada_Material.Referencia + "');";
+                   "','" + entrada_Material.Divisa + "','" + entrada_Material.Referencia + "','"+ entrada_Material.partida +"');";
         }
 
         private string Configura_Cadena_Conexion_MySQL_almacen_materiales()
@@ -141,6 +142,7 @@ namespace Coset_Sistema_Produccion
         public string Precio = "";
         public string Divisa = "";
         public string Referencia = "";
+        public string partida = "";
         public string error = "";
 
     }

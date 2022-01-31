@@ -58,14 +58,6 @@
             this.textBoxPrecioMaterial = new System.Windows.Forms.TextBox();
             this.textBoxUnidadesEntrada = new System.Windows.Forms.TextBox();
             this.dataGridViewPartidasEntradaMaterialesEntrada = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_materiales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidades_ordenadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad_recibidas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo_cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxDivisa = new System.Windows.Forms.TextBox();
             this.textBoxEstadoOC = new System.Windows.Forms.TextBox();
             this.buttonMateriales = new System.Windows.Forms.Button();
@@ -95,6 +87,15 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBoxCodigoEmpleado = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_materiales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidades_ordenadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad_recibidas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo_cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasEntradaMaterialesVisualizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartidasEntradaMaterialesEntrada)).BeginInit();
             this.groupBoxReferencia.SuspendLayout();
@@ -334,6 +335,7 @@
             this.dataGridViewPartidasEntradaMaterialesEntrada.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridViewPartidasEntradaMaterialesEntrada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPartidasEntradaMaterialesEntrada.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.partida,
             this.dataGridViewTextBoxColumn1,
             this.Codigo_materiales,
             this.Codigo_proveedor,
@@ -345,61 +347,10 @@
             this.dataGridViewPartidasEntradaMaterialesEntrada.Enabled = false;
             this.dataGridViewPartidasEntradaMaterialesEntrada.Location = new System.Drawing.Point(12, 384);
             this.dataGridViewPartidasEntradaMaterialesEntrada.Name = "dataGridViewPartidasEntradaMaterialesEntrada";
-            this.dataGridViewPartidasEntradaMaterialesEntrada.Size = new System.Drawing.Size(1044, 202);
+            this.dataGridViewPartidasEntradaMaterialesEntrada.Size = new System.Drawing.Size(1145, 202);
             this.dataGridViewPartidasEntradaMaterialesEntrada.TabIndex = 85;
             this.dataGridViewPartidasEntradaMaterialesEntrada.Visible = false;
             this.dataGridViewPartidasEntradaMaterialesEntrada.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartidasEntradaMaterialesEntrada_CellEndEdit);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // Codigo_materiales
-            // 
-            this.Codigo_materiales.HeaderText = "Codigo Material";
-            this.Codigo_materiales.Name = "Codigo_materiales";
-            this.Codigo_materiales.ReadOnly = true;
-            // 
-            // Codigo_proveedor
-            // 
-            this.Codigo_proveedor.HeaderText = "Codigo Parte Proveedor";
-            this.Codigo_proveedor.Name = "Codigo_proveedor";
-            this.Codigo_proveedor.ReadOnly = true;
-            this.Codigo_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Descripcion_partida
-            // 
-            this.Descripcion_partida.HeaderText = "Descripcion";
-            this.Descripcion_partida.Name = "Descripcion_partida";
-            this.Descripcion_partida.ReadOnly = true;
-            this.Descripcion_partida.Width = 400;
-            // 
-            // Unidades_ordenadas
-            // 
-            this.Unidades_ordenadas.HeaderText = "Unidades";
-            this.Unidades_ordenadas.Name = "Unidades_ordenadas";
-            this.Unidades_ordenadas.ReadOnly = true;
-            // 
-            // Cantidad_recibidas
-            // 
-            this.Cantidad_recibidas.HeaderText = "Recibidas";
-            this.Cantidad_recibidas.Name = "Cantidad_recibidas";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Precio";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // Tipo_cambio
-            // 
-            this.Tipo_cambio.HeaderText = "Tipo Cambio";
-            this.Tipo_cambio.Name = "Tipo_cambio";
-            this.Tipo_cambio.ReadOnly = true;
             // 
             // textBoxDivisa
             // 
@@ -753,6 +704,62 @@
             this.label8.TabIndex = 92;
             this.label8.Text = "Clave Empleado";
             // 
+            // partida
+            // 
+            this.partida.HeaderText = "Partida";
+            this.partida.Name = "partida";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // Codigo_materiales
+            // 
+            this.Codigo_materiales.HeaderText = "Codigo Material";
+            this.Codigo_materiales.Name = "Codigo_materiales";
+            this.Codigo_materiales.ReadOnly = true;
+            // 
+            // Codigo_proveedor
+            // 
+            this.Codigo_proveedor.HeaderText = "Codigo Parte Proveedor";
+            this.Codigo_proveedor.Name = "Codigo_proveedor";
+            this.Codigo_proveedor.ReadOnly = true;
+            this.Codigo_proveedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Descripcion_partida
+            // 
+            this.Descripcion_partida.HeaderText = "Descripcion";
+            this.Descripcion_partida.Name = "Descripcion_partida";
+            this.Descripcion_partida.ReadOnly = true;
+            this.Descripcion_partida.Width = 400;
+            // 
+            // Unidades_ordenadas
+            // 
+            this.Unidades_ordenadas.HeaderText = "Unidades";
+            this.Unidades_ordenadas.Name = "Unidades_ordenadas";
+            this.Unidades_ordenadas.ReadOnly = true;
+            // 
+            // Cantidad_recibidas
+            // 
+            this.Cantidad_recibidas.HeaderText = "Recibidas";
+            this.Cantidad_recibidas.Name = "Cantidad_recibidas";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Precio";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // Tipo_cambio
+            // 
+            this.Tipo_cambio.HeaderText = "Tipo Cambio";
+            this.Tipo_cambio.Name = "Tipo_cambio";
+            this.Tipo_cambio.ReadOnly = true;
+            // 
             // Forma_Entrada_Materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -869,6 +876,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_cambio_visualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Referencia;
+        private System.Windows.Forms.Button buttonMateriales;
+        private System.Windows.Forms.ComboBox comboBoxCodigoEmpleado;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partida;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_materiales;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_proveedor;
@@ -877,8 +888,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad_recibidas;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_cambio;
-        private System.Windows.Forms.Button buttonMateriales;
-        private System.Windows.Forms.ComboBox comboBoxCodigoEmpleado;
-        private System.Windows.Forms.Label label8;
     }
 }
