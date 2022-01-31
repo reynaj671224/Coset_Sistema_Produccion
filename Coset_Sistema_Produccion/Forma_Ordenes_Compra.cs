@@ -2379,8 +2379,21 @@ namespace Coset_Sistema_Produccion
            Rellena_informacio_proveedor();
            Rellena_informacion_partidas_orden_compra_previo_word();
            Limpia_partidas_sin_informacion();
+           borrar_renglones_en_blanco();
            Guardar_archivo_word();
         }
+
+        private void borrar_renglones_en_blanco()
+        {
+            word.Table table = Documento.Tables[3];
+
+            for (int partida = 51; partida > dataGridViewPartidasOrdenCompra.Rows.Count+1;partida--)
+            {
+                table.Rows[partida].Delete();
+            }
+        }
+
+
 
         private void Rellena_informacio_proveedor()
         {
@@ -2405,7 +2418,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_partidas_sin_informacion()
         {
-            for (int partida = dataGridViewPartidasOrdenCompra.Rows.Count + 1; partida <= 16; partida++)
+            for (int partida = dataGridViewPartidasOrdenCompra.Rows.Count + 1; partida <= 50; partida++)
             {
                 Remplaza_texto_en_Documento("<n" + partida + ">",
                         "");
@@ -2436,7 +2449,7 @@ namespace Coset_Sistema_Produccion
             double total = 0;
             double Total_partidas = 0;
             double iva_total = 0;
-            if (dataGridViewPartidasOrdenCompra.Rows.Count <= 16)
+            if (dataGridViewPartidasOrdenCompra.Rows.Count <= 50)
             {
                 for (int partida = 1; partida <= dataGridViewPartidasOrdenCompra.Rows.Count; partida++)
                 {

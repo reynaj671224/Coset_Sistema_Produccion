@@ -41,7 +41,6 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Captura_Produccion.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Calidad_Operaciones.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.Forma_Dibujos_Operacion.resources
-C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.csprojAssemblyReference.cache
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Release\Coset_Sistema_Produccion.csproj.CopyComplete
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Release\Coset_Sistema_Produccion.exe.manifest
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\bin\Release\Coset_Sistema_Produccion.application
