@@ -54,6 +54,7 @@
             this.Dibujo_proyecto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proceso_dibujo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Descrpcion_partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechahora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxCodigoProyecto = new System.Windows.Forms.ComboBox();
             this.timerModificarClientes = new System.Windows.Forms.Timer(this.components);
             this.buttonDibujos = new System.Windows.Forms.Button();
@@ -84,8 +85,18 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxSerie = new System.Windows.Forms.TextBox();
             this.comboBoxNombreProyecto = new System.Windows.Forms.ComboBox();
+            this.dataGridViewDibujosProyectoVizualizar = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso_dibujo_visualizar = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyectoVizualizar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -304,11 +315,12 @@
             this.Cantidad_dibujos,
             this.Dibujo_proyecto,
             this.Proceso_dibujo,
-            this.Descrpcion_partida});
+            this.Descrpcion_partida,
+            this.fechahora});
             this.dataGridViewDibujosProyecto.Enabled = false;
-            this.dataGridViewDibujosProyecto.Location = new System.Drawing.Point(254, 364);
+            this.dataGridViewDibujosProyecto.Location = new System.Drawing.Point(274, 365);
             this.dataGridViewDibujosProyecto.Name = "dataGridViewDibujosProyecto";
-            this.dataGridViewDibujosProyecto.Size = new System.Drawing.Size(594, 156);
+            this.dataGridViewDibujosProyecto.Size = new System.Drawing.Size(592, 156);
             this.dataGridViewDibujosProyecto.TabIndex = 48;
             this.dataGridViewDibujosProyecto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellClick);
             this.dataGridViewDibujosProyecto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDibujosProyecto_CellEndEdit);
@@ -345,6 +357,12 @@
             // 
             this.Descrpcion_partida.HeaderText = "Tiempo Estimado Hrs";
             this.Descrpcion_partida.Name = "Descrpcion_partida";
+            // 
+            // fechahora
+            // 
+            this.fechahora.HeaderText = "fecha Hora";
+            this.fechahora.Name = "fechahora";
+            this.fechahora.Visible = false;
             // 
             // comboBoxCodigoProyecto
             // 
@@ -488,7 +506,7 @@
             // comboBoxNombreCliente
             // 
             this.comboBoxNombreCliente.FormattingEnabled = true;
-            this.comboBoxNombreCliente.Location = new System.Drawing.Point(254, 242);
+            this.comboBoxNombreCliente.Location = new System.Drawing.Point(220, 242);
             this.comboBoxNombreCliente.Name = "comboBoxNombreCliente";
             this.comboBoxNombreCliente.Size = new System.Drawing.Size(268, 21);
             this.comboBoxNombreCliente.Sorted = true;
@@ -652,11 +670,80 @@
             this.comboBoxNombreProyecto.Visible = false;
             this.comboBoxNombreProyecto.SelectedIndexChanged += new System.EventHandler(this.comboBoxNombreProyecto_SelectedIndexChanged);
             // 
+            // dataGridViewDibujosProyectoVizualizar
+            // 
+            this.dataGridViewDibujosProyectoVizualizar.AllowUserToDeleteRows = false;
+            this.dataGridViewDibujosProyectoVizualizar.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridViewDibujosProyectoVizualizar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDibujosProyectoVizualizar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.Proceso_dibujo_visualizar,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.fecha,
+            this.hora});
+            this.dataGridViewDibujosProyectoVizualizar.Enabled = false;
+            this.dataGridViewDibujosProyectoVizualizar.Location = new System.Drawing.Point(157, 387);
+            this.dataGridViewDibujosProyectoVizualizar.Name = "dataGridViewDibujosProyectoVizualizar";
+            this.dataGridViewDibujosProyectoVizualizar.Size = new System.Drawing.Size(825, 156);
+            this.dataGridViewDibujosProyectoVizualizar.TabIndex = 83;
+            this.dataGridViewDibujosProyectoVizualizar.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Cantidad";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Dibujo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 200;
+            // 
+            // Proceso_dibujo_visualizar
+            // 
+            this.Proceso_dibujo_visualizar.HeaderText = "Proceso";
+            this.Proceso_dibujo_visualizar.Name = "Proceso_dibujo_visualizar";
+            this.Proceso_dibujo_visualizar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso_dibujo_visualizar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Proceso_dibujo_visualizar.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Tiempo Estimado Hrs";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "fecha Hora";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Visible = false;
+            // 
+            // fecha
+            // 
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            // 
+            // hora
+            // 
+            this.hora.HeaderText = "Hora";
+            this.hora.Name = "hora";
+            // 
             // Forma_Proyectos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 521);
+            this.Controls.Add(this.dataGridViewDibujosProyectoVizualizar);
             this.Controls.Add(this.comboBoxNombreProyecto);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.textBoxSerie);
@@ -710,6 +797,7 @@
             this.Load += new System.EventHandler(this.Forma_Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyecto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDibujosProyectoVizualizar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -771,5 +859,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dibujo_proyecto;
         private System.Windows.Forms.DataGridViewComboBoxColumn Proceso_dibujo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrpcion_partida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechahora;
+        private System.Windows.Forms.DataGridView dataGridViewDibujosProyectoVizualizar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Proceso_dibujo_visualizar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hora;
     }
 }
