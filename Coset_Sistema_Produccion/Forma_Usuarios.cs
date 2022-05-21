@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Coset_Sistema_Produccion
         public List<Usuario> usuarios_disponibles_empleados = new List<Usuario>();
         public Class_Usuarios clase_usuarios = new Class_Usuarios();
         public Usuario Usuario_Modificaciones = new Usuario();
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
         public string Operacio_usuarios = "";
         public Forma_Usuarios()
         {
@@ -130,6 +132,12 @@ namespace Coset_Sistema_Produccion
             Activa_caja_correo_electronico();
             Activa_caja_numero_licencia();
             Activa_datapick_licencia_fecha();
+            Activa_usuario_activo();
+        }
+
+        private void Activa_usuario_activo()
+        {
+            checkBoxEmpleadoActivo.Enabled = true;
         }
 
         private void Activa_caja_numero_licencia()
@@ -236,6 +244,7 @@ namespace Coset_Sistema_Produccion
                     Desactiva_datapick_licencia_fecha();
                     Deactiva_caja_numero_licencia();
                     Elimina_informacion_usuarios_disponibles();
+                    Desactiva_empleado_activo();
                 }
             }
         }
@@ -410,11 +419,19 @@ namespace Coset_Sistema_Produccion
             Limpia_caja_correo_electronico();
             Limpia_caja_no_licencia();
             Limpia_caja_licencia_fecha();
+            
+        }
+
+        private void Desactiva_empleado_activo()
+        {
+            checkBoxEmpleadoActivo.Checked = false;
+            checkBoxEmpleadoActivo.Enabled = false;
         }
 
         private void Limpia_caja_licencia_fecha()
         {
-             dateTimePickerLiceciaFecha.Text= DateTime.Today.ToString();
+            CultureInfo culture = new CultureInfo("es-MX");
+            dateTimePickerLiceciaFecha.Text= DateTime.Today.ToString();
         }
 
         private void Limpia_caja_no_licencia()
@@ -459,6 +476,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_caja_fecha_ingreso_empleado()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             dateTimePickerEmpleado.Text = DateTime.Today.ToString();
         }
 
@@ -494,6 +512,12 @@ namespace Coset_Sistema_Produccion
 
         private string Configura_cadena_comando_modificar_en_base_de_datos()
         {
+            string empleado_activo_string = " ";
+            if (checkBoxEmpleadoActivo.Checked)
+                empleado_activo_string = "1";
+            else
+                empleado_activo_string = "0";
+
             return "UPDATE sistema.empleados set  nombre_empleado='" + comboBoxNombreEmpleado.Text +
                 "',fecha_ingreso_empleado='" + dateTimePickerEmpleado.Text +
                 "',puesto='" + textBoxPuestoempleado.Text +
@@ -505,7 +529,7 @@ namespace Coset_Sistema_Produccion
                 "',correo_electonico='" + textBoxCorreoElectronico.Text +
                 "',numero_licencia='" + textBoxNoLicencia.Text +
                 "',fecha_vencimiento_licencia='" + dateTimePickerLiceciaFecha.Text +
-                
+                "',empleado_activo='"+ empleado_activo_string +
                 "' where codigo_empleado='" + textBoxCodigoempleado.Text + "';";
         }
 
@@ -690,7 +714,7 @@ namespace Coset_Sistema_Produccion
             Usuario_Modificaciones = usuarios_disponibles_empleados.Find(usuario => usuario.nombre_empleado.Contains(comboBoxNombreEmpleado.SelectedItem.ToString()));
 
             textBoxCodigoempleado.Text = Usuario_Modificaciones.codigo_empleado;
-            dateTimePickerEmpleado.Text = Usuario_Modificaciones.fecha_ingreso_empleado;
+            dateTimePickerEmpleado.Text = Fecha_Hora.calcula_fecha_hora(Usuario_Modificaciones.fecha_ingreso_empleado).ToString();
             textBoxPuestoempleado.Text = Usuario_Modificaciones.puesto_empleado;
             textBoxCostosemana.Text = Usuario_Modificaciones.costo_semana_empleado;
             textBoxCostohora.Text = Usuario_Modificaciones.costo_hora_empleado;
@@ -699,8 +723,11 @@ namespace Coset_Sistema_Produccion
             textBoxClaveusuario.Text = Usuario_Modificaciones.clave_usuario;
             textBoxCorreoElectronico.Text = Usuario_Modificaciones.Correo_electronico;
             textBoxNoLicencia.Text = Usuario_Modificaciones.Numero_licencia;
-            dateTimePickerLiceciaFecha.Text = Usuario_Modificaciones.Fecha_vencimiento_licencia;
-
+            dateTimePickerLiceciaFecha.Text = Fecha_Hora.calcula_fecha_hora(Usuario_Modificaciones.Fecha_vencimiento_licencia).ToString();
+            if (Usuario_Modificaciones.empleado_activo == "1")
+                checkBoxEmpleadoActivo.Checked = true;
+            else
+                checkBoxEmpleadoActivo.Checked = false;
         }
 
         private void timerActualizrempleado_Tick(object sender, EventArgs e)
@@ -736,6 +763,8 @@ namespace Coset_Sistema_Produccion
             Activa_Combo_codigo_empleado();
             Aparece_caja_nombre_empleado();
             Aparece_caja_codigo_empleado();
+            Desactiva_empleado_activo();
+            Desactiva_datapick_licencia_fecha();
         }
 
         private void Limpia_combo_nombre_empleado()
@@ -902,6 +931,10 @@ namespace Coset_Sistema_Produccion
             dateTimePickerLiceciaFecha.Enabled = false;
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
  

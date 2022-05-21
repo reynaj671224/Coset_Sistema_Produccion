@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace Coset_Sistema_Produccion
         public List<Dibujos_cnc> Dibujos_cnc_disponibles = new List<Dibujos_cnc>();
         public Dibujos_cnc dibujos_cnc_seleccion = new Dibujos_cnc();
         public Dibujos_cnc dibujos_cnc_insertar = new Dibujos_cnc();
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
 
         public string secuencia_operacion = "";
 
@@ -300,8 +302,9 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_dibujo_produccion_actualizar()
         {
-            DateTime Final = Convert.ToDateTime(Secuencia_produccion_seleccion.final_proceso);
-            DateTime Inicio = Convert.ToDateTime(Secuencia_produccion_seleccion.inicio_proceso);
+            
+            DateTime Final = Fecha_Hora.calcula_fecha_hora(Secuencia_produccion_seleccion.final_proceso);
+            DateTime Inicio = Fecha_Hora.calcula_fecha_hora(Secuencia_produccion_seleccion.inicio_proceso);
             TimeSpan timeSpan = Final - Inicio;
             if(Dibujos_produccion_disponible[0].Calidad == "Proceso")
             {
@@ -341,8 +344,8 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_secuencia_produccion_modificaciones()
         {
-
-            Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString();
+            CultureInfo culture = new CultureInfo("es-MX");
+            Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString(culture);
             if (secuencia_operacion == "Pausar")
             {
                 Secuencia_produccion_seleccion.estado = "pausado";
@@ -607,7 +610,8 @@ namespace Coset_Sistema_Produccion
             
             if (Dibujos_cnc_disponibles[0].estado== "Inciado")
             {
-                DateTime Fecha_inicio = Convert.ToDateTime(Dibujos_cnc_disponibles[0].fecha_inicio);
+                
+                DateTime Fecha_inicio = Fecha_Hora.calcula_fecha_hora(Dibujos_cnc_disponibles[0].fecha_inicio);
                 textBoxNombreProceso.Text = dibujos_cnc_seleccion.proceso;
                 textBoxEstado.Text = Dibujos_cnc_disponibles[0].estado;
                 textBoxUnidades.Text = Dibujo_seleccion.Cantidad;
@@ -617,8 +621,9 @@ namespace Coset_Sistema_Produccion
             }
             else if (Dibujos_cnc_disponibles[0].estado == "Terminado")
             {
-                DateTime Fecha_inicio = Convert.ToDateTime(Dibujos_cnc_disponibles[0].fecha_inicio);
-                DateTime Fecha_final = Convert.ToDateTime(Dibujos_cnc_disponibles[0].fecha_final);
+                
+                DateTime Fecha_inicio = Fecha_Hora.calcula_fecha_hora(Dibujos_cnc_disponibles[0].fecha_inicio);
+                DateTime Fecha_final = Fecha_Hora.calcula_fecha_hora(Dibujos_cnc_disponibles[0].fecha_final);
                 textBoxNombreProceso.Text = dibujos_cnc_seleccion.proceso;
                 textBoxEstado.Text = Dibujos_cnc_disponibles[0].estado;
                 textBoxUnidades.Text = Dibujo_seleccion.Cantidad;
@@ -835,8 +840,9 @@ namespace Coset_Sistema_Produccion
                 DateTime Inicial, Final;
                 if (secuencia.final_proceso != "")
                 {
-                    Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
-                    Final = Convert.ToDateTime(secuencia.final_proceso);
+                    
+                    Inicial = Fecha_Hora.calcula_fecha_hora(secuencia.inicio_proceso);
+                    Final = Fecha_Hora.calcula_fecha_hora(secuencia.final_proceso);
                     TimeSpan timeSpan = Final - Inicial;
                     dataGridViewSecuenciasProduccion.Rows.Add(
                    secuencia.Codigo,
@@ -1052,9 +1058,10 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_variable_secuencia_produccion_iniciar()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             Secuencia_produccion_insertar.Numero_Dibujo = textBoxNumeroDibujo.Text;
             Secuencia_produccion_insertar.Empleado = comboBoxEmpleado.Text;
-            Secuencia_produccion_insertar.inicio_proceso = DateTime.Now.ToString();
+            Secuencia_produccion_insertar.inicio_proceso = DateTime.Now.ToString(culture);
             Secuencia_produccion_insertar.final_proceso = "";
             Secuencia_produccion_insertar.proceso = textBoxNombreProceso.Text;
             Secuencia_produccion_insertar.estado = "Iniciado";

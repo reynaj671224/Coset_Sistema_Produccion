@@ -1338,6 +1338,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_orden_compra()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             textBoxEmpleado.Text = "";
             textBoxCodigoOrdenCompra.Text = "";
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();

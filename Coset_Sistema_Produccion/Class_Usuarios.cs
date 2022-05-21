@@ -81,7 +81,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_usuarios_integracion()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Electrico' or tipo_empleado='Ingenieria'";
+            return "SELECT * FROM empleados where (tipo_empleado='Electrico' or tipo_empleado='Ingenieria') AND empleado_activo='1'";
         }
 
         public List<Usuario> Adquiere_usuarios_produccion_disponibles_en_base_datos()
@@ -121,8 +121,8 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_Mysql_usuarios_producion()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Produccion' or tipo_empleado='Ingenieria'" +
-                "or tipo_empleado = 'Calidad-Dibujos'";
+            return "SELECT * FROM empleados where (tipo_empleado='Produccion' or tipo_empleado='Ingenieria'" +
+                "or tipo_empleado = 'Calidad-Dibujos') AND empleado_activo='1'";
         }
 
         public List<Usuario> Adquiere_usuarios_administrativos_compras_disponibles_en_base_datos()
@@ -220,7 +220,7 @@ namespace Coset_Sistema_Produccion
                         Correo_electronico = mySqlDataReader["correo_electonico"].ToString(),
                         Numero_licencia = mySqlDataReader["numero_licencia"].ToString(),
                         Fecha_vencimiento_licencia = mySqlDataReader["fecha_vencimiento_licencia"].ToString(),
-
+                        empleado_activo = mySqlDataReader["empleado_activo"].ToString(),
                     });
                 }
             }
@@ -233,6 +233,49 @@ namespace Coset_Sistema_Produccion
             return usuarios_disponibles;
         }
 
+        public List<Usuario> Adquiere_todos_usuarios_requsitores_autos_en_base_datos()
+        {
+            List<Usuario> usuarios_disponibles = new List<Usuario>();
+            MySqlConnection connection = new MySqlConnection(Configura_Cadena_Conexion_MySQL_sistema_empleados());
+            try
+            {
+                MySqlCommand mySqlCommand = new MySqlCommand(Commando_leer_todos_empleados_requisitores_autos_Mysql(), connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+                while (mySqlDataReader.Read())
+                {
+                    usuarios_disponibles.Add(new Usuario()
+                    {
+                        nombre_usuario = mySqlDataReader["nombre_usuario_empleado"].ToString(),
+                        clave_usuario = mySqlDataReader["clave_usuario_empleado"].ToString(),
+                        fecha_ingreso_empleado = mySqlDataReader["fecha_ingreso_empleado"].ToString(),
+                        puesto_empleado = mySqlDataReader["puesto"].ToString(),
+                        costo_semana_empleado = mySqlDataReader["costo_semana_empleado"].ToString(),
+                        costo_hora_empleado = mySqlDataReader["costo_hora_empleado"].ToString(),
+                        tipo_empleado = mySqlDataReader["tipo_empleado"].ToString(),
+                        codigo_empleado = mySqlDataReader["codigo_empleado"].ToString(),
+                        nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
+                        Correo_electronico = mySqlDataReader["correo_electonico"].ToString(),
+                        Numero_licencia = mySqlDataReader["numero_licencia"].ToString(),
+                        Fecha_vencimiento_licencia = mySqlDataReader["fecha_vencimiento_licencia"].ToString(),
+                        empleado_activo = mySqlDataReader["empleado_activo"].ToString(),
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                usuarios_disponibles.Add(new Usuario()
+                { error = ex.Message.ToString() });
+            }
+            connection.Close();
+            return usuarios_disponibles;
+        }
+
+        private string Commando_leer_todos_empleados_requisitores_autos_Mysql()
+        {
+            return "SELECT * FROM empleados where empleado_activo='1'";
+        }
+
         private string Commando_leer_todos_empleados_Mysql()
         {
             return "SELECT * FROM empleados";
@@ -240,18 +283,18 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_requisitores_Mysql()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Ingenieria' or tipo_empleado='Almacen'" +
-                "or tipo_empleado='Administrativo' or tipo_empleado='Produccion'or tipo_empleado='Admin-Compras' " +
-                "or tipo_empleado='Almacen-Compras'";
+            return "SELECT * FROM empleados where (tipo_empleado='Ingenieria' OR tipo_empleado='Almacen'" +
+                "OR tipo_empleado='Administrativo' OR tipo_empleado='Produccion'OR tipo_empleado='Admin-Compras'" +
+                "OR tipo_empleado='Almacen-Compras') AND empleado_activo='1'";
         }
 
         private string Commando_leer_Mysql()
         {
-            return "SELECT * FROM sistema.empleados where tipo_empleado='Admin-Compras' or " +
+            return "SELECT * FROM sistema.empleados where (tipo_empleado='Admin-Compras' or " +
                 "tipo_empleado='Administrativo' or tipo_empleado='Ingenieria' " +
                 "or tipo_empleado='Almacen' or tipo_empleado='Almacen-Compras' or tipo_empleado='Usuario-Produccion'" +
                 "or tipo_empleado = 'Calidad-Dibujos'" +
-                "or tipo_empleado = 'Electrico'";
+                "or tipo_empleado = 'Electrico') AND empleado_activo='1'";
 
 
 
@@ -259,7 +302,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_administrativos_compras_Mysql()
         {
-            return "SELECT * FROM empleados where tipo_empleado='Admin-Compras'";
+            return "SELECT * FROM empleados where tipo_empleado='Admin-Compras' AND empleado_activo='1'";
         }
 
         private string Configura_Cadena_Conexion_MySQL_sistema_empleados()
@@ -289,7 +332,8 @@ namespace Coset_Sistema_Produccion
                         tipo_empleado = mySqlDataReader["tipo_empleado"].ToString(),
                         codigo_empleado = mySqlDataReader["codigo_empleado"].ToString(),
                         nombre_empleado = mySqlDataReader["nombre_empleado"].ToString(),
-                        Correo_electronico = mySqlDataReader["correo_electonico"].ToString()
+                        Correo_electronico = mySqlDataReader["correo_electonico"].ToString(),
+                        empleado_activo = mySqlDataReader["empleado_activo"].ToString(),
                     });
                 }
             }
@@ -304,7 +348,7 @@ namespace Coset_Sistema_Produccion
 
         private string Commando_leer_ingerieros_Mysql()
         {
-            return "SELECT * FROM empleados WHERE tipo_empleado='Ingenieria' OR tipo_empleado='Administrativo'";
+            return "SELECT * FROM empleados WHERE (tipo_empleado='Ingenieria' OR tipo_empleado='Administrativo') AND empleado_activo='1'";
         }
     }
 
@@ -323,6 +367,7 @@ namespace Coset_Sistema_Produccion
         public string Correo_electronico = "";
         public string Numero_licencia = "";
         public string Fecha_vencimiento_licencia = "";
+        public string empleado_activo = "";
         public string error = "";
     }
 }

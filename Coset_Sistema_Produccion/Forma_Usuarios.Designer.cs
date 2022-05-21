@@ -68,6 +68,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBoxNoLicencia = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.checkBoxEmpleadoActivo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +122,7 @@
             this.buttonEliminarUsuario.Text = "Eliminar";
             this.buttonEliminarUsuario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEliminarUsuario.UseVisualStyleBackColor = true;
+            this.buttonEliminarUsuario.Visible = false;
             this.buttonEliminarUsuario.Click += new System.EventHandler(this.buttonEliminarUsuario_Click);
             // 
             // buttonHome
@@ -474,11 +476,24 @@
             this.label12.TabIndex = 33;
             this.label12.Text = "Numero Licencia";
             // 
+            // checkBoxEmpleadoActivo
+            // 
+            this.checkBoxEmpleadoActivo.AutoSize = true;
+            this.checkBoxEmpleadoActivo.Enabled = false;
+            this.checkBoxEmpleadoActivo.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.checkBoxEmpleadoActivo.Location = new System.Drawing.Point(458, 110);
+            this.checkBoxEmpleadoActivo.Name = "checkBoxEmpleadoActivo";
+            this.checkBoxEmpleadoActivo.Size = new System.Drawing.Size(106, 17);
+            this.checkBoxEmpleadoActivo.TabIndex = 35;
+            this.checkBoxEmpleadoActivo.Text = "Empleado Activo";
+            this.checkBoxEmpleadoActivo.UseVisualStyleBackColor = true;
+            // 
             // Forma_Usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 378);
+            this.Controls.Add(this.checkBoxEmpleadoActivo);
             this.Controls.Add(this.textBoxNoLicencia);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.dateTimePickerLiceciaFecha);
@@ -564,5 +579,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxNoLicencia;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox checkBoxEmpleadoActivo;
     }
 }

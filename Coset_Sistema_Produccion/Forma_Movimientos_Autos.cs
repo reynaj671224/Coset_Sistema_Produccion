@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.Office.Core;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
+using System.Globalization;
 
 namespace Coset_Sistema_Produccion
 {
@@ -43,6 +44,7 @@ namespace Coset_Sistema_Produccion
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
         public Excel.Workbook oWB = null;
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
 
         public string Operacion_autos = "";
 
@@ -1002,6 +1004,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellenar_combo_empleados()
         {
+           
             foreach (Usuario usario in Usuarios_disponibles)
             {
                 if (usario.error == "")
@@ -1009,7 +1012,7 @@ namespace Coset_Sistema_Produccion
                     try
                     {
 
-                        if (Convert.ToDateTime(usario.Fecha_vencimiento_licencia) >= DateTime.Today)
+                        if (Fecha_Hora.calcula_fecha_hora(usario.Fecha_vencimiento_licencia) >= DateTime.Today)
                         {
                             comboBoxEmpleado.Items.Add(usario.nombre_empleado);
                         }
@@ -1188,7 +1191,7 @@ namespace Coset_Sistema_Produccion
         private void Obtener_usuarios_disponibles_base_datos()
         {
             Usuarios_disponibles = Class_Usuarios.
-                Adquiere_todos_usuarios_requsitores_disponibles_en_base_datos();
+                Adquiere_todos_usuarios_requsitores_autos_en_base_datos();
         }
 
         private void Limpia_datagridview_empleados()

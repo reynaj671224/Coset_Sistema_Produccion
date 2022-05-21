@@ -60,6 +60,7 @@ namespace Coset_Sistema_Produccion
             Class_Actividades_Proceso_Electrico = new Class_Actividades_Proceso_Electrico();
         public List<Actividad_Proceso_Electrico> 
             Actividades_proceso_electrico_disponibles = new List<Actividad_Proceso_Electrico>();
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
         public enum Campos_dibujos
         {
             codigo, cantidad, numero,
@@ -651,9 +652,10 @@ namespace Coset_Sistema_Produccion
                     {
                         if (dibujo.fechahora != "NA")
                         {
-                            DateTime tiempo = Convert.ToDateTime(dibujo.fechahora);
-                             fecha = tiempo.Day.ToString() + "/" + tiempo.Month.ToString() + "/" + tiempo.Year.ToString();
-                             hora = tiempo.Hour.ToString() + ":" + tiempo.Minute.ToString() + ":" + tiempo.Second.ToString();
+                           
+                            DateTime tiempo = Fecha_Hora.calcula_fecha_hora(dibujo.fechahora);
+                              fecha = tiempo.Day.ToString("00") + "/" + tiempo.Month.ToString("00") + "/" + tiempo.Year.ToString("0000");
+                             hora = tiempo.Hour.ToString("00") + ":" + tiempo.Minute.ToString("00") + ":" + tiempo.Second.ToString("00");
                         }
                         else
                         {
@@ -703,6 +705,7 @@ namespace Coset_Sistema_Produccion
 
         private void Rellena_cajas_informacion_de_codigo_proyectos()
         {
+            
             proyecto_visualizar = proyectos_disponibles.Find(proyecto => proyecto.Codigo.Contains(comboBoxCodigoProyecto.SelectedItem.ToString()));
             Desaparece_combo_nombre_proyecto();
             Desactiva_combo_nombre_proyecto();
@@ -712,8 +715,8 @@ namespace Coset_Sistema_Produccion
             textBoxNombreCliente.Text = proyecto_visualizar.Nombre_cliente;
             textBoxIngenieroCoset.Text = proyecto_visualizar.Ingeniero_coset;;
             textBoxIngenieroCliente.Text = proyecto_visualizar.Ingeriero_cliente;
-            dateTimePickerFechaActual.Text = proyecto_visualizar.Fecha_inicio;
-            dateTimePickerFechaEntrega.Text = proyecto_visualizar.Fecha_entrega;
+            dateTimePickerFechaActual.Text = Fecha_Hora.calcula_fecha_hora(proyecto_visualizar.Fecha_inicio).ToString();
+            dateTimePickerFechaEntrega.Text = Fecha_Hora.calcula_fecha_hora(proyecto_visualizar.Fecha_entrega).ToString();
             textBoxCodigoCliente.Text = proyecto_visualizar.Codigo_cliente;
             textBoxModelo.Text = proyecto_visualizar.Modelo;
             textBoxSerie.Text = proyecto_visualizar.Serie;
@@ -1842,6 +1845,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_proyecto()
         {
+            
             textBoxCodigoProyecto.Text = "";
             textBoxNombreProyecto.Text = "";
             textBoxModelo.Text = "";
@@ -2345,12 +2349,17 @@ namespace Coset_Sistema_Produccion
 
         private void dataGridViewDibujosProyecto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            
+           
             if (Operacio_proyectos == "Agregar Proyecto" || Operacio_proyectos == "Modificar" ||
                 Operacio_proyectos == "Agregar Dibujo" || Operacio_proyectos == "Agregar SubProyecto")/*verifica si esta agregando Partidas*/
             {
                 if (dataGridViewDibujosProyecto[(int)Campos_dibujos.fechahora, e.RowIndex].Value == null)
                 {
-                    dataGridViewDibujosProyecto[(int)Campos_dibujos.fechahora, e.RowIndex].Value = DateTime.Now.ToString();
+                    CultureInfo culture = new CultureInfo("es-MX");
+                    string fecha_hora = DateTime.Now.ToString(culture);
+
+                    dataGridViewDibujosProyecto[(int)Campos_dibujos.fechahora, e.RowIndex].Value = fecha_hora;
                 }
             
                 if (dataGridViewDibujosProyecto.CurrentCell.ColumnIndex == (int)Campos_dibujos.tiempo_estimado) /*verifica si esta modificando el precio*/

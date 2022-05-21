@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,6 +61,7 @@ namespace Coset_Sistema_Produccion
         public Proyecto proyecto_seleccion = new Proyecto();
         public Class_Proyectos Class_Proyectos = new Class_Proyectos();
         public Proyecto proyecto_visualizar = new Proyecto();
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
 
         public string secuencia_operacion = "";
 
@@ -340,8 +342,9 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_dibujo_produccion_actualizar()
         {
-            DateTime Final = Convert.ToDateTime(Secuencia_produccion_seleccion.final_proceso);
-            DateTime Inicio = Convert.ToDateTime(Secuencia_produccion_seleccion.inicio_proceso);
+           
+            DateTime Final = Fecha_Hora.calcula_fecha_hora(Secuencia_produccion_seleccion.final_proceso);
+            DateTime Inicio = Fecha_Hora.calcula_fecha_hora(Secuencia_produccion_seleccion.inicio_proceso);
             TimeSpan timeSpan = Final - Inicio;
             if (Dibujos_produccion_disponible[0].Calidad == "Proceso")
             {
@@ -381,8 +384,8 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_secuencia_produccion_modificaciones()
         {
-
-            Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString();
+            CultureInfo culture = new CultureInfo("es-MX");
+            Secuencia_produccion_seleccion.final_proceso = DateTime.Now.ToString(culture);
             if (secuencia_operacion == "Pausar")
             {
                 Secuencia_produccion_seleccion.estado = "pausado";
@@ -577,8 +580,9 @@ namespace Coset_Sistema_Produccion
                 DateTime Inicial, Final;
                 if (secuencia.final_proceso != "")
                 {
-                    Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
-                    Final = Convert.ToDateTime(secuencia.final_proceso);
+                    
+                    Inicial = Fecha_Hora.calcula_fecha_hora(secuencia.inicio_proceso);
+                    Final = Fecha_Hora.calcula_fecha_hora(secuencia.final_proceso);
                     TimeSpan timeSpan = Final - Inicial;
                     dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
@@ -1117,8 +1121,9 @@ namespace Coset_Sistema_Produccion
                 DateTime Inicial, Final;
                 if (secuencia.final_proceso != "")
                 {
-                    Inicial = Convert.ToDateTime(secuencia.inicio_proceso);
-                    Final = Convert.ToDateTime(secuencia.final_proceso);
+                  
+                    Inicial = Fecha_Hora.calcula_fecha_hora(secuencia.inicio_proceso);
+                    Final = Fecha_Hora.calcula_fecha_hora(secuencia.final_proceso);
                     TimeSpan timeSpan = Final - Inicial;
                     dataGridViewSecuenciasIntegracion.Rows.Add(
                    secuencia.Codigo,
@@ -1317,8 +1322,9 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_variable_secuencia_integracion_iniciar()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             secuencia_Integracion_insetar.Empleado = comboBoxEmpleado.Text;
-            secuencia_Integracion_insetar.inicio_proceso = DateTime.Now.ToString();
+            secuencia_Integracion_insetar.inicio_proceso = DateTime.Now.ToString(culture);
             secuencia_Integracion_insetar.final_proceso = "";
             secuencia_Integracion_insetar.proceso = comboBoxNombreProceso.Text;
             secuencia_Integracion_insetar.actividad = comboBoxActividadesProcesoElectrico.Text;
@@ -1335,7 +1341,8 @@ namespace Coset_Sistema_Produccion
 
         private void Asigna_valores_variable_secuencia_integracion_terminar()
         {
-            secuencia_Integracions_disponibles[0].final_proceso = DateTime.Now.ToString();
+            CultureInfo culture = new CultureInfo("es-MX");
+            secuencia_Integracions_disponibles[0].final_proceso = DateTime.Now.ToString(culture);
             secuencia_Integracions_disponibles[0].estado = "Terminado";
         }
 

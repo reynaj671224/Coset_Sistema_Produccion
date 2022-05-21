@@ -44,6 +44,7 @@ namespace Coset_Sistema_Produccion
         public word.Document Documento = null;
         public int Numero_partidas_disponibles = 0;
         public int RenglonParaEliminardatagridview = 0;
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
         public enum Campos_partidas
         {
             codigo, numero, cantidad, parte, descripcion,
@@ -1183,6 +1184,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_cotizacion()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             textBoxNombreCliente.Text = "";
             textBoxCodigoCotizaciones.Text = "";
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();
@@ -1936,8 +1938,9 @@ namespace Coset_Sistema_Produccion
         private string Calcula_tiempo_de_entrega()
         {
             int semanas = 0;
-            DateTime fecha_inicial = Convert.ToDateTime(dateTimePickerFechaActual.Text);
-            DateTime fecha_final = Convert.ToDateTime(dateTimePickerFechaEntrega.Text);
+            
+            DateTime fecha_inicial = Fecha_Hora.calcula_fecha_hora(dateTimePickerFechaActual.Text);
+            DateTime fecha_final = Fecha_Hora.calcula_fecha_hora(dateTimePickerFechaEntrega.Text);
             TimeSpan dias_entrega = fecha_final - fecha_inicial;
             semanas = (int)(dias_entrega.TotalDays / 7);
 

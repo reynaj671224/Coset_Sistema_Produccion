@@ -90,6 +90,7 @@
     <Compile Include="Class_Dibujos_Produccion.cs" />
     <Compile Include="Class_Dibujos_Proyecto.cs" />
     <Compile Include="Class_Entrada_Material.cs" />
+    <Compile Include="Class_Fecha_Hora.cs" />
     <Compile Include="Class_Integracion_Procesos.cs" />
     <Compile Include="Class_Materiales.cs" />
     <Compile Include="Class_Movimientos_Autos.cs" />

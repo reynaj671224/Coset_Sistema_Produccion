@@ -1218,6 +1218,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_salida_material()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             textBoxEmpleado.Text = "";
             textBoxCodigoProyecto.Text = "";
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();

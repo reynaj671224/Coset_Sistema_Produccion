@@ -76,6 +76,7 @@ namespace Coset_Sistema_Produccion
         public Class_Secuencia_Calidad Class_Secuencia_Calidad = new Class_Secuencia_Calidad();
         public List<Secuencia_calidad> secuencia_calidad_disponibles = new List<Secuencia_calidad>();
         public Secuencia_calidad Secuencia_Calidad_busqueda = new Secuencia_calidad();
+        public Class_Fecha_Hora Fecha_Hora = new Class_Fecha_Hora();
 
         public Excel.Application oXL = null;
         public Excel.Worksheet oSheet = null;
@@ -1179,7 +1180,8 @@ namespace Coset_Sistema_Produccion
                     {
                         min_date = dateTimePickerFechaInicio.Value;
                         max_date = dateTimePickerFechaFinal.Value;
-                        actual_date = Convert.ToDateTime(secuencia_calidad_disponibles[0].Fecha);
+                      
+                        actual_date = Fecha_Hora.calcula_fecha_hora(secuencia_calidad_disponibles[0].Fecha);
                         if (actual_date >= min_date && actual_date <= max_date
                             && dibujo.proyecto == comboBoxCodigoProyecto.Text)
                         {
@@ -1199,9 +1201,10 @@ namespace Coset_Sistema_Produccion
                         Adquiere_secuencia_calidad_busqueda_reporte_dibujos(Secuencia_Calidad_busqueda);
                     if (secuencia_calidad_disponibles.Count > 0)
                     {
+                       
                         min_date = dateTimePickerFechaInicio.Value;
                         max_date = dateTimePickerFechaFinal.Value;
-                        actual_date = Convert.ToDateTime(secuencia_calidad_disponibles[0].Fecha);
+                        actual_date = Fecha_Hora.calcula_fecha_hora(secuencia_calidad_disponibles[0].Fecha);
                         if (actual_date >= min_date && actual_date <= max_date)
                         {
                             dibujo_Produccions_filtros.Add(dibujo);
@@ -1243,7 +1246,8 @@ namespace Coset_Sistema_Produccion
                     {
                         min_date = dateTimePickerFechaInicio.Value;
                         max_date = dateTimePickerFechaFinal.Value;
-                        actual_date = Convert.ToDateTime(secuencia_calidad_disponibles[0].Fecha);
+                        
+                        actual_date = Fecha_Hora.calcula_fecha_hora(secuencia_calidad_disponibles[0].Fecha);
                         if (actual_date >= min_date && actual_date <= max_date 
                             && dibujo.Empleado == comboBoxNombreEmpleado.Text)
                         {
@@ -1264,7 +1268,8 @@ namespace Coset_Sistema_Produccion
                     {
                         min_date = dateTimePickerFechaInicio.Value;
                         max_date = dateTimePickerFechaFinal.Value;
-                        actual_date = Convert.ToDateTime(secuencia_calidad_disponibles[0].Fecha);
+                       
+                        actual_date = Fecha_Hora.calcula_fecha_hora(secuencia_calidad_disponibles[0].Fecha);
                         if(actual_date>= min_date && actual_date<= max_date)
                         {
                             dibujo_Produccions_filtros.Add(dibujo);

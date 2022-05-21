@@ -685,7 +685,7 @@
             this.fecha,
             this.hora});
             this.dataGridViewDibujosProyectoVizualizar.Enabled = false;
-            this.dataGridViewDibujosProyectoVizualizar.Location = new System.Drawing.Point(157, 387);
+            this.dataGridViewDibujosProyectoVizualizar.Location = new System.Drawing.Point(166, 364);
             this.dataGridViewDibujosProyectoVizualizar.Name = "dataGridViewDibujosProyectoVizualizar";
             this.dataGridViewDibujosProyectoVizualizar.Size = new System.Drawing.Size(825, 156);
             this.dataGridViewDibujosProyectoVizualizar.TabIndex = 83;
@@ -695,6 +695,7 @@
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Codigo";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 50;
             // 
             // dataGridViewTextBoxColumn2

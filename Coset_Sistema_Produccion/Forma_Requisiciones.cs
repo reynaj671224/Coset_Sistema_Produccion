@@ -1255,6 +1255,7 @@ namespace Coset_Sistema_Produccion
 
         private void Limpia_cajas_captura_despues_de_agregar_cotizacion()
         {
+            CultureInfo culture = new CultureInfo("es-MX");
             textBoxCodigoRequisiciones.Text = "";
             dateTimePickerFechaActual.Text = DateTime.Today.ToString();
             textBoxRequsitor.Text = "";
