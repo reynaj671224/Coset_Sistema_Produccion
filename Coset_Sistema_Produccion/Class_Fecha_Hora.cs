@@ -15,9 +15,9 @@ namespace Coset_Sistema_Produccion
 
             
             DateTime fecha_hora_parse = DateTime.Now;
-            
-            
 
+
+            
             if (CultureInfo.CurrentCulture.ToString() == "es-MX")
             {
                 CultureInfo culture = new CultureInfo("es-MX", true);
@@ -31,8 +31,8 @@ namespace Coset_Sistema_Produccion
                     }
                     else if (fecha_hora_string.Contains("a. m.") || fecha_hora_string.Contains("p. m."))
                     {
-                        culture.DateTimeFormat.AMDesignator = "a.m";
-                        culture.DateTimeFormat.PMDesignator = "p.m";
+                        culture.DateTimeFormat.AMDesignator = "a. m";
+                        culture.DateTimeFormat.PMDesignator = "p. m";
                         fecha_hora_parse = DateTime.Parse(fecha_hora_string, culture);
                     }
                     else
