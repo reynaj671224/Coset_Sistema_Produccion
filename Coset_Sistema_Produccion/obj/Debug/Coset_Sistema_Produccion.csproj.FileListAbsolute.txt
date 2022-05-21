@@ -67,3 +67,4 @@ C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Co
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Reporte_Ordenes_Compra_Abiertas.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Captura_Integracion.resources
 C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.Forma_Dibujos_Cnc.resources
+C:\Users\reyna\Documents\Visual Studio 2017\Projects\Coset_Sistema_Produccion\Coset_Sistema_Produccion\obj\Debug\Coset_Sistema_Produccion.csprojAssemblyReference.cache
