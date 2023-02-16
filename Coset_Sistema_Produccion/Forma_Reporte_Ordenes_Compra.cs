@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
+using System.Threading;
 
 namespace Coset_Sistema_Produccion
 {
@@ -2475,6 +2476,7 @@ namespace Coset_Sistema_Produccion
                 if (oXL == null)
                 {
                     oXL = new Excel.Application();
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 }
 
                 return true;
